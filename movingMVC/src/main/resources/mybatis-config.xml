@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<typeAliases>
+		<!-- 빈클래스의 객체 별칭명을 관리 -->
+		<typeAlias type="com.moving.domain.FundingVO" alias="fvo" />
+	</typeAliases>
+</configuration>
+
