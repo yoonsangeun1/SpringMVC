@@ -1,0 +1,31 @@
+@charset "UTF-8";
+ /* board_writing.css
+ 	글 작성 css
+    board_writing.jsp
+ */
+ 
+ #bWriting_out_body{
+ 	width:1200px;
+ 	min-height:1024px;
+ }
+ 
+ #bWriting_body{ /*안쪽 전체 div*/
+  	width:960px;
+  	min-height:1024px;
+  	margin-left:auto;
+  	margin-right:auto;
+  	padding:15px;
+ }
+ 
+ #bWriting_header{ /*h3 div*/
+ }
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+

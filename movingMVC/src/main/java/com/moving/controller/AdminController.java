@@ -5,71 +5,57 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+@RequestMapping(value="/admin")
 @Controller
 public class AdminController {
 
 	/* 관리자 홈 */
-	@RequestMapping(value="/admin_index",method=RequestMethod.GET)//GET방식으로 접근하는 매핑주소 처리-> board_write매핑주소 등록
-	
-	public ModelAndView admin_index() {
-		return new ModelAndView("admin_index");
-		//뷰 리졸브 경로-> /WEB-INF/views/admin_index.jsp
-	}//admin_index()
+	@RequestMapping(value="/")
+	public ModelAndView admin() {
+		return new ModelAndView("admin");
+	}//admin()
 	
 	/* 게시판 관리 */
-	@RequestMapping(value="/admin_board",method=RequestMethod.GET)//GET방식으로 접근하는 매핑주소 처리-> board_write매핑주소 등록
-	
-	public ModelAndView admin_board() {
+	@RequestMapping(value="/board")
+	public ModelAndView board() {
 		return new ModelAndView("admin/admin_board");
-		//뷰 리졸브 경로-> /WEB-INF/views/admin/admin_board.jsp
-	}//board_write()
+	}//board()
 	
 	/* 펀딩 관리 */
-	@RequestMapping(value="/admin_funding",method=RequestMethod.GET)//GET방식으로 접근하는 매핑주소 처리-> board_write매핑주소 등록
-	
-	public ModelAndView admin_funding() {
-		return new ModelAndView("admin/admin_funding");
-		//뷰 리졸브 경로-> /WEB-INF/views/admin/admin_funding.jsp
-	}//board_write()
+	@RequestMapping(value="/project")
+	public ModelAndView funding() {
+		return new ModelAndView("admin/admin_project");
+	}//funding()
 	
 	/* 회원 관리 */
-	@RequestMapping(value="/admin_member",method=RequestMethod.GET)//GET방식으로 접근하는 매핑주소 처리-> board_write매핑주소 등록
-	
-	public ModelAndView admin_member() {
+	@RequestMapping(value="/member")
+	public ModelAndView member() {
 		return new ModelAndView("admin/admin_member");
-		//뷰 리졸브 경로-> /WEB-INF/views/admin/admin_member.jsp
-	}//board_write()
+	}//member()
 	
 	/* General */
-	@RequestMapping(value="/admin_general",method=RequestMethod.GET)//GET방식으로 접근하는 매핑주소 처리-> board_write매핑주소 등록
-	
-	public ModelAndView admin_general() {
+	@RequestMapping(value="/general")
+	public ModelAndView general() {
 		return new ModelAndView("admin/admin_general");
-		//뷰 리졸브 경로-> /WEB-INF/views/admin/admin_general.jsp
-	}//board_write()
+	}//general()
 	
-	/* 대쉬보드 */
-	@RequestMapping(value="/admin_dashboard",method=RequestMethod.GET)//GET방식으로 접근하는 매핑주소 처리-> board_write매핑주소 등록
-	
-	public ModelAndView admin_dashboard() {
+	/* DashBoard */
+	@RequestMapping(value="/dashboard")
+	public ModelAndView dashboard() {
 		return new ModelAndView("admin/admin_dashboard");
 		//뷰 리졸브 경로-> /WEB-INF/views/board/admin_dashboard.jsp
-	}//board_write()
+	}//dashboard()
 	
 	/* 영화 관리 */
-	@RequestMapping(value="/admin_movie",method=RequestMethod.GET)//GET방식으로 접근하는 매핑주소 처리-> board_write매핑주소 등록
-	
-	public ModelAndView admin_movie() {
+	@RequestMapping(value="/movie")
+	public ModelAndView movie() {
 		return new ModelAndView("admin/admin_movie");
-		//뷰 리졸브 경로-> /WEB-INF/views/admin/admin_movie.jsp
-	}//board_write()
+	}//movie()
 	
 	/* 영화 관리 */
-	@RequestMapping(value="/admin_movieUpload",method=RequestMethod.GET)//GET방식으로 접근하는 매핑주소 처리-> board_write매핑주소 등록
-	
-	public ModelAndView admin_movieUpload() {
+	@RequestMapping(value="/movie_upload")
+	public ModelAndView movie_upload() {
 		return new ModelAndView("admin/admin_movieUpload");
-		//뷰 리졸브 경로-> /WEB-INF/views/admin/admin_movieUpload.jsp
-	}//board_write()
+	}//movie_upload()
 	
 }

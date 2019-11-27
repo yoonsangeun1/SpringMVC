@@ -1,0 +1,164 @@
+@charset "UTF-8";
+
+/*자유게시판 css*/
+
+#bFree_body{   /*body 안 전체 div*/
+	font-size:16px;
+	line-height:25px;
+	width:1200px;
+	height:auto;
+	min-height:1024px;
+	border:1px solid #e8e8e8;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+#bFree_community{	/*커뮤니티 전체*/
+	width:1200px;
+	background:#9d8ce2;
+	position:relative;	
+	height:150px;
+}
+
+.bFree_community_tit{ /*커뮤니티 h1 div*/
+	padding-top:30px;
+	padding-left:15px;
+	height:auto;
+}
+
+.bFree_community_tit h1{/* 커뮤니티 h1 설정*/
+	font-size:30px;
+ 	color:#fff;
+ 	font-weight:400;
+ 	margin-bottom:20px;
+ 	line-height:1;
+}
+
+.bFree_community_list{ /*커뮤니티 밑 목록들 div*/
+	width:100%;
+	height:auto;
+	position:absolute;
+	bottom:-1px;
+	left:0px;
+}
+
+.bFree_community_list ul{
+	width:100%;
+	list-style:none;
+}
+
+.bFree_community_list li{
+	border:1px solid #000;
+	float:left;
+	width:25%;
+}
+
+.bFree_community_list a{
+	height:60px;
+	color:#fff;
+	line-height:60px;
+	font-size:18px;
+	position:relative;
+	background:#d4cff3;
+	display:block;
+	text-align:center;
+	text-decoration:none;
+}
+
+#bFree_community .bFree_community_list_free{
+	border-bottom:#e8e8e8;
+	border-left:#e8e8e8;
+	border-right:#e8e8e8;
+}
+
+.bFree_community_list_free a{
+	color:#000;
+	background:#fff;
+}
+
+#bFree_table{
+	width:900px;
+	height:500px;
+	border-top:1px solid grey;
+	border-bottom:2px solid grey;
+	margin-top:100px;
+	margin-left:auto;
+	margin-right:auto;
+	position:relative;
+	box-sizing:border-box;
+}
+
+#bFree_table th, #bFree_table td{
+	border-top:1px solid grey;
+	padding:10px;
+}
+
+#bFree_writing{ /*글 쓰기 div*/
+	width:1200px;
+	height:50px;
+	float:left;
+}
+
+#bFree_writing form{
+	width:1200px;
+	height:auto;
+	float:left;
+}
+
+.bFree_writing_btn{ /*글 쓰기 버튼*/
+	margin-top:20px;
+	margin-right:150px;
+	float:right;
+	cursor:pointer;
+}
+
+.bFree_writing_btn:hover{/*오버 시*/
+	background-color:#6a67ce;
+}
+
+#bFree_pagination{ /*하단 페이지 이동 div */
+	width:1200px;
+	height:50px;
+	margin-top:20px;
+	text-align:center;
+}
+
+#bFree_pagination a{
+	padding: 0px 7px;
+	color:#999;
+	font-size:17px;
+	text-decoration:none;
+}
+
+#bFree_pagination a:link{/*방문 전*/
+	color:#999;
+}
+
+#bFree_pagination a:visited{/*방문 후*/
+	color:#999;
+}
+
+#bFree_pagination a:hover{/*마우스 오버 시*/
+	text-decoration:underline;
+}
+
+#bFree_search{ /*검색 구간 전체 div */
+	width:1200px;
+	display:inline-block;
+	text-align:center;
+}
+
+#bFree_combo{ /*검색 구간 콤보박스*/
+	display:inline-block;
+	width:auto; height:31px;
+	padding:7px 12px;
+	font-size:12px;
+	color:#a5a5a5;
+	border:1px solid #ccc;
+	border-radius:4px;
+}
+
+#bFree_input{ /*텍필 ,버튼 통합 div*/
+	display:inline-table;
+}
+

@@ -1,0 +1,190 @@
+@charset "UTF-8";
+
+/*QnA css*/
+
+#bQna_body{ /*qna 전체 div*/
+	font-size:16px;
+	line-height:25px;
+	width:1200px;
+	height:auto;
+	min-height:1024px;
+	border:1px solid #e8e8e8;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+#bQna_community{ /*커뮤니티 전체*/
+	width:1200px;
+	background:#9d8ce2;
+	position:relative;
+	height:150px;
+}
+
+.bQna_community_tit{ /*커뮤니티 h1 div*/
+	padding-top:30px;
+	padding-left:15px;
+	height:auto;
+}
+
+.bQna_community_tit h1{ /*커뮤니티 h1 설정*/
+	font-size:30px;
+	color:#fff;
+	font-weight:400;
+	margin-bottom:20px;
+	line-height:1;
+}
+
+.bQna_community_list{ /*커뮤니티 밑 목록들*/
+	width:100%;
+	height:auto;
+	position:absolute;
+	bottom:-1.2px;
+	left:0.5px;
+}
+
+.bQna_community_list ul{
+	width:100%;
+	list-style:none;
+}
+
+.bQna_community_list li{
+	border:1px solid #000;
+	float:left;
+	width:25%;
+}
+
+.bQna_community_list a{
+	height:60px;
+	color:#fff;
+	line-height:60px;
+	font-size:18px;
+	position:relative;
+	background:#d4cff3;
+	display:block;
+	text-align:center;
+	text-decoration:none;
+}
+
+#bQna_community .bQna_community_list_qna{
+	border-bottom:#e8e8e8;
+	border-left:#e8e8e8;
+	border-right:1px solid #e8e8e8;
+}
+
+.bQna_community_list_qna a{
+	color:#000;
+	background:#fff;
+}
+
+#bQna_cont{ /*커뮤니티 제외 전체*/
+	float:left;
+	width:1200px;
+	height:auto;
+	overflow:hidden;
+	box-sizing:border-box;
+	padding-bottom:40px;
+}
+
+#bQna_table{
+	width:900px;
+	heiht:500px;
+	border-top:1px solid grey;
+	border-bottom:2px solid grey;
+	margin-top:100px;
+	margin-left:auto;
+	margin-right:auto;
+	position:relative;
+	box-sizing:border-box;
+}
+
+#bQna_table th, #bQna_table td{
+	border-top:1px solid grey;
+	padding:10px;
+}
+
+#bQna_writing{ /*글쓰기 div*/
+	width:1200px;
+	height:50px;
+	float:left;
+}
+
+#bQna_writing form{
+	width:1200px;
+	height:auto;
+	float:left;
+}
+
+.bQna_writing_btn{ /*글 쓰기 버튼*/
+	margin-top:20px;
+	margin-right:150px;
+	float:right;
+	cursor:pointer;
+}
+
+.bQna_writing_btn:hover{
+	background-color:#6a67ce;	
+}
+
+#bQna_pagination{ /*하단 페이지 이동 div*/
+	width:1200px;
+	height:50px;
+	margin-top:20px;
+	text-align:center;
+}
+
+#bQna_pagination a{
+	padding:0px 7px;
+	color:#999;
+	font-size:17px;
+	text-decoration:none;
+}
+
+#bQna_pagination a:link{ /*방문 전*/
+	color:#999;
+}
+
+#bQna_pagination a:visited{ /*방문 후*/
+	color:#999;
+}
+
+#bQna_pagination a:hover{
+	text-decoration:underline;
+}
+
+#bQna_search{ /*검색 구간 전체 div*/
+	width:1200px;
+	dsiplay:inline-block;
+	text-align:center;
+}
+
+#bQna_combo{/*검색 구간 콤보박스*/
+	display:inline-block;
+	width:auto; height:31px;
+	padding:6px 12px;
+	font-size:12px;
+	color:#a5a5a5;
+	border:1px solid #ccc;
+	border-radius:4px;
+}
+
+#bQna_input{ /*텍필,버튼 통합 div*/
+	display:inline-table;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

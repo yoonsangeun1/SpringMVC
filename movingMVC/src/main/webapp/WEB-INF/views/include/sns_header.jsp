@@ -65,14 +65,14 @@
 <link rel="stylesheet" type="text/css" href="../css/sns_messenger.css" />
 
 <%-- javascript 추가 (우선, abc순)--%>
-<script src="../js/board_event.js"></script>
-<script src="../js/board_faq.js"></script>
-<script src="../js/funding_write.js"></script>
-<script src="../js/jquery.js"></script>
-<script src="../js/move_banner.js"></script>
-<script src="../js/movie_cont.js"></script>
-<script src="../js/slide.js"></script>
-<script src="../js/sns.js"></script>
+<script src="js/board_event.js"></script>
+<script src="js/board_faq.js"></script>
+<script src="js/funding_write.js"></script>
+<script src="js/jquery.js"></script>
+<script src="js/move_banner.js"></script>
+<script src="js/movie_cont.js"></script>
+<script src="js/slide.js"></script>
+<script src="js/sns.js"></script>
 
 <style>
 #msLogin_wrap {
@@ -119,7 +119,7 @@
 						<div style="flex-grow: 12;">
 							<div id="header_logo">
 								<a href="../sns/SNS_Main.jsp"><img
-									src="../images/logo_w.png" alt="로고 이미지" width="150" height="25" /></a>
+									src="images/logo_w.png" alt="로고 이미지" width="150" height="25" /></a>
 							</div>
 						</div>
 						<div style="flex-grow: 0.8;">

@@ -31,8 +31,8 @@
 			value="oracle.jdbc.OracleDriver" />
 		<property name="url"
 			value="jdbc:oracle:thin:@127.0.0.1:1521:xe" />
-		<property name="username" value="two" />
-		<property name="password" value="two" />
+		<property name="username" value="moving" />
+		<property name="password" value="moving" />
 	</bean>
 
 	<!-- 스프링 jdbc와 mybatis 연결, mybatis 환경설정 -->

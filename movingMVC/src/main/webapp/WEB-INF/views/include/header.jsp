@@ -6,10 +6,10 @@
 <title>메인 화면</title>
 
 <%-- Initialize, index, header 공통 부분 css 추가 --%>
-<link rel="stylesheet" type="text/css" href="../resources/css/init.css" />
-<link rel="stylesheet" type="text/css" href="../resources/css/index.css" />
-<link rel="stylesheet" type="text/css" href="../resources/css/header.css" />
-<link rel="stylesheet" type="text/css" href="../resources/css/scrollbar.css" />
+<link rel="stylesheet" type="text/css" href="../css/init.css" />
+<link rel="stylesheet" type="text/css" href="../css/index.css" />
+<link rel="stylesheet" type="text/css" href="../css/header.css" />
+<link rel="stylesheet" type="text/css" href="../css/scrollbar.css" />
 
 <%-- 아이콘 폰트 사용을 위한 스타일시트, js 추가 --%>
 <link rel="stylesheet" type="text/css"
@@ -35,7 +35,7 @@
 <%-- 시나리오 모집 --%>
 <link rel="stylesheet" type="text/css" href="../css/board_free.css" />
 <%-- 자유게시판 --%>
-<link rel="stylesheet" type="text/css" href="../css/board_writing.css" />
+<link rel="stylesheet" type="text/css" href="../css/board_write.css" />
 <%-- 글 작성 폼 --%>
 <link rel="stylesheet" type="text/css" href="../css/board_qna.css" />
 <%-- Q & A--%>
@@ -58,7 +58,7 @@
 <link rel="stylesheet" type="text/css" href="../css/movie_cont.css" />
 <link rel="stylesheet" type="text/css" href="../css/movie_mainList.css" />
 <link rel="stylesheet" type="text/css"
-	href="../css/movie_categoryList.css" />
+	href="css/movie_categoryList.css" />
 
 <%-- sns css 추가 --%>
 <link rel="stylesheet" type="text/css" href="../css/sns_main.css" />
@@ -111,7 +111,7 @@ $(function(){ // document ready
 					</div>
 					<div style="flex-grow: 12;">
 						<div id="header_logo">
-							<a href="../moving"><img src="../resources/images/logo.png"
+							<a href="../moving"><img src="../images/logo.png"
 								alt="로고 이미지" width="150" height="25" /></a>
 						</div>
 					</div>

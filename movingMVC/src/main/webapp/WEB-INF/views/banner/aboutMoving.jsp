@@ -1,17 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%-- HEADER 호출 --%>
 <%@ include file="../include/header.jsp"%>
-
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>영화를 움직이다! MOVING</title>
-<link rel="stylesheet" type="text/css" href="../resources/css/init.css" />
-<link rel="stylesheet" type="text/css" href="../resources/css/aboutMoving.css" />
-<script src="../resources/js/jquery.js"></script>
-</head>
-<body>
 
 	<div id="aboutMoving_wrap">
 
@@ -19,7 +7,7 @@
 
 		<div id="amMain_wrap">
 			<div class="amMoving_img">
-				<img src="../resources/images/header_logo.png">
+				<img src="../images/header_logo.png">
 			</div>
 			<div class="amMoving_text">
 				<span

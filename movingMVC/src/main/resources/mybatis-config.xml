@@ -7,7 +7,16 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 <configuration>
 	<typeAliases>
 		<!-- 빈클래스의 객체 별칭명을 관리 -->
-		<typeAlias type="com.moving.domain.FundingVO" alias="fvo" />
+		<!-- <typeAlias type="com.moving.domain.MemberVO" alias="member" />
+		<typeAlias type="com.moving.domain.ProjectVO" alias="project" />
+		<typeAlias type="com.moving.domain.MovieVO" alias="movie" />
+		<typeAlias type="com.moving.domain.Board_faqVO" alias="board_faq" />
+		<typeAlias type="com.moving.domain.Board_qnaVO" alias="board_qna" />
+		<typeAlias type="com.moving.domain.Board_noticeVO" alias="board_notice" />
+		<typeAlias type="com.moving.domain.Board_freeVO" alias="board_free" />
+		<typeAlias type="com.moving.domain.Board_actorVO" alias="board_actor" />
+		<typeAlias type="com.moving.domain.Board_contestVO" alias="board_contest" />
+		 -->
 	</typeAliases>
 </configuration>
 

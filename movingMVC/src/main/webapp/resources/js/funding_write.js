@@ -1,0 +1,4 @@
+/**
+ * funding_write.js
+ */
+

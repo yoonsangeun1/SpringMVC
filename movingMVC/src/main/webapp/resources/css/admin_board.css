@@ -1,0 +1,187 @@
+@charset "UTF-8";
+
+/* admin_board css 작업 */
+#aBoard_wrap { /* 게시글 관리 전체를 아우르는 div */
+	float: left;
+	background-color: white;
+	width: 1040px;
+	min-height: 800px;
+	vertical-align: middle;
+}
+
+#aBoard_wrap h1 {
+	font-size: 35px;
+	color: #ccc;
+	margin: 35px 15px;
+	font-weight: bold;
+	text-shadow: 1px 1px 2px gray;
+}
+
+#aBoard_table { /* 게시판 글 목록표 */
+	width: 1000px; /* 표 테이블 너비 */
+	border-collapse: collapse; /* 표 테이블  테두리 공간을 없앰 */
+	margin-top: 35px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#aBoard_table tr:hover { /* 게시판 글 목록표 tr */
+	cursor: hand;
+	cursor: pointer;
+	background-color: skyblue;
+}
+
+#aBoard_table th { /* 게시판 글 목록표 th */
+	height: 20px;
+	font-size: 14px;
+	font-weight: bold;
+	padding: 10px;
+	background-color: #b3a9eb;
+	text-align: center;
+}
+
+#aBoard_table td { /* 게시판 글 목록표 td */
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #e8e8e8;
+	padding: 10px 0px;
+	text-align: center;
+	font-size: 13px;
+}
+
+#aBoard_talbe tr {
+	border-bottom: 1px solid #e8e8e8;
+}
+
+#aBoard_table a {
+	color: #333;
+}
+
+#aBoard_table .aBT_notice, #aBoard_table .notice{
+	color: red;
+	font-weight: bold;
+}
+
+#aBoard_table td.aBT_left { /* 게시판 제목 */
+	text-align: left; /* 글자 왼쪽 정렬 */
+	padding-left: 10px;
+	width: 500px;
+
+}
+
+#aBoard_table .aBT_no {
+	border-top-left-radius: 5px; /* 좌 상단 테두리를 둥글게 한다. */
+	width: 70px;
+}
+
+#aBoard_table .aBT_title {
+
+}
+
+#aBoard_table span { /* 게시판 제목 */
+	display: block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	width: 500px;
+	line-height: 1.4em;
+	
+}
+
+#aBoard_table .aBT_writer {
+	width: 150px;
+}
+
+#aBoard_table .aBT_date {
+	width: 100px;
+}
+
+#aBoard_table .aBT_hit {
+	width: 80px;
+	border-top-right-radius: 5px;
+}
+
+#aBoard_pageCtrl { /* 페이지 목록 */
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 60px;
+	font-size: 14px;
+}
+
+#aBoard_pageCtrl a {
+	padding: 2px 5px;
+	margin: 0px 5px;
+	color: #333;
+}
+
+
+#aBoard_pageCtrl a:hover { /* 페이지 목록 하이퍼링크 된곳 마우스 오버시 */
+	text-decoration: underline;
+	font-weight: bold;
+	color: #fc636b;
+}
+
+#aBoard_search {
+	float: right;
+	margin: 25px 10px 15px 10px;
+}
+
+#aBoard_search select {
+	width: 100px;
+	max-width: 150px;
+	height: 40px;
+	margin-right: 10px;
+	float: left;
+	font: 15px 'lucida sans', 'trebuchet MS', 'Tahoma';
+	border-radius: 3px;
+}
+
+#aBoard_search .input_box {
+	width: 250px;
+	height: 20px;
+	padding: 10px 5px;
+	font: bold 15px 'lucida sans', 'trebuchet MS', 'Tahoma';
+	border: 0;
+	float: left;
+	background: #eee;
+	border-radius: 3px 0 0 3px;
+}
+
+#aBoard_search input:focus {
+	outline: 0;
+	background: #fff;
+	box-shadow: 0 0 2px rgba(0, 0, 0, .8) inset;
+}
+
+#aBoard_search input:-webkit-input-placeholder {
+	color: #999;
+	font-weight: normal;
+	font-style: italic;
+}
+
+#aBoard_search button {
+	overflow: visible;
+	position: relative;
+	float: right;
+	border: 0;
+	padding: 0;
+	cursor: pointer;
+	height: 40px;
+	width: 110px;
+	font: bold 15px/40px 'lucida sans', 'trebuchet MS', 'Tahoma';
+	color: #fff;
+	text-transform: uppercase;
+	background: #b3a9eb;
+	border-radius: 0 3px 3px 0;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, .3);
+}
+
+#aBoard_search button:hover {
+	background: #9d8ce2;
+}
+
+#aBoard_search button:active, #aBoard_search button:focus {
+	background: #9d8ce2;
+	outline: 0;
+}

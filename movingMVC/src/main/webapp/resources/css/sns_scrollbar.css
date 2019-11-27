@@ -1,0 +1,21 @@
+@charset "UTF-8";
+
+::-webkit-scrollbar {width: 15px; height: 12px;  }
+/*::-webkit-scrollbar-button:start:decrement{
+	
+}
+::-webkit-scrollbar-button:end:increment {
+	border-radius: 5px;
+	display: block;
+	width: 12px;
+	height: 12px;
+	background: url() rgba(0,0,0,.05);
+}*/
+::-webkit-scrollbar-track {     
+	background: rgba(0,0,0,.05); 
+	border-radius: 5px;
+}
+::-webkit-scrollbar-thumb {  
+	background: #9d8ce2;
+	border-radius: 15px;	
+}
