@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>메인 화면</title>
+<title>영화를 움직이다! MOVING</title>
 
 <%-- Initialize, index, header 공통 부분 css 추가 --%>
 <link rel="stylesheet" type="text/css" href="../css/init.css" />
@@ -61,9 +61,9 @@
 	href="css/movie_categoryList.css" />
 
 <%-- sns css 추가 --%>
-<link rel="stylesheet" type="text/css" href="../css/sns_main.css" />
-<link rel="stylesheet" type="text/css" href="../css/sns_profile.css" />
-<link rel="stylesheet" type="text/css" href="../css/sns_messenger.css" />
+<link rel="stylesheet" type="text/css" href="../css/social_main.css" />
+<link rel="stylesheet" type="text/css" href="../css/social_profile.css" />
+<link rel="stylesheet" type="text/css" href="../css/social_messenger.css" />
 
 <%-- javascript 추가 (우선, abc순)--%>
 <script src="../js/jquery.js"></script>
@@ -73,7 +73,7 @@
 <script src="../js/move_banner.js"></script>
 <script src="../js/movie_cont.js"></script>
 <script src="../js/slide.js"></script>
-<script src="../js/sns.js"></script>
+<script src="../js/social.js"></script>
 
 <!--  <script>
 $(function(){ // document ready

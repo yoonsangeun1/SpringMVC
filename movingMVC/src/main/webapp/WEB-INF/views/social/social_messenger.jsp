@@ -5,12 +5,12 @@
 	<div id="SNS_Messenger_Wrap">
 		<!-- 오브젝트 항목 래핑 -->
 		<div id="SNS_Messenger_Left">
-			<img id="SNS_Messenger_Photo" src="images/model15.jpg">
+			<img id="SNS_Messenger_Photo" src="../images/model15.jpg">
 			<h4 id="SNS_Messenger_Photo_Title">채팅</h4>
 			<div id="SNS_Messenger_Chat">
 				<div id="SNS_Messenger_Chat_List">
 					<div id="SNS_Messenger_Chatting">
-						<img id="SNS_Messenger_Chat_Photo" src="images/sns_photo7.jpg">
+						<img id="SNS_Messenger_Chat_Photo" src="../images/sns_photo7.jpg">
 						<div id="SNS_Messenger_Chat_Name">홍채인식</div>
 						<div id="SNS_Messenger_Chat_Talk">홍채 팝니다.</div>
 					</div>
@@ -18,7 +18,7 @@
 				</div>
 				<div id="SNS_Messenger_Chat_List">
 					<div id="SNS_Messenger_Chatting">
-						<img id="SNS_Messenger_Chat_Photo" src="images/sns_photo8.jpg">
+						<img id="SNS_Messenger_Chat_Photo" src="../images/sns_photo8.jpg">
 						<div id="SNS_Messenger_Chat_Name">한지우</div>
 						<div id="SNS_Messenger_Chat_Talk">피카츄 팝니다.</div>
 					</div>
@@ -26,7 +26,7 @@
 				</div>
 				<div id="SNS_Messenger_Chat_List">
 					<div id="SNS_Messenger_Chatting">
-						<img id="SNS_Messenger_Chat_Photo" src="images/sns_photo9.jpg">
+						<img id="SNS_Messenger_Chat_Photo" src="../images/sns_photo9.jpg">
 						<div id="SNS_Messenger_Chat_Name">뽀로로</div>
 						<div id="SNS_Messenger_Chat_Talk">크롱 팝니다.</div>
 					</div>
@@ -34,7 +34,7 @@
 				</div>
 				<div id="SNS_Messenger_Chat_List">
 					<div id="SNS_Messenger_Chatting">
-						<img id="SNS_Messenger_Chat_Photo" src="images/sns_photo10.jpg">
+						<img id="SNS_Messenger_Chat_Photo" src="../images/sns_photo10.jpg">
 						<div id="SNS_Messenger_Chat_Name">안두인</div>
 						<div id="SNS_Messenger_Chat_Talk">스톰윈드 팝니다.</div>
 					</div>
@@ -42,7 +42,7 @@
 				</div>
 				<div id="SNS_Messenger_Chat_List">
 					<div id="SNS_Messenger_Chatting">
-						<img id="SNS_Messenger_Chat_Photo" src="images/sns_photo11.jpg">
+						<img id="SNS_Messenger_Chat_Photo" src="../images/sns_photo11.jpg">
 						<div id="SNS_Messenger_Chat_Name">윈스턴</div>
 						<div id="SNS_Messenger_Chat_Talk">바나나 팝니다.</div>
 					</div>
@@ -50,7 +50,7 @@
 				</div>
 				<div id="SNS_Messenger_Chat_List">
 					<div id="SNS_Messenger_Chatting">
-						<img id="SNS_Messenger_Chat_Photo" src="images/sns_photo12.jpg">
+						<img id="SNS_Messenger_Chat_Photo" src="../images/sns_photo12.jpg">
 						<div id="SNS_Messenger_Chat_Name">야스오</div>
 						<div id="SNS_Messenger_Chat_Talk">대리해드립니다.</div>
 					</div>
@@ -58,7 +58,7 @@
 				</div>
 				<div id="SNS_Messenger_Chat_List">
 					<div id="SNS_Messenger_Chatting">
-						<img id="SNS_Messenger_Chat_Photo" src="images/sns_photo12.jpg">
+						<img id="SNS_Messenger_Chat_Photo" src="../images/sns_photo12.jpg">
 						<div id="SNS_Messenger_Chat_Name">야스오</div>
 						<div id="SNS_Messenger_Chat_Talk">대리해드립니다.</div>
 					</div>
@@ -66,7 +66,7 @@
 				</div>
 				<div id="SNS_Messenger_Chat_List">
 					<div id="SNS_Messenger_Chatting">
-						<img id="SNS_Messenger_Chat_Photo" src="images/sns_photo12.jpg">
+						<img id="SNS_Messenger_Chat_Photo" src="../images/sns_photo12.jpg">
 						<div id="SNS_Messenger_Chat_Name">야스오</div>
 						<div id="SNS_Messenger_Chat_Talk">대리해드립니다.</div>
 					</div>
@@ -74,7 +74,7 @@
 				</div>
 				<div id="SNS_Messenger_Chat_List">
 					<div id="SNS_Messenger_Chatting">
-						<img id="SNS_Messenger_Chat_Photo" src="images/sns_photo12.jpg">
+						<img id="SNS_Messenger_Chat_Photo" src="../images/sns_photo12.jpg">
 						<div id="SNS_Messenger_Chat_Name">야스오</div>
 						<div id="SNS_Messenger_Chat_Talk">대리해드립니다.</div>
 					</div>
@@ -82,7 +82,7 @@
 				</div>
 				<div id="SNS_Messenger_Chat_List">
 					<div id="SNS_Messenger_Chatting">
-						<img id="SNS_Messenger_Chat_Photo" src="images/sns_photo12.jpg">
+						<img id="SNS_Messenger_Chat_Photo" src="../images/sns_photo12.jpg">
 						<div id="SNS_Messenger_Chat_Name">야스오</div>
 						<div id="SNS_Messenger_Chat_Talk">대리해드립니다.</div>
 					</div>
@@ -90,7 +90,7 @@
 				</div>
 				<div id="SNS_Messenger_Chat_List">
 					<div id="SNS_Messenger_Chatting">
-						<img id="SNS_Messenger_Chat_Photo" src="images/sns_photo12.jpg">
+						<img id="SNS_Messenger_Chat_Photo" src="../images/sns_photo12.jpg">
 						<div id="SNS_Messenger_Chat_Name">야스오</div>
 						<div id="SNS_Messenger_Chat_Talk">대리해드립니다.</div>
 					</div>
@@ -98,7 +98,7 @@
 				</div>
 				<div id="SNS_Messenger_Chat_List">
 					<div id="SNS_Messenger_Chatting">
-						<img id="SNS_Messenger_Chat_Photo" src="images/sns_photo12.jpg">
+						<img id="SNS_Messenger_Chat_Photo" src="../images/sns_photo12.jpg">
 						<div id="SNS_Messenger_Chat_Name">야스오</div>
 						<div id="SNS_Messenger_Chat_Talk">대리해드립니다.</div>
 					</div>
@@ -106,7 +106,7 @@
 				</div>
 				<div id="SNS_Messenger_Chat_List">
 					<div id="SNS_Messenger_Chatting">
-						<img id="SNS_Messenger_Chat_Photo" src="images/sns_photo12.jpg">
+						<img id="SNS_Messenger_Chat_Photo" src="../images/sns_photo12.jpg">
 						<div id="SNS_Messenger_Chat_Name">야스오</div>
 						<div id="SNS_Messenger_Chat_Talk">대리해드립니다.</div>
 					</div>
@@ -116,7 +116,7 @@
 		</div>
 		<div id="SNS_Messenger_Mid">
 			<div id="SNS_Messenger_Mid_Up">
-				<img id="SNS_Messenger_Photo" src="images/sns_photo7.jpg">
+				<img id="SNS_Messenger_Photo" src="../images/sns_photo7.jpg">
 				<h4 id="SNS_Messenger_Photo_Title">홍채인식</h4>
 			</div>
 			<div id="SNS_Messenger_Mid_Down">
@@ -144,7 +144,7 @@
 		</div>
 		<div id="SNS_Messenger_Right_Up">
 			<div id="SNS_Friend_Image">
-				<img src="images/sns_photo7.jpg">
+				<img src="../images/sns_photo7.jpg">
 				<h4>홍채인식</h4>
 			</div>
 			<div id="SNS_Friend_Menu">
