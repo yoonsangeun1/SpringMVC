@@ -1,0 +1,178 @@
+@charset "UTF-8";
+
+/* admin_member.jsp css작업 */
+#aMember_wrap { /* 회원관리 게시글 전체 div */
+	float: left;
+	background-color: white;
+	width: 1040px;
+	min-height: 800px;
+}
+
+#aMember_wrap h1 { /* 회원관리 제목 */
+	font-size: 35px;
+	color: #ccc;
+	margin: 35px 15px;
+	font-weight: bold;
+	text-shadow: 1px 1px 2px gray;
+}
+
+#aMember_table { /* 회원관리 표 */
+	width: 1000px; /* 표 테이블 너비 */
+	border-collapse: collapse; /* 표 테이블  테두리 공간을 없앰 */
+	margin-top: 35px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#aMember_table tr {
+	width: 1000px;
+	display: flex;
+	line-height: 1.4em;
+}
+#aMember_table tr:hover { /* 회원관리 표에 마우스 오버시 */
+	cursor: hand;
+	cursor: pointer;
+	background-color: skyblue;
+}
+
+#aMember_table th { /* 게시판 글 목록표 th */
+	height: auto;
+	font-size: 14px;
+	line-height: 1.4em;
+	font-weight: bold;
+	padding: 10px;
+	background-color: #b3a9eb;
+	align-items: ;
+}
+
+#aMember_table td { /* 게시판 글 목록표 td */
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #e8e8e8;
+	padding: 10px;
+	font-size: 14px;
+}
+
+#aMember_table a {
+	color: #333;
+}
+
+#aMember_table th.aCheck {
+	border-top-left-radius: 5px; /* 좌 상단 테두리를 둥글게 한다. */
+	text-align: center;
+}
+
+#aMember_table th.aGroup {
+	border-top-right-radius: 5px; /* 좌 상단 테두리를 둥글게 한다. */
+}
+
+#aMember_table .aCheck {flex-grow: 1;
+	text-align: center;
+	width:70px;
+}
+
+#aMember_table .aUserID {flex-grow: 3;
+	width: 250px;
+	text-align: left;
+	padiing-left: 30px;
+}
+
+#aMember_table .aEmail { /* 이메일 주소 */flex-grow: 3;
+	width: 300px;
+	text-align: left;
+	padding-left: 20px;
+}
+
+#aMember_table .aName {flex-grow: 5;
+	width: 200px;
+	text-align: left;
+}
+
+#aMember_table .aGroup {flex-grow: 3;
+	width: 150px;
+	text-align: left;
+}
+
+#aMember_pageCtrl { /* 페이지 목록 */
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 60px;
+	font-size: 14px;
+}
+
+#aMember_pageCtrl a {
+	padding: 2px 5px;
+	margin: 0px 5px;
+	color: #333;
+}
+
+#aMember_pageCtrl a:hover { /* 페이지 목록 하이퍼링크 된곳 마우스 오버시 */
+	text-decoration: underline;
+	font-weight: bold;
+	color: #fc636b;
+}
+
+#aMember_search {
+	float: right;
+	margin: 25px 10px 15px 10px;
+}
+
+#aMember_search select {
+	width: 100px;
+	max-width: 150px;
+	height: 40px;
+	margin-right: 10px;
+	float: left;
+	font: 15px 'lucida sans', 'trebuchet MS', 'Tahoma';
+	border-radius: 3px;
+}
+
+#aMember_search .input_box {
+	width: 250px;
+	height: 20px;
+	padding: 10px 5px;
+	font: bold 15px 'lucida sans', 'trebuchet MS', 'Tahoma';
+	border: 0;
+	float: left;
+	background: #eee;
+	border-radius: 3px 0 0 3px;
+}
+
+#aMember_search input:focus {
+	outline: 0;
+	background: #fff;
+	box-shadow: 0 0 2px rgba(0, 0, 0, .8) inset;
+}
+
+#aMember_search input:-webkit-input-placeholder {
+	color: #999;
+	font-weight: normal;
+	font-style: italic;
+}
+
+#aMember_search button {
+	overflow: visible;
+	position: relative;
+	float: right;
+	border: 0;
+	padding: 0;
+	cursor: pointer;
+	height: 40px;
+	width: 110px;
+	font: bold 15px/40px 'lucida sans', 'trebuchet MS', 'Tahoma';
+	color: #fff;
+	text-transform: uppercase;
+	background: #b3a9eb;
+	border-radius: 0 3px 3px 0;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, .3);
+}
+
+#aMember_search button:hover {
+	background: #9d8ce2;
+}
+
+#aMember_search button:active, #aMember_search button:focus {
+	background: #9d8ce2;
+	outline: 0;
+}

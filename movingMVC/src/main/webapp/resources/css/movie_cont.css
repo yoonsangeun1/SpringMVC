@@ -1,0 +1,501 @@
+@charset "UTF-8";
+
+#movie_cont input {
+	background-color: white;
+	color: #656969;
+	border: 2px solid #e8e8e8;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 15px;
+	border-radius: 2px;
+}
+
+.realbtn input {
+	background-color: white;
+	color: #656969;
+	border: 2px solid #e8e8e8;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+}
+
+#movie_cont button :hover {
+	background-color: #e8e8e8;
+	color: black;
+}
+/* /*  */
+* /
+
+
+#movie_cont { /*movie_cont.jsp의 모든 구역 css*/
+	width: 1200px;
+	min-height: 1024px;
+	height: auto;
+	box-sizing: border-box;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+iframe.video {
+	display: inline-block;
+	margin: 0px auto;
+}
+
+#movie_cont_video {
+	text-align: left;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+#video {
+	display: inline-block;
+	width: 1070px;
+	height: 502px;
+	margin-top: 5px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#video iframe {
+	display: inline-block;
+	width: 900px;
+	height: 500px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/**게시자 정보 CSS start*/
+#videoInfo {
+	display: block;
+	/**영상 제목, 영상 구독자, 영상 설명란, 영상 올린 날짜 등*/
+	width: 900px;
+	text-align: left;
+}
+
+#videoInfo_director {
+	display: block;
+	min-height: 50px;
+	margin: 5px auto;
+}
+
+#videoInfo_director a img {
+	float: left;
+}
+
+#videoInfo_director a b {
+	float: left;
+	font-size: 14px;
+	font-weight: bold;
+	line-height: 4em;
+}
+
+.subTitle {
+	font-size: 20px;
+	color: black;
+	font-family: '맑은 고딕';
+	margin-top: 15px;
+}
+
+.subInfo {
+	font-size: 9px;
+	color: gray;
+	font-family: '맑은 고딕';
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.subCont {
+	font-size: 14px;
+	color: black;
+	display: block;
+	font-family: '맑은 고딕';
+	margin-top: 15px;
+}
+
+#videoInfo img {
+	width: 55px;
+	height: 50px;
+}
+
+/**댓글 작성 CSS start*/
+#commenter { /**페이지 댓글 부분*/
+	float: left;
+	width: 700px;
+	margin-left: 65px;
+}
+
+#visitor_and_commentBtn {
+	width: 699px;
+	height: 85px;
+}
+
+#visitor { /**방문자 프로필 사진, 이름, 텍스트 상자*/
+	float: left;
+	width: 698px;
+	height: 55px;
+	margin: 0px 0px 0px 0px;
+}
+
+#visitor_profile { /**로그인 한 사람의 프로필*/
+	float: left;
+	width: 60px;
+	height: 53px;
+	margin: 0px 0px 0px 0px;
+}
+
+#visitor img {
+	border-radius: 25px;
+	margin-left: 4px;
+}
+
+#visitor_name_box { /**로그인 한 사람의 이름*/
+	float: left;
+	width: 55px;
+	height: 53px;
+	margin: 0px 0px 0px 0px;
+}
+
+#visitor_name {
+	float: left;
+	width: 50px;
+	height: 17px;
+	margin-left: 2px;
+	margin-top: 7px;
+}
+
+#comment_box { /**댓글 작성란*/
+	float: left;
+	width: 581px;
+	height: 53px;
+	margin: 0px 0px 2px 0px;
+}
+
+#comment_box textarea {
+	float: left;
+	width: 574px;
+	height: 45px;
+	margin: 0px 3px 0px 0px;
+}
+
+#comment_buttons { /**댓글, 다시 작성 버튼이 들어갈 공간 CSS*/
+	float: left;
+	width: 698px;
+	height: 27px;
+	margin-top: 1px;
+	margin-right: 3px;
+}
+
+#reset_and_write { /**댓글, 다시 작성 버튼 css 적용*/
+	float: right;
+	width: 134px;
+	height: 25px;
+}
+
+/**댓글 목록 CSS start*/
+#movie_cont_comment {
+	width: 900px;
+	height: auto;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#commentList { /**보여지는 댓글 목록 전체 적용*/
+	width: 699px;
+	float: left;
+	height: auto;
+}
+
+.comment_and_reBtn { /**각각 댓글 + 답글까지 동일 적용*/
+	float: left;
+	width: 699px;
+	height: auto;
+	margin-bottom: 30px;
+}
+
+.comment { /**각각의 댓글마다 동일 적용 → 답글 버튼 제외*/
+	float: left;
+	margin: 0px 0px 0px 0px;
+	width: 698px;
+	height: auto;
+}
+
+.commenterProfile { /**댓글 단 방문자 프로필 사진*/
+	float: left;
+	width: 60px;
+	height: auto;
+}
+
+.commenterProfile img { /**댓글 단 작성자 프로필 사진*/
+	border-radius: 25px;
+	margin-left: 4px;
+}
+
+.commentAll { /**commentTop + commentBottom 둘 다 포함하고 있는 공간 div 설정하기*/
+	float: left;
+	width: 636px;
+	height: auto;
+}
+
+.commentTop { /**댓글 작성자 이름, 작성일자, 좋아요와 싫어요 버튼이 들어있는 공간 CSS*/
+	float: left;
+	width: 634px;
+	height: 32px;
+}
+
+.commenter_name_box { /**댓글 작성자 이름, 작성일자*/
+	float: left;
+	width: 80px;
+	height: 30px;
+	margin: 0px 0px 0px 0px;
+}
+
+.commenterName { /**댓글 작성자 이름*/
+	float: left;
+	width: 33px;
+	height: 17px;
+	margin-left: 2px;
+	margin-top: 7px;
+}
+
+.commentDate { /**댓글 작성일자*/
+	width: 35px;
+	float: left;
+	font-size: 9px;
+	font-family: '맑은 고딕';
+	color: gray;
+	text-align: center;
+	margin-top: 7px;
+	margin-left: 5px;
+}
+
+.like_dislike { /**댓글 좋아요, 싫어요 버튼*/
+	float: left;
+	min-width: 120px;
+	width: auto;
+	margin-left: 5px;
+	margin-top: 3px;
+}
+
+.commentBottom { /**댓글 내용, 수정, 삭제 버튼이 담겨있는 공간 꾸미기*/
+	float: left;
+	width: 634px;
+	height: auto;
+}
+
+.comment_cont { /**댓글 내용*/
+	float: left;
+	width: 575px;
+	font-family: '맑은 고딕';
+	margin-top: 3px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	margin-left: 3px;
+	padding: 5px;
+}
+
+.comment_cont_edit { /**댓글 수정 및 삭제 버튼 CSS*/
+	float: right;
+	width: 50px;
+	height: 48px;
+	margin-right: 3px;
+	margin-top: 3px;
+}
+
+.comment_replyBox { /**답글 버튼이 담겨있는 공간 설정*/
+	float: left;
+	width: 633px;
+	height: auto;
+	margin-left: 65px;
+}
+
+.comment_replyBtn { /**답글 버튼 CSS*/
+	float: left;
+	width: 134px;
+	margin-top: 1px;
+	margin-left: 0px;
+}
+
+.comment_reply_cont { /**보여지는 답글 목록 전체 적용*/
+	width: 633px;
+	float: left;
+	height: auto;
+	margin-left: 0px;
+}
+
+/**답글 CSS start*/
+.reply { /**각각의 답글마다 동일 적용*/
+	float: left;
+	margin: 30px 19px 0px 0px;
+	width: 613px;
+	height: auto;
+}
+
+.replierProfile { /**답글 단 작성자 프로필 사진을 담고 있는 공간*/
+	float: left;
+	width: 60px;
+	height: auto;
+}
+
+.replierProfile img { /**답글 단 작성자 프로필 사진*/
+	border-radius: 25px;
+	margin-left: 4px;
+}
+
+.replierAll { /**replyTop + replyMiddle + replyBottom*/
+	float: left;
+	width: 551px;
+	height: auto;
+}
+
+.replyTop { /**답글 작성자 이름, 작성일자, 좋아요와 싫어요 버튼*/
+	float: left;
+	width: 550px;
+	height: 32px;
+}
+
+.replyer_name_box { /**답글 작성자 이름, 작성일자*/
+	float: left;
+	width: 80px;
+	height: 30px;
+	margin: 0px 0px 0px 0px;
+}
+
+.replierName { /**답글 작성자 이름*/
+	float: left;
+	width: 33px;
+	height: 17px;
+	margin-left: 2px;
+	margin-top: 7px;
+}
+
+.replyDate { /**답글 작성일자*/
+	width: 35px;
+	float: left;
+	font-size: 9px;
+	font-family: '맑은 고딕';
+	color: gray;
+	text-align: center;
+	margin-top: 7px;
+	margin-left: 5px;
+}
+
+.like_dislike { /**답글 좋아요, 싫어요 버튼*/
+	float: left;
+	width: auto;
+	margin-left: 5px;
+	margin-top: 3px;
+}
+
+.replyMiddle { /**댓글 내용, 수정, 삭제 버튼이 담겨있는 공간 꾸미기*/
+	float: left;
+	width: 550px;
+	height: auto;
+}
+
+.reply_cont { /**답글 내용*/
+	float: left;
+	width: 489px;
+	font-family: '맑은 고딕';
+	margin-left: 3px;
+	margin-top: 3px;
+}
+
+.reply_cont_edit { /**답글 수정 및 삭제 버튼 CSS*/
+	float: right;
+	width: 50px;
+	height: 48px;
+	margin-right: 3px;
+	margin-top: 3px;
+}
+
+.replyBottom { /**답글에 대한 답글 CSS*/
+	float: left;
+	width: 550px;
+	height: auto;
+}
+
+.reply_in_replyBtn { /**답글과 답글 보기 버튼*/
+	float: left;
+	width: 134px;
+	margin-top: 1px;
+	margin-left: 0px;
+}
+
+.reply_in_reply { /**답글 보기 버튼을 눌렀을 때 보여지는 div 공간*/
+	float: left;
+	width: 550px;
+	height: auto;
+}
+
+.reply_in_reply_prof_plus_all {
+	float: left;
+	margin: 30px 23px 0px 0px;
+	width: 550px;
+	height: auto;
+}
+
+.innerReplyAll { /**답글 안에 답글*/
+	float: left;
+	width: 488px;
+	height: auto;
+}
+
+.innerReplyTop { /**답글 안에 답글에서 좋아요, 싫어요 버튼*/
+	float: left;
+	width: 488px;
+	height: 32px;
+}
+
+.innerReplyMiddle { /**답글 안에 답글 내용 위치, 수정 삭제 버튼*/
+	float: left;
+	width: 488px;
+	height: auto;
+}
+
+.reply_in_reply_cont { /**답글 안에 답글 내용*/
+	float: left;
+	width: 429px;
+	font-family: '맑은 고딕';
+	margin-left: 3px;
+	margin-top: 3px;
+}
+
+.innerReplyBottom { /**답글 안에 답글에서 답글, 답글 보기 버튼*/
+	float: left;
+	width: 488px;
+	height: auto;
+}
+
+/**페이지 아래 우측 공간 추가 영상 목록*/
+#movie_cont_recommendation {
+	width: 900px;
+	height: auto;
+	margin-right: auto;
+	margin-left: auto;
+	display: flex;
+	flex-direction: row;
+}
+
+#other_Movie {
+	float: left;
+	width: 900px;
+}
+
+.mVideo {
+	float: left;
+	margin: 0px 0px 12px 34px;
+	width: 280px;
+	font-family: '맑은 고딕';
+	font-size: 14px;
+}
+
+.mVideo img {
+	padding-top: 10px;
+}
+
+/**기타 작업 코딩(hover, href tag css)*/

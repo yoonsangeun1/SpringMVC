@@ -1,0 +1,27 @@
+@charset "UTF-8";
+
+/* 프로젝트 리스트 메인 *************************************** 프로젝트 리스트 메인 ***/
+#fWrite_wrap {
+	width: 1200px;
+	height: auto;
+	min-height: 1024px;
+	box-sizing: border-box;
+	overflow: auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+/* 카테고리명, 설명 *************************************** 카테고리명, 설명 ***/
+#fWrite_title {
+	float: left;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	padding-left: 85px;
+	padding-right: 85px;
+	width: 1200px;
+	height: 170px;
+	box-sizing: border-box;
+	overflow: hidden;
+	display: flex;
+}
+

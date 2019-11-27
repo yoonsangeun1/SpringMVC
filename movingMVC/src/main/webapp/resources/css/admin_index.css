@@ -1,0 +1,182 @@
+@charset "UTF-8";
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p,
+	blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn,
+	em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var,
+	b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend,
+	table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas,
+	details, embed, figure, figcaption, footer, header, hgroup, menu, nav,
+	output, ruby, section, summary, time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-family: "Maison Neue Book", "Helvetica Neue", Helvetica, Arial,
+		sans-serif, "맑은 고딕", "나눔고딕 ExtraBold", "나눔고딕", "함초롬바탕";
+	font-size: 17px;
+	font-size: inherit;
+	font-weight: inherit;
+	text-decoration: none;
+	/* vertical-align: baseline; */
+}
+
+.clear {
+	clear: both;
+}
+
+/* admin ui 작업 */
+#admin_wrap { /* 총 테두리 */
+	width: 1200px; /* div폭 */
+	min-height: 800px; /* div높이 */
+	height: auto;
+	overflow: auto;
+	/*border: 1px solid black;*/ /* 테두리 선두께를 1픽셀, 실선 solid, 테두리 선색을 빨강 */
+	margin-left: auto;
+	margin-right: auto; /* div 수평중 정렬 */
+	/*border-radius: 15px;*/ /* css3에서 추가된 속성으로 테두리를 둥글게 처리 */
+	/*box-shadow: 10px 10px 10px gray;*/ /* css3에서 추가된 속성으로 div그림자 효과 */
+	align-items: center;
+}
+
+#admin_menuTitle { /* 맨 위 로고있는 div */
+	width: 1200px;
+	height: 60px;
+	background-color: #b3a9eb;
+	float: left;
+	vertical-align: middle;
+	/* display: flex; */
+	align-items: center;
+	 /* justify-content: center; */
+	box-shadow: 0px 3px 2px #e8e8e8;
+}
+
+#admin_menuHyperlink {
+	width: 200px;
+	list-style: none;
+	float: left;
+	justify-content: center;
+}
+
+#admin_notice .hyperlink {
+	margin-right: 25px;
+	line-height: 20px;
+}
+
+#admin_notice .icon {
+	color: white;
+}
+
+#admin_menuTitle img {
+	width: 200px;
+	margin-left: 20px;
+	float: left;
+	line-height: 60px;
+}
+
+#admin_notice { /* 알림 */
+	width: 220px;
+	display: flex;
+	float: right;
+}
+
+#admin_leftMenu { /* 왼쪽 총 메뉴 div */
+	width: 160px;
+	height: 800px;
+	float: left;
+	border-left: 1px solid #DBDBDB;
+	border-right: 1px solid #DBDBDB;
+}
+
+#admin_leftMenu .hyper {
+	color: black;
+	font-size: 20px;
+}
+
+#admin_info { /* 관리자 정보, 사진, 이름 출력되는 div */
+	width: 160px;
+	height: 220px;
+	border-bottom: 1px solid #DBDBDB;
+}
+
+#admin_info img { /* 등록된 관리자 사진 */
+	margin: 10px 5px 0px 20px;
+}
+
+#admin_info ul {
+	
+}
+
+#admin_info li { /* 관리자 정보 */
+	list-style: none;
+	text-align: center;
+}
+
+#admin_menu { /* 관리 메뉴 */
+	width: 160px;
+	height: 400px;
+	float: left;
+	/* div는 가로줄 전체를 차지하는 블록요소 태그이다. 이것을 내용물 크기만큼만 차지하는 인라인 요소 */
+}
+
+#admin_menu ul { /* 관리 메뉴 항목 */
+	line-height: 35px; /* 글자 위 간격 */
+	margin-top: 35%;
+}
+
+#admin_menu li {
+	list-style: none;
+	text-align: center;
+	font-size: 130%;
+}
+
+#admin_logout { /* 로그아웃 */
+	border-top: 1px solid #DBDBDB;
+	width: 160px;
+	height: 100px;
+	float: left;
+}
+
+#admin_logout ul {
+	margin-top: 40px;
+	list-style: none;
+	text-align: center;
+	font-size: 130%;
+}
+
+#admin_changeItem { /* 변경되는 항목 */
+	width: 960px;
+	height: 700px;
+	float: left;
+}
+
+#change_01 { /* 변경 항목 1 */
+	width: 620px;
+	height: 420px;
+	margin-left: 10px;
+	float: left;
+}
+
+#change_01 h3 {
+	text-align: center;
+}
+
+#change_02 { /* 변경 항목 2 */
+	width: 620px;
+	height: 250px;
+	margin: 10px 10px 0px 10px;
+	float: left;
+}
+
+#change_02 h3 {
+	text-align: center;
+	padding-top: 40px
+}
+
+#change_03 { /* 변경 항목 3 */
+	width: 300px;
+	height: 680px;
+	float: right;
+}
+
+#change_03 h3 {
+	text-align: center;
+}

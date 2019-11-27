@@ -1,0 +1,297 @@
+@charset "UTF-8";
+
+/* 전체 감싸는 랩 */
+#mLogin_wrap {
+	width: 1200px;
+	height: auto;
+	min-height: 750px;
+	margin: auto auto;
+	align-items: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: auto auto;
+	background-color: #F5F5F5;
+}
+/* sns용 전체 감싸는 랩 */
+#msLogin_wrap {
+	width: 1200px;
+	height: auto;
+	min-height: 750px;
+	margin: auto auto;
+	align-items: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: auto auto;
+	background-color: #f2f0fb;
+}
+
+#mLogin_form {
+	width: 460px;
+	min-height: 600px;
+	height: auto;
+	margin: auto auto;
+	display: inline-block;
+	box-sizing: border-box;
+	background-color: white;
+	border-radius: 5px;
+	border: 1px solid #e8e8e8;
+	outline: none;
+}
+
+#mLogin_wrap form{
+	border: none;
+	outline: none;
+}
+#mLogin_form #mLogin_table h2 {
+	line-height: 40px;
+	font-size: 32px;
+	font-weight: bold;
+}
+
+#mLogin_form section {
+	margin: auto auto;
+	padding-top: 30px;
+	padding-bottom: 30px;
+	box-sizing: border-box;
+}
+
+#mLogin_form #mLogin_table {
+	width: 400px;
+	height: 560px;
+	border: 0px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 30px;
+}
+
+#mLogin_table th, #mLogin_table td {
+	height: 45px;
+	width: 400px;
+	font-style: 15px gray;
+}
+
+#mLogin_table .input_text {
+	height: 45px;
+	width: 400px;
+	display: block;
+	font-size: 17px;
+	margin: 5px auto;
+}
+
+#mLogin_table .save_id {
+	float: left;
+}
+
+#mLogin_table a {
+	float: left;
+}
+
+.separator {
+	height: 45px;
+	vertical-align: center;
+	text-align: center;
+}
+
+.separator span {
+	font-size: 12px;
+	line-height: 4em;
+}
+
+#facebookLoginBtn, #loginBtn {
+	width: 413px;
+	height: 56px;
+}
+
+/* 인풋 텍스트박스 효과 */
+#mLogin_form .input_text {
+	width: 400px;
+	height: 45px;
+	padding: 10px 5px;
+	font: bold 15px 'lucida sans', 'trebuchet MS', 'Tahoma';
+	border: 0;
+	float: left;
+	background-color: #eee;
+	border-radius: 3px;
+}
+
+#mLogin_form .input_text:focus {
+	outline: 0;
+	background: #fff;
+	box-shadow: 0 0 2px rgba(0, 0, 0, .8) inset;
+}
+
+#mLogin_form .input_text:-webkit-input-placeholder {
+	color: #999;
+	font-weight: normal;
+	font-style: 10px gray;
+}
+
+#mLogin_form #mLogin_table td span {
+	font-size: 12px;
+	display: inline;
+	font-weight: bold;
+}
+
+#mLogin_form #mLogin_table td #save_id {
+	display: inline;
+}
+
+#mLogin_form #mLogin_table td a {
+	font-size: 12px;
+	display: inline;
+	float: right;
+	font-weight: bold;
+}
+
+/* 일반 로그인 버튼 */
+#mLogin_form #loginBtn {
+	position: relative;
+	float: right;
+	border: 0;
+	padding: 0;
+	cursor: pointer;
+	font: bold 15px 'lucida sans', 'trebuchet MS', 'Tahoma';
+	color: #fff;
+	text-transform: uppercase;
+	background: #b3a9eb;
+	border-radius: 3px;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, .3);
+	margin: auto;
+}
+
+#mLogin_form #loginBtn:hover {
+	background: #9d8ce2;
+}
+
+#mLogin_form #loginBtn:active {
+	background: #9d8ce2;
+	outline: 0;
+}
+
+/* 페이스북 로그인 버튼 */
+#mLogin_form #facebookLoginBtn {
+	overflow: visible;
+	position: relative;
+	float: right;
+	border: 0;
+	padding: 0;
+	cursor: pointer;
+	font: bold 15px/40px 'lucida sans', 'trebuchet MS', 'Tahoma';
+	color: #fff;
+	text-transform: uppercase;
+	background: #304d8a;
+	border-radius: 3px;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, .3);
+	margin: auto;
+}
+
+#mLogin_form #facebookLoginBtn:hover {
+	background: #304d8a;
+}
+
+#mLogin_form #facebookLoginBtn:active {
+	background: #304d8a;
+	outline: 0;
+}
+
+/* 소셜 로그인 버튼 효과 */
+#kakaoLoginBtn, #naverLoginBtn, #googleLoginBtn, #twitterLoginBtn {
+	height: 53px;
+	width: 200px;
+	overflow: visible;
+	position: relative;
+	float: right;
+	border: 1px solid;
+	border-color: #999;
+	padding: 0;
+	cursor: pointer;
+	font: 15px/40px 'lucida sans', 'trebuchet MS', 'Tahoma';
+	color: #black;
+	text-transform: uppercase;
+	background: #fff;
+	border-radius: 3px;
+	margin: auto;
+}
+
+#kakaoLoginBtn:hover, #naverLoginBtn:hover, #googleLoginBtn:hover,
+	#twitterLoginBtn:hover {
+	background: #eee;
+}
+
+#kakaoLoginBtn:active, #naverLoginBtn:active, #googleLoginBtn:active,
+	#twitterLoginBtn:active {
+	background: #eee;
+	outline: 0;
+}
+
+/* 회원가입 유도 */
+#mLogin_form #not_Movingmember {
+	width: 400px;
+	height: auto;
+	margin: auto auto;
+	text-align: center;
+}
+
+#mLogin_form #mLogin_table {
+	width: 400px;
+	height: 560px;
+	border: 0px;
+	margin: auto auto;
+}
+
+#mLogin_form section #not_Movingmember hr {
+	margin: 0px auto;
+	width: 400px;
+	float: left;
+}
+
+#mLogin_form section #not_Movingmember span {
+	margin: 10px auto;
+	display: inline-block;
+}
+
+
+
+
+
+/* 적용취소
+.hline {
+	width: 100%;
+	height: 1px;
+	background: black;
+}
+
+.separator .background {
+    position: relative;
+    z-index: 1;
+    
+    &:before {
+        border-top: 2px solid #dfdfdf;
+        content:"";
+        margin: 0 auto; this centers the line to the full width specified
+position:absolute;
+positioning must be absolute here, and relative positioning must be applied to the parent
+top:50%;
+left:0;
+right0;
+bottom:0;
+width:95%;
+z-index:-1;
+}
+
+.wz_input {
+	width: 370px;
+	height: 50px;
+	display: block;
+	font-size: 17px;
+	margin: 10px auto;
+}
+
+.wz_input input {
+	height: 48px;
+	line-height: 1.2em;
+	font-size: 17px;
+	font-weight: 300;
+}*/

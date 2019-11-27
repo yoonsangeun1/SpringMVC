@@ -1,0 +1,66 @@
+@charset "UTF-8";
+
+#movie_main_list { /**바디 전체 부분*/
+	width: 1200px;
+	min-height: 1024px;
+	height: auto;
+	box-sizing: border-box;
+}
+#slide_show, #video_list { /**바디 상단 슬라이드 쇼 , 카테고리들을 감싸고 있는 div css*/
+	float: left;
+	width: 800px;
+	height: auto;
+	margin: 0px 0px 0px 200px;
+}
+
+
+#thriller, #action, #documentary, #history, #sf,
+#love, #comedy, #ani, #etc { /**카테고리별 css 동시에 동일하게 적용*/
+	width: 799px;
+	height: 300px;
+}
+.category_post { /**왼쪽에 입혀질 이미지 공간 설정*/
+	float: left;
+	margin-top: 50px;
+}
+.category_post img { /**왼쪽에 입혀진 이미지 설정*/
+	width: 397px;
+	height: 197px;
+}
+.Enter_to_category { /**플레이어 이미지가 위치할 전체적인 공간 설정*/
+	float: right;
+	width: 398px;
+	height: 198px;
+	margin-top: 50px;
+}
+.player_category { /**플레이어 이미지를 가둘 공간 설정*/
+	float: left;
+	width: 200px;
+	height: 120px;
+	margin-left: 175px;
+	margin-top: 38px;
+	background-image: url("../images/player_category.png");
+}
+.player_slide_show { /**모니터 이미지 안에서 슬라이드 쇼 구현*/
+	width: 181px;
+	height: 82px;
+	border: 1px solid red;
+	position: absolute;
+	margin-left: 10px;
+	margin-top: 9px;
+}
+
+/**부가적인 설정*/
+.category_line { /**hr tag 설정*/
+	border: 0;
+	height: 7px;
+	background: #ccc;
+}
+#slide_show h1 { /**상단 h1 글 영역 설정*/
+	text-align: center;
+	font-size: 35px;
+	font-family: '맑은 고딕';
+	color: navy;
+	margin-top: 120px;
+	margin-bottom: 120px;
+}

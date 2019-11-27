@@ -1,0 +1,192 @@
+@charset "UTF-8";
+
+/* 펀딩 전체 감싸는 랩 */
+#fCont_wrap {
+	width: 1200px;
+	margin-left: auto;
+	margin-right: auto;
+	min-height: 1024px; /*최소높이*/
+	height: auto;
+	align-items: center;
+	padding-left: 30px;
+	padding-right: 30px;
+	text-align: center;
+}
+/* 펀딩 제목 */
+#fCont_title {
+	text-align: center;
+	display: inline-block;
+	margin: 40px;
+}
+
+#fCont_title h3 {
+	font-size: 2.4rem;
+	line-height: 3rem;
+	margin-bottom: 0.6rem;
+	font-weight: 700;
+}
+
+#fCont_title p {
+	font-size: 1.8rem;
+	line-height: 2.4rem;
+	margin-bottom: 0.6rem;
+}
+
+#fCont_subtitle {
+	width: 1200px;
+	height: auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+/* 펀딩 이미지 */
+#fCont_mainImage {
+	display: inline-block;
+	margin: 10px 0px;
+	margin-left: 30px;
+	margin-right: 10px;
+	width: 700px;
+	height: 450px;
+}
+
+#fCont_tags {
+	display: inline-block;
+	text-align: left;
+	height: 50px;
+}
+
+.fCont_tag {
+	display: inline-block;
+	margin: 15px 10px;
+}
+
+.fCont_tag i {
+	color: #656969;
+}
+/* 펀딩 요약 */
+#fCont_sumCont {
+	display: inline-block;
+	margin: 10px 0px;
+	margin-right: 30px;
+	margin-left: 10px;
+}
+
+.length { /* 프로세스바 길이, 마진 */
+	width: 300px;
+	display: inline-block;
+	margin: 0px;
+	margin-bottom: 15px;
+}
+
+#fCont_sumContTS {
+	width: 300px;
+	height: 450px;
+	text-align: left;
+	display: inline-block;
+	display: flex;
+	align-items: baseline;
+	flex-direction: column;
+	float: left;
+	box-sizing: border-box;
+}
+
+.sumCont_title {
+	display: inline-block;
+	font-size: 2.8rem;
+	line-height: 3.6rem;
+	font-weight: 700;
+	color: #656969;
+}
+
+.sumCont_sub {
+	display: inline-block;
+	font-size: 1.2rem;
+	line-height: 1.8rem;
+	margin-bottom: 15px;
+	color: #656969;
+}
+
+.fCont_sumContBtn {
+	width: 300px;
+	display: inline-block;
+	margin-bottom: 15px;
+	font-weight: bold;
+}
+
+.fCont_shareBtn {
+	width: 150px;
+	display: inline-block;
+	margin-bottom: 15px;
+	font-weight: bold;
+}
+
+#fCont_share {
+	display: flex;
+	display: inline-block;
+	flex-direction: row;
+	width: 300px;
+}
+
+.fCont_shareIcon {
+	margin-left: 1.2rem;
+	display: inline-block;
+}
+
+.fCont_shareIcon i {
+	color: #656969;
+}
+
+#fCont_menubar {
+	width: 1200px;
+	height: 62px;
+	margin: 50px 0px;
+	padding: auto 200px;
+	border-top: 1px solid #e8e8e8;
+	border-bottom: 1px solid #e8e8e8;
+}
+
+#fCont_row {
+	text-align: center;
+	display: flex;
+	align-items: flex-start;
+	flex-direction: row;
+}
+
+.fCont_menu {
+	border: none;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 15px;
+	width: 130px;
+	height: 60px;
+	padding: auto 30px;
+	display: inline-block;
+	margin-bottom: 15px;
+	font-weight: normal;
+	background-color: white;
+	color: #656969;
+}
+
+.fCont_menu:hover { /* 하이퍼링크된 곳 마우스 오버시 css 효과 */
+	background-color: #e8e8e8;
+	color: black;
+	background-image: url(../images/underline.gif);
+	background-repeat: repeat-x; /* x축 즉 수평으로 반복 */
+	background-position: bottom; /* 밑에 위치 */
+}
+
+fCont_menu:active {
+	background-color: #e8e8e8;
+	color: black;
+	background-image: url(../images/underline.gif);
+	background-repeat: repeat-x; /* x축 즉 수평으로 반복 */
+	background-position: bottom; /* 밑에 위치 */
+}
+
+/* 펀딩 상세페이지 */
+
+/*좌측*/
+
+/*우측*/
+img src

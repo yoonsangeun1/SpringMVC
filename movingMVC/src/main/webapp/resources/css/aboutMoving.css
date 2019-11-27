@@ -1,0 +1,321 @@
+@charset "UTF-8";
+
+
+
+#aboutMoving_wrap {
+   /* div 폭 */
+   width:1200px;
+   
+   /* div 최소 높이 1024px로 설정 */
+   min-height:1024px; 
+   
+   /* div테두리 설정 */
+/*    border:3px solid red; */
+/*    border-radius:15px; */
+   
+   /* div 좌우 중앙 정렬 */
+   margin-left: auto; margin-right: auto;
+   
+}
+
+
+
+
+
+
+
+
+
+/************MOVING은 어떤 곳일까요 ? ************/
+#amMain_wrap {
+	float:left;
+   width:1200px; /* 메인배너 너비 */
+   min-height:450px; /* 메인배너 높이 */
+/*    border:3px solid black; */
+/*    border-radius:15px; */
+   text-align: center;
+   background-color:#eae6fa;
+   padding : 30px;
+}
+
+.amMoving_img {
+	float:center;
+	margin-top : 70px;
+	margin-bottom : 100px;
+}
+.amMoving_img img{
+	 width : 800px;
+	 height : 400px;
+} 
+.amMoving_text{
+	margin-top:100px;
+	margin-bottom:100px;
+	line-height:1.2;
+}
+#you  {
+	margin-left : 30px;
+	font-weight:bold; 
+	font-size:80px;
+	text-align:left;
+	
+}
+
+
+
+
+
+
+
+
+/************바꿔나갑니다 . 바로 여기서 ************/
+#amChange_wrap {
+	float:left;
+   width:1200px; /* 메인배너 너비 */
+   min-height:400px; /* 메인배너 높이 */
+/*    border:3px solid black; */
+/*    border-radius:15px; */
+   text-align: center;
+/*    background-color:#fffdeb; */
+   background-image: url(../images/change_moving_backimg.jpg);
+}
+#amChange_text{
+   margin-top : 100px;
+   margin-bottom : 100px;
+}
+.amChange_title {
+   color:red;
+   font-size : 50px;
+}
+.amChange_cont {
+   margin-top : 30px;
+   font-family : sans-serif;
+   font-size : 30px; 
+   line-height:1.2;
+}
+
+
+
+
+
+
+
+/************후원이 필요한 이유 **************/
+#amWhySupport_wrap{
+	float:left;
+   width:1200px; /* 메인배너 너비 */
+   min-height:400px; /* 메인배너 높이 */
+/*    border:3px solid black; */
+/*    border-radius:15px; */
+   font-size:30px;
+   text-align: center;
+   background-color:#f0d9d3;
+}
+#amWhySupport_text{
+   margin-top : 100px;
+   margin-bottom : 50px;
+}
+.amWhySupport_title {
+   color:brown;
+   font-size : 50px;
+}
+.amWhySupport_cont {
+   margin : 30px 0 30px 30px;
+   font-family : sans-serif;
+   font-size : 30px;
+   line-height:1.2;
+}
+
+
+/**********호버호버호버//클릭시 필요함 ********/
+.Project_look {
+	float:center;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	margin: 30px 0 30px 0;
+	padding: 0px;
+	cursor: pointer;
+	height: 40px;
+	width: 300px;
+	color: #fff;
+	font-weight: bold;
+	text-transform: uppercase;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, .3);
+} 
+
+/* .Project_look { */
+/*    position: relative; */
+/*    float: center; */
+/*    border: 0; */
+/*    padding: 0; */
+/*    cursor: pointer; */
+/*    height: 40px; */
+/*    width: 300px; */
+/*    font: bold 15px/40px 'lucida sans', 'trebuchet MS', 'Tahoma'; */
+/*    color: #fff; */
+/*    text-transform: uppercase;  */
+/*    background: #b3a9eb; */
+/*    border-radius: 3px; */
+/*    text-shadow: 0 -1px 0 rgba(0, 0, 0, .3); */
+/*    margin:30px; */
+/*    font-size : 30px; */
+/* } */
+
+/* .Project_look:hover { */
+/*    background: #9d8ce2; */
+/* } */
+
+/* .Project_look:active, .support_btn  :focus { */
+/*    background: #9d8ce2; */
+/*    outline: 0; */
+/* } */
+
+
+
+
+
+/****************주의사항 ****************/
+#amPrecautions_wrap {
+   float:left;
+   width:1200px; /* 메인배너 너비 */
+   min-height:400px; /* 메인배너 높이 */
+/*    border:3px solid black; */
+/*    border-radius:15px; */
+   font-size:30px;
+   text-align: center;
+   background-color:#fffdeb;
+}
+
+#amPrecautions_text{
+   margin-top : 100px;
+   margin-bottom : 100px;
+}
+
+
+.amPrecautions_title {
+	margin : 30px;
+   font-weight:bold;
+   color:red;
+   font-size : 50px;
+   text-decoration: underline;
+}
+
+.amPrecautions_cont {
+   margin : 30px;
+   font-family : sans-serif;
+   font-size : 30px;
+   line-height:1.2;
+}
+
+
+
+
+
+
+
+
+
+
+/**************** 정기 후원 ****************/
+#amRegularSupport_wrap {
+	float:left;
+   width:1200px; /* 메인배너 너비 */
+   min-height:400px; /* 메인배너 높이 */
+/*    border:3px solid black; */
+/*    border-radius:15px; */
+   font-size:30px;
+   text-align: center;
+   background-color : #7edbef;
+}
+
+#amRegularSupport_text{
+   margin-top : 100px;
+   margin-bottom : 100px;
+}
+
+
+.amRegularSupport_title {
+   color:green; 
+   font-size : 50px;
+}
+
+.amRegularSupport_cont {
+   margin-top : 100px;
+/*    font-family : sans-serif; */
+   font-size : 30px;
+   line-height:1.2;
+}
+
+
+
+
+
+
+
+
+
+/****************자주하는 질문****************/
+#amFAQ_wrap{
+	float:left;
+   width:1200px; /* 메인배너 너비 */
+   min-height:400px; /* 메인배너 높이 */
+/*    border:3px solid black; */
+/*    border-radius:15px; */
+   font-size:30px;
+   text-align: center;
+   background-color:#cac2f1;
+}
+
+#amFAQ_text{
+   margin-top : 100px;
+   margin-bottom : 100px;
+}
+
+
+.amFAQ_title {
+	color:#804000;  
+	font-size : 50px;
+}
+
+.amFAQ_cont {
+	width:800px;
+	min-height:400px;
+   margin-top : 100px;
+   font-family : sans-serif;
+   font-size : 30px;
+   line-height:1.2;
+}
+
+/* #amMovingsStory_wrap { */
+/*    width:1200px; 메인배너 너비 */
+/*    min-height:400px; 메인배너 높이 */
+/* /*    border:3px solid black; */ */
+/* /*    border-radius:15px; */ */
+/*    font-size:30px; */
+/*    text-align: center; */
+/*    background-image: url(../images/waves.gif); */
+/* } */
+
+/* #amBrandNews_wrap { */
+/*    width:1200px; 메인배너 너비 */
+/*    min-height:400px; 메인배너 높이 */
+/* /*    border:3px solid black; */ */
+/* /*    border-radius:15px; */ */
+/*    font-size:30px; */
+/*    text-align: center; */
+/*    background-image: url(../images/waves.gif); */
+/* } */
+
+
+
+
+
+
+
+
+
+
+
+
+
+

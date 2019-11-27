@@ -1,0 +1,240 @@
+@charset "UTF-8";
+
+/* FAQ css */
+
+#bFaq_body{
+	width:1200px;
+	height:auto;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+#bFaq_update{	/*업데이트 전체*/
+	width:1200px;
+	background:#9d8ce2;
+	position:relative;	
+	height:150px;
+}
+
+.bFaq_update_tit{ /*업데이트 h1 div*/
+	padding-top:30px;
+	padding-left:15px;
+	height:auto;
+}
+
+.bFaq_update_tit h1{/* 업데이트 h1 설정*/
+	font-size:30px;
+ 	color:#fff;
+ 	font-weight:400;
+ 	margin-bottom:20px;
+ 	line-height:1;
+}
+
+.bFaq_update_list{
+	width:100%;
+	height:auto;
+	position:absolute;
+	bottom:-1.8px;
+	left:0.4px;
+}
+
+.bFaq_update_list ul{
+	width:100%;
+	list-style:none;
+}
+
+.bFaq_update_list li{
+	border-left: 1px solid #000;
+    border-bottom: 1px solid #000;
+    border-top: 1px solid #000;
+	float:left;
+	width:33.333%;
+}
+
+.bFaq_update_list a{
+	height:60px;
+	color:#fff;
+	line-height:60px;
+	font-size:18px;
+	position:relative;
+	background:#d4cff3;
+	display:block;
+	text-align:center;
+	text-decoration:none;
+}
+
+#bFaq_update .bFaq_update_list_faq{
+	border-bottom:#e8e8e8;
+	border-left:1px solid #000;
+	border-right:1px solid #e8e8e8;
+}
+
+.bFaq_update_list_faq a{ /*이벤트 배경,글자색*/
+	color:#000; /*블랙*/
+	background:#fff; /*화이트*/
+}
+
+
+#bFaq_cont{ /* 상단 업데이트 제외 전체 div */
+	float:left;
+	width:1200px;
+	height:auto;
+	border:1px solid #e8e8e8;
+	overflow:auto;
+	box-sizing:border-box;
+	padding-bottom:40px;
+}
+
+#bFaq_cont h3{
+	margin-bottom:20px;
+	font-size:30px;
+	line-height:1.2;
+}
+
+#bFaq_tap{ /*문의 내용 탭 3개 버튼 있는 div*/
+	border:0.5px solid #000;
+	background:#fff;
+	margin:30px 200px;
+	overflow:hidden;
+	box-sizing:border-box;
+
+}
+
+#bFaq_tap button{ /*문의 내용 3개 버튼 */
+	float:left;
+	border:1px solid #000;
+	width:33.3333%;
+	padding:14px 16px;
+	font-size:16px;
+	outline:none; /*클릭 시 파란줄 같은게 겉에 보였는데 outline:none하면 사라짐*/
+	cursor:pointer;	/*커서 포인터*/
+	border-radius:0px;
+}
+
+#bFaq_tap #bFaq_tap_no1{ /*문의 내용에 있는 이용 문의 기본 설정*/
+	border-left:1.5px solid #000;
+	background:#000;
+	color:#fff;
+}
+
+#bFaq_tap_no2{/*후원문의 탭*/
+	background:#fff;
+	color:#000;
+}
+
+#bFaq_tap #bFaq_tap_no3{/*결제문의 탭	*/
+	border-right:1.5px solid #000;
+	background:#fff;
+	color:#000;
+}
+
+
+
+#bFaq_no1_body{ /*이용 문의 div*/
+	width:auto;
+	height:auto;
+	padding:40px 200px;
+	box-sizing:border-box;
+	overflow:auto;
+}
+
+#bFaq_no1_body p{
+	font-size:15px;
+	line-height:2;
+}
+
+#bFaq_no2_body{ /*후원 문의 div*/
+	width:auto;
+	height:auto;
+	padding:40px 200px;
+	box-sizing:border-box;
+	overflow:auto;
+}
+
+#bFaq_no2_body p{
+	font-size:15px;
+	line-height:2;
+}
+
+#bFaq_no3_body{ /*결제 문의 div*/
+	width:auto;
+	height:auto;
+	padding:40px 200px;
+	box-sizing:border-box;
+	overflow:auto;
+}
+
+#bFaq_no3_body p{
+	font-size:15px;
+	line-height:2;
+}
+
+ .bFaq_no1_bt1, .bFaq_no1_bt2, .bFaq_no1_bt3, .bFaq_no1_bt4 { /*이용문의 질문 버튼들*/
+	width:100%;
+	background:#fff;
+	color:#000;
+	border:1px solid #000;
+	cursor:pointer;
+	padding:10px;
+	outline:none;
+	font-size:15px;
+	margin-top:30px;
+	border-radius:0px;
+}
+
+ .bFaq_no1_panel1, .bFaq_no1_panel2, .bFaq_no1_panel3, .bFaq_no1_panel4 { /*이용문의 답변 div*/
+	width:100%;
+	float:left;
+	padding:30px;
+	border:1px solid #000;
+	margin-bottom:30px;
+}
+
+ .bFaq_no2_bt1, .bFaq_no2_bt2, .bFaq_no2_bt3, .bFaq_no2_bt4{ /*후원문의 질문 버튼들*/
+ 	width:100%;
+ 	background:#fff;
+ 	color:#000;
+ 	border:1px solid #000;
+ 	cursor:pointer;
+ 	padding:10px;
+ 	outline:none;
+ 	font-size:15px;
+ 	margin-top:30px;
+ 	border-radius:0px;
+ }
+ 
+ .bFaq_no2_panel1, .bFaq_no2_panel2, .bFaq_no2_panel3, .bFaq_no2_panel4{/*후원문의 답변 div*/
+ 	width:100%;
+ 	float:left;
+ 	padding:30px;
+ 	border:1px solid #000;
+ 	margin-bottom:30px;
+ }
+ 
+ .bFaq_no3_bt1, .bFaq_no3_bt2, .bFaq_no3_bt3, .bFaq_no3_bt4{ /*결제문의 질문 버튼들*/
+ 	width:100%;
+ 	background:#fff;
+ 	color:#000;
+ 	border:1px solid #000;
+ 	cursor:pointer;
+ 	padding:10px;
+ 	outline:none;
+ 	font-size:15px;
+ 	margin-top:30px;
+ 	border-radius:0px;
+ }
+ 
+ .bFaq_no3_panel1, .bFaq_no3_panel2, .bFaq_no3_panel3, .bFaq_no3_panel4{
+ 	width:100%;
+ 	float:left;
+ 	padding:30px;
+ 	border:1px solid #000;
+ 	margin-bottom:30px;
+ }
+
+
+
+
+
+
+
