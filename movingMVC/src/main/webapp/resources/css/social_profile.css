@@ -15,14 +15,14 @@
 	align-items: center;
 	z-index: -2;
 }
-/* 왼쪽 오른쪽 */
-#SNS_Profile_Left{
+/* 상단 중단 하단 */
+#SNS_Profile_Left{/* 상단*/
 	width: 1250px;
 	height: 450px;
 	z-index: 0;
 	
 }
-#SNS_Profile_Set{ /* 프로필 설정 */
+#SNS_Profile_Set{ /* 버튼 */
 	position:relative;
 	width:270px; 
 	height:600px;
@@ -44,8 +44,8 @@
 	padding: 15px 15px;
 	background: #eae6fa;
 }
-/* 왼쪽 메뉴 열거 */
-#SNS_Profile_Background{
+/* 상단 메뉴 열거 */
+#SNS_Profile_Background{/*애니메이션 배경화면 */
 	border:1px solid;
 	width: 1250px;
 	height: 50px;
@@ -90,8 +90,8 @@
 	padding-top: 10px;
 	position: relative;
 	text-align: center;
-	width:270px; 
-	height:70px;
+	width:200px; 
+	height:120px;
 	transition: 1.2s;
 	margin-top: 10px;
 	background: #d4cff3;
@@ -100,8 +100,7 @@
 	line-height: 12px;
 	border-radius: 10px;
 }
-/*#SNS_Profile_Info:hover{/* 애니메이션 효과 */
-	/*top:150px;
+#SNS_Profile_Info:hover{/* 애니메이션 효과 */
 	width: 1145px;
 	height:400px;
 	background: #6a67ce;
@@ -111,11 +110,21 @@
 	line-height: 62px;
 	border:1px solid #a3a0e0;
 	border-radius: 55px;
-}*/
+}
+#SNS_Profile_Info:hover #SNS_Profile_Info_Title{
+	opacity:0;
+	font-size:8px;
+}
+#SNS_Profile_Info_Title{
+	margin-top:15px;
+	opacity:1;
+	transition:0.6s;
+	font-size:24px;
+}
 #SNS_Profile_Menu_Button{
 	margin-top: 8px;
-	width:270px;
-	height:70px;
+	width:200px;
+	height:120px;
 	cursor: pointer;
 	border: none;
 	font-size: 22px;
