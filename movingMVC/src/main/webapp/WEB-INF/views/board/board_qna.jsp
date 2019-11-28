@@ -20,19 +20,19 @@
 		   <ul>
 		   
 		    <li>
-		     <a href="board_actors">배우모집</a>
+		     <a href="actors">배우모집</a>
 		    </li>
 		    
 		    <li>
-		     <a href="board_contest">시나리오 공모</a>
+		     <a href="contest">시나리오 공모</a>
 		    </li>
 		    
 		    <li>
-		     <a href="board_free">자유게시판</a>
+		     <a href="free">자유게시판</a>
 		    </li>
 		    
 		    <li class="bQna_community_list_qna">
-		     <a href="board_qna">QnA</a> <%--QnA 작업해야 됨 --%>
+		     <a href="qna">QnA</a> <%--QnA 작업해야 됨 --%>
 		    </li>
 	    
 		   </ul>
@@ -72,7 +72,7 @@
 				<tr>
 					<td id="no"></td>
 					<td><a href="#" id="link">
-					 <img src="resources/images/bQna.gif" width="16" border="0" alt="답변글이미지" />
+					 <img src="../resources/images/bQna.gif" width="16" border="0" alt="답변글이미지" />
 					[답변:] 흥행 성공한 영화 뭐가 있을까요?</a></td>
 					<td id="author"><a href="#">운영자</a></td>
 					<td id="time">17:27:48</td>
@@ -90,7 +90,7 @@
 				<tr>
 					<td id="no"></td>
 					<td><a href="#" id="link">
-					 <img src="resources/images/bQna.gif" width="16" border="0" alt="답변글이미지" />
+					 <img src="../resources/images/bQna.gif" width="16" border="0" alt="답변글이미지" />
 					[답변:] 결제가 안돼요</a></td>
 					<td id="author"><a href="#">운영자</a></td>
 					<td id="time">17:19:22</td>
@@ -108,7 +108,7 @@
 				<tr>
 					<td id="no"></td>
 					<td><a href="#" id="link">
-					 <img src="resources/images/bQna.gif" width="16" border="0" alt="답변글이미지" />
+					 <img src="../resources/images/bQna.gif" width="16" border="0" alt="답변글이미지" />
 					[답변:] 수수료 문의합니다.</a></td>
 					<td id="author"><a href="#">운영자</a></td>
 					<td id="time">16:47:55</td>
@@ -126,7 +126,7 @@
 				<tr>
 					<td id="no"></td>
 					<td><a href="#" id="link">
-					 <img src="resources/images/bQna.gif" width="16" border="0" alt="답변글이미지" />
+					 <img src="../resources/images/bQna.gif" width="16" border="0" alt="답변글이미지" />
 					[답변:] 후원한 금액이 정상적으로 이용되나요?</a></td>
 					<td id="author"><a href="#">운영자</a></td>
 					<td id="time">16:41:04</td>
@@ -144,7 +144,7 @@
 				<tr>
 					<td id="no"></td>
 					<td><a href="#" id="link">
-					 <img src="resources/images/bQna.gif" width="16" border="0" alt="답변글이미지" />
+					 <img src="../resources/images/bQna.gif" width="16" border="0" alt="답변글이미지" />
 					[답변:] 사이트 공유해가도 되나요?</a></td>
 					<td id="author"><a href="#">운영자</a></td>
 					<td id="time">14:28:24</td>

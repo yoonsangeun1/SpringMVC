@@ -58,5 +58,14 @@ public class BoardController {
 	public ModelAndView write() {
 		return new ModelAndView("board/board_write");
 	}//write()
+	
+	//공지사항 내용 보기 //임시
+	@RequestMapping("/board/notice_cont")
+	public ModelAndView notice_cont() {
+		return new ModelAndView("board/board_notice_cont");
+	}//notice_cont()
+	
+	
+	
 
 }//BoardController class
