@@ -54,8 +54,13 @@
   <term name="동영상" description="" physicalName="video" physicalDescription=""/>
   <term name="수정" description="" physicalName="update" physicalDescription=""/>
   <term name="횟수" description="" physicalName="hit" physicalDescription=""/>
-  <term name="보낸이" description="" physicalName="from" physicalDescription=""/>
-  <term name="받는이" description="" physicalName="to" physicalDescription=""/>
+  <term name="보낸이" description="" physicalName="from" physicalDescription="">
+    <synonyms>보낸</synonyms>
+    <synonyms>누른</synonyms>
+  </term>
+  <term name="받는이" description="" physicalName="to" physicalDescription="">
+    <synonyms>받는</synonyms>
+  </term>
   <term name="추천" description="" physicalName="like" physicalDescription=""/>
   <term name="개수" description="" physicalName="count" physicalDescription="">
     <synonyms>수량</synonyms>
@@ -109,6 +114,30 @@
     <synonyms>예정되는</synonyms>
     <synonyms>예정된</synonyms>
   </term>
-  <term name="주문" physicalName="order"/>
+  <term name="주문" physicalName="order">
+    <synonyms>주문서</synonyms>
+  </term>
+  <term name="소셜" physicalName="social"/>
+  <term name="닉네임" physicalName="nickname">
+    <synonyms>별명</synonyms>
+  </term>
+  <term name="소개" physicalName="introduce"/>
+  <term name="배경" physicalName="background"/>
+  <term name="조회수" physicalName="hit"/>
+  <term name="작성" physicalName="write"/>
+  <term name="프로필" physicalName="profile"/>
+  <term name="마스터" physicalName="master"/>
+  <term name="팔로워" physicalName="follower"/>
+  <term name="팔로우" physicalName="follow"/>
+  <term name="내" physicalName="my">
+    <synonyms>나의</synonyms>
+  </term>
+  <term name="목록" physicalName="list">
+    <synonyms>리스트</synonyms>
+  </term>
+  <term name="썸네일" physicalName="thumbnail">
+    <synonyms>미리보기</synonyms>
+  </term>
+  <term name="qna" physicalName="qna"/>
   <tag name="태그"/>
 </tm:TermDictionary>
