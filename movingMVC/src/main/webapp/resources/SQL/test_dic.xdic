@@ -41,6 +41,7 @@
   <term name="이메일" description="" physicalName="email" physicalDescription=""/>
   <term name="웹사이트" description="" physicalName="website" physicalDescription="">
     <synonyms>홈페이지</synonyms>
+    <synonyms>SNS주소</synonyms>
   </term>
   <term name="연결된" description="" physicalName="link" physicalDescription=""/>
   <term name="태그" description="" physicalName="tag" physicalDescription=""/>
@@ -61,7 +62,9 @@
   <term name="받는이" description="" physicalName="to" physicalDescription="">
     <synonyms>받는</synonyms>
   </term>
-  <term name="추천" description="" physicalName="like" physicalDescription=""/>
+  <term name="추천" description="" physicalName="like" physicalDescription="">
+    <synonyms>좋아요</synonyms>
+  </term>
   <term name="개수" description="" physicalName="count" physicalDescription="">
     <synonyms>수량</synonyms>
     <synonyms>수</synonyms>
@@ -90,10 +93,14 @@
   <term name="총" description="" physicalName="total" physicalDescription=""/>
   <term name="유무" description="" physicalName="existence" physicalDescription=""/>
   <term name="평점" description="" physicalName="grade" physicalDescription=""/>
-  <term name="사업자" description="" physicalName="business" physicalDescription=""/>
+  <term name="사업자" description="" physicalName="business" physicalDescription="">
+    <synonyms>제작사</synonyms>
+  </term>
   <term name="등록증" description="" physicalName="license" physicalDescription=""/>
   <term name="전화번호" description="" physicalName="phone" physicalDescription=""/>
-  <term name="후원자" description="" physicalName="sponser" physicalDescription=""/>
+  <term name="후원자" description="" physicalName="sponser" physicalDescription="">
+    <synonyms>후원</synonyms>
+  </term>
   <term name="수신여부" description="" physicalName="receive" physicalDescription=""/>
   <term name="첨부" description="" physicalName="attach" physicalDescription=""/>
   <term name="메시지" physicalName="message"/>
@@ -139,5 +146,61 @@
     <synonyms>미리보기</synonyms>
   </term>
   <term name="qna" physicalName="qna"/>
+  <term name="질문" physicalName="question"/>
+  <term name="답변" physicalName="answer"/>
+  <term name="url" physicalName="url"/>
+  <term name="상태" physicalName="status"/>
+  <term name="결제" physicalName="payment">
+    <synonyms>지불</synonyms>
+  </term>
+  <term name="방법" physicalName="way">
+    <synonyms>법</synonyms>
+  </term>
+  <term name="등급" physicalName="level"/>
+  <term name="참조" physicalName="reference"/>
+  <term name="적립금" physicalName="point">
+    <synonyms>포인트</synonyms>
+  </term>
+  <term name="유형" physicalName="type">
+    <synonyms>타입</synonyms>
+  </term>
+  <term name="장르" physicalName="genre"/>
+  <term name="비밀번호" physicalName="password"/>
+  <term name="공모전" physicalName="contest"/>
+  <term name="생년월일" physicalName="birth"/>
+  <term name="연령" physicalName="age">
+    <synonyms>나이</synonyms>
+  </term>
+  <term name="신장" physicalName="height">
+    <synonyms>키</synonyms>
+  </term>
+  <term name="몸무게" physicalName="weight">
+    <synonyms>체중</synonyms>
+  </term>
+  <term name="학력" physicalName="school"/>
+  <term name="경력" physicalName="specification"/>
+  <term name="계층" physicalName="step"/>
+  <term name="영문" physicalName="english"/>
+  <term name="한글" physicalName="korean"/>
+  <term name="일본어" physicalName="japanese"/>
+  <term name="배우" physicalName="actor"/>
+  <term name="감독" physicalName="director"/>
+  <term name="개봉" physicalName="release"/>
+  <term name="시대" physicalName="era"/>
+  <term name="관람등급" physicalName="rate"/>
+  <term name="영상" physicalName="video"/>
+  <term name="길이" physicalName="length"/>
+  <term name="테이블" physicalName="table"/>
+  <term name="코드" physicalName="code"/>
+  <term name="여부" physicalName="check">
+    <synonyms>체크</synonyms>
+  </term>
+  <term name="회사" physicalName="firm">
+    <synonyms>사</synonyms>
+  </term>
+  <term name="운송장" physicalName="billing">
+    <synonyms>청구서</synonyms>
+  </term>
+  <term name=""/>
   <tag name="태그"/>
 </tm:TermDictionary>
