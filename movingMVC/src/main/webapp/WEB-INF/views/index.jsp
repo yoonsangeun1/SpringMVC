@@ -86,14 +86,14 @@
 				<div id="header_menuBar">
 					<div class="flex-container">
 						<div style="flex-grow: 1;">
-							<a href="./funding/funding_list.jsp">Project</a>
+							<a href="project/list">Project</a>
 						</div>
 						<div style="flex-grow: 1;">
 							<a href="./movie/movie_mainList.jsp">Movies</a>
 						</div>
 						<div style="flex-grow: 12;">
 							<div id="header_logo">
-								<a href="./moving"><img src="./resources/images/logo.png"
+								<a href="main"><img src="./resources/images/logo.png"
 									alt="로고 이미지" width="150" height="25" /></a>
 							</div>
 						</div>
@@ -103,10 +103,10 @@
 							<a href="#"><i class="fas fa-search"></i></a>
 						</div>
 						<div style="flex-grow: 0.6;">
-							<a href="./sns/SNS_Main.jsp">SNS</a>
+							<a href="social/main">SNS</a>
 						</div>
 						<div style="flex-grow: 0.6;">
-							<a href="./member/member_login.jsp">Login</a>
+							<a href="member/login">Login</a>
 						</div>
 					</div>
 				</div>
@@ -116,15 +116,15 @@
 				<div id="header_menu2">
 					<nav id="menu_bar">
 						<ul>
-							<li><a href="./funding/funding_list.jsp">All</a></li>
-							<li><a href="./funding/funding_list.jsp">Documentaries</a></li>
-							<li><a href="./funding/funding_list.jsp">Shorts</a></li>
-							<li><a href="./funding/funding_list.jsp">Animation</a></li>
-							<li><a href="./funding/funding_list.jsp">Action</a></li>
-							<li><a href="./funding/funding_list.jsp">Romance</a></li>
-							<li><a href="./funding/funding_list.jsp">Action</a></li>
-							<li><a href="./funding/funding_list.jsp">Romance</a></li>
-							<li><a href="./funding/funding_list.jsp">Action</a></li>
+							<li><a href="project/list">All</a></li>
+							<li><a href="project/list">Documentaries</a></li>
+							<li><a href="project/list">Shorts</a></li>
+							<li><a href="project/list">Animation</a></li>
+							<li><a href="project/list">Action</a></li>
+							<li><a href="project/list">Romance</a></li>
+							<li><a href="project/list">Action</a></li>
+							<li><a href="project/list">Romance</a></li>
+							<li><a href="project/list">Action</a></li>
 						</ul>
 					</nav>
 				</div>
@@ -232,7 +232,7 @@
 					<br /> <br /> <br />
 					<button
 						class="biMoving_button button_cb3a9eb button_f24 button_r4 border"
-						onclick="location='aboutMoving';">MOVING자세히보기</button>
+						onclick="location='/moving.com/aboutMoving';">MOVING자세히보기</button>
 				</div>
 
 				<div class="clear"></div>
@@ -460,11 +460,11 @@
 					<section id="footer_about">
 						<h4>ABOUT</h4>
 						<ul>
-							<li><a href="./banner/aboutMoving.jsp">About us</a></li>
-							<li><a href="./board/board_notice.jsp">Notice</a></li>
-							<li><a href="./board/board_actors.jsp">Jobs</a></li>
-							<li><a href="./board/board_faq.jsp">FAQ</a></li>
-							<li><a href="./board/board_qna.jsp">Q&A</a></li>
+							<li><a href="aboutMoving">About us</a></li>
+							<li><a href="board/notice">Notice</a></li>
+							<li><a href="board/actors">Jobs</a></li>
+							<li><a href="board/faq">FAQ</a></li>
+							<li><a href="board/qna">Q&A</a></li>
 
 						</ul>
 					</section>
@@ -501,19 +501,19 @@
 				<!-- <div class="after"> </div>  -->
 
 				<div id="footer_moving">
-					<a href="#"><img src="./resources/images/test.png" alt="test" width="20"
+					<a href="#"><img src="resources/images/test.png" alt="test" width="20"
 						height="20" align="center" /></a>&nbsp;&nbsp;Moving, PBC © 2019
 				</div>
 
 
 				<div id="footer_sns">
-					<a href="#"><img src="./resources/images/test.png" alt="test" width="20"
+					<a href="#"><img src="resources/images/test.png" alt="test" width="20"
 						height="20" align="center" /></a>&nbsp;&nbsp;&nbsp; <a href="#"><img
-						src="./resources/images/test.png" alt="test" width="20" height="20"
+						src="resources/images/test.png" alt="test" width="20" height="20"
 						align="center" /></a>&nbsp;&nbsp;&nbsp; <a href="#"><img
-						src="./resources/images/test.png" alt="test" width="20" height="20"
+						src="resources/images/test.png" alt="test" width="20" height="20"
 						align="center" /></a>&nbsp;&nbsp;&nbsp; <a href="#"><img
-						src="./resources/images/test.png" alt="test" width="20" height="20"
+						src="resources/images/test.png" alt="test" width="20" height="20"
 						align="center" /></a>&nbsp;&nbsp;&nbsp;
 				</div>
 

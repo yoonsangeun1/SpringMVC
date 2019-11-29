@@ -8,7 +8,7 @@
 				<div id="am_Movingmember">
 					<hr class="my-hr1" />
 					<span>무빙 계정이 있으신가요? &nbsp;&nbsp;&nbsp;<a
-						href="member_login.jsp">로그인</a></span>
+						href="/moving.com/member/login">로그인</a></span>
 					<hr class="my-hr1" />
 				</div>
 				<table id="mJoin_table" border="">

@@ -70,7 +70,7 @@
 				</table>
 				<div id="not_Movingmember">
 					<hr class="my-hr1" />
-					<span>아직 무빙 계정이 없나요? &nbsp;&nbsp;&nbsp;<a href="member_join.jsp">회원가입</a></span>
+					<span>아직 무빙 계정이 없나요? &nbsp;&nbsp;&nbsp;<a href="/moving.com/member/join">회원가입</a></span>
 					<hr class="my-hr1" />
 				</div>
 			</section>
