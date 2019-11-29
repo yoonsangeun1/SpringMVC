@@ -8,8 +8,8 @@
 			<!-- 좌측 메뉴 -->
 			<div id="SNS_left_title">
 				<div id="SNS_Profile_Name">
-					<a href="moving_sns_profile">박진우</a>
-				</div>
+					<a href="profile">박진우</a>
+				</div> 
 				<img id="SNS_Profile_Picture" src="../images/member_profile.png"
 					width="30px" height="30px" alt="">
 			</div>
@@ -17,7 +17,7 @@
 			<ul id="SNS_ul1">
 				<!-- 좌측 메뉴 생성 -->
 				<li><a href="#">즐겨찾기</a></li>
-				<li><a href="moving_sns_messenger">메신저</a></li>
+				<li><a href="messenger">메신저</a></li>
 				<li><a href="#">영상</a></li>
 				<li><a href="#">페이지</a></li>
 				<li><a href="#">그룹</a></li>
@@ -158,14 +158,12 @@
 					</li>
 					<li>
 						<div id="SNS_Content">
-							<img src="../images/member_profile.png" width="40" height="40"
-								 alt="프로필 사진">
+							<img src="../images/member_profile.png" width="40" height="40" alt="프로필 사진">
 							<div id="SNS_Content_info">
 								<div id="SNS_Content_Title">박진우</div>
 								<div id="SNS_Content_Writer">1시간 전</div>
 							</div>
-							<input id="SNS_Option_Button" type="button" value="..."
-								style="float: right;">
+							<input id="SNS_Option_Button" type="button" value="..."	style="float: right;">
 							<div id="SNS_Content_Image">
 								<img alt="사진" src="../images/sns_photo15.jpg">
 							</div>
