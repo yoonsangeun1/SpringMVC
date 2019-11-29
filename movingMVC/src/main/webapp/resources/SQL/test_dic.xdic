@@ -70,8 +70,6 @@
     <synonyms>수</synonyms>
   </term>
   <term name="성별" description="" physicalName="sex" physicalDescription=""/>
-  <term name="나이" description="" physicalName="age" physicalDescription=""/>
-  <term name="이메일" description="" physicalName="email" physicalDescription=""/>
   <term name="직업" description="" physicalName="job" physicalDescription=""/>
   <term name="경로" description="" physicalName="path" physicalDescription=""/>
   <term name="게시판" description="" physicalName="board" physicalDescription=""/>
@@ -153,7 +151,7 @@
   <term name="결제" physicalName="payment">
     <synonyms>지불</synonyms>
   </term>
-  <term name="방법" physicalName="way">
+  <term name="방법" physicalName="method">
     <synonyms>법</synonyms>
   </term>
   <term name="등급" physicalName="level"/>
