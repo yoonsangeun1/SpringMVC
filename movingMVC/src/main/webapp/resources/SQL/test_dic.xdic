@@ -87,9 +87,11 @@
     <synonyms>한도</synonyms>
     <synonyms>제한</synonyms>
   </term>
-  <term name="금액" description="" physicalName="sum" physicalDescription=""/>
+  <term name="합계" description="" physicalName="total" physicalDescription=""/>
   <term name="총" description="" physicalName="total" physicalDescription=""/>
-  <term name="유무" description="" physicalName="existence" physicalDescription=""/>
+  <term name="유무" description="" physicalName="availability" physicalDescription="">
+    <synonyms>여부</synonyms>
+  </term>
   <term name="평점" description="" physicalName="grade" physicalDescription=""/>
   <term name="사업자" description="" physicalName="business" physicalDescription="">
     <synonyms>제작사</synonyms>
@@ -199,6 +201,12 @@
   <term name="운송장" physicalName="billing">
     <synonyms>청구서</synonyms>
   </term>
-  <term name=""/>
+  <term name="문서" physicalName="sheet">
+    <synonyms>서</synonyms>
+  </term>
+  <term name="금액" physicalName="price">
+    <synonyms>가격</synonyms>
+  </term>
+  <term name="답글" physicalName="reply"/>
   <tag name="태그"/>
 </tm:TermDictionary>
