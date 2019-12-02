@@ -21,16 +21,16 @@
 	padding-top: 10px;
 }
 
-#SNS_Wrap h3{
+#SNS_Wrap p{
 	transition: transform 0.3s;
 	display: inline-block;
 }
 /*
-#SNS_Wrap h3:hover {
+#SNS_Wrap p:hover {
     transform: scale(1.2);
 }*/
 /* 왼쪽 메뉴 열거 */
-#SNS_Profile_Picture {
+.SNS_Profile_Picture {
    float: right;
 }
 
@@ -84,17 +84,22 @@
    float: left;
 }
 
-#SNS_Content_ul img {
+.SNS_Content_user_img{
+   float: left;
+   width: 30px;
+   height: 30px;	
+}
+/* #SNS_Content_ul img {
    float: left;
    width: 30px;
    height: 30px;
-}
+}*/
 
-#SNS_Content_Title {
+.SNS_Content_Title {
    float: left;
 }
 
-#SNS_Content_Writer {
+.SNS_Content_Writer {
    float: left;
 }
 
@@ -206,16 +211,16 @@
     list-style: none;
     overflow-x: scroll;
     overflow-y: hidden;
+    float: left;
 }
-#right_profile_list{
+#right_profile_friends_ul li{
 	padding-top: 10px;
 	width: 50px;
 	height: 80px;
 	margin-right: 5px;
 	float: left;
 }
-
-#right_profile_list img{
+#right_profile_friends_ul img{
 	margin-left: 6px;
 	width: 35px;
 	height: 35px;
@@ -224,7 +229,7 @@
 	border-radius: 30px;
 	border:2px solid #b3a9eb;
 }
-#right_profile_list h3{
+#right_profile_friends_ul p{
 	font-size: 12px;
 	margin-top: 7px;
 	float: left;
@@ -342,7 +347,7 @@
    transition: background-color 0.2s;
 }
 
-#SNS_Content {
+.SNS_Content {
    margin-bottom:10px;
    padding-top:3px;
    padding-bottom:15px;
@@ -351,26 +356,26 @@
    border-bottom: 1px solid #e8e8e8; 
 }
 
-#SNS_Content_info {
+.SNS_Content_info {
    margin-left: 10px;
    display: flex;
    flex-direction: column;
    float: left;
 }
 /* 작성자, 제목, 내용을 표시한다. */
-#SNS_Content_Title {
+.SNS_Content_Title {
    font-size: 16px;
    margin-top: 2px;
    float: left;
    cursor: pointer;
 }
 
-#SNS_Content_Writer {
+.SNS_Content_Writer {
    margin-top: 5px;
    font-size: 12px;
 }
 
-#SNS_Content_Cont {
+.SNS_Content_Cont {
    font-size: 16px;
    line-height: 22px;
    margin-top: 15px;
@@ -380,7 +385,7 @@
    float: left;
 }
 
-#SNS_Content_Image img {
+.SNS_Content_Image{
    width: 610px;
    height: 420px;
    font-size: 16px;
@@ -396,7 +401,7 @@
    margin-bottom: 30px;
 }
 
-#SNS_Option_Button { /* ...버튼(옵션 버튼) */
+.SNS_Option_Button { /* ...버튼(옵션 버튼) */
    margin-top:3px;
    margin-right: 0px;
    border: none;
@@ -405,14 +410,14 @@
    border-radius: 40px;
 }
 /*--------------------게시글 하단 공유버튼--------------------*/
-#SNS_Cont_Move {/* 무빙 현황 */
+.SNS_Cont_Move {/* 무빙 현황 */
    margin-top: 20px;
    width: 610px;
    height: 40px;
    font-size: 13px;
 }
 
-#SNS_Cont_Option {
+.SNS_Cont_Option {
    margin-top: 1px;
    width: 600px;
    height: 40px;
@@ -421,7 +426,7 @@
    text-align: center;
 }
 
-#SNS_Cont_Option_Move {/* 무브! */
+.SNS_Cont_Option_Move {/* 무브! */
    width: 199px;
    height: inherit;
    display: inline-block;
@@ -435,7 +440,7 @@
    border-bottom-left-radius: 12px;
 }
 
-#SNS_Cont_Option_Share {/* 공유하기 */
+.SNS_Cont_Option_Share {/* 공유하기 */
    width: 199px;
    height: inherit;
    display: inline-block;
@@ -447,7 +452,7 @@
    border-right: 1px solid #b3a9eb;
 }
 
-#SNS_Cont_Option_Funding {/* 펀딩하기 */
+.SNS_Cont_Option_Funding {/* 펀딩하기 */
    width: 199px;
    height: inherit;
    display: inline-block;
@@ -460,7 +465,7 @@
    border-bottom-right-radius: 12px;
 }
 /*-----------------댓글창-----------------*/
-#SNS_Comment {
+.SNS_Comment {
    padding-top: 15px;
    width: 610px;
    height: auto;
@@ -469,11 +474,11 @@
    margin-bottom: 6px;
 }
 
-#SNS_Comment img {
+.SNS_Comment img {
    cursor: pointer;
 }
 
-#SNS_Comment h3 {
+.SNS_Comment p {
    font-weight: 600;
    font-size: 16px;
    padding-top: 13px;
@@ -483,14 +488,14 @@
    color: #504dc6;
 }
 
-#SNS_Comment h4 {
+.SNS_Comment p {
    font-size: 15px;
    padding-left: 8px;
    padding-bottom: 10px;
    display: inline-block;
 }
 /* 댓글 작성 */
-#SNS_Comment_Write{
+.SNS_Comment_Write{
    border-top: 1px solid #f2f0fb;
    height: auto;
    margin-top: 8px;

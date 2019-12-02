@@ -10,7 +10,7 @@
 				<div id="SNS_Profile_Name">
 					<a href="profile">박진우</a>
 				</div> 
-				<img id="SNS_Profile_Picture" src="../images/member_profile.png"
+				<img class="SNS_Profile_Picture" src="../images/member_profile.png"
 					width="30px" height="30px" alt="">
 			</div>
 			<br />
@@ -50,19 +50,19 @@
 			<div id="mid_scrap">
 				<ul id="SNS_Content_ul">
 					<li>
-						<div id="SNS_Content">
-							<img src="../images/member_profile.png" width="40" height="40"
+						<div class="SNS_Content">
+							<img class="SNS_Content_user_img" src="../images/member_profile.png" width="40" height="40"
 								 alt="프로필 사진">
-							<div id="SNS_Content_info">
-								<div id="SNS_Content_Title">박진우</div>
-								<div id="SNS_Content_Writer">1시간 전</div>
+							<div class="SNS_Content_info">
+								<div class="SNS_Content_Title">박진우</div>
+								<div class="SNS_Content_Writer">1시간 전</div>
 							</div>
-							<input id="SNS_Option_Button" type="button" value="..."
+							<input class="SNS_Option_Button" type="button" value="..."
 								style="float: right;">
-							<div id="SNS_Content_Image">
-								<img alt="사진" src="../images/sns_photo.gif">
+							<div>
+								<img class="SNS_Content_Image" alt="사진" src="../images/sns_photo.gif">
 							</div>
-							<div id="SNS_Content_Cont">
+							<div class="SNS_Content_Cont">
 								훈내폭발 #김래원 을 만날 시간🤗<br /> 오늘 밤 11시10분 가장 특별한 인터뷰❣<br /> SBS
 								접속! 무비월드 채널 고정🤩<br /> ↓예매는 아래에서↓<br /> ✔CGV <a
 									href="https://bit.ly/2mvBz2B">https://bit.ly/2mvBz2B</a><br />
@@ -70,33 +70,35 @@
 								✔씨네큐 <a href="https://bit.ly/2m7DUjI">https://bit.ly/2m7DUjI</a><br />
 
 								#한국영화_박스오피스1위 #거침없는_현실로맨스<br /> #가장보통의연애 #절찬상영중
-								<div id="SNS_Cont_Move">903명이 이 영화를 후원하여 302,445,180원이
+								<div class="SNS_Cont_Move">903명이 이 영화를 후원하여 302,445,180원이
 									모였습니다!</div>
-								<div id="SNS_Cont_Option">
-									<div id="SNS_Cont_Option_Move">무브!</div>
-									<div id="SNS_Cont_Option_Share">공유하기</div>
-									<div id="SNS_Cont_Option_Funding">펀딩하기</div>
+								<div class="SNS_Cont_Option">
+									<div class="SNS_Cont_Option_Move">무브!</div>
+									<div class="SNS_Cont_Option_Share">공유하기</div>
+									<div class="SNS_Cont_Option_Funding">펀딩하기</div>
 								</div>
 							</div>
-							<div id="SNS_Comment">
-								<img id="SNS_Profile_Picture" src="../images/member_profile.png"
+							<div class="SNS_Comment">
+								<img class="SNS_Content_user_img SNS_Profile_Picture" src="../images/member_profile.png"
 									width=30px height=30px alt="">
-								<h3>박진우</h3>
-								<h4>귀엽네요 물론 사람이요</h4>
-								<br /> <img id="SNS_Profile_Picture"
+								<p>박진우</p>
+								<p>귀엽네요 물론 사람이요</p>
+								<br /> 
+								<img class="SNS_Content_user_img SNS_Profile_Picture"
 									src="../images/member_profile.png" width=30px height=30px
 									alt="">
-								<h3>양용준</h3>
-								<h4>믓지네</h4>
-								<br /> <img id="SNS_Profile_Picture"
+								<p>양용준</p>
+								<p>믓지네</p>
+								<br /> 
+								<img class="SNS_Content_user_img SNS_Profile_Picture"
 									src="../images/member_profile.png" width=30px height=30px
 									alt="">
-								<h3>송현범</h3>
-								<h4>트윅스가 춤도 출 줄 아네</h4>
+								<p>송현범</p>
+								<p>트윅스가 춤도 출 줄 아네</p>
 								<br />
-								<div id="SNS_Comment_Write">
-									<img id="SNS_Profile_Picture"
-										src="../images/member_profile.png" width=30px height=30px
+								<div class="SNS_Comment_Write">
+									<img class="SNS_Content_user_img SNS_Profile_Picture"
+										src="../images/member_profile.png" 
 										alt=""> <input class="SNS_Comment_Write_Chat"
 										type="text"> <input class="SNS_Comment_Write_Button"
 										type="button" value="작성">
@@ -105,69 +107,67 @@
 						</div>
 					</li>
 					<li>
-						<div id="SNS_Content">
-							<img src="../images/member_profile.png" width="40" height="40"
+						<div class="SNS_Content">
+							<img class="SNS_Content_user_img" src="../images/member_profile.png" width="40" height="40"
 								 alt="프로필 사진">
-							<div id="SNS_Content_info">
-								<div id="SNS_Content_Title">박진우</div>
-								<div id="SNS_Content_Writer">1시간 전</div>
+							<div class="SNS_Content_info">
+								<div class="SNS_Content_Title">박진우</div>
+								<div class="SNS_Content_Writer">1시간 전</div>
 							</div>
-							<input id="SNS_Option_Button" type="button" value="..."
+							<input class="SNS_Option_Button" type="button" value="..."
 								style="float: right;">
-							<div id="SNS_Content_Image">
-								<img alt="사진" src="../images/sns_photo14.jpg">
+							<div >
+								<img class="SNS_Content_Image" alt="사진" src="../images/sns_photo14.jpg">
 							</div>
-							<div id="SNS_Content_Cont">
+							<div class="SNS_Content_Cont">
 								고양이 너무 불쌍해고양이 너무 불쌍해고양이 너무 불쌍해고양이 너무 불쌍해<br />
 								고양이 너무 불쌍해고양이 너무 불쌍해고양이 너무 불쌍해고양이 너무 불쌍해<br />
 								고양이 너무 불쌍해고양이 너무 불쌍해고양이 너무 불쌍해고양이 너무 불쌍해<br />
 								고양이 너무 불쌍해<br />고양이 너무 불쌍해<br />
 								고양이 너무 불쌍해고양이 너무 불쌍해고양이 너무 불쌍해고양이 너무 불쌍해고양이 너무 불쌍해고양이 너무 불쌍해고양이 너무 불쌍해고양이 너무 불쌍해고양이 너무 불쌍해고양이 너무 불쌍해고양이 너무 불쌍해고양이 너무 불쌍해고양이 너무 불쌍해고양이 너무 불쌍해
-								<div id="SNS_Cont_Move">392명이 좋아합니다!</div>
-								<div id="SNS_Cont_Option">
-									<div id="SNS_Cont_Option_Move">무브!</div>
-									<div id="SNS_Cont_Option_Share">공유하기</div>
-									<div id="SNS_Cont_Option_Funding">펀딩하기</div>
+								<div class="SNS_Cont_Move">392명이 좋아합니다!</div>
+								<div class="SNS_Cont_Option">
+									<div class="SNS_Cont_Option_Move">무브!</div>
+									<div class="SNS_Cont_Option_Share">공유하기</div>
+									<div class="SNS_Cont_Option_Funding">펀딩하기</div>
 								</div>
 							</div>
-							<div id="SNS_Comment">
-								<img id="SNS_Profile_Picture" src="../images/member_profile.png"
+							<div class="SNS_Comment">
+								<img class="SNS_Content_user_img" class="SNS_Profile_Picture" src="../images/member_profile.png"
 									width=30px height=30px alt="">
-								<h3>박동수</h3>
-								<h4>진짜 냥불쌍하네</h4>
-								<br /> <img id="SNS_Profile_Picture"
+								<p>박동수</p>
+								<p>진짜 냥불쌍하네</p>
+								<br /> <img class="SNS_Content_user_img" class="SNS_Profile_Picture"
 									src="../images/member_profile.png" width=30px height=30px
 									alt="">
-								<h3>양용준</h3>
-								<h4>믓지네</h4>
-								<br /> <img id="SNS_Profile_Picture"
+								<p>양용준</p>
+								<p>믓지네</p>
+								<br /> <img class="SNS_Content_user_img" class="SNS_Profile_Picture"
 									src="../images/member_profile.png" width=30px height=30px
 									alt="">
-								<h3>홍채훈</h3>
-								<h4>믓지네 밖에 할 줄 모르니?</h4>
+								<p>홍채훈</p>
+								<p>믓지네 밖에 할 줄 모르니?</p>
 								<br />
-								<div id="SNS_Comment_Write">
-									<img id="SNS_Profile_Picture"
-										src="../images/member_profile.png" width=30px height=30px
-										alt=""> <input class="SNS_Comment_Write_Chat"
-										type="text"> <input class="SNS_Comment_Write_Button"
-										type="button" value="작성">
+								<div class="SNS_Comment_Write">
+									<img class="SNS_Content_user_img" class="SNS_Profile_Picture" src="../images/member_profile.png" width=30px height=30px	alt=""> 
+										<input class="SNS_Comment_Write_Chat" type="text"> 
+										<input class="SNS_Comment_Write_Button"	type="button" value="작성">
 								</div>
 							</div>
 						</div>
 					</li>
 					<li>
-						<div id="SNS_Content">
-							<img src="../images/member_profile.png" width="40" height="40" alt="프로필 사진">
-							<div id="SNS_Content_info">
-								<div id="SNS_Content_Title">박진우</div>
-								<div id="SNS_Content_Writer">1시간 전</div>
+						<div class="SNS_Content">
+							<img class="SNS_Content_user_img" src="../images/member_profile.png" width="40" height="40" alt="프로필 사진">
+							<div class="SNS_Content_info">
+								<div class="SNS_Content_Title">박진우</div>
+								<div class="SNS_Content_Writer">1시간 전</div>
 							</div>
-							<input id="SNS_Option_Button" type="button" value="..."	style="float: right;">
-							<div id="SNS_Content_Image">
-								<img alt="사진" src="../images/sns_photo15.jpg">
+							<input class="SNS_Option_Button" type="button" value="..."	style="float: right;">
+							<div >
+								<img class="SNS_Content_Image" alt="사진" src="../images/sns_photo15.jpg">
 							</div>
-							<div id="SNS_Content_Cont">
+							<div class="SNS_Content_Cont">
 								헤-하고 웃고있는 모습을 보면<br/>
 								이발소 아저씨가 생각납니다.<br/>
 								하루종일 웃으며 저를 반겨주시면서<br/>
@@ -176,31 +176,31 @@
 								쟁반노래방도 생각이 나네요.<br/>
 								이히다리야<br/>
 								내용채우기<br/>
-								<div id="SNS_Cont_Move">92명이 좋아합니다!</div>
-								<div id="SNS_Cont_Option">
-									<div id="SNS_Cont_Option_Move">무브!</div>
-									<div id="SNS_Cont_Option_Share">공유하기</div>
-									<div id="SNS_Cont_Option_Funding">펀딩하기</div>
+								<div class="SNS_Cont_Move">92명이 좋아합니다!</div>
+								<div class="SNS_Cont_Option">
+									<div class="SNS_Cont_Option_Move">무브!</div>
+									<div class="SNS_Cont_Option_Share">공유하기</div>
+									<div class="SNS_Cont_Option_Funding">펀딩하기</div>
 								</div>
 							</div>
-							<div id="SNS_Comment">
-								<img id="SNS_Profile_Picture" src="../images/member_profile.png"
+							<div class="SNS_Comment">
+								<img class="SNS_Content_user_img" class="SNS_Profile_Picture" src="../images/member_profile.png"
 									width=30px height=30px alt="">
-								<h3>윤상은</h3>
-								<h4>세로드립ㅋㅋ</h4>
-								<br /> <img id="SNS_Profile_Picture"
+								<p>윤상은</p>
+								<p>세로드립ㅋㅋ</p>
+								<br /> <img class="SNS_Content_user_img" class="SNS_Profile_Picture"
 									src="../images/member_profile.png" width=30px height=30px
 									alt="">
-								<h3>박동수</h3>
-								<h4>고양이 머고</h4>
-								<br /> <img id="SNS_Profile_Picture"
+								<p>박동수</p>
+								<p>고양이 머고</p>
+								<br /> <img class="SNS_Content_user_img" class="SNS_Profile_Picture"
 									src="../images/member_profile.png" width=30px height=30px
 									alt="">
-								<h3>홍채훈</h3>
-								<h4>고양이가 웃을줄도 아네</h4>
+								<p>홍채훈</p>
+								<p>고양이가 웃을줄도 아네</p>
 								<br />
-								<div id="SNS_Comment_Write">
-									<img id="SNS_Profile_Picture"
+								<div class="SNS_Comment_Write">
+									<img class="SNS_Content_user_img" class="SNS_Profile_Picture"
 										src="../images/member_profile.png" width=30px height=30px
 										alt=""> <input class="SNS_Comment_Write_Chat"
 										type="text"> <input class="SNS_Comment_Write_Button"
@@ -216,38 +216,31 @@
 		<div id="SNS_main_right">
 			<!-- 우측 프로필, 뉴스, 기타 -->
 			<div id="right_profile">
-				<h3>비슷한 장르 배우 추천</h3>
+				<p>비슷한 장르 배우 추천</p>
 				<br />
 				<div id="right_profile_friends">
 					<ul id="right_profile_friends_ul">
-						<li id="right_profile_list"><img
-							src="../images/sns_photo3.jpg">
-							<h3>베잌동수</h3></li>
-						<li id="right_profile_list"><img
-							src="../images/sns_photo9.jpg">
-							<h3>양드래곤</h3></li>
-						<li id="right_profile_list"><img
-							src="../images/sns_photo12.jpg">
-							<h3>송타이거</h3></li>
-						<li id="right_profile_list"><img
-							src="../images/sns_photo6.jpg">
-							<h3>윤상은행</h3></li>
-						<li id="right_profile_list"><img
-							src="../images/sns_photo7.jpg">
-							<h3>홍채인식</h3></li>
-						<li id="right_profile_list"><img
-							src="../images/sns_photo7.jpg">
-							<h3>홍채인식</h3></li>
-						<li id="right_profile_list"><img
-							src="../images/sns_photo7.jpg">
-							<h3>홍채인식</h3></li>
+						<li ><img src="../images/sns_photo3.jpg">
+							<p>베잌동수</p></li>
+						<li ><img src="../images/sns_photo9.jpg">
+							<p>양드래곤</p></li>
+						<li ><img src="../images/sns_photo12.jpg">
+							<p>송타이거</p></li>
+						<li ><img src="../images/sns_photo6.jpg">
+							<p>윤상은행</p></li>
+						<li ><img src="../images/sns_photo7.jpg">
+							<p>홍채인식</p></li>
+						<li ><img src="../images/sns_photo7.jpg">
+							<p>홍채인식</p></li>
+						<li ><img src="../images/sns_photo7.jpg">
+							<p>홍채인식</p></li>
 					</ul>
 				</div>
 			</div>
 		</div>
 		<div id="right_etc">
 			<div id="SNS_right_title">
-				<h3>뉴스</h3>
+				<p>뉴스</p>
 			</div>
 			<ul id="SNS_ul2">
 				<li><a href="">[속보]팀장 윤상은.. 박진우에게 팀장 양도..."감격"</a></li>
@@ -260,7 +253,7 @@
 		</div>
 		<div id="right_etc2">
 			<div id="SNS_right_title">
-				<h3>추천 광고</h3>
+				<p>추천 광고</p>
 			</div>
 			<ul id="SNS_ul2">
 				<li><a href="">제주도 항공 특가 편도 140만원 {즉시보기}</a></li>
