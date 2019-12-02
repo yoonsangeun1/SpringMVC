@@ -45,7 +45,9 @@
   </term>
   <term name="연결된" description="" physicalName="link" physicalDescription=""/>
   <term name="태그" description="" physicalName="tag" physicalDescription=""/>
-  <term name="분류번호" description="" physicalName="code" physicalDescription=""/>
+  <term name="분류번호" description="" physicalName="code" physicalDescription="">
+    <synonyms>코드</synonyms>
+  </term>
   <term name="읽음" description="" physicalName="read" physicalDescription=""/>
   <term name="표시" description="" physicalName="mark" physicalDescription=""/>
   <term name="첫번째" description="" physicalName="first" physicalDescription=""/>
@@ -75,7 +77,7 @@
   <term name="게시판" description="" physicalName="board" physicalDescription=""/>
   <term name="영화" description="" physicalName="movie" physicalDescription=""/>
   <term name="사용자" description="" physicalName="user" physicalDescription=""/>
-  <term name="번호" description="" physicalName="number" physicalDescription="">
+  <term name="번호" description="" physicalName="no" physicalDescription="">
     <synonyms>순번</synonyms>
   </term>
   <term name="목표" description="" physicalName="target" physicalDescription=""/>
@@ -91,6 +93,7 @@
   <term name="총" description="" physicalName="total" physicalDescription=""/>
   <term name="유무" description="" physicalName="availability" physicalDescription="">
     <synonyms>여부</synonyms>
+    <synonyms>체크</synonyms>
   </term>
   <term name="평점" description="" physicalName="grade" physicalDescription=""/>
   <term name="사업자" description="" physicalName="business" physicalDescription="">
@@ -156,7 +159,7 @@
   <term name="방법" physicalName="method">
     <synonyms>법</synonyms>
   </term>
-  <term name="등급" physicalName="level"/>
+  <term name="등급" physicalName="lv"/>
   <term name="참조" physicalName="reference"/>
   <term name="적립금" physicalName="point">
     <synonyms>포인트</synonyms>
@@ -191,10 +194,6 @@
   <term name="영상" physicalName="video"/>
   <term name="길이" physicalName="length"/>
   <term name="테이블" physicalName="table"/>
-  <term name="코드" physicalName="code"/>
-  <term name="여부" physicalName="check">
-    <synonyms>체크</synonyms>
-  </term>
   <term name="회사" physicalName="firm">
     <synonyms>사</synonyms>
   </term>
@@ -208,5 +207,12 @@
     <synonyms>가격</synonyms>
   </term>
   <term name="답글" physicalName="reply"/>
+  <term name="포인트" physicalName="point"/>
+  <term name="1" physicalName="_01"/>
+  <term name="2" physicalName="_02"/>
+  <term name="3" physicalName="_03"/>
+  <term name="무브" physicalName="move"/>
+  <term name="답글_정렬순서" physicalName="reply_order"/>
+  <term name="일반" physicalName="normal"/>
   <tag name="태그"/>
 </tm:TermDictionary>
