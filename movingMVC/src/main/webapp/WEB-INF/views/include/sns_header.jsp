@@ -8,7 +8,7 @@
 <link rel="stylesheet" type="text/css" href="../css/init.css" />
 <link rel="stylesheet" type="text/css" href="../css/index.css" />
 <link rel="stylesheet" type="text/css" href="../css/header.css" />
-<link rel="stylesheet" type="text/css" href="../css/sns_scrollbar.css" />
+<link rel="stylesheet" type="text/css" href="../css/social_scrollbar.css" />
 
 <%-- 아이콘 폰트 사용을 위한 스타일시트, js 추가 --%>
 <link rel="stylesheet" type="text/css"
