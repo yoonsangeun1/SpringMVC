@@ -44,12 +44,12 @@ CREATE SEQUENCE social_post_seq
 	START WITH 1;
 
 /* 댓글_시퀀스 */
-CREATE SEQUENCE comment_seq 
+CREATE SEQUENCE m_comment_seq 
 	INCREMENT BY 1
 	START WITH 1;
 
-/* 파일_시퀀스 */
-CREATE SEQUENCE file_seq 
+/* 첨부_파일_시퀀스 */
+CREATE SEQUENCE attached_file_seq 
 	INCREMENT BY 1
 	START WITH 1;
 
@@ -59,7 +59,7 @@ CREATE SEQUENCE move_seq
 	START WITH 1;
 
 /* 회원_시퀀스 */
-CREATE SEQUENCE user_seq 
+CREATE SEQUENCE m_user_seq 
 	INCREMENT BY 1
 	START WITH 1;
 
@@ -109,7 +109,6 @@ CREATE TABLE code_master (
 	code_type_id NUMBER(38), /* 코드_유형_아이디 */
 	code_no NUMBER(38), /* 코드_번호 */
 	code_name VARCHAR2(50), /* 코드_명 */
-	category_no NUMBER(38), /* 카테고리_번호 */
 	category_name VARCHAR2(30), /* 카테고리_명 */
 	table_name VARCHAR2(50), /* 테이블_명 */
 	register_date DATE /* 등록_날짜 */
@@ -120,14 +119,13 @@ CREATE UNIQUE INDEX code_master_id_pk
 		id ASC
 	);
 
-CREATE UNIQUE INDEX code_master_code_no_uix
+CREATE UNIQUE INDEX code_no_uix
 	ON code_master (
 		code_no ASC
 	);
 
-CREATE UNIQUE INDEX code_master_category_no_uix
+CREATE UNIQUE INDEX category_no_uix
 	ON code_master (
-		category_no ASC
 	);
 
 ALTER TABLE code_master
@@ -148,12 +146,12 @@ ALTER TABLE code_master
 	ADD
 		CONSTRAINT UK_code_master2
 		UNIQUE (
-			category_no
 		);
 
 /* 주문_수량 */
 CREATE TABLE order_entity (
 	id NUMBER(38) NOT NULL, /* 아이디 */
+	code_no NUMBER(38), /* 코드_번호 */
 	order_id NUMBER(38), /* 주문서_아이디 */
 	reward_id NUMBER(38), /* 리워드_아이디 */
 	count NUMBER(38), /* 수량 */
@@ -176,6 +174,7 @@ ALTER TABLE order_entity
 /* 주문_문서 */
 CREATE TABLE order_sheet (
 	id NUMBER(38) NOT NULL, /* 아이디 */
+	code_no NUMBER(38), /* 코드_번호 */
 	user_id NUMBER(38), /* 회원_아이디 */
 	address VARCHAR2(80), /* 주소 */
 	total_price NUMBER(38), /* 총_금액 */
@@ -195,9 +194,10 @@ ALTER TABLE order_sheet
 			id
 		);
 
-/* 파일 */
-CREATE TABLE file (
+/* 첨부_파일 */
+CREATE TABLE attached_file (
 	id NUMBER(38) NOT NULL, /* 아이디 */
+	code_no NUMBER(38), /* 코드_번호 */
 	file_path VARCHAR2(300), /* 파일_경로 */
 	thumbnail_path VARCHAR2(300), /* 썸네일_경로 */
 	no NUMBER(38), /* 순번 */
@@ -211,13 +211,13 @@ CREATE TABLE file (
 );
 
 CREATE UNIQUE INDEX file_id_pk
-	ON file (
+	ON attached_file (
 		id ASC
 	);
 
-ALTER TABLE file
+ALTER TABLE attached_file
 	ADD
-		CONSTRAINT PK_file
+		CONSTRAINT PK_attached_file
 		PRIMARY KEY (
 			id
 		);
@@ -225,7 +225,7 @@ ALTER TABLE file
 /* 계층형_게시글 */
 CREATE TABLE reply_post (
 	id NUMBER(38) NOT NULL, /* 아이디 */
-	master_id NUMBER(38), /* 마스터_아이디 */
+	code_no NUMBER(38), /* 코드_번호 */
 	user_id NUMBER(38), /* 회원_아이디 */
 	category VARCHAR2(30), /* 분류 */
 	title VARCHAR2(200), /* 제목 */
@@ -254,6 +254,7 @@ ALTER TABLE reply_post
 /* 배송 */
 CREATE TABLE delivery (
 	id NUMBER(38) NOT NULL, /* 아이디 */
+	code_no NUMBER(38), /* 코드_번호 */
 	order_sheet_id NUMBER(38), /* 주문_문서_아이디 */
 	delivery_firm VARCHAR2(50), /* 배송_사 */
 	billing_no VARCHAR2(25), /* 운송장번호 */
@@ -275,7 +276,7 @@ ALTER TABLE delivery
 /* 소셜_게시글 */
 CREATE TABLE social_post (
 	id NUMBER(38) NOT NULL, /* 아이디 */
-	master_id NUMBER(38), /* 마스터_아이디 */
+	code_no NUMBER(38), /* 코드_번호 */
 	social_id NUMBER(38), /* 소셜_아이디 */
 	user_type VARCHAR2(1), /* 회원_타입 */
 	content VARCHAR2(4000), /* 내용 */
@@ -302,9 +303,8 @@ ALTER TABLE social_post
 CREATE TABLE project_post (
 	id NUMBER(38) NOT NULL, /* 아이디 */
 	user_id NUMBER(38), /* 회원_아이디 */
-	code_master_id NUMBER(38), /* 코드_마스터_아이디 */
+	code_no NUMBER(38), /* 코드_번호 */
 	code NUMBER(38), /* 분류번호 */
-	category_no NUMBER(38), /* 카테고리_번호 */
 	title VARCHAR2(200), /* 제목 */
 	content VARCHAR2(4000), /* 내용 */
 	business VARCHAR2(50), /* 제작사 */
@@ -331,6 +331,7 @@ ALTER TABLE project_post
 /* 추천_리스트 */
 CREATE TABLE recommend_list (
 	id NUMBER(38) NOT NULL, /* 아이디 */
+	code_no NUMBER(38), /* 코드_번호 */
 	social_profile_id NUMBER(38), /* 소셜_프로필_아이디 */
 	social_profile_banner_title VARCHAR2(200), /* 소셜_프로필_광고_제목 */
 	profile_post_id NUMBER(38), /* 프로필_게시글_아이디 */
@@ -341,7 +342,7 @@ CREATE TABLE recommend_list (
 	normal_post_banner_title VARCHAR2(200) /* 일반_게시글_광고_제목 */
 );
 
-CREATE UNIQUE INDEX recommend_list_id_pk
+CREATE UNIQUE INDEX recom_list_id_pk
 	ON recommend_list (
 		id ASC
 	);
@@ -356,11 +357,10 @@ ALTER TABLE recommend_list
 /* 영상_게시글 */
 CREATE TABLE video_post (
 	id NUMBER(38) NOT NULL, /* 아이디 */
-	master_id NUMBER(38), /* 마스터_아이디 */
+	code_no NUMBER(38), /* 코드_번호 */
 	user_id NUMBER(38), /* 회원_아이디 */
 	title_english VARCHAR2(200), /* 제목_영문 */
 	title_korean VARCHAR2(200), /* 제목_한글 */
-	category_no NUMBER(38), /* 카테고리_번호 */
 	director VARCHAR2(50), /* 감독 */
 	actor VARCHAR2(50), /* 배우 */
 	release_date DATE, /* 개봉_일 */
@@ -392,6 +392,7 @@ ALTER TABLE video_post
 /* 소셜_메시지 */
 CREATE TABLE social_message (
 	id NUMBER(38) NOT NULL, /* 아이디 */
+	code_no NUMBER(38), /* 코드_번호 */
 	social_id_from NUMBER(38) NOT NULL, /* 소셜_아이디_보낸이 */
 	social_id_to NUMBER(38) NOT NULL, /* 소셜_아이디_받는이 */
 	content VARCHAR2(4000), /* 내용 */
@@ -411,8 +412,11 @@ ALTER TABLE social_message
 		);
 
 /* 회원 */
-CREATE TABLE user (
+CREATE TABLE m_user (
 	id NUMBER(38) NOT NULL, /* 아이디 */
+	user_status NUMBER(38), /* 회원_상태 */
+	user_type NUMBER(38), /* 회원_유형 */
+	user_lv NUMBER(38), /* 회원_등급 */
 	userid VARCHAR2(50) NOT NULL, /* 회원아이디 */
 	nickname VARCHAR2(17), /* 닉네임 */
 	name VARCHAR2(50), /* 이름 */
@@ -423,50 +427,45 @@ CREATE TABLE user (
 	genre_03 VARCHAR2(50), /* 장르3 */
 	phone VARCHAR2(30), /* 전화번호 */
 	profile_image_url VARCHAR2(300), /* 프로필_사진_url */
-	lv VARCHAR(5) NOT NULL, /* 등급 */
-	point NUMBER(38), /* 포인트 */
+	user_pointpoint NUMBER(38), /* 회원_포인트 */
 	register_date DATE, /* 등록_일 */
-	type VARCHAR2(1), /* 유형 */
-	user_status varchar2(1), /* 회원사용자상태 */
 	business_register_no VARCHAR2(25), /* 사업자등록번호 */
 	business_name VARCHAR2(50), /* 사업자이름 */
-	business_license_image_path VARCHAR2(300), /* 사업자등록증이미지경로 */
-	code_no NUMBER(38), /* 코드_번호 */
-	category_no NUMBER(38) /* 카테고리_번호 */
+	business_license_image_path VARCHAR2(300) /* 사업자등록증이미지경로 */
 );
 
 CREATE UNIQUE INDEX user_id_pk
-	ON user (
+	ON m_user (
 		id ASC
 	);
 
 CREATE UNIQUE INDEX user_userid_uix
-	ON user (
+	ON m_user (
 		userid ASC
 	);
 
 CREATE UNIQUE INDEX user_nickname_uix
-	ON user (
+	ON m_user (
 		nickname ASC
 	);
 
-ALTER TABLE user
+ALTER TABLE m_user
 	ADD
-		CONSTRAINT PK_user
+		CONSTRAINT PK_m_user
 		PRIMARY KEY (
 			id
 		);
 
-ALTER TABLE user
+ALTER TABLE m_user
 	ADD
-		CONSTRAINT UK_user
+		CONSTRAINT UK_m_user
 		UNIQUE (
 			userid
 		);
 
-ALTER TABLE user
+ALTER TABLE m_user
 	ADD
-		CONSTRAINT UK_user2
+		CONSTRAINT UK_m_user2
 		UNIQUE (
 			nickname
 		);
@@ -474,6 +473,7 @@ ALTER TABLE user
 /* 결제 */
 CREATE TABLE payment (
 	id NUMBER(38) NOT NULL, /* 아이디 */
+	code_no NUMBER(38), /* 코드_번호 */
 	order_sheet_id NUMBER(38), /* 주문_문서_아이디 */
 	payment_method varchar2(1), /* 결제_방법 */
 	status varchar2(1) /* 상태 */
@@ -494,6 +494,7 @@ ALTER TABLE payment
 /* 소셜_프로필 */
 CREATE TABLE social_profile (
 	id NUMBER(38) NOT NULL, /* 아이디 */
+	code_no NUMBER(38), /* 코드_번호 */
 	user_id NUMBER(38) NOT NULL, /* 회원_아이디 */
 	nickname VARCHAR2(17), /* 닉네임 */
 	background_image_path VARCHAR2(300), /* 배경_이미지_경로 */
@@ -520,6 +521,7 @@ ALTER TABLE social_profile
 /* 리워드 */
 CREATE TABLE reward (
 	id NUMBER(38) NOT NULL, /* 아이디 */
+	code_no NUMBER(38), /* 코드_번호 */
 	project_id NUMBER(38), /* 프로젝트_아이디 */
 	title VARCHAR2(200), /* 제목 */
 	content VARCHAR2(4000), /* 내용 */
@@ -545,6 +547,7 @@ ALTER TABLE reward
 /* 무브 */
 CREATE TABLE move (
 	id NUMBER(38) NOT NULL, /* 아이디 */
+	code_no NUMBER(38), /* 코드_번호 */
 	user_id_from NUMBER(38), /* 회원_아이디_보낸이 */
 	user_id_to NUMBER(38), /* 회원_아이디_받는이 */
 	register_date DATE, /* 등록_일 */
@@ -581,7 +584,7 @@ CREATE UNIQUE INDEX code_type_master_id_pk
 		id ASC
 	);
 
-CREATE UNIQUE INDEX code_type_master_code_type_id_uix
+CREATE UNIQUE INDEX code_type_id_uix
 	ON code_type_master (
 		code_type_id ASC
 	);
@@ -603,10 +606,9 @@ ALTER TABLE code_type_master
 /* 일반_게시글 */
 CREATE TABLE normal_post (
 	id NUMBER(38) NOT NULL, /* 아이디 */
-	master_id NUMBER(38), /* 마스터_아이디 */
+	code_no NUMBER(38), /* 코드_번호 */
 	user_id NUMBER(38), /* 회원_아이디 */
 	user_category VARCHAR2(30), /* 회원_분류 */
-	category_no NUMBER(38), /* 카테고리_번호 */
 	title VARCHAR2(200), /* 제목 */
 	content VARCHAR2(4000), /* 내용 */
 	hit NUMBER(38), /* 조회수 */
@@ -631,8 +633,9 @@ ALTER TABLE normal_post
 		);
 
 /* 댓글 */
-CREATE TABLE comment (
+CREATE TABLE m_comment (
 	id NUMBER(38) NOT NULL, /* 아이디 */
+	code_no NUMBER(38), /* 코드_번호 */
 	user_id NUMBER(38), /* 회원_아이디 */
 	social_profile_id NUMBER(38), /* 소셜_프로필_아이디 */
 	content VARCHAR2(4000), /* 내용 */
@@ -648,13 +651,13 @@ CREATE TABLE comment (
 );
 
 CREATE UNIQUE INDEX comment_id_pk
-	ON comment (
+	ON m_comment (
 		id ASC
 	);
 
-ALTER TABLE comment
+ALTER TABLE m_comment
 	ADD
-		CONSTRAINT PK_comment
+		CONSTRAINT PK_m_comment
 		PRIMARY KEY (
 			id
 		);
@@ -662,7 +665,7 @@ ALTER TABLE comment
 /* 프로필_게시글 */
 CREATE TABLE profile_post (
 	id NUMBER(38) NOT NULL, /* 아이디 */
-	master_id NUMBER(38), /* 마스터_아이디 */
+	code_no NUMBER(38), /* 코드_번호 */
 	user_id NUMBER(38), /* 회원_아이디 */
 	title VARCHAR2(200), /* 제목 */
 	category VARCHAR2(30), /* 카테고리 */
@@ -698,7 +701,7 @@ ALTER TABLE profile_post
 
 ALTER TABLE code_master
 	ADD
-		CONSTRAINT code_master_code_type_master_code_type_id_fk
+		CONSTRAINT code_master_code_type_id_fk
 		FOREIGN KEY (
 			code_type_id
 		)
@@ -728,18 +731,38 @@ ALTER TABLE order_entity
 		)
 		ON DELETE SET NULL;
 
+ALTER TABLE order_entity
+	ADD
+		CONSTRAINT order_entity_code_no_fk
+		FOREIGN KEY (
+			code_no
+		)
+		REFERENCES code_master (
+			code_no
+		);
+
 ALTER TABLE order_sheet
 	ADD
 		CONSTRAINT order_sheet_user_id_fk
 		FOREIGN KEY (
 			user_id
 		)
-		REFERENCES user (
+		REFERENCES m_user (
 			id
 		)
 		ON DELETE SET NULL;
 
-ALTER TABLE file
+ALTER TABLE order_sheet
+	ADD
+		CONSTRAINT order_sheet_code_no_fk
+		FOREIGN KEY (
+			code_no
+		)
+		REFERENCES code_master (
+			code_no
+		);
+
+ALTER TABLE attached_file
 	ADD
 		CONSTRAINT file_social_post_id_fk
 		FOREIGN KEY (
@@ -750,7 +773,7 @@ ALTER TABLE file
 		)
 		ON DELETE SET NULL;
 
-ALTER TABLE file
+ALTER TABLE attached_file
 	ADD
 		CONSTRAINT file_profile_post_id_fk
 		FOREIGN KEY (
@@ -761,7 +784,7 @@ ALTER TABLE file
 		)
 		ON DELETE SET NULL;
 
-ALTER TABLE file
+ALTER TABLE attached_file
 	ADD
 		CONSTRAINT file_reply_post_id_fk
 		FOREIGN KEY (
@@ -772,7 +795,7 @@ ALTER TABLE file
 		)
 		ON DELETE SET NULL;
 
-ALTER TABLE file
+ALTER TABLE attached_file
 	ADD
 		CONSTRAINT file_normal_post_id_fk
 		FOREIGN KEY (
@@ -783,9 +806,9 @@ ALTER TABLE file
 		)
 		ON DELETE SET NULL;
 
-ALTER TABLE file
+ALTER TABLE attached_file
 	ADD
-		CONSTRAINT FK_video_post_TO_file
+		CONSTRAINT FK_video_post_TO_attached_file
 		FOREIGN KEY (
 			movie_id
 		)
@@ -794,7 +817,7 @@ ALTER TABLE file
 		)
 		ON DELETE SET NULL;
 
-ALTER TABLE file
+ALTER TABLE attached_file
 	ADD
 		CONSTRAINT file_project_post_id_fk
 		FOREIGN KEY (
@@ -805,14 +828,14 @@ ALTER TABLE file
 		)
 		ON DELETE SET NULL;
 
-ALTER TABLE reply_post
+ALTER TABLE attached_file
 	ADD
-		CONSTRAINT reply_post_code_master_id_fk
+		CONSTRAINT file_code_fk
 		FOREIGN KEY (
-			master_id
+			code_no
 		)
 		REFERENCES code_master (
-			id
+			code_no
 		);
 
 ALTER TABLE reply_post
@@ -821,7 +844,7 @@ ALTER TABLE reply_post
 		FOREIGN KEY (
 			user_id
 		)
-		REFERENCES user (
+		REFERENCES m_user (
 			id
 		)
 		ON DELETE SET NULL;
@@ -836,6 +859,16 @@ ALTER TABLE reply_post
 			id
 		);
 
+ALTER TABLE reply_post
+	ADD
+		CONSTRAINT FK_code_master_TO_reply_post
+		FOREIGN KEY (
+			code_no
+		)
+		REFERENCES code_master (
+			code_no
+		);
+
 ALTER TABLE delivery
 	ADD
 		CONSTRAINT delivery_order_sheet_if_fk
@@ -847,9 +880,19 @@ ALTER TABLE delivery
 		)
 		ON DELETE SET NULL;
 
+ALTER TABLE delivery
+	ADD
+		CONSTRAINT delivery_code_no_fk
+		FOREIGN KEY (
+			code_no
+		)
+		REFERENCES code_master (
+			code_no
+		);
+
 ALTER TABLE social_post
 	ADD
-		CONSTRAINT social_post_social_profile_id_fk
+		CONSTRAINT social_post_social_prof_id_fk
 		FOREIGN KEY (
 			social_id
 		)
@@ -857,16 +900,6 @@ ALTER TABLE social_post
 			id
 		)
 		ON DELETE SET NULL;
-
-ALTER TABLE social_post
-	ADD
-		CONSTRAINT social_post_code_master_id_fk
-		FOREIGN KEY (
-			master_id
-		)
-		REFERENCES code_master (
-			id
-		);
 
 ALTER TABLE social_post
 	ADD
@@ -879,40 +912,40 @@ ALTER TABLE social_post
 		)
 		ON DELETE SET NULL;
 
+ALTER TABLE social_post
+	ADD
+		CONSTRAINT FK_code_master_TO_social_post
+		FOREIGN KEY (
+			code_no
+		)
+		REFERENCES code_master (
+			code_no
+		);
+
 ALTER TABLE project_post
 	ADD
 		CONSTRAINT project_post_user_id_fk
 		FOREIGN KEY (
 			user_id
 		)
-		REFERENCES user (
+		REFERENCES m_user (
 			id
 		)
 		ON DELETE SET NULL;
 
 ALTER TABLE project_post
 	ADD
-		CONSTRAINT project_post_code_master_id_fk
+		CONSTRAINT FK_code_master_TO_project_post
 		FOREIGN KEY (
-			code_master_id
+			code_no
 		)
 		REFERENCES code_master (
-			id
-		);
-
-ALTER TABLE project_post
-	ADD
-		CONSTRAINT project_post_category_no_fk
-		FOREIGN KEY (
-			category_no
-		)
-		REFERENCES code_master (
-			category_no
+			code_no
 		);
 
 ALTER TABLE recommend_list
 	ADD
-		CONSTRAINT recommend_list_social_profile_id_fk
+		CONSTRAINT recom_list_social_prof_id_fk
 		FOREIGN KEY (
 			social_profile_id
 		)
@@ -922,7 +955,7 @@ ALTER TABLE recommend_list
 
 ALTER TABLE recommend_list
 	ADD
-		CONSTRAINT recommend_list_profile_post_id_fk
+		CONSTRAINT recom_list_profile_post_id_fk
 		FOREIGN KEY (
 			profile_post_id
 		)
@@ -932,7 +965,7 @@ ALTER TABLE recommend_list
 
 ALTER TABLE recommend_list
 	ADD
-		CONSTRAINT recommend_list_project_post_id_fk
+		CONSTRAINT recom_list_project_post_id_fk
 		FOREIGN KEY (
 			project_post_id
 		)
@@ -942,7 +975,7 @@ ALTER TABLE recommend_list
 
 ALTER TABLE recommend_list
 	ADD
-		CONSTRAINT recommend_list_normal_post_id_fk
+		CONSTRAINT recom_list_normal_post_id_fk
 		FOREIGN KEY (
 			normal_post_id
 		)
@@ -950,13 +983,23 @@ ALTER TABLE recommend_list
 			id
 		);
 
+ALTER TABLE recommend_list
+	ADD
+		CONSTRAINT recom_list_code_no_fk
+		FOREIGN KEY (
+			code_no
+		)
+		REFERENCES code_master (
+			code_no
+		);
+
 ALTER TABLE video_post
 	ADD
-		CONSTRAINT FK_user_TO_video_post
+		CONSTRAINT FK_m_user_TO_video_post
 		FOREIGN KEY (
 			user_id
 		)
-		REFERENCES user (
+		REFERENCES m_user (
 			id
 		)
 		ON DELETE SET NULL;
@@ -965,20 +1008,10 @@ ALTER TABLE video_post
 	ADD
 		CONSTRAINT FK_code_master_TO_video_post
 		FOREIGN KEY (
-			master_id
+			code_no
 		)
 		REFERENCES code_master (
-			id
-		);
-
-ALTER TABLE video_post
-	ADD
-		CONSTRAINT FK_code_master_TO_video_post2
-		FOREIGN KEY (
-			category_no
-		)
-		REFERENCES code_master (
-			category_no
+			code_no
 		);
 
 ALTER TABLE social_message
@@ -1003,24 +1036,14 @@ ALTER TABLE social_message
 		)
 		ON DELETE SET NULL;
 
-ALTER TABLE user
+ALTER TABLE social_message
 	ADD
-		CONSTRAINT user_code_master_code_no_fk
+		CONSTRAINT social_message_code_no_fk
 		FOREIGN KEY (
 			code_no
 		)
 		REFERENCES code_master (
 			code_no
-		);
-
-ALTER TABLE user
-	ADD
-		CONSTRAINT user_code_master_category_no_fk
-		FOREIGN KEY (
-			category_no
-		)
-		REFERENCES code_master (
-			category_no
 		);
 
 ALTER TABLE payment
@@ -1034,16 +1057,36 @@ ALTER TABLE payment
 		)
 		ON DELETE SET NULL;
 
+ALTER TABLE payment
+	ADD
+		CONSTRAINT payment_code_no_fk
+		FOREIGN KEY (
+			code_no
+		)
+		REFERENCES code_master (
+			code_no
+		);
+
 ALTER TABLE social_profile
 	ADD
 		CONSTRAINT social_profile_user_id_fk
 		FOREIGN KEY (
 			user_id
 		)
-		REFERENCES user (
+		REFERENCES m_user (
 			id
 		)
 		ON DELETE SET NULL;
+
+ALTER TABLE social_profile
+	ADD
+		CONSTRAINT social_profile_code_no_fk
+		FOREIGN KEY (
+			code_no
+		)
+		REFERENCES code_master (
+			code_no
+		);
 
 ALTER TABLE reward
 	ADD
@@ -1056,13 +1099,23 @@ ALTER TABLE reward
 		)
 		ON DELETE SET NULL;
 
+ALTER TABLE reward
+	ADD
+		CONSTRAINT reward_code_no_fk
+		FOREIGN KEY (
+			code_no
+		)
+		REFERENCES code_master (
+			code_no
+		);
+
 ALTER TABLE move
 	ADD
 		CONSTRAINT move_user_id_from_fk
 		FOREIGN KEY (
 			user_id_from
 		)
-		REFERENCES user (
+		REFERENCES m_user (
 			id
 		)
 		ON DELETE SET NULL;
@@ -1073,7 +1126,7 @@ ALTER TABLE move
 		FOREIGN KEY (
 			user_id_to
 		)
-		REFERENCES user (
+		REFERENCES m_user (
 			id
 		)
 		ON DELETE SET NULL;
@@ -1133,14 +1186,14 @@ ALTER TABLE move
 		)
 		ON DELETE SET NULL;
 
-ALTER TABLE normal_post
+ALTER TABLE move
 	ADD
-		CONSTRAINT normal_post_code_master_id_fk
+		CONSTRAINT move_code_no_fk
 		FOREIGN KEY (
-			master_id
+			code_no
 		)
 		REFERENCES code_master (
-			id
+			code_no
 		);
 
 ALTER TABLE normal_post
@@ -1149,35 +1202,35 @@ ALTER TABLE normal_post
 		FOREIGN KEY (
 			user_id
 		)
-		REFERENCES user (
+		REFERENCES m_user (
 			id
 		)
 		ON DELETE SET NULL;
 
 ALTER TABLE normal_post
 	ADD
-		CONSTRAINT normal_post_category_no_fk
+		CONSTRAINT FK_code_master_TO_normal_post
 		FOREIGN KEY (
-			category_no
+			code_no
 		)
 		REFERENCES code_master (
-			category_no
+			code_no
 		);
 
-ALTER TABLE comment
+ALTER TABLE m_comment
 	ADD
 		CONSTRAINT comment_user_id_fk
 		FOREIGN KEY (
 			user_id
 		)
-		REFERENCES user (
+		REFERENCES m_user (
 			id
 		)
 		ON DELETE SET NULL;
 
-ALTER TABLE comment
+ALTER TABLE m_comment
 	ADD
-		CONSTRAINT FK_video_post_TO_comment
+		CONSTRAINT FK_video_post_TO_m_comment
 		FOREIGN KEY (
 			movie_id
 		)
@@ -1186,7 +1239,7 @@ ALTER TABLE comment
 		)
 		ON DELETE SET NULL;
 
-ALTER TABLE comment
+ALTER TABLE m_comment
 	ADD
 		CONSTRAINT comment_normal_post_id_fk
 		FOREIGN KEY (
@@ -1197,7 +1250,7 @@ ALTER TABLE comment
 		)
 		ON DELETE SET NULL;
 
-ALTER TABLE comment
+ALTER TABLE m_comment
 	ADD
 		CONSTRAINT comment_social_post_id_fk
 		FOREIGN KEY (
@@ -1208,18 +1261,18 @@ ALTER TABLE comment
 		)
 		ON DELETE SET NULL;
 
-ALTER TABLE comment
+ALTER TABLE m_comment
 	ADD
 		CONSTRAINT comment_comment_id_fk
 		FOREIGN KEY (
 			comment_id_reply
 		)
-		REFERENCES comment (
+		REFERENCES m_comment (
 			id
 		)
 		ON DELETE SET NULL;
 
-ALTER TABLE comment
+ALTER TABLE m_comment
 	ADD
 		CONSTRAINT comment_social_profile_id_fk
 		FOREIGN KEY (
@@ -1230,14 +1283,14 @@ ALTER TABLE comment
 		)
 		ON DELETE SET NULL;
 
-ALTER TABLE profile_post
+ALTER TABLE m_comment
 	ADD
-		CONSTRAINT profile_post_code_master_id_fk
+		CONSTRAINT comment_code_no_fk
 		FOREIGN KEY (
-			master_id
+			code_no
 		)
 		REFERENCES code_master (
-			id
+			code_no
 		);
 
 ALTER TABLE profile_post
@@ -1246,7 +1299,17 @@ ALTER TABLE profile_post
 		FOREIGN KEY (
 			user_id
 		)
-		REFERENCES user (
+		REFERENCES m_user (
 			id
 		)
 		ON DELETE SET NULL;
+
+ALTER TABLE profile_post
+	ADD
+		CONSTRAINT FK_code_master_TO_profile_post
+		FOREIGN KEY (
+			code_no
+		)
+		REFERENCES code_master (
+			code_no
+		);
