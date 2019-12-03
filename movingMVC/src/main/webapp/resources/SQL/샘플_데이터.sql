@@ -83,17 +83,54 @@ VALUES (m_user_seq.nextval, 1, 1, 3, 'business', 'business',
 'business@gmail.com', 'business', null, null, null, 500, sysdate);
 
 --delete from M_USER;
-select * from M_USER where id=4;
+select * from M_USER;
 
 /* 프로젝트 */
 INSERT INTO PROJECT_POST (id,					   code_no,user_id,title,content,business,target_price,target_limit,register_date)
-VALUES 					 (project_post_seq.nextval,20001,4,'제목이다.','내용','슈박스',10000,sysdate,sysdate);
+VALUES 					 (project_post_seq.nextval,20001,3,'제목이다.','내용','슈박스',10000,sysdate,sysdate);
+select * from PROJECT_POST;
 
 /* 일반_게시글 */
 INSERT INTO normal_post (id,						code_no,user_id,title,content,hit,comment_count,move_count,register_date)
-VALUES					(normal_post_seq.nextval,10002,4,'제목이다.','내용',0,0,0,sysdate);
+VALUES					(normal_post_seq.nextval,10002,3,'제목이다.','내용',0,0,0,sysdate);
+select * from normal_post;
 
-select * from code_master where code_no=20001;
+/* 프로필_게시글 */
+INSERT INTO profile_post(id,						code_no,user_id,title,content,hit,register_date, name, sex, birth_date, age, email, height, weight, job, school, specification, website_url)
+VALUES					(profile_post_seq.nextval,10005,3,'프로필','프로필',0,sysdate,'박진우','m','1996-02-13', 24, 'rmatjd2003@naver.com', 172, 72, '취업준비생', '울산대학교 수석 입학', '운전면허증 장롱면허 2년차', 'naver.com');
+select * from profile_post;
+
+/* 계층형_게시글 */
+--question
+INSERT INTO reply_post(id,						code_no,user_id,title,content,hit,register_date,move_count,reply_id,step,reply_order)
+VALUES					(reply_post_seq.nextval,10006,3,'질문있다','내용',0,sysdate,0,reply_post_seq.nextval,0,0);
+--answer
+INSERT INTO reply_post(id,						code_no,user_id,title,content,hit,register_date,move_count,reply_id,step,reply_order)
+VALUES					(reply_post_seq.nextval,10006,3,'답한다','내용',0,sysdate,0,1,1,1);
+
+select * from reply_post;
+
+/* 영상_게시글 */
+INSERT INTO video_post(id,						code_no,user_id,title_english,title_korean,director,actor,release_date,content,grade,genre,era_background,video_file_path,video_length,,,,,,,,,)
+VALUES					(video_post_seq.nextval,3000101,1,'답한다','내용',0,sysdate,0,1,1,1);
+
+select * from video_post;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+select * from code_master;
 --delete from code_master;
 select * from CODE_MASTER where category_name is null;
 
