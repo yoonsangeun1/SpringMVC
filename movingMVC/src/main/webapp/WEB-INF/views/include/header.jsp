@@ -126,6 +126,7 @@ $(function(){ // document ready
 					</div>
 					<div style="flex-grow: 0.6;">
 						<a href="/moving.com/member/login">Login</a>
+						<a href="/moving.com/not_real_login">임시로그인</a>
 					</div>
 				</div>
 			</div>

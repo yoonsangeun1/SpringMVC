@@ -85,6 +85,33 @@ VALUES (m_user_seq.nextval, 1, 1, 3, 'business', 'business',
 --delete from M_USER;
 select * from M_USER;
 
+/* 소셜_프로필 */
+INSERT INTO social_profile (id, code_no, user_id, nickname, profile_image_path, follower_count, follow_count,post_count)
+VALUES						(social_profile_seq.nextval, 50005, 1, '박진우', '/경로', 0,0,0);
+INSERT INTO social_profile (id, code_no, user_id, nickname, profile_image_path, follower_count, follow_count,post_count)
+VALUES						(social_profile_seq.nextval, 50005, 2, '윤상은', '/경로', 0,0,0);
+select * from social_profile;
+
+/* 소셜  메세지*/
+INSERT INTO social_message (id,code_no,social_id_from,social_id_to,content,register_date)
+VALUES					   (social_message_seq.nextval,80004,2,3,'박진우ㅎㅇ',sysdate);
+INSERT INTO social_message VALUES(social_message_seq.nextval,80004,2,3,'ㅂㅎㅇ2',sysdate);
+INSERT INTO social_message VALUES(social_message_seq.nextval,80004,3,2,'윤산은',sysdate);
+INSERT INTO social_message VALUES(social_message_seq.nextval,80004,3,2,'윤산은2',sysdate);
+INSERT INTO social_message VALUES(social_message_seq.nextval,80004,2,3,'ㅂㅎㅇ3',sysdate);
+select * from social_message ORDER BY register_date desc;
+
+/* 소셜_게시글 */
+--publish_availability 타입 변환 필요합니다 
+--일반 게시글
+INSERT INTO social_post(id,code_no,social_id,content,register_date,comment_count,move_count)
+VALUES			(social_post_seq.nextval,10007,2,'내용이다',sysdate,0,0);
+--프로젝트 홍보 게시글
+INSERT INTO social_post(id,code_no,social_id,content,project_id,register_date,comment_count,move_count)
+VALUES			(social_post_seq.nextval,10007,2,'프로젝트 홍보하려고',1,sysdate,0,0);
+
+select * from social_post ORDER BY register_date desc;
+
 /* 프로젝트 */
 INSERT INTO PROJECT_POST (id,					   code_no,user_id,title,content,business,target_price,target_limit,register_date)
 VALUES 					 (project_post_seq.nextval,20001,3,'제목이다.','내용','슈박스',10000,sysdate,sysdate);
@@ -111,21 +138,48 @@ VALUES					(reply_post_seq.nextval,10006,3,'답한다','내용',0,sysdate,0,1,1,
 select * from reply_post;
 
 /* 영상_게시글 */
-INSERT INTO video_post(id,						code_no,user_id,title_english,title_korean,director,actor,release_date,content,grade,genre,era_background,video_file_path,video_length,,,,,,,,,)
-VALUES					(video_post_seq.nextval,3000101,1,'답한다','내용',0,sysdate,0,1,1,1);
+--영화 - 전체
+INSERT INTO video_post(id,						code_no,user_id,title_english,title_korean,director,actor,release_date,content,grade,era_background,video_file_path,video_length,rate,hit,register_date,comment_count,move_count)
+VALUES					(video_post_seq.nextval,30001,1,'English Title','한글제목','박진우감독','박진우배우',sysdate,'줄거리',5.0,'현재','/경로',120,'pg',0,sysdate,0,0);
+--영화 - 범죄/스릴러인 경우
+INSERT INTO video_post(id,						code_no,user_id,title_english,title_korean,director,actor,release_date,content,grade,era_background,video_file_path,video_length,rate,hit,register_date,comment_count,move_count)
+VALUES					(video_post_seq.nextval,3000101,1,'English Title','한글제목','박진우감독','박진우배우',sysdate,'줄거리',5.0,'현재','/경로',120,'pg',0,sysdate,0,0);
+--티저
+INSERT INTO video_post(id,						code_no,user_id,title_korean,content,video_file_path,rate,register_date,hit,comment_count,move_count)
+VALUES					(video_post_seq.nextval,30002,1,'한글제목','줄거리','/경로','pg',sysdate,0,0,0);
 
 select * from video_post;
 
+/* 무브 */
+-- 사람이 사람에게
+INSERT INTO move(id,code_no,user_id_from,user_id_to,register_date)
+VALUES			(move_seq.nextval,80003,1,2,sysdate);
+-- 사람이 프로젝트에
+INSERT INTO move(id,code_no,user_id_from,project_id,register_date)
+VALUES			(move_seq.nextval,80003,1,1,sysdate);
+-- 사람이 일반 게시글에(추가필요)
+-- 사람이 영화에게
+INSERT INTO move(id,code_no,user_id_from,movie_id,register_date)
+VALUES			(move_seq.nextval,80003,1,1,sysdate);
+-- SNS프로필이 SNS 게시글에게
+INSERT INTO move(id,code_no,social_profile_id,social_post_id,register_date)
+VALUES			(move_seq.nextval,80003,2,1,sysdate);
 
 
-
-
-
-
-
-
-
-
+/* 댓글 */
+-- 사람이 프로젝트에(추가필요)
+-- 사람이 일반게시글에 
+INSERT INTO m_comment(id,code_no,user_id,normal_post_id,content,move_count,register_date,comment_id_reply,step,reply_order)
+VALUES			(move_seq.nextval,80001,1,1,'뎃글ㄹ네용',0,sysdate,move_seq.nextval,0,0);
+-- 사람이 일반 게시글에(추가필요)
+-- 사람이 영화에게
+INSERT INTO m_comment(id,code_no,user_id,movie_id,content,grade,move_count,register_date,comment_id_reply,step,reply_order)
+VALUES			(move_seq.nextval,80001,1,1,'뎃글ㄹ네용',5,0,sysdate,move_seq.nextval,0,0);
+-- SNS프로필이 SNS 게시글에게+댓글에 답글
+INSERT INTO m_comment(id,code_no,social_profile_id,social_post_id,content,move_count,register_date,comment_id_reply,step,reply_order)
+VALUES			(move_seq.nextval,80001,2,2,'뎃글ㄹ네용',0,sysdate,6,0,0);
+-- 댓글에 답글
+select * from m_comment;
 
 
 
