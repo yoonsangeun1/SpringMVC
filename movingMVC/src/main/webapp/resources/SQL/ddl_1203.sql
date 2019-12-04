@@ -108,7 +108,7 @@ CREATE TABLE code_master (
 	id NUMBER(38) NOT NULL, /* 아이디 */
 	code_type_id NUMBER(38), /* 코드_유형_아이디 */
 	code_no NUMBER(38), /* 코드_번호 */
-	code_name VARCHAR2(50), /* 코드_명 */
+	category_name_reference VARCHAR2(30), /* 카테고리_명_참조 */
 	category_name VARCHAR2(30), /* 카테고리_명 */
 	table_name VARCHAR2(50), /* 테이블_명 */
 	register_date DATE /* 등록_날짜 */
@@ -124,8 +124,9 @@ CREATE UNIQUE INDEX code_no_uix
 		code_no ASC
 	);
 
-CREATE UNIQUE INDEX category_no_uix
+CREATE UNIQUE INDEX UIX_code_master
 	ON code_master (
+		category_name ASC
 	);
 
 ALTER TABLE code_master
@@ -146,15 +147,16 @@ ALTER TABLE code_master
 	ADD
 		CONSTRAINT UK_code_master2
 		UNIQUE (
+			category_name
 		);
 
 /* 주문_수량 */
 CREATE TABLE order_entity (
 	id NUMBER(38) NOT NULL, /* 아이디 */
-	code_no NUMBER(38), /* 코드_번호 */
+	code_no NUMBER(38) DEFAULT 20004, /* 코드_번호 */
 	order_id NUMBER(38), /* 주문서_아이디 */
 	reward_id NUMBER(38), /* 리워드_아이디 */
-	count NUMBER(38), /* 수량 */
+	count NUMBER(38) DEFAULT 0, /* 수량 */
 	price NUMBER(38), /* 금액 */
 	total_price NUMBER(38) /* 총_가격 */
 );
@@ -174,12 +176,12 @@ ALTER TABLE order_entity
 /* 주문_문서 */
 CREATE TABLE order_sheet (
 	id NUMBER(38) NOT NULL, /* 아이디 */
-	code_no NUMBER(38), /* 코드_번호 */
+	code_no NUMBER(38) DEFAULT 20003, /* 코드_번호 */
 	user_id NUMBER(38), /* 회원_아이디 */
 	address VARCHAR2(80), /* 주소 */
 	total_price NUMBER(38), /* 총_금액 */
 	order_date DATE, /* 주문_일 */
-	status varchar2(1) /* 상태 */
+	status NUMBER(1) DEFAULT 1 /* 상태 */
 );
 
 CREATE UNIQUE INDEX order_sheet_id_pk
@@ -197,17 +199,17 @@ ALTER TABLE order_sheet
 /* 첨부_파일 */
 CREATE TABLE attached_file (
 	id NUMBER(38) NOT NULL, /* 아이디 */
-	code_no NUMBER(38), /* 코드_번호 */
+	code_no NUMBER(38) DEFAULT 80002, /* 코드_번호 */
 	file_path VARCHAR2(300), /* 파일_경로 */
 	thumbnail_path VARCHAR2(300), /* 썸네일_경로 */
 	no NUMBER(38), /* 순번 */
-	register_date DATE, /* 등록_일 */
+	register_date DATE DEFAULT sysdate, /* 등록_날짜 */
+	profile_post_id NUMBER(38), /* 프로필_게시글_아이디 */
+	normal_post_id NUMBER(38), /* 일반_게시글_아이디 */
+	video_post_id NUMBER(38), /* 영상_게시글_아이디 */
+	project_post_id NUMBER(38), /* 프로젝트_게시글_아이디 */
 	social_post_id NUMBER(38), /* 소셜_게시글_아이디 */
-	profile_id NUMBER(38), /* 프로필_아이디 */
-	qna_id NUMBER(38), /* qna_아이디 */
-	post_id NUMBER(38), /* 게시글_아이디 */
-	movie_id NUMBER(38), /* 영화_아이디 */
-	project_id NUMBER(38) /* 프로젝트_아이디 */
+	reply_post_id NUMBER(38) /* 답글_게시글_아이디 */
 );
 
 CREATE UNIQUE INDEX file_id_pk
@@ -222,21 +224,22 @@ ALTER TABLE attached_file
 			id
 		);
 
-/* 계층형_게시글 */
+/* 답글_게시글 */
 CREATE TABLE reply_post (
 	id NUMBER(38) NOT NULL, /* 아이디 */
-	code_no NUMBER(38), /* 코드_번호 */
+	code_no NUMBER(38) DEFAULT 10005, /* 코드_번호 */
 	user_id NUMBER(38), /* 회원_아이디 */
 	category VARCHAR2(30), /* 분류 */
 	title VARCHAR2(200), /* 제목 */
 	content VARCHAR2(4000), /* 내용 */
-	hit NUMBER(38), /* 조회수 */
-	register_date DATE, /* 등록_일 */
-	comment_count NUMBER(38), /* 댓글_개수 */
-	move_count NUMBER(38), /* 무브_개수 */
-	reply_id NUMBER(38), /* 답글_아이디 */
-	step NUMBER(38), /* 계층 */
-	reply_order NUMBER(38) /* 답글_정렬순서 */
+	hit NUMBER(38) DEFAULT 0, /* 조회수 */
+	register_date DATE DEFAULT sysdate, /* 등록_일 */
+	comment_count NUMBER(38) DEFAULT 0, /* 댓글_개수 */
+	move_count NUMBER(38) DEFAULT 0, /* 무브_개수 */
+	reply_post_id NUMBER(38), /* 답글_게시글_아이디 */
+	reply_step NUMBER(5) DEFAULT 0, /* 답글_계층 */
+	reply_order NUMBER(5) DEFAULT 0, /* 답글_정렬순서 */
+	publish_availability NUMBER(1) DEFAULT 1 /* 공개_여부 */
 );
 
 CREATE UNIQUE INDEX reply_post_id_pk
@@ -254,11 +257,11 @@ ALTER TABLE reply_post
 /* 배송 */
 CREATE TABLE delivery (
 	id NUMBER(38) NOT NULL, /* 아이디 */
-	code_no NUMBER(38), /* 코드_번호 */
+	code_no NUMBER(38) DEFAULT 20006, /* 코드_번호 */
 	order_sheet_id NUMBER(38), /* 주문_문서_아이디 */
 	delivery_firm VARCHAR2(50), /* 배송_사 */
 	billing_no VARCHAR2(25), /* 운송장번호 */
-	status varchar2(1) /* 상태 */
+	status NUMBER(1) DEFAULT 1 /* 상태 */
 );
 
 CREATE UNIQUE INDEX delivery_id_pk
@@ -276,15 +279,14 @@ ALTER TABLE delivery
 /* 소셜_게시글 */
 CREATE TABLE social_post (
 	id NUMBER(38) NOT NULL, /* 아이디 */
-	code_no NUMBER(38), /* 코드_번호 */
+	code_no NUMBER(38) DEFAULT 10007, /* 코드_번호 */
 	social_id NUMBER(38), /* 소셜_아이디 */
-	user_type VARCHAR2(1), /* 회원_타입 */
 	content VARCHAR2(4000), /* 내용 */
 	project_id NUMBER(38), /* 프로젝트_아이디 */
-	move_count NUMBER(38), /* 무브_개수 */
-	comment_count NUMBER(38), /* 댓글_개수 */
-	register_date DATE, /* 등록_일 */
-	publish_availability DATE /* 공개_여부 */
+	comment_count NUMBER(38) DEFAULT 0, /* 댓글_개수 */
+	move_count NUMBER(38) DEFAULT 0, /* 무브_개수 */
+	register_date DATE DEFAULT sysdate, /* 등록_일 */
+	publish_availability NUMBER(1) DEFAULT 1 /* 공개_여부 */
 );
 
 CREATE UNIQUE INDEX social_post_id_pk
@@ -299,11 +301,11 @@ ALTER TABLE social_post
 			id
 		);
 
-/* 프로젝트 */
+/* 프로젝트_게시글 */
 CREATE TABLE project_post (
 	id NUMBER(38) NOT NULL, /* 아이디 */
 	user_id NUMBER(38), /* 회원_아이디 */
-	code_no NUMBER(38), /* 코드_번호 */
+	code_no NUMBER(38) DEFAULT 20001, /* 코드_번호 */
 	code NUMBER(38), /* 분류번호 */
 	title VARCHAR2(200), /* 제목 */
 	content VARCHAR2(4000), /* 내용 */
@@ -312,8 +314,11 @@ CREATE TABLE project_post (
 	now_price NUMBER(38), /* 현재_금액 */
 	target_limit DATE, /* 목표_기한 */
 	left_limit NUMBER(38), /* 남은_기한 */
-	sponser_count NUMBER(38), /* 후원자_수 */
-	register_date DATE /* 등록_일 */
+	sponser_count NUMBER(38) DEFAULT 0, /* 후원자_수 */
+	hit NUMBER(38) DEFAULT 0, /* 조회수 */
+	comment_count NUMBER(38) DEFAULT 0, /* 댓글_개수 */
+	move_count NUMBER(38) DEFAULT 0, /* 무브_개수 */
+	register_date DATE DEFAULT sysdate /* 등록_일 */
 );
 
 CREATE UNIQUE INDEX project_post_id_pk
@@ -331,7 +336,7 @@ ALTER TABLE project_post
 /* 추천_리스트 */
 CREATE TABLE recommend_list (
 	id NUMBER(38) NOT NULL, /* 아이디 */
-	code_no NUMBER(38), /* 코드_번호 */
+	code_no NUMBER(38) DEFAULT 80006, /* 코드_번호 */
 	social_profile_id NUMBER(38), /* 소셜_프로필_아이디 */
 	social_profile_banner_title VARCHAR2(200), /* 소셜_프로필_광고_제목 */
 	profile_post_id NUMBER(38), /* 프로필_게시글_아이디 */
@@ -359,6 +364,7 @@ CREATE TABLE video_post (
 	id NUMBER(38) NOT NULL, /* 아이디 */
 	code_no NUMBER(38), /* 코드_번호 */
 	user_id NUMBER(38), /* 회원_아이디 */
+	genre VARCHAR2(50), /* 장르 */
 	title_english VARCHAR2(200), /* 제목_영문 */
 	title_korean VARCHAR2(200), /* 제목_한글 */
 	director VARCHAR2(50), /* 감독 */
@@ -366,15 +372,14 @@ CREATE TABLE video_post (
 	release_date DATE, /* 개봉_일 */
 	content VARCHAR2(4000), /* 내용 */
 	grade NUMBER(38), /* 평점 */
-	genre VARCHAR2(50), /* 장르 */
 	era_background VARCHAR2(100), /* 시대_배경 */
 	video_file_path VARCHAR2(300), /* 영상_파일_경로 */
 	video_length NUMBER(38), /* 영상_길이 */
 	rate varchar2(5), /* 관람등급 */
-	hit NUMBER(38), /* 조회수 */
-	register_date DATE, /* 등록_일 */
-	comment_count NUMBER(38), /* 댓글_개수 */
-	move_count NUMBER(38) /* 무브_개수 */
+	hit NUMBER(38) DEFAULT 0, /* 조회수 */
+	comment_count NUMBER(38) DEFAULT 0, /* 댓글_개수 */
+	move_count NUMBER(38) DEFAULT 0, /* 무브_개수 */
+	register_date DATE DEFAULT sysdate /* 등록_일 */
 );
 
 CREATE UNIQUE INDEX video_post_id_pk
@@ -392,11 +397,11 @@ ALTER TABLE video_post
 /* 소셜_메시지 */
 CREATE TABLE social_message (
 	id NUMBER(38) NOT NULL, /* 아이디 */
-	code_no NUMBER(38), /* 코드_번호 */
+	code_no NUMBER(38) DEFAULT 80004, /* 코드_번호 */
 	social_id_from NUMBER(38) NOT NULL, /* 소셜_아이디_보낸이 */
 	social_id_to NUMBER(38) NOT NULL, /* 소셜_아이디_받는이 */
 	content VARCHAR2(4000), /* 내용 */
-	register_date DATE /* 등록_일 */
+	register_date DATE DEFAULT sysdate /* 등록_일 */
 );
 
 CREATE UNIQUE INDEX PK_social_message
@@ -414,24 +419,28 @@ ALTER TABLE social_message
 /* 회원 */
 CREATE TABLE m_user (
 	id NUMBER(38) NOT NULL, /* 아이디 */
-	user_status NUMBER(38), /* 회원_상태 */
-	user_type NUMBER(38), /* 회원_유형 */
-	user_lv NUMBER(38), /* 회원_등급 */
+	code_no NUMBER(38) DEFAULT 50001, /* 코드_번호 */
 	userid VARCHAR2(50) NOT NULL, /* 회원아이디 */
 	nickname VARCHAR2(17), /* 닉네임 */
 	name VARCHAR2(50), /* 이름 */
 	email VARCHAR2(40) NOT NULL, /* 이메일 */
 	password VARCHAR2(50) NOT NULL, /* 비밀번호 */
-	genre_01 VARCHAR2(50), /* 장르 */
+	genre_01 VARCHAR2(50), /* 장르1 */
 	genre_02 VARCHAR2(50), /* 장르2 */
 	genre_03 VARCHAR2(50), /* 장르3 */
-	phone VARCHAR2(30), /* 전화번호 */
+	phone VARCHAR2(11), /* 전화번호 */
+	publish_availability NUMBER(1) DEFAULT 1, /* 공개_여부 */
 	profile_image_url VARCHAR2(300), /* 프로필_사진_url */
-	user_pointpoint NUMBER(38), /* 회원_포인트 */
-	register_date DATE, /* 등록_일 */
-	business_register_no VARCHAR2(25), /* 사업자등록번호 */
+	user_status NUMBER(38) DEFAULT 1, /* 회원_상태 */
+	user_type NUMBER(38) DEFAULT 1, /* 회원_유형 */
+	user_lv NUMBER(38) DEFAULT 1, /* 회원_등급 */
+	user_point NUMBER(38) DEFAULT 500, /* 회원_포인트 */
+	register_date DATE DEFAULT sysdate, /* 등록_일 */
 	business_name VARCHAR2(50), /* 사업자이름 */
-	business_license_image_path VARCHAR2(300) /* 사업자등록증이미지경로 */
+	business_register_no VARCHAR2(25), /* 사업자등록번호 */
+	business_license_image_path VARCHAR2(300), /* 사업자등록증이미지경로 */
+	deactivate_date DATE, /* 탈퇴_날짜 */
+	deactivate_rerason VARCHAR2(4000) /* 탈퇴_사유 */
 );
 
 CREATE UNIQUE INDEX user_id_pk
@@ -473,10 +482,10 @@ ALTER TABLE m_user
 /* 결제 */
 CREATE TABLE payment (
 	id NUMBER(38) NOT NULL, /* 아이디 */
-	code_no NUMBER(38), /* 코드_번호 */
+	code_no NUMBER(38) DEFAULT 20005, /* 코드_번호 */
 	order_sheet_id NUMBER(38), /* 주문_문서_아이디 */
-	payment_method varchar2(1), /* 결제_방법 */
-	status varchar2(1) /* 상태 */
+	payment_method NUMBER(1), /* 결제_방법 */
+	status NUMBER(1) DEFAULT 1 /* 상태 */
 );
 
 CREATE UNIQUE INDEX payment_id_pk
@@ -494,15 +503,16 @@ ALTER TABLE payment
 /* 소셜_프로필 */
 CREATE TABLE social_profile (
 	id NUMBER(38) NOT NULL, /* 아이디 */
-	code_no NUMBER(38), /* 코드_번호 */
+	code_no NUMBER(38) DEFAULT 50005, /* 코드_번호 */
 	user_id NUMBER(38) NOT NULL, /* 회원_아이디 */
 	nickname VARCHAR2(17), /* 닉네임 */
 	background_image_path VARCHAR2(300), /* 배경_이미지_경로 */
 	introduce VARCHAR2(4000), /* 소개 */
+	user_type VARCHAR2(1) DEFAULT 1, /* 회원_타입 */
 	profile_image_path VARCHAR2(300), /* 프로필_이미지_경로 */
-	follower_count NUMBER(38), /* 팔로워_수 */
-	follow_count NUMBER(38), /* 팔로우_수 */
-	post_count NUMBER(38), /* 게시글_수 */
+	follower_count NUMBER(38) DEFAULT 0, /* 팔로워_수 */
+	follow_count NUMBER(38) DEFAULT 0, /* 팔로우_수 */
+	post_count NUMBER(38) DEFAULT 0, /* 게시글_수 */
 	my_list_name VARCHAR2(50) /* 내_리스트_명 */
 );
 
@@ -521,15 +531,16 @@ ALTER TABLE social_profile
 /* 리워드 */
 CREATE TABLE reward (
 	id NUMBER(38) NOT NULL, /* 아이디 */
-	code_no NUMBER(38), /* 코드_번호 */
+	code_no NUMBER(38) DEFAULT 20002, /* 코드_번호 */
 	project_id NUMBER(38), /* 프로젝트_아이디 */
 	title VARCHAR2(200), /* 제목 */
 	content VARCHAR2(4000), /* 내용 */
 	price NUMBER(38), /* 금액 */
-	delivery_fee_existence varchar2(1), /* 배송_비_유무 */
+	delivery_fee_existence NUMBER(1) DEFAULT 1, /* 배송_비_유무 */
 	delivery_expect_date DATE, /* 전달_예정_일 */
-	limit_count NUMBER(38), /* 제한_수 */
-	select_count NUMBER(38) /* 선택한_수 */
+	limit_count NUMBER(38) DEFAULT 0, /* 제한_수 */
+	select_count NUMBER(38) DEFAULT 0, /* 선택한_수 */
+	register_date DATE DEFAULT sysdate /* 등록_날짜 */
 );
 
 CREATE UNIQUE INDEX reward_id_pk
@@ -547,15 +558,18 @@ ALTER TABLE reward
 /* 무브 */
 CREATE TABLE move (
 	id NUMBER(38) NOT NULL, /* 아이디 */
-	code_no NUMBER(38), /* 코드_번호 */
+	code_no NUMBER(38) DEFAULT 80003, /* 코드_번호 */
+	register_date DATE DEFAULT sysdate, /* 등록_날짜 */
 	user_id_from NUMBER(38), /* 회원_아이디_보낸이 */
 	user_id_to NUMBER(38), /* 회원_아이디_받는이 */
-	register_date DATE, /* 등록_일 */
-	project_id NUMBER(38), /* 프로젝트_아이디 */
-	movie_id NUMBER(38), /* 영화_아이디 */
-	post_id NUMBER(38), /* 게시글_아이디 */
-	social_profile_id NUMBER(38), /* 소셜_프로필_아이디 */
-	social_post_id NUMBER(38) /* 소셜_게시글_아이디 */
+	social_profile_id_from NUMBER(38), /* 소셜_프로필_아이디_보낸이 */
+	social_profile_id_to NUMBER(38), /* 소셜_프로필_아이디_받는이 */
+	normal_post_id NUMBER(38), /* 일반_게시글_아이디 */
+	video_post_id NUMBER(38), /* 영상_게시글_아이디 */
+	project_post_id NUMBER(38), /* 프로젝트_게시글_아이디 */
+	social_post_id NUMBER(38), /* 소셜_게시글_아이디 */
+	reply_post_id NUMBER(38), /* 답글_게시글_아이디 */
+	profile_post_id NUMBER(38) /* 프로필_게시글_아이디 */
 );
 
 CREATE UNIQUE INDEX move_id_pk
@@ -611,10 +625,10 @@ CREATE TABLE normal_post (
 	user_category VARCHAR2(30), /* 회원_분류 */
 	title VARCHAR2(200), /* 제목 */
 	content VARCHAR2(4000), /* 내용 */
-	hit NUMBER(38), /* 조회수 */
-	comment_count NUMBER(38), /* 댓글_개수 */
-	move_count NUMBER(38), /* 무브_개수 */
-	register_date DATE, /* 등록_일 */
+	hit NUMBER(38) DEFAULT 0, /* 조회수 */
+	comment_count NUMBER(38) DEFAULT 0, /* 댓글_개수 */
+	move_count NUMBER(38) DEFAULT 0, /* 무브_개수 */
+	register_date DATE DEFAULT sysdate, /* 등록_일 */
 	limit_date DATE, /* 기한_날짜 */
 	question_content VARCHAR2(4000), /* 질문_내용 */
 	answer_content VARCHAR2(4000) /* 답변_내용 */
@@ -635,19 +649,21 @@ ALTER TABLE normal_post
 /* 댓글 */
 CREATE TABLE m_comment (
 	id NUMBER(38) NOT NULL, /* 아이디 */
-	code_no NUMBER(38), /* 코드_번호 */
-	user_id NUMBER(38), /* 회원_아이디 */
-	social_profile_id NUMBER(38), /* 소셜_프로필_아이디 */
+	code_no NUMBER(38) DEFAULT 80001, /* 코드_번호 */
+	user_id_from NUMBER(38), /* 회원_아이디_보낸이 */
+	social_profile_id_from NUMBER(38), /* 소셜_프로필_아이디_보낸이 */
 	content VARCHAR2(4000), /* 내용 */
-	register_date DATE, /* 등록_일 */
+	register_date DATE DEFAULT sysdate, /* 등록_일 */
 	grade NUMBER(38), /* 평점 */
-	move_count NUMBER(38), /* 무브_개수 */
+	move_count NUMBER(38) DEFAULT 0, /* 무브_개수 */
+	comment_count NUMBER(38) DEFAULT 0, /* 댓글_개수 */
 	comment_id_reply NUMBER(38), /* 댓글_아이디_답글 */
-	step NUMBER(38), /* 계층 */
-	reply_order NUMBER(38), /* 답글_정렬순서 */
-	movie_id NUMBER(38), /* 영화_아이디 */
+	reply_step NUMBER(5) DEFAULT 0, /* 답글_계층 */
+	reply_order NUMBER(5) DEFAULT 0, /* 답글_정렬순서 */
+	video_post_id NUMBER(38), /* 영상_게시글_아이디 */
 	normal_post_id NUMBER(38), /* 일반_게시글_아이디 */
-	social_post_id NUMBER(38) /* 소셜_게시글_아이디 */
+	social_post_id NUMBER(38), /* 소셜_게시글_아이디 */
+	profile_post_id NUMBER(38) /* 프로필_게시글_아이디 */
 );
 
 CREATE UNIQUE INDEX comment_id_pk
@@ -665,15 +681,15 @@ ALTER TABLE m_comment
 /* 프로필_게시글 */
 CREATE TABLE profile_post (
 	id NUMBER(38) NOT NULL, /* 아이디 */
-	code_no NUMBER(38), /* 코드_번호 */
+	code_no NUMBER(38) DEFAULT 10005, /* 코드_번호 */
 	user_id NUMBER(38), /* 회원_아이디 */
 	title VARCHAR2(200), /* 제목 */
 	category VARCHAR2(30), /* 카테고리 */
 	content VARCHAR2(4000), /* 내용 */
-	hit NUMBER(38), /* 조회수 */
-	register_date DATE, /* 등록_일 */
-	comment_count NUMBER(38), /* 댓글_개수 */
-	move_count NUMBER(38), /* 무브_개수 */
+	hit NUMBER(38) DEFAULT 0, /* 조회수 */
+	register_date DATE DEFAULT sysdate, /* 등록_일 */
+	comment_count NUMBER(38) DEFAULT 0, /* 댓글_개수 */
+	move_count NUMBER(38) DEFAULT 0, /* 무브_개수 */
 	name VARCHAR2(50), /* 이름 */
 	sex varchar2(1), /* 성별 */
 	birth_date DATE, /* 생년월일_일 */
@@ -699,6 +715,38 @@ ALTER TABLE profile_post
 			id
 		);
 
+/* 신고 */
+CREATE TABLE report (
+	id NUMBER(38) NOT NULL, /* 아이디 */
+	code_no NUMBER(38) DEFAULT 80005, /* 코드_번호 */
+	title VARCHAR2(200), /* 제목 */
+	content VARCHAR2(4000), /* 내용 */
+	register_date DATE DEFAULT sysdate, /* 등록_일 */
+	user_id_from NUMBER(38), /* 회원_아이디_보낸이 */
+	user_id_to NUMBER(38), /* 회원_아이디_받는이 */
+	social_profile_id_from NUMBER(38), /* 소셜_프로필_아이디_보낸이 */
+	social_profile_id_to NUMBER(38), /* 소셜_프로필_아이디_받는이 */
+	comment_id NUMBER(38), /* 댓글_아이디 */
+	normal_post_id NUMBER(38), /* 일반_게시글_아이디 */
+	social_message_id NUMBER(38), /* 소셜_메시지_아이디 */
+	video_post_id NUMBER(38), /* 영상_게시글_아이디 */
+	project_post_id NUMBER(38), /* 프로젝트_게시글_아이디 */
+	social_post_id NUMBER(38), /* 소셜_게시글_아이디 */
+	profile_post_id NUMBER(38) /* 프로필_게시글_아이디 */
+);
+
+CREATE UNIQUE INDEX PK_report
+	ON report (
+		id ASC
+	);
+
+ALTER TABLE report
+	ADD
+		CONSTRAINT PK_report
+		PRIMARY KEY (
+			id
+		);
+
 ALTER TABLE code_master
 	ADD
 		CONSTRAINT code_master_code_type_id_fk
@@ -707,6 +755,16 @@ ALTER TABLE code_master
 		)
 		REFERENCES code_type_master (
 			code_type_id
+		);
+
+ALTER TABLE code_master
+	ADD
+		CONSTRAINT FK_code_master_TO_code_master
+		FOREIGN KEY (
+			category_name_reference
+		)
+		REFERENCES code_master (
+			category_name
 		);
 
 ALTER TABLE order_entity
@@ -777,7 +835,7 @@ ALTER TABLE attached_file
 	ADD
 		CONSTRAINT file_profile_post_id_fk
 		FOREIGN KEY (
-			profile_id
+			profile_post_id
 		)
 		REFERENCES profile_post (
 			id
@@ -786,9 +844,9 @@ ALTER TABLE attached_file
 
 ALTER TABLE attached_file
 	ADD
-		CONSTRAINT file_reply_post_id_fk
+		CONSTRAINT FK_reply_post_TO_attached_file
 		FOREIGN KEY (
-			qna_id
+			reply_post_id
 		)
 		REFERENCES reply_post (
 			id
@@ -799,7 +857,7 @@ ALTER TABLE attached_file
 	ADD
 		CONSTRAINT file_normal_post_id_fk
 		FOREIGN KEY (
-			post_id
+			normal_post_id
 		)
 		REFERENCES normal_post (
 			id
@@ -810,7 +868,7 @@ ALTER TABLE attached_file
 	ADD
 		CONSTRAINT FK_video_post_TO_attached_file
 		FOREIGN KEY (
-			movie_id
+			video_post_id
 		)
 		REFERENCES video_post (
 			id
@@ -819,9 +877,9 @@ ALTER TABLE attached_file
 
 ALTER TABLE attached_file
 	ADD
-		CONSTRAINT file_project_post_id_fk
+		CONSTRAINT FK_project_post_TO_file
 		FOREIGN KEY (
-			project_id
+			project_post_id
 		)
 		REFERENCES project_post (
 			id
@@ -840,7 +898,7 @@ ALTER TABLE attached_file
 
 ALTER TABLE reply_post
 	ADD
-		CONSTRAINT reply_post_user_id_fk
+		CONSTRAINT FK_m_user_TO_reply_post
 		FOREIGN KEY (
 			user_id
 		)
@@ -851,9 +909,9 @@ ALTER TABLE reply_post
 
 ALTER TABLE reply_post
 	ADD
-		CONSTRAINT reply_post_reply_id_fk
+		CONSTRAINT FK_reply_post_TO_reply_post
 		FOREIGN KEY (
-			reply_id
+			reply_post_id
 		)
 		REFERENCES reply_post (
 			id
@@ -903,7 +961,7 @@ ALTER TABLE social_post
 
 ALTER TABLE social_post
 	ADD
-		CONSTRAINT social_post_project_post_id_fk
+		CONSTRAINT FK_project_post_TO_social_post
 		FOREIGN KEY (
 			project_id
 		)
@@ -924,7 +982,7 @@ ALTER TABLE social_post
 
 ALTER TABLE project_post
 	ADD
-		CONSTRAINT project_post_user_id_fk
+		CONSTRAINT FK_m_user_TO_project_post
 		FOREIGN KEY (
 			user_id
 		)
@@ -965,7 +1023,7 @@ ALTER TABLE recommend_list
 
 ALTER TABLE recommend_list
 	ADD
-		CONSTRAINT recom_list_project_post_id_fk
+		CONSTRAINT FK_projct_post_TO_recom_list
 		FOREIGN KEY (
 			project_post_id
 		)
@@ -1046,6 +1104,16 @@ ALTER TABLE social_message
 			code_no
 		);
 
+ALTER TABLE m_user
+	ADD
+		CONSTRAINT FK_code_master_TO_m_user
+		FOREIGN KEY (
+			code_no
+		)
+		REFERENCES code_master (
+			code_no
+		);
+
 ALTER TABLE payment
 	ADD
 		CONSTRAINT payment_order_sheet_id_fk
@@ -1090,7 +1158,7 @@ ALTER TABLE social_profile
 
 ALTER TABLE reward
 	ADD
-		CONSTRAINT reward_project_post_id_fk
+		CONSTRAINT FK_project_post_TO_reward
 		FOREIGN KEY (
 			project_id
 		)
@@ -1133,9 +1201,9 @@ ALTER TABLE move
 
 ALTER TABLE move
 	ADD
-		CONSTRAINT move_project_post_id_fk
+		CONSTRAINT FK_project_post_TO_move
 		FOREIGN KEY (
-			project_id
+			project_post_id
 		)
 		REFERENCES project_post (
 			id
@@ -1146,7 +1214,7 @@ ALTER TABLE move
 	ADD
 		CONSTRAINT FK_video_post_TO_move
 		FOREIGN KEY (
-			movie_id
+			video_post_id
 		)
 		REFERENCES video_post (
 			id
@@ -1157,7 +1225,7 @@ ALTER TABLE move
 	ADD
 		CONSTRAINT move_normal_post_id_fk
 		FOREIGN KEY (
-			post_id
+			normal_post_id
 		)
 		REFERENCES normal_post (
 			id
@@ -1168,7 +1236,7 @@ ALTER TABLE move
 	ADD
 		CONSTRAINT move_social_profile_id_fk
 		FOREIGN KEY (
-			social_profile_id
+			social_profile_id_from
 		)
 		REFERENCES social_profile (
 			id
@@ -1196,6 +1264,36 @@ ALTER TABLE move
 			code_no
 		);
 
+ALTER TABLE move
+	ADD
+		CONSTRAINT FK_reply_post_TO_move
+		FOREIGN KEY (
+			reply_post_id
+		)
+		REFERENCES reply_post (
+			id
+		);
+
+ALTER TABLE move
+	ADD
+		CONSTRAINT FK_social_profile_TO_move
+		FOREIGN KEY (
+			social_profile_id_to
+		)
+		REFERENCES social_profile (
+			id
+		);
+
+ALTER TABLE move
+	ADD
+		CONSTRAINT FK_social_profile_TO_move2
+		FOREIGN KEY (
+			profile_post_id
+		)
+		REFERENCES social_profile (
+			id
+		);
+
 ALTER TABLE normal_post
 	ADD
 		CONSTRAINT normal_post_user_id_hk
@@ -1221,7 +1319,7 @@ ALTER TABLE m_comment
 	ADD
 		CONSTRAINT comment_user_id_fk
 		FOREIGN KEY (
-			user_id
+			user_id_from
 		)
 		REFERENCES m_user (
 			id
@@ -1232,7 +1330,7 @@ ALTER TABLE m_comment
 	ADD
 		CONSTRAINT FK_video_post_TO_m_comment
 		FOREIGN KEY (
-			movie_id
+			video_post_id
 		)
 		REFERENCES video_post (
 			id
@@ -1276,7 +1374,7 @@ ALTER TABLE m_comment
 	ADD
 		CONSTRAINT comment_social_profile_id_fk
 		FOREIGN KEY (
-			social_profile_id
+			social_profile_id_from
 		)
 		REFERENCES social_profile (
 			id
@@ -1293,6 +1391,16 @@ ALTER TABLE m_comment
 			code_no
 		);
 
+ALTER TABLE m_comment
+	ADD
+		CONSTRAINT FK_profile_post_TO_m_comment
+		FOREIGN KEY (
+			profile_post_id
+		)
+		REFERENCES profile_post (
+			id
+		);
+
 ALTER TABLE profile_post
 	ADD
 		CONSTRAINT profile_post_user_id_fk
@@ -1307,6 +1415,126 @@ ALTER TABLE profile_post
 ALTER TABLE profile_post
 	ADD
 		CONSTRAINT FK_code_master_TO_profile_post
+		FOREIGN KEY (
+			code_no
+		)
+		REFERENCES code_master (
+			code_no
+		);
+
+ALTER TABLE report
+	ADD
+		CONSTRAINT FK_m_user_TO_report
+		FOREIGN KEY (
+			user_id_from
+		)
+		REFERENCES m_user (
+			id
+		);
+
+ALTER TABLE report
+	ADD
+		CONSTRAINT FK_m_user_TO_report2
+		FOREIGN KEY (
+			user_id_to
+		)
+		REFERENCES m_user (
+			id
+		);
+
+ALTER TABLE report
+	ADD
+		CONSTRAINT FK_social_profile_TO_report
+		FOREIGN KEY (
+			social_profile_id_to
+		)
+		REFERENCES social_profile (
+			id
+		);
+
+ALTER TABLE report
+	ADD
+		CONSTRAINT FK_social_profile_TO_report2
+		FOREIGN KEY (
+			social_profile_id_from
+		)
+		REFERENCES social_profile (
+			id
+		);
+
+ALTER TABLE report
+	ADD
+		CONSTRAINT FK_m_comment_TO_report
+		FOREIGN KEY (
+			comment_id
+		)
+		REFERENCES m_comment (
+			id
+		);
+
+ALTER TABLE report
+	ADD
+		CONSTRAINT FK_normal_post_TO_report
+		FOREIGN KEY (
+			normal_post_id
+		)
+		REFERENCES normal_post (
+			id
+		);
+
+ALTER TABLE report
+	ADD
+		CONSTRAINT FK_social_message_TO_report
+		FOREIGN KEY (
+			social_message_id
+		)
+		REFERENCES social_message (
+			id
+		);
+
+ALTER TABLE report
+	ADD
+		CONSTRAINT FK_video_post_TO_report
+		FOREIGN KEY (
+			video_post_id
+		)
+		REFERENCES video_post (
+			id
+		);
+
+ALTER TABLE report
+	ADD
+		CONSTRAINT FK_project_post_TO_report
+		FOREIGN KEY (
+			project_post_id
+		)
+		REFERENCES project_post (
+			id
+		);
+
+ALTER TABLE report
+	ADD
+		CONSTRAINT FK_social_post_TO_report
+		FOREIGN KEY (
+			social_post_id
+		)
+		REFERENCES social_post (
+			id
+		);
+
+ALTER TABLE report
+	ADD
+		CONSTRAINT FK_profile_post_TO_report
+		FOREIGN KEY (
+			profile_post_id
+		)
+		REFERENCES profile_post (
+			id
+		);
+
+ALTER TABLE report
+	ADD
+		CONSTRAINT FK_code_master_TO_report
 		FOREIGN KEY (
 			code_no
 		)
