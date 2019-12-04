@@ -1,54 +1,73 @@
 /* 코드_유형_마스터 */
-INSERT INTO code_type_master values (code_type_master_seq.nextval, 100, '게시글', 'post', sysdate);
-INSERT INTO code_type_master values (code_type_master_seq.nextval, 200, '프로젝트', 'project', sysdate);
-INSERT INTO code_type_master values (code_type_master_seq.nextval, 300, '영상', 'video', sysdate);
-INSERT INTO code_type_master values (code_type_master_seq.nextval, 500, '회원', 'user', sysdate);
-INSERT INTO code_type_master values (code_type_master_seq.nextval, 800, '부가 기능', 'additional function', sysdate);
-select * from code_type_master;
+INSERT INTO code_type_master VALUES (code_type_master_seq.nextval, 100, '게시글', 'post', sysdate);
+INSERT INTO code_type_master VALUES (code_type_master_seq.nextval, 200, '프로젝트', 'project', sysdate);
+INSERT INTO code_type_master VALUES (code_type_master_seq.nextval, 300, '영상', 'video', sysdate);
+INSERT INTO code_type_master VALUES (code_type_master_seq.nextval, 500, '회원', 'user', sysdate);
+INSERT INTO code_type_master VALUES (code_type_master_seq.nextval, 800, '부가 기능', 'additional function', sysdate);
+SELECT * FROM code_type_master;
 
 
 /* 코드_마스터 */
-INSERT INTO code_master VALUES (code_master_seq.nextval, 100, 10001,'공지사항', null,'normal_post',sysdate);
-
-INSERT INTO code_master VALUES (code_master_seq.nextval, 100, 10002,'자유게시판', null,'normal_post',sysdate);
+--공지사항
+INSERT INTO code_master VALUES (code_master_seq.nextval, 100, 10001,'공지사항', '공지사항','normal_post',sysdate);
+--자유게시판
+INSERT INTO code_master VALUES (code_master_seq.nextval, 100, 10002,'자유게시판', '자유게시판','normal_post',sysdate);
+--자유게시판 말머리
 INSERT INTO code_master VALUES (code_master_seq.nextval, 100, 1000201,'자유게시판', '잡답','normal_post',sysdate);
 INSERT INTO code_master VALUES (code_master_seq.nextval, 100, 1000202,'자유게시판', '영화','normal_post',sysdate);
 INSERT INTO code_master VALUES (code_master_seq.nextval, 100, 1000203,'자유게시판', '스포일러','normal_post',sysdate);
+--FAQ, 공모전, 회원프로필, Q&A, 소셜게시글
+INSERT INTO code_master VALUES (code_master_seq.nextval, 100, 10003,'FAQ', 'FAQ','normal_post',sysdate);
+INSERT INTO code_master VALUES (code_master_seq.nextval, 100, 10004,'공모전', '공모전','normal_post',sysdate);
+INSERT INTO code_master VALUES (code_master_seq.nextval, 100, 10005,'회원 프로필', '회원 프로필','profile_post',sysdate);
+INSERT INTO code_master VALUES (code_master_seq.nextval, 100, 10006,'Q&A', 'Q&A','reply_post',sysdate);
+INSERT INTO code_master VALUES (code_master_seq.nextval, 100, 10007,'소셜 게시글', '소셜 게시글','social_post',sysdate);
+--프로젝트 관련
+INSERT INTO code_master VALUES (code_master_seq.nextval, 200, 20001,'프로젝트', '프로젝트','project_post',sysdate);
+INSERT INTO code_master VALUES (code_master_seq.nextval, 200, 20002,'리워드', '리워드','reward',sysdate);
+INSERT INTO code_master VALUES (code_master_seq.nextval, 200, 20003,'주문서', '주문서','order_sheet',sysdate);
+INSERT INTO code_master VALUES (code_master_seq.nextval, 200, 20004,'주문수량', '주문수량','order_entity',sysdate);
+INSERT INTO code_master VALUES (code_master_seq.nextval, 200, 20005,'결제', '결제','payment',sysdate);
+INSERT INTO code_master VALUES (code_master_seq.nextval, 200, 20006,'배송', '배송','delivery',sysdate);
+--영화 전체
+--INSERT INTO code_master VALUES (code_master_seq.nextval, 300, 3000,'영화', null,'video_post',sysdate);
+INSERT INTO code_master VALUES (code_master_seq.nextval, 300, 30001,'영화장르','영화장르','video_post',sysdate);
+--영화 장르별
+INSERT INTO code_master VALUES (code_master_seq.nextval, 300, 3000101,'영화장르', '영화_범죄/스릴러','video_post',sysdate);
+INSERT INTO code_master VALUES (code_master_seq.nextval, 300, 3000102,'영화장르', '영화_액션/어드벤쳐','video_post',sysdate);
+INSERT INTO code_master VALUES (code_master_seq.nextval, 300, 3000103,'영화장르', '영화_다큐/드라마/청춘','video_post',sysdate);
+INSERT INTO code_master VALUES (code_master_seq.nextval, 300, 3000104,'영화장르', '영화_역사/시대극','video_post',sysdate);
+INSERT INTO code_master VALUES (code_master_seq.nextval, 300, 3000105,'영화장르', '영화_판타지/SF','video_post',sysdate);
+INSERT INTO code_master VALUES (code_master_seq.nextval, 300, 3000106,'영화장르', '영화_멜로/로맨스','video_post',sysdate);
+INSERT INTO code_master VALUES (code_master_seq.nextval, 300, 3000107,'영화장르', '영화_코메디','video_post',sysdate);
+INSERT INTO code_master VALUES (code_master_seq.nextval, 300, 3000108,'영화장르', '영화_애니메이션','video_post',sysdate);
+INSERT INTO code_master VALUES (code_master_seq.nextval, 300, 3000109,'영화장르', '영화_기타','video_post',sysdate);
+--티저 전체
+INSERT INTO code_master VALUES (code_master_seq.nextval, 300, 30002,'티저장르', '티저장르','video_post',sysdate);
+--티저 장르별
+INSERT INTO code_master VALUES (code_master_seq.nextval, 300, 3000201,'티저장르', '티저_범죄/스릴러','video_post',sysdate);
+INSERT INTO code_master VALUES (code_master_seq.nextval, 300, 3000202,'티저장르', '티저_액션/어드벤쳐','video_post',sysdate);
+INSERT INTO code_master VALUES (code_master_seq.nextval, 300, 3000203,'티저장르', '티저_다큐/드라마/청춘','video_post',sysdate);
+INSERT INTO code_master VALUES (code_master_seq.nextval, 300, 3000204,'티저장르', '티저_역사/시대극','video_post',sysdate);
+INSERT INTO code_master VALUES (code_master_seq.nextval, 300, 3000205,'티저장르', '티저_판타지/SF','video_post',sysdate);
+INSERT INTO code_master VALUES (code_master_seq.nextval, 300, 3000206,'티저장르', '티저_멜로/로맨스','video_post',sysdate);
+INSERT INTO code_master VALUES (code_master_seq.nextval, 300, 3000207,'티저장르', '티저_코메디','video_post',sysdate);
+INSERT INTO code_master VALUES (code_master_seq.nextval, 300, 3000208,'티저장르', '티저_애니메이션','video_post',sysdate);
+INSERT INTO code_master VALUES (code_master_seq.nextval, 300, 3000209,'티저장르', '티저_기타','video_post',sysdate);
 
-INSERT INTO code_master VALUES (code_master_seq.nextval, 100, 10003,'FAQ', null,'normal_post',sysdate);
-INSERT INTO code_master VALUES (code_master_seq.nextval, 100, 10004,'공모전', null,'normal_post',sysdate);
-INSERT INTO code_master VALUES (code_master_seq.nextval, 100, 10005,'회원 프로필', null,'profile_post',sysdate);
-INSERT INTO code_master VALUES (code_master_seq.nextval, 100, 10006,'Q&A', null,'reply_post',sysdate);
-INSERT INTO code_master VALUES (code_master_seq.nextval, 100, 10007,'소셜 게시글', null,'social_post',sysdate);
-
-INSERT INTO code_master VALUES (code_master_seq.nextval, 200, 20001,'프로젝트', null,'project_post',sysdate);
-INSERT INTO code_master VALUES (code_master_seq.nextval, 200, 20002,'리워드', null,'reward',sysdate);
-INSERT INTO code_master VALUES (code_master_seq.nextval, 200, 20003,'주문서', null,'order_sheet',sysdate);
-INSERT INTO code_master VALUES (code_master_seq.nextval, 200, 20004,'주문수량', null,'order_entity',sysdate);
-INSERT INTO code_master VALUES (code_master_seq.nextval, 200, 20005,'결제', null,'payment',sysdate);
-INSERT INTO code_master VALUES (code_master_seq.nextval, 200, 20006,'배송', null,'delivery',sysdate);
-
-INSERT INTO code_master VALUES (code_master_seq.nextval, 300, 30001,'영화장르', '전체','video_post',sysdate);
-INSERT INTO code_master VALUES (code_master_seq.nextval, 300, 3000101,'영화장르', '범죄/스릴러','video_post',sysdate);
-INSERT INTO code_master VALUES (code_master_seq.nextval, 300, 3000102,'영화장르', '액션/어드벤쳐','video_post',sysdate);
-INSERT INTO code_master VALUES (code_master_seq.nextval, 300, 3000103,'영화장르', '다큐/드라마/청춘','video_post',sysdate);
-INSERT INTO code_master VALUES (code_master_seq.nextval, 300, 3000104,'영화장르', '역사/시대극','video_post',sysdate);
-INSERT INTO code_master VALUES (code_master_seq.nextval, 300, 3000105,'영화장르', '판타지/SF','video_post',sysdate);
-INSERT INTO code_master VALUES (code_master_seq.nextval, 300, 3000106,'영화장르', '멜로/로맨스','video_post',sysdate);
-INSERT INTO code_master VALUES (code_master_seq.nextval, 300, 3000107,'영화장르', '코메디','video_post',sysdate);
-INSERT INTO code_master VALUES (code_master_seq.nextval, 300, 3000108,'영화장르', '애니메이션','video_post',sysdate);
-INSERT INTO code_master VALUES (code_master_seq.nextval, 300, 3000109,'영화장르', '기타','video_post',sysdate);
-INSERT INTO code_master VALUES (code_master_seq.nextval, 300, 30002,'영화장르', '티저','video_post',sysdate);
 -- 1. 범죄/스릴러 2. 액션/어드벤쳐 3. 다큐/드라마/청춘 4. 역사/시대극 5. 판타지/SF 6. 멜로/로맨스 7. 코메디 8.애니메이션 9. 기타
 
+--부가기능 전체
+INSERT INTO code_master VALUES (code_master_seq.nextval, 800, 800,'부가기능', '부가기능',null,sysdate);
+--댓글, 첨부파일, 무브(좋아요), 메세지, 신고, 추천리스트
 INSERT INTO code_master VALUES (code_master_seq.nextval, 800, 80001,'부가기능', '댓글','m_comment',sysdate);
 INSERT INTO code_master VALUES (code_master_seq.nextval, 800, 80002,'부가기능', '첨부파일','attached_file',sysdate);
 INSERT INTO code_master VALUES (code_master_seq.nextval, 800, 80003,'부가기능', '무브','move',sysdate);
-INSERT INTO code_master VALUES (code_master_seq.nextval, 800, 80004,'부가기능', '메세지','social_message',sysdate);
+INSERT INTO code_master VALUES (code_master_seq.nextval, 800, 80004,'부가기능', '메시지','social_message',sysdate);
 INSERT INTO code_master VALUES (code_master_seq.nextval, 800, 80005,'부가기능', '신고글','report',sysdate);
 INSERT INTO code_master VALUES (code_master_seq.nextval, 800, 80006,'부가기능', '추천 리스트','recommend_list',sysdate);
 
-INSERT INTO code_master VALUES (code_master_seq.nextval, 500, 50001,'회원', null,'m_user',sysdate);
+INSERT INTO code_master VALUES (code_master_seq.nextval, 500, 50001,'회원', '회원','m_user',sysdate);
 /* 
 INSERT INTO code_master VALUES (code_master_seq.nextval, 500, 5000101,'회원', '일반회원','m_user',sysdate);
 INSERT INTO code_master VALUES (code_master_seq.nextval, 500, 5000102,'회원', '제작사 일반회원','m_user',sysdate);
@@ -64,23 +83,24 @@ INSERT INTO code_master VALUES (code_master_seq.nextval, 500, 5000403,'회원 �
 */
 INSERT INTO code_master VALUES (code_master_seq.nextval, 500, 50005,'소셜 프로필',null,'social_profile',sysdate);
 
+--DELETE FROM code_master;
+SELECT * FROM code_master;
 
 /* 회원 */
 --관리자
-INSERT INTO M_USER (id,user_status,		user_type, user_lv, 
-userid, nickname, email, password, genre_01, genre_02, genre_03, user_pointpoint, register_date)
-VALUES (m_user_seq.nextval, 1, 1, 4, 'admin', 'admin', 
-'admin@gmail.com', 'admin', null, null, null, 500, sysdate);
+INSERT INTO m_user (id, userid, nickname, email, password, genre_01, genre_02, genre_03)
+VALUES (m_user_seq.nextval, 'admin@gmail.com', '관리자', 'admin@gmail.com', 'admin', null, null, null);
 --일반회원
-INSERT INTO M_USER (id,user_status,		user_type, user_lv, 
-userid, nickname, email, password, genre_01, genre_02, genre_03, user_pointpoint, register_date)
-VALUES (m_user_seq.nextval, 1, 1, 1, 'moving', 'moving', 
-'moving@gmail.com', 'moving', null, null, null, 500, sysdate);
---사업자회원
-INSERT INTO M_USER (id,user_status,		user_type, user_lv, 
-userid, nickname, email, password, genre_01, genre_02, genre_03, user_pointpoint, register_date)
-VALUES (m_user_seq.nextval, 1, 1, 3, 'business', 'business', 
-'business@gmail.com', 'business', null, null, null, 500, sysdate);
+INSERT INTO m_user (id, userid, nickname, email, password, genre_01, genre_02, genre_03)
+VALUES (m_user_seq.nextval, 'moving@gmail.com', '무빙', 'moving@gmail.com', 'moving', null, null, null);
+--사업자회원 일반 회원가입
+INSERT INTO m_user (id, userid, nickname, email, password, genre_01, genre_02, genre_03)
+VALUES (m_user_seq.nextval, 'business@gmail.com', '제작사', 'business@gmail.com', 'business', null, null, null);
+--사업자 회원 사업자 회원 전환
+UPDATE m_user 
+SET business_name = '사업자명', 
+business_register_no = '154-11-541', business_license_image_path = '/사업자 등록증 경로'
+WHERE id=3;
 
 --delete from M_USER;
 select * from M_USER;
@@ -102,7 +122,6 @@ INSERT INTO social_message VALUES(social_message_seq.nextval,80004,2,3,'ㅂㅎ�
 select * from social_message ORDER BY register_date desc;
 
 /* 소셜_게시글 */
---publish_availability 타입 변환 필요합니다 
 --일반 게시글
 INSERT INTO social_post(id,code_no,social_id,content,register_date,comment_count,move_count)
 VALUES			(social_post_seq.nextval,10007,2,'내용이다',sysdate,0,0);
@@ -157,7 +176,6 @@ VALUES			(move_seq.nextval,80003,1,2,sysdate);
 -- 사람이 프로젝트에
 INSERT INTO move(id,code_no,user_id_from,project_id,register_date)
 VALUES			(move_seq.nextval,80003,1,1,sysdate);
--- 사람이 일반 게시글에(추가필요)
 -- 사람이 영화에게
 INSERT INTO move(id,code_no,user_id_from,movie_id,register_date)
 VALUES			(move_seq.nextval,80003,1,1,sysdate);
@@ -171,7 +189,6 @@ VALUES			(move_seq.nextval,80003,2,1,sysdate);
 -- 사람이 일반게시글에 
 INSERT INTO m_comment(id,code_no,user_id,normal_post_id,content,move_count,register_date,comment_id_reply,step,reply_order)
 VALUES			(move_seq.nextval,80001,1,1,'뎃글ㄹ네용',0,sysdate,move_seq.nextval,0,0);
--- 사람이 일반 게시글에(추가필요)
 -- 사람이 영화에게
 INSERT INTO m_comment(id,code_no,user_id,movie_id,content,grade,move_count,register_date,comment_id_reply,step,reply_order)
 VALUES			(move_seq.nextval,80001,1,1,'뎃글ㄹ네용',5,0,sysdate,move_seq.nextval,0,0);
