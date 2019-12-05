@@ -27,8 +27,8 @@ public class NotRealLoginController {
 
 		/* 세션에 id, userid, nickname 저장 */
 		session.setAttribute("id", 1);
-		session.setAttribute("userid", "admin@gmail.com");
-		session.setAttribute("nickname", "admin");
+		session.setAttribute("userid", "dfghj@gmail.com");
+		session.setAttribute("nickname", "sdghjg");
 		
 		/* 세션에서 id, userid, nickname 불러와 변수에 저장 */
 		int id=(int)session.getAttribute("id");

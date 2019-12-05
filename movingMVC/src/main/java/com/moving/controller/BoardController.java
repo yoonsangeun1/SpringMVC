@@ -1,8 +1,12 @@
 package com.moving.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.moving.domain.BoardFreeVO;
 
 @Controller 
 //@RequestMapping("/board")
@@ -41,11 +45,11 @@ public class BoardController {
 		return new ModelAndView("board/board_event");
 	}//event()
 
-	//자유게시판
-	@RequestMapping(value="/board/free")
-	public ModelAndView free() {
-		return new ModelAndView("board/board_free");
-	}//free()
+//	//자유게시판
+//	@RequestMapping(value="/board/free")
+//	public ModelAndView free() {
+//		return new ModelAndView("board/board_free");
+//	}//free() //free_list로 할거?야
 
 	//QnA
 	@RequestMapping(value="/board/qna")
@@ -64,8 +68,6 @@ public class BoardController {
 	public ModelAndView notice_cont() {
 		return new ModelAndView("board/board_notice_cont");
 	}//notice_cont()
-	
-	
-	
+		
 
 }//BoardController class

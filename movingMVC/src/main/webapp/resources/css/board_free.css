@@ -78,7 +78,7 @@
 
 #bFree_table{
 	width:900px;
-	height:500px;
+	height:auto;
 	border-top:1px solid grey;
 	border-bottom:2px solid grey;
 	margin-top:100px;

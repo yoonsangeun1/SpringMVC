@@ -17,6 +17,13 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.moving.domain.Board_actorVO" alias="board_actor" />
 		<typeAlias type="com.moving.domain.Board_contestVO" alias="board_contest" />
 		 -->
+		 
+		<typeAlias type="com.moving.domain.Normal_PostVO" alias="bf"/><!-- 자유게시판 테이블 --> 
+		 
+		<typeAlias type="com.moving.domain.M_userVO" alias="mu"/> <!-- 회원? 테이블 -->
+		
+		<typeAlias type="com.moving.domain.Normal_PostDTO" alias="normal_postdto"/> <!-- resultMap 테스트용 -->
+		
 	</typeAliases>
 </configuration>
 
