@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BoardFree">
+
+<resultMap type="normal_postdto" id="boardInfo">
+	<association property="normal_post" javaType="com.moving.domain.Normal_PostVO" autoMapping="true"/>
+	<association property="m_user" javaType="com.moving.domain.M_userVO" autoMapping="true"/>
+	<!-- <collection property="files" javaType="FileVO" autoMapping="true"/> -->
+</resultMap>
+ 
+ <!-- 게시물 개수 -->
+ <select id="bf_count" resultType="int">
+  select count(*) from normal_post
+ </select>
+ 
+ <!-- 게시물 목록 -->
+ <select id="bf_list" resultMap="boardInfo">
+SELECT n.id, n.title, u.nickname, n.register_date, n.hit
+FROM normal_post n
+INNER JOIN m_user u
+ON n.user_id = u.id
+ORDER BY n.id DESC
+<!--   select * from 
+  (select np.rowNum rNum, np.id, np.user_id, np.title,
+  np.content, np.hit, np.register_date, mu.nickname 
+  from
+  (select * from normal_post np,m_user mu order by np.id desc))
+  where rNum &gt;= #{startrow} and rNum &lt;= #{endrow} -->
+  
+  <!-- rowNum컬럼은 오라클에서 테이블 생성시 생성되는
+  기본컬럼으로 레코드 저장시 일련번호값이 저장됨. rNum
+  rowNum컬럼의 별칭명. &gt;은 >, &lt; < , 1이상
+  10이하 사이의 10개목록만 검색 -->
+  
+ </select>
+ 
+ <!-- 글쓰기 -->
+ <insert id="bf_in" parameterType="bf">
+  insert into normal_post (id,user_id,title,content) 
+  values(normal_post_seq.nextval,#{user_id},#{title},
+  #{content})
+ </insert>
+ 
+ <!-- 조회수 증가 -->
+ <update id="bf_hit">
+  update normal_post set hit=hit+1 where id=#{id}
+ </update>
+ 
+ <!-- 내용보기 -->
+ <select id="bf_cont" resultMap="boardInfo">
+  select normal_post.*,m_user.* 
+  from normal_post,m_user 
+  where normal_post.user_id=m_user.id 
+  and normal_post.id=#{id}
+ </select>
+ 
+
+ 
+ <!-- 내용수정 -->  <!-- session 본인 닉네임으로만 수정 가능하게 해야함. -->
+ <update id="bf_edit">
+  update normal_post set user_id=#{user_id},title=#{title},
+  content=#{content} where id=#{id}   
+ </update>  
+ 
+ <!-- 게시글 삭제 --> <!-- 본인만 본인 게시글 삭제 가능하게 해야함 -->
+ <delete id="bf_del">
+  delete from normal_post where id=#{id}
+ </delete>
+ 
+ 
+<!--  <resultMap type="bf" id="bf_result"> type는 mybatis에서 쓴 것
+ normal_postVO는 1개 이지만 xml은 여러개 해도 됨? ㅇㅋ
+  <id property="id" column="id" /> 컬럼명은 db컬럼명과 동일해야함, 프로퍼티는 노상관
+  <result property="title" column="title" />
+  <association property="user_id" column="user_id" javaType="mu" />
+ </resultMap> -->
+ 
+ 
+
+
+ 
+ </mapper>
+
+
+
+
