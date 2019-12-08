@@ -6,9 +6,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.moving.domain.BoardFreeVO;
-import com.moving.domain.Normal_PostDTO;
-import com.moving.domain.Normal_PostVO;
+import com.moving.domain.NormalPostDTO;
+import com.moving.domain.NormalPostVO;
 
 @Repository
 public class BoardFreeDAOImpl implements BoardFreeDAO {
@@ -22,12 +21,12 @@ public class BoardFreeDAOImpl implements BoardFreeDAO {
 	}//자유게시판 게시물 총 개수 구하기
 
 	@Override
-	public List<Normal_PostDTO> getBoardFreeList(Normal_PostVO bf) {
+	public List<NormalPostDTO> getBoardFreeList(NormalPostVO bf) {
 		return this.sqlSession.selectList("bf_list",bf);
 	}//게시물 목록을 가져옴.
 
 	@Override
-	public void inBoardFree(Normal_PostVO bf) {
+	public void inBoardFree(NormalPostVO bf) {
 		this.sqlSession.insert("bf_in",bf);
 	}//게시물 등록
 
@@ -37,12 +36,12 @@ public class BoardFreeDAOImpl implements BoardFreeDAO {
 	}//조회수 증가
 	
 	@Override
-	public Normal_PostDTO getCont(int id) {
+	public NormalPostDTO getCont(int id) {
 		return this.sqlSession.selectOne("bf_cont",id);
 	}//게시물 보기
 
 	@Override
-	public void editBoardFree(Normal_PostVO bf) {
+	public void editBoardFree(NormalPostVO bf) {
 		this.sqlSession.update("bf_edit",bf);
 	}//게시물 수정
 

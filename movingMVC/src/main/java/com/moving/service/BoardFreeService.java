@@ -2,16 +2,16 @@ package com.moving.service;
 
 import java.util.List;
 
-import com.moving.domain.Normal_PostDTO;
-import com.moving.domain.Normal_PostVO;
+import com.moving.domain.NormalPostDTO;
+import com.moving.domain.NormalPostVO;
 
 public interface BoardFreeService {
 
 	int getTotalCount();
-	List<Normal_PostDTO> getBoardFreeList(Normal_PostVO bf);
-	void inBoardFree(Normal_PostVO b);
-	Normal_PostDTO getCont(int id);
-	void editBoardFree(Normal_PostVO bf);
+	List<NormalPostDTO> getBoardFreeList(NormalPostVO bf);
+	void inBoardFree(NormalPostVO b);
+	NormalPostDTO getCont(int id);
+	void editBoardFree(NormalPostVO bf);
 	void delBoardFree(int free_id);
 
 }//BoardFreeService

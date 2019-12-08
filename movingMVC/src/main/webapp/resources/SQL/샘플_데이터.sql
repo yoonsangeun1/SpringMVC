@@ -81,7 +81,7 @@ INSERT INTO code_master VALUES (code_master_seq.nextval, 500, 5000401,'회원 �
 INSERT INTO code_master VALUES (code_master_seq.nextval, 500, 5000402,'회원 상태', '휴면 회원','status',sysdate);
 INSERT INTO code_master VALUES (code_master_seq.nextval, 500, 5000403,'회원 상태', '탈퇴 회원','status',sysdate);
 */
-INSERT INTO code_master VALUES (code_master_seq.nextval, 500, 50005,'소셜 프로필',null,'social_profile',sysdate);
+INSERT INTO code_master VALUES (code_master_seq.nextval, 500, 50005,'소셜 프로필','소셜 프로필','social_profile',sysdate);
 
 --DELETE FROM code_master;
 SELECT * FROM code_master;
@@ -90,6 +90,10 @@ SELECT * FROM code_master;
 --관리자
 INSERT INTO m_user (id, userid, nickname, email, password, genre_01, genre_02, genre_03)
 VALUES (m_user_seq.nextval, 'admin@gmail.com', '관리자', 'admin@gmail.com', 'admin', null, null, null);
+--관리자 회원 회원등급 부여
+UPDATE m_user 
+SET user_lv = 4
+WHERE id=1;
 --일반회원
 INSERT INTO m_user (id, userid, nickname, email, password, genre_01, genre_02, genre_03)
 VALUES (m_user_seq.nextval, 'moving@gmail.com', '무빙', 'moving@gmail.com', 'moving', null, null, null);
@@ -98,7 +102,7 @@ INSERT INTO m_user (id, userid, nickname, email, password, genre_01, genre_02, g
 VALUES (m_user_seq.nextval, 'business@gmail.com', '제작사', 'business@gmail.com', 'business', null, null, null);
 --사업자 회원 사업자 회원 전환
 UPDATE m_user 
-SET business_name = '사업자명', 
+SET business_name = '사업자명', user_lv = 3,
 business_register_no = '154-11-541', business_license_image_path = '/사업자 등록증 경로'
 WHERE id=3;
 

@@ -1,12 +1,8 @@
 package com.moving.controller;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.moving.domain.BoardFreeVO;
 
 @Controller 
 //@RequestMapping("/board")

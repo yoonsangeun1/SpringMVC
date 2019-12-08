@@ -2,18 +2,17 @@ package com.moving.dao;
 
 import java.util.List;
 
-import com.moving.domain.BoardFreeVO;
-import com.moving.domain.Normal_PostDTO;
-import com.moving.domain.Normal_PostVO;
+import com.moving.domain.NormalPostDTO;
+import com.moving.domain.NormalPostVO;
 
 public interface BoardFreeDAO {
 
 	int getTotalCount();
-	List<Normal_PostDTO> getBoardFreeList(Normal_PostVO bf);
-	void inBoardFree(Normal_PostVO bf);
+	List<NormalPostDTO> getBoardFreeList(NormalPostVO bf);
+	void inBoardFree(NormalPostVO bf);
 	void updateHit(int id);
-	Normal_PostDTO getCont(int id);
-	void editBoardFree(Normal_PostVO bf);
+	NormalPostDTO getCont(int id);
+	void editBoardFree(NormalPostVO bf);
 	void delBoardFree(int free_id);
 
 }//BoardFreeDAO inteface 

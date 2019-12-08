@@ -182,7 +182,9 @@
   </term>
   <term name="학력" physicalName="school"/>
   <term name="경력" physicalName="specification"/>
-  <term name="계층" physicalName="step"/>
+  <term name="계층" physicalName="step">
+    <synonyms>계층형</synonyms>
+  </term>
   <term name="영문" physicalName="english"/>
   <term name="한글" physicalName="korean"/>
   <term name="일본어" physicalName="japanese"/>
@@ -213,5 +215,13 @@
   <term name="무브" physicalName="move"/>
   <term name="답글_정렬순서" physicalName="reply_order"/>
   <term name="일반" physicalName="normal"/>
+  <term name="삭제" physicalName="delete"/>
+  <term name="탈퇴" physicalName="deactivate">
+    <synonyms>비활성화</synonyms>
+  </term>
+  <term name="사유" physicalName="rerason">
+    <synonyms>이유</synonyms>
+  </term>
+  <term name="신고" physicalName="report"/>
   <tag name="태그"/>
 </tm:TermDictionary>

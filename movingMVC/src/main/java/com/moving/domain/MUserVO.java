@@ -1,6 +1,6 @@
 package com.moving.domain;
 
-public class M_userVO { /*m_user 테이블 임시로 id와 nickname만 가져오기*/
+public class MUserVO { /*m_user 테이블 임시로 id와 nickname만 가져오기*/
 
 	private int id;
 	private String nickname;

@@ -13,8 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.moving.domain.Normal_PostDTO;
-import com.moving.domain.Normal_PostVO;
+import com.moving.domain.NormalPostDTO;
+import com.moving.domain.NormalPostVO;
 import com.moving.service.BoardFreeService;
 
 @Controller
@@ -27,7 +27,7 @@ public class BoardFreeController {
 	@RequestMapping("/board/free")
 	public ModelAndView board_free_list(
 			HttpServletRequest request,
-			Normal_PostVO bf) throws Exception{ 
+			NormalPostVO bf) throws Exception{ 
 		/*페이징 쪽나누기 코드*/
 		int page=1; //현재 쪽번호
 		int limit=10; //한페이지에 보여지는 목록 개수
@@ -41,7 +41,7 @@ public class BoardFreeController {
 		bf.setEndrow(bf.getStartrow()+limit-1);//끝행번호
 		
 		int totalCount=this.boardFreeService.getTotalCount(); //총 게시물 수
-		List<Normal_PostDTO> bflist=this.boardFreeService.getBoardFreeList(bf);
+		List<NormalPostDTO> bflist=this.boardFreeService.getBoardFreeList(bf);
 		//게시물 목록을 가져옴
 		
 		//총페이지 수
@@ -102,7 +102,7 @@ public class BoardFreeController {
 	
 	//글쓰기 완료 후 리스트로 이동
 	@RequestMapping("/board/free_write_ok")
-	public String board_free_write_ok(Normal_PostVO bf,
+	public String board_free_write_ok(NormalPostVO bf,
 			HttpServletResponse response,
 			HttpServletRequest request,
 			HttpSession session) throws Exception{
@@ -115,8 +115,8 @@ public class BoardFreeController {
 		
 		System.out.println(user_id); // user_id 값 잠시 확인할려고 사용함.
 		
-		Normal_PostVO b=new Normal_PostVO();
-		b.setUser_id(user_id);
+		NormalPostVO b=new NormalPostVO();
+		b.setUserId(user_id);
 		this.boardFreeService.inBoardFree(b);
 	
 		return "redirect:/board/free";
@@ -129,7 +129,7 @@ public class BoardFreeController {
 			int page) throws Exception{
 		
 		//번호에 해당하는 디비 레코드 값을 가져옴.
-		Normal_PostDTO bfdto=this.boardFreeService.getCont(id);
+		NormalPostDTO bfdto=this.boardFreeService.getCont(id);
 		
 		ModelAndView cm=new ModelAndView("/board/board_free_cont");
 		
@@ -145,7 +145,7 @@ public class BoardFreeController {
 	@RequestMapping("/board/free_edit")
 	public String board_free_edit(int free_id,int page,Model m) {
 		
-		Normal_PostDTO bfdto=this.boardFreeService.getCont(free_id);
+		NormalPostDTO bfdto=this.boardFreeService.getCont(free_id);
 		
 		m.addAttribute("bfdto",bfdto);
 		m.addAttribute("page",page);
@@ -157,7 +157,7 @@ public class BoardFreeController {
 	
 	//게시글 수정 완료
 	@RequestMapping("/board/free_edit_ok")
-	public String board_free_edit_ok(Normal_PostVO bf,int page) {
+	public String board_free_edit_ok(NormalPostVO bf,int page) {
 		
 		this.boardFreeService.editBoardFree(bf);
 		

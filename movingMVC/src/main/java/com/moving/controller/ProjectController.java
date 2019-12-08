@@ -22,4 +22,10 @@ public class ProjectController {
 	public String content() {
 		return "project/project_content";
 	}//content()
+	
+	//펀딩 글쓰기
+	@RequestMapping("project/write")
+	public String write() {
+		return "project/funding_write";
+	}//write()
 }
