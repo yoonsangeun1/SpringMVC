@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="adminVideo"><!-- 매퍼 네임스페이스명 -->
+	<!-- videoPost resultMap -->
+	<resultMap type="videoPostVO" id="videoPostInfo">
+		<association property="mUserVO" javaType="com.moving.domain.MUserVO" 
+		column="user_id" select="selectVideoAuthor" />
+		<!-- 1:1 매핑 실행 결과. property는 자바 변수명, javaType은 자바 변수 객체 경로, 
+		select는 변수에 담을 값을 검색하는 메서드, column은 select를 실행할 때 필요한 컬럼 값 
+		=> project_post의 user_id값을 기준으로 m_user테이블에서 유저 정보를 불러와 MUserVO타입 mUserVO 변수에 저장-->
+		<collection property="attachedFileVO" 
+			javaType="java.util.List" autoMapping="true"
+			column="project_post_id" ofType="AttachedFileVO"
+			select="selectVideoAttachedFile"/>
+	</resultMap>
+	
+	<!-- 영상 첨부파일(사진) 불러오기 -->
+	<select id="selectVideoAttachedFile" resultType="attachedFileVO">
+		SELECT * FROM ATTACHED_FILE 
+		WHERE VIDEO_POST_ID = #{id} 
+		ORDER BY NO ASC
+	</select>
+	
+	<!-- 조회수 증가 -->
+	<update id="updateHit">
+		UPDATE VIDEO_POST SET HIT = HIT + 1 WHERE ID = #{id}
+	</update>
+	
+	<!-- 작성자 정보 불러오기 -->
+	<select id="selectVideoAuthor" resultType="mUserVO">
+		SELECT * FROM M_USER
+		WHERE ID = #{user_id}
+	</select>
+	
+	<!-- 영상 게시글 불러오기 -->
+	<select id="selectVideoPost" resultType="videoPostVO">
+		SELECT * FROM VIDEO_POST
+		WHERE ID = #{id}
+	</select>
+	
+	<!-- 영상 정보 +첨부파일+작성자+댓글 다 불러오기 -->
+	<select id="selectVideoInfo" resultMap="videoPostInfo">
+		SELECT * FROM VIDEO_POST
+		WHERE ID = #{id}
+	</select>
+	
+	<!-- 티저 게시글 작성 -->
+	<insert id="insertTeaserVideo">
+		INSERT INTO VIDEO_POST (id, code_no, user_id, title_english,
+		 title_korean, content, video_file_path, rate) 
+		 VALUES (video_post_seq.nextval, #{code_no}, 1
+	</insert>
+	
+	<!-- 영화 게시글 작성 -->
+	<insert id="insertMovieVideo">
+		INSERT INTO video_post(id, code_no, user_id,title_english,title_korean,
+		director,actor,release_date,content,grade,era_background,video_file_path,video_length,rate)
+		VALUES (video_post_seq.nextval, #{code_no}, 1
+	</insert>
+	
+	<!-- 첨부파일 저장 -->
+	<insert id="insertVideoAttachedFile">
+		INSERT INTO ATTACHED_FILE
+		(ID, FILE_PATH, THUMBNAIL_PATH, NO, VIDEO_POST_ID) 
+		VALUES 
+		(ATTACHED_FILE_SEQ.NEXTVAL, )
+		
+	</insert>
+</mapper>

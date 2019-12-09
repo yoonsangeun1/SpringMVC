@@ -1,0 +1,218 @@
+@charset "UTF-8";
+
+/*********** 영화 업로드 페이지 ui구성 ************/
+
+#aMovie_uploadWrap { /* 영상관리 전체를 포함하는 div */
+	float: left;
+	width: 1040px;
+	min-height: 800px;
+	vertical-align: middle;
+}
+
+#aMovie_uploadWrap h2 { /* 영상관리 제목 */
+	font-size: 30px;
+	color: #ccc;
+	margin: 35px 15px;
+	font-weight: bold;
+	text-shadow: 1px 1px 2px gray;
+}
+
+#aMUploadCenter { /* 동영상 업로드 화면 중앙 div */
+	float: left;
+}
+
+#aMUpload_table{ /* 영상 업로드 표 */
+	margin-top: 25px;
+	font-size: 13px;
+}
+
+#aMUpload_table th { /* 영상관리 표 th */
+	width: 60px;
+	vertical-align: middle;
+	font-size: 13px;
+}
+
+#aMUpload_table td {
+
+}
+
+#aMUpload_table .content {
+	width: 530px;
+}
+
+#aMUploadC_category {
+	
+}
+
+#aMUploadC_category .combo { /* 중앙 카테고리 콤보박스 */
+	font-size: 10pt;
+	height: 20px;
+}
+
+#aMUploadC_title .title { /* 동영상 업로드 중앙 화면 제목 */
+	width: 215px;
+	height: 20px;
+	font-size: 11pt;
+}
+
+#aMUploadC_title .year {
+	width: 87px;
+	height: 20px;
+	font-size: 11pt;
+}
+
+#aMUploadC_director { /* 감독(제작사) 입력박스 */
+	width: 60px;
+}
+
+#aMUploadC_actor { /* 출연진 입력박스 */
+	
+}
+
+#aMUploadC_background { /* 시대배경 입력박스 */
+	width: 100px;
+}
+
+#aMUploadC_runningTime { /* 상영시간 입력박스 */
+	width: 80px;
+}
+
+#aMUploadC_image { /* 동영상 업로드 중앙 화면 이미지 */
+	height: 150px;
+}
+
+#aMUploadC_image img {
+	width: 120px;
+	height: 140px;
+	vertical-align: middle;
+}
+
+#aMUploadC_tag input {
+	height: 30px;
+	color: red;
+}
+
+#aMUploadRight { /* 동영상 업로드 화면 오른쪽 div */
+	width: 400px;
+	height: 600px;
+	float: right;
+}
+
+#aMUploadR_uploadBtn .button { /* 동영상 업로드 화면 오른쪽 저장 버튼 */
+	background-color: #6a67ce; /* 보라색 제일 진한거 */
+	border: none;
+	color: white;
+	padding: 15px 42px;
+	margin-bottom: 20px;
+	margin-right: 20px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	cursor: pointer;
+	float: right;
+	
+}
+
+#aMUploadR_cancelBtn .button { /* 동영상 업로드 화면 오른쪽 저장 버튼 */
+	background-color: black; /* 보라색 제일 진한거 */
+	border: none;
+	color: white;
+	padding: 15px 42px;
+	margin-bottom: 20px;
+	margin-right: 20px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	cursor: pointer;
+	float: right;
+	
+}
+
+#aMUploadR_video { /* 동영상 업로드 화면 오른쪽 동영상 */
+	float: left;
+}
+
+#aMUploadR_videoUrl {
+	float: left;
+}
+
+#aMUploadBottom { /* 동영상 업로드 화면 맨 밑 div */
+	width: 570px;
+	height: 30px;
+	float: left;
+	align: center;
+	margin-top: 20px;
+}
+
+#aMUploadBottom input { /* 동영상 업로드 화면 맨 밑 체크 */
+	
+}
+
+#aMUploadBottom select { /* 동영상 업로드 화면 맨 밑 콤보박스 */
+	display: inline-block;
+}
+
+/*테스트용*/
+#aMUpload_table {
+	width: 610px;
+}
+
+#aMUploadR_videoUrl input {
+	
+}
+
+#aMUploadR_Actor { /* 제작사/배우 추가 */
+	
+}
+
+#aMovie_uploadTab {
+	
+}
+
+.container {
+	width: 1040px;
+	margin: 0 auto;
+}
+
+ul.tabs {
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+}
+ul .tab {
+	border-top-right-radius: 5px;
+	border-top-left-radius: 5px;
+}
+
+ul.tabs li {
+	background: none;
+	color: #222;
+	background-color: #b3a9eb;
+	display: inline-block;
+	padding: 10px 15px;
+	cursor: pointer;
+	font-size: 14px;
+}
+
+ul.tabs li.on {
+	background: white;
+	color: #222;
+} 
+
+.tab-content {
+	display: none;
+	background: white;
+	padding: 15px;
+}
+
+.tab-content.on {
+	display: inline-block;
+}
+
+
+
+
+
+

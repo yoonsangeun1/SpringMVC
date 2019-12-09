@@ -11,7 +11,7 @@
 		
 			<tr>
 				<th colspan="8" align="right">
-					<a href="admin_movieUpload" class="link"><i class="fas fa-upload"></i>업로드</a>
+					<a href="movie_upload" class="link"><i class="fas fa-upload"></i>업로드</a>
 				</th>
 			</tr>
 			

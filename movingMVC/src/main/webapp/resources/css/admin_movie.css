@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-#aMovie_wrap { /* 영화관리 전체를 포함하는 div */
+#aMovie_wrap { /* 영상관리 전체를 포함하는 div */
 	float: left;
 	background-color: white;
 	width: 1040px;
@@ -8,7 +8,7 @@
 	vertical-align: middle;
 }
 
-#aMovie_wrap h1 { /* 영화관리 제목 */
+#aMovie_wrap h1 { /* 영상관리 제목 */
 	font-size: 35px;
 	color: #ccc;
 	margin: 35px 15px;
@@ -16,59 +16,63 @@
 	text-shadow: 1px 1px 2px gray;
 }
 
-#aMovie_wrap .link { /* 영화 관리 업로드 하이퍼링크 */
+#aMovie_wrap .link { /* 영상 관리 업로드 하이퍼링크 */
 	float: right;
 	color: black;
 	font-size: 130%;
 	margin-bottom: 20px;
 }
 
-#aMovie_list { /* 영화 관리 전체 div */
+#aMovie_upload {
+	height: auto;
+}
+
+#aMovie_list { /* 영상 관리 전체 div */
 	float: left;
 }
 
-#aMovie_listTable { /* 영화 관리 목록표 */
+#aMovie_listTable { /* 영상 관리 목록표 */
 	width: 1000px;
 }
 
-#aMovie_list .cate1 { /* 영화 관리 표 분류항목(동영상,제목,공개상태,날짜) */
+#aMovie_list .cate1 { /* 영상 관리 표 분류항목(동영상,제목,공개상태,날짜) */
 	text-align: left;
 }
 
-#aMovie_list .cate2 { /* 영화 관리 표 분류항목(조회수,댓글,좋아요) */
+#aMovie_list .cate2 { /* 영상 관리 표 분류항목(조회수,댓글,좋아요) */
 	text-align: right;
 }
 
-#aMovie_list .video { /* 영화 관리 표 분류 영상 */
+#aMovie_list .video { /* 영상 관리 표 분류 영상 */
 	text-align: left;
 }
 
-#aMovie_list .title { /* 영화 관리 표 분류 제목 */
+#aMovie_list .title { /* 영상관리 표 분류 제목 */
 	width: 400px;
 }
 
-#aMovie_list .date { /* 영화 관리 표 분류 등록날짜 */
+#aMovie_list .date { /* 영상 관리 표 분류 등록날짜 */
 	width:90px;
 }
 
-#aMovie_list .views { /* 영화 관리 표 분류 조회수 */
+#aMovie_list .views { /* 영상 관리 표 분류 조회수 */
 	width:90px;
 }
 
-#aMovie_list .comment { /* 영화 관리 표 분류 댓글 */
+#aMovie_list .comment { /* 영상 관리 표 분류 댓글 */
 	width:70px;
 }
 
-#aMovie_list .like { /* 영화 관리 표 분류 좋아요 수 */
+#aMovie_list .like { /* 영상 관리 표 분류 좋아요 수 */
 	
 }
 
-#aMovie_list th { /* 영화 관리 분류 탭(동영상, 제목 등) */
+#aMovie_list th { /* 영상 관리 분류 탭(동영상, 제목 등) */
 	border-bottom: 1px solid #e8e8e8;
 	vertical-align: middle;
 }
 
-#aMovie_list td { /* 영화 관리 분류된 리스트 */
+#aMovie_list td { /* 영상 관리 분류된 리스트 */
 	border-bottom: 1px solid #e8e8e8;
 	line-height: 1.4em;
 	vertical-align: middle;
@@ -78,132 +82,7 @@
 	font-size: 14px;
 }
 
-#aMovie_list .trFont { /* 영화 관리 분류된 리스트 글꼴 */
+#aMovie_list .trFont { /* 영상 관리 분류된 리스트 글꼴 */
 	font-size: 12px;
 }
 
-/*********** 영화 업로드 페이지 ui구성 ************/
-
-#aMovie_uploadWrap { /* 영화관리 전체를 포함하는 div */
-	float: left;
-	background-color: white;
-	width: 1040px;
-	min-height: 800px;
-	vertical-align: middle;
-}
-
-#aMovie_uploadWrap h2 { /* 영화관리 제목 */
-	font-size: 30px;
-	color: #ccc;
-	margin: 35px 15px;
-	font-weight: bold;
-	text-shadow: 1px 1px 2px gray;
-}
-
-#aMovie_uploadWrap table{
-	margin-top: 25px;
-	font-size: 15px;
-}
-
-#aMovie_uploadWrap .txtbox {
-	width: 500px;
-}
-
-#aMUploadCenter { /* 동영상 업로드 화면 중앙 div */
-	float: left;
-}
-
-#aMUploadC_category .combo { /* 중앙 카테고리 콤보박스 */
-	font-size: 13pt;
-	height: 30px;
-}
-
-#aMUploadC_title .title { /* 동영상 업로드 중앙 화면 제목 */
-	height: 50px;
-	font-size: 13pt;
-}
-
-#aMUploadC_image { /* 동영상 업로드 중앙 화면 이미지 */
-	height: 150px;
-}
-
-#aMUploadC_image img {
-	width: 120px;
-	height: 140px;
-	vertical-align: middle;
-}
-
-#aMUploadC_tag input {
-	height: 30px;
-	color: red;
-}
-
-#aMUploadRight { /* 동영상 업로드 화면 오른쪽 div */
-	width: 400px;
-	height: 600px;
-	float: right;
-}
-
-#aMUploadR_saveBtn .button { /* 동영상 업로드 화면 오른쪽 저장 버튼 */
-	background-color: #6a67ce; /* 보라색 제일 진한거 */
-	border: none;
-	color: white;
-	padding: 15px 42px;
-	margin-bottom: 20px;
-	margin-right: 20px;
-	text-align: center;
-	text-decoration: none;
-	display: inline-block;
-	font-size: 16px;
-	cursor: pointer;
-	float: right;
-	
-}
-
-
-
-#aMUploadR_video { /* 동영상 업로드 화면 오른쪽 동영상 */
-	float: left;
-}
-
-#aMUploadR_videoUrl {
-	float: left;
-}
-
-#aMUploadUnder { /* 동영상 업로드 화면 맨 밑 div */
-	width: 570px;
-	height: 30px;
-	float: left;
-	align: center;
-	margin-top: 20px;
-}
-
-#aMUploadUnder input { /* 동영상 업로드 화면 맨 밑 체크 */
-	
-}
-
-#aMUploadUnder select { /* 동영상 업로드 화면 맨 밑 콤보박스 */
-	display: inline-block;
-}
-
-/*테스트용*/
-#aMUpload_table {
-	width: 610px;
-}
-
-#aMUpload_table th {
-	width: 80px;
-	vertical-align: middle;
-}
-
-#aMUpload_table td {
-
-}
-
-#aMUploadR_videoUrl input {
-	
-}
-
-#aMUploadR_Actor { /* 제작사/배우 추가 */
-	
-}

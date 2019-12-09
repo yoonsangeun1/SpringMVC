@@ -5,6 +5,7 @@
 <meta charset="UTF-8">
 <title>관리자 페이지</title>
 <script src="../js/jquery.js"></script>
+<script src="../js/movie_upload.js"></script>
 <script src="https://kit.fontawesome.com/bf95efc607.js" crossorigin="anonymous"></script>
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="../iconfont/css/fontawesome.min.css">
@@ -18,7 +19,8 @@
 <link rel="stylesheet" type="text/css" href="../css/admin_funding.css" />
 <link rel="stylesheet" type="text/css" href="../css/admin_board.css" />
 <link rel="stylesheet" type="text/css" href="../css/admin_movie.css" />
-<link rel="stylesheet" type="text/css" href="../css/admin_movie.css" />
+<link rel="stylesheet" type="text/css" href="../css/admin_movie_upload.css" /> 
+<link rel="stylesheet" type="text/css" href="../css/admin_movie_cont.css" />
 
 </head>
 <body>
@@ -52,6 +54,7 @@
 						</div>
 						<div style="flex-grow: 0.6;">
 							<a href="../member/member_snsLogin.jsp">Login</a>
+							<a href="/moving.com/not_real_login">임시로그인</a>
 						</div>
 					</div>
 				</div>

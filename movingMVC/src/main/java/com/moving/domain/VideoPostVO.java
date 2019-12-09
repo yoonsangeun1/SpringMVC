@@ -1,5 +1,7 @@
 package com.moving.domain;
 
+import java.util.List;
+
 public class VideoPostVO {
 	
 	private int id; // 아이디
@@ -22,6 +24,10 @@ public class VideoPostVO {
 	private int moveCount; // 무브 개수
 	private String registerDate; // 영상 등록일
 	
+	/* resultMap JOIN 검색용 */
+	private List<MCommentVO> mCommentVO;			/* 댓글 VO */
+	private MUserVO mUserVO;						/* 회원 VO */
+	private List<AttachedFileVO> attachedFileVO; 	/* 첨부파일 VO */
 	
 	public int getId() {
 		return id;
@@ -137,5 +143,26 @@ public class VideoPostVO {
 	public void setRegisterDate(String registerDate) {
 		this.registerDate = registerDate;
 	}
+	
+	
+	public List<MCommentVO> getmCommentVO() {
+		return mCommentVO;
+	}
+	public void setmCommentVO(List<MCommentVO> mCommentVO) {
+		this.mCommentVO = mCommentVO;
+	}
+	public MUserVO getmUserVO() {
+		return mUserVO;
+	}
+	public void setmUserVO(MUserVO mUserVO) {
+		this.mUserVO = mUserVO;
+	}
+	public List<AttachedFileVO> getAttachedFileVO() {
+		return attachedFileVO;
+	}
+	public void setAttachedFileVO(List<AttachedFileVO> attachedFileVO) {
+		this.attachedFileVO = attachedFileVO;
+	}
+	
 	
 }

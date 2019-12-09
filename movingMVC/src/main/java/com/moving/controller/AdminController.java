@@ -1,13 +1,16 @@
 package com.moving.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 @RequestMapping(value="/admin")
 @Controller
 public class AdminController {
+	
+	@Autowired
+	private AdminVideoService adminVideoService;
 
 	/* 관리자 홈 */
 	@RequestMapping(value="/")
@@ -52,10 +55,17 @@ public class AdminController {
 		return new ModelAndView("admin/admin_movie");
 	}//movie()
 	
-	/* 영화 관리 */
+	/* 영화 업로드 */
 	@RequestMapping(value="/movie_upload")
-	public ModelAndView movie_upload() {
+	public ModelAndView insertMovie() {
+			
 		return new ModelAndView("admin/admin_movieUpload");
-	}//movie_upload()
+	}//insertMovie()
+	
+	/* 업로드 완료 */
+//	@RequestMapping(value="/movie_upload_ok")
+//	public String insertMovieOk() {
+//		
+//	}//insertMovieOk()
 	
 }
