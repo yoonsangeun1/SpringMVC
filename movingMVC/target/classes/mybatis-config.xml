@@ -26,7 +26,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	<!-- 객체 별칭 관리 -->
 	<typeAliases>
 		<!-- 공통 사용 -->
-		<typeAlias type="com.moving.domain.CodeTypeMasterVO" alias="CodeTypeMasterVO"/>		<!-- 코드 타입 마스터 VO -->
+		<typeAlias type="com.moving.domain.CodeTypeMasterVO" alias="codeTypeMasterVO"/>		<!-- 코드 타입 마스터 VO -->
 		<typeAlias type="com.moving.domain.CodeMasterVO" alias="codeMasterVO"/>				<!-- 코드 마스터 VO -->
 		<typeAlias type="com.moving.domain.MCommentVO" alias="mCommentVO"/>				<!-- 코드 마스터 VO -->
 		<typeAlias type="com.moving.domain.AttachedFileVO" alias="attachedFileVO"/>				<!-- 코드 마스터 VO -->
