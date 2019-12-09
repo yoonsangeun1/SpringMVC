@@ -39,6 +39,9 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.moving.domain.NormalPostDTO" alias="normalPostDTO"/>			<!-- resultMap 테스트용 -->
 		
 		
+		<typeAlias type="com.moving.domain.VideoPostVO" alias="videoPostVO"/>			<!-- resultMap 테스트용 -->
+		
+		
 	</typeAliases>
 </configuration>
 
