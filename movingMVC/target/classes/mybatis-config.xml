@@ -28,18 +28,18 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<!-- 공통 사용 -->
 		<typeAlias type="com.moving.domain.CodeTypeMasterVO" alias="codeTypeMasterVO"/>		<!-- 코드 타입 마스터 VO -->
 		<typeAlias type="com.moving.domain.CodeMasterVO" alias="codeMasterVO"/>				<!-- 코드 마스터 VO -->
-		<typeAlias type="com.moving.domain.MCommentVO" alias="mCommentVO"/>				<!-- 코드 마스터 VO -->
-		<typeAlias type="com.moving.domain.AttachedFileVO" alias="attachedFileVO"/>				<!-- 코드 마스터 VO -->
+		<typeAlias type="com.moving.domain.MCommentVO" alias="mCommentVO"/>					<!-- 댓글 VO -->
+		<typeAlias type="com.moving.domain.AttachedFileVO" alias="attachedFileVO"/>			<!-- 첨부파일 VO -->
 		
 		<typeAlias type="com.moving.domain.MUserVO" alias="mUserVO"/>						<!-- 회원VO -->
 		
 		<typeAlias type="com.moving.domain.ProjectPostVO" alias="projectPostVO" />			<!-- 프로젝트 게시글 VO -->
 
-		<typeAlias type="com.moving.domain.NormalPostVO" alias="bf"/>						<!-- 일반 게시글 VO -->		
+		<typeAlias type="com.moving.domain.NormalPostVO" alias="normalPostVO"/>				<!-- 일반 게시글 VO -->		
 		<typeAlias type="com.moving.domain.NormalPostDTO" alias="normalPostDTO"/>			<!-- resultMap 테스트용 -->
 		
 		
-		<typeAlias type="com.moving.domain.VideoPostVO" alias="videoPostVO"/>			<!-- resultMap 테스트용 -->
+		<typeAlias type="com.moving.domain.VideoPostVO" alias="videoPostVO"/>				<!-- 영상 VO -->
 		
 		
 	</typeAliases>

@@ -4,6 +4,70 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="project"><!-- 매퍼 네임스페이스명 -->
+<mapper namespace="projectPost"><!-- 매퍼 네임스페이스명 -->
 
+	<!-- projectInfo resultMap -->
+	<resultMap type="projectPostVO" id="projectInfo">
+		<association property="mUserVO" javaType="com.moving.domain.MUserVO" 
+		column="user_id" select="selectProjectAuthor" />
+		<!-- 1:1 매핑 실행 결과. property는 자바 변수명, javaType은 자바 변수 객체 경로, 
+		select는 변수에 담을 값을 검색하는 메서드, column은 select를 실행할 때 필요한 컬럼 값 
+		=> project_post의 user_id값을 기준으로 m_user테이블에서 유저 정보를 불러와 MUserVO타입 mUserVO 변수에 저장-->
+		<collection property="attachedFileVO" 
+			javaType="java.util.List" autoMapping="true"
+			column="project_post_id" ofType="AttachedFileVO"
+			select="selectProjectAttachedFile"/>
+	</resultMap>
+
+	<!-- 작성자 정보 불러오기 -->
+	<select id="selectProjectAuthor" resultType="mUserVO">
+		SELECT * FROM M_USER
+		WHERE ID = #{user_id}
+	</select>
+
+	<!-- 프로젝트 게시글 불러오기 -->
+	<select id="selectProjectPost" resultType="projectPostVO">
+		SELECT * FROM PROJECT_POST
+		WHERE ID = #{id}
+	</select>
+	
+	<!-- 프로젝트 정보 +첨부파일+작성자+댓글 다 불러오기 -->
+	<select id="selectProjectInfo" resultMap="projectInfo">
+		SELECT * FROM PROJECT_POST
+		WHERE ID = #{id}
+	</select>
+	
+	<!-- 프로젝트 첨부파일 불러오기 -->
+	<select id="selectProjectAttachedFile" resultType="attachedFileVO">
+		SELECT * FROM ATTACHED_FILE 
+		WHERE PROJECT_POST_ID = #{id} 
+		ORDER BY NO ASC
+	</select>
+	
+	<!-- 조회수 증가 -->
+	<update id="updateHit">
+		UPDATE PROJECT_POST SET HIT = HIT + 1 WHERE ID = #{id}
+	</update>
+	
+	<!-- 프로젝트 남은 기한 구해서 저장하기 -->
+	<update id="test">
+	UPDATE PROJECT_POST
+	SET LEFT_LIMIT = (
+	
+	SELECT dd|| '일'|| SUBSTR (hms, 1, 2)|| '시'|| SUBSTR (hms, 3, 2)|| '분'||
+	SUBSTR (hms, 5, 2)|| '초' day
+	FROM (
+	SELECT TRUNC (end_date - start_date) dd,
+	TO_CHAR (TO_DATE (TRUNC ( MOD(end_date - start_date, 1) * 24 * 60 * 60),
+	'sssss'), 'hh24miss') hms
+	FROM (
+	SELECT (SELECT TARGET_LIMIT FROM PROJECT_POST where id=2) end_date,
+	TRUNC(SYSDATE, 'MI') start_date
+	FROM DUAL
+	)
+	)
+	
+	)
+	WHERE ID = #{id}
+	</update>
 </mapper>

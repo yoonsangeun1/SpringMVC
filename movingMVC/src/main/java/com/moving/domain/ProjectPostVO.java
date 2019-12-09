@@ -1,5 +1,7 @@
 package com.moving.domain;
 
+import java.util.List;
+
 public class ProjectPostVO {
 
 	private int id;					/* 아이디 */
@@ -7,19 +9,23 @@ public class ProjectPostVO {
 	private int codeNo; 			/* 코드_번호 20001 */
 	private int code;				/* 분류번호 */
 	private String title;			/* 제목 */
+	private String introduce;		/* 소개글 */
 	private String content; 		/* 내용 */
 	private String business; 		/* 제작사 */
 	private int targetPrice;		/* 목표_금액 */
 	private int nowPrice;			/* 현재_금액 */
 	private String targetLimit;		/* 목표_기한 */
-	private int leftLimit;			/* 남은_기한 */
+	private String leftLimit;		/* 남은_기한 */
 	private int sponserCount;		/* 후원자_수 */
 	private int hit; 				/* 조회수 */
 	private int commentCount; 		/* 댓글_개수 */
 	private int moveCount; 			/* 무브_개수 */
 	private String registerDate; 	/* 등록_일 */
 	
-	
+	/* resultMap JOIN 검색용 */
+	private List<MCommentVO> mCommentVO;			/* 댓글 VO */
+	private MUserVO mUserVO;						/* 회원 VO */
+	private List<AttachedFileVO> attachedFileVO; 	/* 첨부파일 VO */
 	public int getId() {
 		return id;
 	}
@@ -49,6 +55,12 @@ public class ProjectPostVO {
 	}
 	public void setTitle(String title) {
 		this.title = title;
+	}
+	public String getIntroduce() {
+		return introduce;
+	}
+	public void setIntroduce(String introduce) {
+		this.introduce = introduce;
 	}
 	public String getContent() {
 		return content;
@@ -80,10 +92,10 @@ public class ProjectPostVO {
 	public void setTargetLimit(String targetLimit) {
 		this.targetLimit = targetLimit;
 	}
-	public int getLeftLimit() {
+	public String getLeftLimit() {
 		return leftLimit;
 	}
-	public void setLeftLimit(int leftLimit) {
+	public void setLeftLimit(String leftLimit) {
 		this.leftLimit = leftLimit;
 	}
 	public int getSponserCount() {
@@ -115,6 +127,24 @@ public class ProjectPostVO {
 	}
 	public void setRegisterDate(String registerDate) {
 		this.registerDate = registerDate;
+	}
+	public List<MCommentVO> getmCommentVO() {
+		return mCommentVO;
+	}
+	public void setmCommentVO(List<MCommentVO> mCommentVO) {
+		this.mCommentVO = mCommentVO;
+	}
+	public MUserVO getmUserVO() {
+		return mUserVO;
+	}
+	public void setmUserVO(MUserVO mUserVO) {
+		this.mUserVO = mUserVO;
+	}
+	public List<AttachedFileVO> getAttachedFileVO() {
+		return attachedFileVO;
+	}
+	public void setAttachedFileVO(List<AttachedFileVO> attachedFileVO) {
+		this.attachedFileVO = attachedFileVO;
 	}
 	
 	

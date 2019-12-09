@@ -5,8 +5,8 @@
 <%-- 펀딩 제목, 간략 소개글 --%>
 <div id="fCont_wrap">
 	<div id="fCont_title">
-		<h3>GoSun Flatware: Portable Utensils to End Single-Use Plastic</h3>
-		<p>Reusable utensils that fit in your wallet, purse or pocket.</p>
+		<h3>${projectInfo.title }</h3>
+		<p>${projectInfo.introduce }</p>
 	</div>
 
 	<%-- 펀딩 메인 이미지, 모금 정보 --%>
@@ -33,14 +33,21 @@
 					<!-- 여기에 수정해야 할 것 : 퍼센트 표시 바. -->
 					<div class="progress-bar length" role="progressbar"
 						aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"
-						style="width: 40%">
+						style="width: ${ projectInfo.nowPrice div projectInfo.targetPrice * 100}%">
+						 ${ projectInfo.nowPrice div projectInfo.targetPrice}
 						<%--<span class="sr-only">40% Complete</span>--%>
 					</div>
 				</div>
-				<span class="sumCont_title">9,999 원</span> <span class="sumCont_sub">목표
-					금액 10,000원 중</span> <span class="sumCont_title">1,520 명</span> <span
-					class="sumCont_sub">프로젝트 후원자</span> <span class="sumCont_title">19
-					일</span> <span class="sumCont_sub">남은 목표 일수</span>
+				<span class="sumCont_title">${ projectInfo.nowPrice } 원</span> 
+				<span class="sumCont_sub">목표 금액 ${projectInfo.targetPrice } 원 중</span> 
+				
+				<span class="sumCont_title">${projectInfo.sponserCount } 명</span> 
+				<span class="sumCont_sub">프로젝트 후원자</span>
+
+				
+				<span class="sumCont_title">${projectInfo.leftLimit }</span> <span class="sumCont_sub">남은
+					목표 일수</span>
+
 				<button class="fCont_sumContBtn button button_f16 shadow"
 					type="button">이 프로젝트 밀어주기</button>
 				<div id="fCont_share">

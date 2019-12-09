@@ -136,8 +136,10 @@ VALUES			(social_post_seq.nextval,10007,2,'프로젝트 홍보하려고',1,sysda
 select * from social_post ORDER BY register_date desc;
 
 /* 프로젝트 */
-INSERT INTO PROJECT_POST (id,					   code_no,user_id,title,content,business,target_price,target_limit,register_date)
-VALUES 					 (project_post_seq.nextval,20001,3,'제목이다.','내용','슈박스',10000,sysdate,sysdate);
+INSERT INTO PROJECT_POST (id, user_id, title, content, business, 
+target_price, target_limit)
+VALUES (project_post_seq.nextval, 3, '제목이다.', '내용', '슈박스', 10000, sysdate);
+
 select * from PROJECT_POST;
 
 /* 일반_게시글 */
