@@ -1,6 +1,8 @@
+--프로젝트 댓글 컬럼 추가
+
 --프로젝트 게시글
 alter table PROJECT_POST modify (left_limit varchar2(50));
-alter table PROJECT_POST add (introduce varchar2(50));
+alter table PROJECT_POST add (introduce varchar2(500));
 INSERT INTO PROJECT_POST (id, user_id, title, content, business, 
 target_price, target_limit)
 VALUES (project_post_seq.nextval, 3, '제목이다.', '내용', '슈박스', 10000, sysdate);
@@ -119,3 +121,5 @@ SELECT dd|| '일'|| SUBSTR (hms, 1, 2)|| '시'|| SUBSTR (hms, 3, 2)|| '분'|| SU
 	update project_post set target_limit=TO_DATE ('2019-12-28', 'yyyy-mm-dd hh24:mi:ss')
 	where id=2;
 	select * from project_post
+	
+	update project_post set now_price=4000 where id=2;

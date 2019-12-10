@@ -1,6 +1,6 @@
 package com.moving.domain;
 
-public class MCommentVO {
+public class MCommentVO {				/* 댓글 */
 
 	private int id; 					/* 아이디 */
 	private int codeNo; 				/* 코드_번호 */
@@ -18,6 +18,7 @@ public class MCommentVO {
 	private int normalPostId; 			/* 일반_게시글_아이디 */
 	private int socialPostId; 			/* 소셜_게시글_아이디 */
 	private int profilePostId; 			/* 프로필_게시글_아이디 */
+	private int projectPostId; 			/* 프로젝트_게시글_아이디 */
 	
 	
 	public int getId() {
@@ -115,6 +116,12 @@ public class MCommentVO {
 	}
 	public void setProfilePostId(int profilePostId) {
 		this.profilePostId = profilePostId;
+	}
+	public int getProjectPostId() {
+		return projectPostId;
+	}
+	public void setProjectPostId(int projectPostId) {
+		this.projectPostId = projectPostId;
 	}
 	
 	

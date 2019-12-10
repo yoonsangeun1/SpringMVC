@@ -103,13 +103,23 @@ CREATE SEQUENCE delivery_seq
 	INCREMENT BY 1
 	START WITH 1;
 
+/* 태그_시퀀스 */
+CREATE SEQUENCE tag_seq 
+	INCREMENT BY 1
+	START WITH 1;
+
+/* 팔로우_시퀀스 */
+CREATE SEQUENCE follow_seq 
+	INCREMENT BY 1
+	START WITH 1;
+
 /* 코드_마스터 */
 CREATE TABLE code_master (
 	id NUMBER(38) NOT NULL, /* 아이디 */
 	code_type_id NUMBER(38), /* 코드_유형_아이디 */
 	code_no NUMBER(38), /* 코드_번호 */
-	category_name_reference VARCHAR2(30), /* 카테고리_명_참조 */
-	category_name VARCHAR2(30), /* 카테고리_명 */
+	category_name_reference VARCHAR2(50), /* 카테고리_명_참조 */
+	category_name VARCHAR2(50), /* 카테고리_명 */
 	table_name VARCHAR2(50), /* 테이블_명 */
 	register_date DATE /* 등록_날짜 */
 );
@@ -154,7 +164,7 @@ ALTER TABLE code_master
 CREATE TABLE order_entity (
 	id NUMBER(38) NOT NULL, /* 아이디 */
 	code_no NUMBER(38) DEFAULT 20004, /* 코드_번호 */
-	order_id NUMBER(38), /* 주문서_아이디 */
+	order_sheet_id NUMBER(38), /* 주문_문서_아이디 */
 	reward_id NUMBER(38), /* 리워드_아이디 */
 	count NUMBER(38) DEFAULT 0, /* 수량 */
 	price NUMBER(38), /* 금액 */
@@ -178,7 +188,7 @@ CREATE TABLE order_sheet (
 	id NUMBER(38) NOT NULL, /* 아이디 */
 	code_no NUMBER(38) DEFAULT 20003, /* 코드_번호 */
 	user_id NUMBER(38), /* 회원_아이디 */
-	address VARCHAR2(80), /* 주소 */
+	address VARCHAR2(255), /* 주소 */
 	total_price NUMBER(38), /* 총_금액 */
 	order_date DATE, /* 주문_일 */
 	status NUMBER(1) DEFAULT 1 /* 상태 */
@@ -229,7 +239,7 @@ CREATE TABLE reply_post (
 	id NUMBER(38) NOT NULL, /* 아이디 */
 	code_no NUMBER(38) DEFAULT 10005, /* 코드_번호 */
 	user_id NUMBER(38), /* 회원_아이디 */
-	category VARCHAR2(30), /* 분류 */
+	category VARCHAR2(50), /* 분류 */
 	title VARCHAR2(200), /* 제목 */
 	content VARCHAR2(4000), /* 내용 */
 	hit NUMBER(38) DEFAULT 0, /* 조회수 */
@@ -308,12 +318,13 @@ CREATE TABLE project_post (
 	code_no NUMBER(38) DEFAULT 20001, /* 코드_번호 */
 	code NUMBER(38), /* 분류번호 */
 	title VARCHAR2(200), /* 제목 */
+	introduce VARCHAR2(200), /* 소개 */
 	content VARCHAR2(4000), /* 내용 */
 	business VARCHAR2(50), /* 제작사 */
 	target_price NUMBER(38), /* 목표_금액 */
 	now_price NUMBER(38), /* 현재_금액 */
 	target_limit DATE, /* 목표_기한 */
-	left_limit NUMBER(38), /* 남은_기한 */
+	left_limit VARCHAR2(500), /* 남은_기한 */
 	sponser_count NUMBER(38) DEFAULT 0, /* 후원자_수 */
 	hit NUMBER(38) DEFAULT 0, /* 조회수 */
 	comment_count NUMBER(38) DEFAULT 0, /* 댓글_개수 */
@@ -375,7 +386,7 @@ CREATE TABLE video_post (
 	era_background VARCHAR2(100), /* 시대_배경 */
 	video_file_path VARCHAR2(300), /* 영상_파일_경로 */
 	video_length NUMBER(38), /* 영상_길이 */
-	rate varchar2(5), /* 관람등급 */
+	rate VARCHAR2(10), /* 관람등급 */
 	hit NUMBER(38) DEFAULT 0, /* 조회수 */
 	comment_count NUMBER(38) DEFAULT 0, /* 댓글_개수 */
 	move_count NUMBER(38) DEFAULT 0, /* 무브_개수 */
@@ -440,7 +451,7 @@ CREATE TABLE m_user (
 	business_register_no VARCHAR2(25), /* 사업자등록번호 */
 	business_license_image_path VARCHAR2(300), /* 사업자등록증이미지경로 */
 	deactivate_date DATE, /* 탈퇴_날짜 */
-	deactivate_rerason VARCHAR2(4000) /* 탈퇴_사유 */
+	deactivate_reason VARCHAR2(4000) /* 탈퇴 */
 );
 
 CREATE UNIQUE INDEX user_id_pk
@@ -508,7 +519,7 @@ CREATE TABLE social_profile (
 	nickname VARCHAR2(17), /* 닉네임 */
 	background_image_path VARCHAR2(300), /* 배경_이미지_경로 */
 	introduce VARCHAR2(4000), /* 소개 */
-	user_type VARCHAR2(1) DEFAULT 1, /* 회원_타입 */
+	user_type NUMBER(1) DEFAULT 1, /* 회원_타입 */
 	profile_image_path VARCHAR2(300), /* 프로필_이미지_경로 */
 	follower_count NUMBER(38) DEFAULT 0, /* 팔로워_수 */
 	follow_count NUMBER(38) DEFAULT 0, /* 팔로우_수 */
@@ -622,7 +633,7 @@ CREATE TABLE normal_post (
 	id NUMBER(38) NOT NULL, /* 아이디 */
 	code_no NUMBER(38), /* 코드_번호 */
 	user_id NUMBER(38), /* 회원_아이디 */
-	user_category VARCHAR2(30), /* 회원_분류 */
+	user_category VARCHAR2(50), /* 회원_분류 */
 	title VARCHAR2(200), /* 제목 */
 	content VARCHAR2(4000), /* 내용 */
 	hit NUMBER(38) DEFAULT 0, /* 조회수 */
@@ -663,7 +674,8 @@ CREATE TABLE m_comment (
 	video_post_id NUMBER(38), /* 영상_게시글_아이디 */
 	normal_post_id NUMBER(38), /* 일반_게시글_아이디 */
 	social_post_id NUMBER(38), /* 소셜_게시글_아이디 */
-	profile_post_id NUMBER(38) /* 프로필_게시글_아이디 */
+	profile_post_id NUMBER(38), /* 프로필_게시글_아이디 */
+	project_post_id NUMBER(38) /* 프로젝트_게시글_아이디 */
 );
 
 CREATE UNIQUE INDEX comment_id_pk
@@ -684,14 +696,14 @@ CREATE TABLE profile_post (
 	code_no NUMBER(38) DEFAULT 10005, /* 코드_번호 */
 	user_id NUMBER(38), /* 회원_아이디 */
 	title VARCHAR2(200), /* 제목 */
-	category VARCHAR2(30), /* 카테고리 */
+	category VARCHAR2(50), /* 카테고리 */
 	content VARCHAR2(4000), /* 내용 */
 	hit NUMBER(38) DEFAULT 0, /* 조회수 */
 	register_date DATE DEFAULT sysdate, /* 등록_일 */
 	comment_count NUMBER(38) DEFAULT 0, /* 댓글_개수 */
 	move_count NUMBER(38) DEFAULT 0, /* 무브_개수 */
 	name VARCHAR2(50), /* 이름 */
-	sex varchar2(1), /* 성별 */
+	sex VARCHAR2(1), /* 성별 */
 	birth_date DATE, /* 생년월일_일 */
 	age NUMBER(38), /* 나이 */
 	email VARCHAR2(40), /* 이메일 */
@@ -747,6 +759,55 @@ ALTER TABLE report
 			id
 		);
 
+/* 팔로우 */
+CREATE TABLE follow (
+	id NUMBER(38) NOT NULL, /* 아이디 */
+	code_no NUMBER(38) DEFAULT 80007, /* 코드_번호 */
+	register_date DATE DEFAULT sysdate, /* 등록_날짜 */
+	user_id_from NUMBER(38), /* 회원_아이디_보낸이 */
+	user_id_to NUMBER(38), /* 회원_아이디_받는이 */
+	social_profile_id_from NUMBER(38), /* 소셜_프로필_아이디_보낸이 */
+	social_profile_id_to NUMBER(38) /* 소셜_프로필_아이디_받는이 */
+);
+
+CREATE UNIQUE INDEX PK_follow
+	ON follow (
+		id ASC
+	);
+
+ALTER TABLE follow
+	ADD
+		CONSTRAINT PK_follow
+		PRIMARY KEY (
+			id
+		);
+
+/* 태그 */
+CREATE TABLE tag (
+	id NUMBER(38) NOT NULL, /* 아이디 */
+	code_no NUMBER(38) DEFAULT 80008, /* 코드_번호 */
+	tag_name VARCHAR2(50), /* 태그_명 */
+	register_date DATE DEFAULT sysdate, /* 등록_날짜 */
+	normal_post_id NUMBER(38), /* 일반_게시글_아이디 */
+	social_post_id NUMBER(38), /* 소셜_게시글_아이디 */
+	video_post_id NUMBER(38), /* 영상_게시글_아이디 */
+	project_post_id NUMBER(38), /* 프로젝트_게시글_아이디 */
+	profile_post_id NUMBER(38), /* 프로필_게시글_아이디 */
+	reply_post_id NUMBER(38) /* 답글_게시글_아이디 */
+);
+
+CREATE UNIQUE INDEX PK_tag
+	ON tag (
+		id ASC
+	);
+
+ALTER TABLE tag
+	ADD
+		CONSTRAINT PK_tag
+		PRIMARY KEY (
+			id
+		);
+
 ALTER TABLE code_master
 	ADD
 		CONSTRAINT code_master_code_type_id_fk
@@ -771,7 +832,7 @@ ALTER TABLE order_entity
 	ADD
 		CONSTRAINT order_entity_order_sheet_id_fk
 		FOREIGN KEY (
-			order_id
+			order_sheet_id
 		)
 		REFERENCES order_sheet (
 			id
@@ -1401,6 +1462,16 @@ ALTER TABLE m_comment
 			id
 		);
 
+ALTER TABLE m_comment
+	ADD
+		CONSTRAINT FK_project_post_TO_m_comment
+		FOREIGN KEY (
+			project_post_id
+		)
+		REFERENCES project_post (
+			id
+		);
+
 ALTER TABLE profile_post
 	ADD
 		CONSTRAINT profile_post_user_id_fk
@@ -1540,4 +1611,124 @@ ALTER TABLE report
 		)
 		REFERENCES code_master (
 			code_no
+		);
+
+ALTER TABLE follow
+	ADD
+		CONSTRAINT FK_m_user_TO_follow
+		FOREIGN KEY (
+			user_id_from
+		)
+		REFERENCES m_user (
+			id
+		);
+
+ALTER TABLE follow
+	ADD
+		CONSTRAINT FK_m_user_TO_follow2
+		FOREIGN KEY (
+			user_id_to
+		)
+		REFERENCES m_user (
+			id
+		);
+
+ALTER TABLE follow
+	ADD
+		CONSTRAINT FK_social_profile_TO_follow
+		FOREIGN KEY (
+			social_profile_id_from
+		)
+		REFERENCES social_profile (
+			id
+		);
+
+ALTER TABLE follow
+	ADD
+		CONSTRAINT FK_social_profile_TO_follow2
+		FOREIGN KEY (
+			social_profile_id_to
+		)
+		REFERENCES social_profile (
+			id
+		);
+
+ALTER TABLE follow
+	ADD
+		CONSTRAINT FK_code_master_TO_follow
+		FOREIGN KEY (
+			code_no
+		)
+		REFERENCES code_master (
+			code_no
+		);
+
+ALTER TABLE tag
+	ADD
+		CONSTRAINT FK_code_master_TO_tag
+		FOREIGN KEY (
+			code_no
+		)
+		REFERENCES code_master (
+			code_no
+		);
+
+ALTER TABLE tag
+	ADD
+		CONSTRAINT FK_normal_post_TO_tag
+		FOREIGN KEY (
+			normal_post_id
+		)
+		REFERENCES normal_post (
+			id
+		);
+
+ALTER TABLE tag
+	ADD
+		CONSTRAINT FK_social_post_TO_tag
+		FOREIGN KEY (
+			social_post_id
+		)
+		REFERENCES social_post (
+			id
+		);
+
+ALTER TABLE tag
+	ADD
+		CONSTRAINT FK_video_post_TO_tag
+		FOREIGN KEY (
+			video_post_id
+		)
+		REFERENCES video_post (
+			id
+		);
+
+ALTER TABLE tag
+	ADD
+		CONSTRAINT FK_project_post_TO_tag
+		FOREIGN KEY (
+			project_post_id
+		)
+		REFERENCES project_post (
+			id
+		);
+
+ALTER TABLE tag
+	ADD
+		CONSTRAINT FK_profile_post_TO_tag
+		FOREIGN KEY (
+			profile_post_id
+		)
+		REFERENCES profile_post (
+			id
+		);
+
+ALTER TABLE tag
+	ADD
+		CONSTRAINT FK_reply_post_TO_tag
+		FOREIGN KEY (
+			reply_post_id
+		)
+		REFERENCES reply_post (
+			id
 		);

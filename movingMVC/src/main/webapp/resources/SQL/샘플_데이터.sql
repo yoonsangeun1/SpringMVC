@@ -66,6 +66,8 @@ INSERT INTO code_master VALUES (code_master_seq.nextval, 800, 80003,'부가기�
 INSERT INTO code_master VALUES (code_master_seq.nextval, 800, 80004,'부가기능', '메시지','social_message',sysdate);
 INSERT INTO code_master VALUES (code_master_seq.nextval, 800, 80005,'부가기능', '신고글','report',sysdate);
 INSERT INTO code_master VALUES (code_master_seq.nextval, 800, 80006,'부가기능', '추천 리스트','recommend_list',sysdate);
+INSERT INTO code_master VALUES (code_master_seq.nextval, 800, 80007,'부가기능', '팔로우','follow',sysdate);
+INSERT INTO code_master VALUES (code_master_seq.nextval, 800, 80008,'부가기능', '태그','tag',sysdate);
 
 INSERT INTO code_master VALUES (code_master_seq.nextval, 500, 50001,'회원', '회원','m_user',sysdate);
 /* 

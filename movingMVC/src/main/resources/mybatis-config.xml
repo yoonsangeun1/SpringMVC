@@ -31,10 +31,17 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.moving.domain.MCommentVO" alias="mCommentVO"/>					<!-- 댓글 VO -->
 		<typeAlias type="com.moving.domain.AttachedFileVO" alias="attachedFileVO"/>			<!-- 첨부파일 VO -->
 		<typeAlias type="com.moving.domain.MoveVO" alias="moveVO"/>							<!-- 무브 VO -->
+		<typeAlias type="com.moving.domain.TagVO" alias="tagVO"/>							<!-- 태그 VO -->
+		<typeAlias type="com.moving.domain.FollowVO" alias="followVO"/>						<!-- 팔로우 VO -->
+		<typeAlias type="com.moving.domain.ReportVO" alias="reportVO"/>						<!-- 신고 VO -->
 		
 		<typeAlias type="com.moving.domain.MUserVO" alias="mUserVO"/>						<!-- 회원VO -->
 		
 		<typeAlias type="com.moving.domain.ProjectPostVO" alias="projectPostVO" />			<!-- 프로젝트 게시글 VO -->
+		<typeAlias type="com.moving.domain.OrderSheetVO" alias="orderSheetVO" />			<!-- 주문_문서 VO -->
+		<typeAlias type="com.moving.domain.OrderEntityVO" alias="orderEntityVO" />			<!-- 주문_수량 VO -->
+		<typeAlias type="com.moving.domain.DeliveryVO" alias="deliveryVO" />				<!-- 배송 VO -->
+		<typeAlias type="com.moving.domain.PaymentVO" alias="paymentVO" />					<!-- 결제 VO -->
 
 		<typeAlias type="com.moving.domain.NormalPostVO" alias="normalPostVO"/>				<!-- 일반 게시글 VO -->		
 		<typeAlias type="com.moving.domain.NormalPostDTO" alias="normalPostDTO"/>			<!-- resultMap 테스트용 -->

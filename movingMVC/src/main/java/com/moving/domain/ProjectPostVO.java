@@ -2,7 +2,7 @@ package com.moving.domain;
 
 import java.util.List;
 
-public class ProjectPostVO {
+public class ProjectPostVO {		/* 프로젝트 게시글 */
 
 	private int id;					/* 아이디 */
 	private int userId;				/* 회원_아이디 */
@@ -26,6 +26,8 @@ public class ProjectPostVO {
 	private List<MCommentVO> mCommentVO;			/* 댓글 VO */
 	private MUserVO mUserVO;						/* 회원 VO */
 	private List<AttachedFileVO> attachedFileVO; 	/* 첨부파일 VO */
+	private List<TagVO> tagVO;					 	/* 태그 VO */
+	
 	public int getId() {
 		return id;
 	}
@@ -146,6 +148,11 @@ public class ProjectPostVO {
 	public void setAttachedFileVO(List<AttachedFileVO> attachedFileVO) {
 		this.attachedFileVO = attachedFileVO;
 	}
-	
+	public List<TagVO> getTagVO() {
+		return tagVO;
+	}
+	public void setTagVO(List<TagVO> tagVO) {
+		this.tagVO = tagVO;
+	}
 	
 }

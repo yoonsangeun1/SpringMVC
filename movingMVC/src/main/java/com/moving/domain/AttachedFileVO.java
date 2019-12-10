@@ -1,9 +1,10 @@
 package com.moving.domain;
 
-public class AttachedFileVO {/* 첨부_파일 */
+public class AttachedFileVO {		/* 첨부_파일 */
 
 	private int id; 				/* 아이디 */
 	private int codeNo; 			/* 코드_번호 */
+	private int fileType;			/* 파일_타입 */
 	private String filePath; 		/* 파일_경로 */
 	private String thumbnailPath; 	/* 썸네일_경로 */
 	private int no; 				/* 순번 */

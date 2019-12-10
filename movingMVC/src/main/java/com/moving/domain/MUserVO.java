@@ -1,30 +1,30 @@
 package com.moving.domain;
 
-public class MUserVO {
+public class MUserVO {							//회원 정보		
 
-	private int id; //아이디(고유번호,시퀀스,회원넘버)
-	private int codeNo; //코드_번호
-	private String userid; //회원아이디
-	private String nickname; //닉네임
-	private String name; //이름
-	private String email; //이메일
-	private String password; //비밀번호
-	private String genre01; //장르1
-	private String genre02; //장르2
-	private String genre03; //장르3
-	private String phone; //전화번호
-	private int publishAvailability; //공개_여부
-	private String profileImageUrl; //프로필_사진_url
-	private int userStatus; //회원_상태
-	private int userType; //회원_유형
-	private int userLv; //회원_등급
-	private int userPoint; //회원_포인트
-	private String registerDate; //등록_일
-	private String businessName; //사업자 이름
-	private String businessRegisterNo; //사업자등록번호
-	private String businessLicenseImagePath; //사업자등록증이미지경로
-	private String deactivateDate; //탈퇴_날짜
-	private String deactivateReason; //탈퇴_사유
+	private int id; 							//아이디(고유번호,시퀀스,회원넘버)
+	private int codeNo; 						//코드_번호
+	private String userid; 						//회원아이디
+	private String nickname; 					//닉네임
+	private String name; 						//이름
+	private String email;		 				//이메일
+	private String password; 					//비밀번호
+	private String genre01; 					//장르1
+	private String genre02; 					//장르2
+	private String genre03; 					//장르3
+	private String phone; 						//전화번호
+	private int publishAvailability;			//공개_여부
+	private String profileImageUrl; 			//프로필_사진_url
+	private int userStatus; 					//회원_상태
+	private int userType; 						//회원_유형
+	private int userLv; 						//회원_등급
+	private int userPoint; 						//회원_포인트
+	private String registerDate; 				//등록_일
+	private String businessName; 				//사업자 이름
+	private String businessRegisterNo; 			//사업자등록번호
+	private String businessLicenseImagePath; 	//사업자등록증이미지경로
+	private String deactivateDate; 				//탈퇴_날짜
+	private String deactivateReason; 			//탈퇴_사유
 	
 	public int getId() {
 		return id;
