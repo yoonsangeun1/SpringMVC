@@ -30,6 +30,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.moving.domain.CodeMasterVO" alias="codeMasterVO"/>				<!-- 코드 마스터 VO -->
 		<typeAlias type="com.moving.domain.MCommentVO" alias="mCommentVO"/>					<!-- 댓글 VO -->
 		<typeAlias type="com.moving.domain.AttachedFileVO" alias="attachedFileVO"/>			<!-- 첨부파일 VO -->
+		<typeAlias type="com.moving.domain.MoveVO" alias="moveVO"/>							<!-- 무브 VO -->
 		
 		<typeAlias type="com.moving.domain.MUserVO" alias="mUserVO"/>						<!-- 회원VO -->
 		
@@ -41,6 +42,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		
 		<typeAlias type="com.moving.domain.VideoPostVO" alias="videoPostVO"/>				<!-- 영상 VO -->
 		
+		<typeAlias type="com.moving.domain.SocialPostVO" alias="socialPostVO"/>				<!-- 소셜 포스트 VO -->
+		<typeAlias type="com.moving.domain.SocialProfileVO" alias="socialProfileVO"/>		<!-- 소셜 프로필 VO -->		
 		
 	</typeAliases>
 </configuration>
