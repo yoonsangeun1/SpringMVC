@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="socialProfile"><!-- 매퍼 네임스페이스명 -->
+	<!-- 1:1 매핑 실행 결과. property는 자바 변수명, javaType은 자바 변수 객체 경로, 
+		select는 변수에 담을 값을 검색하는 메서드, column은 select를 실행할 때 필요한 컬럼 값 
+		=> project_post의 user_id값을 기준으로 m_user테이블에서 유저 정보를 불러와 MUserVO타입 mUserVO 변수에 저장-->
+		
+	<resultMap type="socialProfileVO" id="socialProfileInfo">
+		<!-- <association property="socialPostVO" javaType="com.moving.domain.SocialPostVO"
+		 column="id" select="selectPostWithId"/> -->
+		<!-- 유저 아이디를 받아와서 PostVO에서 selectPostWithId가 실행되도록 매핑한다. -->
+		<collection property="socialPostVO" 
+			javaType="java.util.ArrayList" autoMapping="true"
+			column="id" ofType="SocialPostVO"
+			select="selectPostWithId"/>
+	</resultMap>
+	
+	<!-- <resultMap type="socialPostVO" id="socialPostInfo">
+		<association property="socialPostVO" javaType="com.moving.domain.SocialPostVO"
+		 column="id" select="selectPostWithId"/>
+		유저 아이디를 받아와서 PostVO에서 selectPostWithId가 실행되도록 매핑한다.
+		<collection property="mCommentVO" 
+			javaType="java.util.List" autoMapping="true"
+			column="id" ofType="MCommentVO"
+			select="selectCommentWithId"/>
+	</resultMap> -->
+	
+	<!-- 소셜 게시글 불러오기 -->
+	<select id="selectPostWithId" resultType="socialPostVO">
+		SELECT * FROM SOCIAL_POST
+		WHERE social_id = #{id}
+		ORDER BY register_date desc
+	</select>
+	
+	<!-- 사용자 프로필 정보 불러오기 -->
+	<select id="selectProfileAll" resultType="socialProfileVO">
+		SELECT * FROM SOCIAL_PROFILE
+		WHERE ID = #{id}
+	</select>
+	
+	<!-- 사용자 프로필 정보와 소셜 게시글 불러오기 -->
+	<select id="selectProfileAndPost" resultMap="socialProfileInfo">
+		SELECT * FROM SOCIAL_PROFILE
+		WHERE ID = #{id}
+	</select>
+	
+</mapper>
+
+
+	
+	

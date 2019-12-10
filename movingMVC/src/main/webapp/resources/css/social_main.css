@@ -365,14 +365,15 @@
 /* 작성자, 제목, 내용을 표시한다. */
 .SNS_Content_Title {
    font-size: 16px;
-   margin-top: 2px;
+   margin-top: 5px;
    float: left;
    cursor: pointer;
 }
 
 .SNS_Content_Writer {
-   margin-top: 5px;
+   margin-top: 7px;
    font-size: 12px;
+   float:left;
 }
 
 .SNS_Content_Cont {

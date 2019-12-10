@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="../include/sns_header.jsp"%>
-
+<%@ taglib prefix="c" 
+            uri="http://java.sun.com/jsp/jstl/core" %>
 	<!-- 배경화면 전체 지정 -->
 	<div id="SNS_Wrap">
 		<!-- 오브젝트 항목 래핑 -->
@@ -8,7 +9,7 @@
 			<!-- 좌측 메뉴 -->
 			<div id="SNS_left_title">
 				<div id="SNS_Profile_Name">
-					<a href="profile">박진우</a>
+					<a href="profile">${id}</a>
 				</div> 
 				<img class="SNS_Profile_Picture" src="../images/member_profile.png"
 					width="30px" height="30px" alt="">
