@@ -4,23 +4,23 @@
 <head>
 <meta charset="UTF-8">
 <title>관리자 페이지</title>
-<script src="../js/jquery.js"></script>
-<script src="../js/movie_upload.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/jquery.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/movie_upload.js"></script>
 <script src="https://kit.fontawesome.com/bf95efc607.js" crossorigin="anonymous"></script>
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="../iconfont/css/fontawesome.min.css">
-<link rel="stylesheet" type="text/css" href="../css/admin_index.css" />
-<link rel="stylesheet" type="text/css" href="../css/init.css" />
-<link rel="stylesheet" type="text/css" href="../css/header.css" />
-<link rel="stylesheet" type="text/css" href="../css/scrollbar.css" />
-<link rel="stylesheet" type="text/css" href="../css/sns_main.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/admin_index.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/init.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/header.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/scrollbar.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/sns_main.css" />
 
-<link rel="stylesheet" type="text/css" href="../css/admin_member.css" />
-<link rel="stylesheet" type="text/css" href="../css/admin_funding.css" />
-<link rel="stylesheet" type="text/css" href="../css/admin_board.css" />
-<link rel="stylesheet" type="text/css" href="../css/admin_movie.css" />
-<link rel="stylesheet" type="text/css" href="../css/admin_movie_upload.css" /> 
-<link rel="stylesheet" type="text/css" href="../css/admin_movie_cont.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/admin_member.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/admin_funding.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/admin_board.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/admin_movie.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/admin_movie_upload.css" /> 
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/admin_movie_cont.css" />
 
 </head>
 <body>
@@ -40,7 +40,7 @@
 						<div style="flex-grow: 12;">
 							<div id="header_logo">
 								<a href="../admin_index.jsp"><img
-									src="../images/logo_w.png" alt="로고 이미지" width="150" height="25" /></a>
+									src="${pageContext.request.contextPath}/resources/images/logo_w.png" alt="로고 이미지" width="150" height="25" /></a>
 							</div>
 						</div>
 						<div style="flex-grow: 0.8;">
@@ -68,7 +68,7 @@
 	
 				<!-- 관리자 정보, 사진, 이름 -->
 				<div id="admin_info">
-					<a href="#"> <img src="../images/member_profile.png" width="120" height="120" alt="등록된 사진이 없습니다." />
+					<a href="#"> <img src="${pageContext.request.contextPath}/resources/images/member_profile.png" width="120" height="120" alt="등록된 사진이 없습니다." />
 					</a>
 					<ul>
 						<li>관리자 정보:</li>

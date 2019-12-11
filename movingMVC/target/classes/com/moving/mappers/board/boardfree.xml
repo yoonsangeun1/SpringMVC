@@ -6,24 +6,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="BoardFree">
 
-<resultMap type="normal_postdto" id="boardInfo">
-	<association property="normal_post" javaType="com.moving.domain.Normal_PostVO" autoMapping="true"/>
-	<association property="m_user" javaType="com.moving.domain.M_userVO" autoMapping="true"/>
-	<!-- <collection property="files" javaType="FileVO" autoMapping="true"/> -->
+<resultMap type="NormalPostDTO" id="boardInfo">
+   <association property="normalpost" javaType="com.moving.domain.NormalPostVO" autoMapping="true"/>
+   <association property="muser" javaType="com.moving.domain.MUserVO" autoMapping="true"/>
+   <!-- <collection property="files" javaType="FileVO" autoMapping="true"/> -->
 </resultMap>
  
  <!-- 게시물 개수 -->
  <select id="bf_count" resultType="int">
-  select count(*) from normal_post
+  SELECT COUNT(*) FROM NORMAL_POST
  </select>
  
  <!-- 게시물 목록 -->
  <select id="bf_list" resultMap="boardInfo">
-SELECT n.id, n.title, u.nickname, n.register_date, n.hit
-FROM normal_post n
-INNER JOIN m_user u
-ON n.user_id = u.id
-ORDER BY n.id DESC
+SELECT N.ID, N.TITLE, U.NICKNAME,
+       N.REGISTER_DATE, N.HIT
+FROM NORMAL_POST N
+INNER JOIN M_USER U
+ON N.USER_ID = U.ID
+WHERE ROWNUM &gt;= #{startrow}
+AND ROWNUM &lt; #{endrow}
+ORDER BY N.ID DESC
+
+
+
 <!--   select * from 
   (select np.rowNum rNum, np.id, np.user_id, np.title,
   np.content, np.hit, np.register_date, mu.nickname 
@@ -39,7 +45,7 @@ ORDER BY n.id DESC
  </select>
  
  <!-- 글쓰기 -->
- <insert id="bf_in" parameterType="bf">
+ <insert id="bf_in">
   insert into normal_post (id,user_id,title,content) 
   values(normal_post_seq.nextval,#{user_id},#{title},
   #{content})
@@ -84,7 +90,6 @@ ORDER BY n.id DESC
 
  
  </mapper>
-
 
 
 

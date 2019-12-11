@@ -2,7 +2,12 @@
 <%@ include file="../include/sns_header.jsp"%>
 <%@ taglib prefix="c"
     		uri="http://java.sun.com/jsp/jstl/core" %>
-
+<script>
+	function setScrollX(xValue){
+		/* $('#SNS_Profile_Down').scrollLeft($('#SNS_Profile_Down').scrollLeft() + xValue); */
+		$('#SNS_Profile_Down').animate({scrollLeft : xValue}, 400);
+	}
+</script>
 <div id="SNS_Profile_All">
 	<!-- 배경화면 전체 지정 -->
 	<div id="SNS_Profile_Wrap">
@@ -24,11 +29,11 @@
 		</div>
 		<div id="SNS_Profile_Set">
 			<ul class="SNS_Profile_Menu_Ul">
-				<li class="SNS_Profile_Menu_Button SNS_Background" >스토리</li>
-				<li class="SNS_Profile_Menu_Button SNS_Background" >프로필 정보</li>
-				<li class="SNS_Profile_Menu_Button SNS_Background" >후원하기</li>
-				<li class="SNS_Profile_Menu_Button SNS_Background" >모아보기</li>
-				<li class="SNS_Profile_Menu_Button SNS_Background" >친구목록</li>
+				<li class="SNS_Profile_Menu_Button SNS_Background" onclick="setScrollX(0);">타임라인</li>
+				<li class="SNS_Profile_Menu_Button SNS_Background" onclick="setScrollX(1250);">프로필 정보</li>
+				<li class="SNS_Profile_Menu_Button SNS_Background" onclick="setScrollX(2500);">후원하기</li>
+				<li class="SNS_Profile_Menu_Button SNS_Background" onclick="setScrollX(3750);">모아보기</li>
+				<li class="SNS_Profile_Menu_Button SNS_Background" onclick="setScrollX(5000);" >친구목록</li>
 			</ul>
 		</div>
 		<div id="SNS_Profile_Down">

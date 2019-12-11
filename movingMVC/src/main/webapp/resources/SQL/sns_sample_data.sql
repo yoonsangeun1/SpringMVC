@@ -75,13 +75,13 @@ VALUES			(social_post_seq.nextval,1,'내용이다');
 INSERT INTO social_post(id,social_id,content)
 VALUES			(social_post_seq.nextval,1,'사진게식글');
 INSERT INTO attached_file(id,file_path,no,social_post_id)
-VALUES			(attached_file_seq.nextval,'../images/model15.jpg',1,2);
+VALUES			(attached_file_seq.nextval,'../images/sns_photo1.jpg',1,2);
 INSERT INTO attached_file(id,file_path,no,social_post_id)
-VALUES			(attached_file_seq.nextval,'../images/model15.jpg',2,2);
+VALUES			(attached_file_seq.nextval,'../images/sns_photo16.jpg',2,2);
 INSERT INTO attached_file(id,file_path,no,social_post_id)
-VALUES			(attached_file_seq.nextval,'../images/model15.jpg',3,2);
+VALUES			(attached_file_seq.nextval,'../images/sns_photo17.jpg',3,2);
 INSERT INTO attached_file(id,file_path,no,social_post_id)
-VALUES			(attached_file_seq.nextval,'../images/model15.jpg',4,2);
+VALUES			(attached_file_seq.nextval,'../images/sns_photo18.jpg',4,2);
 
 /* 회원프로필 띄울 내용 - 박진우전용 회원게시물 */
 select social_profile.nickname,social_profile.profile_image_path,social_post.* 
@@ -90,6 +90,7 @@ where social_profile.id=1
 and social_post.social_id=social_profile.id;
 
 select * from social_post ORDER BY register_date desc;
+select * from attached_file where social_post_id = 2 order by no asc;
 
 --사진게시글내용 띄울거+첨부파일
 select attached_file.file_path, attached_file.no,social_post.* 

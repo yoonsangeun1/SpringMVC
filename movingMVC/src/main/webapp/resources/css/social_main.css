@@ -18,7 +18,7 @@
 	position: relative;
 	background-color: #f2f0fb;
 	align-items: center;
-	padding-top: 10px;
+	padding-top: 45px;
 }
 
 #SNS_Wrap p{
@@ -409,6 +409,7 @@
    background: #6a67ce;
    color: white;
    border-radius: 40px;
+   outline:none;
 }
 /*--------------------게시글 하단 공유버튼--------------------*/
 .SNS_Cont_Move {/* 무빙 현황 */
@@ -473,6 +474,7 @@
    border-top: 1px solid #f2f0fb;
    float: left;
    margin-bottom: 6px;
+   text-align:left;
 }
 
 .SNS_Comment img {

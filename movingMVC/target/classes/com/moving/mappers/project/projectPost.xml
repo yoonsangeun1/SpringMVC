@@ -19,12 +19,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			select="selectProjectAttachedFile"/>
 	</resultMap>
 
-	<!-- 작성자 정보 불러오기 -->
-	<select id="selectProjectAuthor" resultType="mUserVO">
-		SELECT * FROM M_USER
-		WHERE ID = #{user_id}
-	</select>
-
 	<!-- 프로젝트 게시글 불러오기 -->
 	<select id="selectProjectPost" resultType="projectPostVO">
 		SELECT * FROM PROJECT_POST
@@ -35,6 +29,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectProjectInfo" resultMap="projectInfo">
 		SELECT * FROM PROJECT_POST
 		WHERE ID = #{id}
+	</select>
+
+	<!-- 작성자 정보 불러오기 -->
+	<select id="selectProjectAuthor" resultType="mUserVO">
+		SELECT * FROM M_USER
+		WHERE ID = #{user_id}
 	</select>
 	
 	<!-- 프로젝트 첨부파일 불러오기 -->
@@ -51,23 +51,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 프로젝트 남은 기한 구해서 저장하기 -->
 	<update id="test">
-	UPDATE PROJECT_POST
-	SET LEFT_LIMIT = (
-	
-	SELECT dd|| '일'|| SUBSTR (hms, 1, 2)|| '시'|| SUBSTR (hms, 3, 2)|| '분'||
-	SUBSTR (hms, 5, 2)|| '초' day
-	FROM (
-	SELECT TRUNC (end_date - start_date) dd,
-	TO_CHAR (TO_DATE (TRUNC ( MOD(end_date - start_date, 1) * 24 * 60 * 60),
-	'sssss'), 'hh24miss') hms
-	FROM (
-	SELECT (SELECT TARGET_LIMIT FROM PROJECT_POST where id=2) end_date,
-	TRUNC(SYSDATE, 'MI') start_date
-	FROM DUAL
-	)
-	)
-	
-	)
-	WHERE ID = #{id}
+		UPDATE PROJECT_POST
+		SET LEFT_LIMIT = (
+		
+		SELECT dd|| '일'|| SUBSTR (hms, 1, 2)|| '시'|| SUBSTR (hms, 3, 2)|| '분'||
+		SUBSTR (hms, 5, 2)|| '초' day
+		FROM (
+		SELECT TRUNC (end_date - start_date) dd,
+		TO_CHAR (TO_DATE (TRUNC ( MOD(end_date - start_date, 1) * 24 * 60 * 60),
+		'sssss'), 'hh24miss') hms
+		FROM (
+		SELECT (SELECT TARGET_LIMIT FROM PROJECT_POST where id=2) end_date,
+		TRUNC(SYSDATE, 'MI') start_date
+		FROM DUAL
+		)
+		)
+		
+		)
+		WHERE ID = #{id}
 	</update>
 </mapper>

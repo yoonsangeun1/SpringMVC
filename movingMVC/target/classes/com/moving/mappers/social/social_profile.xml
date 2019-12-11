@@ -16,7 +16,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<collection property="socialPostVO" 
 			javaType="java.util.ArrayList" autoMapping="true"
 			column="id" ofType="SocialPostVO"
-			select="selectPostWithId"/>
+			select="selectPostWithId"/>	
 	</resultMap>
 	
 	<!-- <resultMap type="socialPostVO" id="socialPostInfo">
