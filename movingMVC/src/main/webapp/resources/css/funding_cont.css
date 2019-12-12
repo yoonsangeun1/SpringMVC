@@ -139,7 +139,8 @@
 #fCont_menubar {
 	width: 1200px;
 	height: 62px;
-	margin: 50px 0px;
+	margin-top: 50px;
+	margin-bottom: 20px;
 	padding: auto 200px;
 	border-top: 1px solid #e8e8e8;
 	border-bottom: 1px solid #e8e8e8;
@@ -176,7 +177,7 @@
 	background-position: bottom; /* 밑에 위치 */
 }
 
-fCont_menu:active {
+.fCont_menu:active {
 	background-color: #e8e8e8;
 	color: black;
 	background-image: url(../images/underline.gif);
@@ -184,9 +185,52 @@ fCont_menu:active {
 	background-position: bottom; /* 밑에 위치 */
 }
 
-/* 펀딩 상세페이지 */
+/* 펀딩 상세페이지 표시 영역 */
+#fCont_cont {
+	width: 1250px;
+	min-height: 500px;
+	overflow: hidden;
+}
 
-/*좌측*/
+#fCont_scrollCont {
+	width: 6250px;
+	height: auto;
+	display: flex;
+	align-items: stretch;
+	flex-direction: row;
+}
+/* 세부 페이지들 */
+#fCont_CampaignCont {
+	width: 1250px;
+	min-height: 500px;
+	float: left;
+	padding: 0px 20px;
+}
 
-/*우측*/
-img src
+#fCont_FAQCont {
+	width: 1250px;
+	min-height: 500px;
+	padding: 0px 20px;
+	float: left;
+}
+
+#fCont_UpdatesCont {
+	width: 1250px;
+	min-height: 500px;
+	padding: 0px 20px;
+	float: left;
+}
+
+#fCont_CommentsCont {
+	width: 1250px;
+	min-height: 500px;
+	padding: 0px 20px;
+	float: left;
+}
+
+#fCont_CommunitiesCont {
+	width: 1250px;
+	min-height: 500px;
+	padding: 0px 20px;
+	float: left;
+}

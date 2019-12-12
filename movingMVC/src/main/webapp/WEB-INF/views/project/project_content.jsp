@@ -34,19 +34,15 @@
 					<div class="progress-bar length" role="progressbar"
 						aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"
 						style="width: ${ projectInfo.nowPrice div projectInfo.targetPrice * 100}%">
-						 ${ projectInfo.nowPrice div projectInfo.targetPrice}
-						<%--<span class="sr-only">40% Complete</span>--%>
+						<span class="sr-only">${ projectInfo.nowPrice div projectInfo.targetPrice * 100}%
+							Complete</span>
 					</div>
 				</div>
-				<span class="sumCont_title">${ projectInfo.nowPrice } 원</span> 
-				<span class="sumCont_sub">목표 금액 ${projectInfo.targetPrice } 원 중</span> 
-				
-				<span class="sumCont_title">${projectInfo.sponserCount } 명</span> 
-				<span class="sumCont_sub">프로젝트 후원자</span>
-
-				
-				<span class="sumCont_title">${projectInfo.leftLimit }</span> <span class="sumCont_sub">남은
-					목표 일수</span>
+				<span class="sumCont_title">${ projectInfo.nowPrice } 원</span> <span
+					class="sumCont_sub">목표 금액 ${projectInfo.targetPrice } 원 중</span> <span
+					class="sumCont_title">${projectInfo.sponserCount } 명</span> <span
+					class="sumCont_sub">프로젝트 후원자</span> <span class="sumCont_title">${projectInfo.leftLimit }</span>
+				<span class="sumCont_sub">남은 목표 일수</span>
 
 				<button class="fCont_sumContBtn button button_f16 shadow"
 					type="button">이 프로젝트 밀어주기</button>
@@ -83,28 +79,100 @@
 	<%-- 펀딩 하위 메뉴 --%>
 	<div id="fCont_menubar">
 		<div id="fCont_row">
-			<button class="fCont_menu">Campaign</button>
-			<button class="fCont_menu">FAQ</button>
-			<button class="fCont_menu">Updates</button>
-			<button class="fCont_menu">Comments</button>
-			<button class="fCont_menu">Communities</button>
+			<script>
+				function setScrollX(xValue) {
+					/* $('#SNS_Profile_Down').scrollLeft($('#SNS_Profile_Down').scrollLeft() + xValue); */
+					$('#fCont_cont').animate({
+						scrollLeft : xValue
+					}, 400);
+				}//클릭시 게시글
+			</script>
+			<button class="fCont_menu" onclick="setScrollX(0)">Campaign</button>
+			<button class="fCont_menu" onclick="setScrollX(1250)">FAQ</button>
+			<button class="fCont_menu" onclick="setScrollX(2500)">Updates</button>
+			<button class="fCont_menu" onclick="setScrollX(3750)">
+				Comments
+				<%-- 댓글 개수가 0이 아닌 경우 개수 출력 --%>
+				<c:if test="${projectInfo.commentCount != 0}">
+					<span class="commentCount"><b>${projectInfo.commentCount }</b></span>
+				</c:if>
+			</button>
+			<button class="fCont_menu" onclick="setScrollX(5000)">Communities</button>
 		</div>
 	</div>
 
+
 	<div id="fCont_cont">
-		<%-- 상세 정보 --%>
-		<div id="fCont_leftCont">
-		<h3>About</h3>
-		<img src="../images/fundingCont01.png" width="800" height="1200" alt="fundingCont"/>
-		
+		<div id="fCont_scrollCont">
+
+			<%-- 상세 정보 --%>
+			<div id="fCont_CampaignCont">
+				<h3>About</h3>
+				<p>${projectInfo.content }</p>
+				<c:if test="${!empty projectInfo.attachedFileVO }">
+					<c:forEach var="file" items="${projectInfo.attachedFileVO }">
+						<img src="${file.filePath }" width="800" height="1200"
+							alt="fundingCont" />
+					</c:forEach>
+				</c:if>
+				<c:if test="${empty projectInfo.attachedFileVO }">
+					<p>첨부 파일이 없습니다!</p>
+					<!-- <img src="../images/fundingCont01.png" width="800" height="1200" alt="fundingCont"/>
+		 -->
+				</c:if>
+			</div>
+
+
+
+			<div id="fCont_FAQCont"></div>
+			<div id="fCont_UpdatesCont"></div>
+
+
+			<%------------------------------------------------------------------------------------------------ --%>
+			<div id="fCont_CommentsCont">
+				<div class="SNS_Comment">
+
+					<%------------------------------------------------------------------------------------------------ --%>
+					<div class="SNS_Comment_Write">
+						<%-- 본인의 프로필 사진이 있다면,없다면 분기 나누기 --%>
+						<img class="SNS_Content_user_img" class="SNS_Profile_Picture"
+							src="../images/member_profile.png" width=30px height=30px alt="">
+						<input name="content" id="content" class="SNS_Comment_Write_Chat">
+						<input class="SNS_Comment_Write_Button" name="write" id="write"
+							type="button" value="작성"
+							onclick="getCommentList(); reply_check(); selectCommentCount();">
+					</div>
+					<%-- 댓글 목록 출력 --%>
+					<%-- 댓글이 있다면 --%>
+					<ul id="replies"
+						style="margin-top: 7px; list-style: none; align-items: center;">
+						<c:if test="${!empty projectInfo.mCommentVO }">
+							<c:forEach var="comment" items="${projectInfo.mCommentVO }">
+								<li style="align-items: center;"><c:if
+										test="${!empty comment.mUserVO.profileImageUrl }">
+										<img class="SNS_Content_user_img" class="SNS_Profile_Picture"
+											src="${comment.mUserVO.profileImageUrl }" width=30px
+											height=30px alt="">
+									</c:if> <c:if test="${empty comment.mUserVO.profileImageUrl }">
+										<img class="SNS_Content_user_img" class="SNS_Profile_Picture"
+											src="../images/member_profile.png" width=30px height=30px
+											alt="">
+									</c:if>
+									<p>${comment.mUserVO.nickname }</p>
+									<p>${comment.content }</p></li>
+							</c:forEach>
+						</c:if>
+						<c:if test="${empty projectInfo.mCommentVO }">
+							<li><p>작성된 댓글이 아직 없습니다</p></li>
+						</c:if>
+					</ul>
+				</div>
+
+			</div>
+			<div id="fCont_CommunitiesCont"></div>
 		</div>
-		<div id="fCont_rightCont">
-		<h3>About</h3>
-		<img src="../images/fundingCont01.png" width="800" height="1200" alt="fundingCont"/>
-		
-		</div>
-		
 	</div>
+
 </div>
 
 

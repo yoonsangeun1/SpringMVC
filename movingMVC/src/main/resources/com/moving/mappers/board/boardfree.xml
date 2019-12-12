@@ -6,9 +6,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="BoardFree">
 
-<resultMap type="normal_postdto" id="boardInfo">
-	<association property="normal_post" javaType="com.moving.domain.Normal_PostVO" autoMapping="true"/>
-	<association property="m_user" javaType="com.moving.domain.M_userVO" autoMapping="true"/>
+<resultMap type="normalPostDTO" id="boardInfo">
+	<association property="normalPost" javaType="com.moving.domain.NormalPostVO" autoMapping="true"/>
+	<association property="mUser" javaType="com.moving.domain.MUserVO" autoMapping="true"/>
 	<!-- <collection property="files" javaType="FileVO" autoMapping="true"/> -->
 </resultMap>
  
@@ -39,7 +39,7 @@ ORDER BY n.id DESC
  </select>
  
  <!-- 글쓰기 -->
- <insert id="bf_in" parameterType="bf">
+ <insert id="bf_in">
   insert into normal_post (id,user_id,title,content) 
   values(normal_post_seq.nextval,#{user_id},#{title},
   #{content})

@@ -13,11 +13,93 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<!-- 1:1 매핑 실행 결과. property는 자바 변수명, javaType은 자바 변수 객체 경로, 
 		select는 변수에 담을 값을 검색하는 메서드, column은 select를 실행할 때 필요한 컬럼 값 
 		=> project_post의 user_id값을 기준으로 m_user테이블에서 유저 정보를 불러와 MUserVO타입 mUserVO 변수에 저장-->
+		
+		<collection property="rewardVO" 
+			javaType="java.util.ArrayList" ofType="rewardVO" 
+			column="id" select="selectProjectRewards"/>
 		<collection property="attachedFileVO" 
-			javaType="java.util.List" autoMapping="true"
-			column="project_post_id" ofType="AttachedFileVO"
-			select="selectProjectAttachedFile"/>
+			javaType="java.util.ArrayList" ofType="AttachedFileVO" 
+			column="id" select="selectProjectAttachedFiles"/>
+		<collection property="tagVO" 
+			javaType="java.util.ArrayList" ofType="tagVO" 
+			column="id" select="selectProjectTags"/>
+			<collection property="mCommentVO" javaType="java.util.ArrayList" ofType="mCommentInfo"
+			 column="id" select="selectProjectComments"/>
+		<!-- 1:다 매핑 실행 결과 -->
 	</resultMap>
+	
+	<!-- 댓글 resultmap-->
+	<resultMap type="mCommentVO" id="mCommentInfo">
+		<association property="mUserVO" javaType="com.moving.domain.MUserVO" 
+		column="user_id_from" select="selectCommentAuthor" />
+	</resultMap>
+	
+	
+	<!-- 댓글 개수 세기 -->
+	<select id="selectCommentCount" resultType="projectPostVO">
+		SELECT comment_count 
+		FROM project_post
+		WHERE id = ${id}
+	</select>
+
+	<!-- 댓글 개수 세서, 업데이트 -->
+	<update id="updateCommentCount">
+		UPDATE project_post
+		SET comment_count=(
+			SELECT COUNT(id) 
+			FROM m_comment
+			WHERE project_post_id = #{id}
+			)
+		WHERE id= #{id}
+	</update>
+	
+	
+	<!-- 댓글 해시맵으로 불러오기 -->
+	<select id="selectCommentListMap" resultType="java.util.Map">
+		SELECT c.id, c.user_id_from, c.project_post_id, 
+		c.content, c.register_date, u.nickname  
+		FROM m_comment c
+		LEFT OUTER JOIN m_user u on c.user_id_from = u.id
+		WHERE c.project_post_id = #{id}
+		ORDER BY c.register_date desc
+	</select>
+	
+	<!-- 댓글 수정하기 -->
+	<update id="updateProjectComment">
+		UPDATE m_comment
+		SET content = #{content}
+		WHERE id = #{id}
+	</update>
+	
+	<!-- 댓글 삭제하기 -->
+	<delete id="deleteProjectComment">
+		DELETE FROM m_comment
+		WHERE id = #{id}
+	</delete>
+	
+	<!-- 댓글 작성자 불러오기 -->
+	<select id="selectCommentAuthor" resultType="mUserVO">
+		SELECT * FROM m_user WHERE id = #{userIdFrom}
+	</select>
+	
+	<!-- 일반 댓글 작성-->
+	<insert id="insertProjectComment">
+		INSERT INTO m_comment (id, user_id_from, content, COMMENT_ID_REPLY, PROJECT_POST_ID)
+		VALUES (m_comment_seq.nextval, #{userIdFrom}, #{content}, m_comment_seq.nextval, #{projectPostId})
+	</insert>
+	
+	<!-- 프로젝트 댓글 작성시 댓글 카운트 높이기 -->
+	<update id="updateProjectCommentCount">
+		UPDATE m_comment 
+		SET comment_count = comment_count + 1
+		WHERE id = #{projectPostId}
+	</update>
+	
+	<!-- 프로젝트 정보 +리워드+첨부파일+작성자+댓글 다 불러오기 -->
+	<select id="selectProjectInfo" resultMap="projectInfo">
+		SELECT * FROM PROJECT_POST
+		WHERE ID = #{id}
+	</select>
 
 	<!-- 프로젝트 게시글 불러오기 -->
 	<select id="selectProjectPost" resultType="projectPostVO">
@@ -25,23 +107,39 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE ID = #{id}
 	</select>
 	
-	<!-- 프로젝트 정보 +첨부파일+작성자+댓글 다 불러오기 -->
-	<select id="selectProjectInfo" resultMap="projectInfo">
-		SELECT * FROM PROJECT_POST
-		WHERE ID = #{id}
-	</select>
-
-	<!-- 작성자 정보 불러오기 -->
+	<!-- 프로젝트 작성자 정보 불러오기 -->
 	<select id="selectProjectAuthor" resultType="mUserVO">
 		SELECT * FROM M_USER
 		WHERE ID = #{user_id}
 	</select>
 	
+	<!-- 프로젝트 리워드 불러오기 -->
+	<select id="selectProjectRewards" resultType="rewardVO">
+		SELECT * FROM REWARD
+		WHERE PROJECT_POST_ID = #{id}
+		ORDER BY PRICE ASC
+	</select>
+	
 	<!-- 프로젝트 첨부파일 불러오기 -->
-	<select id="selectProjectAttachedFile" resultType="attachedFileVO">
+	<select id="selectProjectAttachedFiles" resultType="attachedFileVO">
 		SELECT * FROM ATTACHED_FILE 
-		WHERE PROJECT_POST_ID = #{id} 
+		WHERE project_post_id = #{id} 
 		ORDER BY NO ASC
+	</select>
+	
+	<!-- 프로젝트 태그 불러오기 -->
+	<select id="selectProjectTags" resultType="tagVO">
+		SELECT * FROM tag 
+		WHERE project_post_id = #{id} 
+		ORDER BY id ASC
+	</select>
+	
+	<!-- 프로젝트 댓글 불러오기 -->
+	<select id="selectProjectComments" resultMap="mCommentInfo">
+		SELECT * FROM M_COMMENT
+		WHERE PROJECT_POST_ID = #{id}
+		ORDER BY id DESC
+		<!-- 나중에 추가하기 답글계층 정렬도 -->
 	</select>
 	
 	<!-- 조회수 증가 -->
@@ -53,12 +151,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="test">
 		UPDATE PROJECT_POST
 		SET LEFT_LIMIT = (
-		
-		SELECT dd|| '일'|| SUBSTR (hms, 1, 2)|| '시'|| SUBSTR (hms, 3, 2)|| '분'||
+		SELECT dd|| '일'|| SUBSTR (hms, 1, 2)|| '시간'|| SUBSTR (hms, 3, 2)|| '분'||
 		SUBSTR (hms, 5, 2)|| '초' day
 		FROM (
 		SELECT TRUNC (end_date - start_date) dd,
-		TO_CHAR (TO_DATE (TRUNC ( MOD(end_date - start_date, 1) * 24 * 60 * 60),
+		TO_CHAR (TO_DATE (TRUNC (MOD(end_date - start_date, 1) * 24 * 60 * 60),
 		'sssss'), 'hh24miss') hms
 		FROM (
 		SELECT (SELECT TARGET_LIMIT FROM PROJECT_POST where id=2) end_date,
@@ -66,7 +163,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM DUAL
 		)
 		)
-		
 		)
 		WHERE ID = #{id}
 	</update>

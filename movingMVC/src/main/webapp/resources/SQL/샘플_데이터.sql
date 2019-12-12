@@ -95,7 +95,7 @@ VALUES (m_user_seq.nextval, 'admin@gmail.com', '관리자', 'admin@gmail.com', '
 --관리자 회원 회원등급 부여
 UPDATE m_user 
 SET user_lv = 4
-WHERE id=1;
+WHERE id=2;
 --일반회원
 INSERT INTO m_user (id, userid, nickname, email, password, genre_01, genre_02, genre_03)
 VALUES (m_user_seq.nextval, 'moving@gmail.com', '무빙', 'moving@gmail.com', 'moving', null, null, null);
@@ -106,7 +106,7 @@ VALUES (m_user_seq.nextval, 'business@gmail.com', '제작사', 'business@gmail.c
 UPDATE m_user 
 SET business_name = '사업자명', user_lv = 3,
 business_register_no = '154-11-541', business_license_image_path = '/사업자 등록증 경로'
-WHERE id=3;
+WHERE id=4;
 
 --delete from M_USER;
 select * from M_USER;

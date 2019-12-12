@@ -38,6 +38,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.moving.domain.MUserVO" alias="mUserVO"/>						<!-- 회원VO -->
 		
 		<typeAlias type="com.moving.domain.ProjectPostVO" alias="projectPostVO" />			<!-- 프로젝트 게시글 VO -->
+		<typeAlias type="com.moving.domain.RewardVO" alias="rewardVO" />					<!-- 프로젝트 게시글 VO -->
 		<typeAlias type="com.moving.domain.OrderSheetVO" alias="orderSheetVO" />			<!-- 주문_문서 VO -->
 		<typeAlias type="com.moving.domain.OrderEntityVO" alias="orderEntityVO" />			<!-- 주문_수량 VO -->
 		<typeAlias type="com.moving.domain.DeliveryVO" alias="deliveryVO" />				<!-- 배송 VO -->

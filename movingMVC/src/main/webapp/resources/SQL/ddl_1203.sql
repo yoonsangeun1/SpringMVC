@@ -210,6 +210,7 @@ ALTER TABLE order_sheet
 CREATE TABLE attached_file (
 	id NUMBER(38) NOT NULL, /* 아이디 */
 	code_no NUMBER(38) DEFAULT 80002, /* 코드_번호 */
+	file_type NUMBER(1) DEFAULT 1, /* 파일_타입 */
 	file_path VARCHAR2(300), /* 파일_경로 */
 	thumbnail_path VARCHAR2(300), /* 썸네일_경로 */
 	no NUMBER(38), /* 순번 */
@@ -543,7 +544,7 @@ ALTER TABLE social_profile
 CREATE TABLE reward (
 	id NUMBER(38) NOT NULL, /* 아이디 */
 	code_no NUMBER(38) DEFAULT 20002, /* 코드_번호 */
-	project_id NUMBER(38), /* 프로젝트_아이디 */
+	project_post_id NUMBER(38), /* 프로젝트_게시글_아이디 */
 	title VARCHAR2(200), /* 제목 */
 	content VARCHAR2(4000), /* 내용 */
 	price NUMBER(38), /* 금액 */
@@ -1221,7 +1222,7 @@ ALTER TABLE reward
 	ADD
 		CONSTRAINT FK_project_post_TO_reward
 		FOREIGN KEY (
-			project_id
+			project_post_id
 		)
 		REFERENCES project_post (
 			id

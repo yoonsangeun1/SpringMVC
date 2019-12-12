@@ -20,6 +20,7 @@ public class MCommentVO {				/* 댓글 */
 	private int profilePostId; 			/* 프로필_게시글_아이디 */
 	private int projectPostId; 			/* 프로젝트_게시글_아이디 */
 	
+	private MUserVO mUserVO;			/* 댓글 작성한 회원 정보 */
 	
 	public int getId() {
 		return id;
@@ -123,7 +124,11 @@ public class MCommentVO {				/* 댓글 */
 	public void setProjectPostId(int projectPostId) {
 		this.projectPostId = projectPostId;
 	}
-	
-	
+	public MUserVO getmUserVO() {
+		return mUserVO;
+	}
+	public void setmUserVO(MUserVO mUserVO) {
+		this.mUserVO = mUserVO;
+	}
 	
 }

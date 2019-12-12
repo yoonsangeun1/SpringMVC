@@ -27,6 +27,7 @@ public class ProjectPostVO {		/* 프로젝트 게시글 */
 	private MUserVO mUserVO;						/* 회원 VO */
 	private List<AttachedFileVO> attachedFileVO; 	/* 첨부파일 VO */
 	private List<TagVO> tagVO;					 	/* 태그 VO */
+	private List<RewardVO> rewardVO;				/* 리워드 VO */
 	
 	public int getId() {
 		return id;
@@ -153,6 +154,12 @@ public class ProjectPostVO {		/* 프로젝트 게시글 */
 	}
 	public void setTagVO(List<TagVO> tagVO) {
 		this.tagVO = tagVO;
+	}
+	public List<RewardVO> getRewardVO() {
+		return rewardVO;
+	}
+	public void setRewardVO(List<RewardVO> rewardVO) {
+		this.rewardVO = rewardVO;
 	}
 	
 }

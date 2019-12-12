@@ -8,75 +8,73 @@
 <title>영화를 움직이다! MOVING</title>
 
 <%-- Initialize, index, header 공통 부분 css 추가 --%>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/init.css" />
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/index.css" />
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/header.css" />
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/scrollbar.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/init.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/index.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/header.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/scrollbar.css" />
 
 <%-- 아이콘 폰트 사용을 위한 스타일시트, js 추가 --%>
 <link rel="stylesheet" type="text/css"
-	href="../iconfont/css/fontawesome.min.css">
+	href="${pageContext.request.contextPath}/resources/iconfont/css/fontawesome.min.css">
 <script src="https://kit.fontawesome.com/bf95efc607.js"
 	crossorigin="anonymous"></script>
-<link rel="stylesheet" href="../icon/css/fontello.css">
-<link rel="stylesheet" href="../icon/css/animation.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/icon/css/fontello.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/icon/css/animation.css">
 
 <%-- banner css 추가 --%>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/aboutMoving.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/aboutMoving.css" />
 
 <%-- board css 추가 --%>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/board_notice.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/board_notice.css" />
 <%-- 공지사항 --%>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/board_event.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/board_event.css" />
 <%-- 이벤트 --%>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/board_faq.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/board_faq.css" />
 <%-- FAQ --%>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/board_actors.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/board_actors.css" />
 <%-- 배우 모집 --%>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/board_contest.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/board_contest.css" />
 <%-- 시나리오 모집 --%>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/board_free.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/board_free.css" />
 <%-- 자유게시판 --%>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/board_write.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/board_write.css" />
 <%-- 글 작성 폼 --%>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/board_qna.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/board_qna.css" />
 <%-- Q & A--%>
 
 <%-- funding css 추가 --%>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/funding_list.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/funding_list.css" />
 <%-- 펀딩 리스트 --%>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/funding_write.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/funding_write.css" />
 <%-- 펀딩 글 작성 폼 --%>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/funding_cont.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/funding_cont.css" />
 <%-- 펀딩 글 보기 --%>
 
 <%-- member css 추가 --%>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/member_login.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/member_login.css" />
 <%-- 로그인 폼 --%>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/member_join.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/member_join.css" />
 <%-- 회원가입 폼 --%>
 
 <%-- movie css 추가 --%>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/movie_cont.css" />
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/movie_mainList.css" />
-<link rel="stylesheet" type="text/css"
-	href="css/movie_categoryList.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/movie_mainList.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/movie_categoryList.css" />
 
 <%-- sns css 추가 --%>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/social_main.css" />
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/social_profile.css" />
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/social_messenger.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/social_main.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/social_profile.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/social_messenger.css" />
 
 <%-- javascript 추가 (우선, abc순)--%>
-<script src="${pageContext.request.contextPath}/js/jquery.js"></script>
-<script src="${pageContext.request.contextPath}/js/board_event.js"></script>
-<script src="${pageContext.request.contextPath}/js/board_faq.js"></script>
-<script src="${pageContext.request.contextPath}/js/funding_write.js"></script>
-<script src="${pageContext.request.contextPath}/js/move_banner.js"></script>
-<script src="${pageContext.request.contextPath}/js/movie_cont.js"></script>
-<script src="${pageContext.request.contextPath}/js/slide.js"></script>
-<script src="${pageContext.request.contextPath}/js/social.js"></script>
-
+<script src="${pageContext.request.contextPath}/resources/js/jquery.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/jstest.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/board_event.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/board_faq.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/funding_write.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/move_banner.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/social.js"></script>
+<%--<script src="${pageContext.request.contextPath}/resources/js/slide.js"></script>
+ --%>
 <!--  <script>
 $(function(){ // document ready
       if (!!$('#header').offset()) { // make sure "#header" element exists
@@ -94,7 +92,6 @@ $(function(){ // document ready
     });
 //     헤더가 좌상단에 붙음. 가운데정렬 마진레프트라이트오토 css 지정, 배경투명말고 색넣기 나중에
 </script> -->
-
 </head>
 <body>
 	<div id="main_wrap">
@@ -113,7 +110,7 @@ $(function(){ // document ready
 					</div>
 					<div style="flex-grow: 12;">
 						<div id="header_logo">
-							<a href="/moving.com/main"><img src="${pageContext.request.contextPath}/images/logo.png"
+							<a href="/moving.com/main"><img src="${pageContext.request.contextPath}/resources/images/logo.png"
 								alt="로고 이미지" width="150" height="25" /></a>
 						</div>
 					</div>

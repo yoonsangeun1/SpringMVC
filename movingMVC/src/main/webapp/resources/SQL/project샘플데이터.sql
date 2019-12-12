@@ -1,21 +1,43 @@
---프로젝트 댓글 컬럼 추가
+UPDATE project_post   
+SET comment_count=(   
+SELECT COUNT(id)   
+FROM m_comment
+WHERE project_post_id = 2)   WHERE id= 2
 
+SELECT c.id, c.user_id_from, c.project_post_id, u.nickname
+		FROM m_comment c
+		LEFT OUTER JOIN m_user u on c.user_id_from = u.id
+		WHERE c.project_post_id=2
+		ORDER BY c.register_date desc;
+--프로젝트 댓글 컬럼 추가
+select * from m_comment where project_post_id=2;
 --프로젝트 게시글
 alter table PROJECT_POST modify (left_limit varchar2(50));
 alter table PROJECT_POST add (introduce varchar2(500));
-INSERT INTO PROJECT_POST (id, user_id, title, content, business, 
+
+INSERT INTO PROJECT_POST (id, user_id, title, introduce, content, business, 
 target_price, target_limit)
-VALUES (project_post_seq.nextval, 3, '제목이다.', '내용', '슈박스', 10000, sysdate);
-UPDATE PROJECT_POST set introduce='소개입니다아아아아아아아아아아아아' where id=2;
+VALUES (project_post_seq.nextval, 4, '제목이다.', '내용', '소개입니다아아아아아아아아아아아아', '슈박스', 10000, '2019-12-28');
+
+UPDATE PROJECT_POST set introduce='소개입니다아아아아아아아아아아아아' where id=1;
 SELECT * FROM PROJECT_POST;
 
 --첨부파일
 INSERT INTO attached_file (id, file_path, thumbnail_path, no, project_post_id)
-VALUES (attached_file_seq.nextval, '../images/funding05.PNG', '../images/funding05.PNG', 1, 2);
+VALUES (attached_file_seq.nextval, '../images/funding05.PNG', '../images/funding05.PNG', 1, 1);
 
 INSERT INTO attached_file (id, file_path, thumbnail_path, no, project_post_id)
-VALUES (attached_file_seq.nextval, '../images/funding05.PNG', '../images/funding05.PNG', 2, 2);
+VALUES (attached_file_seq.nextval, '../images/funding05.PNG', '../images/funding05.PNG', 2, 1);
 SELECT * FROM ATTACHED_FILE;
+
+--댓글
+   INSERT INTO M_COMMENT (ID, USER_ID_FROM, CONTENT, COMMENT_ID_REPLY, PROJECT_POST_ID)
+   VALUES (m_comment_seq.nextval, 2, 'eafdssdaffasd',m_comment_seq.nextval, 2);
+   INSERT INTO M_COMMENT (ID, USER_ID_FROM, CONTENT, COMMENT_ID_REPLY, PROJECT_POST_ID)
+   VALUES (m_comment_seq.nextval, 3, 'eafdssdaffasd',m_comment_seq.nextval, 2);
+--답댓글
+   INSERT INTO M_COMMENT (ID, USER_ID_FROM, CONTENT, COMMENT_ID_REPLY, PROJECT_POST_ID)
+   VALUES (m_comment_seq.nextval, 2, 'eafdssdaffasd',m_comment_seq.nextval, 2);
 
 SELECT TO_DATE(TO_CHAR(SYSDATE, 'YYYYMMDD')) - TO_DATE('20291217') FROM DUAL; 
 -- 두 날짜 사이 일수 계산
