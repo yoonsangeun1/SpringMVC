@@ -1,26 +1,27 @@
 package com.moving.domain;
 
-public class MCommentVO {				/* 댓글 */
+public class MCommentVO {						/* 댓글 */
 
-	private int id; 					/* 아이디 */
-	private int codeNo; 				/* 코드_번호 */
-	private int userIdFrom; 			/* 회원_아이디_보낸이 */
-	private int socialProfileIdFrom;	/* 소셜_프로필_아이디_보낸이 */
-	private String content;  			/* 내용 */
-	private String registerDate; 		/* 등록_일 */
-	private int grade; 					/* 평점 */
-	private int moveCount;				/* 무브_개수 */
-	private int commentCount;			/* 댓글_개수 */
-	private int commentIdReply; 		/* 댓글_아이디_답글 */
-	private int replyStep;				/* 답글_계층 */
-	private int replyOrder;				/* 답글_정렬순서 */
-	private int videoPostId; 			/* 영상_게시글_아이디 */
-	private int normalPostId; 			/* 일반_게시글_아이디 */
-	private int socialPostId; 			/* 소셜_게시글_아이디 */
-	private int profilePostId; 			/* 프로필_게시글_아이디 */
-	private int projectPostId; 			/* 프로젝트_게시글_아이디 */
+	private int id; 							/* 아이디 */
+	private int codeNo; 						/* 코드_번호 */
+	private int userIdFrom; 					/* 회원_아이디_보낸이 */
+	private int socialProfileIdFrom;			/* 소셜_프로필_아이디_보낸이 */
+	private String content;  					/* 내용 */
+	private String registerDate; 				/* 등록_일 */
+	private int grade; 							/* 평점 */
+	private int moveCount;						/* 무브_개수 */
+	private int commentCount;					/* 댓글_개수 */
+	private int commentIdReply; 				/* 댓글_아이디_답글 */
+	private int replyStep;						/* 답글_계층 */
+	private int replyOrder;						/* 답글_정렬순서 */
+	private int videoPostId; 					/* 영상_게시글_아이디 */
+	private int normalPostId; 					/* 일반_게시글_아이디 */
+	private int socialPostId; 					/* 소셜_게시글_아이디 */
+	private int profilePostId; 					/* 프로필_게시글_아이디 */
+	private int projectPostId; 					/* 프로젝트_게시글_아이디 */
 	
-	private MUserVO mUserVO;			/* 댓글 작성한 회원 정보 */
+	private MUserVO mUserVO;					/* 댓글 작성한 회원 정보 */
+	private SocialProfileVO socialProfileVO;	/* sns 댓글 작성한 회원 정보*/
 	
 	public int getId() {
 		return id;
@@ -129,6 +130,12 @@ public class MCommentVO {				/* 댓글 */
 	}
 	public void setmUserVO(MUserVO mUserVO) {
 		this.mUserVO = mUserVO;
+	}
+	public SocialProfileVO getSocialProfileVO() {
+		return socialProfileVO;
+	}
+	public void setSocialProfileVO(SocialProfileVO socialProfileVO) {
+		this.socialProfileVO = socialProfileVO;
 	}
 	
 }
