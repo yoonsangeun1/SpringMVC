@@ -7,9 +7,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="BoardFree">
 
 <resultMap type="NormalPostDTO" id="boardInfo">
-   <association property="normalpost" javaType="com.moving.domain.NormalPostVO" autoMapping="true"/>
-   <association property="muser" javaType="com.moving.domain.MUserVO" autoMapping="true"/>
-   <!-- <collection property="files" javaType="FileVO" autoMapping="true"/> -->
+	<association property="normalPostVO" javaType="com.moving.domain.NormalPostVO" autoMapping="true"/>
+	<association property="mUserVO" javaType="com.moving.domain.MUserVO" autoMapping="true"/>
+	<!-- <collection property="files" javaType="FileVO" autoMapping="true"/> -->
 </resultMap>
  
  <!-- 게시물 개수 -->
@@ -17,18 +17,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   SELECT COUNT(*) FROM NORMAL_POST
  </select>
  
- <!-- 게시물 목록 -->
+ <!-- 페이징 -->
  <select id="bf_list" resultMap="boardInfo">
-SELECT N.ID, N.TITLE, U.NICKNAME,
-       N.REGISTER_DATE, N.HIT
-FROM NORMAL_POST N
-INNER JOIN M_USER U
-ON N.USER_ID = U.ID
-WHERE ROWNUM &gt;= #{startrow}
-AND ROWNUM &lt; #{endrow}
-ORDER BY N.ID DESC
-
-
+SELECT * FROM
+(SELECT ROWNUM rNum, N.ID, N.TITLE,
+ U.NICKNAME, N.REGISTER_DATE, N.HIT
+FROM NORMAL_POST N, M_USER U
+WHERE N.USER_ID = U.ID
+ORDER BY N.ID DESC)
+WHERE rNum &gt;= #{startrow}
+AND rNum &lt;= #{endrow}
 
 <!--   select * from 
   (select np.rowNum rNum, np.id, np.user_id, np.title,
@@ -46,35 +44,41 @@ ORDER BY N.ID DESC
  
  <!-- 글쓰기 -->
  <insert id="bf_in">
-  insert into normal_post (id,user_id,title,content) 
-  values(normal_post_seq.nextval,#{user_id},#{title},
+  INSERT INTO NORMAL_POST (ID,USER_ID,TITLE,CONTENT) 
+  VALUES(NORMAL_POST_SEQ.NEXTVAL,#{userId},#{title},
   #{content})
  </insert>
  
  <!-- 조회수 증가 -->
  <update id="bf_hit">
-  update normal_post set hit=hit+1 where id=#{id}
+  UPDATE NORMAL_POST 
+  SET HIT=HIT+1 
+  WHERE ID=#{id}
  </update>
  
  <!-- 내용보기 -->
  <select id="bf_cont" resultMap="boardInfo">
-  select normal_post.*,m_user.* 
-  from normal_post,m_user 
-  where normal_post.user_id=m_user.id 
-  and normal_post.id=#{id}
+  SELECT N.*, M.nickname
+  FROM NORMAL_POST N, M_USER M
+  WHERE N.USER_ID = M.ID
+  AND N.ID=#{id}
  </select>
+ 
  
 
  
  <!-- 내용수정 -->  <!-- session 본인 닉네임으로만 수정 가능하게 해야함. -->
  <update id="bf_edit">
-  update normal_post set user_id=#{user_id},title=#{title},
-  content=#{content} where id=#{id}   
- </update>  
+ UPDATE NORMAL_POST 
+ SET TITLE=#{title},
+   	 CONTENT=#{content} 
+ WHERE ID=#{id}   
+ </update>
  
  <!-- 게시글 삭제 --> <!-- 본인만 본인 게시글 삭제 가능하게 해야함 -->
  <delete id="bf_del">
-  delete from normal_post where id=#{id}
+  DELETE FROM NORMAL_POST 
+  WHERE ID=#{id}
  </delete>
  
  
@@ -85,11 +89,9 @@ ORDER BY N.ID DESC
   <association property="user_id" column="user_id" javaType="mu" />
  </resultMap> -->
  
- 
 
-
- 
  </mapper>
+
 
 
 
