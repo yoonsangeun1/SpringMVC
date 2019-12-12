@@ -6,11 +6,12 @@
 <title>자유게시판 글쓰기</title>
 <script src="../resources/js/jquery.js"></script>
 <script src="../resources/js/board_free.js"></script>
+<script src="../resources/editor/js/HuskyEZCreator.js" charset="UTF-8"></script>
 </head>
 <body>
  <form method="post" action="/moving.com/board/free_write_ok"
  onsubmit="return free_check();">
-  <table border="1">
+  <table border="1" style="width:1024px"> <!-- width 임시로 넣어둠. -->
    <caption>자유게시판 글쓰기</caption>
    <tr>
     <th>글쓴이</th>
@@ -24,7 +25,21 @@
    <tr>
     <th>글내용</th>
     <td><textarea name="content" id="content" 
-    rows="10" cols="38"></textarea></td>
+    rows="10" cols="100"></textarea>
+    
+<script type="text/javascript">
+	var oEditors = []; //전역변수
+	
+	nhn.husky.EZCreator.createInIFrame({ //스마트 에디터 프레임 생성
+    	oAppRef: oEditors,
+    	elPlaceHolder:"content",
+    	sSkinURI: "../resources/editor/SmartEditor2Skin.html",
+    	bUseToolbar : true,		//툴 바 사용 여부
+    	bUseVerticalResizer : true,  //입력창 크기 조절 사용 여부
+    	bUseVerticalResizer : true, //모드 탭(Editor | HTML | TEXT ) 사용 여부
+	});
+</script>
+    </td>
    </tr> 
    <tr>
     <th colspan="2">

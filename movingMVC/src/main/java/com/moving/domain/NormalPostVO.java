@@ -1,5 +1,7 @@
 package com.moving.domain;
 
+import java.util.List;
+
 public class NormalPostVO {
 
 	private int id; 				/* 아이디 */	  //시퀀스임
@@ -17,15 +19,18 @@ public class NormalPostVO {
 	private String answerContent;  /* 답변_내용 */ //qna
 	
 	/* JOIN 검색, resultMap을 위한 변수 */
-	private MUserVO mUserVO; 		//유저 vo resultMap 사용하기 위해 적용
+	private List<MCommentVO> mCommentVO;			/* 댓글 VO */
+	private MUserVO mUserVO;						/* 회원 VO */
+	private List<AttachedFileVO> attachedFileVO; 	/* 첨부파일 VO */
+	private List<MoveVO> moveVO; 					/* 무브(좋아요) VO */
 	
 	//페이징 관련변수(쪽나누기)
 	private int startrow;//시작행 번호
 	private int endrow;//끝행 번호
 
 	//검색기능
-	private String find_name;//검색어
-	private String find_field;//검색필드
+	private String findName;//검색어
+	private String findField;//검색필드
 	
 	
 	public int getId() {
@@ -83,7 +88,7 @@ public class NormalPostVO {
 		this.moveCount = moveCount;
 	}
 	public String getRegisterDate() {
-		return registerDate;
+		return registerDate.substring(0,10);
 	}
 	public void setRegisterDate(String registerDate) {
 		this.registerDate = registerDate;
@@ -124,18 +129,19 @@ public class NormalPostVO {
 	public void setEndrow(int endrow) {
 		this.endrow = endrow;
 	}
-	public String getFind_name() {
-		return find_name;
+	public String getFindName() {
+		return findName;
 	}
-	public void setFind_name(String find_name) {
-		this.find_name = find_name;
+	public void setFindName(String findName) {
+		this.findName = findName;
 	}
-	public String getFind_field() {
-		return find_field;
+	public String getFindField() {
+		return findField;
 	}
-	public void setFind_field(String find_field) {
-		this.find_field = find_field;
+	public void setFindField(String findField) {
+		this.findField = findField;
 	}
+	
 	
 	
 	

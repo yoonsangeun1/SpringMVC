@@ -60,27 +60,27 @@
 		 <c:if test="${!empty bflist}"> <%--bflist에 값이 있으면 --%>
    		  <c:forEach var="bfdto" items="${bflist}">
 		   <tr style="height:44px">
-			<td id="no">${bfdto.normal_post.id}</td>
+			<td id="no">${bfdto.normalPostVO.id}</td>
 			
-   	<c:set var="bfdto.normal_post.title" value="${bfdto.normal_post.title}" /> <%-- 변수에 제목값 저장 --%>
-   	<c:set var="bfdto.m_user.nickname" value="${bfdto.m_user.nickname}" /> <%--변수에 이름값 저장 --%> 
+   	<c:set var="bfdto.normalPostVO.title" value="${bfdto.normalPostVO.title}" /> <%-- 변수에 제목값 저장 --%>
+   	<c:set var="bfdto.mUserVO.nickname" value="${bfdto.mUserVO.nickname}" /> <%--변수에 이름값 저장 --%> 
 
 			
 			
 	<c:choose>
-     <c:when test="${fn:length(bfdto.normal_post.title) > 20}"> <%--20자 이상일 경우 --%>
-	  <c:set var="title" value="${fn:substring(bfdto.normal_post.title,0,19)}..." />
+     <c:when test="${fn:length(bfdto.normalPostVO.title) > 20}"> <%--20자 이상일 경우 --%>
+	  <c:set var="title" value="${fn:substring(bfdto.normalPostVO.title,0,19)}..." />
 	   <td>
-        <a href="/moving.com/board/free_cont?id=${bfdto.normal_post.id}&page=${page}">
-	  ${bfdto.normal_post.title}  <%--user_id가 아닌 닉네임이 들어가게 수정해야함. --%>
+        <a href="/moving.com/board/free_cont?id=${bfdto.normalPostVO.id}&page=${page}">
+	  ${bfdto.normalPostVO.title}  <%--user_id가 아닌 닉네임이 들어가게 수정해야함. --%>
 	    </a><%-- board_cont?bno=번호값&page=쪽번호 2개의 피라미터 값이 get방식으로 전달됨. --%>
        </td>
      </c:when>
      
      <c:otherwise>
       <td>
-       <a href="/moving.com/board/free_cont?id=${bfdto.normal_post.id}&page=${page}">
-	   ${bfdto.normal_post.title}
+       <a href="/moving.com/board/free_cont?id=${bfdto.normalPostVO.id}&page=${page}">
+	   ${bfdto.normalPostVO.title}
 	   </a><%-- board_cont?bno=번호값&page=쪽번호 2개의 피라미터 값이 get방식으로 전달됨. --%>
       </td>
      </c:otherwise>
@@ -89,11 +89,11 @@
     
     
      <c:choose>
-      <c:when test="${fn:length(bfdto.m_user.nickname) > 10}">
-       <c:set var="bfdto.m_user.nickname" value="${fn:substring(bfdto.m_user.nickname,0,9)}.." />
+      <c:when test="${fn:length(bfdto.mUserVO.nickname) > 10}">
+       <c:set var="bfdto.m_user.nickname" value="${fn:substring(bfdto.mUserVO.nickname,0,9)}.." />
         <td id="author">
          <a href=#>
-       	  ${bfdto.m_user.nickname}
+       	  ${bfdto.mUserVO.nickname}
          </a>
         </td>
       </c:when>
@@ -101,15 +101,15 @@
       <c:otherwise>
        <td id="author">
         <a href="#">
-         ${bfdto.m_user.nickname}
+         ${bfdto.mUserVO.nickname}
         </a>
        </td>
       </c:otherwise>
 
      </c:choose>
      		
-			<td id="time">${bfdto.normal_post.register_date}</td>
-			<td id="hit">${bfdto.normal_post.hit}</td>
+			<td id="time">${bfdto.normalPostVO.registerDate}</td>
+			<td id="hit">${bfdto.normalPostVO.hit}</td>
 		   </tr>
 		  </c:forEach>
   		 </c:if>

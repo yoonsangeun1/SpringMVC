@@ -41,8 +41,11 @@ alter table board_free
 modify(free_name varchar2(200)); --글쓴이 컬럼 크기 변경했음
 
 
-
-
+INSERT INTO M_COMMENT (ID, USER_ID_FROM, CONTENT, COMMENT_ID_REPLY, NORMAL_POST_ID)
+	VALUES (m_comment_seq.nextval, 1, 'nhjmk',m_comment_seq.nextval,6)
+INSERT INTO M_COMMENT (ID, USER_ID_FROM, CONTENT, COMMENT_ID_REPLY, NORMAL_POST_ID)
+	VALUES (m_comment_seq.nextval, 1, 'nhjmk',4,6)
+	select * from M_COMMENT;
 
 
 
