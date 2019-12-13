@@ -24,6 +24,10 @@ public class VideoPostVO {
 	private int moveCount; // 무브 개수
 	private String registerDate; // 영상 등록일
 	
+	/* 페이지용 변수 */
+	private int startrow; // 시작 페이지
+	private int endrow; // 끝 페이지
+
 	/* resultMap JOIN 검색용 */
 	private List<MCommentVO> mCommentVO;			/* 댓글 VO */
 	private MUserVO mUserVO;						/* 회원 VO */
@@ -145,6 +149,18 @@ public class VideoPostVO {
 	}
 	
 	
+	public int getStartrow() {
+		return startrow;
+	}
+	public void setStartrow(int startrow) {
+		this.startrow = startrow;
+	}
+	public int getEndrow() {
+		return endrow;
+	}
+	public void setEndrow(int endrow) {
+		this.endrow = endrow;
+	}
 	public List<MCommentVO> getmCommentVO() {
 		return mCommentVO;
 	}

@@ -1,0 +1,107 @@
+@charset "UTF-8";
+/*바디 전체 부분*/
+/*장르별 목록 적용*/
+#movie_box {
+	float: left;
+	width: 1200px;
+	min-height: 1024px;
+	height: auto;
+	box-sizing: border-box;
+
+	margin-left: auto;
+	margin-right: auto;
+
+}
+/*상단 글*/
+#fList_title {
+	width: 1100px;
+	min-height: 300px;
+	height: auto;
+	margin: 0px 0px 0px 50px;
+}
+/*총 게시물 수*/
+#list_count {
+	float: right;
+	align: center;
+	margin-right: 50px;
+}
+/*목록 페이지*/
+.cinema {
+	float: left;
+	width: 1100px;
+	min-height: 512px;
+	height: auto;
+	margin: 0px 0px 0px 50px;
+}
+/*영상*/
+.mBox_item {
+	float: left;
+	width: 247px;
+	border: 1px outset #ff0000; /**테두리 설정*/
+	margin: 90px 10px 0px 16px;
+	
+	background-color: white; /**w3schools source*/
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+/*영상 이미지*/
+.mBox_item img {
+	min-width: 245px;
+	height: 240px;
+	width: 240px;
+}
+/*영상 제목*/
+.container {
+	float: left;
+	width: 238px;
+	height: 50px;
+	font-size: 17px;
+	font-weight: bold;
+	display: block;
+	text-align: center;
+	text-shadow: 1px 1px 1px gray;
+	margin-top: 14px;
+	margin-bottom: 12px;
+	line-height: 26px;
+}
+/*영상 간략 설명란*/
+.movie_postInfo {
+	transition: .2s ease;
+	opacity: 0;
+	position: absolute;
+	top: 50px;
+	left: 50px;
+	transform: translate(-50px, -50px);
+	-ms-transform: translate(-50px, -50px);
+}
+/*영상 간략 설명 글*/
+.info_cont {
+	color: black;
+	font-size: 14px;
+	font-weight: bold;
+	margin-top: 17px;
+	margin-left: 12px;
+	line-height: 20px;
+}
+
+/*기타 부수거리 작업*/
+/*영상 액션 주기 (크기 변화)*/
+.mBox_item:hover {
+	transform: scale(1.2);
+}
+/*영상 간략 설명 글 (투명도)*/
+.mBox_item:hover .movie_postInfo {
+	opacity: 1;
+}
+/*영상 액션 주기 (투명도)*/
+.mBox_item:hover .image {
+	opacity: 0.1;
+}
+/*영상 이미지 액션 주기*/
+.image {
+	opacity: 1;
+ 	display: block;
+ 	width: 100%;
+ 	height: auto;
+ 	transition: .5s ease;
+	backface-visibility: hidden;
+}

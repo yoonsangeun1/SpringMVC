@@ -56,10 +56,9 @@
 <%-- 회원가입 폼 --%>
 
 <%-- movie css 추가 --%>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/movie_cont.css" />
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/movie_mainList.css" />
-<link rel="stylesheet" type="text/css"
-	href="css/movie_categoryList.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/video_cont.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/video_mainList.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/video_categoryList.css" />
 
 <%-- sns css 추가 --%>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/social_main.css" />
