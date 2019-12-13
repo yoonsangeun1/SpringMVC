@@ -58,29 +58,29 @@
 
 		<tbody>
 		 <c:if test="${!empty bflist}"> <%--bflist에 값이 있으면 --%>
-   		  <c:forEach var="bfdto" items="${bflist}">
+   		  <c:forEach var="bflist" items="${bflist}">
 		   <tr style="height:44px">
-			<td id="no">${bfdto.normalPostVO.id}</td>
+			<td id="no">${bflist.id}</td>
 			
-   	<c:set var="bfdto.normalPostVO.title" value="${bfdto.normalPostVO.title}" /> <%-- 변수에 제목값 저장 --%>
-   	<c:set var="bfdto.mUserVO.nickname" value="${bfdto.mUserVO.nickname}" /> <%--변수에 이름값 저장 --%> 
+   	<c:set var="bflist.title" value="${bflist.title}" /> <%-- 변수에 제목값 저장 --%>
+   	<c:set var="bflist.mUserVO.nickname" value="${bflist.mUserVO.nickname}" /> <%--변수에 이름값 저장 --%> 
 
 			
 			
 	<c:choose>
-     <c:when test="${fn:length(bfdto.normalPostVO.title) > 20}"> <%--20자 이상일 경우 --%>
-	  <c:set var="title" value="${fn:substring(bfdto.normalPostVO.title,0,19)}..." />
+     <c:when test="${fn:length(bflist.title) > 20}"> <%--20자 이상일 경우 --%>
+	  <c:set var="title" value="${fn:substring(bflist.title,0,19)}..." />
 	   <td>
-        <a href="/moving.com/board/free_cont?id=${bfdto.normalPostVO.id}&page=${page}">
-	  ${bfdto.normalPostVO.title}  <%--user_id가 아닌 닉네임이 들어가게 수정해야함. --%>
+        <a href="/moving.com/board/free_cont?id=${bflist.id}&page=${page}">
+	  ${bflist.title}  <%--user_id가 아닌 닉네임이 들어가게 수정해야함. --%>
 	    </a><%-- board_cont?bno=번호값&page=쪽번호 2개의 피라미터 값이 get방식으로 전달됨. --%>
        </td>
      </c:when>
      
      <c:otherwise>
       <td>
-       <a href="/moving.com/board/free_cont?id=${bfdto.normalPostVO.id}&page=${page}">
-	   ${bfdto.normalPostVO.title}
+       <a href="/moving.com/board/free_cont?id=${bflist.id}&page=${page}">
+	   ${bflist.title}
 	   </a><%-- board_cont?bno=번호값&page=쪽번호 2개의 피라미터 값이 get방식으로 전달됨. --%>
       </td>
      </c:otherwise>
@@ -89,11 +89,11 @@
     
     
      <c:choose>
-      <c:when test="${fn:length(bfdto.mUserVO.nickname) > 10}">
-       <c:set var="bfdto.m_user.nickname" value="${fn:substring(bfdto.mUserVO.nickname,0,9)}.." />
+      <c:when test="${fn:length(bflist.mUserVO.nickname) > 10}">
+       <c:set var="bfdto.m_user.nickname" value="${fn:substring(bflist.mUserVO.nickname,0,9)}.." />
         <td id="author">
          <a href=#>
-       	  ${bfdto.mUserVO.nickname}
+       	  ${bflist.mUserVO.nickname}
          </a>
         </td>
       </c:when>
@@ -101,15 +101,15 @@
       <c:otherwise>
        <td id="author">
         <a href="#">
-         ${bfdto.mUserVO.nickname}
+         ${bflist.mUserVO.nickname}
         </a>
        </td>
       </c:otherwise>
 
      </c:choose>
      		
-			<td id="time">${bfdto.normalPostVO.registerDate}</td>
-			<td id="hit">${bfdto.normalPostVO.hit}</td>
+			<td id="time">${bflist.registerDate}</td>
+			<td id="hit">${bflist.hit}</td>
 		   </tr>
 		  </c:forEach>
   		 </c:if>
@@ -185,5 +185,23 @@
   </div> <%--검색 구간 전체 div --%>
   
 	</div> <%--body 안에 있는 전체를 씌운 div --%>
+	
+	<script>
+	 var msg="${msg}"; //컨트롤러에서 rttr로 설정한 키 이름을 EL로 받아와 저장했음.
+	 
+	 if(msg == "BOARD/FREE_INSERT"){
+		 alert("글쓰기가 성공 했습니다!");
+	 }//if boardFreeController에서 글쓰기 성공 시 출력.
+	 
+	 if(msg == "BOARD/FREE_EDIT"){
+		 alert("글수정이 성공 했습니다!");
+	 }//수정
+	 
+	 if(msg == "BOARD/FREE_DEL"){
+		 alert("글삭제가 성공 했습니다!");
+	 }//삭제
+	 
+	 
+	</script>
 
 <%@ include file="../include/footer.jsp"%>

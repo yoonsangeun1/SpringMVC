@@ -8,10 +8,10 @@ import com.moving.domain.NormalPostVO;
 public interface BoardFreeService {
 
 	int getTotalCount();
-	List<NormalPostDTO> getBoardFreeList(NormalPostVO bf);
+	List<NormalPostVO> getBoardFreeList(NormalPostVO bf);
 	void inBoardFree(NormalPostVO b);
-	NormalPostDTO getCont(int id);
+	NormalPostVO getCont(int id);
 	void editBoardFree(NormalPostVO bf);
-	void delBoardFree(int free_id);
+	void delBoardFree(int id);
 
 }//BoardFreeService

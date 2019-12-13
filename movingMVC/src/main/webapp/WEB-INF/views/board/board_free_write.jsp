@@ -39,6 +39,7 @@
     	bUseVerticalResizer : true, //모드 탭(Editor | HTML | TEXT ) 사용 여부
 	});
 </script>
+
     </td>
    </tr> 
    <tr>

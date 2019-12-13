@@ -1,6 +1,5 @@
 package com.moving.controller;
 
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
@@ -13,8 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.moving.domain.NormalPostDTO;
 import com.moving.domain.NormalPostVO;
 import com.moving.service.BoardFreeService;
 
@@ -42,9 +41,25 @@ public class BoardFreeController {
 		bf.setEndrow(bf.getStartrow()+limit-1);//끝행번호
 		
 		int totalCount=this.boardFreeService.getTotalCount(); //총 게시물 수
-		List<NormalPostDTO> bflist=this.boardFreeService.getBoardFreeList(bf);
+		List<NormalPostVO> bflist=this.boardFreeService.getBoardFreeList(bf);
 		//게시물 목록을 가져옴
 		
+		/*System.out.println(bflist.get(0).getId());
+		System.out.println(bflist.get(1).getId());
+		System.out.println(bflist.get(2).getId());
+		System.out.println(bflist.get(3).getId());
+		System.out.println(bflist.get(0).getmUserVO().getNickname());
+		System.out.println(bflist.get(0).getmUserVO().getId());
+		System.out.println(bflist.get(1).getmUserVO().getNickname());
+		System.out.println(bflist.get(1).getmUserVO().getId());
+		System.out.println(bflist.get(2).getmUserVO().getId());
+		System.out.println(bflist.get(3).getmUserVO().getId());
+		System.out.println(bflist.get(4).getmUserVO().getId());
+		System.out.println(bflist.get(1).getmUserVO().getRegisterDate());
+		System.out.println(bflist.get(2).getmUserVO().getRegisterDate());
+		System.out.println(bflist.get(3).getmUserVO().getRegisterDate());
+		System.out.println(bflist.get(4).getmUserVO().getRegisterDate());
+		*/
 		//총페이지 수
 		int maxpage=(int)((double)totalCount/limit+0.95);
 		//시작 페이지
@@ -81,7 +96,7 @@ public class BoardFreeController {
 		PrintWriter out=response.getWriter();
 		session=request.getSession();
 		
-		if(session.getAttribute("id") != null) {
+		if(session.getAttribute("id") != null) { //세션으로 id 값이 있을경우.
 		int id=(int)session.getAttribute("id");
 		
 		if(id==1) {
@@ -104,24 +119,37 @@ public class BoardFreeController {
 	public String board_free_write_ok(NormalPostVO bf,
 			HttpServletResponse response,
 			HttpServletRequest request,
-			HttpSession session) throws Exception{
+			HttpSession session,
+			RedirectAttributes rttr) throws Exception{
+		//RedirectAttributes는 글쓰기 완료 후 값을 넘겨줌으로써, 넘겨 받은 메시지가
+		//board/free에서 일치하는 메시지에 따른 알림창을 띄울 것임.
 		
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out=response.getWriter();
 		session=request.getSession();
 		
-		int user_id=(int)session.getAttribute("id");
+		if(session.getAttribute("id") != null) {
+			
+		int user_id=(int)session.getAttribute("id"); //세션으로 받아온 id를 user_id에 저장
 		
-		System.out.println(user_id); // user_id 값 잠시 확인할려고 사용
+		bf.setUserId(user_id); // NormalPostVO bf.setUserId에 id 값을 넣어둠.
 		
-		String test=bf.getContent();
+		this.boardFreeService.inBoardFree(bf); //bf 값을 기준으로 글쓰기 완료하기
 		
-		System.out.println(test);
-		
-		bf.setUserId(user_id);
-		this.boardFreeService.inBoardFree(bf);
+		rttr.addFlashAttribute("msg","BOARD/FREE_INSERT");
 	
-		return "redirect:/board/free";
+		return "redirect:/board/free"; //목록으로 이동
+		
+		}else { // 넘겨온 id 값이 없을경우, 또는 세션 만료되었을 경우?
+			out.println("<script>");
+			out.println("alert('로그인이 만료 되었습니다.');");
+			out.println("location='/board/free");
+			out.println("</script>");
+		}//if else
+		
+		return null;
+		
+		
 	}//board_free_write_ok()
 	
 	//내용보기+조회수 증가
@@ -131,12 +159,11 @@ public class BoardFreeController {
 			int page) throws Exception{
 		
 		//번호에 해당하는 디비 레코드 값을 가져옴.
-		NormalPostDTO bfdto=this.boardFreeService.getCont(id);
+		NormalPostVO bf=this.boardFreeService.getCont(id);
 		
 		ModelAndView cm=new ModelAndView("/board/board_free_cont");
 		
-		//cm.addObject("bf",bf);
-		cm.addObject("bfdto",bfdto);
+		cm.addObject("bf",bf);
 		cm.addObject("page",page);
 		
 		return cm;
@@ -146,8 +173,8 @@ public class BoardFreeController {
 	//게시글 수정
 	@RequestMapping("/board/free_edit")
 	public String board_free_edit(int id, /*게시글 번호 id*/
-			int page,
-			Model m,
+			int page,					  /*페이지*/
+			Model m,					  /*MODEL값만 넘길때 사용?하나봄.*/
 			HttpServletRequest request,
 			HttpServletResponse response,
 			HttpSession session) throws Exception {
@@ -156,22 +183,21 @@ public class BoardFreeController {
 		PrintWriter out=response.getWriter();
 		session=request.getSession();
 
-		
-		
-		System.out.println(id);
 		if(session.getAttribute("id") != null) { /*세션에 값이 있을경우*/
 			
-		NormalPostDTO bfdto=this.boardFreeService.getCont(id); //글번호 id를 기준으로 검색
-		int m_userid=(int) session.getAttribute("id");
+		NormalPostVO bf=this.boardFreeService.getCont(id); //글번호 id를 기준으로 검색
+		
+		int m_userid=(int) session.getAttribute("id"); //세션으로 받아온 id를 m_userid에 저장
 		
 		
-		if(m_userid == bfdto.getNormalPostVO().getUserId()) { //m_user의 id와 normal_post의
+		if(m_userid == bf.getUserId()) { //m_user의 id와 normal_post의
 			//user_id가 일치한다면
 			
-			m.addAttribute("bfdto",bfdto);
+			m.addAttribute("bfdto",bf);
 			m.addAttribute("page",page);
+			m.addAttribute("id",id);
 			
-			return "board/board_free_edit";
+			return "board/board_free_edit"; //view 페이지로 이동.
 			
 		}else { /*본인 게시글 수정이 아닐경우*/
 			out.println("<script>");
@@ -182,7 +208,7 @@ public class BoardFreeController {
 		
 		}else { /*세션이 값이 없을 경우*/
 			out.println("<script>");
-			out.println("alert('수정 권한이 없습니다!');");
+			out.println("alert('로그인이 만료 되었습니다!');");
 			out.println("history.back();");
 			out.println("</script>");
 		}//if else
@@ -196,17 +222,12 @@ public class BoardFreeController {
 	@RequestMapping("/board/free_edit_ok")
 	public String board_free_edit_ok(NormalPostVO bf,
 			int page,
-			HttpServletResponse response) throws Exception {
-		
-		response.setContentType("text/html;charset=UTF-8");
-		PrintWriter out=response.getWriter();
-		
+			int id,
+			RedirectAttributes rttr) throws Exception {	
 		
 		this.boardFreeService.editBoardFree(bf);
 		
-		//SUCCESS해서 완료되었음을 알리기
-		
-		return "redirect:/board/free?page="+page;
+		return "redirect:/board/free_cont?id="+id+"&page="+page; // 해당 내용보기 페이지로 이동
 		
 	}//board_free_edit_ok()
 	
@@ -215,24 +236,46 @@ public class BoardFreeController {
 	public String board_free_del(int id,int page, //id는 게시물 번호, page는 게시물 페이지
 			HttpServletResponse response,
 			HttpServletRequest request,
-			HttpSession session) throws Exception{
+			HttpSession session,
+			RedirectAttributes rttr) throws Exception{
 		
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out=response.getWriter();
 		session=request.getSession();
 		
-		if(session.getAttribute("id") != null) { //session이 null이 아닐경우
+		if(session.getAttribute("id") != null) { /*세션에 값이 있을경우*/
 			
-		int id2=(int)session.getAttribute("id"); //세션 id값 담기
-		//int user_id=this.boardFreeService.getCont(id);
+			NormalPostVO bfdto=this.boardFreeService.getCont(id); //글번호 id를 기준으로 검색
+			
+			int m_userid=(int) session.getAttribute("id"); //세션으로 받아온 id를 m_userid에 저장
+			
+			
+			if(m_userid == bfdto.getUserId()) { //m_user의 id와 normal_post의
+				//user_id가 일치한다면
+				
+				this.boardFreeService.delBoardFree(id);
+				
+				rttr.addFlashAttribute("msg","BOARD/FREE_DEL"); //삭제 msg 전달
+				
+				return "redirect:/board/free?page="+page; //view 페이지로 이동.
+				
+			}else { /*본인 게시글 수정이 아닐경우*/
+				out.println("<script>");
+				out.println("alert('본인 게시글만 삭제 가능합니다!');");
+				out.println("history.back();");
+				out.println("</script>");
+			}//if else
+			
+			}else { /*세션이 값이 없을 경우*/
+				out.println("<script>");
+				out.println("alert('로그인이 만료 되었습니다!');");
+				out.println("history.back();");
+				out.println("</script>");
+			}//if else
 		
-		//this.boardFreeService.delBoardFree(user_id);
+			return null;
 		
-		}//if
-		
-		return "redirect:/board/free?page="+page;
-		
-	}//board_free_edl()
+	}//board_free_del()
 	
 	
 	

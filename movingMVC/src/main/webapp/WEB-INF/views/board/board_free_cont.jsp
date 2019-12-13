@@ -25,30 +25,30 @@
   
   <tr>
    <th>글쓴이</th>
-   <!--<c:set var="mu" value="${bf.m_userVO}" />-->
-    <td>${bfdto.mUserVO.nickname}</td>
-  
-   
-   
+    <td>${bf.mUserVO.nickname}</td>
   </tr>
   
   <tr>
-    <th>제목</th> <td>${bfdto.normalPostVO.title}</td>  
+    <th>제목</th> <td>${bf.title}</td>  
   </tr>
+  
   <tr>
-   <th>내용</th> <td>${bfdto.normalPostVO.content}</td>
+   <th>내용</th> <td>${bf.content}</td>
   </tr>
+  
   <tr>
-   <th>조회수</th> <td>${bfdto.normalPostVO.hit}</td>
+   <th>조회수</th> <td>${bf.hit}</td>
   </tr>
+  
   <tr>
    <th colspan="2">
    <input type="button" value="수정"
 onclick="location=
-'/moving.com/board/free_edit?id=${bfdto.normalPostVO.id}&page=${page}';" /> 
+'/moving.com/board/free_edit?id=${bf.id}&page=${page}';" /> 
 <%-- board_cont?bno=번호&page=쪽번호 2개의 피라미터값
 이 get방식으로 전달 --%>  
-<input type="button" value="삭제" onclick="del_check();"/>
+<input type="button" value="삭제"
+onclick="location='/moving.com/board/free_del?id=${bf.id}&page=${page}';" />
 <input type="button" value="목록"
 onclick="location=
 '/moving.com/board/free?page=${page}';"/>

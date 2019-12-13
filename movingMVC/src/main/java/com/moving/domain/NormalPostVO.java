@@ -141,8 +141,23 @@ public class NormalPostVO {
 	public void setFindField(String findField) {
 		this.findField = findField;
 	}
-	
-	
-	
-	
+	public List<MCommentVO> getmCommentVO() {
+		return mCommentVO;
+	}
+	public void setmCommentVO(List<MCommentVO> mCommentVO) {
+		this.mCommentVO = mCommentVO;
+	}
+	public List<AttachedFileVO> getAttachedFileVO() {
+		return attachedFileVO;
+	}
+	public void setAttachedFileVO(List<AttachedFileVO> attachedFileVO) {
+		this.attachedFileVO = attachedFileVO;
+	}
+	public List<MoveVO> getMoveVO() {
+		return moveVO;
+	}
+	public void setMoveVO(List<MoveVO> moveVO) {
+		this.moveVO = moveVO;
+	}
+		
 }//NomalPostVO class

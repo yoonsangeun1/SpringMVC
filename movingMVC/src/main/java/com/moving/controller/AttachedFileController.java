@@ -77,6 +77,8 @@ public class AttachedFileController {
 
 	}//photoUpload()  //단일 파일 업로드	
 	
+	
+	//다중 파일 업로드
 	@RequestMapping("/multiplePhotoUpload")
 	public void multiplePhotoUpload(HttpServletRequest request, HttpServletResponse response){
 	    try {
@@ -91,17 +93,39 @@ public class AttachedFileController {
 	         //파일 기본경로
 	         String dftFilePath = request.getRealPath("/");
 	        		 //request.getSession().getServletContext().getRealPath("/");
+	         
 	         //파일 기본경로 _ 상세경로
+	         
+	         SimpleDateFormat formatterFoler = new SimpleDateFormat("yyyyMM");
+	         String todayFolder= formatterFoler.format(new java.util.Date());
+	         //	System.out.println(todayFolder); 201912 이런식으로 나옴
+	         
 	         String filePath = dftFilePath + "resources" + File.separator + "photo_upload" + File.separator;
-	         File file = new File(filePath);
-	         if(!file.exists()) {
+	         //File.separator 는 \ 인듯함.
+	         
+	         File file = new File(filePath);//기본 경로 폴더 생성
+	         if(!file.exists()) {//file 폴더가 없다면
 	            file.mkdirs();
+	            
+	         }else { // 폴더가 있다면
+		         File fileyyyyMMFolder = new File(filePath + todayFolder + File.separator);
+		         if(!fileyyyyMMFolder.exists()) {// 년월 폴더가 없다면
+		        	 fileyyyyMMFolder.mkdirs();
+		         }
 	         }
+	         
+	         
 	         String realFileNm = "";
 	         SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
 	         String today= formatter.format(new java.util.Date());
+	         //	System.out.println(today); 20191212171734 이런식으로 나옴
+	         String todayTest =formatterFoler.format(new java.util.Date());//yyyyMM만 출력(폴더명 비교용-의미없음 지워도됨
+	         
 	         realFileNm = today+UUID.randomUUID().toString() + filename.substring(filename.lastIndexOf("."));
-	         String rlFileNm = filePath + realFileNm;
+	         
+		     
+		     String rlFileNm = filePath  + todayFolder + File.separator + realFileNm;
+		   
 	         ///////////////// 서버에 파일쓰기 /////////////////
 	         InputStream is = request.getInputStream();
 	         OutputStream os=new FileOutputStream(rlFileNm);
@@ -120,7 +144,8 @@ public class AttachedFileController {
 	         sFileInfo += "&bNewLine=true";
 	         // img 태그의 title 속성을 원본파일명으로 적용시켜주기 위함
 	         sFileInfo += "&sFileName="+ filename;
-	         sFileInfo += "&sFileURL="+"/moving.com/resources/photo_upload/"+realFileNm;
+	         sFileInfo += "&sFileURL="+"/moving.com/resources/photo_upload/"+
+	         todayFolder + File.separator + realFileNm;
 	         PrintWriter print = response.getWriter();
 	         print.print(sFileInfo);
 	         print.flush();

@@ -206,8 +206,60 @@ VALUES			(move_seq.nextval,80001,2,2,'뎃글ㄹ네용',0,sysdate,6,0,0);
 -- 댓글에 답글
 select * from m_comment;
 
+SELECT * FROM
+ROWNUM rNum, 
+N.ID, N.TITLE,
+ U.NICKNAME, N.REGISTER_DATE, N.HIT
+FROM NORMAL_POST N, M_USER U
+WHERE N.USER_ID = U.ID
+ORDER BY N.ID DESC)
+WHERE rNum >= 1
+AND rNum <= 20;
+
+select * from M_USER;
 
 
+SELECT * FROM
+(SELECT ROW_NUMBER() OVER(ORDER BY N.ID DESC) rNum,
+N.ID, N.TITLE, U.NICKNAME,
+N.REGISTER_DATE, N.HIT
+FROM NORMAL_POST N, M_USER U
+WHERE N.USER_ID = U.ID
+ORDER BY N.ID DESC)
+WHERE rNum &gt;= #{startrow}
+AND rNum &lt;= #{endrow}
+
+  select
+    B.id            as id,
+    B.title         as title,
+    B.user_id     as user_id,
+    A.id            as id,
+    A.nickname      as nickname,
+    A.email         as email
+  from NORMAL_POST B left outer join M_USER A on B.user_id = A.id
+  order by B.id desc 
+  where rNum >=2 and rNum <=10
+  
+  select * from m_comment;
+  
+    select * from
+    (select 
+  rowNum rNum, N.ID, N.TITLE, U.NICKNAME,
+  N.REGISTER_DATE, N.HIT
+  from NORMAL_POST N, M_USER U
+  where N.USER_ID = U.ID
+  order by N.ID desc)
+  where rNum >= 2 and rNum <= 20;
+  
+   SELECT * FROM
+(SELECT ROW_NUMBER() OVER(ORDER BY ID DESC) rNum,
+ID, TITLE, USER_ID,
+REGISTER_DATE, HIT
+FROM NORMAL_POST 
+ORDER BY ID DESC)
+WHERE rNum >= 1
+AND rNum <= 30
+  
 
 select * from code_master;
 --delete from code_master;

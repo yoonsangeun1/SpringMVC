@@ -6,10 +6,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="BoardFree">
 
-<resultMap type="NormalPostDTO" id="boardInfo">
-	<association property="normalPostVO" javaType="com.moving.domain.NormalPostVO" autoMapping="true"/>
-	<association property="mUserVO" javaType="com.moving.domain.MUserVO" autoMapping="true"/>
-	<!-- <collection property="files" javaType="FileVO" autoMapping="true"/> -->
+<resultMap type="normalPostVO" id="boardInfo">
+	<association property="mUserVO" javaType="mUserVO" 
+	column="user_id" select="test"/>
+	<collection property="mCommentVO" javaType="java.util.List" ofType="commentInfo"
+	column="id" select="test2" /> 
+	<!-- <association property="mUserVO" javaType="com.moving.domain.MUserVO" autoMapping="true"/> -->
 </resultMap>
  
  <!-- 게시물 개수 -->
@@ -17,23 +19,53 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   SELECT COUNT(*) FROM NORMAL_POST
  </select>
  
+ <select id="test" resultType="mUserVO">
+ 	select nickname from m_user where id=#{user_id}
+ </select>
+ 
+ <select id="test2" resultMap="commentInfo">
+  select content, user_id_from from M_COMMENT where normal_post_id=#{id}
+ </select>
+ 
+ <resultMap type="mCommentVO" id="commentInfo">
+	<association property="mUserVO" javaType="mUserVO" 
+	column="user_id_from" select="test3"/>
+</resultMap>
+
+<select id="test3" resultType="mUserVO">
+ select nickname from m_User where id=#{user_id_from}
+</select>
+ 
  <!-- 페이징 -->
  <select id="bf_list" resultMap="boardInfo">
-SELECT * FROM
-(SELECT ROWNUM rNum, N.ID, N.TITLE,
- U.NICKNAME, N.REGISTER_DATE, N.HIT
+ SELECT * FROM
+(SELECT ROW_NUMBER() OVER(ORDER BY ID DESC) rNum,
+ID, TITLE, USER_ID,
+REGISTER_DATE, HIT
+FROM NORMAL_POST 
+ORDER BY ID DESC)
+WHERE rNum &gt;= #{startrow}
+AND rNum &lt;= #{endrow}
+<!-- SELECT * FROM
+(SELECT ROW_NUMBER() OVER(ORDER BY N.ID DESC) rNum,
+N.ID, N.TITLE, U.NICKNAME,
+N.REGISTER_DATE, N.HIT
 FROM NORMAL_POST N, M_USER U
 WHERE N.USER_ID = U.ID
 ORDER BY N.ID DESC)
 WHERE rNum &gt;= #{startrow}
-AND rNum &lt;= #{endrow}
+AND rNum &lt;= #{endrow} -->
 
-<!--   select * from 
-  (select np.rowNum rNum, np.id, np.user_id, np.title,
-  np.content, np.hit, np.register_date, mu.nickname 
-  from
-  (select * from normal_post np,m_user mu order by np.id desc))
-  where rNum &gt;= #{startrow} and rNum &lt;= #{endrow} -->
+<!-- SELECT * FROM
+(SELECT ROW_NUMBER() OVER(ORDER BY N.ID DESC) rNum, 
+N.ID, N.TITLE,
+ U.NICKNAME, N.REGISTER_DATE, N.HIT
+FROM NORMAL_POST N, M_USER U
+WHERE N.USER_ID = U.ID
+ORDER BY N.ID DESC)
+WHERE rNum >= 11
+AND rNum <= 20;  이런식으로 처리해서 페이징 구현함. 이유) 2개의 테이블을 비교해서 값을 가져와야 하기 때문임.
+나는 nickname이 필요했었음. -->
   
   <!-- rowNum컬럼은 오라클에서 테이블 생성시 생성되는
   기본컬럼으로 레코드 저장시 일련번호값이 저장됨. rNum
