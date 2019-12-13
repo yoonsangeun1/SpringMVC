@@ -1,6 +1,5 @@
 @charset "UTF-8";
 
-/* 전체 감싸는 랩 */
 #mJoin_wrap {
 	width: 1200px;
 	height: auto;
@@ -8,41 +7,8 @@
 	margin: auto auto;
 	align-items: center;
 	display: flex;
-	align-items: center;
 	justify-content: center;
-	margin: auto auto;
 	background-color: #F5F5F5;
-}
-/* sns용 전체 감싸는 랩 */
-#msJoin_wrap {
-	width: 1200px;
-	height: auto;
-	min-height: 930px;
-	margin: auto auto;
-	align-items: center;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	margin: auto auto;
-	background-color: #f2f0fb;
-}
-/* 회원인 경우 */
-#mJoin_form #am_Movingmember {
-	width: 400px;
-	height: auto;
-	text-align: center;
-	margin: auto auto;
-}
-
-#mJoin_form #am_Movingmember hr {
-	margin: 0px auto;
-	width: 400px;
-	float: left;
-}
-
-#mJoin_form section #am_Movingmember span {
-	margin: 10px auto;
-	display: inline-block;
 }
 
 #mJoin_form {
@@ -58,82 +24,84 @@
 	outline: none;
 }
 
-#mJoin_wrap form {
-	border: none;
-	outline: none;
-}
-
-#mJoin_form #mJoin_table {
-	width: 400px;
-	height: 560px;
-	border: 0px;
-	margin: auto auto;
-}
-
-#mJoin_form #mJoin_table h2 {
-	line-height: 40px;
-	font-size: 32px;
-	font-weight: bold;
-}
-
 #mJoin_form section {
-	height: auto;
+	float:left;
+	min-height: 300px;
 	padding-top: 30px;
 	padding-bottom: 30px;
 	box-sizing: border-box;
 	margin: auto auto;
 }
-
-#mJoin_form #mJoin_table {
+ /************************상단 텍스트************************/
+ 
+ #mJoin_form .am_Movingmember {
 	width: 400px;
-	height: 560px;
-	border: 0px;
-	margin-left: auto;
-	margin-right: auto;
-	margin-top: 30px;
-}
-
-#mJoin_table th, #mJoin_table td {
-	height: 45px;
-	width: 400px;
-	font-style: 15px gray;
-}
-
-#mJoin_table .input_text {
-	height: 45px;
-	width: 400px;
-	display: block;
-	font-size: 17px;
-	margin: 5px auto;
-}
-
-#mJoin_table .save_id {
-	float: left;
-}
-
-#mJoin_table a {
-	float: left;
-}
-
-.separator {
-	height: 45px;
-	vertical-align: center;
+	height: auto;
 	text-align: center;
+	margin: auto auto;
+	padding-top:30px;
 }
 
-.separator span {
-	font-size: 12px;
-	line-height: 4em;
-}
-
-#facebookJoinBtn, #joinBtn {
-	width: 413px;
-	height: 56px;
-}
-
-/* 인풋 텍스트박스 효과 */
-#mJoin_form .input_text {
+#mJoin_form .am_Movingmember hr {
+	margin: 0px auto;
 	width: 400px;
+	float: left;
+}
+
+#mJoin_form .am_Movingmember span {
+	margin: 10px auto;
+	display: inline-block;
+	font-size:15px;
+}
+#mJoin_form h2 {
+	line-height: 40px;
+	font-size: 32px;
+	font-weight: bold;
+	margin-top:10px;
+	margin-left:30px;
+}
+
+.terms_check_all {
+	width:350px;
+	margin-left:auto;
+	margin-right:auto;
+}
+ 
+ /************************이메일 입력폼************************/
+#email_field {
+	float:left;
+/* 	border : 1px solid red; */
+	min-height:100px;
+}
+
+.mv_email {
+	float:left;
+	width:458px;
+	min-height:95px;
+/* 	border: 1px solid black; */
+	padding : 10px;
+}
+
+/* 인증번호 발송 안내문 */
+#emailCheck_message {
+    float: left;
+    width: 100%;
+    height: 15px;
+    margin: 5px 0;
+    /* border: 1px solid red; */
+    line-height: 1.2;
+}
+/* 이메일 인증하기버튼 */	
+.btnCheckEmail {
+	float:left;
+	width:100px;
+	height:65px;
+	margin:5px; 
+}
+
+/* 인증번호 입력폼 */
+.text_input { 
+	width: 306px;
 	height: 45px;
 	padding: 10px 5px;
 	font: bold 15px 'lucida sans', 'trebuchet MS', 'Tahoma';
@@ -141,41 +109,143 @@
 	float: left;
 	background-color: #eee;
 	border-radius: 3px;
+	margin:5px;
 }
 
-#mJoin_form .input_text:focus {
+.input_text:focus {
 	outline: 0;
 	background: #fff;
 	box-shadow: 0 0 2px rgba(0, 0, 0, .8) inset;
 }
 
-#mJoin_form .input_text:-webkit-input-placeholder {
+.input_text:-webkit-input-placeholder {
 	color: #999;
 	font-weight: normal;
 	font-style: 10px gray;
 }
 
-#mJoin_form #mJoin_table td span {
-	font-size: 12px;
-	display: inline;
-	font-weight: bold;
+/* 인증번호입력 버튼 */
+.btnCheckToken {
+	float:left;
+	width:100px;
+	height:65px;
+	margin:5px;
 }
 
-#mJoin_form #mJoin_table td #save_id {
-	display: inline;
+/************************회원정보 입력폼************************/
+
+#info_field {
+	float:left;
+	width:100%;
+	min-height:95px;
+/* 	border: 1px solid black; */
+	padding : 10px;
 }
 
-#mJoin_form #mJoin_table td a {
-	font-size: 12px;
-	display: inline;
-	float: right;
-	font-weight: bold;
+#info_name_nick {
+	float:left;
+	width:100%;
+	min-height:50px;
+/* 	border:1px solid red; */
+	margin:5px 0px;
 }
 
-/* 일반 회원가입 버튼 */
+		/*닉네임 입력 폼 */
+.text_infoNickInput {
+	width: 306px;
+	height: 45px;
+	padding: 10px 5px;
+	font: bold 15px 'lucida sans', 'trebuchet MS', 'Tahoma';
+	border: 0;
+	float: left;
+	background-color: #eee;
+	border-radius: 3px;
+	margin:5px;
+}
+		/* 닉네임 중복확인 버튼 */
+.nickCheckBtn {
+	float:left;
+	width:100px;
+	height:65px;
+	margin:5px;
+}
+
+#nickcheck_message {
+	float:left;
+	width:100%;
+	height:15px;
+	margin:5px 0;
+/* 	border:1px solid red; */
+	line-height: 1.2;
+}
+		/*이름,비밀번호,비밀번호 확인 입력폼 */
+.text_infoInput {
+	width: 415px;
+	height: 45px;
+	padding: 10px 5px;
+	font: bold 15px 'lucida sans', 'trebuchet MS', 'Tahoma';
+	border: 0;
+	float: left;
+	background-color: #eee;
+	border-radius: 3px;
+	margin:5px;
+}
+
+#pwdCheck_message {
+	float:left;
+	width:100%;
+	height:15px;
+	margin:5px 0;
+/* 	border:1px solid red; */
+	line-height: 2em; 
+}
+
+#phone_box {
+	float:left;
+	width:100%;
+	height:30px;
+	margin:5px 0;
+}
+/************************장르선택 입력폼************************/
+
+#genreCheck_field {
+		float:left;
+	width:100%;
+	min-height:95px;
+/* 	border: 1px solid green; */
+	padding : 30px;
+}
+
+.genre_check {
+	width:20px;
+	height:20px;
+	padding:3px;
+}
+
+.genre_name {
+	font-size:15px;
+	padding:5px;
+}
+
+/************************버튼 필드************************/
+
+#joinBtn_field {
+	float:left;
+/* 	border : 1px solid blue; */
+}
+
+.joinBtn1 {
+	float:left;
+/* 	border : 3px solid black; */
+	margin-left:20px;
+}
+
+/************************회원가입 버튼************************/
 #mJoin_form #joinBtn {
 	position: relative;
-	float: right;
+	float: left;
+	width:418px;
+	height:56px;
 	border: 0;
 	padding: 0;
 	cursor: pointer;
@@ -197,103 +267,85 @@
 	outline: 0;
 }
 
-/* 페이스북 회원가입 버튼 */
-#mJoin_form #facebookJoinBtn {
-	overflow: visible;
-	position: relative;
-	float: right;
-	border: 0;
-	padding: 0;
-	cursor: pointer;
-	font: bold 15px/40px 'lucida sans', 'trebuchet MS', 'Tahoma';
-	color: #fff;
-	text-transform: uppercase;
-	background: #304d8a;
-	border-radius: 3px;
-	text-shadow: 0 -1px 0 rgba(0, 0, 0, .3);
-	margin: auto;
-}
+/* /************************라인 필드************************/ */
+/* .separator_join { */
+/* 	float:left; */
+/* 	width:100%; */
+/* 	height: 45px; */
+/* 	vertical-align: center; */
+/* 	text-align: center; */
+/* } */
+/* .separator_join span { */
+/* 	font-size: 12px; */
+/* 	line-height: 4em; */
+/* } */
 
-#mJoin_form #facebookJoinBtn:hover {
-	background: #304d8a;
-}
+/* /************************소셜 회원가입버튼 필드************************/ */
+/* .joinBtn2 { */
+/* 	float:left; */
+/* 	width:419px; */
+/* /* 	border : 3px solid b5lack;  */ */
+/* 	margin-left:20px; */
+/* } */
 
-#mJoin_form #facebookJoinBtn:active {
-	background: #304d8a;
-	outline: 0;
-}
+/* /************************페이스북 회원가입************************/ */
+/* #mJoin_form #facebookJoinBtn { */
+/* 	overflow: visible; */
+/* 	position: relative; */
+/* 	float: left; */
+/* 	width:418px; */
+/* 	height:56px; */
+/* 	border: 0; */
+/* 	padding: 0; */
+/* 	cursor: pointer; */
+/* 	font: bold 15px/40px 'lucida sans', 'trebuchet MS', 'Tahoma'; */
+/* 	color: #fff; */
+/* 	text-transform: uppercase; */
+/* 	background: #4a4aff; */
+/* 	border-radius: 3px; */
+/* 	text-shadow: 0 -1px 0 rgba(0, 0, 0, .3); */
+/* 	margin: auto; */
+/* }  */
 
-/* 소셜 회원가입 버튼 효과 */
-.social-join {
-	align-items: center;
-}
+/* #mJoin_form #facebookJoinBtn:hover { */
+/* 	background: #304d8a; */
+/* } */
 
-#kakaoJoinBtn, #naverJoinBtn, #googleJoinBtn, #twitterJoinBtn {
-	height: 53px;
-	width: 130px;
-	overflow: visible;
-	position: relative;
-	float: right;
-	border: 1px solid;
-	border-color: #999;
-	padding: 0;
-	cursor: pointer;
-	font: 15px/40px 'lucida sans', 'trebuchet MS', 'Tahoma';
-	color: #black;
-	text-transform: uppercase;
-	background: #fff;
-	border-radius: 3px;
-	margin: auto;
-	display: inline-block;
-}
+/* #mJoin_form #facebookJoinBtn:active { */
+/* 	background: #304d8a; */
+/* 	outline: 0; */
+/* } */
 
-#kakaoJoinBtn:hover, #naverJoinBtn:hover, #googleJoinBtn:hover,
-	#twitterJoinBtn:hover {
-	background: #eee;
-}
+/* /************************구글,네이버,카카오,트위터 회원가입버튼************************/ */
 
-#kakaoJoinBtn:active, #naverJoinBtn:active, #googleJoinBtn:active,
-	#twitterJoinBtn:active {
-	background: #eee;
-	outline: 0;
-}
 
-/* 적용취소
-.hline {
-	width: 100%;
-	height: 1px;
-	background: black;
-}
+/* /* 소셜 로그인 버튼 효과 */ */
+/* #kakaoJoinBtn, #naverJoinBtn, #googleJoinBtn, #twitterJoinBtn { */
+/* 	height: 53px; */
+/* 	width: 196px;  */
+/* 	overflow: visible; */
+/* 	position: relative; */
+/* 	float: left; */
+/* 	border: 1px solid; */
+/* 	border-color: #999; */
+/* 	padding: 0px; */
+/* 	cursor: pointer; */
+/* 	font: 15px/40px 'lucida sans', 'trebuchet MS', 'Tahoma'; */
+/* 	color: #black; */
+/* 	text-transform: uppercase; */
+/* 	background: #fff; */
+/* 	border-radius: 3px; */
+/* 	margin : 5px; */
+/* } */
 
-.separator .background {
-    position: relative;
-    z-index: 1;
-    
-    &:before {
-        border-top: 2px solid #dfdfdf;
-        content:"";
-        margin: 0 auto; this centers the line to the full width specified
-position:absolute;
-positioning must be absolute here, and relative positioning must be applied to the parent
-top:50%;
-left:0;
-right0;
-bottom:0;
-width:95%;
-z-index:-1;
-}
+/* #kakaoLoginBtn:hover, #naverLoginBtn:hover, #googleLoginBtn:hover, */
+/* 	#twitterLoginBtn:hover { */
+/* 	background: #eee; */
+/* } */
 
-.wz_input {
-	width: 370px;
-	height: 50px;
-	display: block;
-	font-size: 17px;
-	margin: 10px auto;
-}
+/* #kakaoLoginBtn:active, #naverLoginBtn:active, #googleLoginBtn:active, */
+/* 	#twitterLoginBtn:active { */
+/* 	background: #eee; */
+/* 	outline: 0; */
+/* } */
 
-.wz_input input {
-	height: 48px;
-	line-height: 1.2em;
-	font-size: 17px;
-	font-weight: 300;
-}*/
