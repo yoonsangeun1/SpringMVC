@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="../include/admin_header.jsp" %>
 <div id="aBoard_wrap">
+
 	<div class="h1">
 		<h1>게시글 관리</h1>
 	</div>

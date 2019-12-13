@@ -8,17 +8,17 @@
 <script src="./js/movie_upload.js"></script>
 <script src="https://kit.fontawesome.com/bf95efc607.js" crossorigin="anonymous"></script>
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" type="text/css" href="./resources/iconfont/css/fontawesome.min.css">
-<link rel="stylesheet" type="text/css" href="./resources/css/admin_index.css" />
-<link rel="stylesheet" type="text/css" href="./resources/css/init.css" />
-<link rel="stylesheet" type="text/css" href="./resources/css/header.css" />
-<link rel="stylesheet" type="text/css" href="./resources/css/scrollbar.css" />
-<link rel="stylesheet" type="text/css" href="./resources/css/sns_main.css" />
+<link rel="stylesheet" type="text/css" href="./iconfont/css/fontawesome.min.css">
+<link rel="stylesheet" type="text/css" href="./css/admin_index.css" />
+<link rel="stylesheet" type="text/css" href="./css/init.css" />
+<link rel="stylesheet" type="text/css" href="./css/header.css" />
+<link rel="stylesheet" type="text/css" href="./css/scrollbar.css" />
+<link rel="stylesheet" type="text/css" href="./css/social_main.css" />
 
-<link rel="stylesheet" type="text/css" href="./resources/css/admin_member.css" />
-<link rel="stylesheet" type="text/css" href="./resources/css/admin_funding.css" />
-<link rel="stylesheet" type="text/css" href="./resources/css/admin_board.css" />
-<link rel="stylesheet" type="text/css" href="./resources/css/admin_movie.css" />
+<link rel="stylesheet" type="text/css" href="./css/admin_member.css" />
+<link rel="stylesheet" type="text/css" href="./css/admin_funding.css" />
+<link rel="stylesheet" type="text/css" href="./css/admin_board.css" />
+<link rel="stylesheet" type="text/css" href="./css/admin_movie.css" />
 <link rel="stylesheet" type="text/css" href="./css/admin_movie_upload.css" /> 
 <link rel="stylesheet" type="text/css" href="./css/admin_movie_cont.css" />
 
@@ -89,7 +89,7 @@
 				<!-- 로그아웃 -->
 				<div id="admin_logout">
 					<ul>
-						<li><a href="./resources/index.jsp" class="hyper">로그아웃</a></li>
+						<li><a href="index" class="hyper">로그아웃</a></li>
 					</ul>
 				</div>
 			</div>

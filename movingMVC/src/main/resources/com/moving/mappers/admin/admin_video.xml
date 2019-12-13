@@ -49,25 +49,27 @@
 	</select>
 	
 	<!-- 티저 게시글 작성 -->
-	<insert id="insertTeaserVideo">
-		INSERT INTO VIDEO_POST (id, code_no, user_id, title_english,
-		 title_korean, content, video_file_path, rate) 
-		 VALUES (video_post_seq.nextval, #{code_no}, 1
-	</insert>
+<!-- 	<insert id="insertTeaserVideo"> -->
+<!-- 		INSERT INTO VIDEO_POST (id, code_no, user_id, title_english, -->
+<!-- 		 title_korean, content, video_file_path, rate)  -->
+<!-- 		 VALUES (video_post_seq.nextval, #{code_no}, 1 -->
+<!-- 	</insert> -->
 	
 	<!-- 영화 게시글 작성 -->
 	<insert id="insertMovieVideo">
-		INSERT INTO video_post(id, code_no, user_id,title_english,title_korean,
-		director,actor,release_date,content,grade,era_background,video_file_path,video_length,rate)
-		VALUES (video_post_seq.nextval, #{code_no}, 1
+		INSERT INTO video_post(id, code_no, user_id, title_english, title_korean,
+		director, actor, release_date, content, era_background, video_file_path, video_length, rate)
+		VALUES (video_post_seq.nextval, #{codeNo}, 1, #{titleEnglish}, #{titleKorean},
+		#{director}, #{actor}, TO_DATE(#{releaseDate},'yyyy-mm-dd'), #{content},
+		#{eraBackground}, 0, 0, #{rate})
 	</insert>
 	
 	<!-- 첨부파일 저장 -->
-	<insert id="insertVideoAttachedFile">
-		INSERT INTO ATTACHED_FILE
-		(ID, FILE_PATH, THUMBNAIL_PATH, NO, VIDEO_POST_ID) 
-		VALUES 
-		(ATTACHED_FILE_SEQ.NEXTVAL, )
+<!-- 	<insert id="insertVideoAttachedFile"> -->
+<!-- 		INSERT INTO ATTACHED_FILE -->
+<!-- 		(ID, FILE_PATH, THUMBNAIL_PATH, NO, VIDEO_POST_ID)  -->
+<!-- 		VALUES  -->
+<!-- 		(ATTACHED_FILE_SEQ.NEXTVAL, ) -->
 		
-	</insert>
+<!-- 	</insert> -->
 </mapper>

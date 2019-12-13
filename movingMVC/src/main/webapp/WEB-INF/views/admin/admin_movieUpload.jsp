@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="../include/admin_header.jsp"%>
 <%-- 영화 업로드 페이지 구성 --%>
 <div id="aMovie_uploadWrap">
@@ -15,7 +16,7 @@
 	<%-- 업로드 화면 구성 --%>
 	<div id="aMovie_upload" class="tab-content on">
 
-		<form >
+		<form method="post" action="/moving.com/admin/movie_upload_ok" onsubmit="return movie_check();">
 		
 			<%-- 업로드 창 중앙 div --%>
 			<div id="aMUploadCenter">
@@ -25,39 +26,39 @@
 					<tr>
 						<th>감독</th>
 						<td>
-						<input name="aMUploadC_director" id="aMUploadC_director" />
+						<input name="director" id="aMUploadC_director" />
 						&nbsp;&nbsp;&nbsp;출연진&nbsp;
-						<input name="aMUploadC_actor" id="aMUploadC_actor" />
+						<input name="actor" id="aMUploadC_actor" />
 						&nbsp;&nbsp;&nbsp;시대배경&nbsp;
-						<input name="aMUploadC_background" id="aMUploadC_background" />
+						<input name="eraBackground" id="aMUploadC_background" />
 						</td>
 					</tr>
 					<tr>
 						<th class="thName">장르</th>
 						<td class="tdName">
-							<div id="aMUploadC_category" class="select">
-								<select name="codeNo" class="combo">
+							<div id="aMUploadC_combo" class="select">
+								<select id="aMUploadC_genre" name="codeNo" class="combo">
 									<option value="30001">선택하세요.</option>
 									<option value="3000101">범죄/스릴러</option>
-									<option value="액션/어드벤쳐">액션/어드벤쳐</option>
-									<option value="다큐/드라마/청춘">다큐/드라마/청춘</option>
-									<option value="역사/시대극">역사/시대극</option>
-									<option value="판타지/SF">판타지/SF</option>
-									<option value="멜로/로맨스">멜로/로맨스</option>
-									<option value="코미디">코미디</option>
-									<option value="애니메이션">애니메이션</option>
-									<option value="기타">기타</option>
+									<option value="3000102">액션/어드벤쳐</option>
+									<option value="3000103">다큐/드라마/청춘</option>
+									<option value="3000104">역사/시대극</option>
+									<option value="3000105">판타지/SF</option>
+									<option value="3000106">멜로/로맨스</option>
+									<option value="3000107">코미디</option>
+									<option value="3000108">애니메이션</option>
+									<option value="3000109">기타</option>
 								</select>
 								&nbsp;&nbsp;&nbsp;상영등급&nbsp;
-								<select name="aMUploadC_rating" class="combo">
+								<select id="aMUploadC_rating" name="rate" class="combo">
 									<option value="null">선택하세요.</option>
-									<option value="all">전체 관람가</option>
-									<option value="12">12세 이상 관람가</option>
-									<option value="15세 이상 관람가">15세 이상 관람가</option>
-									<option value="청소년 관람불가">청소년 관람불가</option>
+									<option value="g">전체 관람가</option>
+									<option value="pg-13">12세 이상 관람가</option>
+									<option value="r">15세 이상 관람가</option>
+									<option value="nc-17">청소년 관람불가</option>
 								</select>
 								&nbsp;&nbsp;&nbsp;상영시간&nbsp;
-								<input name="aMUploadC_runningTime" class="time" id="aMUploadC_runningTime"
+								<input type="number" name="videoLength" class="time" id="aMUploadC_runningTime"
 									/>분
 							</div>
 							
@@ -71,12 +72,12 @@
 							<%-- 제목 입력 --%>
 							<div id="aMUploadC_title">
 
-								<input type="text" name="aMUpload_titleText" class="title"
-									id="aMUpload_titleText" placeholder="한글 제목을 입력하세요."/>
-								<input type="text" name="aMUpload_titleText2" class="title"
-									id="aMUpload_titleText2" placeholder="영문 제목을 입력하세요."/>
-								<input type="text" name="aMUpload_titleText2" class="year"
-									id="aMUpload_titleText3" placeholder="연도"/>
+								<input type="text" name="titleKorean" class="korean title"
+									id="aMUploadC_titleText" placeholder="한글 제목을 입력하세요."/>
+								<input type="text" name="titleEnglish" class="english title"
+									id="aMUploadC_titleText2" placeholder="영문 제목을 입력하세요."/>
+								<input type="date" name="releaseDate" class="year"
+									id="aMUploadC_titleText3" placeholder="연도"/>
 							</div>
 						</td>
 					</tr>
@@ -85,7 +86,7 @@
 						<td>
 							<%-- 줄거리 입력 --%>
 							<div id="aMUploadC_cont">
-								<textarea name="aMUpload_contText" id="aMUpload_contText" class="txtbox content"
+								<textarea name="content" id="aMUploadC_contText" class="txtbox content"
 									placeholder="내용을 입력하세요." rows="22"></textarea>
 							</div>
 						</td>
@@ -158,11 +159,11 @@
 			</div>
 			<%-- 취소 버튼 --%>
 			<div id="aMUploadR_cancelBtn">
-				<button type="button" class="button">취소</button>
+				<button type="reset" class="button">취소</button>
 			</div>
 			<%-- 업로드 버튼 --%>
 			<div id="aMUploadR_uploadBtn">
-				<button type="button" class="button">저장</button>
+				<button type="submit" class="button">저장</button>
 			</div>
 		</form>
 	</div>
@@ -170,7 +171,7 @@
 	<%-- 티저 업로드 화면 구성 --%>
 	<div id="aMovie_upload2" class="tab-content">
 
-		<form>
+		<form method="post" action="/moving.com/admin/teaser_upload_ok" onsubmit="return teaser_check();">
 		
 			<%-- 업로드 창 중앙 div --%>
 			<div id="aMUploadCenter">
@@ -178,20 +179,20 @@
 
 					<%-- 카테고리 콤보박스 --%>
 					<tr>
-						<th>카테고리</th>
+						<th>장르</th>
 						<td>
-							<div id="aMUploadC_category">
-								<select name="aMUploadC_cateComboBox" class="combo">
-									<option value="전체">전체</option>
-									<option value="범죄/스릴러">범죄/스릴러</option>
-									<option value="액션/어드벤쳐">액션/어드벤쳐</option>
-									<option value="다큐/드라마/청춘">다큐/드라마/청춘</option>
-									<option value="역사/시대극">역사/시대극</option>
-									<option value="판타지/SF">판타지/SF</option>
-									<option value="멜로/로맨스">멜로/로맨스</option>
-									<option value="코미디">코미디</option>
-									<option value="애니메이션">애니메이션</option>
-									<option value="기타">기타</option>
+							<div id="aMUploadC_combo">
+								<select id="aMUploadC_genreT" name="aMUploadC_genreT" class="combo">
+									<option value="30001">선택하세요.</option>
+									<option value="3000101">범죄/스릴러</option>
+									<option value="3000102">액션/어드벤쳐</option>
+									<option value="3000103">다큐/드라마/청춘</option>
+									<option value="3000104">역사/시대극</option>
+									<option value="3000105">판타지/SF</option>
+									<option value="3000106">멜로/로맨스</option>
+									<option value="3000107">코미디</option>
+									<option value="3000108">애니메이션</option>
+									<option value="3000109">기타</option>
 								</select>
 							</div>
 						</td>
@@ -204,8 +205,8 @@
 							<%-- 제목 입력 --%>
 							<div id="aMUploadC_title">
 
-								<input type="text" name="aMUpload_titleText" class="title"
-									id="aMUpload_titleText" placeholder="한글 제목을 입력하세요."/>
+								<input type="text" name="aMUpload_titleTextT" class="title"
+									id="aMUploadC_titleTextT" placeholder="한글 제목을 입력하세요."/>
 							</div>
 						</td>
 					</tr>
@@ -214,7 +215,7 @@
 						<td>
 							<%-- 줄거리 입력 --%>
 							<div id="aMUploadC_cont">
-								<textarea name="aMUpload_contText" id="aMUpload_contText" class="txtbox content"
+								<textarea name="aMUploadC_contTextT" id="aMUploadC_contTextT" class="txtbox content"
 									placeholder="내용을 입력하세요." rows="20"></textarea>
 							</div>
 						</td>
@@ -315,11 +316,11 @@
 			</div>
 			<%-- 취소 버튼 --%>
 			<div id="aMUploadR_cancelBtn">
-				<button type="button" class="button">취소</button>
+				<button type="reset" class="button">취소</button>
 			</div>
 			<%-- 업로드 버튼 --%>
 			<div id="aMUploadR_uploadBtn">
-				<button type="button" class="button">저장</button>
+				<button type="submit" class="button">저장</button>
 			</div>
 		</form>
 	</div>

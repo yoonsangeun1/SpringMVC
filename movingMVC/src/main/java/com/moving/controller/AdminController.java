@@ -5,6 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.moving.service.AdminVideoService;
+
 @RequestMapping(value="/admin")
 @Controller
 public class AdminController {
@@ -58,14 +60,14 @@ public class AdminController {
 	/* 영화 업로드 */
 	@RequestMapping(value="/movie_upload")
 	public ModelAndView insertMovie() {
-			
-		return new ModelAndView("admin/admin_movieUpload");
+		String[] genre = {"선택하세요.","범죄/스릴러","액션/어드벤쳐","다큐/드라마/청춘","역사/시대극",
+				"판타지/SF","멜로/로맨스","코미디","애니메이션","기타"};
+		String[] codeNo = {"30001","3000101","3000102","3000103","3000104","3000105",
+				"3000106","3000107","3000108","3000109"};
+		ModelAndView m = new ModelAndView("admin/admin_movieUpload");
+		m.addObject("genre",genre);
+		m.addObject("codeNo",codeNo);
+		return m;
 	}//insertMovie()
-	
-	/* 업로드 완료 */
-//	@RequestMapping(value="/movie_upload_ok")
-//	public String insertMovieOk() {
-//		
-//	}//insertMovieOk()
 	
 }
