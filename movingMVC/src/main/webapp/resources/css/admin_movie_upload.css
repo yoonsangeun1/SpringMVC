@@ -40,23 +40,23 @@
 	width: 530px;
 }
 
-#aMUploadC_category {
+#aMUploadC_combo {
 	
 }
 
-#aMUploadC_category .combo { /* 중앙 카테고리 콤보박스 */
+#aMUploadC_combo .combo { /* 중앙 카테고리 콤보박스 */
 	font-size: 10pt;
 	height: 20px;
 }
 
 #aMUploadC_title .title { /* 동영상 업로드 중앙 화면 제목 */
-	width: 215px;
+	width: 155px;
 	height: 20px;
 	font-size: 11pt;
 }
 
 #aMUploadC_title .year {
-	width: 87px;
+	width: 147px;
 	height: 20px;
 	font-size: 11pt;
 }
