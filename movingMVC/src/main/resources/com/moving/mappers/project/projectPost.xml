@@ -6,7 +6,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="projectPost"><!-- 매퍼 네임스페이스명 -->
 
-	<!-- projectInfo resultMap -->
+	<!-- 0) 프로젝트 불러오면서 모든 정보 다 불러오기  -->
+	<!-- 0-1) projectInfo resultMap 생성 -->
 	<resultMap type="projectPostVO" id="projectInfo">
 		<association property="mUserVO" javaType="com.moving.domain.MUserVO" 
 		column="user_id" select="selectProjectAuthor" />
@@ -23,38 +24,67 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<collection property="tagVO" 
 			javaType="java.util.ArrayList" ofType="tagVO" 
 			column="id" select="selectProjectTags"/>
-			<collection property="mCommentVO" javaType="java.util.ArrayList" ofType="mCommentInfo"
+		<collection property="mCommentVO" javaType="java.util.ArrayList" ofType="mCommentInfo"
 			 column="id" select="selectProjectComments"/>
 		<!-- 1:다 매핑 실행 결과 -->
 	</resultMap>
 	
+	<!-- 0-2) 프로젝트 정보 + 작성자 + 리워드 + 첨부파일 + 댓글 다 불러오기 -->
+	<!-- 0-2-1) 프로젝트 정보 -->
+	<select id="selectProjectInfo" resultMap="projectInfo">
+		SELECT * FROM PROJECT_POST
+		WHERE ID = #{id}
+	</select>
+	<!-- 0-2-2) 프로젝트 작성자 -->
+	<select id="selectProjectAuthor" resultType="mUserVO">
+		SELECT * FROM M_USER
+		WHERE ID = #{user_id}
+	</select>
+	<!-- 0-2-3) 프로젝트 리워드 -->
+	<select id="selectProjectRewards" resultType="rewardVO">
+		SELECT * FROM REWARD
+		WHERE PROJECT_POST_ID = #{id}
+		ORDER BY PRICE ASC
+	</select>
+	<!-- 0-2-4) 프로젝트 첨부파일 -->
+	<select id="selectProjectAttachedFiles" resultType="attachedFileVO">
+		SELECT * FROM ATTACHED_FILE 
+		WHERE project_post_id = #{id} 
+		ORDER BY NO ASC
+	</select>
+	<!-- 0-2-5) 첨부파일 댓글은 밑에 1-1 확인 -->
+	<!-- 0-2-5) 프로젝트 태그 -->
+	<select id="selectProjectTags" resultType="tagVO">
+		SELECT * FROM tag 
+		WHERE project_post_id = #{id} 
+		ORDER BY id ASC
+	</select>
+	<!-- 000000000000 프로젝트 게시글만! 불러오기 잘 안쓸 것 -->
+	<select id="selectProjectPost" resultType="projectPostVO">
+		SELECT * FROM PROJECT_POST
+		WHERE ID = #{id}
+	</select>
+	
+	<!-- 1-1) 게시글에 해당하는 댓글 목록 불러오기 작성자 정보와 함께. resultMap 반환 -->
 	<!-- 댓글 resultmap-->
 	<resultMap type="mCommentVO" id="mCommentInfo">
 		<association property="mUserVO" javaType="com.moving.domain.MUserVO" 
 		column="user_id_from" select="selectCommentAuthor" />
 	</resultMap>
-	
-	
-	<!-- 댓글 개수 세기 -->
-	<select id="selectCommentCount" resultType="projectPostVO">
-		SELECT comment_count 
-		FROM project_post
-		WHERE id = ${id}
+	<!-- 프로젝트 댓글 불러오기 -->
+	<select id="selectProjectComments" resultMap="mCommentInfo">
+		SELECT * FROM M_COMMENT
+		WHERE PROJECT_POST_ID = #{id}
+		ORDER BY id DESC
+		<!-- 나중에 추가하기 답글계층 정렬도 -->
 	</select>
-
-	<!-- 댓글 개수 세서, 업데이트 -->
-	<update id="updateCommentCount">
-		UPDATE project_post
-		SET comment_count=(
-			SELECT COUNT(id) 
-			FROM m_comment
-			WHERE project_post_id = #{id}
-			)
-		WHERE id= #{id}
-	</update>
+	<!-- 댓글 작성자 불러오기 -->
+	<select id="selectCommentAuthor" resultType="mUserVO">
+		SELECT * FROM m_user WHERE id = #{userIdFrom}
+	</select>
 	
 	
-	<!-- 댓글 해시맵으로 불러오기 -->
+	<!-- 1-2) 게시글에 해당하는 댓글 모두 다 목록 해시맵으로 불러오기 JSON용 HashMap 반환 -->
 	<select id="selectCommentListMap" resultType="java.util.Map">
 		SELECT c.id, c.user_id_from, c.project_post_id, 
 		c.content, c.register_date, u.nickname  
@@ -64,85 +94,57 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		ORDER BY c.register_date desc
 	</select>
 	
-	<!-- 댓글 수정하기 -->
+	
+	<!-- 2) 아래 둘은 한 세트처럼 사용. 게시글 개수 카운트, 저장 + 카운트한 값 반환 -->
+	<!-- 2-1) 게시글의 댓글 개수 세서, 저장된 값업데이트 -->
+	<update id="updateCommentCount">
+		UPDATE project_post
+		SET comment_count=(
+			SELECT COUNT(id) 
+			FROM m_comment
+			WHERE project_post_id = #{id}
+			)
+		WHERE id= #{id}
+	</update>
+	<!-- 2-2) 게시글의 댓글 개수 저장된 값 가져오기 -->
+	<select id="selectCommentCount" resultType="projectPostVO">
+		SELECT comment_count 
+		FROM project_post
+		WHERE id = ${id}
+	</select>
+
+	<!-- 3) 댓글 작성, 수정, 삭제  -->
+	<!-- 3-1) 댓글 작성시 세트로 작동. 댓글 저장 + 카운트 높이기 -->
+	<!-- 3-1-1) 댓글 작성-->
+	<insert id="insertProjectComment">
+		INSERT INTO m_comment 
+		(id, user_id_from, content, COMMENT_ID_REPLY, PROJECT_POST_ID)
+		VALUES 
+		(m_comment_seq.nextval, #{userIdFrom}, #{content}, m_comment_seq.nextval, #{projectPostId})
+	</insert>
+	<!--  3-1-2) 댓글 카운트 높이기 -->
+	<update id="updateProjectCommentCountOne">
+		UPDATE m_comment 
+		SET comment_count = comment_count + 1
+		WHERE id = #{projectPostId}
+	</update>
+	
+	<!-- 3-2) 댓글 내용 -->
 	<update id="updateProjectComment">
 		UPDATE m_comment
 		SET content = #{content}
 		WHERE id = #{id}
 	</update>
 	
-	<!-- 댓글 삭제하기 -->
+	<!-- 3-3) 댓글 삭제 -->
 	<delete id="deleteProjectComment">
 		DELETE FROM m_comment
 		WHERE id = #{id}
 	</delete>
 	
-	<!-- 댓글 작성자 불러오기 -->
-	<select id="selectCommentAuthor" resultType="mUserVO">
-		SELECT * FROM m_user WHERE id = #{userIdFrom}
-	</select>
 	
-	<!-- 일반 댓글 작성-->
-	<insert id="insertProjectComment">
-		INSERT INTO m_comment (id, user_id_from, content, COMMENT_ID_REPLY, PROJECT_POST_ID)
-		VALUES (m_comment_seq.nextval, #{userIdFrom}, #{content}, m_comment_seq.nextval, #{projectPostId})
-	</insert>
 	
-	<!-- 프로젝트 댓글 작성시 댓글 카운트 높이기 -->
-	<update id="updateProjectCommentCount">
-		UPDATE m_comment 
-		SET comment_count = comment_count + 1
-		WHERE id = #{projectPostId}
-	</update>
-	
-	<!-- 프로젝트 정보 +리워드+첨부파일+작성자+댓글 다 불러오기 -->
-	<select id="selectProjectInfo" resultMap="projectInfo">
-		SELECT * FROM PROJECT_POST
-		WHERE ID = #{id}
-	</select>
-
-	<!-- 프로젝트 게시글 불러오기 -->
-	<select id="selectProjectPost" resultType="projectPostVO">
-		SELECT * FROM PROJECT_POST
-		WHERE ID = #{id}
-	</select>
-	
-	<!-- 프로젝트 작성자 정보 불러오기 -->
-	<select id="selectProjectAuthor" resultType="mUserVO">
-		SELECT * FROM M_USER
-		WHERE ID = #{user_id}
-	</select>
-	
-	<!-- 프로젝트 리워드 불러오기 -->
-	<select id="selectProjectRewards" resultType="rewardVO">
-		SELECT * FROM REWARD
-		WHERE PROJECT_POST_ID = #{id}
-		ORDER BY PRICE ASC
-	</select>
-	
-	<!-- 프로젝트 첨부파일 불러오기 -->
-	<select id="selectProjectAttachedFiles" resultType="attachedFileVO">
-		SELECT * FROM ATTACHED_FILE 
-		WHERE project_post_id = #{id} 
-		ORDER BY NO ASC
-	</select>
-	
-	<!-- 프로젝트 태그 불러오기 -->
-	<select id="selectProjectTags" resultType="tagVO">
-		SELECT * FROM tag 
-		WHERE project_post_id = #{id} 
-		ORDER BY id ASC
-	</select>
-	
-	<!-- 프로젝트 댓글 불러오기 -->
-	<select id="selectProjectComments" resultMap="mCommentInfo">
-		SELECT * FROM M_COMMENT
-		WHERE PROJECT_POST_ID = #{id}
-		ORDER BY id DESC
-		<!-- 나중에 추가하기 답글계층 정렬도 -->
-	</select>
-	
-	<!-- 조회수 증가 -->
+	<!-- 프로젝트 게시글 조회수 증가 -->
 	<update id="updateHit">
 		UPDATE PROJECT_POST SET HIT = HIT + 1 WHERE ID = #{id}
 	</update>

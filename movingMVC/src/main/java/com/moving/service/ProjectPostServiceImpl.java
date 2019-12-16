@@ -33,7 +33,7 @@ public class ProjectPostServiceImpl implements ProjectPostService {
 	@Override
 	public void insertProjectComment(MCommentVO mCommentVO) {
 		projectPostDAO.insertProjectComment(mCommentVO);			//댓글 저장
-		projectPostDAO.updateProjectCommentCount(mCommentVO);		//댓글 개수 높이기
+		projectPostDAO.updateProjectCommentCountOne(mCommentVO);		//댓글 개수 높이기
 	}//insertProjectComment
 
 	@Override
@@ -55,11 +55,12 @@ public class ProjectPostServiceImpl implements ProjectPostService {
 	public List<Map<String, Object>> selectCommentListMap(int id) {
 		return projectPostDAO.selectCommentListMap(id);
 	}
-
+	
+	@Transactional
 	@Override
 	public ProjectPostVO selectCommentCount(int id) {
-		projectPostDAO.updateCommentCount(id);
-		return projectPostDAO.selectCommentCount(id);
+		projectPostDAO.updateCommentCount(id);				//댓글 개수 세고나서 저장./ 나중에 수정하기
+		return projectPostDAO.selectCommentCount(id);		//댓글 개수 가져오기
 	}
 
 }

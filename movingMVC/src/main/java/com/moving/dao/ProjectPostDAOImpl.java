@@ -34,20 +34,22 @@ public class ProjectPostDAOImpl implements ProjectPostDAO {
 	@Override
 	public void insertProjectComment(MCommentVO mCommentVO) {
 		sqlSession.insert("insertProjectComment", mCommentVO);
-		System.out.println("content"+mCommentVO.getContent());
-		System.out.println("userIdFrom"+mCommentVO.getUserIdFrom());
-		System.out.println("projectPostId"+mCommentVO.getProjectPostId());
 	}//insertProjectComment() 댓글 작성
 
 	@Override
+	public void updateProjectCommentCountOne(MCommentVO mCommentVO) {
+		sqlSession.update("updateProjectCommentCountOne", mCommentVO);
+	}//
+	
+	@Override
 	public void updateProjectCommentCount(MCommentVO mCommentVO) {
 		sqlSession.update("updateProjectComment", mCommentVO);
-	}//댓글 개수 카운트 높여서 저장
+	}
 
 	@Override
 	public List<MCommentVO> selectCommentList(int id) {
 		return sqlSession.selectList("selectProjectComments", id);
-	}
+	}//프로젝트 댓글 불러오기
 
 	@Override
 	public void updateProjectComment(MCommentVO mCommentVO) {
@@ -71,7 +73,9 @@ public class ProjectPostDAOImpl implements ProjectPostDAO {
 
 	@Override
 	public void updateCommentCount(int id) {
-		sqlSession.update("updateCommentCount", id);
+		ProjectPostVO p = new ProjectPostVO();
+		p.setId(id);
+		sqlSession.update("updateCommentCount", p);
 	}
 	
 	

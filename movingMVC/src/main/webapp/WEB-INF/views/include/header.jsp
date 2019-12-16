@@ -24,39 +24,26 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/aboutMoving.css" />
 
 <%-- board css 추가 --%>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/board_notice.css" />
-<%-- 공지사항 --%>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/board_event.css" />
-<%-- 이벤트 --%>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/board_faq.css" />
-<%-- FAQ --%>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/board_actors.css" />
-<%-- 배우 모집 --%>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/board_contest.css" />
-<%-- 시나리오 모집 --%>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/board_free.css" />
-<%-- 자유게시판 --%>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/board_write.css" />
-<%-- 글 작성 폼 --%>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/board_qna.css" />
-<%-- Q & A--%>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/board_notice.css" /><%-- 공지사항 --%>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/board_event.css" /><%-- 이벤트 --%>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/board_faq.css" /><%-- FAQ --%>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/board_actors.css" /><%-- 배우 모집 --%>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/board_contest.css" /><%-- 시나리오 모집 --%>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/board_free.css" /><%-- 자유게시판 --%>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/board_write.css" /><%-- 글 작성 폼 --%>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/board_qna.css" /><%-- Q & A--%>
 
 <%-- funding css 추가 --%>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/funding_list.css" />
-<%-- 펀딩 리스트 --%>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/funding_write.css" />
-<%-- 펀딩 글 작성 폼 --%>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/funding_cont.css" />
-<%-- 펀딩 글 보기 --%>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/funding_list.css" /><%-- 펀딩 리스트 --%>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/funding_write.css" /><%-- 펀딩 글 작성 폼 --%>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/funding_cont.css" /><%-- 펀딩 글 보기 --%>
 
 <%-- member css 추가 --%>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/member_login.css" />
-<%-- 로그인 폼 --%>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/member_join.css" />
-<%-- 회원가입 폼 --%>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/member_login.css" /><%-- 로그인 폼 --%>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/member_join.css" /><%-- 회원가입 폼 --%>
 
 <%-- movie css 추가 --%>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/video_cont.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/video_content.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/video_mainList.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/video_categoryList.css" />
 

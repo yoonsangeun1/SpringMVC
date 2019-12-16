@@ -140,7 +140,7 @@
 						<input name="content" id="content" class="SNS_Comment_Write_Chat">
 						<input class="SNS_Comment_Write_Button" name="write" id="write"
 							type="button" value="작성"
-							onclick="getCommentList(); reply_check(); selectCommentCount();">
+							onclick="reply_check(); selectCommentCount();">
 					</div>
 					<%-- 댓글 목록 출력 --%>
 					<%-- 댓글이 있다면 --%>

@@ -42,7 +42,7 @@ public class ProjectReplyController {
 	}//selectCommentList()
 
 	//VO 타입 : 게시판 번호에 해당하는 댓글 목록 불러오기
-	@RequestMapping(value="all/{id}", method=RequestMethod.GET)
+	@RequestMapping(value="all_vo/{id}", method=RequestMethod.GET)
 	public ResponseEntity<List<MCommentVO>> selectCommentList(@PathVariable("id") int id) {
 		/* @PathVariable("id") 애노테이션은 웹주소 경로에서 원하는 자료를 추출하는 용도로 사용.
 		 * 여기서는 {id}에 주어진 게시판 번호값을 가져와서 int id에 저장 */
@@ -57,7 +57,7 @@ public class ProjectReplyController {
 	}//selectCommentList()
 
 	//Map 타입 : 게시판 번호에 해당하는 댓글 목록 불러오기
-	@RequestMapping(value="test/{id}", method=RequestMethod.GET)
+	@RequestMapping(value="all/{id}", method=RequestMethod.GET)
 	public List<Map<String, Object>> selectCommentListMap(@PathVariable("id") int id) {
 		 /*@PathVariable("id") 애노테이션은 웹주소 경로에서 원하는 자료를 추출하는 용도로 사용.
 		 * 여기서는 {id}에 주어진 게시판 번호값을 가져와서 int id에 저장*/ 

@@ -16,6 +16,25 @@ public class OrderSheetVO {		/* 주문_문서 */
 	private DeliveryVO deliveryVO;
 	private PaymentVO paymentVO;
 	
+	
+	public List<OrderEntityVO> getOrderEntityVO() {
+		return orderEntityVO;
+	}
+	public void setOrderEntityVO(List<OrderEntityVO> orderEntityVO) {
+		this.orderEntityVO = orderEntityVO;
+	}
+	public DeliveryVO getDeliveryVO() {
+		return deliveryVO;
+	}
+	public void setDeliveryVO(DeliveryVO deliveryVO) {
+		this.deliveryVO = deliveryVO;
+	}
+	public PaymentVO getPaymentVO() {
+		return paymentVO;
+	}
+	public void setPaymentVO(PaymentVO paymentVO) {
+		this.paymentVO = paymentVO;
+	}
 	public int getId() {
 		return id;
 	}

@@ -19,7 +19,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 회원저장 -->
 	<insert id="insertUser">
-		insert into m_user (id,userid,name,nickname,email,password,phone,genre01,genre02,genre03)
+		insert into m_user (id,userid,name,nickname,email,password,phone,genre_01,genre_02,genre_03)
 		 values(m_user_seq.nextval,#{email},#{name},#{nickname},#{email},#{password},#{phone},#{genre01},#{genre02},#{genre03})
 	</insert>
 	
@@ -42,7 +42,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 	로그인인증 -->
 	<select id="login_check" resultType="mUserVO">
 		select * from m_user where email=#{mLogin_email}
-		and userStatus=1
+		and user_status=1
 	</select>
 	
 <!-- 	회원정보수정 -->
