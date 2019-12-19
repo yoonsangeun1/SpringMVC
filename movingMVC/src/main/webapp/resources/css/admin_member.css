@@ -26,7 +26,7 @@
 
 #aMember_table tr {
 	width: 1000px;
-	display: flex;
+	display: table;
 	line-height: 1.4em;
 }
 #aMember_table tr:hover { /* 회원관리 표에 마우스 오버시 */
@@ -62,35 +62,62 @@
 	text-align: center;
 }
 
-#aMember_table th.aGroup {
+#aMember_table th.aLevel {
 	border-top-right-radius: 5px; /* 좌 상단 테두리를 둥글게 한다. */
 }
 
-#aMember_table .aCheck {flex-grow: 1;
+#aMember_table th.aUserId { /* 회원관리 목록표 구분 ID분류 */
 	text-align: center;
-	width:70px;
 }
 
-#aMember_table .aUserID {flex-grow: 3;
-	width: 250px;
+#aMember_table .aCheck {
+	text-align: center;
+	width: 60px;
+}
+
+#aMember_table .aId {
 	text-align: left;
-	padiing-left: 30px;
+	width: 90px;
 }
 
-#aMember_table .aEmail { /* 이메일 주소 */flex-grow: 3;
-	width: 300px;
+#aMember_table .aNickName {
 	text-align: left;
-	padding-left: 20px;
+	width: 130px;
 }
 
-#aMember_table .aName {flex-grow: 5;
-	width: 200px;
+#aMember_table .aUserId {
 	text-align: left;
+	width: 220px;
 }
 
-#aMember_table .aGroup {flex-grow: 3;
+#aMember_table .aName {
+	text-align: left;
+	width: 100px;
+}
+
+#aMember_table .aPhone {
+	text-align: center;
 	width: 150px;
-	text-align: left;
+}
+
+#aMember_table .aUserStatus {
+	text-align: center;
+	width: 52px;
+}
+
+#aMember_table .aPublishAvailability {
+	text-align: center;
+	width: 80px;
+}
+
+#aMember_table .aUserPoint {
+	text-align: right;
+	width: 66px;
+}
+
+#aMember_table .aUserLv {
+	text-align: center;
+	width: 52px;
 }
 
 #aMember_pageCtrl { /* 페이지 목록 */

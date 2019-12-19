@@ -85,7 +85,7 @@
 <script src="${pageContext.request.contextPath}/js/movie_cont.js"></script>
 <script src="${pageContext.request.contextPath}/js/slide.js"></script>
 <script src="${pageContext.request.contextPath}/js/social.js"></script>
-<script src="${pageContext.request.contextPath}/js/movie_upload"></script>
+<script src="${pageContext.request.contextPath}/js/movie_upload.js"></script>
 
 
 </head>
@@ -149,12 +149,12 @@
 				<div id="admin_menu">
 					<ul>
 						<!-- ul li태그로 메뉴구성 -->
-						<li><a href="/moving.com/admin" class="hyper">HOME</a></li>
+						<li><a href="/moving.com/admin/" class="hyper">HOME</a></li>
 						<li><a href="/moving.com/admin/dashboard" class="hyper">DASHBOARD</a></li>
 						<li><a href="/moving.com/admin/general" class="hyper">GENERAL</a></li>
 						<li><p class="hyper">------------</p></li>
 						<li><a href="/moving.com/admin/member" class="hyper">회원 관리</a></li>
-						<li><a href="/moving.com/admin/funding" class="hyper">펀딩 관리</a></li>
+						<li><a href="/moving.com/admin/project" class="hyper">펀딩 관리</a></li>
 						<li><a href="/moving.com/admin/board" class="hyper">게시글 관리</a></li>
 						<li><a href="/moving.com/admin/movie" class="hyper">영화 관리</a></li>
 					</ul>

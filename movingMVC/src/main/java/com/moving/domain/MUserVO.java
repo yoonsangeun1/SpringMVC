@@ -1,5 +1,7 @@
 package com.moving.domain;
 
+import java.util.List;
+
 public class MUserVO {							//회원 정보		
 
 	private int id; 							//아이디(고유번호,시퀀스,회원넘버)
@@ -25,6 +27,15 @@ public class MUserVO {							//회원 정보
 	private String businessLicenseImagePath; 	//사업자등록증이미지경로
 	private String deactivateDate; 				//탈퇴_날짜
 	private String deactivateReason; 			//탈퇴_사유
+	
+	/* 페이징 관련 변수 */
+	private int startrow; 						// 시작행 번호
+	private int endrow;							// 끝 행 번호
+	
+	/* 검색 필드와 검색어 */
+	private String findField;					// 검색 필드
+	private String findName;					// 검색어
+	
 	
 	public int getId() {
 		return id;
@@ -132,7 +143,7 @@ public class MUserVO {							//회원 정보
 		return registerDate;
 	}
 	public void setRegisterDate(String registerDate) {
-		this.registerDate = registerDate;
+		this.registerDate = registerDate.substring(0,10); // 0~10 사이의 년,월,일만 반환
 	}
 	public String getBusinessName() {
 		return businessName;
@@ -163,6 +174,30 @@ public class MUserVO {							//회원 정보
 	}
 	public void setDeactivateReason(String deactivateReason) {
 		this.deactivateReason = deactivateReason;
+	}
+	public int getStartrow() {
+		return startrow;
+	}
+	public void setStartrow(int startrow) {
+		this.startrow = startrow;
+	}
+	public int getEndrow() {
+		return endrow;
+	}
+	public void setEndrow(int endrow) {
+		this.endrow = endrow;
+	}
+	public String getFindName() {
+		return findName;
+	}
+	public void setFindName(String findName) {
+		this.findName = findName;
+	}
+	public String getFindField() {
+		return findField;
+	}
+	public void setFindField(String findField) {
+		this.findField = findField;
 	}
 	
 }//M_user class

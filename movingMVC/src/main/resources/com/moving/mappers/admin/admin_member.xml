@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AdminMember">
+
+	<resultMap type="mUserVO" id="memberInfo">
+<!-- 		<association property="" javaType="com.moving.domain." autoMapping="true"/> -->
+	</resultMap>
+	
+	<select id="am_count" resultType="int">
+		SELECT COUNT(ID) FROM M_USER
+		<where>
+			<if test="findField == ''"></if> <!-- 총 회원 수 -->
+			<if test="findField == 'all'">
+				nickname like #{findName} or userid like #{findName} or name like #{findName}
+			</if>
+			<if test="findField == 'nickName'">
+				nickname like #{findName}
+			</if>
+			<if test="findField == 'id'">
+				userid like #{findName}
+			</if>
+			<if test="findField == 'name'">
+				name like #{findName}
+			</if>
+		</where>
+	</select>
+	
+	<select id="am_list" resultMap="memberInfo">
+		SELECT * FROM (SELECT ROWNUM rNum, id, nickname, 
+		userid, name, phone, user_status, publish_availability, user_point, user_lv FROM (SELECT * FROM M_USER
+		<where>
+			<if test="findField == ''"></if> <!-- 총 회원 수 -->
+			<if test="findField == 'all'">
+				nickname like #{findName} or userid like #{findName} or name like #{findName}
+			</if>
+			<if test="findField == 'nickName'">
+				nickname like #{findName}
+			</if>
+			<if test="findField == 'id'">
+				userid like #{findName}
+			</if>
+			<if test="findField == 'name'">
+				name like #{findName}
+			</if>
+		</where>
+		ORDER BY id DESC))
+		WHERE rNum &gt;= #{startrow} and rNum &lt;= #{endrow}
+	</select>
+</mapper>
