@@ -72,7 +72,7 @@
 	  <c:set var="title" value="${fn:substring(bflist.title,0,19)}..." />
 	   <td>
         <a href="/moving.com/board/free_cont?id=${bflist.id}&page=${page}">
-	  ${bflist.title}  <%--user_id가 아닌 닉네임이 들어가게 수정해야함. --%>
+	  ${title} <!-- set쪽에 bflist.title로 해서 가져오면 값이 적용이 안됨 ? -->
 	    </a><%-- board_cont?bno=번호값&page=쪽번호 2개의 피라미터 값이 get방식으로 전달됨. --%>
        </td>
      </c:when>
@@ -90,7 +90,7 @@
     
      <c:choose>
       <c:when test="${fn:length(bflist.mUserVO.nickname) > 10}">
-       <c:set var="bfdto.m_user.nickname" value="${fn:substring(bflist.mUserVO.nickname,0,9)}.." />
+       <c:set var="bflist.mUserVO.nickname" value="${fn:substring(bflist.mUserVO.nickname,0,9)}.." />
         <td id="author">
          <a href=#>
        	  ${bflist.mUserVO.nickname}

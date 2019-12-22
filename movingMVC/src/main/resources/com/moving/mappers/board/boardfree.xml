@@ -7,17 +7,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="BoardFree">
 
 <resultMap type="normalPostVO" id="boardInfo">
-	<association property="mUserVO" javaType="mUserVO" 
-	column="user_id" select="test"/>
-	<collection property="mCommentVO" javaType="java.util.List" ofType="commentInfo"
+		<id property="id" column="board_free_id" /> <!-- board_free_id는 AS로 별칭을 지정해 준 것임. -->
+		<result property="registerDate" column="board_free_registerDate" />
+			<association property="mUserVO" javaType="com.moving.domain.MUserVO"/>
+</resultMap>
+	
+<!-- 	<collection property="mCommentVO" javaType="java.util.List" ofType="commentInfo"
 	column="id" select="test2" /> 
-	<!-- <association property="mUserVO" javaType="com.moving.domain.MUserVO" autoMapping="true"/> -->
+	<association property="mUserVO" javaType="com.moving.domain.MUserVO" autoMapping="true"/>
+</resultMap>
+
+<resultMap type="normalPostVO" id="boardInfo">
+	<association property="mUserVO" javaType="mUserVO"
+	column="user_id" select="test" />
 </resultMap>
  
- <!-- 게시물 개수 -->
- <select id="bf_count" resultType="int">
-  SELECT COUNT(*) FROM NORMAL_POST
- </select>
  
  <select id="test" resultType="mUserVO">
  	select nickname from m_user where id=#{user_id}
@@ -34,19 +38,32 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <select id="test3" resultType="mUserVO">
  select nickname from m_User where id=#{user_id_from}
-</select>
+</select> -->
+
+ <!-- 게시물 개수  -->
+ <select id="bf_count" resultType="int">
+  SELECT COUNT(*) FROM NORMAL_POST
+ </select>
  
- <!-- 페이징 -->
- <select id="bf_list" resultMap="boardInfo">
+ <!-- 페이징 + 목록보기 -->
+<select id="bf_list" resultMap="boardInfo">
  SELECT * FROM
-(SELECT ROW_NUMBER() OVER(ORDER BY ID DESC) rNum,
-ID, TITLE, USER_ID,
-REGISTER_DATE, HIT
-FROM NORMAL_POST 
-ORDER BY ID DESC)
-WHERE rNum &gt;= #{startrow}
-AND rNum &lt;= #{endrow}
-<!-- SELECT * FROM
+ (SELECT ROW_NUMBER() OVER(ORDER BY N.ID DESC) rNum,
+ N.ID AS board_free_id, N.TITLE, U.NICKNAME,
+ N.REGISTER_DATE AS board_free_registerDate, N.HIT
+ FROM NORMAL_POST N, M_USER U
+ WHERE N.USER_ID = U.ID
+ ORDER BY N.ID DESC)
+ WHERE rNum &gt;= #{startrow}
+ AND rNum &lt;= #{endrow}
+</select>
+
+
+ 
+ 
+ 
+<!--  <select id="bf_list" resultMap="boardInfo">
+ SELECT * FROM
 (SELECT ROW_NUMBER() OVER(ORDER BY N.ID DESC) rNum,
 N.ID, N.TITLE, U.NICKNAME,
 N.REGISTER_DATE, N.HIT
@@ -54,7 +71,16 @@ FROM NORMAL_POST N, M_USER U
 WHERE N.USER_ID = U.ID
 ORDER BY N.ID DESC)
 WHERE rNum &gt;= #{startrow}
-AND rNum &lt;= #{endrow} -->
+AND rNum &lt;= #{endrow}  -->
+
+<!--  SELECT * FROM
+(SELECT ROW_NUMBER() OVER(ORDER BY ID DESC) rNum,
+ID, TITLE, USER_ID,
+REGISTER_DATE, HIT
+FROM NORMAL_POST 
+ORDER BY ID DESC)
+WHERE rNum &gt;= #{startrow}
+AND rNum &lt;= #{endrow} 12월 13일 상은햄이랑 수정 중 마지막에 작성한 코드. -->
 
 <!-- SELECT * FROM
 (SELECT ROW_NUMBER() OVER(ORDER BY N.ID DESC) rNum, 
@@ -71,8 +97,7 @@ AND rNum <= 20;  이런식으로 처리해서 페이징 구현함. 이유) 2개�
   기본컬럼으로 레코드 저장시 일련번호값이 저장됨. rNum
   rowNum컬럼의 별칭명. &gt;은 >, &lt; < , 1이상
   10이하 사이의 10개목록만 검색 -->
-  
- </select>
+
  
  <!-- 글쓰기 -->
  <insert id="bf_in">

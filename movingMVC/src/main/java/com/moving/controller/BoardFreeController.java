@@ -71,6 +71,12 @@ public class BoardFreeController {
 			endpage=startpage+10-1;
 		}//if
 		
+		System.out.println(bflist);
+		System.out.println(bflist.get(0).getRegisterDate());
+		System.out.println(bflist.get(0).getId());
+		System.out.println(bflist.get(0).getTitle());
+		System.out.println(bflist.get(0).getHit());
+		
 		ModelAndView bfmlist=new ModelAndView(); //board free ModelAndView list
 		
 		bfmlist.addObject("totalCount",totalCount);//totalCount키이름에 총게시물 수 저장
