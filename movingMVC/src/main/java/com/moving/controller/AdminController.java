@@ -20,11 +20,11 @@ public class AdminController {
 		return new ModelAndView("admin");
 	}//admin()
 	
-	/* 게시판 관리 */
-	@RequestMapping(value="/board")
-	public ModelAndView board() {
-		return new ModelAndView("admin/admin_board");
-	}//board()
+//	/* 게시판 관리 */
+//	@RequestMapping(value="/board")
+//	public ModelAndView board() {
+//		return new ModelAndView("admin/admin_board");
+//	}//board()
 	
 	/* 프로젝트 관리 */
 	@RequestMapping(value="/project")

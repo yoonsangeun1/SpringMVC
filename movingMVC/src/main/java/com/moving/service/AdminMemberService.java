@@ -10,4 +10,6 @@ public interface AdminMemberService {
 
 	List<MUserVO> memberList(MUserVO mu);
 
+	MUserVO memberInfo(String userid);
+
 }

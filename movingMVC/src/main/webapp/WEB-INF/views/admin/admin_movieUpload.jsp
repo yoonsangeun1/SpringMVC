@@ -26,11 +26,11 @@
 					<tr>
 						<th>감독</th>
 						<td>
-						<input name="director" id="aMUploadC_director" />
+						<input name="director" id="aMUploadC_director"/>
 						&nbsp;&nbsp;&nbsp;출연진&nbsp;
-						<input name="actor" id="aMUploadC_actor" />
+						<input name="actor" id="aMUploadC_actor" size="30"/>
 						&nbsp;&nbsp;&nbsp;시대배경&nbsp;
-						<input name="eraBackground" id="aMUploadC_background" />
+						<input name="eraBackground" id="aMUploadC_background" size="18"/>
 						</td>
 					</tr>
 					<tr>
@@ -87,8 +87,21 @@
 							<%-- 줄거리 입력 --%>
 							<div id="aMUploadC_cont">
 								<textarea name="content" id="aMUploadC_contText" class="txtbox content"
-									placeholder="내용을 입력하세요." rows="22"></textarea>
-							</div>
+									placeholder="내용을 입력하세요." rows="22" cols="85"></textarea>
+									<script type="text/javascript">
+										var oEditors = []; //전역변수
+
+										nhn.husky.EZCreator
+												.createInIFrame({ //스마트 에디터 프레임 생성
+													oAppRef : oEditors,
+													elPlaceHolder : "aMUploadC_contText",
+													sSkinURI : "../resources/editor/SmartEditor2Skin.html",
+													bUseToolbar : true, //툴 바 사용 여부
+													bUseVerticalResizer : true, //입력창 크기 조절 사용 여부
+													ㅠUseVerticalResizer : true, //모드 탭(Editor | HTML | TEXT ) 사용 여부
+												});
+									</script>
+								</div>
 						</td>
 					</tr>
 					<tr>
@@ -120,7 +133,7 @@
 						<%-- 동영상 div --%>
 						<td>
 							<div id="aMUploadR_video">
-								<iframe width="340" height="220" src="https://www.youtube.com/embed/b5bHx1nTQ24" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+								<iframe width="250" height="160" src="https://www.youtube.com/embed/b5bHx1nTQ24" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 							</div>
 						</td>
 					</tr>
@@ -129,7 +142,7 @@
 						<%-- 동영상 url or 파일명 --%>
 						<td height="100">
 							<div id="aMUploadR_videoUrl">
-								영상 파일 경로<input name="aMUploadR_url" id="aMUploadR_url" size="44" readonly />
+								영상 파일 경로<input name="aMUploadR_url" id="aMUploadR_url" size="20" readonly />
 							</div>
 						</td>
 					</tr>
@@ -183,16 +196,16 @@
 						<td>
 							<div id="aMUploadC_combo">
 								<select id="aMUploadC_genreT" name="aMUploadC_genreT" class="combo">
-									<option value="30001">선택하세요.</option>
-									<option value="3000101">범죄/스릴러</option>
-									<option value="3000102">액션/어드벤쳐</option>
-									<option value="3000103">다큐/드라마/청춘</option>
-									<option value="3000104">역사/시대극</option>
-									<option value="3000105">판타지/SF</option>
-									<option value="3000106">멜로/로맨스</option>
-									<option value="3000107">코미디</option>
-									<option value="3000108">애니메이션</option>
-									<option value="3000109">기타</option>
+									<option value="30002">선택하세요.</option>
+									<option value="3000201">범죄/스릴러</option>
+									<option value="3000202">액션/어드벤쳐</option>
+									<option value="3000203">다큐/드라마/청춘</option>
+									<option value="3000204">역사/시대극</option>
+									<option value="3000205">판타지/SF</option>
+									<option value="3000206">멜로/로맨스</option>
+									<option value="3000207">코미디</option>
+									<option value="3000208">애니메이션</option>
+									<option value="3000209">기타</option>
 								</select>
 							</div>
 						</td>

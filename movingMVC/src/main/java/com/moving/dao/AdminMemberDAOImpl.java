@@ -23,4 +23,9 @@ public class AdminMemberDAOImpl implements AdminMemberDAO{
 	public List<MUserVO> memberlist(MUserVO mu) {
 		return this.sqlSession.selectList("am_list",mu);
 	} // 검색전후 회원 목록
+
+	@Override
+	public MUserVO memberInfo(String userid) {
+		return this.sqlSession.selectOne("am_info",userid);
+	}
 }

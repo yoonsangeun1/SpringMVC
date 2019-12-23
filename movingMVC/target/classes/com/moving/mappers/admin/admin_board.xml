@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AdminMember">
+
+	<resultMap type="NormalPostVO" id="postInfo">
+		<association property="mUserVO" javaType="com.moving.domain.MUserVO" autoMapping="true"/>
+	</resultMap>
+	
+	<select id="ab_count" resultType="int">
+		SELECT COUNT(*) FROM NORMAL_POST N
+		<where>
+			<if test="findField == ''"></if> <!-- 검색값이 없을 경우 -->
+			<if test="findField == 'title'"> <!-- 검색조건이 제목인 경우 -->
+				N.TITLE LIKE #{findName} <!-- LIKE로 찾기 기능 사용 -->
+			</if>
+			<if test="findField == 'content'"> <!-- 검색조건이 내용인 경우 -->
+				N.CONTENT LIKE #{findName}
+			</if>
+			<if test="findField == 'nickname'"> <!-- 검색조건이 닉네임인 경우 -->
+				N.USER_ID IN
+				(SELECT U.ID FROM M_USER U
+				WHERE U.nickname LIKE #{findName})
+			</if>
+		</where>
+
+	</select>
+	
+	<select id="ab_list" resultMap="postInfo">
+	SELECT * FROM
+	(SELECT ROW_NUMBER() OVER(ORDER BY N.ID DESC) rNum,
+	N.ID, N.TITLE, U.NICKNAME,
+	N.REGISTER_DATE AS registerDate, N.HIT
+	FROM NORMAL_POST N, M_USER U
+	<where>
+		N.USER_ID = U.ID
+		<if test="findField == ''"></if> <!-- 값이 없을 경우 -->
+		<if test="findField == 'title'"> <!-- 검색 필드가 제목일 경우 -->
+			AND N.TITLE LIKE #{findName}      <!-- 검색 필드 값대로 검색 -->
+		</if>
+		<if test="findField == 'content'"> <!-- 검색 필드가 내용일 경우 -->
+			AND N.CONTENT LIKE #{findName}    <!-- 검색 필드 값대로 검색 -->
+		</if>
+		<if test="findField == 'nickname'"> <!-- 검색 필드가 닉네임일 경우 -->
+			AND U.NICKNAME LIKE #{findName}     <!-- 검색 필드 값대로 검색 -->
+		</if>
+	</where>
+	ORDER BY ID DESC)
+	WHERE rNum &gt;= #{startrow}
+	AND rNum &lt;= #{endrow}
+</select>
+</mapper>

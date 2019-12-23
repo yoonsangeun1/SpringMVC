@@ -69,11 +69,17 @@ function movie_check(){
 		return false;
 	} // 연도
 	
-	if($.trim($('#aMUploadC_contText').val()) == ''){
+	oEditors.getById["aMUploadC_contText"].exec("UPDATE_CONTENTS_FIELD", []);
+	
+	var content=$("#aMUploadC_contText").val();	
+	
+	if(content == "" || content == null || content == "&nbsp;" || 
+			content == '<br>' || content == '<br/>' ||
+			content == '<p>&nbsp;</p>'){
 		alert('줄거리를 입력해주세요!');
-		$('#aMUploadC_contText').val('').focus();
+		oEditors.getById["aMUploadC_contText"].exec("FOCUS");
 		return false;
-	} // 줄거리
+	}//if
 	
 } // movie_check()
 

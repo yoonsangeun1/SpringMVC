@@ -24,17 +24,18 @@
 		</tr>
 		<c:if test="${!empty mulist}">
 			<c:forEach var="m" items="${mulist }">
-			<tr onclick="window.open('member','회원정보','width=700,height=750,location=no,status=no,scrollbars=yes')">
+			<tr onclick="popup('${m.userid}');">
+			
 				<td class="aCheck"><input type="checkbox" name="aMember_check" value="memCheck" /></td>
-				<td class="aId"><a href="#" >${m.id }</a></td>
-				<td class="aNickName"><a href="#" >${m.nickname }</a></td>
-				<td class="aUserId"><a href="#" >${m.userid }</a></td>
-				<td class="aName"><a href="#" >${m.name }</a></td>
-				<td class="aPhone"><a href="#" >${m.phone }</a></td>
-				<td class="aUserStatus"><a href="#" >${m.userStatus }</a></td>
-				<td class="aPublishAvailability"><a href="#" >${m.publishAvailability }</a></td>
-				<td class="aUserPoint"><a href="#" >${m.userPoint }</a></td>
-				<td class="aUserLv"><a href="#" >${m.userLv }</a></td>
+				<td class="aId">${m.id }</td>
+				<td class="aNickName">${m.nickname }</td>
+				<td class="aUserId">${m.userid }</td>
+				<td class="aName">${m.name }</td>
+				<td class="aPhone">${m.phone }</td>
+				<td class="aUserStatus">${m.userStatus }</td>
+				<td class="aPublishAvailability">${m.publishAvailability }</td>
+				<td class="aUserPoint">${m.userPoint }</td>
+				<td class="aUserLv">${m.userLv }</td>
 			</tr>
 			</c:forEach>
 		</c:if>
@@ -185,4 +186,18 @@
 	
 	
 </div>
+			<script>
+				var x=750;
+				var y=650;
+				var popupX = (screen.availWidth - x) / 2;
+				if(window.screenLeft < 0){
+					popupX += window.screen.width*-1;
+				}else if(window.screenLeft > window.screen.width ){
+					popupX += window.screen.width;
+				}
+				var popupY = (screen.availHeight / 2);
+				function popup(userid){
+					window.open('memberInfo?userid='+userid+'&page=${page}','회원정보','width='+x+',height='+y+',left='+popupX+',top='+popupY+',location=no,status=no,scrollbars=yes,resizable=no');
+				}
+			</script>
 <%@ include file="../include/admin_footer.jsp" %>

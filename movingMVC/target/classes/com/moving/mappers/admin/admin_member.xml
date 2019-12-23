@@ -33,7 +33,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT * FROM (SELECT ROWNUM rNum, id, nickname, 
 		userid, name, phone, user_status, publish_availability, user_point, user_lv FROM (SELECT * FROM M_USER
 		<where>
-			<if test="findField == ''"></if> <!-- 총 회원 수 -->
+			<if test="findField == ''"></if> <!-- 총 회원 목록 -->
 			<if test="findField == 'all'">
 				nickname like #{findName} or userid like #{findName} or name like #{findName}
 			</if>
@@ -49,5 +49,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</where>
 		ORDER BY id DESC))
 		WHERE rNum &gt;= #{startrow} and rNum &lt;= #{endrow}
+	</select>
+	
+	<select id="am_info" resultMap="memberInfo">
+		SELECT profile_image_url, id, userid, name, nickname, genre_01, genre_02, genre_03, email, phone, publish_availability,
+		user_status, user_type, user_lv, business_name, business_register_no FROM M_USER WHERE userid = #{userid}
 	</select>
 </mapper>
