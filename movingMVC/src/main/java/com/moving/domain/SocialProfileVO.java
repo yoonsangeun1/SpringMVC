@@ -4,17 +4,18 @@ import java.util.List;
 
 public class SocialProfileVO {
 	private int id;			//SNS이용 회원 아이디(넘버)
-	private int codeNo;
-	private int userId;
-	private String nickname;
-	private String userType;
-	private String introduce;	//이미지 경로
-	private String backgroundImagePath;
-	private String profileImagePath;	//팔로워,팔로우 수
-	private int followerCount;
-	private int followCount;
+	private int codeNo;		//SNS이용 회원 종류 코드번호
+	private int userId;		//유저 아이디?
+	private String nickname;//회원 별칭
+	private String userType;//회원 종류
+	private String introduce;//프로필 상 자기소개
+	private String backgroundImagePath;//배경화면 이미지 경로
+	private String profileImagePath;//프로필 이미지 경로
+	private int followerCount;//팔로워 수
+	private int followCount;//팔로우 수
 	private int postCount;//게시글
-	private String myListName;
+	private String myListName;//??
+	
 	private List<SocialPostVO> socialPostVO;
 	
 	public int getId() {

@@ -75,6 +75,7 @@
 <script src="${pageContext.request.contextPath}/js/movie_cont.js"></script>
 <script src="${pageContext.request.contextPath}/js/slide.js"></script>
 <script src="${pageContext.request.contextPath}/js/social.js"></script>
+<script src="${pageContext.request.contextPath}/resources/editor/js/HuskyEZCreator.js"></script>
 
 <style>
 #msLogin_wrap {

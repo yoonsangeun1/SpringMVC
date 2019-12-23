@@ -4,30 +4,20 @@ import java.util.List;
 
 public class SocialPostVO {
 	private int id;			//게시글 넘버
-	private int codeNo;
+	private int codeNo;		//게시글 종류
 	private int socialId;	//소셜 회원 아이디(넘버)
-	private String content;
-	private int projectId;
+	private String content;	//게시글 내용
+	private int projectId;	//(영화사)프로젝트 아이디(넘버)
 	private int socialCount;
-	private int moveCount;
-	private String registerDate;
-	private int publishAvailability;
+	private int moveCount;	//좋아요 개수
+	private String registerDate;//등록일자
+	private int publishAvailability;//공개 여부
+	
+	/* resultmap을 위한 변수 */
 	private SocialProfileVO socialProfileVO;
-	private AttachedFileVO attachedFileVO;
+	private List<AttachedFileVO> attachedFileVO;
 	private List<MCommentVO> mCommentVO;
 	
-	public AttachedFileVO getAttachedFileVO() {
-		return attachedFileVO;
-	}
-	public void setAttachedFileVO(AttachedFileVO attachedFileVO) {
-		this.attachedFileVO = attachedFileVO;
-	}
-	public List<MCommentVO> getmCommentVO() {
-		return mCommentVO;
-	}
-	public void setmCommentVO(List<MCommentVO> mCommentVO) {
-		this.mCommentVO = mCommentVO;
-	}
 	public int getId() {
 		return id;
 	}
@@ -88,5 +78,18 @@ public class SocialPostVO {
 	public void setSocialProfileVO(SocialProfileVO socialProfileVO) {
 		this.socialProfileVO = socialProfileVO;
 	}
-
+	public List<AttachedFileVO> getAttachedFileVO() {
+		return attachedFileVO;
+	}
+	public void setAttachedFileVO(List<AttachedFileVO> attachedFileVO) {
+		this.attachedFileVO = attachedFileVO;
+	}
+	public List<MCommentVO> getmCommentVO() {
+		return mCommentVO;
+	}
+	public void setmCommentVO(List<MCommentVO> mCommentVO) {
+		this.mCommentVO = mCommentVO;
+	}
+	
+	
 }

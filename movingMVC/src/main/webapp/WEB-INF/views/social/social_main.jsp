@@ -28,26 +28,20 @@
 		</div>
 		<div id="SNS_main_mid">
 			<!-- 중간 글쓰기, 글보기 -->
-			<form method="post" action="#" onsubmit="#">
 				<div id="mid_pad">
 					<div id="mid_left">
 						<textarea id="SNS_main_text" rows="14" cols="61"
 							placeholder="오늘은 어떤 기분을 남기고 싶으신가요?"></textarea>
 					</div>
 					<div id="mid_right">
-						<input type="submit" id="SNS_Buttons" value="작성" />
+						<input type="submit" class="SNS_Buttons" value="작성" />
 						<div class="SNS_File">
 							<label for="SNS_Buttons_File">사진 올리기</label> <input type="file"
-								id="SNS_Buttons_File">
+								class="SNS_Buttons_File">
 						</div>
-						<div class="SNS_File">
-							<label for="SNS_Buttons_File">동영상 올리기</label> <input type="file"
-								id="SNS_Buttons_File">
-						</div>
-						<input type="reset" id="SNS_Buttons" value="비우기" />
+						<input type="reset" class="SNS_Buttons" value="전체 삭제" />
 					</div>
 				</div>
-			</form>
 			<div id="mid_scrap">
 				<ul id="SNS_Content_ul">
 					<li>
@@ -55,8 +49,8 @@
 							<img class="SNS_Content_user_img" src="../images/member_profile.png" width="40" height="40"
 								 alt="프로필 사진">
 							<div class="SNS_Content_info">
-								<div class="SNS_Content_Title">박진우</div>
-								<div class="SNS_Content_Writer">1시간 전</div>
+								<div class="SNS_Content_Author">박진우</div>
+								<div class="SNS_Content_Write_Time">1시간 전</div>
 							</div>
 							<input class="SNS_Option_Button" type="button" value="..."
 								style="float: right;">
@@ -112,8 +106,8 @@
 							<img class="SNS_Content_user_img" src="../images/member_profile.png" width="40" height="40"
 								 alt="프로필 사진">
 							<div class="SNS_Content_info">
-								<div class="SNS_Content_Title">박진우</div>
-								<div class="SNS_Content_Writer">1시간 전</div>
+								<div class="SNS_Content_Author">박진우</div>
+								<div class="SNS_Content_Write_Time">1시간 전</div>
 							</div>
 							<input class="SNS_Option_Button" type="button" value="..."
 								style="float: right;">
@@ -161,8 +155,8 @@
 						<div class="SNS_Content">
 							<img class="SNS_Content_user_img" src="../images/member_profile.png" width="40" height="40" alt="프로필 사진">
 							<div class="SNS_Content_info">
-								<div class="SNS_Content_Title">박진우</div>
-								<div class="SNS_Content_Writer">1시간 전</div>
+								<div class="SNS_Content_Author">박진우</div>
+								<div class="SNS_Content_Write_Time">1시간 전</div>
 							</div>
 							<input class="SNS_Option_Button" type="button" value="..."	style="float: right;">
 							<div >

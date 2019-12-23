@@ -123,6 +123,7 @@ CREATE TABLE code_master (
 	table_name VARCHAR2(50), /* 테이블_명 */
 	register_date DATE /* 등록_날짜 */
 );
+select * from code_master
 
 CREATE UNIQUE INDEX code_master_id_pk
 	ON code_master (

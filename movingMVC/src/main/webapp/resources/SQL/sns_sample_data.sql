@@ -49,11 +49,11 @@ CREATE TABLE social_profile (
 INSERT INTO social_profile (id, user_id, nickname)
 VALUES						(social_profile_seq.nextval, 1, '박진우');
 UPDATE social_profile set 
-introduce='안녕하세요. 좋은 하루 되세요. 쳐다보지 마세요. 나대지 마세요.^^
-								안녕?안녕? 반가워 반가워 반가워 반가워 반가워 반가워 반가워 반가워 반가워'
-,profile_image_path='../images/model15.jpg'
+introduce='안녕하세요. 좋은 하루 되세요. '
+,profile_image_path='../images/sns_photo17.jpg'
 where id=1;
 
+UPDATE social_profile set background_image_path='../resources/images/sns_back2.jpg' where id=1;
 INSERT INTO social_profile (id, code_no, user_id, nickname, profile_image_path)
 VALUES						(social_profile_seq.nextval, 2, '윤상은', '/경로');
 select * from social_profile;
@@ -82,6 +82,29 @@ INSERT INTO attached_file(id,file_path,no,social_post_id)
 VALUES			(attached_file_seq.nextval,'../images/sns_photo17.jpg',3,2);
 INSERT INTO attached_file(id,file_path,no,social_post_id)
 VALUES			(attached_file_seq.nextval,'../images/sns_photo18.jpg',4,2);
+
+select * from SOCIAL_POST
+select
+		
+		profile.*,
+		post.*, c.*
+		from social_profile profile 
+		left outer join social_post post on profile.id = post.social_id
+		left outer join m_comment c on post.id = c.social_post_id
+		
+		where profile.id = 1
+		order by post.register_date desc
+
+SELECT * FROM M_COMMENT
+		WHERE SOCIAL_POST_ID =22
+		ORDER BY REGISTER_DATE DESC;
+		
+select * from m_comment where social_post_id=22;
+
+insert into M_COMMENT 
+(id, content, social_profile_id_from, social_post_id, comment_id_reply)
+values
+(m_comment_seq.nextval,'안녕', 2, 22, M_COMMENT_seq.nextval);
 
 /* 회원프로필 띄울 내용 - 박진우전용 회원게시물 */
 select social_profile.nickname,social_profile.profile_image_path,social_post.* 
@@ -113,9 +136,51 @@ ORDER BY social_post.register_date desc, attached_file.no asc;
 
 select * from social_post ORDER BY register_date desc;
 
+SELECT * FROM social_profile
 
+SELECT * FROM social_profile
+WHERE id = 
+(SELECT * FROM social_post
+WHERE social_id= 1
+ORDER BY register_date desc)
+WHERE id = 1
+
+select id from social_profile where user_id=1
 -- SNS프로필이 SNS 게시글에게+댓글에 답글
 INSERT INTO m_comment(id,code_no,social_profile_id,social_post_id,content,move_count,register_date,comment_id_reply,step,reply_order)
 VALUES			(move_seq.nextval,80001,2,2,'뎃글ㄹ네용',0,sysdate,6,0,0);
 
 
+SELECT * FROM SOCIAL_PROFILE
+		WHERE id = 1
+		
+		SELECT * FROM social_post
+		WHERE social_id=1
+		
+SELECT id AS m_comment_social_id, nickname,profile_image_path FROM social_profile
+		WHERE id = 1
+SELECT id AS social_post_social_id, user_type, nickname, profile_image_path
+		FROM social_profile
+		WHERE id = 1
+SELECT id AS social_post_social_id, user_type, nickname, profile_image_path
+		FROM social_profile
+		WHERE id = 1		
+SELECT id AS social_post_id, social_id, content, move_count, register_date,publish_availability
+		FROM social_post
+		WHERE social_id=1
+		ORDER BY register_date desc
+SELECT id AS m_comment_social_id, nickname,profile_image_path FROM social_profile
+		WHERE id = 1		
+		
+		
+		
+SELECT id AS social_profile_id, nickname, background_image_path,introduce, profile_image_path,
+		follower_count,follow_count
+		from social_profile
+		WHERE id =1; 	
+		
+SELECT id AS m_comment_id, social_profile_id_from as socialprofileidfrom, content, 
+		register_date, move_count, social_post_id FROM m_comment
+		WHERE social_post_id =22
+		ORDER BY register_date desc	;	
+delete from social_post where id=53

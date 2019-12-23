@@ -5,4 +5,10 @@ import com.moving.domain.SocialProfileVO;
 
 public interface SocialDAO {
 	SocialProfileVO selectSocialProfileInfo(int id);
+	//List<SocialPostVO> socialPostCommentList(int id);
+
+	void insertPost(SocialPostVO socialPostVO);
+
+	void deletePost(int post_id);
+
 }

@@ -3,7 +3,6 @@ package com.moving.domain;
 import org.springframework.web.multipart.MultipartFile;
 
 public class AttachedFileVO {		/* 첨부_파일 */
-
 	private int id; 				/* 아이디 */
 	private int codeNo; 			/* 코드_번호 */
 	private int fileType;			/* 파일_타입 */
