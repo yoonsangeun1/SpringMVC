@@ -34,3 +34,8 @@ function del_check(){
 		return false;
 	}
 }//del_check()
+
+
+
+
+

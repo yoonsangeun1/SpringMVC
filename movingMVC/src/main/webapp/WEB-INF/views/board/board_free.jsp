@@ -42,6 +42,7 @@
 		
 		</div> <%--커뮤니티 배우모집,시나리오 공모 등 div --%>
 
+<form method="get" action="/moving.com/board/free"> <!-- 검색필드 넘겨주기 위한 form -->
 		<table id="bFree_table" cellspacing="0">
 		 <thead>
 				<%--thead 요소는 테이블의 제목 그룹화. 한 번만 선언 가능하며,
@@ -92,17 +93,32 @@
       <c:when test="${fn:length(bflist.mUserVO.nickname) > 10}">
        <c:set var="bflist.mUserVO.nickname" value="${fn:substring(bflist.mUserVO.nickname,0,9)}.." />
         <td id="author">
-         <a href=#>
+        <c:if test="${bflist.socialProfileVO.id != 0}">
+         <a href="/moving.com/social/profile?id=${bflist.socialProfileVO.id}">
        	  ${bflist.mUserVO.nickname}
          </a>
+        </c:if>
+        
+        <c:if test="${bflist.socialProfileVO.id == 0}">
+       	  ${bflist.mUserVO.nickname}
+        </c:if>
+        
         </td>
       </c:when>
       
       <c:otherwise>
        <td id="author">
-        <a href="#">
-         ${bflist.mUserVO.nickname}
-        </a>
+       
+        <c:if test="${bflist.socialProfileVO.id != 0}">
+         <a href="/moving.com/social/profile?id=${bflist.socialProfileVO.id}">
+       	  ${bflist.mUserVO.nickname}
+         </a>
+        </c:if>
+        
+        <c:if test="${bflist.socialProfileVO.id == 0}">
+       	  ${bflist.mUserVO.nickname}
+        </c:if>
+       
        </td>
       </c:otherwise>
 
@@ -130,10 +146,10 @@
     
     <div style="clear:both"></div>
 		
-	<div id="bFree_pagination"> <%--페이지 순번 --%>
+	<div id="bFree_pagination"> <%--페이지 div --%>
 	
 		   <%-- 페이징 추가 --%>
-
+  <c:if test="${(empty findField) && (empty findName)}"> <%--검색 전 --%>
    <c:if test="${page <= 1}"> <!-- 첫번째 페이지 -->
     &lt;&lt;
    </c:if>
@@ -166,24 +182,68 @@
 	  &gt;&gt;
 	 </a>
 	</c:if>
+   </c:if> <%-- 검색 전 --%>
+   
+   <c:if test="${(!empty findField) || (!empty findName)}"> <%-- 검색 후 --%>
+    <c:if test="${page <= 1}"> <!-- 첫번째 페이지 -->
+    &lt;&lt;
+   </c:if>
+   
+   <c:if test="${page>1}"> <!-- 첫페이지 초과 -->
+    <a href="/moving.com/board/free?page=${page-1}&findField=${findField}&findName=${findName}">
+	 &lt;&lt;
+    </a>
+   </c:if>
+   
+   <%--현재 쪽번호 출력 --%>
+ <c:forEach var="a" begin="${startpage}" end="${endpage}" step="1">
+  <c:if test="${a==page}"> <%--현재쪽번호가 선택된 경우 --%>
+   [${a}]
+  </c:if>
+  
+  	<c:if test="${a != page}"><%--현재쪽번호가 선택안된 경우 --%>
+ 	 <a href="/moving.com/board/free?page=${a}&findField=${findField}&findName=${findName}">
+  	   ${a}
+ 	 </a> 
+  	</c:if>
+ </c:forEach>   
+
+	<c:if test="${page>=maxpage}">
+ 	 &gt;&gt;
+	</c:if>
+
+	<c:if test="${page<maxpage}">
+	 <a href="/moving.com/board/free?page=${page+1}&findField=${findField}&findName=${findName}">
+	  &gt;&gt;
+	 </a>
+	</c:if>
+   </c:if> <%-- 검색 후 --%>
+   
+   
 	</div>
 
 	<div id="bFree_search"> <%--검색 구간 전체 div --%>
-     <select name="bFree_combo" id="bFree_combo">
-      <option value="title_content">제목+내용</option>
-      <option value="title">제목</option>
-      <option value="content">내용</option>
-      <option value="user_name">이름</option>
-      <option value="tag">태그</option>
+     <select name="findField" id="findField">
+      <option value="title"
+      <c:if test="${findField == 'title'}">
+      ${'selected'}</c:if>>제목</option> <%--필드 콤보박스 제목을 선택했을 시
+      selected로 기본값 부여 --%>
+      <option value="content"
+      <c:if test="${findField == 'content'}">
+      ${'selected'}</c:if>>내용</option>
+      <option value="nickname"
+      <c:if test="${findField == 'nickname'}">
+      ${'selected'}</c:if>>닉네임</option>
     </select>
    
    <div id="bFree_input"> <%--텍필,버튼 --%>
-    <input id="search_text" name="search_text" size="20" />
+    <input id="findName" name="findName" size="20" value="${findName}"/>
     <input type="submit" class="search_btn button_wce8e8e8" value="검색" />
    </div> <%--텍필,버튼 --%>
    
   </div> <%--검색 구간 전체 div --%>
   
+  </form>
 	</div> <%--body 안에 있는 전체를 씌운 div --%>
 	
 	<script>

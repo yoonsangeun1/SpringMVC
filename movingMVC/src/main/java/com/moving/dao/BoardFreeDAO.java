@@ -6,7 +6,7 @@ import com.moving.domain.NormalPostVO;
 
 public interface BoardFreeDAO {
 
-	int getTotalCount();
+	int getTotalCount(NormalPostVO bf);
 	List<NormalPostVO> getBoardFreeList(NormalPostVO bf);
 	void inBoardFree(NormalPostVO bf);
 	void updateHit(int id);

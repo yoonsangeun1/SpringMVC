@@ -23,6 +23,7 @@ public class NormalPostVO {
 	private MUserVO mUserVO;						/* 회원 VO */
 	private List<AttachedFileVO> attachedFileVO; 	/* 첨부파일 VO */
 	private List<MoveVO> moveVO; 					/* 무브(좋아요) VO */
+	private SocialProfileVO socialProfileVO;		/* SNS VO*/
 	
 	//페이징 관련변수(쪽나누기)
 	private int startrow;//시작행 번호
@@ -159,5 +160,11 @@ public class NormalPostVO {
 	public void setMoveVO(List<MoveVO> moveVO) {
 		this.moveVO = moveVO;
 	}
-		
+	public SocialProfileVO getSocialProfileVO() {
+		return socialProfileVO;
+	}
+	public void setSocialProfileVO(SocialProfileVO socialProfileVO) {
+		this.socialProfileVO = socialProfileVO;
+	}
+	
 }//NomalPostVO class
