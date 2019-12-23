@@ -17,8 +17,8 @@ public class BoardFreeServiceImpl implements BoardFreeService {
 	private BoardFreeDAO boardFreeDao;
 
 	@Override
-	public int getTotalCount() {
-		return this.boardFreeDao.getTotalCount();
+	public int getTotalCount(NormalPostVO bf) {
+		return this.boardFreeDao.getTotalCount(bf);
 	}//게시물 개수 
 
 	@Override

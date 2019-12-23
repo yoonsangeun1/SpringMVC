@@ -115,7 +115,7 @@ select * from M_USER;
 INSERT INTO social_profile (id, code_no, user_id, nickname, profile_image_path, follower_count, follow_count,post_count)
 VALUES						(social_profile_seq.nextval, 50005, 1, '박진우', '/경로', 0,0,0);
 INSERT INTO social_profile (id, code_no, user_id, nickname, profile_image_path, follower_count, follow_count,post_count)
-VALUES						(social_profile_seq.nextval, 50005, 2, '윤상은', '/경로', 0,0,0);
+VALUES						(social_profile_seq.nextval, 50005, 3, '윤상은', '/경로', 0,0,0);
 select * from social_profile;
 
 /* 소셜  메세지*/
@@ -259,11 +259,162 @@ FROM NORMAL_POST
 ORDER BY ID DESC)
 WHERE rNum >= 1
 AND rNum <= 30
+
+ SELECT * FROM
+(SELECT ROW_NUMBER() OVER(ORDER BY N.ID DESC) rNum,
+N.ID, N.TITLE, U.NICKNAME,
+N.REGISTER_DATE, N.HIT
+FROM NORMAL_POST N, M_USER U
+WHERE N.USER_ID = U.ID
+ORDER BY N.ID DESC)
+WHERE rNum >= 11
+AND rNum <= 20;
+
+ SELECT * FROM
+(SELECT ROW_NUMBER() OVER(ORDER BY N.ID DESC) rNum,
+N.ID AS board_free_id, N.TITLE, U.NICKNAME,
+N.REGISTER_DATE AS board_free_registerDate, N.HIT
+FROM NORMAL_POST N, M_USER U
+WHERE N.USER_ID = U.ID
+ORDER BY N.ID DESC)
+WHERE rNum >= 1
+AND rNum <= 20;
+
+ SELECT * FROM
+(SELECT ROW_NUMBER() OVER(ORDER BY N.ID DESC) rNum,
+N.ID AS board_free_id, N.TITLE, U.NICKNAME,
+N.REGISTER_DATE AS board_free_registerDate, N.HIT
+FROM NORMAL_POST N, M_USER U
+WHERE N.USER_ID = U.ID
+ORDER BY N.ID DESC)
+WHERE rNum >= 1
+AND rNum <= 20;
+
+SELECT COUNT(N.ID) FROM NORMAL_POST N;
+
+SELECT COUNT(*) FROM NORMAL_POST N
+WHERE N.USER_ID IN (SELECT U.ID FROM M_USER U
+WHERE U.nickname LIKE '관리자');
+
+
+SELECT COUNT(N.ID) FROM NORMAL_POST N
+WHERE (SELECT * FROM M_USER U) N.USER_ID = U.ID
+
+SELECT COUNT(*) FROM NORMAL_POST N
+WHERE (SELECT * FROM M_USER U)
+N.USER_ID = U.ID
+AND U.nickname LIKE '관리자';
+
   
+
+SELECT COUNT(*) FROM NORMAL_POST where title like '%z%';
+SELECT COUNT(*) FROM M_USER where nickname LIKE '관리자';
+SELECT COUNT(*) FROM NORMAL_POST N, M_USER U
+WHERE N.USER_ID = U.ID
+AND U.nickname LIKE '관리자';
+
+  SELECT N.*, M.nickname
+  FROM NORMAL_POST N, M_USER M
+  WHERE N.USER_ID = M.ID
+  AND N.ID=65
+  
+  SELECT s.id FROM SOCIAL_PROFILE s,m_user u
+  WHERE s.user_id = u.id
 
 select * from code_master;
 --delete from code_master;
 select * from CODE_MASTER where category_name is null;
 
+ SELECT * FROM
+ (SELECT 
+ N.ID AS board_free_id, N.TITLE, U.NICKNAME, S.ID AS social_profile_id
+ N.REGISTER_DATE AS board_free_registerDate, N.HIT 
+ FROM NORMAL_POST N
+ INNER JOIN m_user U ON N.USER_ID = U.ID
+ INNER JOIN SOCIAL_PROFILE S ON N.USER_ID = S.user_id
+ where board_free_id=50 
+ ORDER BY board_free_id DESC)
+ WHERE rNum >=1
+ AND rNum <=10
+ 
+ INSERT INTO social_profile (id, code_no, user_id, nickname, profile_image_path, follower_count, follow_count,post_count)
+VALUES						(social_profile_seq.nextval, 50005, 1, '박진우', '/경로', 0,0,0);
+
+  SELECT * FROM
+ (SELECT ROW_NUMBER() OVER(ORDER BY N.ID DESC) rNum,
+ N.ID AS board_free_id , N.TITLE, U.NICKNAME,S.ID AS social_profile_id,
+ N.REGISTER_DATE AS board_free_registerDate, N.HIT
+ FROM NORMAL_POST N, M_USER U, SOCIAL_PROFILE S
+ WHERE N.USER_ID = U.ID 
+ AND U.ID = S.USER_ID
+ ORDER BY board_free_id DESC)
+ WHERE rNum >= 1
+ AND rNum <= 31                  /*소셜 넣지 안을때 기본 쿼리*/
+ 
+  SELECT * FROM
+ (SELECT ROW_NUMBER() OVER(ORDER BY board_free_id DESC) rNum,
+ N.ID AS board_free_id, N.TITLE, U.NICKNAME, S.ID AS social_profile_id
+ N.REGISTER_DATE AS board_free_registerDate, N.HIT
+ FROM NORMAL_POST N, M_USER U, SOCIAL_PROFILE S
+ 
+ SELECT * FROM
+ (SELECT ROW_NUMBER() OVER(ORDER BY board_free_id DESC) rNum,
+ N.ID AS board_free_id, N.TITLE, U.NICKNAME, S.ID AS social_profile_id
+ N.REGISTER_DATE AS board_free_registerDate, N.HIT
+ FROM NORMAL_POST N 
+ INNER JOIN M_USER U ON N.USER_ID = U.ID AND
+ INNER JOIN SOCIAL_PROFILE S ON U.ID = S.USER_ID
+ ORDER BY board_free_id DESC)
+ WHERE rNum >=1
+ AND rNum <=20;
+
+  SELECT * FROM
+ (SELECT ROW_NUMBER() OVER(ORDER BY N.ID DESC) rNum,
+ N.ID , N.TITLE, U.NICKNAME, S.ID,
+ N.REGISTER_DATE AS board_free_registerDate, N.HIT
+ FROM NORMAL_POST N, M_USER U, SOCIAL_PROFILE S
+ WHERE N.USER_ID = U.ID AND U.ID = S.USER_ID
+ ORDER BY N.ID DESC)
+ WHERE rNum >= 1
+ AND rNum <= 30;
+
+  SELECT * FROM
+ (SELECT ROW_NUMBER() OVER(ORDER BY board_free_id DESC) rNum,
+ N.ID AS board_free_id, N.TITLE, U.NICKNAME, S.ID AS social_profile_id,
+ U.ID AS m_user_id, N.USER_ID AS board_free_user_id,
+ S.USER_ID AS social_profile_user_id,
+ N.REGISTER_DATE AS board_free_registerDate, N.HIT
+ FROM NORMAL_POST N, M_USER U, SOCIAL_PROFILE S
+ ORDER BY board_free_id DESC)
+ WHERE rNum >= 1
+ AND rNum <= 30;
+ 
+   SELECT * FROM
+ (SELECT ROW_NUMBER() OVER(ORDER BY N.ID DESC) rNum,
+ N.ID AS board_free_id , N.TITLE, U.NICKNAME,S.ID AS social_profile_id,
+ N.REGISTER_DATE AS board_free_registerDate, N.HIT
+ FROM NORMAL_POST N 
+ LEFT OUTER JOIN M_USER U ON N.USER_ID = U.ID 
+ LEFT OUTER JOIN SOCIAL_PROFILE S ON U.ID = S.USER_ID
+ ORDER BY board_free_id DESC)
+ WHERE rNum >= 1
+ AND rNum <= 31 
+ 
+ delete from social_profile where id=3
+ 
+ ALTER TABLE NORMAL_POST ADD(content2 CLOB);
+ UPDATE NORMAL_POST SET content2 = content;
+ 
+ALTER TABLE NORMAL_POST RENAME COLUMN content TO content3;
+ALTER TABLE NORMAL_POST RENAME COLUMN content2 TO content;
+ALTER TABLE NORMAL_POST DROP COLUMN content3;
+
+  SELECT N.*, M.nickname
+  FROM NORMAL_POST N, M_USER M
+  WHERE N.USER_ID = M.ID
+  AND N.ID=67
 
 
+
+ 
+ 

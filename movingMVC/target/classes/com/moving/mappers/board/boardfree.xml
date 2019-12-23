@@ -6,10 +6,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="BoardFree">
 
-<resultMap type="normalPostVO" id="boardInfo">
-		<id property="id" column="board_free_id" /> <!-- board_free_id는 AS로 별칭을 지정해 준 것임. -->
+<resultMap type="normalPostVO" id="boardInfo" autoMapping="true">
+		<id property="id" column="board_free_id"/> <!-- board_free_id는 AS로 별칭을 지정해 준 것임. -->
+		<result property="title" column="title" />
+		<result property="userId" column="board_free_user_id" />
 		<result property="registerDate" column="board_free_registerDate" />
-			<association property="mUserVO" javaType="com.moving.domain.MUserVO"/>
+		<result property="hit" column="hit" />
+		<result property="content" column="content" />
+		
+			<association property="mUserVO" javaType="com.moving.domain.MUserVO"
+			 autoMapping="true">
+			</association>
+			
+			<association property="socialProfileVO" javaType="com.moving.domain.SocialProfileVO"
+			 autoMapping="true">
+			 <id property="id" column="social_profile_id"/>
+			</association>
+			
 </resultMap>
 	
 <!-- 	<collection property="mCommentVO" javaType="java.util.List" ofType="commentInfo"
@@ -40,20 +53,47 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  select nickname from m_User where id=#{user_id_from}
 </select> -->
 
- <!-- 게시물 개수  -->
+ <!-- 검색 전,후 게시물 개수 -->
  <select id="bf_count" resultType="int">
-  SELECT COUNT(*) FROM NORMAL_POST
+    SELECT COUNT(*) FROM NORMAL_POST N
+  <where>
+   <if test="findField == ''"></if> <!-- 검색값이 없을 경우 -->
+   <if test="findField == 'title'"> <!-- 검색조건이 제목인 경우  -->
+    N.TITLE LIKE #{findName} <!-- LIKE로 찾기 기능 사용 -->
+   </if>
+   <if test="findField == 'content'"> <!-- 검색조건이 내용인 경우 -->
+    N.CONTENT LIKE #{findName}
+   </if> 
+   <if test="findField == 'nickname'"> <!-- 검색조건이 닉네임인 경우 -->
+	N.USER_ID IN
+	(SELECT U.ID FROM M_USER U
+	WHERE U.nickname LIKE #{findName})
+   </if>
+   </where>
  </select>
  
  <!-- 페이징 + 목록보기 -->
 <select id="bf_list" resultMap="boardInfo">
  SELECT * FROM
  (SELECT ROW_NUMBER() OVER(ORDER BY N.ID DESC) rNum,
- N.ID AS board_free_id, N.TITLE, U.NICKNAME,
+ N.ID AS board_free_id, N.TITLE, U.NICKNAME, S.ID AS social_profile_id,
  N.REGISTER_DATE AS board_free_registerDate, N.HIT
- FROM NORMAL_POST N, M_USER U
- WHERE N.USER_ID = U.ID
- ORDER BY N.ID DESC)
+FROM NORMAL_POST N 
+ LEFT OUTER JOIN M_USER U ON N.USER_ID = U.ID 
+ LEFT OUTER JOIN SOCIAL_PROFILE S ON U.ID = S.USER_ID
+ <where>
+ <if test="findField == ''"></if> <!-- 값이 없을 경우 -->
+ <if test="findField == 'title'"> <!-- 검색 필드가 제목일 경우 -->
+  N.TITLE LIKE #{findName}	   <!-- 검색 필드 값대로 검색 -->
+ </if>
+ <if test="findField == 'content'"> <!-- 검색 필드가 내용일 경우 -->
+  N.CONTENT LIKE #{findName}	 <!-- 검색 필드 값대로 검색 -->
+ </if>
+ <if test="findField == 'nickname'"> <!-- 검색 필드가 닉네임일 경우 -->
+  U.NICKNAME LIKE #{findName}	  <!-- 검색 필드 값대로 검색 -->
+ </if>
+ </where>
+ ORDER BY board_free_id DESC)
  WHERE rNum &gt;= #{startrow}
  AND rNum &lt;= #{endrow}
 </select>
@@ -115,14 +155,12 @@ AND rNum <= 20;  이런식으로 처리해서 페이징 구현함. 이유) 2개�
  
  <!-- 내용보기 -->
  <select id="bf_cont" resultMap="boardInfo">
-  SELECT N.*, M.nickname
+  SELECT N.ID AS board_free_id, N.USER_ID AS board_free_user_id,
+   N.TITLE, N.HIT, N.CONTENT, M.nickname
   FROM NORMAL_POST N, M_USER M
   WHERE N.USER_ID = M.ID
   AND N.ID=#{id}
  </select>
- 
- 
-
  
  <!-- 내용수정 -->  <!-- session 본인 닉네임으로만 수정 가능하게 해야함. -->
  <update id="bf_edit">

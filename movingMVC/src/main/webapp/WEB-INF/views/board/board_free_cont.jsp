@@ -18,6 +18,15 @@
    */
  }
 </style>
+<script>
+function delconfirm(){
+	if(confirm("삭제하시겠습니까?")){
+		location.replace('/moving.com/board/free_del?id=${bf.id}&page=${page}'); //yes
+	}else{
+		location.replace('/moving.com/board/free_cont?id=${bf.id}&page=${page}'); //no
+	}
+}//confirm()
+</script>
 </head>
 <body>
  <table border="1">
@@ -48,7 +57,7 @@ onclick="location=
 <%-- board_cont?bno=번호&page=쪽번호 2개의 피라미터값
 이 get방식으로 전달 --%>  
 <input type="button" value="삭제"
-onclick="location='/moving.com/board/free_del?id=${bf.id}&page=${page}';" />
+onclick="delconfirm()" />
 <input type="button" value="목록"
 onclick="location=
 '/moving.com/board/free?page=${page}';"/>
@@ -212,6 +221,15 @@ $('#replies').on('click','.replyLi button',function(){
     });
   });
  </script>
+ 
+ <script>
+	 var msg="${msg}"; //컨트롤러에서 rttr로 설정한 키 이름을 EL로 받아와 저장했음.
+	 
+	 if(msg == "BOARD/FREE_EDIT"){
+		 alert("글수정을 성공 했습니다!");
+	 }//if boardFreeController에서 글쓰기 성공 시 출력.
+ </script>
+ 
 </body>
 </html>
 

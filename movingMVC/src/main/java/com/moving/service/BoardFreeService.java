@@ -2,12 +2,11 @@ package com.moving.service;
 
 import java.util.List;
 
-import com.moving.domain.NormalPostDTO;
 import com.moving.domain.NormalPostVO;
 
 public interface BoardFreeService {
 
-	int getTotalCount();
+	int getTotalCount(NormalPostVO bf);
 	List<NormalPostVO> getBoardFreeList(NormalPostVO bf);
 	void inBoardFree(NormalPostVO b);
 	NormalPostVO getCont(int id);

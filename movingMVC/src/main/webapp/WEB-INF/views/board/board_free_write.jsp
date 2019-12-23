@@ -24,7 +24,7 @@
    </tr>
    <tr>
     <th>글내용</th>
-    <td><textarea name="content" id="content" 
+    <td><textarea name="content" id="content" onkeyUp="checkByte(this.form);"
     rows="10" cols="100"></textarea>
     
 <script type="text/javascript">
@@ -42,6 +42,7 @@
 
     </td>
    </tr> 
+   
    <tr>
     <th colspan="2">
     <input type="submit" value="저장" />
@@ -49,7 +50,7 @@
     </th>
    </tr>
   </table>
- </form>
+ </form> 
 </body>
 </html>
 

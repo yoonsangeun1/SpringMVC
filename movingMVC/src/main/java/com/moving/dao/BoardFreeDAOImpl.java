@@ -15,8 +15,8 @@ public class BoardFreeDAOImpl implements BoardFreeDAO {
 	private SqlSession sqlSession;
 
 	@Override
-	public int getTotalCount() {
-		return this.sqlSession.selectOne("bf_count");
+	public int getTotalCount(NormalPostVO bf) {
+		return this.sqlSession.selectOne("bf_count",bf);
 	}//자유게시판 게시물 총 개수 구하기
 
 	@Override

@@ -27,7 +27,7 @@ public class BoardFreeController {
 	@RequestMapping("/board/free")
 	public ModelAndView board_free_list(
 			HttpServletRequest request,
-			NormalPostVO bf) throws Exception{ 
+			NormalPostVO bf) throws Exception{  // bf는 boardfree 여서 bf이다.
 		/*페이징 쪽나누기 코드*/
 		int page=1; //현재 쪽번호
 		int limit=10; //한페이지에 보여지는 목록 개수
@@ -37,29 +37,20 @@ public class BoardFreeController {
 			//get으로 전달된 페이지번호를 정수숫자로 바꿔서 저장
 		}//if 
 		
+		String findField=request.getParameter("findField"); //검색필드(콤보박스)
+		String findName=request.getParameter("findName"); //검색어
+		
+		bf.setFindField(findField);
+		bf.setFindName("%"+findName+"%");// %는 오라클에서 앞이나 뒤에서  
+		//다른 글자 포함해서? 찾을때 사용
+		
 		bf.setStartrow((page-1)*10+1); //시작행번호
 		bf.setEndrow(bf.getStartrow()+limit-1);//끝행번호
 		
-		int totalCount=this.boardFreeService.getTotalCount(); //총 게시물 수
+		int totalCount=this.boardFreeService.getTotalCount(bf); //검색 전, 후 총 게시물 수
 		List<NormalPostVO> bflist=this.boardFreeService.getBoardFreeList(bf);
 		//게시물 목록을 가져옴
-		
-		/*System.out.println(bflist.get(0).getId());
-		System.out.println(bflist.get(1).getId());
-		System.out.println(bflist.get(2).getId());
-		System.out.println(bflist.get(3).getId());
-		System.out.println(bflist.get(0).getmUserVO().getNickname());
-		System.out.println(bflist.get(0).getmUserVO().getId());
-		System.out.println(bflist.get(1).getmUserVO().getNickname());
-		System.out.println(bflist.get(1).getmUserVO().getId());
-		System.out.println(bflist.get(2).getmUserVO().getId());
-		System.out.println(bflist.get(3).getmUserVO().getId());
-		System.out.println(bflist.get(4).getmUserVO().getId());
-		System.out.println(bflist.get(1).getmUserVO().getRegisterDate());
-		System.out.println(bflist.get(2).getmUserVO().getRegisterDate());
-		System.out.println(bflist.get(3).getmUserVO().getRegisterDate());
-		System.out.println(bflist.get(4).getmUserVO().getRegisterDate());
-		*/
+
 		//총페이지 수
 		int maxpage=(int)((double)totalCount/limit+0.95);
 		//시작 페이지
@@ -71,12 +62,6 @@ public class BoardFreeController {
 			endpage=startpage+10-1;
 		}//if
 		
-		System.out.println(bflist);
-		System.out.println(bflist.get(0).getRegisterDate());
-		System.out.println(bflist.get(0).getId());
-		System.out.println(bflist.get(0).getTitle());
-		System.out.println(bflist.get(0).getHit());
-		
 		ModelAndView bfmlist=new ModelAndView(); //board free ModelAndView list
 		
 		bfmlist.addObject("totalCount",totalCount);//totalCount키이름에 총게시물 수 저장
@@ -85,6 +70,8 @@ public class BoardFreeController {
 		bfmlist.addObject("endpage",endpage);
 		bfmlist.addObject("maxpage",maxpage);
 		bfmlist.addObject("page",page);
+		bfmlist.addObject("findField",findField);
+		bfmlist.addObject("findName",findName);
 		
 		bfmlist.setViewName("board/board_free"); //뷰리졸브
 		
@@ -169,6 +156,10 @@ public class BoardFreeController {
 		
 		ModelAndView cm=new ModelAndView("/board/board_free_cont");
 		
+		System.out.println("내용보기 ID"+id);
+		System.out.println("내용보기 ID get방식"+bf.getId());
+		System.out.println("내용보기 USER_ID get방식"+bf.getUserId());
+		
 		cm.addObject("bf",bf);
 		cm.addObject("page",page);
 		
@@ -195,11 +186,14 @@ public class BoardFreeController {
 		
 		int m_userid=(int) session.getAttribute("id"); //세션으로 받아온 id를 m_userid에 저장
 		
+/*		System.out.println("수정 ID"+id);
+		System.out.println(m_userid);
+		System.out.println(bf.getUserId());*/
 		
 		if(m_userid == bf.getUserId()) { //m_user의 id와 normal_post의
 			//user_id가 일치한다면
 			
-			m.addAttribute("bfdto",bf);
+			m.addAttribute("bf",bf);
 			m.addAttribute("page",page);
 			m.addAttribute("id",id);
 			
@@ -233,6 +227,8 @@ public class BoardFreeController {
 		
 		this.boardFreeService.editBoardFree(bf);
 		
+		rttr.addFlashAttribute("msg","BOARD/FREE_EDIT");
+		
 		return "redirect:/board/free_cont?id="+id+"&page="+page; // 해당 내용보기 페이지로 이동
 		
 	}//board_free_edit_ok()
@@ -251,12 +247,11 @@ public class BoardFreeController {
 		
 		if(session.getAttribute("id") != null) { /*세션에 값이 있을경우*/
 			
-			NormalPostVO bfdto=this.boardFreeService.getCont(id); //글번호 id를 기준으로 검색
+			NormalPostVO bf=this.boardFreeService.getCont(id); //글번호 id를 기준으로 검색
 			
-			int m_userid=(int) session.getAttribute("id"); //세션으로 받아온 id를 m_userid에 저장
+			int m_userid=(int) session.getAttribute("id"); //세션으로 받아온 id를 m_userid에 저장		
 			
-			
-			if(m_userid == bfdto.getUserId()) { //m_user의 id와 normal_post의
+			if(m_userid == bf.getUserId()) { //m_user의 id와 normal_post의
 				//user_id가 일치한다면
 				
 				this.boardFreeService.delBoardFree(id);
