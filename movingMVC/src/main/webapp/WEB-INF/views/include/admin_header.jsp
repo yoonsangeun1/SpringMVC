@@ -86,7 +86,7 @@
 <script src="${pageContext.request.contextPath}/js/slide.js"></script>
 <script src="${pageContext.request.contextPath}/js/social.js"></script>
 <script src="${pageContext.request.contextPath}/js/movie_upload.js"></script>
-
+<script src="../resources/editor/js/HuskyEZCreator.js" charset="UTF-8"></script>
 
 </head>
 <body>

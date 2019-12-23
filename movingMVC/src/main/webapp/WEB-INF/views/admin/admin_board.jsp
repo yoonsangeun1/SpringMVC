@@ -8,13 +8,33 @@
 	<%-- 게시판 글 목록표 생성 --%>
 	<table id="aBoard_table" border="1">
 		<tr>
+			<td colspan="6" align="right">게시물 수  : ${boardCount }개</td>
+		</tr>
+		<tr>
+			<th scope="col" class="aBT_check"><input type="checkbox" name="aBoard_check" value="checkB" /></th>
 			<th scope="col" class="aBT_no">번호</th>
 			<th scope="col" class="aBT_title">제목</th>
 			<th scope="col" class="aBT_writer">작성자</th>
 			<th scope="col" class="aBT_date">작성일</th>
 			<th scope="col" class="aBT_hit">조회수</th>
 		</tr>
-		
+		<c:if test="${!empty nplist}">
+			<c:forEach var="n" items="${nplist}">
+			<tr>
+				<td class="bCheck"><input type="checkbox" name="checkBoard" value="boardCheck" /></td>
+				<td class="bNo">${n.id }</td>
+				<td class="bTitle">${n.title }</td>
+				<td class="bUserId">${n.mUserVO.nickname }</td>
+				<td class="bHegisterDate">${n.registerDate }</td>
+				<td class="bHit">${n.hit }</td>
+			</tr>
+			</c:forEach>
+		</c:if>
+		<c:if test="${empty nplist }">
+			<tr>
+				<td colspan="6" align="center">등록된 게시글이 없습니다!</td>
+			</tr>
+		</c:if>
 <!-- 		<tr> -->
 <!-- 			<td class="aBT_notice">공지<i class="fas fa-exclamation"></i></td> -->
 <!-- 			<td class="aBT_left"><a href="#" class="notice"><span>[필독]글 작성시 기본 준수 사항입니다.</a></span></td> -->
@@ -99,31 +119,65 @@
 	
 	<%-- 페이징 목록 --%>
 	<div id="aBoard_pageCtrl">
-		<a href="#">이전</a>
-		<a href="#">1</a>
-		<a href="#">2</a>
-		<a href="#">3</a>
-		<a href="#">4</a>
-		<a href="#">5</a>
-		<a href="#">6</a>
-		<a href="#">7</a>
-		<a href="#">8</a>
-		<a href="#">9</a>
-		<a href="#">다음</a>
+		<%-- 검색전 페이징 --%>
+		<c:if test="${(empty findField) && (empty findName)}">
+			<c:if test="${page<=1 }">[이전]&nbsp;</c:if>
+			<c:if test="${page>1 }"><a href="board?page=${page-1 }">[이전]</a>&nbsp;</c:if>
+			
+			<%-- 현재 쪽번호 --%>
+			<c:forEach var="a" begin="${startpage }" end="${endpage }" step="1">
+							
+				<%-- 현재 쪽번호가 선택된 경우 --%>
+				<c:if test="${a==page }"><${a }></c:if>
+				
+				<%-- 현재 쪽번호가 선택되지 않은 경우 --%>
+				<c:if test="${a != page }"><a href="board?page=${a}">[${a }]</a>&nbsp;</c:if>
+			</c:forEach>
+							
+			<c:if test="${page >= maxpage }">[다음]</c:if>
+			<c:if test="${page < maxpage }"><a href="board?page=${page+1 }">[다음]</a></c:if>
+		</c:if>
+						
+		<%-- 검색후 페이징 --%>
+		<c:if test="${(!empty findField) || (!empty findName) }">
+			<c:if test="${page<=1 }">[이전]&nbsp;</c:if>
+			<c:if test="${page>1 }">
+				<a href="board?page=${page-1 }&findField=${findField}&findName=${findName}">[이전]</a>&nbsp;
+			</c:if>
+							
+		<%-- 현재 쪽번호 --%>
+		<c:forEach var="a" begin="${startpage }" end="${endpage }" step="1">
+								
+			<%-- 현재 쪽번호가 선택된 경우 --%>
+			<c:if test="${a==page }"><${a}></c:if>
+								
+			<%-- 현재 쪽번호가 아닌 경우 --%>
+			<c:if test="${a!=page }">
+				<a href="board?page=${a}&findField=${findField}&findName=${findName}">[${a}]</a>&nbsp;
+			</c:if>
+								
+		</c:forEach>
+							
+		<c:if test="${page >= maxpage }">[다음]</c:if>
+		<c:if test="${page < maxpage}">
+			<a href="board?page=${page+1}&findField=${findField}&findName=${findName}">[다음]</a>
+		</c:if>
+		</c:if>
+		<%-- 검색후 페이징 --%>
 	</div>
 	
 	<%-- 검색창, 검색조건 콤보박스 --%>
 	<div id="aBoard_search">
 		<form>
 			<select class="select" name="findField">
-				<option value="전체">전체</option>
-				<option value="제목">제목</option>
-				<option value="내용">내용</option>
-				<option value="작성자">작성자</option>
+				<option value="all">전체</option>
+				<option value="title">제목</option>
+				<option value="content">내용</option>
+				<option value="nickname">작성자</option>
 			</select>
 			
 			<%-- 검색 텍스트필드, 버튼 --%>
-			<input type="text" name="findName" class="input_box" placeholder="검색해주세요."/>
+			<input type="text" name="findName" class="input_box" placeholder="검색어를 입력하세요." value="${findName }" />
 			<button type="submit" class="btn">검색</button>
 		</form>
 	

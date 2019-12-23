@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.moving.domain.MUserVO;
 import com.moving.service.AdminMemberService;
@@ -59,10 +61,16 @@ public class AdminMemberController {
 		return "admin/admin_member"; // 뷰 페이지 경로 지정
 	}//member()
 	
-//	/* 회원 클릭했을 때 나오는 회원정보 창 */
-//	@RequestMapping(value="/memberInfo")
-//	public ModelAndView memberInfo() {
-//		
-//	}
+	/* 회원 클릭했을 때 나오는 회원정보 창 */
+	@RequestMapping(value="/memberInfo")
+	public ModelAndView memberInfo(@RequestParam("userid") String userid,@RequestParam("page") int page, MUserVO mu) {
+		
+		mu=this.adminMemberService.memberInfo(userid);
+		ModelAndView m = new ModelAndView();
+		m.addObject("mu",mu);
+		m.addObject("page",page);
+		m.setViewName("admin/admin_member_info");
+		return m;
+	}
 }
  

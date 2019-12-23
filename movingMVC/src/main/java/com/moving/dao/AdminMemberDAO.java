@@ -10,4 +10,6 @@ public interface AdminMemberDAO {
 
 	List<MUserVO> memberlist(MUserVO mu);
 
+	MUserVO memberInfo(String userid);
+
 }
