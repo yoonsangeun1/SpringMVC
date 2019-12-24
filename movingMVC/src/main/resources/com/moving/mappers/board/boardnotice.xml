@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BoardNotice">
+
+<resultMap type="normalPostVO" id="boardInfo" autoMapping="true">
+		<id property="id" column="board_notice_id"/> <!-- board_free_id는 AS로 별칭을 지정해 준 것임. -->
+		<result property="title" column="title" />
+		<result property="userId" column="board_notice_user_id" />
+		<result property="registerDate" column="board_notice_registerDate" />
+		<result property="hit" column="hit" />
+		<result property="content" column="content" />
+		
+			<association property="mUserVO" javaType="com.moving.domain.MUserVO"
+			 autoMapping="true">
+			</association>
+			
+			<association property="socialProfileVO" javaType="com.moving.domain.SocialProfileVO"
+			 autoMapping="true">
+			 <id property="id" column="social_profile_id"/>
+			</association>
+			
+</resultMap>
+
+<select id="bn_count" resultType="int">
+ SELECT COUNT(*) FROM NORMAL_POST N
+ <where>
+  <if test="findField == ''"></if> <!-- 검색값이 없을 경우 -->
+  <if test="findField == 'title'"> <!-- 검색조건이 제목인 경우 -->
+   N.TITLE LIKE #{findName} <!-- LIKE로 찾기 기능 사용 -->
+  </if>
+  <if test="findField == 'content'"> <!-- 검색조건이 내용인 경우 -->
+   N.CONTENT LIKE #{findName}
+  </if>
+  <if test="findField == 'nickname'"> <!-- 검색조건이 닉네임인 경우 -->
+   N.USER_ID IN
+   (SELECT U.ID FROM M_USER U
+   WHERE U.NICKNAME LIKE #{findName})
+  </if>
+ </where>
+</select>
+
+<!-- 페이징 + 목록보기 -->
+<select id="bn_list" resultMap="boardInfo">
+ 
+</select>
+
+
+
+</mapper>
+
+
+

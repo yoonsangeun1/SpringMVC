@@ -92,14 +92,14 @@ public class BoardFreeController {
 		if(session.getAttribute("id") != null) { //세션으로 id 값이 있을경우.
 		int id=(int)session.getAttribute("id");
 		
-		if(id==1) {
+		if(id != 0) {
 			return new ModelAndView("board/board_free_write");
 		}//if
 		
 		}else {
 			out.println("<script>");
 			out.println("alert('글쓰기 권한이 없습니다!');");
-			out.println("history.back();");
+			out.println("location='/moving.com/member/login';");
 			out.println("</script>");
 		}//if else
 		
@@ -135,8 +135,8 @@ public class BoardFreeController {
 		
 		}else { // 넘겨온 id 값이 없을경우, 또는 세션 만료되었을 경우?
 			out.println("<script>");
-			out.println("alert('로그인이 만료 되었습니다.');");
-			out.println("location='/board/free");
+			out.println("alert('로그인을 다시해주세요!');");
+			out.println("location='/moving.com/member/login';");
 			out.println("</script>");
 		}//if else
 		
@@ -208,8 +208,8 @@ public class BoardFreeController {
 		
 		}else { /*세션이 값이 없을 경우*/
 			out.println("<script>");
-			out.println("alert('로그인이 만료 되었습니다!');");
-			out.println("history.back();");
+			out.println("alert('로그인을 다시 해주세요!');");
+			out.println("location='/moving.com/member/login';");
 			out.println("</script>");
 		}//if else
 		
@@ -269,8 +269,8 @@ public class BoardFreeController {
 			
 			}else { /*세션이 값이 없을 경우*/
 				out.println("<script>");
-				out.println("alert('로그인이 만료 되었습니다!');");
-				out.println("history.back();");
+				out.println("alert('로그인을 다시 해주세요!');");
+				out.println("location='/moving.com/member/login';");
 				out.println("</script>");
 			}//if else
 		
