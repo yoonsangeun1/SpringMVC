@@ -4,8 +4,8 @@
 <%@ include file="../include/header.jsp"%>
 
 <div id="mJoin_wrap">
-	<form method="post" action="member_join_ok" onsubmit="return join_check();">
-		<div id="mJoin_form">
+	<form id="mJoin_form" method="post" action="member_join_ok" onsubmit="return join_check();">
+<!-- 		<div id="mJoin_form"> -->
 			<section>
 				<div class="am_Movingmember">
 					<hr class="my-hr1" />
@@ -17,11 +17,11 @@
 				<h2 class="mJoin_text">회원가입</h2>
 					
 					<div id="email_field" class="email_field">
-						<div class="mv_email">
-							<input type="email" id="email" name="email" class="text_input" placeholder="이메일 계정"> 
+						<div class="mv_email"> 
+							<input type="email" id="email" name="email" class="text_input" placeholder="이메일 계정" oninput="userid_check();"> 
 							<button type="button" class="btnCheckEmail" id="btnCheckEmail" onclick="emailTokenInput();">인증하기</button>
 					 
-							<div id="emailCheck_message" style="display:none">
+							<div id="emailCheck_message">
 								<span id="emailCheck"></span>
 							</div>
 							<div class="emailToken" style="display:none">
@@ -34,17 +34,17 @@
 					</div>
 					<div id="info_field">
 						<div id="info_name_nick">
-							<input name="name" id="name" class="text_infoInput" placeholder="이름">
-							<input name="nickname" id="nickname" class="text_infoNickInput" placeholder="닉네임">
+							<input type="text" maxlength="4" name="name" id="name" class="text_infoInput" placeholder="이름">
+							<input name="nickname" id="nickname" class="text_infoNickInput" placeholder="닉네임" oninput="nick_check();">
 							<br/>
-							<input type="button" value="중복확인" class="nickCheckBtn" onclick="nick_check();">
+<!-- 							<input type="button" value="중복확인" class="nickCheckBtn" onclick="nick_check();"> -->
 						</div>
 						<div id="nickcheck_message">
 							<span id="nickcheck"></span>
 						</div>
 						
 							<input type="password" name="password" id="password" class="text_infoInput" placeholder="비밀번호">
-							<input type="password" name="password2" id="password2" class="text_infoInput" placeholder="비밀번호 확인">	
+							<input type="password" name="password2" id="password2" class="text_infoInput" placeholder="비밀번호 확인">
 							
 						<div id="pwdCheck_message">
 							<span id="pwdcheck"></span>
@@ -89,7 +89,7 @@
 					
 					<div id="joinBtn_field">
 						<div class="joinBtn1">
-							<input type="submit" class="join" id="joinBtn" value="회원가입">
+							<input type="submit" class="join" id="joinBtn" value="회원가입" disabled="disabled">
 						</div>
 						
 <!-- 						<div class="separator_join"> -->
@@ -115,7 +115,7 @@
 <!-- 						</div> -->
 					</div>
 					</section>
-			</div>
+<!-- 			</div> -->
 	</form>
 </div>
 

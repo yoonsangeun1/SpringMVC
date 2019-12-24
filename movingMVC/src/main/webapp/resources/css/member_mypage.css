@@ -1,0 +1,185 @@
+@charset "UTF-8";
+/**************************웹페이지 전체틀***************************/
+#mMypage_wrap {
+	width: 1200px;
+	height: auto;
+	min-height: 930px;
+	margin: auto auto;
+	align-items: center;
+	display: flex;
+	justify-content: center;
+	background-color: #F5F5F5;
+}
+
+/***************************마이페이지 전체틀***************************/
+#mMypage_form{
+	float:left;
+	width: 1000px; 
+	min-height: 800px;
+	height: auto;
+	margin: auto auto;
+	display: inline-block;
+	box-sizing: border-box;
+	background-color: white;
+	border-radius: 5px;
+	border: 1px solid #e8e8e8;
+	outline: none;
+}
+/***************************마이페이지 정보부분***************************/
+#mMypage_info {
+	float:left;
+	width:600px;
+	min-height:100px;
+	margin : 20px;
+	padding : 20px;
+/* 	border:2px solid red; */
+}
+
+#mMypage_user {
+	float:left;
+	width:550px;
+	min-height:50px;
+/* 	border:2px solid blue; */
+	padding : 10px;
+	line-height:1.5;
+}
+
+#mInfo_name {
+	font-size : 35px;
+	margin-left:20px;
+	
+}
+#mInfo_snsText {
+	margin-left:60px;
+	font-size : 20px;
+}
+
+#mInfo_userType {
+	margin-left:20px;
+	font-size : 20px;
+}
+#mInfo_snsAdress {
+	margin-left : 150px;
+	font-size : 35px;
+}
+#mMypage_action {
+	float:left;
+	width:600px;
+	min-height:50px;
+/* 	border:2px solid blue; */
+	padding : 10px;
+}
+
+.mInfo_text2 {
+	float:left;
+	width:190px;
+	text-align : center;
+}
+
+.mInfo_text2 span {
+	font-size : 15px;
+	font-weight : bold;
+	margin : 10px;
+	line-height : 1.8; 
+}
+
+#mInfo_button{
+	float:left;
+	width : 200px;
+	margin-top : 10px;
+	margin-left : 10px;	
+}
+
+.profile_modify_btn{
+	float:left;
+	height:40px;
+	border-radius : 25px;
+	color:white;
+	font-size:15px;
+	cursor: pointer; 
+}
+
+.userChange {
+	float:left;
+	height:40px;
+	border-radius : 25px;
+	color:white;
+	font-size:15px;
+	cursor: pointer;
+	margin-left:10px;
+}
+
+
+/***************************마이페이지 프로필틀***************************/
+#mMypage_profileImg {
+	float:left;
+width:200px;
+height:200px;
+border-radius:100px;
+text-align:center;
+margin:50px;
+vertical-align:middle;
+line-height:150px;
+border:1px solid black;
+}
+/***************************마이페이지 펀딩 리스트***************************/
+#mMypage_funding_wrap {
+	float : left;
+	width:960px; 
+	min-height:200px;
+/* 	border:1px solid green; */
+	margin : 20px;
+}
+/***************************펀딩리스트 버튼***************************/
+ul.tabs {
+	margin : 0px;
+	padding : 0px;
+	list-style : none;
+	width : 600px;
+}
+
+ul.tabs li {
+	background : none;
+	color : #222;
+	display : inline-block;
+	padding : 10px 15px;
+	cursour : pointer;
+	font-size:12px;
+}
+
+ul.tabs li.current{
+  background: #d9d3f5;
+  color: #222;
+}
+.tab-content{
+  display: none;
+  background: #d9d3f5;
+  padding: 15px;
+  min-height:400px;
+}
+ 
+.tab-content.current{
+  display: inherit;
+}
+
+#mMypage_fundingBtn {
+}
+#top-area {
+	float:right;
+	width:940px;
+	margin : 10px 10px 0 10px;
+/* 	border : 1px solid blue; */
+}
+
+#top-area .select-box {
+	float:right;
+}
+#selectProjectType {
+	width:100px;
+	height:35px;
+	font-size:15px;
+}
+.tab-content p {
+	text-align : center;
+	font-size : 15px;
+}

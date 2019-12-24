@@ -61,19 +61,23 @@ function join_check() {
 		$("#phone03").val("").focus();
 		return false;
 	}
-//	
-//	var checkbox = document.getElementsByName("genre_like");
-//	var checkCount = 0;
-//	
-//	for(var i=0;i<checkbox.length;i++) {
-//		if(checkbox[i].checked) {
-//			checkCount++;
-//		}
-//	}
-//	if(checkCount == 1 || checkCount == 2) {
-//		alert("선호장르를 3개 선택해주세요 !");
-//		return false;
-//	}
+	   if($('#email').css("background-color") == "#FFCECE" ) {
+		   $("#joinBtn").prop("disabled",false);
+	       $("#joinBtn").css("background-color","#9d8ce2");
+	   }
+	   if($('#nickname').css("background-color") == "#FFCECE" ) {
+		   $("#joinBtn").prop("disabled",false);
+	       $("#joinBtn").css("background-color","#9d8ce2");
+	   }
+	   if($('#password').css("background-color") == "#FFCECE" ) {
+		   $("#joinBtn").prop("disabled",false);
+	       $("#joinBtn").css("background-color","#9d8ce2");
+	   }
+	   if($('#password2').css("background-color") == "#FFCECE" ) {
+		   $("#joinBtn").prop("disabled",false);
+	       $("#joinBtn").css("background-color","#9d8ce2");
+	   }
+
 }
 
 /** 선호장르 체크박스 최대 3개까지만 선택가능 */
@@ -102,16 +106,16 @@ function CountChecked(obj) {
 }
 
 
-/** 이메일 인증하기 버튼클릭시 인증번호입력폼 생성 */
-function emailTokenInput(){ 
-	$("#emailCheck_message").hide(); //이메일발송 메세지영역 숨김
+/** 이메일아이디 실시간 중복체크 */
+function userid_check(){ 
+//	$("#emailCheck_message").hide(); //이메일발송 메세지영역 숨김
 	$email=$.trim($("#email").val());
 
-	if($.trim($("#email").val()) == "") {
-		alert("인증에 필요한 이메일을 입력해주세요 !");
-		$("#email").val("").focus();
-		return false;
-	}
+//	if($.trim($("#email").val()) == "") {
+//		alert("인증에 필요한 이메일을 입력해주세요 !");
+////		$("#email").val("").focus();
+//		return false;
+//	}
 	$.ajax({ //$는 jQuery , $.ajax는 jQuery내의 아작스 실행
 		type:"POST", //데이터를 서버로 보내는 방법
 		url:"join_emailCheck", //아작스 서버 주소 파일명->컨트롤러에 등록한 매핑주소
@@ -119,94 +123,144 @@ function emailTokenInput(){
 		datatype : "int", //서버의 실행된 결과값을 사용자로 받아오는 방법
 		success : function(data) { //success는 아작스로 받아오는 것이 성공했을 경우 서버 데이터를 data변수에 저장
 			if(data==1) { //중복 닉네임이 있다면
-				$('#emailCheck_message').css("display","block");
-				$newtext='<font color="red" size="3"><b>&nbsp;&nbsp;&nbsp;중복된 이메일입니다. 다시 입력해주세요.</b></font>';
-				$("#emailCheck").text(''); //nickcheck영역 문자열을 초기화
-				$("#emailCheck").show(); //nickcheck영역을 보이게함.
-				$("#emailCheck").append($newtext); //nickcheck영역에 문자열을 추가
-				$("#email").val('').focus();
-				return false;
+				$("#emailCheck").text("중복된 이메일입니다. 다시 입력해주세요 ! :P"); //nickcheck영역에 문자열을 추가
+				$("#emailChecks").css("color","red");
+				$("#emailCheck").css("font-size","15px");
+				$("#emailCheck").css("font-weight","bold");
+				$("#email").css("background-color","#FFCECE");
+				$("#joinBtn").prop("disabled",true);
+		        $("#joinBtn").css("background-color","#aaaaaa");
+			}else if(!(check_useremail($email))) { //이메일 형식이 맞지 않다면
+				$("#emailCheck").text("불가능한 이메일형식입니다. 다시 입력해주세요 ! :P"); //nickcheck영역에 문자열을 추가
+				$("#emailCheck").css("color","red");
+				$("#emailCheck").css("font-size","15px");
+				$("#emailCheck").css("font-weight","bold");
+				$("#email").css("background-color","#FFCECE");
+				$("#joinBtn").prop("disabled",true);
+		        $("#joinBtn").css("background-color","#aaaaaa");
 			}else { //중복된 닉네임이 없다면
-				$newtext='<font color="blue" size="3"><b>&nbsp;&nbsp;&nbsp;사용 가능한 이메일입니다.</b></font>';
-				$("#emailCheck").text(''); //nickcheck영역 문자열을 초기화
-				$("#emailCheck").show(); //nickcheck영역을 보이게함.
-				$("#emailCheck").append($newtext); //nickcheck영역에 문자열을 추가
-				$("#email_check").val('').focus();
-				
-				if($('.emailToken').css("display") == "none" ){
-					$('.emailToken').css("display","block");
-					$('#emailCheck_message').css("display","block");
-					alert("입력하신 메일로 인증번호를 발송하였습니다.");
-//					$newtext='<font color="green" font-weight:bold; size="3"><b>&nbsp;&nbsp;&nbsp;입력하신 메일로 인증번호를 발송하였습니다.</b></font>';
-					$("#emailCheck").text('');
-					$("#emailCheck").show();
-					$("#emailCheck").append($newtext);
-					$("#email_check").val('').focus();
-					return false;
-				};//display block을 none으로 변경
+				$("#emailCheck").text("사용 가능한 이메일입니다. 이메일인증을 해주세요 ! :)");
+				$("#emailCheck").css("color","#9d8ce2");
+				$("#emailCheck").css("font-size","15px");
+				$("#emailCheck").css("font-weight","bold");//nickcheck영역에 문자열을 추가
+				$("#email").css("background-color","#eae6fa");
+				$("#joinBtn").prop("disabled",false);
+			    $("#joinBtn").css("background-color","#9d8ce2");
 			} 
 		},
 		error : function() { //비동기식 아작스로 서버디비 데이터를 못가져와서 에러가 발생했을때 호출되는 함수
 			alert("data error");
 		}
 	}); //$.ajax
+	
+	function check_useremail($email) {
+		var pattern = new RegExp(/^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{3}$/i); //닉네임을 한글,영문,숫자
+		return pattern.test($email);
+	};
+}
 
+/** 비밀번호 - 비밀번호확인 일치여부 체크 */
+$(function(){
 
+    $('#password2').keyup(function(){
 
- 
+        if($('#password').val() != $('#password2').val()){
+          $('#pwdcheck').text("비밀번호가 일치하지 않습니다 ! :P ");
+          $("#pwdcheck").css("color","red");
+          $("#pwdcheck").css("font-size","15px");
+          $("#pwdcheck").css("font-weight","bold");
+          $("#password").css("background-color","#FFCECE");
+          $("#password2").css("background-color","#FFCECE");
+          $("#joinBtn").prop("disabled",true);
+          $("#joinBtn").css("background-color","#aaaaaa");
+        } else{
+          $('#pwdcheck').text("비밀번호가 일치합니다 ! :) ");
+		  $("#pwdcheck").css("color","#9d8ce2");
+		  $("#pwdcheck").css("font-size","15px");
+		  $("#pwdcheck").css("font-weight","bold");
+		  $("#password").css("background-color","#eae6fa");
+          $("#password2").css("background-color","#eae6fa");
+          $("#joinBtn").prop("disabled",false);
+          $("#joinBtn").css("background-color","#9d8ce2");
+        }
+
+    });
+});
+
+$(function(){
+	$('#name').keyup(function() {
+		 $("#name").css("background-color","#eae6fa");
+	})
+})
+
+/** 인증하기 버튼클릭시 인증번호입력폼 생성 */
+function emailTokenInput() {
+	if($.trim($("#email").val()) == "") {
+		alert("인증에 필요한 이메일을 입력해주세요 !");
+		$("#email").val("").focus();
+		return false;
+	}else {//이메일이 제대로 입력됐다면 실행
+		if($('.emailToken').css("display") == "none" ){
+			$('.emailToken').css("display","block");
+			$newtext='<font color="green" font-weight:bold; size="3"><b>&nbsp;&nbsp;&nbsp;입력하신 메일로 인증번호를 발송하였습니다.</b></font>';
+			$("#emailCheck").text("입력하신 메일로 인증번호를 발송했습니다 ! :)");
+			$("#emailCheck").css("color","#9d8ce2");
+			$("#emailCheck").css("font-size","15px");
+			$("#emailCheck").css("font-weight","bold");
+		}
+	};//display block을 none으로 변경
+	
 	var btn = document.getElementById('btnCheckEmail');
 	if(btn.textContent == "인증하기") {
 		btn.textContent = "재전송";
 	};
-
 }
+
+
 
 /** 중복닉네임 체크 */
 function nick_check() {
-	$("#nickcheck").hide(); //닉네임체크 메세지영역 숨김
 	$nickname=$.trim($("#nickname").val());
-
-	//1.입력글자 길이 체크
-	if($nickname.length < 2 || $nickname.length > 8) {
-		$newtext='<font color="red" size="3"><b>&nbsp;&nbsp;&nbsp;닉네임은 2~8자 이어야 합니다.</b></font>';
-		$("#nickcheck").text(''); //nickcheck영역 문자열을 초기화
-		$("#nickcheck").show(); //nickcheck영역을 보이게함.
-		$("#nickcheck").append($newtext); //nickcheck영역에 문자열을 추가
-		$("#nickname").val('').focus();
-		return false;
-	};
-
-	//2. 입력글자 확인
-	if(!(check_usernickname($nickname))){
-		$newtext='<font color="red" size="3"><b>&nbsp;&nbsp;&nbsp;닉네임은 한글,영문,숫자 조합만 가능합니다.</b></font>';
-		$("#nickcheck").text(''); //nickcheck영역 문자열을 초기화
-		$("#nickcheck").show(); //nickcheck영역을 보이게함.
-		$("#nickcheck").append($newtext); //nickcheck영역에 문자열을 추가
-		$("#nickname").val('').focus();
-		return false;
-	};
 
 	//3. 닉네임 중복확인
 	$.ajax({ //$는 jQuery , $.ajax는 jQuery내의 아작스 실행
 		type:"POST", //데이터를 서버로 보내는 방법
-		//url:"./member/member_join.jsp",
 		url:"nickcheck", //아작스 서버 주소 파일명->컨트롤러에 등록한 매핑주소
 		data : {"nickname":$nickname}, //좌측 nickname파라미터 이름에 우측 $nickname 변수값을 저장
 		datatype : "int", //서버의 실행된 결과값을 사용자로 받아오는 방법
 		success : function(data) { //success는 아작스로 받아오는 것이 성공했을 경우 서버 데이터를 data변수에 저장
 			if(data==1) { //중복 닉네임이 있다면
-				$newtext='<font color="red" size="3"><b>&nbsp;&nbsp;&nbsp;중복된 닉네임입니다. 다시 입력해주세요.</b></font>';
-				$("#nickcheck").text(''); //nickcheck영역 문자열을 초기화
-				$("#nickcheck").show(); //nickcheck영역을 보이게함.
-				$("#nickcheck").append($newtext); //nickcheck영역에 문자열을 추가
-				$("#nickname").val('').focus();
-				return false;
+				$("#nickcheck").text("중복된 닉네임입니다. 다시 입력해주세요 ! :P"); 
+				$("#nickcheck").css("color","red");
+				$("#nickcheck").css("font-size","15px");
+				$("#nickcheck").css("font-weight","bold");
+				$("#nickname").css("background-color","#FFCECE");
+				$("#joinBtn").prop("disabled",true);
+		        $("#joinBtn").css("background-color","#aaaaaa");
+			}else if($nickname.length < 2 || $nickname.length > 8) {
+				$("#nickcheck").text("닉네임은 2~8자 이어야 합니다 ! :P"); //nickcheck영역에 문자열을 추가
+				$("#nickcheck").css("color","red");
+				$("#nickcheck").css("font-size","15px");
+				$("#nickcheck").css("font-weight","bold");
+				$("#nickname").css("background-color","#FFCECE");
+				$("#joinBtn").prop("disabled",true);
+		        $("#joinBtn").css("background-color","#aaaaaa");
+			}else if(!(check_usernickname($nickname))){
+				$("#nickcheck").text("닉네임은 한글,영문,숫자 조합만 가능합니다 ! :P");//nickcheck영역에 문자열을 추가
+				$("#nickcheck").css("color","red");
+				$("#nickcheck").css("font-size","15px");
+				$("#nickcheck").css("font-weight","bold");
+				$("#nickname").css("background-color","#FFCECE");
+				$("#joinBtn").prop("disabled",true);
+		        $("#joinBtn").css("background-color","#aaaaaa");
 			}else { //중복된 닉네임이 없다면
-				$newtext='<font color="blue" size="3"><b>&nbsp;&nbsp;&nbsp;사용 가능한 닉네임입니다.</b></font>';
-				$("#nickcheck").text(''); //nickcheck영역 문자열을 초기화
-				$("#nickcheck").show(); //nickcheck영역을 보이게함.
-				$("#nickcheck").append($newtext); //nickcheck영역에 문자열을 추가
-				$("#password").val('').focus();
+				$("#nickcheck").text("사용 가능한 닉네임입니다 ! :)"); //nickcheck영역에 문자열을 추가
+				$("#nickcheck").css("color","#9d8ce2");
+				$("#nickcheck").css("font-size","15px");
+				$("#nickcheck").css("font-weight","bold");
+				$("#nickname").css("background-color","#eae6fa");
+				$("#joinBtn").prop("disabled",false);
+		        $("#joinBtn").css("background-color","#9d8ce2");
 			}
 		},
 		error : function() { //비동기식 아작스로 서버디비 데이터를 못가져와서 에러가 발생했을때 호출되는 함수
@@ -217,10 +271,12 @@ function nick_check() {
 
 /** 닉네임 중복체크 정규표현식 */
 function check_usernickname($nickname) {
-	var pattern = new RegExp(/^[가-힣a-zA-Z0-9]+$/); //닉네임을 한글,영문,숫자
+	var pattern = new RegExp(/^[s가-힣a-zA-Z0-9]+$/); //닉네임을 한글,영문,숫자
 	return pattern.test($nickname);
 };
 
-/** 휴대폰번호 3개의 input 하나의 문자열로 합치기 */
+
+
+
 
 

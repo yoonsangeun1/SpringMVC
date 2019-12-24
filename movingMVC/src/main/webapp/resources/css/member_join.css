@@ -15,7 +15,9 @@
 	width: 460px;
 	min-height: 600px;
 	height: auto;
-	margin: auto auto;
+	margin : auto auto;
+	margin-top:150px; 
+	margin-bottom : 50px;
 	display: inline-block;
 	box-sizing: border-box;
 	background-color: white;
@@ -29,8 +31,7 @@
 	min-height: 300px;
 	padding-top: 30px;
 	padding-bottom: 30px;
-	box-sizing: border-box;
-	margin: auto auto;
+	box-sizing: border-box; 
 }
  /************************상단 텍스트************************/
  
@@ -79,15 +80,15 @@
 	width:458px;
 	min-height:95px;
 /* 	border: 1px solid black; */
-	padding : 10px;
+	margin : 10px 10px 0 10px;
 }
 
 /* 인증번호 발송 안내문 */
 #emailCheck_message {
     float: left;
-    width: 100%;
+    width: 400px;
     height: 15px;
-    margin: 5px 0;
+    margin-left : 12px;
     /* border: 1px solid red; */
     line-height: 1.2;
 }
@@ -136,7 +137,7 @@
 
 #info_field {
 	float:left;
-	width:100%;
+	width:459px;
 	min-height:95px;
 /* 	border: 1px solid black; */
 	padding : 10px;
@@ -147,12 +148,12 @@
 	width:100%;
 	min-height:50px;
 /* 	border:1px solid red; */
-	margin:5px 0px;
+/* 	margin:5px 0px; */
 }
 
 		/*닉네임 입력 폼 */
 .text_infoNickInput {
-	width: 306px;
+	width: 415px; 
 	height: 45px;
 	padding: 10px 5px;
 	font: bold 15px 'lucida sans', 'trebuchet MS', 'Tahoma';
@@ -172,13 +173,15 @@
 
 #nickcheck_message {
 	float:left;
-	width:100%;
+	width:400px;
 	height:15px;
-	margin:5px 0;
+	margin-left :12px;
 /* 	border:1px solid red; */
 	line-height: 1.2;
 }
-		/*이름,비밀번호,비밀번호 확인 입력폼 */
+
+
+/*이름,비밀번호,비밀번호 확인 입력폼 */
 .text_infoInput {
 	width: 415px;
 	height: 45px;
@@ -193,27 +196,27 @@
 
 #pwdCheck_message {
 	float:left;
-	width:100%;
+	width:400px;
 	height:15px;
-	margin:5px 0;
+	margin-left :12px;
 /* 	border:1px solid red; */
-	line-height: 2em; 
+	line-height: 1.2;
 }
 
 #phone_box {
 	float:left;
-	width:100%;
-	height:30px;
+	width:435px;
+	min-height:30px;
 	margin:5px 0;
 }
 /************************장르선택 입력폼************************/
 
 #genreCheck_field {
 		float:left;
-	width:100%;
+	width:398px;
 	min-height:95px;
 /* 	border: 1px solid green; */
-	padding : 30px;
+	margin : 10px 30px;
 }
 
 .genre_check {
@@ -238,6 +241,8 @@
 	float:left;
 /* 	border : 3px solid black; */
 	margin-left:20px;
+	margin-top : 10px;
+
 }
 
 /************************회원가입 버튼************************/

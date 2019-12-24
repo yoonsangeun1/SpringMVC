@@ -122,6 +122,19 @@ public class MemberController {
 		return re;
 	}//memeber_emailcheck()
 	
+	
+//	//이메일 및 비밀번호 찾기 공지창
+//		@RequestMapping("member/email_find")
+//		public String email_find() {
+//			return "member/email_find";
+//		}//member_find()
+//	//이메일 및 비밀번호 찾기 공지창
+//	@RequestMapping("member/pwd_find")
+//		public String pwd_find() {
+//			return "member/pwd_find";
+//		}//member_find()
+	
+	
 	//이메일 및 비밀번호 찾기 공지창
 	@RequestMapping("member/member_find")
 	public String member_find() {
@@ -130,13 +143,12 @@ public class MemberController {
 	
 	//이메일 아이디 찾기 결과
 	@RequestMapping("member/email_find_ok")
-	public String email_find_ok(String find_name, String find_phone, HttpServletResponse response,HttpServletRequest request, MUserVO m, Model model) throws Exception {
+	public String email_find_ok(String find_email, HttpServletResponse response,HttpServletRequest request, MUserVO m, Model model) throws Exception {
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out = response.getWriter();
-		m.setName(find_name);
-		m.setPhone(find_phone);
+		m.setEmail(find_email);
 		MUserVO em = this.mUserService.emailFind(m);
-		//이름과 폰번호를 기준으로 DB에서 이메일검색
+		//이메일을 기준으로 DB에서 이메일검색
 		if(em==null) { //회원정보가 없다면
 			out.println("<script>");
 			out.println("alert('회원 정보를 찾을 수 없습니다 !');");
@@ -148,15 +160,15 @@ public class MemberController {
 			return "member/email_find_ok";
 		}
 		return null;
-	}
+	}//email_find_ok()
 	
 	//비밀번호 찾기 결과
 	@RequestMapping("member/pwd_find_ok")
-	public String pwd_find_ok(String find_email, String find_name, HttpServletResponse response, MUserVO m, Model model) throws Exception {
+	public String pwd_find_ok(String find_email2, String find_name2, HttpServletResponse response, MUserVO m, Model model) throws Exception {
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out = response.getWriter();
-		m.setEmail(find_email);
-		m.setName(find_name);
+		m.setEmail(find_email2);
+		m.setName(find_name2);
 		MUserVO em = this.mUserService.pwdFind(m);
 		//이메일과 이름을 기준으로 디비에서 비밀번호 검색
 		if(em==null) {//회원정보가 없다면
@@ -175,7 +187,7 @@ public class MemberController {
 			return "member/pwd_find_ok";
 		}
 		return null;
-	}
+	}//pwd_find_ok()
 	
 	//로그인 인증
 	@RequestMapping("member/member_login_ok")
@@ -199,7 +211,7 @@ public class MemberController {
 				out.println("history.back();");
 				out.println("</script>");
 			}else {
-				session.setAttribute("id",dm.getId()); //세션 이메일아이디에 아이디값 저장
+				session.setAttribute("id",dm.getId()); //세션 id에 시퀀스번호값 저장
 				session.setAttribute("userid",mLogin_email); //세션 이메일아이디에 아이디값 저장
 				session.setAttribute("nickname",dm.getNickname()); //세션 닉네임에 VO객체저장
 				session.setAttribute("name",dm.getName()); //세션 이름에 VO객체저장
@@ -208,29 +220,48 @@ public class MemberController {
 				session.setAttribute("genre02",dm.getGenre02()); //세션 장르2에 VO객체저장
 				session.setAttribute("genre03",dm.getGenre03()); //세션 장르3에 VO객체저장
 				session.setAttribute("phone",dm.getPhone()); //세션 휴대폰번호에 VO객체저장
-				session.setAttribute("publishAvailability",dm.getPublishAvailability()); //세션 마이페이지 공개여부에 VO객체저장
-				session.setAttribute("profileImageUrl",dm.getProfileImageUrl()); //세션 프로필사진에 VO객체저장
-				session.setAttribute("userStatus",dm.getUserStatus()); //세션 회원상태에 VO객체저장
-				session.setAttribute("userType",dm.getUserType()); //세션 회원유형에 VO객체저장
-				session.setAttribute("userLv",dm.getUserLv()); //세션 회원등급에 VO객체저장
-				session.setAttribute("userPoint",dm.getUserPoint()); //세션 회원포인트에 VO객체저장
-				session.setAttribute("registerDate",dm.getRegisterDate()); //세션 회원가입날짜에 VO객체저장
-				session.setAttribute("businessName",dm.getBusinessName()); //세션 사업자이름에 VO객체저장
-				session.setAttribute("businessRegisterNo",dm.getBusinessRegisterNo()); //세션 사업자등록번호에 VO객체저장
-				session.setAttribute("businessLicenseImagePath",dm.getBusinessLicenseImagePath()); //세션 사업자등록증이미지경로에 VO객체저장
-				session.setAttribute("deactivateDate",dm.getDeactivateDate()); //세션 탈퇴날짜에 VO객체저장
-				session.setAttribute("deactivateReason",dm.getDeactivateReason()); //세션 탈퇴사유 VO객체저장
+				session.setAttribute("publish_availability",dm.getPublishAvailability()); //세션 마이페이지 공개여부에 VO객체저장
+				session.setAttribute("profile_image_url",dm.getProfileImageUrl()); //세션 프로필사진에 VO객체저장
+				session.setAttribute("user_status",dm.getUserStatus()); //세션 회원상태에 VO객체저장
+				session.setAttribute("user_type",dm.getUserType()); //세션 회원유형에 VO객체저장
+				
+				if(dm.getUserLv()==1) {
+					session.setAttribute("user_lv", "개인회원");
+				}else if(dm.getUserLv()==2) {
+					session.setAttribute("user_lv", "휴면회원");
+				}else if(dm.getUserLv()==3) {
+					session.setAttribute("user_lv", "제작사");
+				}else {
+					session.setAttribute("user_lv", "관리자");
+				}
+//				session.setAttribute("user_lv",dm.getUserLv()); //세션 회원등급에 VO객체저장
+				session.setAttribute("user_point",dm.getUserPoint()); //세션 회원포인트에 VO객체저장 
+				session.setAttribute("register_date",dm.getRegisterDate()); //세션 회원가입날짜에 VO객체저장
+				session.setAttribute("business_name",dm.getBusinessName()); //세션 사업자이름에 VO객체저장
+				session.setAttribute("business_register_no",dm.getBusinessRegisterNo()); //세션 사업자등록번호에 VO객체저장
+				session.setAttribute("business_license_image_path",dm.getBusinessLicenseImagePath()); //세션 사업자등록증이미지경로에 VO객체저장
+				session.setAttribute("deactivate_date",dm.getDeactivateDate()); //세션 탈퇴날짜에 VO객체저장
+				session.setAttribute("deactivate_reason",dm.getDeactivateReason()); //세션 탈퇴사유 VO객체저장
 				
 				return "redirect:/main";
 			}
 		}
 		return null;
-	}
+	}//member_login_ok()
 	
-	//Header 출력
-		@RequestMapping(value="header")	
-		public ModelAndView header() {
-			
-			return new ModelAndView("include/header");
-		}//member_login()
+	//로그아웃
+	@RequestMapping("member_logout")
+	public String member_logout(HttpServletResponse response, HttpSession session) throws Exception {
+		response.setContentType("text/html;charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		
+		session.invalidate(); //세션만료 > 로그아웃
+		
+		out.println("<script>");
+		out.println("alert('로그아웃 되었습니다!');");
+		out.println("location='main';");
+		out.println("</script>");
+		
+		return null;
+	}//member_logout()
 }

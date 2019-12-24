@@ -9,12 +9,13 @@
 <body>
 	<div id="emailFindOK_wrap">
 		<h2 class="emailFindOK_title">이메일 아이디 찾기 결과</h2>
-		<table id="emailFindOK_table">
-			<tr>
-				<th>이메일 아이디</th>
-				<td>${email}</td>
-			</tr>
-		</table>
+		<div id="emailFindOK_text">
+			<span id="emailFindOK_result" style="font-height:bold; font-size:30px;">${email}</span>
+			<br>
+			회원으로 등록된 이메일 아이디입니다.
+			<br>
+			해당 이메일로 로그인하고 MOVING을 이용하세요 !
+		</div>
 		<div id="pwdFindOK_button">
 			<input type="button" value="닫기" onclick="self.close();"/>
 		</div>

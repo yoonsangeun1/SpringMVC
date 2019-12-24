@@ -47,4 +47,19 @@ public class MUserServiceImpl implements MUserService {
 		return this.mUserDAO.loginCheck(mLogin_email);
 	}//로그인 인증
 
+	@Override
+	public void memberChange(MUserVO m) {
+		this.mUserDAO.memberChange(m);
+	}//회원전환 ( 개인 > 사업자 )
+
+	@Override
+	public MUserVO check_businessName(String businessName) {
+		return this.mUserDAO.check_businessName(businessName);
+	}//사업자명 중복검색
+
+	@Override
+	public MUserVO check_businessRegisterNo(String businessRegisterNo) {
+		return this.mUserDAO.check_businessRegisterNO(businessRegisterNo);
+	}//사업자등록번호 중복검색
+
 }

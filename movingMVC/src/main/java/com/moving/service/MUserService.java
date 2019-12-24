@@ -11,4 +11,7 @@ public interface MUserService {
 	void updatePwd(MUserVO m); //임시비밀번호 수정
 	MUserVO emailFind(MUserVO m); //이메일아이디 찾기
 	MUserVO loginCheck(String mLogin_email); //로그인인증
+	void memberChange(MUserVO m); //회원 전환 ( 개인 > 사업자 )
+	MUserVO check_businessName(String businessName); //사업자명 중복검색
+	MUserVO check_businessRegisterNo(String businessRegisterNo); //사업자 등록번호 중복검색
 }

@@ -1,0 +1,184 @@
+@charset "UTF-8";
+
+/* 전체 감싸는 랩 */
+#mChange_wrap {
+	width: 1200px;
+	height: auto;
+	min-height: 750px;
+	display: flex;
+	margin: auto auto;
+	background-color: #F5F5F5;
+}
+
+#mChange_form {
+	width: 460px;
+	min-height: 400px;	
+	height: auto;
+	margin: auto auto;
+	margin-top : 150px;
+	margin-bottom : 50px;
+	display: inline-block;
+	box-sizing: border-box;
+	background-color: white;
+	border-radius: 5px;
+	border: 1px solid #e8e8e8;
+	outline: none;
+}
+
+#mChange_form h2 {
+	line-height: 40px;
+	font-size: 30px;
+	font-weight: bold;
+	margin-top:10px;
+	margin-left:30px;
+}
+
+#mChange_form section {
+	float:left;
+	min-height:300px;
+	padding-top: 30px;
+	padding-bottom: 30px;
+	box-sizing: border-box;
+}
+#mChange_info1 {
+	float:left;
+	width:100%;
+	min-height:95px;
+/* 	border: 1px solid black; */
+	margin-left:20px;
+	margin-top:40px;
+}
+
+#mChange_info1 span {
+	font-size: 20px; 
+}
+#mChange_info1 .user_input {
+	width: 407px;
+	font-size: 17px;
+	margin: 5px auto;
+	height: 45px;
+	padding: 10px 5px;
+	font: bold 15px 'lucida sans', 'trebuchet MS', 'Tahoma';
+	border: 0;
+	float: left;
+	background-color: #eae6fa;
+	border-radius: 3px;
+}
+
+#mChange_info2 {
+	float:left;
+	width:419px;
+	min-height:95px;
+/* 	border: 1px solid black; */
+	margin-left:20px;
+	margin-top:30px;
+}
+
+#mChange_info2 span {
+	font-size: 20px; 
+}
+#mChange_businessName {
+	width: 407px;
+	font-size: 17px;
+	margin: 5px auto;
+	height: 45px;
+	padding: 10px 5px;
+	font: bold 15px 'lucida sans', 'trebuchet MS', 'Tahoma';
+	border: 0;
+	float: left;
+	background-color: #eee;
+	border-radius: 3px;
+}
+#mChange_businessRegisterNo {
+	width: 407px;
+	font-size: 17px;
+	margin: 5px auto;
+	height: 45px;
+	padding: 10px 5px;
+	font: bold 15px 'lucida sans', 'trebuchet MS', 'Tahoma';
+	border: 0;
+	float: left;
+	background-color: #eee;
+	border-radius: 3px;
+}
+
+
+#mChange_message {
+	float:left;
+	width:417px;
+	height:15px;
+	margin:5px 0;
+/* 	border:1px solid red; */
+	line-height: 1.2;
+}
+
+#mChange_file_text {
+	float:left;
+	width:100%;
+	min-height:50px;
+	line-height:2;
+}
+/* #mChange_businessLicenseImagePath { */
+/* 	float: left; */
+/* 	width: 407px; */
+/* 	font-size: 17px; */
+/* 	margin: 5px auto; */
+/* 	height: 45px; */
+/* 	padding: 10px 5px; */
+/* 	font: bold 15px 'lucida sans', 'trebuchet MS', 'Tahoma'; */
+/* 	border: 0; */
+/* 	background-color: #eee; */
+/* 	border-radius: 3px;  */
+/* } */
+
+/* .change_input_button { */
+/* 	float:left; */
+/* 	width:100px; */
+/* 	height:65px; */
+/* 	margin-top:5px; */
+/* 	margin-left : 7px;  */
+/* } */
+
+#mChange_file {
+	float:left;
+	width:100%;
+}
+
+
+
+#mChange_button {
+	float:left;
+	width:100%;
+/* 	min-height:100px; */ 
+/* 	border: 1px solid black; */
+	margin-top : 30px;
+}
+
+#member_change_btn, #member_change_cancel_btn{
+    width: 200px;
+    height: 56px;
+}
+
+
+#mChange_form #member_change_btn, #member_change_cancel_btn{
+	position: relative;
+	float: left;
+	border: 0;
+	cursor: pointer;
+	font: bold 15px 'lucida sans', 'trebuchet MS', 'Tahoma';
+	color: #fff;
+	text-transform: uppercase;
+	background: #b3a9eb;
+	border-radius: 3px;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, .3);
+	margin-left: 20px;
+}
+
+#mLogin_form #loginBtn:hover {
+	background: #9d8ce2;
+}
+
+#mLogin_form #loginBtn:active {
+	background: #9d8ce2;
+	outline: 0;
+}

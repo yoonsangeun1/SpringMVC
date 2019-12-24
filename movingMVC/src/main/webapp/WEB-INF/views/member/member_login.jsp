@@ -3,14 +3,14 @@
 
 <div id="mLogin_wrap">
 	<form method="post" action="member_login_ok" onsubmit="return login_check();" id="mLogin_form">
-		<div id="mLogin_form">
+<!-- 		<div id="mLogin_form"> -->
 			<section>
 				<div id="mLogin_text">
 					<h2>로그인 </h2>
 				</div>
 				
 				<div id="mLogin_box">
-					<input name="mLogin_email" id="mLogin_email" class="input_text" type="email" placeholder="이메일 아이디" >
+					<input name="mLogin_email" id="mLogin_email" class="input_text" type="email" placeholder="이메일 아이디">
 					<input name="mLogin_password" id="mLogin_password" class="input_text" type="password" placeholder="비밀번호(영문,숫자,특수문자 포함 8자 이상)">
 				</div>
 				
@@ -49,7 +49,7 @@
 					<hr class="my-hr1" />
 				</div>
 			</section>
-		</div>
+<!-- 		</div> -->
 
 	</form>
 </div>

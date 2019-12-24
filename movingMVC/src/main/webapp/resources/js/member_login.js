@@ -26,3 +26,23 @@ function member_find() {
 }
 
 
+$(function(){
+	$('#mLogin_email').keyup(function() {
+		 $("#mLogin_email").css("background-color","#eae6fa");
+	})
+})
+
+
+
+
+
+function check_useremail($mLogin_email) {
+	var pattern = new RegExp(/^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{3}$/i); //닉네임을 한글,영문,숫자
+	return pattern.test($mLogin_email);
+};
+
+$(function(){
+	$('#mLogin_password').keyup(function() {
+		 $("#mLogin_password").css("background-color","#eae6fa");
+	})
+})

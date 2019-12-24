@@ -6,11 +6,7 @@
 	height: auto;
 	min-height: 750px;
 	margin: auto auto;
-	align-items: center;
 	display: flex;
-	align-items: center;
-	justify-content: center;
-	margin: auto auto;
 	background-color: #F5F5F5;
 }
  
@@ -19,17 +15,13 @@
 	min-height: 400px;	
 	height: auto;
 	margin: auto auto;
-	display: inline-block;
-	box-sizing: border-box;
 	background-color: white;
 	border-radius: 5px;
 	border: 1px solid #e8e8e8;
-	outline: none;
 }
 
 #mLogin_wrap form{
 	border: none;
-	outline: none;
 }
 
 #mLogin_form h2 {
@@ -58,8 +50,34 @@
 	margin-top:10px;
 }
 
-#mLogin_box .input_text {
-	width: 407px;
+/* #mLogin_box .input_text { */
+/* 	width: 407px; */
+/* 	font-size: 17px; */
+/* 	margin: 5px auto; */
+/* 	height: 45px; */
+/* 	padding: 10px 5px; */
+/* 	font: bold 15px 'lucida sans', 'trebuchet MS', 'Tahoma'; */
+/* 	border: 0; */
+/* 	float: left; */
+/* 	background-color: #eee; */
+/* 	border-radius: 3px; */
+/* } */
+
+#mLogin_email {
+		width: 407px;
+	font-size: 17px;
+	margin: 5px auto;
+	height: 45px;
+	padding: 10px 5px;
+	font: bold 15px 'lucida sans', 'trebuchet MS', 'Tahoma';
+	border: 0;
+	float: left;
+	background-color: #eee;
+	border-radius: 3px;
+}
+
+#mLogin_password {
+			width: 407px;
 	font-size: 17px;
 	margin: 5px auto;
 	height: 45px;
@@ -75,10 +93,6 @@
 	margin : 0 10px 0 10px;
 	float:left;
 	width:100%;
-}
-#mLogin_text2 .save_id{
-	float:left;
-	margin-left:5px;
 }
 
 #mLogin_text2 .find_id {

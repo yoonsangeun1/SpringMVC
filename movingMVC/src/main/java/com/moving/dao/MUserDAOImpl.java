@@ -40,11 +40,26 @@ public class MUserDAOImpl implements MUserDAO {
 	@Override
 	public MUserVO emailFind(MUserVO m) {
 		return this.sqlSession.selectOne("email_find",m);
-	}
+	}//이메일아이디 찾기
 
 	@Override
 	public MUserVO loginCheck(String mLogin_email) {
 		return this.sqlSession.selectOne("login_check",mLogin_email);
+	}//로그인인증
+
+	@Override
+	public void memberChange(MUserVO m) {
+		this.sqlSession.update("member_change",m);
+	}//회원전환
+
+	@Override
+	public MUserVO check_businessName(String businessName) {
+		return this.sqlSession.selectOne("check_businessName",businessName);
+	}
+
+	@Override
+	public MUserVO check_businessRegisterNO(String businessRegisterNo) {
+		return this.sqlSession.selectOne("check_businessRegisterNo",businessRegisterNo);
 	}
 
 

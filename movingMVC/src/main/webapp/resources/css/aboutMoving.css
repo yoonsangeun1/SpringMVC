@@ -35,6 +35,10 @@
 /*    border-radius:15px; */
    text-align: center;
    background-color:#eae6fa;
+   background-color:#aaaaaa; /*회색  가입버튼 비활성화*/
+   background-color:#B0F6AC; /*초록  입력폼 성공*/
+   background-color:#4CAF50; /*진초록 가입버튼 활성화*/
+   background-color:#FFCECE; /*빨강 입력폼 실패*/
    padding : 30px;
 }
 

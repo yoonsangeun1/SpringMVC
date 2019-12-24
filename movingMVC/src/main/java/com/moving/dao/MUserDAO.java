@@ -18,5 +18,11 @@ public interface MUserDAO {
 
 	MUserVO loginCheck(String mLogin_email); //로그인 인증
 
+	void memberChange(MUserVO m); //회원전환
+
+	MUserVO check_businessName(String businessName); //사업자명 중복검색
+
+	MUserVO check_businessRegisterNO(String businessRegisterNo); //사업자 등록번호 중복검색
+
 
 }
