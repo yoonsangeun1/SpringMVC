@@ -1,5 +1,9 @@
 package com.moving.controller;
 
+import java.io.File;
+import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,12 +13,18 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.moving.domain.AttachedFileVO;
+import com.moving.domain.MUserVO;
 import com.moving.domain.SocialPostVO;
 import com.moving.domain.SocialProfileVO;
 import com.moving.service.SocialService;
@@ -27,8 +37,42 @@ public class SocialController {
 	
 	//소셜 메인페이지
 	@RequestMapping(value="/social/main",method=RequestMethod.GET)
-	public ModelAndView social_main() throws Exception{
-		return new ModelAndView("social/social_main");
+	public ModelAndView social_main(
+			HttpServletRequest request,
+			HttpServletResponse response,
+			HttpSession session
+			) throws Exception{
+		response.setContentType("text/html;charset=UTF-8");
+		PrintWriter out= response.getWriter();
+		
+		int id=(int)session.getAttribute("id");
+		System.out.println("id="+id);
+		
+		ModelAndView m=new ModelAndView();
+		//SocialProfileVO socialProfileVO=socialService.socialProfileInfo(id);
+				
+				//int get_id=socialProfileVO.getId();//id값을 받아온다
+				SocialProfileVO db_id = socialService.checkId(id);
+				//Integer a=(Integer)db_id.getUserId();
+				int re=1;
+				if(db_id == null ) re=-1;
+				if(re == 1) //id값이 있을 경우
+				{
+					/*System.out.println("성공");
+					System.out.println(socialProfileVO.getId()); //id값 출력
+					List<SocialPostVO> socialPostVO=socialService.selectSocialPost(); //id로 검색하여 게시글ㄹ
+					m.addObject("s_post", socialPostVO);
+					m.addObject("s_pro", socialProfileVO);
+					m.setViewName("social/social_main");*/
+				}
+				else {
+					//socialService.insertSocialProfile(id);
+					out.println("<script>");
+					out.println("alert('소셜 계정으로 전환하세요');");
+					out.println("location='/moving.com/social/join'");
+					out.println("</script>");
+				}
+				return null;
 	}//social_main()
 
 	//메신저
@@ -64,17 +108,21 @@ public class SocialController {
 			HttpServletResponse response, @PathVariable("id") int id
 			,SocialPostVO s_post
 			)throws Exception{
+		HttpSession session=request.getSession();//세션 값 전체를 가져온다.
+		int using_id=(int)session.getAttribute("id");//세션에서 아이디값을 가져온다.
 //		String saveFolder=request.getRealPath("/resources/upload");
 //		int filesize=200*1024*1024;
 //		MultipartRequest multi=null;
 //		multi=new MultipartRequest(request,saveFolder,filesize,"UTF-8");
-//		SocialPostVO socialPostVO=new SocialPostVO();
-//		socialPostVO.setSocialId(id);
-//		socialPostVO.setContent(SNS_Main_Text_Value);
-//		this.socialService.insertPost(socialPostVO);
-//		m.addAttribute("id", id);
-		System.out.println(s_post.getContent());
-		return "redirect:/social/main";
+		
+		s_post.setSocialId(using_id);
+		this.socialService.insertPost(s_post);
+		
+		if(id==0) {
+			return "redirect:/social/main";
+		}else {
+			return "redirect:/social/profile?id="+id;
+		}
 	}
 	
 	@RequestMapping(value="social/post_del_ok")
@@ -98,39 +146,7 @@ public class SocialController {
 		return "redirect:/social/profile?id="+user_id;
 	}
 	
-//	@RequestMapping(value="social/attach_insert_ok", method=RequestMethod.POST)
-//	public String social_attach_insert(@ModelAttribute("product") Product product, MultipartHttpServletRequest request,
-//            @RequestParam("file") MultipartFile[] file ) throws Exception{
-//	String uploadPath=request.getRealPath("/resources/upload");
-//	String fileOriginName="";
-//	String fileMultiName="";
-//	for(int i=0;i<file.length;i++) {
-//		 fileOriginName = file[i].getOriginalFilename();
-//	        System.out.println("기존 파일명 : "+fileOriginName);
-//	        SimpleDateFormat formatter = new SimpleDateFormat("YYYYMMDD_HHMMSS_"+i);
-//	        Calendar now = Calendar.getInstance();
-//	        
-//	        //확장자명
-//	        String extension = fileOriginName.split("\\.")[1];
-//	        
-//	        //fileOriginName에 날짜+.+확장자명으로 저장시킴.
-//	        fileOriginName = formatter.format(now.getTime())+"."+extension;
-//	        System.out.println("변경된 파일명 : "+fileOriginName);
-//	        
-//	        File f = new File(uploadPath+"\\"+fileOriginName);
-//	        file[i].transferTo(f);
-//	        if(i==0) {
-//	        	fileMultiName += fileOriginName;
-//	        }
-//	        else{
-//	        	fileMultiName += ","+fileOriginName;
-//	        }
-//	}
-//	  System.out.println("*"+fileMultiName);
-//	    product.setFileName(fileMultiName);
-//	    
-//	    this.socialService.insertAttachFiles();
-//	    
-//	    return "redirect:/social/profile?id="+user_id;
+
+
 //	}
 }

@@ -1,5 +1,7 @@
 package com.moving.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,7 +23,7 @@ public class SocialServiceImpl implements SocialService {
 		return socialDAO.selectSocialProfileInfo(id);
 	}
 
-	@Transactional
+//	@Transactional
 	@Override
 	public void insertPost(SocialPostVO socialPostVO) {
 		this.socialDAO.insertPost(socialPostVO);
@@ -31,5 +33,20 @@ public class SocialServiceImpl implements SocialService {
 	@Override
 	public void deletePost(int post_id) {
 		this.socialDAO.deletePost(post_id);
+	}
+
+	@Override
+	public List<SocialPostVO> selectSocialPost() {
+		return socialDAO.selectSocialPost();
+	}
+
+	@Override
+	public void insertSocialProfile(int id) {
+		this.socialDAO.insertSocialProfile(id);
+	}
+
+	@Override
+	public SocialProfileVO checkId(int id) {
+		return this.socialDAO.checkId(id);
 	}
 }

@@ -5,6 +5,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="socialProfile"><!-- 매퍼 네임스페이스명 -->
+	<select id="checkId" resultType="socialProfileVO">
+		SELECT * FROM social_profile 
+		WHERE user_id = #{id}
+	</select>
+
 	<!-- @(2)회원 프로필 화면 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 	<resultMap type="socialProfileVO" id="socialProfileInfo">
 		<id property="id" column="social_profile_id"/>
@@ -30,12 +35,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		ORDER BY register_date desc
 	</select>
 	
+	<!-- 타임라인에서) "소셜" 게시글을 전부 검색한다. -->
+	<select id="selectAllPostAndComment" resultMap="socialPostInfo">
+		SELECT id AS social_post_id, social_id, content, move_count, register_date,publish_availability
+		FROM social_post
+		ORDER BY register_date desc
+	</select>
+	
+	
 	<!-- @(4)게시글 리스트 호출 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 	<resultMap type="socialPostVO" id="socialPostInfo">
 		<id property="id" column="social_post_id"/>
 		<!-- @(5)게시글 작성자 정보 -->
 		<association property="socialProfileVO" javaType="com.moving.domain.SocialProfileVO"
-			column="social_post_id" select="selectSocialProfileOnPost">
+			column="social_id" select="selectSocialProfileOnPost">
 			<id property="id" column="social_post_social_id"/>
 		</association>
 		<!-- @게시글 첨부파일 리스트 호출 -->
@@ -52,7 +65,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectSocialProfileOnPost" resultType="socialProfileVO">
 		SELECT id AS social_post_social_id, user_type, nickname, profile_image_path
 		FROM social_profile
-		WHERE id = #{social_post_id}
+		WHERE id = #{social_id}
 	</select>
 	
 	
@@ -102,6 +115,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete from social_post where id=#{post_id}
 	</delete>
 	
+	<select id="selectSocialPost">
+		select * from social_post order by register_date desc
+	</select>
+	
+	<insert id="insertSocialProfile">
+		insert into social_profile(id,user_id,nickname,user_type)
+		values (social_profile_seq.nextval,${id},'새 친구',1)
+	</insert>
 	<!-- ==================================<구분선>====================================== -->
 	<!-- 회원에 해당하는  게시글 검색 (게시글 + 댓글 + 작성자) -->
 	<select id="selectSocialPostInfo" resultMap="socialPostInfo">
