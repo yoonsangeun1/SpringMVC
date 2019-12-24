@@ -123,7 +123,6 @@ CREATE TABLE code_master (
 	table_name VARCHAR2(50), /* 테이블_명 */
 	register_date DATE /* 등록_날짜 */
 );
-select * from code_master
 
 CREATE UNIQUE INDEX code_master_id_pk
 	ON code_master (
@@ -434,14 +433,14 @@ CREATE TABLE m_user (
 	id NUMBER(38) NOT NULL, /* 아이디 */
 	code_no NUMBER(38) DEFAULT 50001, /* 코드_번호 */
 	userid VARCHAR2(50) NOT NULL, /* 회원아이디 */
-	nickname VARCHAR2(17), /* 닉네임 */
+	nickname VARCHAR2(50), /* 닉네임 */
 	name VARCHAR2(50), /* 이름 */
 	email VARCHAR2(40) NOT NULL, /* 이메일 */
-	password VARCHAR2(50) NOT NULL, /* 비밀번호 */
+	password VARCHAR2(100) NOT NULL, /* 비밀번호 */
 	genre_01 VARCHAR2(50), /* 장르1 */
 	genre_02 VARCHAR2(50), /* 장르2 */
 	genre_03 VARCHAR2(50), /* 장르3 */
-	phone VARCHAR2(11), /* 전화번호 */
+	phone VARCHAR2(100), /* 전화번호 */
 	publish_availability NUMBER(1) DEFAULT 1, /* 공개_여부 */
 	profile_image_url VARCHAR2(300), /* 프로필_사진_url */
 	user_status NUMBER(38) DEFAULT 1, /* 회원_상태 */
