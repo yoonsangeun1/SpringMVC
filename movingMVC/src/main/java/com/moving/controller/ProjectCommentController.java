@@ -21,7 +21,7 @@ import com.moving.service.ProjectPostService;
 
 @RestController
 @RequestMapping("/replies")
-public class ProjectReplyController {
+public class ProjectCommentController {
 
 	@Autowired
 	private ProjectPostService projectPostService;
