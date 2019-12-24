@@ -13,12 +13,10 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/scrollbar.css" />
 
 <%-- 아이콘 폰트 사용을 위한 스타일시트, js 추가 --%>
-<link rel="stylesheet" type="text/css"
-	href="../iconfont/css/fontawesome.min.css">
-<script src="https://kit.fontawesome.com/bf95efc607.js"
-	crossorigin="anonymous"></script>
-<link rel="stylesheet" href="../icon/css/fontello.css">
-<link rel="stylesheet" href="../icon/css/animation.css">
+<link rel="stylesheet" type="text/css"ref="${pageContext.request.contextPath}/resources/iconfont/css/fontawesome.min.css">
+<script src="https://kit.fontawesome.com/bf95efc607.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/icon/css/fontello.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/icon/css/animation.css">
 
 <%-- banner css 추가 --%>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/aboutMoving.css" />
@@ -57,18 +55,17 @@
 
 <%-- javascript 추가 (우선, abc순)--%>
 <script src="${pageContext.request.contextPath}/js/jquery.js"></script>
+<script src="${pageContext.request.contextPath}/js/header_icon.js"></script>
 <script src="${pageContext.request.contextPath}/js/member_join.js"></script>
 <script src="${pageContext.request.contextPath}/js/member_login.js"></script>
 <script src="${pageContext.request.contextPath}/js/member_change.js"></script>
-<script src="${pageContext.request.contextPath}/js/header_icon.js"></script>
 <script src="${pageContext.request.contextPath}/js/board_event.js"></script>
 <script src="${pageContext.request.contextPath}/js/board_faq.js"></script>
 <script src="${pageContext.request.contextPath}/js/funding_write.js"></script>
 <script src="${pageContext.request.contextPath}/js/move_banner.js"></script>
 <script src="${pageContext.request.contextPath}/js/movie_cont.js"></script>
-<script src="${pageContext.request.contextPath}/js/slide.js"></script>
 <script src="${pageContext.request.contextPath}/js/social.js"></script>
-<script src="https://kit.fontawesome.com/e253e3fae5.js" crossorigin="anonymous"></script>
+<%-- <script src="${pageContext.request.contextPath}/js/slide.js"></script> --%>
 
 <!--  <script>
 $(function(){ // document ready
