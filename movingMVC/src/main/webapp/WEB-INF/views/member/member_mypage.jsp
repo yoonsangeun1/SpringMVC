@@ -44,7 +44,7 @@
 			</div>
 			<div id="mInfo_button">
 				<button class="profile_modify_btn button_cb3a9eb border" onclick="location='#';">프로필 설정</button>
-				<button class="userChange button_cb3a9eb border" onclick="location='http://localhost:8084/moving.com/member_change';">회원전환</button>
+				<button class="userChange button_cb3a9eb border" onclick="location='/moving.com/member_change';">회원전환</button>
 			</div>
 		</div>
 		<div id="mMypage_profileImg">
