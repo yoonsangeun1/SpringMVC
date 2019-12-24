@@ -166,7 +166,7 @@ $(function(){ // document ready
 <!-- 								<button type="button" class="profile_modify_btn button_cb3a9eb border"> -->
 <!-- 									정보 수정 -->
 <!-- 								</button> -->
-								<div class="MyMenuUserInfo_userInfo" onclick="location='${pageContext.request.contextPath}/moving.com/member/mypage';"> 
+								<div class="MyMenuUserInfo_userInfo" onclick="location='/moving.com/member/mypage';"> 
 									<a class="MyMenuUserInfo_profileLink">
 										<span class="MyMenuUserInfo_name">${name}</span> &nbsp;&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i>
 										<span class="MyMenuUserInfo_avatar"><i class="far fa-user-circle" aria-hidden="true" style="font-size:60px;"></i></span>
@@ -203,19 +203,19 @@ $(function(){ // document ready
 									</a>
 								</li>
 								<li>
-									<a href="${pageContext.request.contextPath}/moving.com/member_change" class="MyMenu_subMenuBtn"> 
+									<a href="/moving.com/member_change" class="MyMenu_subMenuBtn"> 
 											 회원 전환<i class="fas fa-chevron-right" aria-hidden="true" style="float: right"></i>
 									</a>
 								</li>
 								<li>
-									<a href="${pageContext.request.contextPath}/moving.com/member_infosetting" class="MyMenu_subMenuBtn">
+									<a href="/moving.com/member_infosetting" class="MyMenu_subMenuBtn">
 										설정<i class="fas fa-chevron-right" aria-hidden="true" style="float:right"></i>
 									</a>
 								</li>
 							</ul>
 							
 							<div id="MyMenuUserActive_logout">
-								<input type="button" value="로그아웃" class="logout button_cb3a9eb border" onclick="location='${pageContext.request.contextPath}/moving.com/member_logout';">
+								<input type="button" value="로그아웃" class="logout button_cb3a9eb border" onclick="location='/moving.com/member_logout';">
 <!-- 								<input type="hidden"> -->
 							</div>
 
