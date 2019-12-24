@@ -242,7 +242,7 @@ CREATE TABLE reply_post (
 	user_id NUMBER(38), /* 회원_아이디 */
 	category VARCHAR2(50), /* 분류 */
 	title VARCHAR2(200), /* 제목 */
-	content VARCHAR2(4000), /* 내용 */
+	content CLOB, /* 내용 */
 	hit NUMBER(38) DEFAULT 0, /* 조회수 */
 	register_date DATE DEFAULT sysdate, /* 등록_일 */
 	comment_count NUMBER(38) DEFAULT 0, /* 댓글_개수 */
@@ -292,7 +292,7 @@ CREATE TABLE social_post (
 	id NUMBER(38) NOT NULL, /* 아이디 */
 	code_no NUMBER(38) DEFAULT 10007, /* 코드_번호 */
 	social_id NUMBER(38), /* 소셜_아이디 */
-	content VARCHAR2(4000), /* 내용 */
+	content CLOB, /* 내용 */
 	project_id NUMBER(38), /* 프로젝트_아이디 */
 	comment_count NUMBER(38) DEFAULT 0, /* 댓글_개수 */
 	move_count NUMBER(38) DEFAULT 0, /* 무브_개수 */
@@ -320,7 +320,7 @@ CREATE TABLE project_post (
 	code NUMBER(38), /* 분류번호 */
 	title VARCHAR2(200), /* 제목 */
 	introduce VARCHAR2(200), /* 소개 */
-	content VARCHAR2(4000), /* 내용 */
+	content CLOB, /* 내용 */
 	business VARCHAR2(50), /* 제작사 */
 	target_price NUMBER(38), /* 목표_금액 */
 	now_price NUMBER(38), /* 현재_금액 */
@@ -382,7 +382,7 @@ CREATE TABLE video_post (
 	director VARCHAR2(50), /* 감독 */
 	actor VARCHAR2(50), /* 배우 */
 	release_date DATE, /* 개봉_일 */
-	content VARCHAR2(4000), /* 내용 */
+	content CLOB, /* 내용 */
 	grade NUMBER(38), /* 평점 */
 	era_background VARCHAR2(100), /* 시대_배경 */
 	video_file_path VARCHAR2(300), /* 영상_파일_경로 */
@@ -412,7 +412,7 @@ CREATE TABLE social_message (
 	code_no NUMBER(38) DEFAULT 80004, /* 코드_번호 */
 	social_id_from NUMBER(38) NOT NULL, /* 소셜_아이디_보낸이 */
 	social_id_to NUMBER(38) NOT NULL, /* 소셜_아이디_받는이 */
-	content VARCHAR2(4000), /* 내용 */
+	content CLOB, /* 내용 */
 	register_date DATE DEFAULT sysdate /* 등록_일 */
 );
 
@@ -452,7 +452,7 @@ CREATE TABLE m_user (
 	business_register_no VARCHAR2(25), /* 사업자등록번호 */
 	business_license_image_path VARCHAR2(300), /* 사업자등록증이미지경로 */
 	deactivate_date DATE, /* 탈퇴_날짜 */
-	deactivate_reason VARCHAR2(4000) /* 탈퇴 */
+	deactivate_reason CLOB /* 탈퇴 */
 );
 
 CREATE UNIQUE INDEX user_id_pk
@@ -519,7 +519,7 @@ CREATE TABLE social_profile (
 	user_id NUMBER(38) NOT NULL, /* 회원_아이디 */
 	nickname VARCHAR2(17), /* 닉네임 */
 	background_image_path VARCHAR2(300), /* 배경_이미지_경로 */
-	introduce VARCHAR2(4000), /* 소개 */
+	introduce CLOB, /* 소개 */
 	user_type NUMBER(1) DEFAULT 1, /* 회원_타입 */
 	profile_image_path VARCHAR2(300), /* 프로필_이미지_경로 */
 	follower_count NUMBER(38) DEFAULT 0, /* 팔로워_수 */
@@ -546,7 +546,7 @@ CREATE TABLE reward (
 	code_no NUMBER(38) DEFAULT 20002, /* 코드_번호 */
 	project_post_id NUMBER(38), /* 프로젝트_게시글_아이디 */
 	title VARCHAR2(200), /* 제목 */
-	content VARCHAR2(4000), /* 내용 */
+	content CLOB, /* 내용 */
 	price NUMBER(38), /* 금액 */
 	delivery_fee_existence NUMBER(1) DEFAULT 1, /* 배송_비_유무 */
 	delivery_expect_date DATE, /* 전달_예정_일 */
@@ -636,14 +636,14 @@ CREATE TABLE normal_post (
 	user_id NUMBER(38), /* 회원_아이디 */
 	user_category VARCHAR2(50), /* 회원_분류 */
 	title VARCHAR2(200), /* 제목 */
-	content VARCHAR2(4000), /* 내용 */
+	content CLOB, /* 내용 */
 	hit NUMBER(38) DEFAULT 0, /* 조회수 */
 	comment_count NUMBER(38) DEFAULT 0, /* 댓글_개수 */
 	move_count NUMBER(38) DEFAULT 0, /* 무브_개수 */
 	register_date DATE DEFAULT sysdate, /* 등록_일 */
 	limit_date DATE, /* 기한_날짜 */
-	question_content VARCHAR2(4000), /* 질문_내용 */
-	answer_content VARCHAR2(4000) /* 답변_내용 */
+	question_content CLOB, /* 질문_내용 */
+	answer_content CLOB /* 답변_내용 */
 );
 
 CREATE UNIQUE INDEX normal_post_id_pk
@@ -664,7 +664,7 @@ CREATE TABLE m_comment (
 	code_no NUMBER(38) DEFAULT 80001, /* 코드_번호 */
 	user_id_from NUMBER(38), /* 회원_아이디_보낸이 */
 	social_profile_id_from NUMBER(38), /* 소셜_프로필_아이디_보낸이 */
-	content VARCHAR2(4000), /* 내용 */
+	content CLOB, /* 내용 */
 	register_date DATE DEFAULT sysdate, /* 등록_일 */
 	grade NUMBER(38), /* 평점 */
 	move_count NUMBER(38) DEFAULT 0, /* 무브_개수 */
@@ -698,7 +698,7 @@ CREATE TABLE profile_post (
 	user_id NUMBER(38), /* 회원_아이디 */
 	title VARCHAR2(200), /* 제목 */
 	category VARCHAR2(50), /* 카테고리 */
-	content VARCHAR2(4000), /* 내용 */
+	content CLOB, /* 내용 */
 	hit NUMBER(38) DEFAULT 0, /* 조회수 */
 	register_date DATE DEFAULT sysdate, /* 등록_일 */
 	comment_count NUMBER(38) DEFAULT 0, /* 댓글_개수 */
@@ -733,7 +733,7 @@ CREATE TABLE report (
 	id NUMBER(38) NOT NULL, /* 아이디 */
 	code_no NUMBER(38) DEFAULT 80005, /* 코드_번호 */
 	title VARCHAR2(200), /* 제목 */
-	content VARCHAR2(4000), /* 내용 */
+	content CLOB, /* 내용 */
 	register_date DATE DEFAULT sysdate, /* 등록_일 */
 	user_id_from NUMBER(38), /* 회원_아이디_보낸이 */
 	user_id_to NUMBER(38), /* 회원_아이디_받는이 */
