@@ -58,30 +58,30 @@
 			</thead>
 
 		<tbody>
-		 <c:if test="${!empty bflist}"> <%--bflist에 값이 있으면 --%>
-   		  <c:forEach var="bflist" items="${bflist}">
+		 <c:if test="${!empty bnlist}"> <%--bnlist에 값이 있으면 --%>
+   		  <c:forEach var="bnlist" items="${bnlist}">
 		   <tr style="height:44px">
-			<td id="no">${bflist.id}</td>
+			<td id="no">${bnlist.id}</td>
 			
-   	<c:set var="bflist.title" value="${bflist.title}" /> <%-- 변수에 제목값 저장 --%>
-   	<c:set var="bflist.mUserVO.nickname" value="${bflist.mUserVO.nickname}" /> <%--변수에 이름값 저장 --%> 
+   	<c:set var="bnlist.title" value="${bnlist.title}" /> <%-- 변수에 제목값 저장 --%>
+   	<c:set var="bnlist.mUserVO.nickname" value="${bnlist.mUserVO.nickname}" /> <%--변수에 이름값 저장 --%> 
 
 			
 			
 	<c:choose>
-     <c:when test="${fn:length(bflist.title) > 20}"> <%--20자 이상일 경우 --%>
-	  <c:set var="title" value="${fn:substring(bflist.title,0,19)}..." />
+     <c:when test="${fn:length(bnlist.title) > 20}"> <%--20자 이상일 경우 --%>
+	  <c:set var="title" value="${fn:substring(bnlist.title,0,19)}..." />
 	   <td>
-        <a href="/moving.com/board/notice_cont?id=${bflist.id}&page=${page}">
-	  ${title} <!-- set쪽에 bflist.title로 해서 가져오면 값이 적용이 안됨 ? -->
+        <a href="/moving.com/board/notice_cont?id=${bnlist.id}&page=${page}">
+	  ${title} <!-- set쪽에 bnlist.title로 해서 가져오면 값이 적용이 안됨 ? -->
 	    </a><%-- board_cont?bno=번호값&page=쪽번호 2개의 피라미터 값이 get방식으로 전달됨. --%>
        </td>
      </c:when>
      
      <c:otherwise>
       <td>
-       <a href="/moving.com/board/notice_cont?id=${bflist.id}&page=${page}">
-	   ${bflist.title}
+       <a href="/moving.com/board/notice_cont?id=${bnlist.id}&page=${page}">
+	   ${bnlist.title}
 	   </a><%-- board_cont?bno=번호값&page=쪽번호 2개의 피라미터 값이 get방식으로 전달됨. --%>
       </td>
      </c:otherwise>
@@ -90,17 +90,17 @@
     
     
      <c:choose>
-      <c:when test="${fn:length(bflist.mUserVO.nickname) > 10}">
-       <c:set var="bflist.mUserVO.nickname" value="${fn:substring(bflist.mUserVO.nickname,0,9)}.." />
+      <c:when test="${fn:length(bnlist.mUserVO.nickname) > 10}">
+       <c:set var="bnlist.mUserVO.nickname" value="${fn:substring(bnlist.mUserVO.nickname,0,9)}.." />
         <td id="author">
-        <c:if test="${bflist.socialProfileVO.id != 0}">
-         <a href="/moving.com/social/profile?id=${bflist.socialProfileVO.id}">
-       	  ${bflist.mUserVO.nickname}
+        <c:if test="${bnlist.socialProfileVO.id != 0}">
+         <a href="/moving.com/social/profile?id=${bnlist.socialProfileVO.id}">
+       	  ${bnlist.mUserVO.nickname}
          </a>
         </c:if>
         
-        <c:if test="${bflist.socialProfileVO.id == 0}">
-       	  ${bflist.mUserVO.nickname}
+        <c:if test="${bnlist.socialProfileVO.id == 0}">
+       	  ${bnlist.mUserVO.nickname}
         </c:if>
         
         </td>
@@ -109,14 +109,14 @@
       <c:otherwise>
        <td id="author">
        
-        <c:if test="${bflist.socialProfileVO.id != 0}">
-         <a href="/moving.com/social/profile?id=${bflist.socialProfileVO.id}">
-       	  ${bflist.mUserVO.nickname}
+        <c:if test="${bnlist.socialProfileVO.id != 0}">
+         <a href="/moving.com/social/profile?id=${bnlist.socialProfileVO.id}">
+       	  ${bnlist.mUserVO.nickname}
          </a>
         </c:if>
         
-        <c:if test="${bflist.socialProfileVO.id == 0}">
-       	  ${bflist.mUserVO.nickname}
+        <c:if test="${bnlist.socialProfileVO.id == 0}">
+       	  ${bnlist.mUserVO.nickname}
         </c:if>
        
        </td>
@@ -124,13 +124,13 @@
 
      </c:choose>
      		
-			<td id="time">${bflist.registerDate}</td>
-			<td id="hit">${bflist.hit}</td>
+			<td id="time">${bnlist.registerDate}</td>
+			<td id="hit">${bnlist.hit}</td>
 		   </tr>
 		  </c:forEach>
   		 </c:if>
   		 
-   <c:if test="${empty bflist}"> <%--bflist에 값이 없으면 --%>
+   <c:if test="${empty bnlist}"> <%--bnlist에 값이 없으면 --%>
     <tr>
      <th colspan="5">게시물 목록이 없습니다.</th>
     </tr>
@@ -249,15 +249,15 @@
 	<script>
 	 var msg="${msg}"; //컨트롤러에서 rttr로 설정한 키 이름을 EL로 받아와 저장했음.
 	 
-	 if(msg == "BOARD/FREE_INSERT"){
+	 if(msg == "BOARD/NOTICE_INSERT"){
 		 alert("글쓰기가 성공 했습니다!");
 	 }//if boardFreeController에서 글쓰기 성공 시 출력.
 	 
-	 if(msg == "BOARD/FREE_EDIT"){
+	 if(msg == "BOARD/NOTICE_EDIT"){
 		 alert("글수정이 성공 했습니다!");
 	 }//수정
 	 
-	 if(msg == "BOARD/FREE_DEL"){
+	 if(msg == "BOARD/NOTICE_DEL"){
 		 alert("글삭제가 성공 했습니다!");
 	 }//삭제
 	 

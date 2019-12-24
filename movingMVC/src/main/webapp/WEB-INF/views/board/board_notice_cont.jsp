@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>공지사항 내용</title>
 <script src="../resources/js/jquery.js"></script>
-<script src="../resourecs/js/board_notice.js"></script>
+<script src="../resourecs/js/board_free.js"></script>
 <style>
  #modDiv{
    width:300px; height:100px;
@@ -21,9 +21,9 @@
 <script>
 function delconfirm(){
 	if(confirm("삭제하시겠습니까?")){
-		location.replace('/moving.com/board/notice_del?id=${bf.id}&page=${page}'); //yes
+		location.replace('/moving.com/board/notice_del?id=${bn.id}&page=${page}'); //yes
 	}else{
-		location.replace('/moving.com/board/notice_cont?id=${bf.id}&page=${page}'); //no
+		location.replace('/moving.com/board/notice_cont?id=${bn.id}&page=${page}'); //no
 	}
 }//confirm()
 </script>
@@ -34,26 +34,26 @@ function delconfirm(){
   
   <tr>
    <th>글쓴이</th>
-    <td>${bf.mUserVO.nickname}</td>
+    <td>${bn.mUserVO.nickname}</td>
   </tr>
   
   <tr>
-    <th>제목</th> <td>${bf.title}</td>  
+    <th>제목</th> <td>${bn.title}</td>  
   </tr>
   
   <tr>
-   <th>내용</th> <td>${bf.content}</td>
+   <th>내용</th> <td>${bn.content}</td>
   </tr>
   
   <tr>
-   <th>조회수</th> <td>${bf.hit}</td>
+   <th>조회수</th> <td>${bn.hit}</td>
   </tr>
   
   <tr>
    <th colspan="2">
    <input type="button" value="수정"
 onclick="location=
-'/moving.com/board/notice_edit?id=${bf.id}&page=${page}';" /> 
+'/moving.com/board/notice_edit?id=${bn.id}&page=${page}';" /> 
 <%-- board_cont?bno=번호&page=쪽번호 2개의 피라미터값
 이 get방식으로 전달 --%>  
 <input type="button" value="삭제"
@@ -66,7 +66,7 @@ onclick="location=
  </table>
  
  <br/><hr/>
- <%-- [댓글 개수:<b>${bf.reply_cnt}</b> 개]--%>
+ <%-- [댓글 개수:<b>${bn.reply_cnt}</b> 개]--%>
  <br/> 
  <%-- 댓글기능 추가 --%>
  <%--댓글 수정화면 --%>

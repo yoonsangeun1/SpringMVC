@@ -30,12 +30,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  <where>
   <if test="findField == ''"></if> <!-- 검색값이 없을 경우 -->
   <if test="findField == 'title'"> <!-- 검색조건이 제목인 경우 -->
-   N.TITLE LIKE #{findName} <!-- LIKE로 찾기 기능 사용 -->
+   N.CODE_NO = 10001 AND N.TITLE LIKE #{findName} <!-- LIKE로 찾기 기능 사용 -->
   </if>
   <if test="findField == 'content'"> <!-- 검색조건이 내용인 경우 -->
-   N.CONTENT LIKE #{findName}
+   N.CODE_NO = 10001 AND N.CONTENT LIKE #{findName}
   </if>
   <if test="findField == 'nickname'"> <!-- 검색조건이 닉네임인 경우 -->
+   N.CODE_NO = 10001 AND 
    N.USER_ID IN
    (SELECT U.ID FROM M_USER U
    WHERE U.NICKNAME LIKE #{findName})
@@ -45,10 +46,67 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <!-- 페이징 + 목록보기 -->
 <select id="bn_list" resultMap="boardInfo">
- 
+ SELECT * FROM
+ (SELECT ROW_NUMBER() OVER(ORDER BY N.ID DESC) rNum,
+ N.ID AS board_notice_id, N.TITLE, U.NICKNAME, S.ID AS social_profile_id,
+ N.REGISTER_DATE AS board_notice_registerDate, N.HIT
+ FROM NORMAL_POST N
+ LEFT OUTER JOIN M_USER U ON N.USER_ID = U.ID
+ LEFT OUTER JOIN SOCIAL_PROFILE S ON U.ID = S.USER_ID
+ <where>
+ N.CODE_NO = 10001
+ <if test="findField == ''"></if>   <!-- 값이 없을 경우 -->
+ <if test="findField == 'title'">   <!-- 검색 필드가 제목일 경우 -->
+  AND N.TITLE LIKE #{findName} 		    <!-- 검색 필드 값대로 검색 -->
+ </if>
+ <if test="findField == 'content'"> <!-- 검색 필드가 내용일 경우 -->
+  AND N.CONTENT LIKE #{findName}		<!-- 검색 필드 값대로 검색 -->
+ </if>
+ <if test="findField == 'nickname'"><!-- 검색 필드가 닉네임일 경우 -->
+  AND U.NICKNAME LIKE #{findName}		<!-- 검색 필드 값대로 검색 -->
+ </if>
+ </where>
+ ORDER BY board_notice_id DESC)
+ WHERE rNum &gt;= #{startrow}
+ AND rNum &lt;= #{endrow}
 </select>
 
+<!-- 글쓰기, 공지사항 글쓰 코드넘버는 10001 -->
+<insert id="bn_in">
+  INSERT INTO NORMAL_POST (ID,USER_ID,TITLE,CONTENT,CODE_NO) 
+  VALUES(NORMAL_POST_SEQ.NEXTVAL,#{userId},#{title},
+  #{content},10001)
+</insert>
 
+<!-- 조회수 증가 -->
+<update id="bn_hit">
+ UPDATE NORMAL_POST
+ SET HIT=HIT+1
+ WHERE ID=#{id}
+</update>
+
+<!-- 내용보기 -->
+<select id="bn_cont" resultMap="boardInfo">
+ SELECT N.ID AS board_notice_id, N.USER_ID AS board_notice_user_id,
+ N.TITLE, N.HIT, N.CONTENT, M.NICKNAME
+ FROM NORMAL_POST N, M_USER M
+ WHERE N.USER_ID = M.ID
+ AND N.ID=#{id}
+</select>
+
+<!-- 내용수정 -->
+<update id="bn_edit">
+ UPDATE NORMAL_POST
+ SET TITLE=#{title},
+ 	 CONTENT=#{content}
+ WHERE ID=#{id}
+</update>
+
+<!-- 게시글 삭제 -->
+<delete id="bn_del">
+ DELETE FROM NORMAL_POST
+ WHERE ID=#{id}
+</delete>
 
 </mapper>
 

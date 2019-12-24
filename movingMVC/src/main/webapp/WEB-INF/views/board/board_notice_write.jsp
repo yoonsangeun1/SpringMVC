@@ -5,12 +5,12 @@
 <meta charset="UTF-8">
 <title>자유게시판 글쓰기</title>
 <script src="../resources/js/jquery.js"></script>
-<script src="../resources/js/board_notice.js"></script>
+<script src="../resources/js/board_free.js"></script>
 <script src="../resources/editor/js/HuskyEZCreator.js" charset="UTF-8"></script>
 </head>
 <body>
  <form method="post" action="/moving.com/board/notice_write_ok"
- onsubmit="return notice_check();">
+ onsubmit="return free_check();">
   <table border="1" style="width:1024px"> <!-- width 임시로 넣어둠. -->
    <caption>공지사항 글쓰기</caption>
    <tr>
@@ -24,7 +24,7 @@
    </tr>
    <tr>
     <th>글내용</th>
-    <td><textarea name="content" id="content" onkeyUp="checkByte(this.form);"
+    <td><textarea name="content" id="content"
     rows="10" cols="100"></textarea>
     
 <script type="text/javascript">

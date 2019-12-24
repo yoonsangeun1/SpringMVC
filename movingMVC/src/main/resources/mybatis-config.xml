@@ -47,7 +47,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.moving.domain.NormalPostVO" alias="normalPostVO"/>				<!-- 일반 게시글 VO -->		
 		<typeAlias type="com.moving.domain.ReplyPostVO" alias="replyPostVO"/>				<!-- 일반 게시글 VO -->		
 		<typeAlias type="com.moving.domain.ProfilePostVO" alias="profilePostVO"/>				<!-- 일반 게시글 VO -->		
-		<typeAlias type="com.moving.domain.NormalPostDTO" alias="normalPostDTO"/>			<!-- resultMap 테스트용 -->
 		
 		<typeAlias type="com.moving.domain.VideoPostVO" alias="videoPostVO"/>				<!-- 영상 VO -->
 		
