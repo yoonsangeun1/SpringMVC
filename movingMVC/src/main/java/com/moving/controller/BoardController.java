@@ -11,12 +11,13 @@ public class BoardController {
 	/* @Autowired
 	private BoardService boardService; 서비스 생성 후 작성*/ 
 
-	//공지사항
+/*	//공지사항
 	@RequestMapping(value="/board/notice")	
 	public ModelAndView notice() {
 		return new ModelAndView("board/board_notice");
 	}//notice()
-
+*/
+	
 	//공모전
 	@RequestMapping(value="/board/contest")
 	public ModelAndView contest() {
