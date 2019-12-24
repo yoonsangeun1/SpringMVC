@@ -1,5 +1,7 @@
 package com.moving.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,10 +12,20 @@ import com.moving.domain.VideoPostVO;
 public class AdminVideoServiceImpl implements AdminVideoService {
 
 	@Autowired
-	private  AdminVideoDAO adminVideoDAO;
+	private  AdminVideoDAO adminVideoDao;
 
 	@Override
 	public void insertMovie(VideoPostVO vp) {
-		this.adminVideoDAO.insertMovie(vp);
+		this.adminVideoDao.insertMovie(vp);
+	}
+
+	@Override
+	public int videoCount(VideoPostVO vp) {
+		return this.adminVideoDao.videoCount(vp);
+	}
+
+	@Override
+	public List<VideoPostVO> videoList(VideoPostVO vp) {
+		return this.adminVideoDao.videoList(vp);
 	}
 }

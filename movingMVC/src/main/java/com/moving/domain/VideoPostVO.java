@@ -33,6 +33,11 @@ public class VideoPostVO {
 	private MUserVO mUserVO;						/* 회원 VO */
 	private List<AttachedFileVO> attachedFileVO; 	/* 첨부파일 VO */
 	
+	/* 검색기능 */
+	private String findName;//검색어
+	private String findField;//검색필드
+	
+	
 	public int getId() {
 		return id;
 	}
@@ -142,7 +147,7 @@ public class VideoPostVO {
 		this.moveCount = moveCount;
 	}
 	public String getRegisterDate() {
-		return registerDate;
+		return registerDate.substring(0,10);
 	}
 	public void setRegisterDate(String registerDate) {
 		this.registerDate = registerDate;
@@ -178,6 +183,18 @@ public class VideoPostVO {
 	}
 	public void setAttachedFileVO(List<AttachedFileVO> attachedFileVO) {
 		this.attachedFileVO = attachedFileVO;
+	}
+	public String getFindName() {
+		return findName;
+	}
+	public void setFindName(String findName) {
+		this.findName = findName;
+	}
+	public String getFindField() {
+		return findField;
+	}
+	public void setFindField(String findField) {
+		this.findField = findField;
 	}
 	
 	

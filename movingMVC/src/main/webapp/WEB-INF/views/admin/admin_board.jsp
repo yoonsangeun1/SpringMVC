@@ -8,7 +8,7 @@
 	<%-- 게시판 글 목록표 생성 --%>
 	<table id="aBoard_table" border="1">
 		<tr>
-			<td colspan="6" align="right">게시물 수  : ${boardCount }개</td>
+			<td colspan="6" align="right" style="text-align: right">게시물 수  : ${boardCount }개</td>
 		</tr>
 		<tr>
 			<th scope="col" class="aBT_check"><input type="checkbox" name="aBoard_check" value="checkB" /></th>
@@ -170,10 +170,14 @@
 	<div id="aBoard_search">
 		<form>
 			<select class="select" name="findField">
-				<option value="all">전체</option>
-				<option value="title">제목</option>
-				<option value="content">내용</option>
-				<option value="nickname">작성자</option>
+				<option value="all"
+					<c:if test="${findField=='all' }">${'selected' }</c:if>>전체</option>
+				<option value="title"
+					<c:if test="${findField=='title' }">${'selected' }</c:if>>제목</option>
+				<option value="content"
+					<c:if test="${findField=='content' }">${'selected' }</c:if>>내용</option>
+				<option value="nickname"
+					<c:if test="${findField=='nickname' }">${'selected' }</c:if>>작성자</option>
 			</select>
 			
 			<%-- 검색 텍스트필드, 버튼 --%>

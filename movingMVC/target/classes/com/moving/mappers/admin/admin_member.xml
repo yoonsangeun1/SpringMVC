@@ -31,7 +31,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="am_list" resultMap="memberInfo">
 		SELECT * FROM (SELECT ROWNUM rNum, id, nickname, 
-		userid, name, phone, user_status, publish_availability, user_point, user_lv FROM (SELECT * FROM M_USER
+		userid, name, phone, user_status, publish_availability, user_point, user_lv
+		FROM (SELECT * FROM M_USER
 		<where>
 			<if test="findField == ''"></if> <!-- 총 회원 목록 -->
 			<if test="findField == 'all'">
