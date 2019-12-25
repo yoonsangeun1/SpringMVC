@@ -133,33 +133,53 @@
 				<div class="SNS_Comment">
 
 					<%------------------------------------------------------------------------------------------------ --%>
+					<%-- 댓글 작성 --%>
 					<div class="SNS_Comment_Write">
-						<%-- 본인의 프로필 사진이 있다면,없다면 분기 나누기 --%>
-						<img class="SNS_Content_user_img" class="SNS_Profile_Picture"
-							src="../images/member_profile.png" width=30px height=30px alt="">
-						<input name="content" id="content" class="SNS_Comment_Write_Chat">
-						<input class="SNS_Comment_Write_Button" name="write" id="write"
-							type="button" value="작성"
-							onclick="reply_check(); selectCommentCount();">
+					
+						<%-- 본인의 프로필 사진이 있다면,없다면 분기 나누기 나중에 프로필사진--%>
+						<%-- 프로필 이미지가 있을 경우 --%>
+						<c:if test="${!empty profile_image_url }">
+							<img class="SNS_Content_user_img" class="SNS_Profile_Picture"
+								src="${comment.mUserVO.profileImageUrl }" width="30" height="30"
+								alt="">
+						</c:if>
+						<%-- 프로필 이미지가 없을 경우 --%>
+						<c:if test="${empty profile_image_url }">
+							<img class="SNS_Content_user_img" class="SNS_Profile_Picture"
+								src="../images/member_profile.png" width="30" height="30" alt="">
+						</c:if>
+						<input type="hidden" id="project_post_id" size="40" value="${projectInfo.id }">
+						<p>${nickname }</p>
+						<input id="content" name="content" class="SNS_Comment_Write_Chat">
+						<input id="write" name="write" class="SNS_Comment_Write_Button" type="button" 
+						value="작성" >
 					</div>
+					
 					<%-- 댓글 목록 출력 --%>
 					<%-- 댓글이 있다면 --%>
 					<ul id="replies"
 						style="margin-top: 7px; list-style: none; align-items: center;">
 						<c:if test="${!empty projectInfo.mCommentVO }">
 							<c:forEach var="comment" items="${projectInfo.mCommentVO }">
-								<li style="align-items: center;"><c:if
-										test="${!empty comment.mUserVO.profileImageUrl }">
+								<li style="align-items: center;">
+									<%-- 프로필 이미지가 있을 경우 --%>
+									<c:if test="${!empty profile_image_url }">
 										<img class="SNS_Content_user_img" class="SNS_Profile_Picture"
-											src="${comment.mUserVO.profileImageUrl }" width=30px
-											height=30px alt="">
-									</c:if> <c:if test="${empty comment.mUserVO.profileImageUrl }">
+											src="${comment.mUserVO.profileImageUrl }" width="30" height="30" alt="">
+									</c:if> 
+									<%-- 프로필 이미지가 없을 경우 --%>
+									<c:if test="${empty comment.mUserVO.profileImageUrl }">
 										<img class="SNS_Content_user_img" class="SNS_Profile_Picture"
-											src="../images/member_profile.png" width=30px height=30px
-											alt="">
+											src="../images/member_profile.png" width="30" height="30" alt="">
 									</c:if>
-									<p>${comment.mUserVO.nickname }</p>
-									<p>${comment.content }</p></li>
+									<a href="/moving.com/member/mypage?id=${comment.id }">
+									<p>${comment.mUserVO.nickname }</p></a>
+									<input type="hidden" class="id" value="${comment.id }">
+									<%-- <p class="modyfiy_content">${comment.content }</p> --%>
+									<input name="modify_content" class="modify_content SNS_Comment_Write_Chat" value="${comment.content }" >
+									<input type="button" name="modify" class="modify SNS_Comment_Write_Button" value="수정" >
+									<input type="button" name="delete" class="delete SNS_Comment_Write_Button" value="삭제" >
+									</li>
 							</c:forEach>
 						</c:if>
 						<c:if test="${empty projectInfo.mCommentVO }">
@@ -180,11 +200,6 @@
 <%@ include file="../include/footer.jsp"%>
 
 
-
-
-
-
-
 <%-- <div id="test">
 		<p>
 		<i class="fas fa-bell"></i>기본 사용법
@@ -197,4 +212,4 @@
 		<i class="icon-logo_w"></i>icon-logo_w
 		<i class="icon-logo_w font50"></i>icon-logo_w font50
 		</p>
-		</div>--%>
+	</div>--%>

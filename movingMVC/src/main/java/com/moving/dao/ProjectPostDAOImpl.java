@@ -77,6 +77,16 @@ public class ProjectPostDAOImpl implements ProjectPostDAO {
 		p.setId(id);
 		sqlSession.update("updateCommentCount", p);
 	}
+
+	@Override
+	public int selectListCount(ProjectPostVO projectPostVO) {
+		return sqlSession.selectOne("projectPost.selectListCount", projectPostVO);
+	}
+
+	@Override
+	public List<ProjectPostVO> selectProjectList(ProjectPostVO projectPostVO) {
+		return sqlSession.selectList("selectProjectList", projectPostVO);
+	}
 	
 	
 }

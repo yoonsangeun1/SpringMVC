@@ -12,6 +12,8 @@
 	align-items: center;
 	margin-left: auto;
 	margin-right: auto;
+	padding-top: 46px; 
+	font-family: 10px '맑은 고딕' black;
 }
 /* 카테고리명, 설명 *************************************** 카테고리명, 설명 ***/
 #fList_title {
@@ -121,6 +123,7 @@
 	background-color: #6a67ce;
 }
 
+
 #hover_container h3 {
 	font-size: 21px;
 	font-weight: bold;
@@ -146,6 +149,72 @@
 	text-decoration: underline;
 	font-weight: bold;
 	color: #6a67ce;
+}
+
+#hover_container-category  { 
+	cursor: pointer;
+	width: 370px;
+	height: 550px;
+	border: 1px solid #e8e8e8;
+	margin: 15px;
+}
+
+.hover_container-category-padding {
+	width: 330px;
+	height: 327px;
+	margin: 0px auto;
+	float: left;
+}
+
+#hover_container-category h3 {
+	font-size: 19px;
+	font-weight: bold;
+	margin-top: 20px;
+	margin-bottom: 10px;
+}
+
+#hover_container-category p {
+	font-family: "맑은 고딕";
+	font-size: 17px;
+	margin-top: 10px;
+	margin-bottom: 25px;
+	line-height: 1.3em;
+}
+
+#hover_container-category:hover h3 {
+	text-decoration: underline;
+	font-weight: bold;
+	color: #6a67ce;
+}
+
+#hover_container-category:active h3 {
+	text-decoration: underline;
+	font-weight: bold;
+	color: #6a67ce;
+}
+
+.progress-category {
+	height: 5px;
+	/* width: 530px; */
+	width: 330px;
+	background-color: #E8E8E8;
+	font-family: Helvetica;
+	font-size: 12px;
+	float: left;
+	margin: 0px auto;   
+	margin-bottom: 20px;
+}
+
+.progress-bar-category {
+	height: 5px;
+	background-color: #6a67ce;
+}
+
+.progress-category p {
+	font-family: "맑은 고딕";
+	font-size: 15px;
+	margin-bottom: 10px;
+	line-height: 1.3em;
 }
 /* 우측 리스트 *************************************** 우측 리스트 ***/
 #fList_right {

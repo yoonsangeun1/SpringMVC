@@ -22,6 +22,8 @@ public interface ProjectPostService {
 	List<Map<String, Object>> selectCommentListMap(int id);
 	//게시글에 해당하는 댓글 개수 불러오면서 저장
 	ProjectPostVO selectCommentCount(int id);
+	int selectListCount(ProjectPostVO projectPostVO);//게시글 리스트 개수 구하기
+	List<ProjectPostVO> selectProjectList(ProjectPostVO projectPostVO);
 	
 
 

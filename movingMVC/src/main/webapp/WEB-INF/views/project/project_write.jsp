@@ -1,14 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="../include/header.jsp"%>
-<script type="text/javascript">
-var oEditors = [];
-nhn.husky.EZCreator.createInIFrame({
- oAppRef: oEditors,
- elPlaceHolder: "ir1",
- sSkinURI: ../resources/naver/SmartEditor2Skin.html",
- fCreator: "createSEditor2"
-});
-</script>
+
 <!-- 크라우드 펀딩 글 작성 페이지 -->
 <div id="fWrite_wrap">
 <%-- 티저 업로드 화면 구성 --%>

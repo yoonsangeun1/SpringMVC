@@ -63,4 +63,14 @@ public class ProjectPostServiceImpl implements ProjectPostService {
 		return projectPostDAO.selectCommentCount(id);		//댓글 개수 가져오기
 	}
 
+	@Override
+	public int selectListCount(ProjectPostVO projectPostVO) {
+		return projectPostDAO.selectListCount(projectPostVO);
+	}
+
+	@Override
+	public List<ProjectPostVO> selectProjectList(ProjectPostVO projectPostVO) {
+		return projectPostDAO.selectProjectList(projectPostVO);
+	}
+
 }
