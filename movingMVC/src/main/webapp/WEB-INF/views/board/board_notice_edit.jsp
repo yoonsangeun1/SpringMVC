@@ -5,31 +5,31 @@
 <meta charset="UTF-8">
 <title>자유게시판 수정</title>
 <script src="../resources/js/jquery.js"></script>
-<script src="../resources/js/board_notice.js"></script>
+<script src="../resources/js/board_free.js"></script>
 <script src="../resources/editor/js/HuskyEZCreator.js" charset="UTF-8"></script>
 </head>
 <body>
  <form method="post" action="notice_edit_ok"
- onsubmit="return notice_check();">
+ onsubmit="return free_check();">
  <%--히든으로 게시물 번호와 페이지번호값을 전달 --%>
- <input type="hidden" name="id" value="${bf.id}" />
+ <input type="hidden" name="id" value="${bn.id}" />
  <input type="hidden" name="page" value="${page}" />
  
   <table border="1" style="width:1024px">
    <caption>공지사항 수정</caption>
    <tr>
     <th>글쓴이</th>
-    <td>${bf.mUserVO.nickname}</td>   
+    <td>${bn.mUserVO.nickname}</td>   
    </tr> 
    <tr>
     <th>제목</th>
   <td><input name="title" id="title" size="36" 
-  value="${bf.title}" /></td>
+  value="${bn.title}" /></td>
    </tr>
    <tr>
     <th>글내용</th>
     <td><textarea name="content" id="content" 
-    rows="10" cols="100">${bf.content}</textarea>
+    rows="10" cols="100">${bn.content}</textarea>
     
     <script type="text/javascript">
 	var oEditors = []; //전역변수

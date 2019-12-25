@@ -8,5 +8,9 @@ public interface BoardNoticeService {
 
 	int getTotalCount(NormalPostVO bn);
 	List<NormalPostVO> getBoardNoticeList(NormalPostVO bn);
+	void inBoardNotice(NormalPostVO bn);
+	NormalPostVO getCont(int id);
+	void editBoardNotice(NormalPostVO bn);
+	void delBoardNotice(int id);
 
 }//BoardNoticeService interface 

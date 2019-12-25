@@ -11,7 +11,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.moving.dao.ProjectPostDAO;
 import com.moving.domain.MCommentVO;
-import com.moving.domain.NormalPostDTO;
 import com.moving.domain.ProjectPostVO;
 
 @Service

@@ -98,7 +98,7 @@ public class BoardFreeController {
 		
 		}else {
 			out.println("<script>");
-			out.println("alert('글쓰기 권한이 없습니다!');");
+			out.println("alert('로그인을 해주세요!');");
 			out.println("location='/moving.com/member/login';");
 			out.println("</script>");
 		}//if else
@@ -135,7 +135,7 @@ public class BoardFreeController {
 		
 		}else { // 넘겨온 id 값이 없을경우, 또는 세션 만료되었을 경우?
 			out.println("<script>");
-			out.println("alert('로그인을 다시해주세요!');");
+			out.println("alert('로그인을 해주세요!');");
 			out.println("location='/moving.com/member/login';");
 			out.println("</script>");
 		}//if else
@@ -155,10 +155,6 @@ public class BoardFreeController {
 		NormalPostVO bf=this.boardFreeService.getCont(id);
 		
 		ModelAndView cm=new ModelAndView("/board/board_free_cont");
-		
-		System.out.println("내용보기 ID"+id);
-		System.out.println("내용보기 ID get방식"+bf.getId());
-		System.out.println("내용보기 USER_ID get방식"+bf.getUserId());
 		
 		cm.addObject("bf",bf);
 		cm.addObject("page",page);
@@ -186,10 +182,6 @@ public class BoardFreeController {
 		
 		int m_userid=(int) session.getAttribute("id"); //세션으로 받아온 id를 m_userid에 저장
 		
-/*		System.out.println("수정 ID"+id);
-		System.out.println(m_userid);
-		System.out.println(bf.getUserId());*/
-		
 		if(m_userid == bf.getUserId()) { //m_user의 id와 normal_post의
 			//user_id가 일치한다면
 			
@@ -208,7 +200,7 @@ public class BoardFreeController {
 		
 		}else { /*세션이 값이 없을 경우*/
 			out.println("<script>");
-			out.println("alert('로그인을 다시 해주세요!');");
+			out.println("alert('로그인을 해주세요!');");
 			out.println("location='/moving.com/member/login';");
 			out.println("</script>");
 		}//if else
@@ -260,7 +252,7 @@ public class BoardFreeController {
 				
 				return "redirect:/board/free?page="+page; //view 페이지로 이동.
 				
-			}else { /*본인 게시글 수정이 아닐경우*/
+			}else { /*본인 게시글 삭제가 아닐경우*/
 				out.println("<script>");
 				out.println("alert('본인 게시글만 삭제 가능합니다!');");
 				out.println("history.back();");
@@ -269,7 +261,7 @@ public class BoardFreeController {
 			
 			}else { /*세션이 값이 없을 경우*/
 				out.println("<script>");
-				out.println("alert('로그인을 다시 해주세요!');");
+				out.println("alert('로그인을 해주세요!');");
 				out.println("location='/moving.com/member/login';");
 				out.println("</script>");
 			}//if else
