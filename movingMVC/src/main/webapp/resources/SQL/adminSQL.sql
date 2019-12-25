@@ -3,3 +3,5 @@ SELECT profile_image_url, id, userid, nickname, genre_01, genre_02, genre_03, em
 		
 INSERT INTO m_user (id, userid, nickname, email, password, genre_01, genre_02, genre_03)
 VALUES (m_user_seq.nextval, 'mihawk648', '하위^^', 'moving@gmail.com', 'moving1', null, null, null);
+
+SELECT * FROM VIDEO_POST;

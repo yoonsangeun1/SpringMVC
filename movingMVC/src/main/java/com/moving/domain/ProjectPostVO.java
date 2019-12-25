@@ -21,7 +21,15 @@ public class ProjectPostVO {		/* 프로젝트 게시글 */
 	private int commentCount; 		/* 댓글_개수 */
 	private int moveCount; 			/* 무브_개수 */
 	private String registerDate; 	/* 등록_일 */
-	
+
+	/* 페이징 관련변수(쪽나누기) */
+	private int startRow;			/* 시작행 번호 */
+	private int endRow;				/* 끝행 번호 */
+
+	/* 검색기능 */
+	private String findName;		/* 검색어 */
+	private String findField;		/* 검색 필드 */
+
 	/* resultMap JOIN 검색용 */
 	private List<MCommentVO> mCommentVO;			/* 댓글 VO */
 	private MUserVO mUserVO;						/* 회원 VO */
@@ -130,6 +138,30 @@ public class ProjectPostVO {		/* 프로젝트 게시글 */
 	}
 	public void setRegisterDate(String registerDate) {
 		this.registerDate = registerDate;
+	}
+	public int getStartRow() {
+		return startRow;
+	}
+	public void setStartRow(int startRow) {
+		this.startRow = startRow;
+	}
+	public int getEndRow() {
+		return endRow;
+	}
+	public void setEndRow(int endRow) {
+		this.endRow = endRow;
+	}
+	public String getFindName() {
+		return findName;
+	}
+	public void setFindName(String findName) {
+		this.findName = findName;
+	}
+	public String getFindField() {
+		return findField;
+	}
+	public void setFindField(String findField) {
+		this.findField = findField;
 	}
 	public List<MCommentVO> getmCommentVO() {
 		return mCommentVO;

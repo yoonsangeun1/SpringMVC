@@ -11,18 +11,105 @@ function getParameterByName(name) {
 }
 var id = getParameterByName('id');
 
+//세션 아이디 가져오기
+
+//댓글 추가 부분
+
+$(function(){ 
+	getCommentList();
+	$('#write').click( function() {
+	//var sessionId="<%=session.getAttribute('id')%>"
+	//	var sessionTest=sessionId;
+	var project_post_id = $('#project_post_id').val();//게시글 번호
+	var content=$('#content').val();//댓글 내용
+
+	if(content=='') {
+		alert('댓글 내용을 입력하세요!');
+		$('#content').val('').focus();
+		return false;
+	}
+
+	$.ajax({//jQuery ajax
+		type: 'post',//서버로 자료를 보내는 법
+		url: '/moving.com/comments/write',//매핑 주소
+		headers: {
+			"Content-Type": "application/json", 
+			"X-HTTP-Method-Override": "POST"
+			//HTTP 코드 맨 머리 앞에 추가적인 정보 지정
+		},
+		dataType: 'text',//문자열
+		data: JSON.stringify({//댓글 작성자, 내용이 json이다.
+			//왼쪽에서 오른쪽으로 대입됨!! 우 -> 왼 아님!!!
+			//왼쪽이 키이름 오른쪽이 값!! 이건 동일!!
+			projectPostId: project_post_id, //게시물 번호
+			//id: id, //댓글 작성자
+			content: content //댓글 내용
+		}),
+		success: function(data) {//댓글 저장 성공시 SUCCESS 문자열 반환
+			if(data=='SUCCESS') {
+				alert('댓글이 등록되었습니다!');
+				getCommentList();//댓글 목록 함수 호출! 갱신된 내용 가져옴.
+				getCommentCount();
+				$('#content').val("");
+			}
+		}
+	});
+	
+	})
+});
+
+/*
+	if(content=='') {
+		alert('댓글 내용을 입력하세요!');
+		$('#content').val('').focus();
+		return false;
+	}
+	
+	$.ajax({//jQuery ajax
+		type: 'post',//서버로 자료를 보내는 법
+		url: '/controller/replies',//매핑 주소
+		headers: {
+			"Content-Type": "application/json", 
+			"X-HTTP-Method-Override": "POST"
+			//HTTP 코드 맨 머리 앞에 추가적인 정보 지정
+		},
+		dataType: 'text',//문자열
+		data: JSON.stringify({//댓글 작성자, 내용이 json이다.
+			//왼쪽에서 오른쪽으로 대입됨!! 우 -> 왼 아님!!!
+			//왼쪽이 키이름 오른쪽이 값!! 이건 동일!!
+			project_post_id: project_post_id, //게시물 번호
+			id: id, //댓글 작성자
+			content: content //댓글 내용
+		}),
+		success: function(data) {//댓글 저장 성공시 SUCCESS 문자열 반환
+			if(data=='SUCCESS') {
+				alert('댓글이 등록되었습니다!');
+				getCommentList();//댓글 목록 함수 호출! 갱신된 내용 가져옴.
+				getCommentCount();
+				$('#content').val("");
+			}
+		}
+	});
+});
+*/
+
+
+
+
+
 //댓글 작성시 내용 입력 체크
-function reply_check() {
+function comment_check() {
 	if($.trim($('#content').val())=='') {
 		alert('댓글 내용을 입력하세요!');
 		$('#content').val('').focus();
 		return false;
 	}
+	
 }
 
 //댓글 목록 불러오는 함수 호출
 function getCommentList() {
-	$.getJSON("/moving.com/replies/test/" + id, function(data) {
+	$.getJSON("/moving.com/comments/all/" + id, function(data) {
 		//get방식으로 json 데이터를 비동기식으로 가져와서 data에 저장
 		var str = "";
 		success: $(data).each(function() {//each()는 jQuery 반복 함수
@@ -41,7 +128,7 @@ function getCommentList() {
 
 //게시글 번호에 해당하는 댓글 개수 출력, 개수 출력되는 부분에 값 변경
 function getCommentCount() {
-	$.getJSON("/moving.com/replies/count/"+id, function(data) {
+	$.getJSON("/moving.com/comments/count/"+id, function(data) {
 		var commentCount= "<b>"+data+"</b>";
 		$('.commentCount').html(commentCount);
 	});
@@ -55,7 +142,7 @@ function getCommentCount() {
 		
 		$.ajax({
 			type: 'delete',
-			url: '/controller/replies/'+rno,
+			url: '/controller/comments/'+rno,
 			headers:{
 				"Content-Type": "application/json",
 				"X-HTTP-Method-Override": "DELETE"
@@ -79,7 +166,7 @@ function getCommentCount() {
 		
 		$.ajax({
 			type: 'put',
-			url: '/controller/replies/'+rno,
+			url: '/controller/comments/'+rno,
 			headers:{
 				"Content-Type": "application/json",
 				"X-HTTP-Method-Override": "PUT"
@@ -97,7 +184,7 @@ function getCommentCount() {
 	});
 	
 	//댓글 수정 화면 --%>
-	$('#replies').on('click', '.replyLi button', function() {
+	$('.modify').on('click', function() {
 		var reply=$(this).parent();
 		var rno=reply.attr('data-rno');//댓글 번호
 		var replytext=reply.children('.com').text();

@@ -9,10 +9,21 @@
 			<!-- 좌측 메뉴 -->
 			<div id="SNS_left_title">
 				<div id="SNS_Profile_Name">
-					<a href="profile">${id}</a>
+				<c:if test="${empty s_pro.nickname}">
+					<a href="profile?id=${id}">비회원</a>
+				</c:if>
+				<c:if test="${!empty s_pro.nickname}">
+					<a href="profile?id=${id}">${s_pro.nickname}</a>
+				</c:if>
 				</div> 
-				<img class="SNS_Profile_Picture" src="../images/member_profile.png"
-					width="30px" height="30px" alt="">
+				<c:if test="${!empty s_pro.profileImagePath}">
+					<img class="SNS_Profile_Picture" src="${s_pro.profileImagePath}"
+						width="30px" height="30px" alt="" onclick="location='/moving.com/social/profile?id='+${id}">
+				</c:if>
+				<c:if test="${empty s_pro.profileImagePath}">
+					<img class="SNS_Profile_Picture" src="../images/member_profile.png"
+						width="30px" height="30px" alt="" onclick="location='/moving.com/social/profile?id='+${id}">
+				</c:if>
 			</div>
 			<br />
 			<ul id="SNS_ul1">
@@ -28,45 +39,120 @@
 		</div>
 		<div id="SNS_main_mid">
 			<!-- 중간 글쓰기, 글보기 -->
+			<c:if test="${!empty s_pro.id}">
+			<form action="post_write_ok/0" enctype="mutipart/form-data" method="post" name="timeLineWriter">
 				<div id="mid_pad">
+					<div id="SNS_Profile_Upload_Top">
+						<ul id="SNS_None_Ul"></ul>
+					</div>
 					<div id="mid_left">
-						<textarea id="SNS_main_text" rows="14" cols="61"
+						<textarea name="content" id="SNS_main_text" rows="14" cols="61"
 							placeholder="오늘은 어떤 기분을 남기고 싶으신가요?"></textarea>
 					</div>
 					<div id="mid_right">
 						<input type="submit" class="SNS_Buttons" value="작성" />
 						<div class="SNS_File">
-							<label for="SNS_Buttons_File">사진 올리기</label> <input type="file"
-								class="SNS_Buttons_File">
+							<label for="File_First">사진 올리기</label> 
+								<input type="file" id="File_First" class="SNS_Buttons_File" accept=".jpg,.jpeg,.png,.gif,.bmp" onchange="loadImage(this)" name="photoGet" multiple/>
 						</div>
 						<input type="reset" class="SNS_Buttons" value="전체 삭제" />
 					</div>
 				</div>
+				</form>
+			</c:if>
+				<%-- 
+				<form action="post_write_ok/${id}" enctype="mutipart/form-data" method="post" name="timeLineWriter">
+					<div id="SNS_Profile_Writer">
+						<div id="SNS_Profile_Upload_Top">
+							<ul id="SNS_None_Ul"></ul>
+						</div>
+						<div id="SNS_Profile_Upload_Roof" onclick="goTimeLine()"></div>
+						<div id="SNS_Profile_Mid_Left">
+							<textarea name="content" id="SNS_main_text" rows="15" cols="54" placeholder="오늘은 어떤 기분을 남기고 싶으신가요?"></textarea>
+						</div>
+						<div id="mid_right">
+							<input type="submit" class="SNS_Buttons" value="작성" />
+							<div class="SNS_File">
+								<label for="File_First">사진 올리기</label> 
+								<input type="file" id="File_First" class="SNS_Buttons_File" accept=".jpg,.jpeg,.png,.gif,.bmp" onchange="loadImage(this)" name="photoGet" multiple/>
+							</div>
+							<input type="reset" class="SNS_Buttons" value="전체 삭제" onclick="removeAllLi()"/>
+						</div>
+					</div>
+				</form> --%>
+				
 			<div id="mid_scrap">
+				<c:if test="${empty s_pro.id}">
+					<p style="width: 100%;height: 700px;font-size: 15px;text-align: center;line-height: 700px;">
+						SNS을 이용하기 위해서는 등록이 필요합니다!
+					</p>
+				</c:if>
 				<ul id="SNS_Content_ul">
+					<c:forEach var="s" items="${s_post}">
 					<li>
 						<div class="SNS_Content">
-							<img class="SNS_Content_user_img" src="../images/member_profile.png" width="40" height="40"
-								 alt="프로필 사진">
-							<div class="SNS_Content_info">
-								<div class="SNS_Content_Author">박진우</div>
-								<div class="SNS_Content_Write_Time">1시간 전</div>
-							</div>
-							<input class="SNS_Option_Button" type="button" value="..."
+							<div style="height: 40px;">
+								<div class="SNS_Info_Wrap">
+								<c:if test="${empty s.socialProfileVO.profileImagePath}">
+									<img class="SNS_Content_user_img" src="../images/member_profile.png" width="40" height="40" alt=""
+										 alt="프로필 사진">
+								</c:if>
+								<c:if test="${!empty s.socialProfileVO.profileImagePath}">
+									<img class="SNS_Content_user_img" src="${s.socialProfileVO.profileImagePath}" width="40" height="40" alt=""
+										 alt="프로필 사진">
+								</c:if>
+								<div class="SNS_Content_info">
+									<div class="SNS_Content_Author">${s.socialProfileVO.nickname}</div>
+									<c:set var="date" value="${s.registerDate}"/>
+									<div class="SNS_Content_Write_Time">
+										<script>/* 시간 차 계산 후 출력 */
+												var writeTime = "${date}";
+												var nowTime = new Date();
+	
+												var yyyy = writeTime.substr(0, 4);
+												var mm = writeTime.substr(5, 2);
+												var dd = writeTime.substr(8, 2);
+												var hh = writeTime.substr(11, 2);
+												var mi = writeTime.substr(14, 2);
+	
+												var copyTime = new Date(yyyy,mm - 1, dd, hh, mi);
+												var hours = Math.abs(nowTime- copyTime) / 36e5;
+												
+												hours = Math.floor(hours);
+												
+												if (hours<=1){
+													hours = "조금 전";
+												}
+												else if (hours<=24){
+													hours = hours + "시간 전";
+												}
+												else if (24 < hours && hours <= 48){
+													hours = "하루 전";
+												}
+												else if (hours>=48 && hours <8760){
+													hours = (copyTime.getMonth()+1)+"월"
+													+		copyTime.getDate()+"일 ";
+												}
+												else if (hours>=8760)
+												{
+													hours = copyTime.getFullYear()+"년"
+													+		(copyTime.getMonth()+1)+"월"
+													+		copyTime.getDate()+"일 ";
+												}
+												document.write(hours);
+											</script>
+									</div>
+									</div>
+								</div>
+								<input class="SNS_Option_Button" type="button" value="..."
 								style="float: right;">
-							<div>
+							</div>
+							<div id="SNS_Content_Image_DIV">
 								<img class="SNS_Content_Image" alt="사진" src="../images/sns_photo.gif">
 							</div>
 							<div class="SNS_Content_Cont">
-								훈내폭발 #김래원 을 만날 시간🤗<br /> 오늘 밤 11시10분 가장 특별한 인터뷰❣<br /> SBS
-								접속! 무비월드 채널 고정🤩<br /> ↓예매는 아래에서↓<br /> ✔CGV <a
-									href="https://bit.ly/2mvBz2B">https://bit.ly/2mvBz2B</a><br />
-								✔메가박스 <a href="https://bit.ly/2ms0dAV">https://bit.ly/2ms0dAV</a><br />
-								✔씨네큐 <a href="https://bit.ly/2m7DUjI">https://bit.ly/2m7DUjI</a><br />
-
-								#한국영화_박스오피스1위 #거침없는_현실로맨스<br /> #가장보통의연애 #절찬상영중
-								<div class="SNS_Cont_Move">903명이 이 영화를 후원하여 302,445,180원이
-									모였습니다!</div>
+								${s.content}
+								<div class="SNS_Cont_Move">0명이 이 영화를 후원하여 0원이 모였습니다!</div>
 								<div class="SNS_Cont_Option">
 									<div class="SNS_Cont_Option_Move">무브!</div>
 									<div class="SNS_Cont_Option_Share">공유하기</div>
@@ -74,136 +160,38 @@
 								</div>
 							</div>
 							<div class="SNS_Comment">
-								<img class="SNS_Content_user_img SNS_Profile_Picture" src="../images/member_profile.png"
-									width=30px height=30px alt="">
-								<p>박진우</p>
-								<p>귀엽네요 물론 사람이요</p>
-								<br /> 
-								<img class="SNS_Content_user_img SNS_Profile_Picture"
-									src="../images/member_profile.png" width=30px height=30px
-									alt="">
-								<p>양용준</p>
-								<p>믓지네</p>
-								<br /> 
-								<img class="SNS_Content_user_img SNS_Profile_Picture"
-									src="../images/member_profile.png" width=30px height=30px
-									alt="">
-								<p>송현범</p>
-								<p>트윅스가 춤도 출 줄 아네</p>
-								<br />
+							<c:forEach var="s_reply" items="${s.mCommentVO}">
+								<c:if test="${!empty s_reply}">
+								<ul id="SNS_None_Ul_Main">
+									<li>
+										<img class="SNS_Content_user_img SNS_Profile_Picture" src="${s_reply.socialProfileVO.profileImagePath}"
+											width=30px height=30px alt="">
+										<c:if test="${!empty s_reply.socialProfileVO.nickname}">
+											<p>${s_reply.socialProfileVO.nickname}</p>
+										</c:if>
+										<c:if test="${empty s_reply.socialProfileVO.nickname}">
+											<p>탈퇴한 회원</p>
+										</c:if>
+										<p>${s_reply.content}</p>
+										<br />
+									</li> 
+								</ul>
+								</c:if>
+							</c:forEach>
+								<c:if test="${empty s_reply}">
+										<div class="SNS_Comment_None">댓글이 아직 없습니다. 댓글을 작성해보세요 </div>
+								</c:if>
 								<div class="SNS_Comment_Write">
 									<img class="SNS_Content_user_img SNS_Profile_Picture"
-										src="../images/member_profile.png" 
-										alt=""> <input class="SNS_Comment_Write_Chat"
-										type="text"> <input class="SNS_Comment_Write_Button"
-										type="button" value="작성">
+										src="${s.socialProfileVO.profileImagePath}" 
+										alt=""> 
+										<input class="SNS_Comment_Write_Chat" type="text">
+										<input class="SNS_Comment_Write_Button" type="button" value="작성">
 								</div>
 							</div>
 						</div>
 					</li>
-					<li>
-						<div class="SNS_Content">
-							<img class="SNS_Content_user_img" src="../images/member_profile.png" width="40" height="40"
-								 alt="프로필 사진">
-							<div class="SNS_Content_info">
-								<div class="SNS_Content_Author">박진우</div>
-								<div class="SNS_Content_Write_Time">1시간 전</div>
-							</div>
-							<input class="SNS_Option_Button" type="button" value="..."
-								style="float: right;">
-							<div >
-								<img class="SNS_Content_Image" alt="사진" src="../images/sns_photo14.jpg">
-							</div>
-							<div class="SNS_Content_Cont">
-								고양이 너무 불쌍해고양이 너무 불쌍해고양이 너무 불쌍해고양이 너무 불쌍해<br />
-								고양이 너무 불쌍해고양이 너무 불쌍해고양이 너무 불쌍해고양이 너무 불쌍해<br />
-								고양이 너무 불쌍해고양이 너무 불쌍해고양이 너무 불쌍해고양이 너무 불쌍해<br />
-								고양이 너무 불쌍해<br />고양이 너무 불쌍해<br />
-								고양이 너무 불쌍해고양이 너무 불쌍해고양이 너무 불쌍해고양이 너무 불쌍해고양이 너무 불쌍해고양이 너무 불쌍해고양이 너무 불쌍해고양이 너무 불쌍해고양이 너무 불쌍해고양이 너무 불쌍해고양이 너무 불쌍해고양이 너무 불쌍해고양이 너무 불쌍해고양이 너무 불쌍해
-								<div class="SNS_Cont_Move">392명이 좋아합니다!</div>
-								<div class="SNS_Cont_Option">
-									<div class="SNS_Cont_Option_Move">무브!</div>
-									<div class="SNS_Cont_Option_Share">공유하기</div>
-									<div class="SNS_Cont_Option_Funding">펀딩하기</div>
-								</div>
-							</div>
-							<div class="SNS_Comment">
-								<img class="SNS_Content_user_img" class="SNS_Profile_Picture" src="../images/member_profile.png"
-									width=30px height=30px alt="">
-								<p>박동수</p>
-								<p>진짜 냥불쌍하네</p>
-								<br /> <img class="SNS_Content_user_img" class="SNS_Profile_Picture"
-									src="../images/member_profile.png" width=30px height=30px
-									alt="">
-								<p>양용준</p>
-								<p>믓지네</p>
-								<br /> <img class="SNS_Content_user_img" class="SNS_Profile_Picture"
-									src="../images/member_profile.png" width=30px height=30px
-									alt="">
-								<p>홍채훈</p>
-								<p>믓지네 밖에 할 줄 모르니?</p>
-								<br />
-								<div class="SNS_Comment_Write">
-									<img class="SNS_Content_user_img" class="SNS_Profile_Picture" src="../images/member_profile.png" width=30px height=30px	alt=""> 
-										<input class="SNS_Comment_Write_Chat" type="text"> 
-										<input class="SNS_Comment_Write_Button"	type="button" value="작성">
-								</div>
-							</div>
-						</div>
-					</li>
-					<li>
-						<div class="SNS_Content">
-							<img class="SNS_Content_user_img" src="../images/member_profile.png" width="40" height="40" alt="프로필 사진">
-							<div class="SNS_Content_info">
-								<div class="SNS_Content_Author">박진우</div>
-								<div class="SNS_Content_Write_Time">1시간 전</div>
-							</div>
-							<input class="SNS_Option_Button" type="button" value="..."	style="float: right;">
-							<div >
-								<img class="SNS_Content_Image" alt="사진" src="../images/sns_photo15.jpg">
-							</div>
-							<div class="SNS_Content_Cont">
-								헤-하고 웃고있는 모습을 보면<br/>
-								이발소 아저씨가 생각납니다.<br/>
-								하루종일 웃으며 저를 반겨주시면서<br/>
-								치도리를 해주셨는데..<br/>
-								멋진 추억공유합니다.<br/>
-								쟁반노래방도 생각이 나네요.<br/>
-								이히다리야<br/>
-								내용채우기<br/>
-								<div class="SNS_Cont_Move">92명이 좋아합니다!</div>
-								<div class="SNS_Cont_Option">
-									<div class="SNS_Cont_Option_Move">무브!</div>
-									<div class="SNS_Cont_Option_Share">공유하기</div>
-									<div class="SNS_Cont_Option_Funding">펀딩하기</div>
-								</div>
-							</div>
-							<div class="SNS_Comment">
-								<img class="SNS_Content_user_img" class="SNS_Profile_Picture" src="../images/member_profile.png"
-									width=30px height=30px alt="">
-								<p>윤상은</p>
-								<p>세로드립ㅋㅋ</p>
-								<br /> <img class="SNS_Content_user_img" class="SNS_Profile_Picture"
-									src="../images/member_profile.png" width=30px height=30px
-									alt="">
-								<p>박동수</p>
-								<p>고양이 머고</p>
-								<br /> <img class="SNS_Content_user_img" class="SNS_Profile_Picture"
-									src="../images/member_profile.png" width=30px height=30px
-									alt="">
-								<p>홍채훈</p>
-								<p>고양이가 웃을줄도 아네</p>
-								<br />
-								<div class="SNS_Comment_Write">
-									<img class="SNS_Content_user_img" class="SNS_Profile_Picture"
-										src="../images/member_profile.png" width=30px height=30px
-										alt=""> <input class="SNS_Comment_Write_Chat"
-										type="text"> <input class="SNS_Comment_Write_Button"
-										type="button" value="작성">
-								</div>
-							</div>
-						</div>
-					</li>
+					</c:forEach>
 				</ul>
 			</div>
 		</div>

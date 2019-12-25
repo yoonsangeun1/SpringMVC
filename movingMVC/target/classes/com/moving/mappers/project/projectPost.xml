@@ -9,8 +9,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 0) 프로젝트 불러오면서 모든 정보 다 불러오기  -->
 	<!-- 0-1) projectInfo resultMap 생성 -->
 	<resultMap type="projectPostVO" id="projectInfo">
+		<id property="id" column="project_post_id"/>
+		
 		<association property="mUserVO" javaType="com.moving.domain.MUserVO" 
-		column="user_id" select="selectProjectAuthor" />
+		column="user_id" select="selectProjectAuthor">
+		<!-- <id property="id" column="m_user_id"/> -->
+		</association>
 		<!-- 1:1 매핑 실행 결과. property는 자바 변수명, javaType은 자바 변수 객체 경로, 
 		select는 변수에 담을 값을 검색하는 메서드, column은 select를 실행할 때 필요한 컬럼 값 
 		=> project_post의 user_id값을 기준으로 m_user테이블에서 유저 정보를 불러와 MUserVO타입 mUserVO 변수에 저장-->
@@ -32,7 +36,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 0-2) 프로젝트 정보 + 작성자 + 리워드 + 첨부파일 + 댓글 다 불러오기 -->
 	<!-- 0-2-1) 프로젝트 정보 -->
 	<select id="selectProjectInfo" resultMap="projectInfo">
-		SELECT * FROM PROJECT_POST
+		SELECT id as project_post_id, title, content FROM PROJECT_POST
 		WHERE ID = #{id}
 	</select>
 	<!-- 0-2-2) 프로젝트 작성자 -->
@@ -168,4 +172,44 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		)
 		WHERE ID = #{id}
 	</update>
+	
+	
+	<!-- 프로젝트 리스트 : 검색 전, 후 게시물 개수 구하기 -->
+	<select id="selectListCount" resultType="int">
+		SELECT COUNT(id) FROM project_post
+		<where>
+			<if test="findField==''"></if><!-- 검색 전 총 레코드 개수 -->
+			<if test="findField=='title'">
+			title LIKE #{findName}
+			</if><!-- 제목으로 검색시 총 레코드 개수 -->
+			<if test="findField=='content'">
+			content LIKE #{findName}
+			</if><!-- 내용으로 검색시 총 레코드 개수 -->
+		</where>
+	</select>
+	
+	<!-- 프로젝트 리스트 : 검색 전, 후 게시글 목록 구하기 -->
+	<select id="selectProjectList" resultMap="projectInfo">
+		SELECT * FROM (
+		SELECT rowNum num, A.* 
+		FROM (SELECT P.id as project_post_id, P.title <!-- , U.nickname, U.profile_image_url  -->
+		FROM project_post P<!-- , m_user U -->
+		<!-- WHERE P.user_id = U.id --> 
+		<where>
+			<!-- P.user_id = U.id  -->
+			<if test="findField==''"></if><!-- 검색 전 총 레코드 개수 -->
+			<if test="findField=='title'">
+			<!-- AND  -->title LIKE #{findName}
+			</if><!-- 제목으로 검색시 총 레코드 개수 -->
+			<if test="findField=='content'">
+			<!-- AND  -->content LIKE #{findName}
+			</if><!-- 내용으로 검색시 총 레코드 개수 -->
+		</where>
+		ORDER BY P.id DESC) A
+		WHERE rowNum &lt;= #{endRow}
+		)22
+		WHERE num &lt;= #{startRow}
+	</select>
+		<!-- &gt;은 ~보다 크다(>),&lt;은 ~보다 작다(<),rowNum 컬럼은 오라클에서 테이블생성시 생성되는 기본컬럼으로 
+			레코드 저장시 일련번호값이 저장됨. -->
 </mapper>

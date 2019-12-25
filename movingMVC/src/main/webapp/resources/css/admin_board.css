@@ -62,20 +62,23 @@
 	font-weight: bold;
 }
 
-#aBoard_table td.aBT_left { /* 게시판 제목 */
-	text-align: left; /* 글자 왼쪽 정렬 */
-	padding-left: 10px;
-	width: 500px;
+/* #aBoard_table td.aBT_left { 게시판 제목 */
+/* 	text-align: left; 글자 왼쪽 정렬 */
+/* 	padding-left: 10px; */
+/* 	width: 500px; */
+/* } */
 
+#aBoard_table .aBT_check {
+	width: 100px;
+	border-top-left-radius: 5px; /* 좌 상단 테두리를 둥글게 한다. */
 }
 
 #aBoard_table .aBT_no {
-	border-top-left-radius: 5px; /* 좌 상단 테두리를 둥글게 한다. */
-	width: 70px;
+	width: 100px;
 }
 
 #aBoard_table .aBT_title {
-
+	width: 350px;
 }
 
 #aBoard_table span { /* 게시판 제목 */
@@ -93,11 +96,11 @@
 }
 
 #aBoard_table .aBT_date {
-	width: 100px;
+	width: 200px;
 }
 
 #aBoard_table .aBT_hit {
-	width: 80px;
+	width: 100px;
 	border-top-right-radius: 5px;
 }
 

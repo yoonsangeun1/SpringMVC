@@ -28,7 +28,7 @@ WHERE id=3;
 
 --delete from M_USER;
 select * from M_USER;
-
+select * from social_profile
 /* 소셜_프로필 */
 CREATE TABLE social_profile (
 	id NUMBER(38) NOT NULL, /* 아이디 */
@@ -135,7 +135,9 @@ and social_post.id=attached_file.social_post_id
 ORDER BY social_post.register_date desc, attached_file.no asc;
 
 select * from social_post ORDER BY register_date desc;
-
+SELECT id AS social_post_id, social_id, content, move_count, register_date,publish_availability
+		FROM social_post
+		ORDER BY register_date desc
 SELECT * FROM social_profile
 
 SELECT * FROM social_profile

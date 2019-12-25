@@ -1,3 +1,50 @@
+update m_user set id=1 where nickname='관리자'
+
+alter table m_comment drop column content
+alter table m_comment modify (content varchar2(1000));
+alter table m_comment add (content_tmp varchar2(1000));
+
+
+select * from project_post
+
+SELECT P.id as project_post_id, P.title 
+		FROM project_post P
+		SELECT P.id, P.title 
+		FROM project_post P
+
+SELECT * FROM (
+		SELECT rowNum num, A.* 
+		FROM (SELECT P.id as PROJECT_POST_id
+		FROM project_post P
+		ORDER BY P.id DESC) A
+		WHERE rowNum <= 3
+		)
+		WHERE num >= 1
+
+
+SELECT COUNT(id) FROM project_post
+		<where>
+			<if test="findField==''"></if><!-- 검색 전 총 레코드 개수 -->
+			<if test="findField=='title'">
+			title LIKE #{findName}
+			</if><!-- 제목으로 검색시 총 레코드 개수 -->
+			<if test="findField=='content'">
+			content LIKE #{findName}
+			</if><!-- 내용으로 검색시 총 레코드 개수 -->
+		</where>
+
+SELECT * FROM (
+		SELECT rowNum num, A.*  
+		FROM (SELECT P.*, U.nickname, U.profile_image_url 
+		FROM project_post P, m_user U
+		WHERE P.user_id = U.id 
+		ORDER BY P.id DESC) A
+		WHERE rowNum <= 10
+		)
+WHERE num >= 1 
+
+select * from project_post
+
 UPDATE project_post   
 SET comment_count=(   
 SELECT COUNT(id)   

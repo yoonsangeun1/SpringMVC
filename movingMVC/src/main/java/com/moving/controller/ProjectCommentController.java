@@ -20,7 +20,7 @@ import com.moving.domain.MCommentVO;
 import com.moving.service.ProjectPostService;
 
 @RestController
-@RequestMapping("/replies")
+@RequestMapping("/comments")
 public class ProjectCommentController {
 
 	@Autowired
@@ -90,6 +90,7 @@ public class ProjectCommentController {
 			//mCommentVO.setUserIdFrom(user_id);//회원 id 저장
 			//mCommentVO.setProjectPostId(mCommentVO.getProjectPostId());//게시글 id 저장
 			try {
+				mCommentVO.setUserIdFrom(user_id);
 				this.projectPostService.insertProjectComment(mCommentVO);//댓글 저장
 				entity=new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
 				//댓글 저장 성공시 'SUCCESS' 문자열을 반환하고 정상 상태 코드 200을 반환(HttpStatus.OK)

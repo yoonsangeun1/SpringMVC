@@ -31,4 +31,8 @@ public interface ProjectPostDAO {
 	void updateCommentCount(int id);
 
 	void updateProjectCommentCountOne(MCommentVO mCommentVO);
+
+	int selectListCount(ProjectPostVO projectPostVO);
+
+	List<ProjectPostVO> selectProjectList(ProjectPostVO projectPostVO);
 }

@@ -51,11 +51,11 @@ public class AdminController {
 		//뷰 리졸브 경로-> /WEB-INF/views/board/admin_dashboard.jsp
 	}//dashboard()
 	
-	/* 영화 관리 */
-	@RequestMapping(value="/movie")
-	public ModelAndView movie() {
-		return new ModelAndView("admin/admin_movie");
-	}//movie()
+//	/* 영화 관리 */
+//	@RequestMapping(value="/movie")
+//	public ModelAndView movie() {
+//		return new ModelAndView("admin/admin_movie");
+//	}//movie()
 	
 	/* 영화 업로드 */
 	@RequestMapping(value="/movie_upload")

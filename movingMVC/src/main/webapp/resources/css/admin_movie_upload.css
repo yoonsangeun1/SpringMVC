@@ -24,6 +24,8 @@
 #aMUpload_table{ /* 영상 업로드 표 */
 	width: 710px;
 	margin-top: 25px;
+	margin-left: auto;
+	margin-right: auto;
 	font-size: 13px;
 	float: left;
 }

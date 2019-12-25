@@ -2,47 +2,7 @@
 <%@ include file="../include/sns_header.jsp"%>
 <%@ taglib prefix="c"
     		uri="http://java.sun.com/jsp/jstl/core" %>
-<script>
-	function removeAllLi(){
-		$('#SNS_None_Ul').empty();
-	}
-	function setScrollX(xValue){
-		$('#SNS_Profile_Down').animate({scrollLeft : xValue}, 200);
-		(xValue>200)?hideWriter():showWriter();
-	}
-	function showWriter(){
-		$('#SNS_Profile_Writer').animate({top:"59%"},130);
-	}
-	function hideWriter(){
-		$('#SNS_Profile_Writer').animate({top:"88%"},130);
-	}
-	function addPhoto(){
-		var st=$("SNS_main_text").text();
-		for(var i=0;i<document.getElementsByName("photoGet")[0].files.length;i++){
-				st+=document.getElementsByName("photoGet")[0].files[i].name+"\n";
-		}
-		$('#SNS_main_text').text(st);
-	}
-	function goTimeLine(){
-		setScrollX(0);
-		showWriter();
-	}
-	function loadImage(img){/* 이미지를 불러오는 함수 */
-		$('#SNS_Profile_Writer').animate({top:"59%"},280);
-		
-// 		alert(img.files[0].name);
-// 		alert($('.SNS_Profile_Upload_Picture').length); /* 개수 반환 */
-		var num=img.files.length;
-		for(var i=1;i<=num;i++){
-			var reader = new FileReader();
-			reader.onload = function (e) {
-			$('#SNS_None_Ul').append('<li><img id="Upload_Pic'+i+'" class="SNS_Profile_Upload_Picture"'
-					+'src="'+e.target.result+'"></li>');
-			}
-			reader.readAsDataURL(img.files[i-1]);
-		}
-	}
-</script>
+
 <div id="SNS_Profile_All">							<!-- 배경화면 전체 지정 -->
 	<div id="SNS_Profile_Wrap">						<!-- 오브젝트 항목 래핑 -->
 		<div id="SNS_Profile_Top">

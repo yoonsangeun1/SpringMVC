@@ -2,25 +2,29 @@
 <%@ include file="../include/header.jsp"%>
 <link rel="stylesheet" type="text/css" href="../css/funding_list.css" />
 
-<div class="fList_wrap">
-
-	<%-- MainDIV 1. 카테고리 제목, 설명 --%>
-	<div id="fList_title">
-		<section>
-			<h3>Main</h3>
-			<p>Discover the artists and organizations using Moving to
-				realize ambitious projects in visual art and performance.</p>
-			<%-- 세부 카테고리별 보기 버튼 --%>
-			<div id="title_category_container">
-				<span><a href="#">Explore Animation</a></span> <span><a
-					href="#">Explore Romance</a></span> <span><a href="#">Explore
-						Action</a></span> <span><a href="#">Explore Art</a></span>
-			</div>
-		</section>
+<div class="fList_wrap" style="width: 100%">
+	<%-- 상단 메뉴 두번째  category_bar --%>
+	<div id="header_menu2" style="height: 45px; padding-top: 10px;">
+		<nav id="menu_bar" style="line-height: 45px;">
+			<ul>
+				<!-- <li><a href="/moving.com/project/list?category=20001">전체</a></li> -->
+				<li><a href="/moving.com/project/list?category=2000101">범죄 &amp; 스릴러</a></li>
+				<li><a href="/moving.com/project/list?category=2000102">액션 &amp; 어드벤쳐</a></li>
+				<li><a href="/moving.com/project/list?category=2000103">다큐 &amp; 드라마/청춘</a></li>
+				<li><a href="/moving.com/project/list?category=2000104">역사 &amp; 시대극</a></li>
+				<li><a href="/moving.com/project/list?category=2000105">판타지 &amp; SF</a></li>
+				<li><a href="/moving.com/project/list?category=2000106">멜로 &amp; 로맨스</a></li>
+				<li><a href="/moving.com/project/list?category=2000107">코메디</a></li>
+				<li><a href="/moving.com/project/list?category=2000108">애니메이션</a></li>
+				<li><a href="/moving.com/project/list?category=2000109">기타</a></li>
+			</ul>
+		</nav>
 	</div>
+		<div class="border_bottom_b20" ></div>
+
 
 	<%-- MainDIV 2. 펀딩 리스트 시작 --%>
-	<div id="fList_project">
+	<div id="fList_project" style="padding-top: 30px;" >
 		<%-- 좌측 리스트 --%>
 		<div id="fList_left">
 			<h3>에디터 추천 프로젝트</h3>
@@ -50,27 +54,30 @@
 			<div class="clear"></div>
 			<%-- 우측 리스트 프로젝트 1, 2, 3 --%>
 			<ul>
+			<c:if test="${!empty plist }">
+				<c:forEach var="p" items="${plist }">
 				<li>
 					<div class="hover_container2"
-						onclick="location.href='funding_cont.jsp';"
+						onclick="location.href='/moving.com/project/content?id=${p.id}&page=${page }';"
 						style="cursor: pointer;">
 						<img src="../images/funding01.PNG" width="130" height="85"
 							alt="funding01.png" />
 						<div class="hover_container2R">
-							<h3>The Prisoner's Apothecary</h3>
-							<span class="progress-percent">40% Complete</span>
-							<p>By Ellena Robert</p>
+							<h3>${p.id} ${p.title }</h3>
+							<span class="progress-percent">
+							<%-- <div class="progress-bar" role="progressbar" aria-valuenow="70"
+						aria-valuemin="0" aria-valuemax="100" style="width: ${p.nowPrice div p.targetPrice * 100}%"></div> --%>
+						${p.nowPrice div p.targetPrice * 100}% Complete</span>
+							<p>By ${p.mUserVO.nickname}</p>
 						</div>
 						<button type="button" class="likebtn">
 							<i class="fas fa-heart fa-1x"></i>
 						</button>
-						<!-- <span class="fa-stack fa-lg">
- <i class="fa fa-circle fa-stack-2x"></i>
- <i class="fas fa-heart fa-stack-1x fa-inverse"></i>
- </span> -->
 					</div>
 				</li>
-				<li>
+				</c:forEach>
+				</c:if>
+				<!-- <li>
 					<div class="hover_container2"
 						onclick="location.href='funding_cont.jsp';"
 						style="cursor: pointer;">
@@ -101,7 +108,7 @@
 							<i class="fas fa-heart fa-1x"></i>
 						</button>
 					</div>
-				</li>
+				</li> -->
 			</ul>
 			<%-- 우측 리스트 페이지 번호 --%>
 			<div id="page_num_container">
