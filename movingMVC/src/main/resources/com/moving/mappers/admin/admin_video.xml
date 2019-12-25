@@ -64,6 +64,43 @@
 		#{eraBackground}, 0, 0, #{rate})
 	</insert>
 	
+	<!-- 총 영상 게시물 수 -->
+	<select id="vp_count" resultType="int">
+		SELECT COUNT(ID) FROM VIDEO_POST
+		<where>
+			<if test="findField == ''"></if>
+			<if test="findField == 'all'">
+				TITLE_ENGLISH LIKE #{findName} or TITLE_KOREAN LIKE #{findName} or DIRECTOR LIKE #{findName}
+			</if>
+			<if test="findField == 'title'">
+				TITLE_ENGLISH LIKE #{findName} or TITLE_KOREAN LIKE #{findName}
+			</if>
+			<if test="findField == 'director'">
+				DIRECTOR LIKE #{findName}
+			</if>
+		</where>
+	</select>
+	
+	<!-- 영상 목록 -->
+	<select id="vp_list" resultType="VideoPostVO">
+		SELECT * FROM (SELECT ROWNUM rNum, ID, DIRECTOR, VIDEO_FILE_PATH, TITLE_ENGLISH, TITLE_KOREAN, USER_ID, 
+		REGISTER_DATE, HIT, COMMENT_COUNT, MOVE_COUNT
+		FROM (SELECT * FROM VIDEO_POST
+		<where>
+			<if test="findField == ''"></if>
+			<if test="findField == 'all'">
+				TITLE_ENGLISH LIKE #{findName} or TITLE_KOREAN LIKE #{findName} or DIRECTOR LIKE #{findName}
+			</if>
+			<if test="findField == 'title'">
+				TITLE_ENGLISH LIKE #{findName} or TITLE_KOREAN LIKE #{findName}
+			</if>
+			<if test="findField == 'director'">
+				DIRECTOR LIKE #{findName}
+			</if>
+		</where>
+		ORDER BY ID DESC))
+		WHERE rNum &gt;= #{startrow} and rNum &lt;= #{endrow}
+	</select>
 	<!-- 첨부파일 저장 -->
 <!-- 	<insert id="insertVideoAttachedFile"> -->
 <!-- 		INSERT INTO ATTACHED_FILE -->

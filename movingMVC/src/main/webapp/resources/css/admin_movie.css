@@ -17,7 +17,7 @@
 }
 
 #aMovie_wrap .link { /* 영상 관리 업로드 하이퍼링크 */
-	float: right;
+/* 	float: right; */
 	color: black;
 	font-size: 130%;
 	margin-bottom: 20px;
@@ -33,6 +33,7 @@
 
 #aMovie_listTable { /* 영상 관리 목록표 */
 	width: 1000px;
+	border-collapse: collapse; /* 표 테이블  테두리 공간을 없앰 */
 }
 
 #aMovie_list .cate1 { /* 영상 관리 표 분류항목(동영상,제목,공개상태,날짜) */
@@ -86,3 +87,74 @@
 	font-size: 12px;
 }
 
+#aMovie_pageCtrl { /* 페이지 목록 */
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 60px;
+	font-size: 14px;
+}
+
+#aMovie_search { /* 검색박스 div */
+	float: right;
+	margin: 25px 10px 15px 10px;
+}
+
+#aMovie_search select { /* 검색 콤보박스 */
+	width: 100px;
+	max-width: 150px;
+	height: 40px;
+	margin-right: 10px;
+	float: left;
+	font: 15px 'lucida sans', 'trebuchet MS', 'Tahoma';
+	border-radius: 3px;
+}
+
+#aMovie_search .input_box {
+	width: 250px;
+	height: 20px;
+	padding: 10px 5px;
+	font: bold 15px 'lucida sans', 'trebuchet MS', 'Tahoma';
+	border: 0;
+	float: left;
+	background: #eee;
+	border-radius: 3px 0 0 3px;
+}
+
+#aMovie_search input:focus {
+	outline: 0;
+	background: #fff;
+	box-shadow: 0 0 2px rgba(0, 0, 0, .8) inset;
+}
+
+#aMovie_search input:-webkit-input-placeholder {
+	color: #999;
+	font-weight: normal;
+	font-style: italic;
+}
+
+#aMovie_search button {
+	overflow: visible;
+	position: relative;
+	float: right;
+	border: 0;
+	padding: 0;
+	cursor: pointer;
+	height: 40px;
+	width: 110px;
+	font: bold 15px/40px 'lucida sans', 'trebuchet MS', 'Tahoma';
+	color: #fff;
+	text-transform: uppercase;
+	background: #b3a9eb;
+	border-radius: 0 3px 3px 0;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, .3);
+}
+
+#aMovie_search button:hover {
+	background: #9d8ce2;
+}
+
+#aMovie_search button:active, #aMovie_search button:focus {
+	background: #9d8ce2;
+	outline: 0;
+}

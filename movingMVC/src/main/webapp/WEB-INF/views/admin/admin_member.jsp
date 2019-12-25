@@ -41,7 +41,7 @@
 		</c:if>
 		<c:if test="${empty mulist }">
 			<tr>
-				<td colspan="10" align="center">회원 목록이 없습니다!</th>
+				<td colspan="10" align="center">회원 목록이 없습니다.</th>
 			</tr>
 		</c:if>
 <!-- 		<tr> -->
@@ -169,10 +169,14 @@
 	<div id="aMember_search">
 		<form>
 			<select class="select" name="findField">
-				<option value="all">전체</option>
-				<option value="nickName">닉네임</option>
-				<option value="id">ID</option>
-				<option value="name">이름</option>
+				<option value="all"
+					<c:if test="${findField=='all' }">${'selected' }</c:if>>전체</option>
+				<option value="nickName"
+					<c:if test="${findField=='nickName' }">${'selected' }</c:if>>닉네임</option>
+				<option value="id"
+					<c:if test="${findField=='id' }">${'selected' }</c:if>>ID</option>
+				<option value="name"
+					<c:if test="${findField=='name' }">${'selected' }</c:if>>이름</option>
 			</select>
 			
 			<%-- 검색 텍스트필드, 버튼 --%>
@@ -180,8 +184,6 @@
 			<button type="submit" class="btn" >Search</button>
 			
 		</form>
-		
-		
 	</div>
 	
 	
