@@ -93,9 +93,11 @@
 			<button class="fCont_menu" onclick="setScrollX(3750)">
 				Comments
 				<%-- 댓글 개수가 0이 아닌 경우 개수 출력 --%>
+				<span class="commentCount">
 				<c:if test="${projectInfo.commentCount != 0}">
-					<span class="commentCount"><b>${projectInfo.commentCount }</b></span>
+					<b>${projectInfo.commentCount }</b>
 				</c:if>
+				</span>
 			</button>
 			<button class="fCont_menu" onclick="setScrollX(5000)">Communities</button>
 		</div>
@@ -172,13 +174,16 @@
 										<img class="SNS_Content_user_img" class="SNS_Profile_Picture"
 											src="../images/member_profile.png" width="30" height="30" alt="">
 									</c:if>
-									<a href="/moving.com/member/mypage?id=${comment.id }">
-									<p>${comment.mUserVO.nickname }</p></a>
+									<p><a href="/moving.com/member/mypage?id=${comment.id }">
+									${comment.mUserVO.nickname }</a></p>
 									<input type="hidden" class="id" value="${comment.id }">
 									<%-- <p class="modyfiy_content">${comment.content }</p> --%>
 									<input name="modify_content" class="modify_content SNS_Comment_Write_Chat" value="${comment.content }" >
+									<c:set var="sessionId" value="${id }"></c:set>
+									<%-- <c:if test="${comment.id == sessionId }"> --%>
 									<input type="button" name="modify" class="modify SNS_Comment_Write_Button" value="수정" >
 									<input type="button" name="delete" class="delete SNS_Comment_Write_Button" value="삭제" >
+									<%-- </c:if> --%>
 									</li>
 							</c:forEach>
 						</c:if>

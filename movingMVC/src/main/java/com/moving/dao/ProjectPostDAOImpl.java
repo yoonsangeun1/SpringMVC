@@ -73,9 +73,7 @@ public class ProjectPostDAOImpl implements ProjectPostDAO {
 
 	@Override
 	public void updateCommentCount(int id) {
-		ProjectPostVO p = new ProjectPostVO();
-		p.setId(id);
-		sqlSession.update("updateCommentCount", p);
+		sqlSession.update("updateCommentCount", id);
 	}
 
 	@Override

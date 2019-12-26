@@ -114,7 +114,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectCommentCount" resultType="projectPostVO">
 		SELECT comment_count 
 		FROM project_post
-		WHERE id = ${id}
+		WHERE id = #{id}
 	</select>
 
 	<!-- 3) 댓글 작성, 수정, 삭제  -->
@@ -207,7 +207,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</where>
 		ORDER BY P.id DESC) A
 		WHERE rowNum &lt;= #{endRow}
-		)22
+		)
 		WHERE num &lt;= #{startRow}
 	</select>
 		<!-- &gt;은 ~보다 크다(>),&lt;은 ~보다 작다(<),rowNum 컬럼은 오라클에서 테이블생성시 생성되는 기본컬럼으로 

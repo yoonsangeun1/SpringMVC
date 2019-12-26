@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.moving.domain.MCommentVO;
+import com.moving.domain.ProjectPostVO;
+import com.moving.domain.SocialProfileVO;
 import com.moving.service.ProjectPostService;
 
 @RestController
@@ -31,8 +33,13 @@ public class ProjectCommentController {
 	public ResponseEntity<String> selectCommentCount(@PathVariable("id") int id) {
 		/* @PathVariable("id") 애노테이션은 웹주소 경로에서 원하는 자료를 추출하는 용도로 사용.
 		 * 여기서는 {id}에 주어진 게시판 번호값을 가져와서 int id에 저장 */
+		System.out.println(id);
 		ResponseEntity<String> entity=null;
 		try {
+			ProjectPostVO db_count=projectPostService.selectCommentCount(id);
+			int re=1;
+			if(db_count == null ) re=-1;
+			if(re == 1) //값이 있을 경우
 			entity=new ResponseEntity<>(""+this.projectPostService.selectCommentCount(id).getCommentCount(), HttpStatus.OK);
 		}catch(Exception e) { 
 			e.printStackTrace(); 
