@@ -10,7 +10,12 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	margin-left: auto;
+	margin-right: auto;
+	font-size: 1.5em;
+	line-height: 1.5em;
 }
+
 /* 카테고리명, 설명 *************************************** 카테고리명, 설명 ***/
 #fWrite_title {
 	float: left;
@@ -19,9 +24,74 @@
 	padding-left: 85px;
 	padding-right: 85px;
 	width: 1200px;
-	height: 170px;
+	min-height: 900px;
 	box-sizing: border-box;
 	overflow: hidden;
-	display: flex;
 }
 
+#fWrite_title .btn{ /* 검토 요청하기 버튼 */
+	height: 30px;
+}
+
+#fWrite_Alert { /* 알림 글귀 */
+	margin-top: 10px;
+	
+}
+
+#fWrite_preview {
+	width: 1200px;
+	margin-left: auto;
+	margin-right: auto;
+	min-height: 1024px; /*최소높이*/
+	height: auto;
+	align-items: center;
+	padding-left: 30px;
+	padding-right: 30px;
+	text-align: center;
+}
+
+ul.menu {
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+	background-color: #b3a9eb;
+	float: left;
+	margin-left: auto;
+	margin-right: auto;
+	display: flex;
+	flex-direction: row;
+	align-items: stretch;
+	width: 1100px;
+	text-align: center;
+	line-height: 3.5em;
+}
+
+ul.option {
+	border-top-right-radius: 5px;
+	border-top-left-radius: 5px;
+}
+
+ul.menu li {
+	background: none;
+	color: #222;
+	background-color: #b3a9eb;
+	display: inline-block;
+	padding: 10px 15px;
+	cursor: pointer;
+	flex-grow: 1;
+}
+
+ul.menu li.on {
+	background: white;
+	color: #222;
+} 
+
+.menu-option {
+	display: none;
+	background: white;
+	padding: 15px;
+}
+
+.menu-option.on {
+	display: inline-block;
+}
