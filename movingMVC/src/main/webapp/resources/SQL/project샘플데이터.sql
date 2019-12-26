@@ -1,5 +1,8 @@
 update m_user set id=1 where nickname='관리자'
-
+select * from m_user
+select * from m_user
+update m_user set profile_image_url='../images/member_profile.png' where id=2
+update m_user set profile_image_url='default' where id=3
 alter table m_comment drop column content
 alter table m_comment modify (content varchar2(1000));
 alter table m_comment add (content_tmp varchar2(1000));
@@ -188,7 +191,7 @@ SELECT dd|| '일'|| SUBSTR (hms, 1, 2)|| '시'|| SUBSTR (hms, 3, 2)|| '분'|| SU
 	)
 	
 	update project_post set target_limit=TO_DATE ('2019-12-28', 'yyyy-mm-dd hh24:mi:ss')
-	where id=2;
+	where id=3;
 	select * from project_post
 	
 	update project_post set now_price=4000 where id=2;

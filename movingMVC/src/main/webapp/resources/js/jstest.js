@@ -17,7 +17,8 @@ var id = getParameterByName('id');
 
 $(function(){ 
 	getCommentList();
-	$('#write').click( function() {
+	$('#write').on('click', function() {
+	//$('#write').click( function() {
 	//var sessionId="<%=session.getAttribute('id')%>"
 	//	var sessionTest=sessionId;
 	var project_post_id = $('#project_post_id').val();//게시글 번호
@@ -54,7 +55,6 @@ $(function(){
 			}
 		}
 	});
-	
 	})
 });
 
@@ -86,9 +86,10 @@ function getCommentList() {
 			+"<p><a href='/moving.com/member/mypage?id="+this.USER_ID_FROM+"'>"
 			+this.NICKNAME+"</a></p><p class='comment_content'>"
 			+this.CONTENT+"</p>"
-			//+"<input type='button' name='modify' class='modify SNS_Comment_Write_Button' value='수정' >"
-			+"<button name='modify_"+this.ID+"'  class='modify SNS_Comment_Write_Button'>수정</button>"
-			+"<button name='delete_"+this.ID+"' class='delete SNS_Comment_Write_Button'>삭제</button>"
+			+"<input type='button' name='modify_"+this.ID+"' class='modify SNS_Comment_Write_Button' value='수정'>"
+			+"<input type='button' name='delete_"+this.ID+"' class='delete SNS_Comment_Write_Button' value='삭제'>"
+			//+"<button name='modify_"+this.ID+"'  class='modify SNS_Comment_Write_Button'>수정</button>"
+			//+"<button name='delete_"+this.ID+"' class='delete SNS_Comment_Write_Button'>삭제</button>"
 			//<input type="button" id="button_${var.index }" name="button_${var.index }" value="Button">
 			+"</li>";
 			}else if(this.PROFILE_IMAGE_URL != 'default') {
@@ -100,9 +101,10 @@ function getCommentList() {
 				+"<p class='com'><a class='a' href='/moving.com/member/mypage?id="+this.USER_ID_FROM+"'>"
 				+this.NICKNAME+"</a></p><p class='comment_content'>"
 				+this.CONTENT+"</p>"
-				//+"<input type='button' name='modify' class='modify SNS_Comment_Write_Button' value='수정' onclick='clicksss();'>"
-				+"<button name='modify_"+this.ID+"'  class='modify SNS_Comment_Write_Button'>수정</button>"
-				+"<button name='delete_"+this.ID+"' class='delete SNS_Comment_Write_Button'>삭제</button>"
+				+"<input type='button' name='modify_"+this.ID+"' class='modify SNS_Comment_Write_Button' value='수정'>"
+				+"<input type='button' name='delete_"+this.ID+"' class='delete SNS_Comment_Write_Button' value='삭제'>"
+				//+"<button name='modify_"+this.ID+"'  class='modify SNS_Comment_Write_Button'>수정</button>"
+				//+"<button name='delete_"+this.ID+"' class='delete SNS_Comment_Write_Button'>삭제</button>"
 				+"</li>";
 			}
 		});
@@ -110,7 +112,15 @@ function getCommentList() {
 	});//매핑 주소 써주기
 }//getCommentList()
 
-//댓글 목록 출력 부분 --%>
+function please() {
+	var reply=$(this).parent();
+	var rno=reply.attr('data-commentId');//댓글 번호
+	var replytext2=reply.children('.comment_content').text();
+	
+	alert(reply);
+	alert(rno);
+	alert(replytext2);
+}
 
 //게시글 번호에 해당하는 댓글 개수 출력, 개수 출력되는 부분에 값 변경
 function getCommentCount() {
@@ -124,9 +134,11 @@ function getCommentCount() {
 
 	
 	
-	//댓글 삭제 --%>
+//댓글 삭제 --%>
 $(function(){ 
-	$('.delete').on('click', function() {
+	$("input[name^='delete']").on('click', function() {
+	//$('.delete').on('click', function() {
+		alert('제발');
 		var commentId=$('#replies_li').html();//댓글 번호
 		alert('삭제'+commentId);
 		
@@ -149,7 +161,7 @@ $(function(){
 	});
 });
 
-function clicksss() {
+function modifyComment() {
 alert('수정');
 
 var reply=$(this).parent();
@@ -224,105 +236,3 @@ function deleteComment() {
 		});
 	});
 	
-
-
-	
-	//댓글 추가 부분 --%>
-	$('#replyAddBtn').on('click', function() {
-		var replyer=$('#newreplyer').val();//댓글 작성자
-		var replytext=$('#newreplytext').val();//댓글 내용
-		
-		/* check();
-		function check() {
-			if(replyer=="") {
-				alert('작성자를 입력하세요!');
-				$('#newreplyer').val("").focus();
-				return false;
-			}
-			if(replytext=="") {
-				alert('내용을 입력하세요!');
-				$('#newreplytext').val("").focus();
-				return false;
-			}
-		}//check() */
-		
-		$.ajax({//jQuery ajax
-			type: 'post',//서버로 자료를 보내는 법
-			url: '/controller/replies',//매핑 주소
-			headers: {
-				"Content-Type": "application/json", 
-				"X-HTTP-Method-Override": "POST"
-				//HTTP 코드 맨 머리 앞에 추가적인 정보 지정
-			},
-			dataType: 'text',//문자열
-			data: JSON.stringify({//댓글 작성자, 내용이 json이다.
-				//왼쪽에서 오른쪽으로 대입됨!! 우 -> 왼 아님!!!
-				//왼쪽이 키이름 오른쪽이 값!! 이건 동일!!
-				bno: bno, //게시물 번호
-				replyer: replyer, //댓글 작성자
-				replytext: replytext //댓글 내용
-			}),
-			success: function(data) {//댓글 저장 성공시 SUCCESS 문자열 반환
-				if(data=='SUCCESS') {
-					alert('댓글이 등록되었습니다!');
-					getAllList();//댓글 목록 함수 호출! 갱신된 내용 가져옴.
-					getReplyCount();
-					$('#newreplyer').val("");
-					$('#newreplytext').val("");
-				}
-			}
-		});
-	});
-
-/*댓글 목록 출력 부분
-var id = ${projectInfo.id};//게시물 번호값 전달
-var user_id = ${mCommentVO.userIdFrom};//작성자 id 전달
-
-댓글 추가 부분
-$('#SNS_Comment_Write_Button').on('click', function() {
-	alert('댓글내용');
-	//var replyer = $('#newreplyer').val();//댓글 작성자
-	var replytext = $('#content').val();//댓글 내용
-
-	//	check();
-	//	function check() {
-	 if(replyer=="") {
-						alert('작성자를 입력하세요!');
-						$('#newreplyer').val("").focus();
-						return false;
-					} 
-	if(replytext.value=="") {
-		alert('내용을 입력하세요!');
-		$('#content').val("").focus();
-		return false;
-	}
-	//	}//check() 
-
-	$.ajax({//jQuery ajax
-		type : 'post',//서버로 자료를 보내는 법
-		url : '/moving.com/replies/write',//매핑 주소
-		headers : {
-			"Content-Type" : "application/json",
-			"X-HTTP-Method-Override" : "POST"
-				//HTTP 코드 맨 머리 앞에 추가적인 정보 지정
-		},
-		dataType : 'text',//문자열
-		data : JSON.stringify({//댓글 작성자, 내용이 json이다.
-			//왼쪽에서 오른쪽으로 대입됨!! 우 -> 왼 아님!!!
-			//왼쪽이 키이름 오른쪽이 값!! 이건 동일!!
-			projectPostId : id, //게시물 번호
-			userIdFrom : user_id, //댓글 작성자
-			content : replytext
-			//댓글 내용
-		}),
-		success : function(data) {//댓글 저장 성공시 SUCCESS 문자열 반환
-			if (data == 'SUCCESS') {
-				alert('댓글이 등록되었습니다!');
-				//getAllList();//댓글 목록 함수 호출! 갱신된 내용 가져옴.
-				getReplyCount();
-				$('#newreplyer').val("");
-				$('#newreplytext').val("");
-			}
-		}
-	});
-});*/
