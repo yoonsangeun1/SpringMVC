@@ -155,7 +155,7 @@
 								src="../images/member_profile.png" width="30" height="30" alt="">
 						</c:if>
 						<input type="hidden" id="project_post_id" size="40" value="${projectInfo.id }">
-						<p>${nickname }</p>
+						<p id="sessionId">${nickname }</p>
 						<input id="content" name="content" class="SNS_Comment_Write_Chat">
 						<input id="write" name="write" class="SNS_Comment_Write_Button" type="button" 
 						value="작성" >
