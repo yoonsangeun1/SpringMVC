@@ -57,16 +57,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  <select id="bf_count" resultType="int">
     SELECT COUNT(*) FROM NORMAL_POST N
   <where>
+    N.CODE_NO = 10002
    <if test="findField == ''"></if> <!-- 검색값이 없을 경우 -->
    <if test="findField == 'title'"> <!-- 검색조건이 제목인 경우  -->
-    N.CODE_NO = 10002 AND N.TITLE LIKE #{findName} <!-- LIKE로 찾기 기능 사용 -->
+    AND N.TITLE LIKE #{findName} <!-- LIKE로 찾기 기능 사용 -->
    </if>
    <if test="findField == 'content'"> <!-- 검색조건이 내용인 경우 -->
-    N.CODE_NO = 10002 AND N.CONTENT LIKE #{findName}
+    AND N.CONTENT LIKE #{findName}
    </if> 
    <if test="findField == 'nickname'"> <!-- 검색조건이 닉네임인 경우 -->
-	N.CODE_NO = 10002 AND
-	N.USER_ID IN
+	AND N.USER_ID IN
 	(SELECT U.ID FROM M_USER U
 	WHERE U.nickname LIKE #{findName})
    </if>
