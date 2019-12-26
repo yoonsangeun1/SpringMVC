@@ -3,8 +3,8 @@
 
 <!-- 크라우드 펀딩 상세 페이지 -->
 <%-- 펀딩 제목, 간략 소개글 --%>
-<div id="fCont_wrap">
-	<div id="fCont_title">
+<div id="fCont_wrap" >
+	<div id="fCont_title" style="padding-top: 45px;">
 		<h3>${projectInfo.title }</h3>
 		<p>${projectInfo.introduce }</p>
 	</div>
@@ -144,13 +144,13 @@
 					</script>
 						<%-- 본인의 프로필 사진이 있다면,없다면 분기 나누기 나중에 프로필사진--%>
 						<%-- 프로필 이미지가 있을 경우 --%>
-						<c:if test="${!empty profile_image_url }">
+						<c:if test="${'default' != profile_image_url }">
 							<img class="SNS_Content_user_img" class="SNS_Profile_Picture"
-								src="${comment.mUserVO.profileImageUrl }" width="30" height="30"
+								src="${profile_image_url }" width="30" height="30"
 								alt="">
 						</c:if>
 						<%-- 프로필 이미지가 없을 경우 --%>
-						<c:if test="${empty profile_image_url }">
+						<c:if test="${'default' == profile_image_url }">
 							<img class="SNS_Content_user_img" class="SNS_Profile_Picture"
 								src="../images/member_profile.png" width="30" height="30" alt="">
 						</c:if>

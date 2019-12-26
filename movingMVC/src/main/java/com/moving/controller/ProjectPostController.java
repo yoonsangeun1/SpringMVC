@@ -32,7 +32,7 @@ public class ProjectPostController {
 		int limit=12; //한 페이지에 보여지는 목록 개수
 		int category=Integer.parseInt(request.getParameter("category"));//카테고리 받아오기
 		if(category == 20001) {
-			limit=3;
+			limit=12;
 		}
 		String findName=request.getParameter("find_name");
 		String findField=request.getParameter("find_field");

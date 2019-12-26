@@ -59,6 +59,11 @@ $(function(){
 
 //댓글 작성시 내용 입력 체크
 function comment_check() {
+	/*if($.trim($('#sessionId').text()) == '') {
+		alert('로그인이 필요합니다!');
+		location='/moving.com/member/login';
+		return false;
+	}*/
 	if($.trim($('#content').val())=='') {
 		alert('댓글 내용을 입력하세요!');
 		$('#content').val('').focus();
@@ -75,26 +80,13 @@ function comment_check() {
 
 //댓글 목록 불러오는 함수 호출
 function getCommentList() {
-	//var a=$('nickname').val();
-	//var a=session.getAttribute('nickname');
-	//var a= "<%=(String)session.getAttribute('nickname')%>";
-	//var a= '<%=(String)session.getAttribute("nickname")%>';
-	//var a=getParameterByName('nickname');
-	//var a=sessionStorage.getItem('id');
-	//alert(a);
-	//var a=$('#sessionId').val();
-	//alert(a);
-	
+	var sessionId=$('#sessionId').text();//로그인한 아이디
 	var project_post_id = $('#project_post_id').val();//게시글 번호
 	$.getJSON("/moving.com/comments/all/" + project_post_id, function(data) {
 		//get방식으로 json 데이터를 비동기식으로 가져와서 data에 저장
 		//alert(project_post_id);
 		var str = "";
 		success: $(data).each(function() {//each()는 jQuery 반복 함수
-			/*if($.trim($('#sessionId').val())==this.ID) {
-				alert('로그인');
-			}*/
-			
 			if(this.PROFILE_IMAGE_URL == 'default') {
 				str += "<li class='replies' data-commentId='"+this.ID+"' style='align-items: center'>"
 				+"<div class='comment_no' style='display:none'>"+this.ID+"</div>"
@@ -106,11 +98,11 @@ function getCommentList() {
 				+this.CONTENT+"</p>"
 				+"<input name='comment_txt_"+this.ID+"' class='comment_txt' value='"+this.CONTENT+"' style='display: none;'>"
 				//+"<input type='button' name='modify' class='modify SNS_Comment_Write_Button' value='수정' onclick='clicksss();'>"
-//				if($.trim($('#sessionId').val())==this.ID) {
-				str += "<button name='modify_"+this.ID+"'  class='modify SNS_Comment_Write_Button'>수정</button>"
-				+"<button name='modify_ok_"+this.ID+"'  class='modify_ok SNS_Comment_Write_Button' style='display: none;'>수정완료</button>"
-				+"<button name='delete_"+this.ID+"' class='delete SNS_Comment_Write_Button'>삭제</button>"
-//				}
+				if(sessionId == this.NICKNAME) {//로그안한 닉네임과 댓글 닉네임 비교하여 수정, 삭제 버튼 생성
+					str += "<button name='modify_"+this.ID+"'  class='modify SNS_Comment_Write_Button'>수정</button>"
+					+"<button name='modify_ok_"+this.ID+"'  class='modify_ok SNS_Comment_Write_Button' style='display: none;'>수정완료</button>"
+					+"<button name='delete_"+this.ID+"' class='delete SNS_Comment_Write_Button'>삭제</button>"
+				}
 				+"</li>";
 			}else if(this.PROFILE_IMAGE_URL != 'default') {
 				str += "<li class='replies' data-commentId='"+this.ID+"' style='align-items: center'>"
@@ -123,11 +115,11 @@ function getCommentList() {
 				+this.CONTENT+"</p>"
 				+"<input name='comment_txt_"+this.ID+"' class='comment_txt' value='"+this.CONTENT+"' style='display: none;'>"
 				//+"<input type='button' name='modify' class='modify SNS_Comment_Write_Button' value='수정' onclick='clicksss();'>"
-//				if($.trim($('#sessionId').val())==this.ID) {
+				if(sessionId == this.NICKNAME) {
 					str += "<button name='modify_"+this.ID+"'  class='modify SNS_Comment_Write_Button'>수정</button>"
 					+"<button name='modify_ok_"+this.ID+"'  class='modify_ok SNS_Comment_Write_Button' style='display: none;'>수정완료</button>"
 					+"<button name='delete_"+this.ID+"' class='delete SNS_Comment_Write_Button'>삭제</button>"
-//					}
+					}
 				+"</li>";
 			}
 		});

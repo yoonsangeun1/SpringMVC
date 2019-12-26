@@ -6,7 +6,7 @@ update m_user set profile_image_url='default' where id=3
 alter table m_comment drop column content
 alter table m_comment modify (content varchar2(1000));
 alter table m_comment add (content_tmp varchar2(1000));
-
+update PROJECT_POST set introduce='소개' where id=3 
 
 select * from project_post
 
