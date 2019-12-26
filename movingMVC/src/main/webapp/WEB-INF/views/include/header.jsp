@@ -226,10 +226,10 @@ $(function(){ // document ready
 					</div>
 				</div>
 			</div>
-			<div class="border_bottom_b10"></div>
+			<div class="border_bottom_10"></div>
 
 			<%-- 상단 메뉴 두번째  category_bar --%>
-			<div id="header_menu2">
+			<!-- <div id="header_menu2">
 				<nav id="menu_bar">
 					<ul>
 						<li><a href="../funding/funding_list.jsp">All</a></li>
@@ -244,7 +244,7 @@ $(function(){ // document ready
 					</ul>
 				</nav>
 			</div>
-			<div class="border_bottom_t20"></div>
+			<div class="border_bottom_t20"></div> -->
 		</div>
 		<div class="clear"></div>
 

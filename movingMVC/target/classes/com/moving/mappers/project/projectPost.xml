@@ -36,7 +36,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 0-2) 프로젝트 정보 + 작성자 + 리워드 + 첨부파일 + 댓글 다 불러오기 -->
 	<!-- 0-2-1) 프로젝트 정보 -->
 	<select id="selectProjectInfo" resultMap="projectInfo">
-		SELECT id as project_post_id, title, content FROM PROJECT_POST
+		SELECT id as project_post_id, title, content, introduce, 
+		business, target_price, now_price, target_limit, left_limit, 
+		sponser_count, hit, comment_count, move_count, register_date
+		FROM PROJECT_POST
 		WHERE ID = #{id}
 	</select>
 	<!-- 0-2-2) 프로젝트 작성자 -->
@@ -91,7 +94,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 1-2) 게시글에 해당하는 댓글 모두 다 목록 해시맵으로 불러오기 JSON용 HashMap 반환 -->
 	<select id="selectCommentListMap" resultType="java.util.Map">
 		SELECT c.id, c.user_id_from, c.project_post_id, 
-		c.content, c.register_date, u.nickname  
+		c.content, c.register_date, u.nickname , u.profile_image_url
 		FROM m_comment c
 		LEFT OUTER JOIN m_user u on c.user_id_from = u.id
 		WHERE c.project_post_id = #{id}

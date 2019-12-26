@@ -161,35 +161,35 @@
 					<%-- 댓글이 있다면 --%>
 					<ul id="replies"
 						style="margin-top: 7px; list-style: none; align-items: center;">
-						<c:if test="${!empty projectInfo.mCommentVO }">
+						<%-- <c:if test="${!empty projectInfo.mCommentVO }">
 							<c:forEach var="comment" items="${projectInfo.mCommentVO }">
-								<li style="align-items: center;">
-									<%-- 프로필 이미지가 있을 경우 --%>
-									<c:if test="${!empty profile_image_url }">
+								<li class="replies_li" style="align-items: center;">
+									<div class="comment_no"></div>
+									프로필 이미지가 있을 경우
+									<input type="hidden" class="id" value="${comment.id }">
+									<c:if test="${!empty comment.mUserVO.profileImageUrl }">
 										<img class="SNS_Content_user_img" class="SNS_Profile_Picture"
 											src="${comment.mUserVO.profileImageUrl }" width="30" height="30" alt="">
 									</c:if> 
-									<%-- 프로필 이미지가 없을 경우 --%>
+									프로필 이미지가 없을 경우
 									<c:if test="${empty comment.mUserVO.profileImageUrl }">
 										<img class="SNS_Content_user_img" class="SNS_Profile_Picture"
 											src="../images/member_profile.png" width="30" height="30" alt="">
 									</c:if>
 									<p><a href="/moving.com/member/mypage?id=${comment.id }">
 									${comment.mUserVO.nickname }</a></p>
-									<input type="hidden" class="id" value="${comment.id }">
-									<%-- <p class="modyfiy_content">${comment.content }</p> --%>
 									<input name="modify_content" class="modify_content SNS_Comment_Write_Chat" value="${comment.content }" >
 									<c:set var="sessionId" value="${id }"></c:set>
-									<%-- <c:if test="${comment.id == sessionId }"> --%>
-									<input type="button" name="modify" class="modify SNS_Comment_Write_Button" value="수정" >
-									<input type="button" name="delete" class="delete SNS_Comment_Write_Button" value="삭제" >
-									<%-- </c:if> --%>
+									<c:if test="${comment.id == sessionId }">
+									<button type="button" name="modify" class="modify SNS_Comment_Write_Button" >수정</button>
+									<button type="button" name="delete" class="delete SNS_Comment_Write_Button" >삭제</button>
+									</c:if>
 									</li>
 							</c:forEach>
 						</c:if>
 						<c:if test="${empty projectInfo.mCommentVO }">
 							<li><p>작성된 댓글이 아직 없습니다</p></li>
-						</c:if>
+						</c:if> --%>
 					</ul>
 				</div>
 
@@ -217,4 +217,4 @@
 		<i class="icon-logo_w"></i>icon-logo_w
 		<i class="icon-logo_w font50"></i>icon-logo_w font50
 		</p>
-	</div>--%>
+</div>--%>

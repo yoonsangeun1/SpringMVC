@@ -71,7 +71,7 @@ public class ProjectCommentController {
 		List<Map<String, Object>> entity=null;
 		try {
 			entity=this.projectPostService.selectCommentListMap(id);
-			//System.out.println(entity.get(0));
+			//System.out.println(entity.get(0).get(PROFILE_IMAGE_PATH));
 		}catch(Exception e) { 
 			e.printStackTrace(); 
 			//entity=new ResponseEntity<>();

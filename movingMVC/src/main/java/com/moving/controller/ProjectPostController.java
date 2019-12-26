@@ -81,13 +81,13 @@ public class ProjectPostController {
 
 	//펀딩 상세 페이지 내용 보기 + 조회수 증가
 	@RequestMapping("project/content")
-	public ModelAndView content(int id, HttpServletRequest request) throws Exception {
+	public ModelAndView content(String id, HttpServletRequest request) throws Exception {
 		HttpSession session=request.getSession();
 		Integer sessionId=(Integer)session.getAttribute("id");
-		ProjectPostVO projectInfo=projectPostService.selectprojectInfo(id);	//프로젝트 정보 불러오기
+		ProjectPostVO projectInfo=projectPostService.selectprojectInfo(Integer.parseInt(id));	//프로젝트 정보 불러오기
 		ModelAndView m=new ModelAndView("project/project_content");	//뷰페이지 경로 설정
 
-		System.out.println(projectInfo.getId());
+		//System.out.println(projectInfo.getId());
 		m.addObject("projectInfo", projectInfo);
 		m.addObject("sessionId", sessionId);
 		return m;
