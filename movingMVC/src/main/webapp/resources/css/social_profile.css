@@ -49,7 +49,6 @@
 	height:auto;
 	float:left;
 }
-
 #SNS_Profile_Writer{
    position: fixed;
    top: 50%;
@@ -285,6 +284,7 @@ li.SNS_Profile_Menu_Button:last-child{
 }
 #SNS_Profile_Introduce{/* 간단 소개 */
 	position: absolute;
+	top:50px;
 	text-align:center;
 	width: 100%;
 	height: 100%;
@@ -556,4 +556,45 @@ li.SNS_Profile_Menu_Button:last-child{
 	width:100px;
 	height:30px;
 	border:1px solid;
+}
+#SNS_Up_Join{
+	margin-top: 20px;
+}
+#SNS_Insert_Form{
+	line-height: 40px;
+    font-size: 32px;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-left: 30px;
+}
+#SNS_Insert_Page{
+	width: 1200px;
+    height: auto;
+    min-height: 930px;
+    margin: auto auto;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+#SNS_Join_Form{
+	width: 460px;
+    height: auto;
+    margin: auto auto;
+    margin-top: 150px;
+    margin-bottom: 50px;
+    display: inline-block;
+    box-sizing: border-box;
+    background-color: white;
+    border-radius: 5px;
+    border: 1px solid #e8e8e8;
+    outline: none;
+}
+.SNS_Content_Cont_Profile{
+	font-size: 16px;
+    line-height: 22px;
+    margin-top: 15px;
+    margin-right: 5px;
+    padding-left: 5px;
+    padding-bottom: 10px;
+    float: left;
 }

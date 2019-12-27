@@ -116,6 +116,10 @@
 			reader.readAsDataURL(img.files[i-1]);
 		}
 	}
+	function focusComment(){
+// 		document.getElementsByClassName("SNS_Comment_Write_Chat").focus();
+		$('.SNS_Comment_Write_Chat').focus();
+	}
 </script>
 
 <style>
@@ -166,7 +170,7 @@
 						</div>
 						<div style="flex-grow: 12;">
 							<div id="header_logo">
-								<a href="../sns/SNS_Main.jsp"><img
+								<a href="/moving.com/social/main"><img
 									src="${pageContext.request.contextPath}/images/logo_w.png" alt="로고 이미지" width="150" height="25" /></a>
 							</div>
 						</div>
@@ -186,4 +190,5 @@
 					</div>
 				</div>
 			</div>
+		</div>
 		</div>

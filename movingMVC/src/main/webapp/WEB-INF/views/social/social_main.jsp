@@ -40,24 +40,24 @@
 		<div id="SNS_main_mid">
 			<!-- 중간 글쓰기, 글보기 -->
 			<c:if test="${!empty s_pro.id}">
-			<form action="post_write_ok/0" enctype="mutipart/form-data" method="post" name="timeLineWriter">
-				<div id="mid_pad">
-					<div id="SNS_Profile_Upload_Top">
-						<ul id="SNS_None_Ul"></ul>
-					</div>
-					<div id="mid_left">
-						<textarea name="content" id="SNS_main_text" rows="14" cols="61"
-							placeholder="오늘은 어떤 기분을 남기고 싶으신가요?"></textarea>
-					</div>
-					<div id="mid_right">
-						<input type="submit" class="SNS_Buttons" value="작성" />
-						<div class="SNS_File">
-							<label for="File_First">사진 올리기</label> 
-								<input type="file" id="File_First" class="SNS_Buttons_File" accept=".jpg,.jpeg,.png,.gif,.bmp" onchange="loadImage(this)" name="photoGet" multiple/>
+				<form action="post_write_ok/0" enctype="mutipart/form-data" method="post" name="timeLineWriter">
+					<div id="mid_pad">
+						<div id="SNS_Profile_Upload_Top">
+							<ul id="SNS_None_Ul"></ul>
 						</div>
-						<input type="reset" class="SNS_Buttons" value="전체 삭제" />
+						<div id="mid_left">
+							<textarea name="content" id="SNS_main_text" rows="14" cols="61"
+								placeholder="오늘은 어떤 기분을 남기고 싶으신가요?"></textarea>
+						</div>
+						<div id="mid_right">
+							<input type="submit" class="SNS_Buttons" value="작성" />
+							<div class="SNS_File">
+								<label for="File_First">사진 올리기</label> 
+									<input type="file" id="File_First" class="SNS_Buttons_File" accept=".jpg,.jpeg,.png,.gif,.bmp" onchange="loadImage(this)" name="photoGet" multiple/>
+							</div>
+							<input type="reset" class="SNS_Buttons" value="전체 삭제" />
+						</div>
 					</div>
-				</div>
 				</form>
 			</c:if>
 				<%-- 
@@ -87,7 +87,7 @@
 						SNS을 이용하기 위해서는 등록이 필요합니다!
 					</p>
 				</c:if>
-				<ul id="SNS_Content_ul">
+				<ul id="SNS_Content_ul"><!-- 게시글 출력 구간 -->
 					<c:forEach var="s" items="${s_post}">
 					<li>
 						<div class="SNS_Content">
@@ -144,19 +144,21 @@
 									</div>
 									</div>
 								</div>
-								<input class="SNS_Option_Button" type="button" value="..."
-								style="float: right;">
+								<c:if test="${id==s.socialProfileVO.userId}">
+										<input class="SNS_Option_Button" type="button" value="삭제"	onclick="
+										if(confirm('정말로 삭제할까요?') == true){
+									location='/moving.com/social/post_del_ok/${id}?post_id=${s.id}&user_id=${s.socialProfileVO.userId}&page_num=0';}else{return}" style="float: right;">
+								</c:if>
 							</div>
-							<div id="SNS_Content_Image_DIV">
-								<img class="SNS_Content_Image" alt="사진" src="../images/sns_photo.gif">
-							</div>
+							<img class="SNS_Content_Image" alt="사진" src="../images/sns_photo.gif">
 							<div class="SNS_Content_Cont">
 								${s.content}
+							<c:if test="${s.projectId==2}">
 								<div class="SNS_Cont_Move">0명이 이 영화를 후원하여 0원이 모였습니다!</div>
+							</c:if>
 								<div class="SNS_Cont_Option">
 									<div class="SNS_Cont_Option_Move">무브!</div>
-									<div class="SNS_Cont_Option_Share">공유하기</div>
-									<div class="SNS_Cont_Option_Funding">펀딩하기</div>
+									<div class="SNS_Cont_Option_Funding">공유하기</div>
 								</div>
 							</div>
 							<div class="SNS_Comment">
@@ -182,9 +184,16 @@
 										<div class="SNS_Comment_None">댓글이 아직 없습니다. 댓글을 작성해보세요 </div>
 								</c:if>
 								<div class="SNS_Comment_Write">
+								<c:if test="${empty s.socialProfileVO.profileImagePath}">
+									<img class="SNS_Content_user_img SNS_Profile_Picture"
+										src="../images/member_profile.png" 
+										alt=""> 
+								</c:if>
+								<c:if test="${!empty s.socialProfileVO.profileImagePath}">
 									<img class="SNS_Content_user_img SNS_Profile_Picture"
 										src="${s.socialProfileVO.profileImagePath}" 
 										alt=""> 
+								</c:if>
 										<input class="SNS_Comment_Write_Chat" type="text">
 										<input class="SNS_Comment_Write_Button" type="button" value="작성">
 								</div>

@@ -83,7 +83,7 @@
 }
 #SNS_Content_ul {
    width: 613px;
-   margin-top: 10px;
+/*    margin-top: 10px; */
    list-style: none;
    text-align: left;
    margin-left: auto;
@@ -179,7 +179,7 @@
    height: auto;
    border: 1px solid #e8e8e8;
    margin: 5px 5px 20px 5px;
-   padding: 10px 2px 10px 10px;
+   padding: 0px 2px 10px 10px;
    background: white;
    float: left;
    box-sizing: border-box;
@@ -376,6 +376,7 @@
 
 .SNS_Content {
    margin-bottom:15px;
+   margin-top:15px;
    min-height:300px;
    padding-top:3px;
    padding-bottom:15px;
@@ -415,7 +416,7 @@
    margin-right: 5px;
    padding-left: 5px;
    padding-bottom: 10px;
-   float: left;
+/*    float: left; */
 }
 
 .SNS_Content_Image{
@@ -453,11 +454,11 @@
 }
 
 .SNS_Cont_Option {
-   margin-top: 1px;
+   margin-top: 20px;
    width: 600px;
    height: 40px;
    display: inline-block;
-   float: left;
+/*    float: left; */
    text-align: center;
    -ms-user-select: none; 
    -moz-user-select: -moz-none;
@@ -467,7 +468,7 @@
 }
 
 .SNS_Cont_Option_Move {/* 무브! */
-   width: 199px;
+   width: 299px;
    height: inherit;
    display: inline-block;
    float: left;
@@ -478,14 +479,15 @@
    border-right: 1px solid #b3a9eb;
    border-top-left-radius: 12px;
    border-bottom-left-radius: 12px;
-   transition:0.3s;
+   transition:0.5s;
+   font-size:18px;
 }
 .SNS_Cont_Option_Move:hover{
 	background: #ff178b;
 	transform:scale(1.1);
 }
 .SNS_Cont_Option_Share {/* 공유하기 */
-   width: 199px;
+   width: 299px;
    height: inherit;
    display: inline-block;
    float: left;
@@ -497,23 +499,30 @@
 }
 
 .SNS_Cont_Option_Funding {/* 펀딩하기 */
-   width: 199px;
+   width: 299px;
    height: inherit;
    display: inline-block;
    float: left;
-   padding-top: 10px;
+   padding-top: 0px;
    cursor: pointer;
    color:white;
    background-color: #6a67ce;   
    border-top-right-radius: 12px;
    border-bottom-right-radius: 12px;
+   transition:0.5s;
+   outline:none;
+   border:none;
+   font-size:18px;
+   line-height: 40px;
+}
+.SNS_Cont_Option_Funding:hover{
+	background: #ff178b;
 }
 /*-----------------댓글창-----------------*/
 .SNS_Comment {
    width: 610px;
    height: auto;
    border-top: 1px solid #f2f0fb;
-   float: left;
    margin-bottom: 6px;
    text-align:left;
 }
@@ -559,6 +568,8 @@
 }
 .SNS_Comment_Write_Chat{
 	margin-top: 3px;
+	outline:none;
+	padding-left:4px;
 	margin-left: 10px;
 	width:490px;
 	height: 22px;

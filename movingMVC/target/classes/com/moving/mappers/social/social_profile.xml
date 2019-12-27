@@ -22,7 +22,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectProfileAndPost" resultMap="socialProfileInfo">
 		<!-- 아이디값으로 소셜 프로필을 검색한다. -->
 		SELECT id AS social_profile_id, nickname, background_image_path,introduce, profile_image_path,
-		follower_count,follow_count
+		follower_count,follow_count,user_id
+		from social_profile
+		WHERE user_id = #{id}
+	</select>
+	
+	<!-- 소셜 프로필 번호로 회원 프로필 검색 -->
+	<select id="selectProfileAndPostWithId" resultMap="socialProfileInfo">
+		<!-- 아이디값으로 소셜 프로필을 검색한다. -->
+		SELECT id AS social_profile_id, nickname, background_image_path,introduce, profile_image_path,
+		follower_count,follow_count,user_id
 		from social_profile
 		WHERE id = #{id}
 	</select>
@@ -32,6 +41,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT id AS social_post_id, social_id, content, move_count, register_date,publish_availability
 		FROM social_post
 		WHERE social_id=#{social_profile_id}
+		ORDER BY register_date desc
+	</select>
+	
+	<!-- 게시글 번호값으로 게시글 정보 하나만 검색. -->
+	<select id="selectOnePostAndComment" resultMap="socialPostInfo">
+		SELECT id AS social_post_id, social_id, content, move_count, register_date,publish_availability
+		FROM social_post
+		WHERE id = #{post_id}
 		ORDER BY register_date desc
 	</select>
 	
@@ -63,7 +80,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- (5)게시글 아이디를 기준으로 게시글에 해당하는 작성자 정보 불러오기 -->
 	<select id="selectSocialProfileOnPost" resultType="socialProfileVO">
-		SELECT id AS social_post_social_id, user_type, nickname, profile_image_path
+		SELECT id AS social_post_social_id, user_type, nickname, profile_image_path,user_id
 		FROM social_profile
 		WHERE id = #{social_id}
 	</select>
@@ -101,27 +118,37 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE id = #{socialProfileIdFrom}
 	</select>
 	
+	<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@일반 단일 쿼리문@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+	
+	<!-- 소셜 게시글 작성한다. -->
 	<insert id="insertSocialPost">
 		insert into social_post(id, code_no,content, social_id,register_date)
 		values (social_post_seq.nextval,10007,#{content},#{socialId},sysdate)
 	</insert>
 	
+	<select id="selectIDFromUserID" resultType="SocialProfileVO">
+		select id from SOCIAL_PROFILE where user_id=#{using_id}
+	</select>
+	<!-- 첨부파일을 넣는다. -->
 	<insert id="insertAttachFiles">
 		insert into attached_file(id, file_type,file_path,no,register_date,social_post_id)
-		values (attached_file_seq.nextval, 1,#{filePath},#{no},sysdate,#{socialId})
+		values (attached_file_seq.nextval, 1,#{filePath},#{no},sysdate,#{socialPostId})
 	</insert>
 	
+	<!-- 게시글을 삭제한다. -->
 	<delete id="deleteSocialPost">
 		delete from social_post where id=#{post_id}
 	</delete>
 	
+	<!-- 소셜 게시글을 전부 검색한다. -->
 	<select id="selectSocialPost">
 		select * from social_post order by register_date desc
 	</select>
 	
+	<!-- 일반아이디에 해당하는 소셜 아이디로 주입 -->
 	<insert id="insertSocialProfile">
-		insert into social_profile(id,user_id,nickname,user_type)
-		values (social_profile_seq.nextval,${id},'새 친구',1)
+		insert into social_profile(id,nickname,user_id,user_type,introduce)
+		values (social_profile_seq.nextval,#{nickname},#{userId},1,#{introduce})
 	</insert>
 	<!-- ==================================<구분선>====================================== -->
 	<!-- 회원에 해당하는  게시글 검색 (게시글 + 댓글 + 작성자) -->

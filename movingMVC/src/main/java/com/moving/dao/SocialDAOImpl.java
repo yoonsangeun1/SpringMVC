@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.moving.domain.AttachedFileVO;
 import com.moving.domain.SocialPostVO;
 import com.moving.domain.SocialProfileVO;
 
@@ -21,6 +22,11 @@ public class SocialDAOImpl implements SocialDAO {
 	}
 
 	@Override
+	public SocialProfileVO socialProfileInfoWithId(int id) {
+		return sqlsession.selectOne("selectProfileAndPostWithId",id);//(1)
+	}
+	
+	@Override
 	public void insertPost(SocialPostVO socialPostVO) {
 		this.sqlsession.insert("insertSocialPost",socialPostVO);
 	}
@@ -35,14 +41,30 @@ public class SocialDAOImpl implements SocialDAO {
 	public List<SocialPostVO> selectSocialPost() {
 		return sqlsession.selectList("selectAllPostAndComment");
 	}
+	
+	@Override
+	public SocialPostVO selectSocialPostOne(int post_id) {
+		return sqlsession.selectOne("selectOnePostAndComment", post_id);
+	}
 
 	@Override
-	public void insertSocialProfile(int id) {
-		this.sqlsession.insert("insertSocialProfile",id);
+	public void insertSocialProfile(SocialProfileVO socialProfileVO) {
+		this.sqlsession.insert("insertSocialProfile",socialProfileVO);
 	}
 
 	@Override
 	public SocialProfileVO checkId(int id) {
 		return this.sqlsession.selectOne("checkId",id);
 	}
+
+	@Override
+	public SocialProfileVO selectIDFromUserID(int using_id) {
+		return this.sqlsession.selectOne("selectIDFromUserID",using_id);
+	}
+
+	@Override
+	public void insertAttachFiles(AttachedFileVO aFile) {
+		this.sqlsession.insert("insertAttachFiles",aFile);
+	}
+
 }

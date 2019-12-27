@@ -14,6 +14,8 @@ VALUES (m_user_seq.nextval, 'admin@gmail.com', '관리자', 'admin@gmail.com', '
 UPDATE m_user 
 SET user_lv=4
 WHERE id=1;
+select * from M_USER where id=5
+select * from SOCIAL_PROFILE where user_id=5
 --일반회원
 INSERT INTO m_user (id, userid, nickname, email, password, genre_01, genre_02, genre_03)
 VALUES (m_user_seq.nextval, 'moving@gmail.com', '무빙', 'moving@gmail.com', 'moving', null, null, null);
@@ -25,7 +27,15 @@ UPDATE m_user
 SET business_name = '사업자명', user_lv=3,
 business_register_no = '154-11-541', business_license_image_path = '/사업자 등록증 경로'
 WHERE id=3;
-
+SELECT id AS social_profile_id, nickname, background_image_path,introduce, profile_image_path,
+		follower_count,follow_count
+		from social_profile
+		WHERE user_id = 3
+select id from SOCIAL_PROFILE where user_id=3
+insert into social_post(id, code_no,content, social_id,register_date)
+			values (social_post_seq.nextval,10007,'아 잼다',4,sysdate)
+	insert into social_profile(id,nickname,user_id,user_type,introduce)
+		values (social_profile_seq.nextval,'몰라',3,1,'ㅎㅇ')
 --delete from M_USER;
 select * from M_USER;
 select * from social_profile

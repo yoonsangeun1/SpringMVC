@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.moving.dao.SocialDAO;
+import com.moving.domain.AttachedFileVO;
 import com.moving.domain.SocialPostVO;
 import com.moving.domain.SocialProfileVO;
 
@@ -21,6 +22,11 @@ public class SocialServiceImpl implements SocialService {
 	@Override
 	public SocialProfileVO socialProfileInfo(int id) {
 		return socialDAO.selectSocialProfileInfo(id);
+	}
+
+	@Override
+	public SocialProfileVO socialProfileInfoWithId(int id) {
+		return socialDAO.socialProfileInfoWithId(id);
 	}
 
 //	@Transactional
@@ -41,12 +47,28 @@ public class SocialServiceImpl implements SocialService {
 	}
 
 	@Override
-	public void insertSocialProfile(int id) {
-		this.socialDAO.insertSocialProfile(id);
+	public SocialPostVO selectSocialPostOne(int post_id) {
+		return socialDAO.selectSocialPostOne(post_id);
+	}
+
+	@Override
+	public void insertSocialProfile(SocialProfileVO socialProfileVO) {
+		this.socialDAO.insertSocialProfile(socialProfileVO);
 	}
 
 	@Override
 	public SocialProfileVO checkId(int id) {
 		return this.socialDAO.checkId(id);
 	}
+
+	@Override
+	public SocialProfileVO selectIDFromUserID(int using_id) {
+		return this.socialDAO.selectIDFromUserID(using_id);
+	}
+
+	@Override
+	public void insertAttachFiles(AttachedFileVO aFile) {
+		this.socialDAO.insertAttachFiles(aFile);
+	}
+
 }

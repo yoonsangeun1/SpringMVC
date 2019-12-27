@@ -84,7 +84,13 @@
 				<ul id="SNS_Content_ul">
 					<c:if test="${empty s_pro.socialPostVO}">
 						<div class="SNS_Profile_Post">
-							<p>등록된 게시글이 없습니다.</p>
+							<p style="
+    width: 100%;
+    height: 200px;
+    text-align: center;
+    line-height: 180px;
+    font-size:20px;"
+							>등록된 게시글이 없습니다.</p>
 						</div>
 					</c:if>
 					<c:if test="${!empty s_pro.socialPostVO}">
@@ -93,7 +99,12 @@
 
 							<li>
 							<div class="SNS_Profile_Post">
-								<img class="SNS_Content_user_img" src="${s_pro.profileImagePath}" width="40" height="40" alt="프로필 사진">
+							<c:if test="${!empty s_pro.profileImagePath}">
+								<img class="SNS_Content_user_img" src="${s_pro.profileImagePath}" width="40" height="40" alt="">
+							</c:if>
+							<c:if test="${empty s_pro.profileImagePath}">
+								<img class="SNS_Content_user_img" src="../images/member_profile.png" width="40" height="40" alt="">
+							</c:if>
 								<div class="SNS_Content_info">
 									<div class="SNS_Content_Author">${s_pro.nickname}</div>
 										<c:set var="date" value="${s_post.registerDate}"/>
@@ -137,9 +148,9 @@
 									</div>
 								</div>
 								<input class="SNS_Option_Button" type="button" value="삭제"	onclick="if(confirm('정말로 삭제할까요?') == true){
-									location='/moving.com/social/post_del_ok?post_id=${s_post.id}&user_id=${s_post.socialId}';}else{return}" style="float: right;">
+									location='/moving.com/social/post_del_ok/${id}?post_id=${s_post.id}&user_id=${s_post.socialId}&page_num=1';}else{return}" style="float: right;">
 <%-- 								<img class="SNS_Content_Image" alt="사진" src="${s_pro.profileImagePath}"> --%>
-								<div class="SNS_Content_Cont">
+								<div class="SNS_Content_Cont_Profile">
 									<%-- 게시글 넘버 : ${s_post.id}<br/>
 									게시글 종류 : ${s_post.codeNo}<br/>
 									소셜 회원 아이디 : ${s_post.socialId}<br/>
@@ -147,9 +158,11 @@
 										${s_post.content}<br/> 
 									<div class="SNS_Cont_Move">${s_post.moveCount}명이 좋아합니다!</div>
 									<div class="SNS_Cont_Option">
-										<div class="SNS_Cont_Option_Move">무브!</div>
-										<div class="SNS_Cont_Option_Share">댓글</div>
-										<div class="SNS_Cont_Option_Funding">공유하기</div>
+										<div class="SNS_Cont_Option_Move">
+											무브!
+										</div>
+										<input class="SNS_Cont_Option_Funding" type="button" value="공유하기"	onclick="if(confirm('공유할까요?') == true){
+											location='/moving.com/social/post_share_ok/${id}?post_id=${s_post.id}&user_id=${s_pro.id}';}else{return}" style="float: right;">
 									</div>
 								</div>
 								<div class="SNS_Comment">
@@ -211,8 +224,14 @@
 										<p class="SNS_Comment_None">댓글이 아직 없습니다. 댓글을 작성해보세요 </p>
 									</c:if>
 									<div class="SNS_Comment_Write">
-										<img class="SNS_Content_user_img" class="SNS_Profile_Picture"
-											src="${s_pro.profileImagePath}" width=30px height=30px alt=""> 
+										<c:if test="${!empty s_pro.profileImagePath}">
+											<img class="SNS_Content_user_img" class="SNS_Profile_Picture"
+												src="${s_pro.profileImagePath}" width=30px height=30px alt=""> 
+										</c:if>
+										<c:if test="${empty s_pro.profileImagePath}">
+											<img class="SNS_Content_user_img" class="SNS_Profile_Picture"
+												src="../images/member_profile.png" width=30px height=30px alt=""> 
+										</c:if>
 										<input class="SNS_Comment_Write_Chat" type="text"> 
 										<input class="SNS_Comment_Write_Button"	type="button" value="작성">
 									</div>
