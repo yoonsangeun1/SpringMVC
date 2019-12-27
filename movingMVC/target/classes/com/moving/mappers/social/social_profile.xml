@@ -127,7 +127,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<select id="selectIDFromUserID" resultType="SocialProfileVO">
-		select id from SOCIAL_PROFILE where user_id=#{using_id}
+		select * from SOCIAL_PROFILE where user_id=#{using_id}
 	</select>
 	<!-- 첨부파일을 넣는다. -->
 	<insert id="insertAttachFiles">

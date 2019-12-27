@@ -23,31 +23,6 @@
 <%-- banner css 추가 --%>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/aboutMoving.css" />
 
-<%-- board css 추가 --%>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/board_notice.css" />
-<%-- 공지사항 --%>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/board_event.css" />
-<%-- 이벤트 --%>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/board_faq.css" />
-<%-- FAQ --%>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/board_actors.css" />
-<%-- 배우 모집 --%>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/board_contest.css" />
-<%-- 시나리오 모집 --%>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/board_free.css" />
-<%-- 자유게시판 --%>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/board_writing.css" />
-<%-- 글 작성 폼 --%>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/board_qna.css" />
-<%-- Q & A--%>
-
-<%-- funding css 추가 --%>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/funding_list.css" />
-<%-- 펀딩 리스트 --%>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/funding_write.css" />
-<%-- 펀딩 글 작성 폼 --%>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/funding_cont.css" />
-<%-- 펀딩 글 보기 --%>
 
 <%-- member css 추가 --%>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/member_login.css" />
@@ -55,11 +30,6 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/member_join.css" />
 <%-- 회원가입 폼 --%>
 
-<%-- movie css 추가 --%>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/movie_cont.css" />
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/movie_mainList.css" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/css/movie_categoryList.css" />
 
 <%-- sns css 추가 --%>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/social_main.css" />
@@ -67,14 +37,8 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/social_messenger.css" />
 
 <%-- javascript 추가 (우선, abc순)--%>
-<script src="${pageContext.request.contextPath}/js/board_event.js"></script>
-<script src="${pageContext.request.contextPath}/js/board_faq.js"></script>
-<script src="${pageContext.request.contextPath}/js/funding_write.js"></script>
-<script src="${pageContext.request.contextPath}/js/jquery.js"></script>
-<script src="${pageContext.request.contextPath}/js/move_banner.js"></script>
-<script src="${pageContext.request.contextPath}/js/movie_cont.js"></script>
-<script src="${pageContext.request.contextPath}/js/slide.js"></script>
-<script src="${pageContext.request.contextPath}/js/social.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/jquery.js"></script>
+<%-- <script src="${pageContext.request.contextPath}/resources/js/social.js"></script> --%>
 <script src="${pageContext.request.contextPath}/resources/editor/js/HuskyEZCreator.js"></script>
 <script>
 	function removeAllLi(){

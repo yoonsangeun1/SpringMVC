@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="socialComment"><!-- 매퍼 네임스페이스명 -->
+	<!-- 댓글 resultmap -->
+	<resultMap type="mCommentVO" id="mCommentInfo1">
+		<association property="socialProfileVO"
+			javaType="com.moving.domain.SocialProfileVO"
+			column="social_profile_id_from" select="selectCommentAuthor1" />
+	</resultMap>
+	<!-- 댓글 작성자 불러오기 -->
+	<select id="selectCommentAuthor1" resultType="socialProfileVO">
+		SELECT * FROM
+		social_profile WHERE id = #{socialProfileIdFrom}
+	</select>
+
+	<!-- 댓글 저장 -->
+	<insert id="insertProjectComment">
+		INSERT INTO m_comment
+		(id, social_profile_id_from, content, COMMENT_ID_REPLY, social_post_id)
+		VALUES
+		(m_comment_seq.nextval, #{socialProfileIdFrom}, #{content}, m_comment_seq.nextval, #{socialPostId})
+	</insert>
+
+	<!-- 프로젝트 댓글 불러오기 -->
+	<select id="selectProjectComments" resultMap="mCommentInfo1">
+		SELECT * FROM M_COMMENT
+		WHERE social_post_id = #{id}
+		ORDER BY id DESC
+		<!-- 나중에 추가하기 답글계층 정렬도 -->
+	</select>
+
+	<!-- 3-2) 댓글 내용 -->
+	<update id="updateProjectComment">
+		UPDATE m_comment
+		SET content = #{content}
+		WHERE id =
+		#{id}
+	</update>
+
+	<!-- 3-3) 댓글 삭제 -->
+	<delete id="deleteProjectComment">
+		DELETE FROM m_comment
+		WHERE id = #{id}
+	</delete>
+
+	<!-- 1-2) 게시글에 해당하는 댓글 모두 다 목록 해시맵으로 불러오기 JSON용 HashMap 반환 -->
+	<select id="selectCommentListMap" resultType="java.util.Map">
+		SELECT c.id,
+		c.social_profile_id_from, c.social_post_id,
+		c.content, c.register_date, u.nickname , u.profile_image_path
+		FROM m_comment c
+		LEFT OUTER JOIN social_profile u on c.social_profile_id_from = u.id
+		WHERE c.social_post_id = #{id}
+		ORDER BY c.register_date desc
+	</select>
+
+	<!-- 2-2) 게시글의 댓글 개수 저장된 값 가져오기 -->
+	<select id="selectCommentCount" resultType="socialPostVO">
+		SELECT comment_count
+		FROM social_post
+		WHERE id = #{id}
+	</select>
+
+	<!-- 3-1-2) 댓글 카운트 높이기 -->
+	<update id="updateProjectCommentCountOne">
+		UPDATE m_comment
+		SET comment_count = comment_count + 1
+		WHERE id = #{socialPostId}
+	</update>
+
+	<!-- 2-1) 게시글의 댓글 개수 세서, 저장된 값업데이트 -->
+	<update id="updateCommentCount">
+		UPDATE social_post
+		SET comment_count=(
+		SELECT COUNT(id)
+		FROM m_comment
+		WHERE social_post_id = #{id}
+		)
+		WHERE id= #{id}
+	</update>
+</mapper>

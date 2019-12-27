@@ -120,10 +120,17 @@ public class SocialController {
 	@RequestMapping(value="/social/profile")
 	public ModelAndView social_profile(
 			HttpServletRequest request,
-			HttpServletResponse response, int id
+			HttpServletResponse response, int id,
+			HttpSession session
 			) throws Exception{
 		response.setContentType("text/html;charset=UTF-8");
-
+		session=request.getSession();
+		
+		int using_id=(int)session.getAttribute("id");
+		SocialProfileVO sessionSocial=this.socialService.selectIDFromUserID(using_id);//세션 아이디로 소셜 아이디를 검색한다.
+		
+		session.setAttribute("sessionSocial", sessionSocial);
+		System.out.println(sessionSocial.getNickname());
 		ModelAndView m=new ModelAndView();
 		if((Integer)id==null) {//아이디가 없을 경우
 			m.setViewName("main");

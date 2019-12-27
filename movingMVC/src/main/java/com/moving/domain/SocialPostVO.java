@@ -10,6 +10,7 @@ public class SocialPostVO {
 	private int projectId;	//(영화사)프로젝트 아이디(넘버)
 	private int socialCount;
 	private int moveCount;	//좋아요 개수
+	private int commentCount;	//댓글 개수
 	private String registerDate;//등록일자
 	private int publishAvailability;//공개 여부
 	
@@ -59,6 +60,13 @@ public class SocialPostVO {
 	}
 	public void setMoveCount(int moveCount) {
 		this.moveCount = moveCount;
+	}
+	
+	public int getCommentCount() {
+		return commentCount;
+	}
+	public void setCommentCount(int commentCount) {
+		this.commentCount = commentCount;
 	}
 	public String getRegisterDate() {
 		return registerDate;
