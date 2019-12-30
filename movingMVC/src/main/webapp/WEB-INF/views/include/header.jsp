@@ -64,7 +64,7 @@
 <script src="${pageContext.request.contextPath}/resources/js/board_faq.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/funding_write.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/move_banner.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/movie_cont.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/video_viewPg.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/social.js"></script>
 <%-- <script src="${pageContext.request.contextPath}/resources/js/slide.js"></script> --%>
 

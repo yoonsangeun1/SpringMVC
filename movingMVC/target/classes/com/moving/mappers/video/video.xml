@@ -11,18 +11,56 @@
 
 <mapper namespace="videoPost"><!-- 매퍼 네임스페이스명 -->
 
+	<!--
+		메인 페이지 나열된 TOP 4 VIDEO
+		https://okky.kr/article/373058
+	-->
+	<!-- <select id="video_topFour" resultType="videoPostVO">
+		SELECT * FROM (
+		SELECT RANK() OVER(ORDER BY HIT, GRADE DESC) RANKING, TITLE_KOREAN, DIRECTOR FROM VIDEO_POST)
+		WHERE RANKING BETWEEN 1 AND 4
+		↑ 에러는 안 나는데 랭크 함수가 적용되는 목록이 뜨지가 않음
+	</select> --> <!-- 1차 실패 -->
+	<!-- <select id="video_topFour" resultType="videoPostVO">
+		SELECT * FROM
+		(SELECT RANK() OVER(ORDER BY HIT DESC) RANKING, TITLE_KOREAN, DIRECTOR FROM VIDEO_POST)
+		WHERE RANKING BETWEEN 1 AND 4
+		↑ 에러는 안 나는데 랭크 함수가 적용되는 목록이 뜨지가 않음
+	</select> --> <!-- 2차 실패 -->
+	<!-- <select id="video_topFour" resultType="videoPostVO">
+		총 조회 수에 따라 각 장르에서 영상 순위를 매깁니다.
+		SELECT ID, SUM(HITAMOUNTQUOTA) AS HIT, GENRE,
+			RANK() OVER (PARTITION BY GENRE ORDER BY SUM(HITAMOUNTQUOTA) DESC) AS RANKRESULT
+		FROM ??? AS ???
+		INNER JOIN ??? AS ??? ON ??? = ???
+		INNER JOIN ??? AS ??? ON ??? = ???
+		WHERE ??? = 1 AND ??? != N'NA'
+		GROUP BY ID, HIT
+	</select> https://docs.microsoft.com/ko-kr/sql/t-sql/functions/rank-transact-sql?view=sql-server-ver15 --> <!-- 3차 실패 -->
+	<select id="topLs" resultType="videoPostVO">
+	
+		SELECT ROW_NUMBER() OVER (ORDER BY HIT DESC) AS ID, CODE_NO, TITLE_KOREAN, HIT
+		FROM VIDEO_POST WHERE CODE_NO = #{codeNo}
+		
+	</select>
 	
 	<!-- 총 게시물 수 -->
 	<select id="dvdCount" resultType="int">
-		SELECT COUNT(*)	FROM VIDEO_POST
+	
+		SELECT COUNT(*)
+		FROM VIDEO_POST
+		WHERE CODE_NO = #{codeNo}
+				
 	</select>
 	
-	<!-- 영상 포스트들 -->
+	<!-- 장르별 목록 -->
 	<select id="videoPostList" resultType="videoPostVO">
+	
 		SELECT * FROM
-		(SELECT rowNum rNum, ID, TITLE_KOREAN, DIRECTOR, ACTOR, CONTENT FROM
-		(SELECT * FROM VIDEO_POST ORDER BY ID, GENRE DESC))
+		(SELECT rowNum rNum, ID, CODE_NO, TITLE_KOREAN, DIRECTOR, ACTOR, CONTENT FROM
+		(SELECT * FROM VIDEO_POST WHERE CODE_NO = #{codeNo} ORDER BY ID DESC))
 		WHERE rNum &gt;= #{startrow} and rNum &lt;= #{endrow}
+		
 		<!--
 			rowNum 컬럼은 오라클에서 테이블 생성 시 생성되는 기본 컬럼으로 레코드 저장 시에 일련번호 값이 저장됨.
 			rNum은 rowNum 컬럼의 별칭 명
@@ -30,19 +68,32 @@
 			&lt;은 <
 			1 이상 10 이하 사이의 10개의 목록만 검색한다.
 		-->
+		
 	</select>
 	
 	<!-- 내용 보기 -->
 	<select id="dvd_content" resultType="videoPostVO">
-		SELECT * FROM VIDEO_POST WHERE ID=#{id}
+	
+		SELECT * FROM VIDEO_POST WHERE ID = #{id}
+		
 	</select>
 	
 	<!-- 조회 수 -->
 	<update id="videoUpdateHit">
+	
 		UPDATE VIDEO_POST
 		SET HIT = HIT + 1
 		WHERE ID = #{id}
+		
 		<!-- 조회 수는 0부터 시작하니까 + 1을 해서 1부터 시작하도록 설정 -->
+		
 	</update>
+	
+	<!-- 메인 페이지 뷰 페이지 -->
+	<select id="viewPg" resultType="videoPostVO">
+	
+		SELECT * FROM VIDEO_POST WHERE GENRE = #{genre}
+		
+	</select>
 	
 </mapper>

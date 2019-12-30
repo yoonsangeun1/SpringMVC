@@ -6,22 +6,20 @@
 	height: auto;
 	margin-left: auto;
 	margin-right: auto;
-/**	border: 1px solid blue;*/
 
 }
-#slide_show, #video_list { /**바디 상단 슬라이드 쇼 , 카테고리들을 감싸고 있는 div css*/
+#slide_show, #video_list { /**바디 상단 글 , 카테고리들을 감싸고 있는 div css*/
 	float: left;
 	width: 1198px;
 	height: auto;
 	margin: 0px 0px 0px 0px;
-/**	border: 1px solid blue;*/
 }
 #slide_show h1 { /**상단 h1 글 영역 설정*/
 	text-align: center;
 	font-size: 35px;
 	font-family: '맑은 고딕';
 	color: navy;
-	margin-top: 120px;
+	margin-top: 200px;
 	margin-bottom: 120px;
 	line-height: 100px;
 	text-shadow: 2px 2px 6px gray; /**그림자 효과*/
@@ -35,18 +33,15 @@
 	margin-bottom: 15px;
 	font-size: 14px;
 }
-
 #thriller, #action, #documentary, #history, #sf,
 #love, #comedy, #ani, #etc { /**카테고리별 css 동시에 동일하게 적용*/
 	width: 1197px;
 	height: 490px;
-	
 	position: relative;
 }
 .listName_and_moreBtn {
 	float: left;
 	width: 1196px;
-	
 	position: relative;
 }
 .listName { /**장르 이름*/
@@ -56,10 +51,9 @@
 	margin-left: 15px;
 	text-align: left;
 	font-size: 25px;
+	font-weight: bold;
 	color: navy;
 	text-shadow: 2px 2px 6px gray;
-	font-weight: bold;
-	
 	position: relative;
 }
 .moreView { /**더 보기 버튼*/
@@ -68,23 +62,22 @@
 	margin-top: 35px;
 	margin-right: 30px;
 	font-size: 15px;
+	font-weight: bold;
 	color: navy;
 	text-align: center;
-	
+	text-shadow: 2px 2px 6px gray;
 	position: relative;
 }
 .dvd_video_film { /**영화 포스터*/
 	float: left;
 	width: 280px;
 	height: 345px;
-	margin-top: 40px;
+	margin-top: 52px;
 	margin-left: 14px;
-	border: 1px outset darkgray;
+	border-right: 4px solid navy;
 	border-radius: 20px;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-	
-	position: relative;
-	
+	box-shadow: 24px 0 40px 0 rgba(0, 0, 0, 0.5), 0 0 0 0 rgba(0, 0, 0, 0);
+	position: static;
 	background-color: white;
 }
 .videoPost {
@@ -97,9 +90,10 @@
 	text-align: center;
 	font-size: 15px;
 	line-height: 50px;
-	border-bottom: 1px solid silver;
+	border-bottom: 1px solid #464646;
+	border-top: 1px solid #464646;
 }
-.postBtn {
+.postBtn { /*producerProf, producerName, share, join, hyperLink*/
 	width: 278px;
 	height: 100px;
 }
@@ -145,51 +139,49 @@
 	margin-top: 18px;
 	margin-left: 12px;
 }
-.postView {
-	width: 278px;
-	height: 36px;
-	background-color: lightgray;
+.intro {
+	width: 278px; height: 39px;
+	background-color: white;
 	border-bottom-left-radius: 15px;
-	border-bottom-right-radius: 15px;
-	border: 1px solid gray;
-	
+	border-bottom-right-radius: 15px; 
+	border-top-color: navy;
+	border-right-color: navy;
+	border-left-color: white;
+	border-bottom: white;
 	font-size: 17px;
 	font-style: italic;
-	text-align: center;
+	text-align: right;
 	text-shadow: 1px 1px 3px gray;
+	color: teal;
 }
-
+#modDiv {
+	width: 700px; height: 500px;
+	background-color: silver;
+	position: absolute;
+	top: 30%; left: 95%;
+	padding: 20px;
+	z-index: 1000;
+}
 /**부가적인 설정*/
 .category_line { /**hr tag 설정*/
 	border: 0;
 	height: 7px;
 	background: #ccc;
-	
 	position: relative;
 }
-.postViewArea { /**포스트에 관한 내용 숨기고 띄우기*/
-	width: 700px;
-	height: 500px;
-	background-color: silver;
-	position: absolute;
-	z-index: 1000;
+.clear{
+    clear:both; /*float속성을 제거해서 잘못된 UI적용을 막아줌*/
 }
 #Upcoming_movies a:hover, .moreView a:hover, .videoPost a:hover, .videoTitle a:hover, .hyperLink a:hover {
 	color: gray;
 	text-shadow: 1px 1px 3px silver;
 } /**각 id 또는 class 하이퍼링크 개별 적용*/
-.clear{
-    clear:both; /*float속성을 제거해서 잘못된 UI적용을 막아줌*/
-}
-a:link {
+#Upcoming_movies a:link, .moreView a:link, .videoPost a:link, .videoTitle a:link, .hyperLink a:link {
 	text-decoration: none; /* 하이퍼링크된 곳의 밑줄선을 없앰 */
 }
-a:active { /* 하이퍼링크된 곳을 클릭하는 순간 밑줄 선 없앰 */
-	text-decoration: none;
+#Upcoming_movies a:active, .moreView a:active, .videoPost a:active, .videoTitle a:active, .hyperLink a:active {
+	text-decoration: none; /* 하이퍼링크된 곳을 클릭하는 순간 밑줄 선 없앰 */
 }
-a:visited { /* 한번이라도 클릭한 곳의 밑줄선 없앰 */
-	text-decoration: none;
-}
-a:hover { /* 하이퍼링크된 곳에 마우스를 가져다 댔을 때 밑줄 선 없앰 */
-	text-decoration: none;
+#Upcoming_movies a:visited, .moreView a:visited, .videoPost a:visited, .videoTitle a:visited, .hyperLink a:visited {
+	text-decoration: none; /* 한번이라도 클릭한 곳의 밑줄선 없앰 */
 }

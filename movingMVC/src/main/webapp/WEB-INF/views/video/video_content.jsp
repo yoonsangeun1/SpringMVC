@@ -7,7 +7,7 @@
 		<%-- 동영상 삽입 start --%>
 		<div id="video">
 			
-			<iframe width="1068" height="500" src="${videoPostVO.videoFilePath}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+			<iframe width="1200" height="700" src="${videoPostVO.videoFilePath}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 			
 		</div>
 		<%-- 동영상 삽입 end --%>
@@ -18,14 +18,14 @@
 			<div class="clear"></div>
 			<p class="subInfo">조회 수 ${videoPostVO.hit}회 · ${videoPostVO.registerDate}<p><!-- 조회 수는 mainList(배열 처리, TOP순위 처리), categoryList 페이징 처리 후 작업 : https://rongscodinghistory.tistory.com/7 -->
 			<div class="clear"></div>
-			<hr />
+			<hr /><br /><br />
 			<div class="clear"></div>
 			<a href="https://www.youtube.com/channel/UCmLiSrat4HW2k07ahKEJo4w"><img src="../images/m_publisher.PNG" /></a>
 			<a href="https://www.youtube.com/channel/UCmLiSrat4HW2k07ahKEJo4w"><b>${videoPostVO.director}</b></a>
 			<div class="clear"></div>
 			<p class="subCont">${videoPostVO.content}</p>
 			<div class="clear"></div>
-			<br /><hr /><br />
+			<br /><br /><hr /><br />
 		</div>
 		<%-- 영상 기본 정보 코드 end --%>
 		
@@ -60,16 +60,8 @@
 		<%-- 추가 비디오 목록 코드 start --%> 
 		<div id="other_Movie"><!-- 다른 동영상들을 담고 있는 div -->
 			<div class="mVideo"><!-- 영화 동영상 각각 div 설정 -->
-				<p class="otherMovieTitle">루루 때문에 고양이들 단체로 목욕하는 날</p>
-				<a href="./movie"><img src="../images/replyuser.png" width="280px" height="200px" /></a>
-			</div>
-			<div class="mVideo"><!-- 영화 동영상 각각 div 설정 -->
-				<hr /><p class="otherMovieTitle">사물이 거울에 보이는 것보다 가까이 있음</p>
-				<a href="./moviecategory"><img src="../images/replyuser.png" width="280px" height="200px" /></a>
-			</div>
-			<div class="mVideo"><!-- 영화 동영상 각각 div 설정 -->
-				<hr /><p class="otherMovieTitle">고양이들이 너무 좋아해서 2층 침대를 ...</p>
-				<a href="./movieplay"><img src="../images/replyuser.png" width="280px" height="200px" /></a>
+				<p class="otherMovieTitle">${videoPostVO.titleKorean}</p>
+				<a href="content?id=${videoPostVO.id}&page=${page}"><img src="../images/replyuser.png" width="280px" height="200px" /></a>
 			</div>
 		</div>
 		<%-- 추가 비디오 목록 코드 end --%> 

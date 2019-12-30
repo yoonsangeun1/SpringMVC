@@ -100,7 +100,31 @@ ALTER TABLE m_user
 			nickname
 		);
 
-select * from VIDEO_POST order by id desc;
+SELECT * FROM VIDEO_POST ORDER BY ID DESC;
+SELECT * FROM VIDEO_POST WHERE GENRE='영화_범죄/스릴러'
+SELECT ID, TITLE_KOREAN, HIT FROM VIDEO_POST ORDER BY HIT DESC;
+SELECT ROW_NUMBER() OVER
+(ORDER BY HIT DESC) AS ID, CODE_NO, TITLE_KOREAN, HIT, RANKING
+FROM VIDEO_POST
+WHERE CODE_NO='3000101';
+
+SELECT COUNT(*)
+FROM VIDEO_POST
+WHERE CODE_NO = '3000101'; --에러 없음
+
+SELECT ID, COUNT(*)
+		FROM VIDEO_POST
+		WHERE CODE_NO = '3000101'
+		GROUP BY CODE_NO; --에러 없음
+
+SELECT CODE_NO, COUNT(*)
+FROM VIDEO_POST
+WHERE CODE_NO = '3000101'
+GROUP BY CODE_NO;
+		
+SELECT * FROM
+		(SELECT CODE_NO, COUNT(*) FROM VIDEO_POST
+		 WHERE CODE_NO = '3000101' GROUP BY CODE_NO); -- 에러 없음
 
 INSERT INTO video_post(id,code_no,user_id,title_english,title_korean,director,actor,release_date,content,grade,era_background,video_file_path,video_length,rate)
 VALUES (video_post_seq.nextval,30001,1,'English Title','한글제목','박진우감독','박진우배우',sysdate,'줄거리',5.0,'현재','/경로',120,'g'); --영화 - 범죄/스릴러인 경우
@@ -109,10 +133,10 @@ VALUES (video_post_seq.nextval,3000101,1,'English Title','한글제목','박진�
 
 INSERT INTO video_post(id, code_no,user_id,title_korean,content,video_file_path,rate)
 VALUES (video_post_seq.nextval,3000208,1,'고양이','2층 침대를 선물했어요!','https://www.youtube.com/embed/SqV_37jdXS8','g');
-INSERT INTO video_post(id,code_no,user_id,title_english,title_korean,director,actor,release_date,content,grade,era_background,video_file_path,video_length,rate)
-VALUES (video_post_seq.nextval,3000108,1,'Cats occupy bunk beds','2층 침대를 점령한 고양이들','크림히어로즈','루루',sysdate,'밖에 나갔다가 돌아왔더니 고양이들이 저의 2층 침대를 점령했어요!<br /><br />[BGM] "Montauk Point" Kevin MacLeod(incompetech.com)',5.0,'2018년 늦봄','https://www.youtube.com/embed/SqV_37jdXS8',9,'g');
-INSERT INTO video_post(id,code_no,user_id,title_english,title_korean,director,actor,release_date,content,grade,era_background,video_file_path,video_length,rate)
-VALUES (video_post_seq.nextval,3000108,1,'Avengers : Cream Heroes Cat Introduction','어벤져쯔 : 크림히어로즈 고양이 소개','크림히어로즈','루루, 모모, 디디, 라라, 티티, 츄츄, 코코',sysdate,'귀여운 고양이들이 루루의 지휘 아래 뭉쳤습니다.<br />어벤져쯔 고양이들을 소개합니다.<br />다양한 능력을 가지고 있는 고양이들은 거대한 계획을 세우고 있는데요.<br />어떤 계획으로 집사를 놀라게 할지 한번 보시죠!<br />* 7월 31일 라이브 영상입니다.<br /><br />일곱 고양이와 집사의 애정 넘치는 이야기',5.0,'2017년 한여름날','https://www.youtube.com/embed/CNpa9nCy1_0',9,'g');
+INSERT INTO video_post(id,code_no,user_id,genre,title_english,title_korean,director,actor,release_date,content,grade,era_background,video_file_path,video_length,rate)
+VALUES (video_post_seq.nextval,3000108,1,'영화_범죄/스릴러','Cats occupy bunk beds','2층 침대를 점령한 고양이들','크림히어로즈','루루',sysdate,'밖에 나갔다가 돌아왔더니 고양이들이 저의 2층 침대를 점령했어요!<br /><br />[BGM] "Montauk Point" Kevin MacLeod(incompetech.com)',5.0,'2018년 늦봄','https://www.youtube.com/embed/SqV_37jdXS8',9,'g');
+INSERT INTO video_post(id,code_no,user_id,genre,title_english,title_korean,director,actor,release_date,content,grade,era_background,video_file_path,video_length,rate)
+VALUES (video_post_seq.nextval,3000101,1,'영화_범죄/스릴러','Avengers : Cream Heroes Cat Introduction','어벤져쯔 : 크림히어로즈 고양이 소개','크림히어로즈','루루, 모모, 디디, 라라, 티티, 츄츄, 코코',sysdate,'귀여운 고양이들이 루루의 지휘 아래 뭉쳤습니다.<br />어벤져쯔 고양이들을 소개합니다.<br />다양한 능력을 가지고 있는 고양이들은 거대한 계획을 세우고 있는데요.<br />어떤 계획으로 집사를 놀라게 할지 한번 보시죠!<br />* 7월 31일 라이브 영상입니다.<br /><br />일곱 고양이와 집사의 애정 넘치는 이야기',5.0,'2017년 한여름날','https://www.youtube.com/embed/CNpa9nCy1_0',9,'g');
 /**
  * https://www.youtube.com/embed/SqV_37jdXS8
  * Chr(10) : 현재 커서가 위치한 곳에서 아래로 한줄 내리는 기능 → 라인 피드 : new line
@@ -121,11 +145,12 @@ VALUES (video_post_seq.nextval,3000108,1,'Avengers : Cream Heroes Cat Introducti
  * LINK : https://mymuseum.tistory.com/10
  */
 
-select * from video_post;
+ALTER TABLE VIDEO_POST
+ADD (ranking varchar2(50));
 
 drop table video_post; --삭제가 안 됨.
-DELETE FROM VIDEO_POST WHERE ID = '1'; --데이터 삭제
-UPDATE video_post SET id = '14' WHERE id = '27';
+DELETE FROM VIDEO_POST WHERE ID = '17'; --데이터 삭제
+UPDATE video_post SET id = '23' WHERE id = '47';
 SELECT '밖에 나갔다가 돌아왔더니 고양이들이 저의 2층 침대를 점령했어요!'||chr(10)||'[BGM] "Montauk Point" Kevin MacLeod(incompetech.com)'
 AS test FROM DUAL;
 UPDATE video_post

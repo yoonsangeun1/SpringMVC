@@ -1,46 +1,52 @@
 @charset "UTF-8";
 
-#movie_comment {											/*movie_cont.jsp의 모든 구역 css*/
+/*movie_cont.jsp의 모든 구역 css*/
+#movie_comment {
 	width: 1200px;
 	min-height: 1024px;
 	height: auto;
 	box-sizing: border-box;
 	margin-left: auto;
 	margin-right: auto;
-
 }
-#video {													/**페이지 위 영상 부분*/
-	width: 1070px;
-	height: 502px;
-	margin-top: 5px;
-	margin-left: 62px;
+/*페이지 위 영상 부분*/
+#video {
+	width: 1200px;
+	height: 700px;
+	margin: 0px auto;
+	padding-top: 75px;
 }
 
 
-/**게시자 정보 CSS start*/
-#videoInfo {												/**영상 제목, 영상 구독자, 영상 설명란, 영상 올린 날짜 등*/
-	float: left;
-	width: 1100px;
-	margin: 7px 0px 0px 50px;
+/*게시자 정보*/
+#videoInfo {
+	width: 1200px;
+	margin: 0px auto;
+	padding-top: 75px;
 }
+/*영상 제목*/
 .subTitle {
 	float: left;
 	font-size: 20px;
 	color: black;
 	font-family: '맑은 고딕';
-	margin-top: 17px;
+	margin-top: 24px;
 	margin-left: 20px;
+	line-height: 20px;
 }
+/*영상 설명란*/
 .subInfo {
 	float: left;
 	font-size: 12px;
-	color: #808080;
-	font-family: '맑은 고딕';
-	margin-top: 12px;
-	margin-bottom: 10px;
-	margin-left: 20px;
 	font-style: italic;
+	font-family: '맑은 고딕';
+	color: #808080;
+	margin-top: 12px;
+	margin-bottom: 24px;
+	margin-left: 20px;
+	line-height: 12px;
 }
+/*영상 게시자*/
 #videoInfo img {
 	float: left;
 	width: 55px;
@@ -70,6 +76,7 @@
 	margin-top: 40px;
 	margin-bottom: 20px;
 	margin-left: 25px;
+	line-height: 28px;
 }
 
 
@@ -136,18 +143,4 @@
 /**기타 작업 코딩(hover, href tag css)*/
 .clear{
     clear:both; /*float속성을 제거해서 잘못된 UI적용을 막아줌*/
-}
-a:link {
-	text-decoration: none; /* 하이퍼링크된 곳의 밑줄선을 없앰 */
-}
-a:active { /* 하이퍼링크된 곳을 클릭하는 순간 밑줄 선 없앰 */
-	text-decoration: none;
-}
-a:visited { /* 한번이라도 클릭한 곳의 밑줄선 없앰 */
-	text-decoration: none;
-}
-a:hover { /* 하이퍼링크된 곳에 마우스를 가져다 댔을 때 밑줄 선 없앰 */
-	text-decoration: none;
-	color: blue;
-	text-shadow: 1px 1px 3px blue;
 }
