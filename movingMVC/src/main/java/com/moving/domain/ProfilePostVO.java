@@ -7,8 +7,10 @@ public class ProfilePostVO {		/* 배우모집 게시판 */
 	private int id;					/* 아이디 */
 	private int codeNo;				/* 코드_번호 10005 */
 	private int userId; 			/* 회원_아이디 */
+	private String thumbnailImage;  /*썸네일 이미지*/
 	private String title; 			/* 제목 */
 	private String category;		/* 카테고리 */
+	private String etctext; 		/*카테고리 기타 텍스트 필드값*/
 	private String content; 		/* 내용 */
 	private int hit; 				/* 조회수 */
 	private String registerDate; 	/* 등록_일 */
@@ -31,7 +33,58 @@ public class ProfilePostVO {		/* 배우모집 게시판 */
 	private MUserVO mUserVO;						/* 회원 VO */
 	private List<AttachedFileVO> attachedFileVO; 	/* 첨부파일 VO */
 	private List<MoveVO> moveVO; 					/* 무브(좋아요) VO */
+	private SocialProfileVO socialProfileVO;		/* SNS VO*/
 	
+	//페이징 관련변수(쪽나누기)
+	private int startrow;//시작행 번호
+	private int endrow; //끝행번호
+	
+	//검색기능
+	private String findName; //검색어
+	private String findField; //검색필드
+	
+	public String getEtctext() {
+		return etctext;
+	}
+	public void setEtctext(String etctext) {
+		this.etctext = etctext;
+	}
+	public SocialProfileVO getSocialProfileVO() {
+		return socialProfileVO;
+	}
+	public void setSocialProfileVO(SocialProfileVO socialProfileVO) {
+		this.socialProfileVO = socialProfileVO;
+	}
+	public int getStartrow() {
+		return startrow;
+	}
+	public void setStartrow(int startrow) {
+		this.startrow = startrow;
+	}
+	public int getEndrow() {
+		return endrow;
+	}
+	public void setEndrow(int endrow) {
+		this.endrow = endrow;
+	}
+	public String getFindName() {
+		return findName;
+	}
+	public void setFindName(String findName) {
+		this.findName = findName;
+	}
+	public String getFindField() {
+		return findField;
+	}
+	public void setFindField(String findField) {
+		this.findField = findField;
+	}
+	public String getThumbnailImage() {
+		return thumbnailImage;
+	}
+	public void setThumbnailImage(String thumbnailImage) {
+		this.thumbnailImage = thumbnailImage;
+	}
 	public int getId() {
 		return id;
 	}

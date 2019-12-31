@@ -392,41 +392,102 @@
     <div id="bActors_writing"> <%-- 글 쓰기 폼 div --%>
       <input type="button" class="bActors_writing_btn button
        button_c9d8ce2 button_f12 button_p1024 button_r4"
-      value="글 쓰기" />
+      value="글 쓰기" onclick="location='/moving.com/board/actors_write';" />
     </div> <%-- 글 쓰기 폼 div --%>
     
         <div id="clear"></div>
     
-    <div id="bActors_page"> <%--페이지 순번 --%>
-		 <a href="board_actors">첫페이지</a>
-		 <a href="board_actors">&lt;&lt;</a>
-		 <a href="board_actors">1</a>
-		 <a href="board_actors">2</a>
-		 <a href="board_actors">3</a>
-		 <a href="board_actors">4</a>
-		 <a href="board_actors">5</a>
-		 <a href="board_actors">6</a>
-		 <a href="board_actors">7</a>
-		 <a href="board_actors">8</a>
-		 <a href="board_actors">9</a>
-		 <a href="board_actors">10</a>
-		 <a href="board_actors">&gt;&gt;</a>
-		 <a href="board_actors
-		 ">끝페이지</a>
-		</div> <%--페이지 순번 --%>
+ <div id="bActors_pagination"> <%--페이지 div --%>   
     
+ <%--페이징 추가 --%>
+ <c:if test="${(empty findField) && (empty findName)}"> <%--검색 전  --%>
+  <c:if test="${page <= 1}"> <%-- 첫번째 페이지 --%>
+   &lt;&lt;
+  </c:if>
+ 
+ 
+ <c:if test="${page>1}"> <%-- 첫페이지 초과 --%>
+  <a href="/moving.com/board/actors?page=${page-1}">
+   &lt;&lt;
+  </a>
+ </c:if>
+ 
+ <%--현재 쪽번호 출력 --%>
+ <c:forEach var="a" begin="${startpage}" end="${endpage}" step="1">
+  <c:if test="${a==page}"> <%--현재 쪽번호가 선택된 경우 --%>
+  [${a}]
+  </c:if>
+  
+  <c:if test="${a != page}"> <%--현재 쪽번호가 선택안된 경우 --%>
+   <a href="/moving.com/board/actors?page=${a}">
+    ${a}
+   </a>
+  </c:if>
+ </c:forEach>
+		
+	<c:if test="${page>=maxpage}">
+	 &gt;&gt;
+	</c:if>
+	
+	<c:if test="${page<maxpage}">
+	 <a href="/moving.com/board/actors?page=${page+1}">
+	  &gt;&gt;
+	 </a>
+	</c:if>
+   </c:if> <%--검색 전 --%>	
+   
+   <c:if test="${(!empty findField) || (!empty findName)}"> <%--검색 후 --%>
+    <c:if test="${page <= 1}"> <%--첫번째 페이지 --%>
+ 	 &lt;&lt;   
+    </c:if>
+    
+    <c:if test="${page>1}"> <%--첫페이지 초과 --%>
+     <a href="/moving.com/board/actors?page=${page-1}&findField=${findField}&findName=${findName}">
+      &lt;&lt;
+     </a>
+    </c:if>
+    
+    <%--현재 쪽번호 출력 --%>
+    <c:forEach var="a" begin="${startpage}" end="${endpage}" step="1">
+     <c:if test="${a==page}"> <%--현재쪽번호가 선택된 경우 --%>
+      [${a}]
+     </c:if>
+    
+      <c:if test="${a != page}"> <%--현재 쪽번호가 선택안된 경우 --%>
+       <a href="/moving.com/board/actors?page=${a}&findField=${findField}&findName=${findName}">
+        ${a}
+       </a>
+      </c:if>
+    </c:forEach>
+    
+    <c:if test="${page >= maxpage}">
+     &gt;&gt;
+    </c:if>
+    
+    <c:if test="${page < maxpage}">
+     <a href="/moving.com/board/actors?page=${page+1}&findField=${findField}&findName=${findName}">
+      &gt;&gt;
+     </a>
+    </c:if>
+   </c:if> <%--검색 후 --%>
+   
+   </div> <%--페이지 div --%>
 		
   <div id="bActors_search"> <%--검색 구간 전체 div --%>
-   <select name="bActors_combo" id="bActors_combo">
-    <option value="title_content">제목+내용</option>
-    <option value="title">제목</option>
-    <option value="content">내용</option>
-    <option value="user_name">이름</option>
-    <option value="tag">태그</option>
+   <select name="findField" id="findField">
+    <option value="content"
+    <c:if test="${findField == 'content'}">
+    ${'selected'}</c:if>>내용</option>
+    <option value="nickname"
+    <c:if test="${findField == 'nickname'}">
+    ${'selected'}</c:if>>닉네임</option>
+    <option value="name"
+    <c:if test="${findField == 'name'}">
+    ${'seleted'}</c:if>>이름</option>
    </select>
    
    <div id="bActors_input"> <%--텍필,버튼 --%>
-    <input id="search_text" name="search_text" size="20" />
+    <input id="findName" name="findName" size="20" value="${findName}" />
     <input type="submit" class="search_btn button_wce8e8e8" value="검색" />
    </div> <%--텍필,버튼 --%>
    
@@ -434,5 +495,23 @@
    
   </div> <%--프로필 전체 감쌀 div --%>
  </div> <%--  전체 div --%>
+ 
+ <script>
+ 
+  var msg="${msg}";
+  
+  if(msg == "BOARD/ACTORS_INSERT"){
+	  alert("글쓰기가 성공 했습니다!");
+  }//if
+  
+  if(msg == "BOARD/ACTORS_EDIT"){
+	  alert("글수정이 성공 했습니다!");
+  }//if
+  
+  if(msg == "BOARD/ACTORS_DEL"){
+	  alert("글삭제가 성공 했습니다!");
+  }//if
+ 
+ </script>
 
 <%@ include file="../include/footer.jsp"%>

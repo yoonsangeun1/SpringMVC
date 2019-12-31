@@ -439,4 +439,85 @@ ALTER TABLE NORMAL_POST DROP COLUMN content3;
 SELECT COUNT(*) FROM NORMAL_POST N
 WHERE N.CODE_NO = 10001
  
+ALTER TABLE Profile_Post add(thumbnail_image varchar2(4000));
+ALTER TABLE Profile_Post drop column img;
+
+ALTER TABLE Profile_Post add(etctext varchar2(4000));
+
+select * from normal_post;
+select * from m_user;
+select * from profile_post;
+
+INSERT INTO profile_post(id,code_no,user_id,thumbnail_image,title,content,
+hit,register_date, name, sex, birth_date,
+age, email, height, weight,
+job, school, specification,
+website_url)
+VALUES (profile_post_seq.nextval,10005,3,
+'<img src="/moving.com/resources/photo_upload/201912\20191226111240bcd7375f-3220-4e39-b342-323426820106.jpg" title="hotel.jpg" width="900px;"><br style="clear:both;">',
+'프로필','프로필',0,sysdate,'박진우','m',
+'1996-02-13', 24, 'rmatjd2003@naver.com', 172, 72,
+'취업준비생', '울산대학교 수석 입학', '운전면허증 장롱면허 2년차',
+'naver.com');
+
+SELECT rownum rnum,P.* FROM profile_post P ;
+
+ SELECT ROWNUM RNUM,P.*,U.NICKNAME
+ FROM PROFILE_POST P, M_USER U
+ WHERE RNUM >= 1
+ AND rNum <= 10
+ ORDER BY P.id DESC
+ 
+ SELECT * FROM
+ (SELECT ROW_NUMBER() OVER(ORDER BY P.ID DESC) rNum,
+ P.thumbnail_Image, P.ID AS board_actors_id, U.NICKNAME,
+ P.NAME
+ FROM PROFILE_POST P
+ LEFT OUTER JOIN M_USER U ON P.USER_ID = U.ID
+ WHERE P.CODE_NO = 10005
+ ORDER BY board_actors_id DESC)
+ WHERE rNum >= 2
+ AND rNum <= 20;
+ 
+  INSERT INTO PROFILE_POST (ID,CODE_NO,USER_ID,
+ THUMBNAIL_IMAGE,CATEGORY,EMAIL,
+ BIRTH_DATE,HEIGHT,SEX,
+ WEBSITE_URL,CONTENT,REGISTER_DATE) 
+ VALUES(profile_post_seq.nextval,10005,3,
+ '','','',
+ to_date('19980301','yyyyMMdd'),176,'male',
+ '','zzz',sysdate)
+ 
+ select * from m_user;
+ select * from profile_post;
+ 
+ 
+ alter table profile_post modify(sex varchar(50))
+ alter table profile_post modify(height default 0)
+ 
+ insert into profile_post ( id,code_no,user_id,
+ thumbnail_image,category,email,
+ birth_date,height,sex,
+ website_url,content,register_date)
+ values(profile_post_seq.nextval,10005,3,
+ '','','aa@naver.com',
+ 980101,178,sysdate)
+ 
+ 
+ select * from profile_post;
+ 
+ INSERT INTO profile_post(id,code_no,user_id,
+ content,hit,
+ register_date, name, sex,
+ birth_date, age, email,
+ height, weight,
+  website_url)
+VALUES(profile_post_seq.nextval,10005,3,
+'프로필',0,
+sysdate,'박진우','m',
+'1996-02-13', 24, 'rmatjd2003@naver.com',
+172, 72,
+ 'naver.com');
+ 
+ 
  

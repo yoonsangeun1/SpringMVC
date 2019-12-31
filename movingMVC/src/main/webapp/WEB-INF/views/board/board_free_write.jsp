@@ -24,7 +24,7 @@
    </tr>
    <tr>
     <th>글내용</th>
-    <td><textarea name="content" id="content" onkeyUp="checkByte(this.form);"
+    <td><textarea name="content" id="content"
     rows="10" cols="100"></textarea>
     
 <script type="text/javascript">
