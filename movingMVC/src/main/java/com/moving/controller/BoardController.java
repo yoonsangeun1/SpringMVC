@@ -30,12 +30,12 @@ public class BoardController {
 		return new ModelAndView("board/board_faq");
 	}//faq()
 
-	//배우 프로필
+/*	//배우 프로필
 	@RequestMapping(value="/board/actors")
 	public ModelAndView actors() {
 		return new ModelAndView("board/board_actors");
 	}//actors()
-
+*/
 	//이벤트
 	@RequestMapping(value="/board/event")
 	public ModelAndView event() {
@@ -54,12 +54,12 @@ public class BoardController {
 		return new ModelAndView("board/board_qna");
 	}//qna()
 
-	//글 작성
+/*	//글 작성
 	@RequestMapping(value="/write")
 	public ModelAndView write() {
 		return new ModelAndView("board/board_write");
 	}//write()
-	
+*/	
 /*	//공지사항 내용 보기 //임시
 	@RequestMapping("/board/notice_cont")
 	public ModelAndView notice_cont() {
