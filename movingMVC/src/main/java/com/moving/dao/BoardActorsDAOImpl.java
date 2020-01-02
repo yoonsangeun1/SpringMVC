@@ -28,6 +28,27 @@ public class BoardActorsDAOImpl implements BoardActorsDAO {
 	public void inBoardActors(ProfilePostVO ba) {
 		this.sqlSession.insert("ba_in",ba);
 	}//게시물 등록
+
+	@Override
+	public void actorsupdateHit(int id) {
+		this.sqlSession.update("ba_hit",id);
+	}//조회수 증가
+	
+	@Override
+	public ProfilePostVO getCont(int id) {
+		return this.sqlSession.selectOne("ba_cont",id);
+	}//게시물 보기
+
+	@Override
+	public ProfilePostVO getCont2(int id) {
+		return this.sqlSession.selectOne("ba_cont2",id);
+	}//조회수 증가 없이 게시물 내용 담기
+
+	@Override
+	public void editBoardActors(ProfilePostVO ba) {
+		this.sqlSession.update("ba_edit",ba);
+	}//게시물 수정
+
 	
 	
 	

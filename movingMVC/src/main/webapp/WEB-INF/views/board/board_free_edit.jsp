@@ -47,14 +47,13 @@
 	</td>
     <%--textarea에는 value 속성이 없다. --%>
    </tr> 
-   
-   
-   
-   
+     
    <tr>
     <th colspan="2">
     <input type="submit" value="수정" />
     <input type="reset" value="취소" />
+    <input type="button" value="목록" 
+    onclick="location='/moving.com/board/free?page=${page}';" />
     </th>
    </tr>
    

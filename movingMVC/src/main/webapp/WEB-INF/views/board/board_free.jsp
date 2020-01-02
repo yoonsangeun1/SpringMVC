@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=UTF-8"%>
+g<%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ include file="../include/header.jsp"%>
@@ -141,7 +141,7 @@
     <div id="bFree_writing"> <%-- 글 쓰기 폼 div --%>
       <input type="button" class="bFree_writing_btn button
        button_c9d8ce2 button_f12 button_p1024 button_r4" 
-      value="글 쓰기" onclick="location='/moving.com/board/free_write';" />
+      value="글 쓰기" onclick="location='/moving.com/board/free_write?page=${page}';" />
     </div> <%-- 글 쓰기 폼 div --%>
     
     <div style="clear:both"></div>

@@ -1,9 +1,10 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>연기자 프로필 글쓰기</title>
+<title>연기자 프로필 수정</title>
 <script src="../resources/js/jquery.js"></script>
 <script src="../resources/editor/js/HuskyEZCreator.js" charset="UTF-8"></script>
 </head>
@@ -11,7 +12,7 @@
  <form method="post" action="/moving.com/board/actors_write_ok"
  onsubmit="return actors_check();" enctype="multipart/form-data">
   <table border="1" style="width:1024px" cellspacing="0" > <!-- width 임시로 넣어둠. -->
-   <caption>연기자 프로필 글쓰기</caption>
+   <caption>연기자 프로필 수정</caption>
    <tr>
     <th  style="width:230px;">글쓴이</th>
     <td><div id="nickname">${nickname}</div> <%--input? --%>
@@ -29,9 +30,12 @@
     *1장만 등록 가능합니다!*
     </th>
     <td>
-     <div class="select_img" style="boader:1px; width:200px; height:250px;"><img src="" /></div>
+     <div class="select_img" style="boader:1px; width:200px; height:250px;">
+     <img src="${ba.thumbnailImage}" />
+	 </div>
      <input type="file" id="thumbnailImage" name="thumbnailImage"
-     style="margin:20px;" />
+     style="margin:20px;"
+      />
      <label> * 사진의 기본 사이즈는 200 X 250 입니다. * </label>
     </td>
    </tr>
@@ -39,7 +43,7 @@
    <tr>
     <th>카테고리</th>
     <td>
-    <input type="radio" name="category" value="actor" />배우
+    <input type="radio" name="category" value="actor"/>배우
     <input type="radio" name="category" value="stunt" />스턴트맨
     <input type="radio" name="category" value="childactor" />아역배우
     <input type="radio" name="category" value="etc"/>기타
@@ -151,12 +155,6 @@
  
  <script>
  function actors_check(){ //submit 
-	 
-	 //썸네일 이미지 등록 안됐을 시
-	 if(!$("#thumbnailImage").val()){
-		 alert("이미지를 등록해주세요!");
-		 return false;
-	 }//if
 	
 	 var count = $("input:radio[name=category]:checked").length; //체크박스 선택된 개수 구함
 	 

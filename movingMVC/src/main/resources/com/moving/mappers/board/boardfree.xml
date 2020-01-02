@@ -99,47 +99,6 @@ FROM NORMAL_POST N
  WHERE rNum &gt;= #{startrow}
  AND rNum &lt;= #{endrow}
 </select>
-
-
- 
- 
- 
-<!--  <select id="bf_list" resultMap="boardInfo">
- SELECT * FROM
-(SELECT ROW_NUMBER() OVER(ORDER BY N.ID DESC) rNum,
-N.ID, N.TITLE, U.NICKNAME,
-N.REGISTER_DATE, N.HIT
-FROM NORMAL_POST N, M_USER U
-WHERE N.USER_ID = U.ID
-ORDER BY N.ID DESC)
-WHERE rNum &gt;= #{startrow}
-AND rNum &lt;= #{endrow}  -->
-
-<!--  SELECT * FROM
-(SELECT ROW_NUMBER() OVER(ORDER BY ID DESC) rNum,
-ID, TITLE, USER_ID,
-REGISTER_DATE, HIT
-FROM NORMAL_POST 
-ORDER BY ID DESC)
-WHERE rNum &gt;= #{startrow}
-AND rNum &lt;= #{endrow} 12월 13일 상은햄이랑 수정 중 마지막에 작성한 코드. -->
-
-<!-- SELECT * FROM
-(SELECT ROW_NUMBER() OVER(ORDER BY N.ID DESC) rNum, 
-N.ID, N.TITLE,
- U.NICKNAME, N.REGISTER_DATE, N.HIT
-FROM NORMAL_POST N, M_USER U
-WHERE N.USER_ID = U.ID
-ORDER BY N.ID DESC)
-WHERE rNum >= 11
-AND rNum <= 20;  이런식으로 처리해서 페이징 구현함. 이유) 2개의 테이블을 비교해서 값을 가져와야 하기 때문임.
-나는 nickname이 필요했었음. -->
-  
-  <!-- rowNum컬럼은 오라클에서 테이블 생성시 생성되는
-  기본컬럼으로 레코드 저장시 일련번호값이 저장됨. rNum
-  rowNum컬럼의 별칭명. &gt;은 >, &lt; < , 1이상
-  10이하 사이의 10개목록만 검색 -->
-
  
  <!-- 글쓰기, 자유게시판 글쓰기는 코드넘버 10002-->
  <insert id="bf_in">

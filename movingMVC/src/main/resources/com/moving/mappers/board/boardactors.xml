@@ -13,11 +13,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="registerDate" column="board_actors_registerDate" />
 		<result property="name" column="name" />
 		<result property="height" column="height" />
-		<result property="website_url" column="website_url" />
+		<result property="websiteUrl" column="website_url" />
 		<result property="hit" column="hit" />
 		<result property="content" column="content" />
 		<result property="email" column="email" />
-		<result property="thumbnailImage" column="thumbnailImage" />
+		<result property="thumbnailImage" column="thumbnail_Image" />
 		
 			<association property="mUserVO" javaType="com.moving.domain.MUserVO"
 			 autoMapping="true">
@@ -54,10 +54,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <select id="ba_list" resultMap="boardInfo">
  SELECT * FROM
  (SELECT ROW_NUMBER() OVER(ORDER BY P.ID DESC) rNum,
- P.thumbnail_Image, P.ID AS board_actors_id, U.NICKNAME,
- P.NAME
+ P.thumbnail_Image, P.ID AS board_actors_id,
+ P.NAME,P.USER_ID
  FROM PROFILE_POST P
- LEFT OUTER JOIN M_USER U ON P.USER_ID = U.ID
  <where>
  P.CODE_NO = 10005
  <if test="findField == ''"></if>
@@ -76,7 +75,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  AND rNum &lt;= #{endrow}
 </select>
 
-<insert id="ba_in"> <!-- code_no는 10005 -->
+<insert id="ba_in"> <!-- code_no는 10005,etctext는 null을 허용해주기 위해 jdbcType 넣어줌. -->
  INSERT INTO PROFILE_POST (ID,CODE_NO,USER_ID,
  THUMBNAIL_IMAGE,CATEGORY,EMAIL,
  BIRTH_DATE,HEIGHT,SEX,
@@ -86,8 +85,38 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  #{thumbnailImage},#{category},#{email},
  to_date(#{birthDate},'yyyyMMdd'),#{height},#{sex},
  #{websiteUrl},#{content},sysdate,
- #{name},#{etctext})
+ #{name},#{etctext,jdbcType=VARCHAR})
 </insert>
+
+<!-- 조회수 증가 -->
+<update id="ba_hit">
+ UPDATE PROFILE_POST
+ SET HIT=HIT+1
+ WHERE ID=#{id}
+</update>
+
+<!-- 내용보기 -->
+<select id="ba_cont" resultMap="boardInfo">
+ SELECT P.ID AS board_actors_id, P.USER_ID AS board_actors_user_id,
+ P.HIT,THUMBNAIL_IMAGE,CATEGORY,
+ EMAIL,BIRTH_DATE,HEIGHT,
+ SEX,WEBSITE_URL,CONTENT,REGISTER_DATE AS board_actors_registerDate,
+ NAME,ETCTEXT
+ FROM PROFILE_POST P
+ WHERE P.ID=#{id}
+</select>
+
+<!-- 조회수 증가 없이 내용 가져오기 -->
+<select id="ba_cont2" resultMap="boardInfo">
+  SELECT P.ID AS board_actors_id, P.USER_ID AS board_actors_user_id,
+ P.HIT,THUMBNAIL_IMAGE,CATEGORY,
+ EMAIL,BIRTH_DATE,HEIGHT,
+ SEX,WEBSITE_URL,CONTENT,REGISTER_DATE AS board_actors_registerDate,
+ NAME,ETCTEXT
+ FROM PROFILE_POST P
+ WHERE P.ID=#{id}
+</select>
+
 
 
 </mapper>

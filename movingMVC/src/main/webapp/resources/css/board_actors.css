@@ -107,12 +107,13 @@
 	width:1200px;
 	height:auto;
 	text-align:center;
-	padding-left:10px;
+	padding-left:30px;
+	padding-right:30px;
 }
 
 #bActors_model{ /*배우들 네모 전체div*/
 	margin:10px 10px 10px 18px;
-	width:14%;
+	width:16%;
 	min-height:auto;
 	float:left;
 	border:1px solid #ccc;
