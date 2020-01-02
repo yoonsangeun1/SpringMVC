@@ -7,7 +7,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.moving.service.AdminVideoService;
 
-@RequestMapping(value="/admin")
+//@RequestMapping(value="/admin")
 @Controller
 public class AdminController {
 	
@@ -15,7 +15,7 @@ public class AdminController {
 	private AdminVideoService adminVideoService;
 
 	/* 관리자 홈 */
-	@RequestMapping(value="/")
+	@RequestMapping(value="/admin")
 	public ModelAndView admin() {
 		return new ModelAndView("admin");
 	}//admin()
@@ -27,7 +27,7 @@ public class AdminController {
 //	}//board()
 	
 	/* 프로젝트 관리 */
-	@RequestMapping(value="/project")
+	@RequestMapping(value="/admin/project")
 	public ModelAndView project() {
 		return new ModelAndView("admin/admin_project");
 	}//funding()
@@ -39,13 +39,13 @@ public class AdminController {
 //	}//member()
 	
 	/* General */
-	@RequestMapping(value="/general")
+	@RequestMapping(value="/admin/general")
 	public ModelAndView general() {
 		return new ModelAndView("admin/admin_general");
 	}//general()
 	
 	/* DashBoard */
-	@RequestMapping(value="/dashboard")
+	@RequestMapping(value="/admin/dashboard")
 	public ModelAndView dashboard() {
 		return new ModelAndView("admin/admin_dashboard");
 		//뷰 리졸브 경로-> /WEB-INF/views/board/admin_dashboard.jsp
@@ -58,7 +58,7 @@ public class AdminController {
 //	}//movie()
 	
 	/* 영화 업로드 */
-	@RequestMapping(value="/movie_upload")
+	@RequestMapping(value="/admin/movie_upload")
 	public ModelAndView insertMovie() {
 		ModelAndView m = new ModelAndView("admin/admin_movieUpload");
 		return m;

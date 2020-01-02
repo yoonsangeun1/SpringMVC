@@ -4,52 +4,174 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="AdminMember">
+<mapper namespace="AdminBoard">
 
-	<resultMap type="NormalPostVO" id="postInfo">
-		<association property="mUserVO" javaType="com.moving.domain.MUserVO" autoMapping="true"/>
+	<resultMap type="normalPostVO" id="postInfo" autoMapping="true">
+		<association property="mUserVO" javaType="com.moving.domain.MUserVO" autoMapping="true"
+		column="user_id" select="selectBoardAuthor"/>
+		<association property="replyPostVO" javaType="com.moving.domain.ReplyPostVO" autoMapping="true"/>
+		<association property="profilePostVO" javaType="com.moving.domain.ProfilePostVO" autoMapping="true"/>
 	</resultMap>
 	
-	<select id="ab_count" resultType="int">
-		SELECT COUNT(*) FROM NORMAL_POST N
-		<where>
-			<if test="findField == ''"></if> <!-- 검색값이 없을 경우 -->
-			<if test="findField == 'title'"> <!-- 검색조건이 제목인 경우 -->
-				N.TITLE LIKE #{findName} <!-- LIKE로 찾기 기능 사용 -->
-			</if>
-			<if test="findField == 'content'"> <!-- 검색조건이 내용인 경우 -->
-				N.CONTENT LIKE #{findName}
-			</if>
-			<if test="findField == 'nickname'"> <!-- 검색조건이 닉네임인 경우 -->
-				N.USER_ID IN
-				(SELECT U.ID FROM M_USER U
-				WHERE U.nickname LIKE #{findName})
-			</if>
-		</where>
-
+	<!-- 작성자 불러오기 -->
+	<select id="selectBoardAuthor" resultType="mUserVO">
+		SELECT * FROM M_USER
+		WHERE ID = #{user_id}
 	</select>
 	
+	<!-- 게시글 갯수 -->
+	<select id="ab_count" resultType="int">
+		select sum(cnt) sum_count from
+		(
+		select  count(id) cnt from normal_post 
+		<where>		
+			<if test="findField == ''"></if> 
+			<if test="findField == 'title+content'">
+					title like #{findName} or content like #{findName}
+			</if> 
+			<if test="findField == 'title'">
+					title like #{findName}
+			</if> 
+			<if test="findField == 'content'">
+					content like #{findName}
+			</if>
+			<if test="findField == 'nickname'">
+					user_id like #{userId}
+			</if>
+			
+			<if test="codeNo == '0'"></if>
+			<if test="findField == '' and codeNo != 0">
+			code_no like #{codeNo}
+			</if>
+			<if test="findField != '' and codeNo != 0">
+			AND code_no like #{codeNo}
+			</if>
+		</where> 
+		
+		UNION ALL
+		
+		select  count(id) cnt from profile_post 
+		<where>		
+			<if test="findField == ''"></if> 
+			<if test="findField == 'title+content'">
+					title like #{findName} or content like #{findName}
+			</if> 
+			<if test="findField == 'title'">
+					title like #{findName}
+			</if> 
+			<if test="findField == 'content'">
+					content like #{findName}
+			</if> 
+			<if test="findField == 'nickname'">
+					user_id like #{userId}
+			</if>
+			
+			<if test="codeNo == '0'"></if>
+			<if test="findField == '' and codeNo != 0">
+			code_no like #{codeNo}
+			</if>
+			<if test="findField != '' and codeNo != 0">
+			AND code_no like #{codeNo}
+			</if>
+		</where> 
+		)
+	</select>
+	
+	<!-- 게시물 목록 -->
 	<select id="ab_list" resultMap="postInfo">
 	SELECT * FROM
-	(SELECT ROW_NUMBER() OVER(ORDER BY N.ID DESC) rNum,
-	N.ID, N.TITLE, U.NICKNAME,
-	N.REGISTER_DATE AS registerDate, N.HIT
-	FROM NORMAL_POST N, M_USER U
+		(
+		SELECT ROW_NUMBER() OVER(ORDER BY id DESC) rNum,
+		code_no, id, title, user_id, register_date
+		FROM 	
+			(
+			select code_no, id, title, user_id, register_date, move_count from normal_post
+				<where>		
+				<if test="findField == ''"></if> 
+				<if test="findField == 'title+content'">
+						title like #{findName} or content like #{findName}
+				</if> 
+				<if test="findField == 'title'">
+						title like #{findName}
+				</if> 
+				<if test="findField == 'content'">
+						content like #{findName}
+				</if> 
+				<if test="findField == 'nickname'">
+					user_id like #{userId}
+				</if>
+				
+			<if test="codeNo == '0'"></if>
+			<if test="findField == '' and codeNo != 0">
+			code_no like #{codeNo}
+			</if>
+			<if test="findField != '' and codeNo != 0">
+			AND code_no like #{codeNo}
+			</if>
+		</where> 
+			UNION ALL
+			select code_no, id, title, user_id, register_date, move_count from profile_post
+				<where>		
+				<if test="findField == ''"></if> 
+				<if test="findField == 'title+content'">
+						title like #{findName} or content like #{findName}
+				</if> 
+				<if test="findField == 'title'">
+						title like #{findName}
+				</if> 
+				<if test="findField == 'content'">
+						content like #{findName}
+				</if> 
+				<if test="findField == 'nickname'">
+						user_id like #{userId}
+				</if>
+				
+			<if test="codeNo == '0'"></if>
+			<if test="findField == '' and codeNo != 0">
+			code_no like #{codeNo}
+			</if>
+			<if test="findField != '' and codeNo != 0">
+			AND code_no like #{codeNo}
+			</if>
+				</where> 
+			order by id desc)
+	)
 	<where>
-		N.USER_ID = U.ID
-		<if test="findField == ''"></if> <!-- 값이 없을 경우 -->
-		<if test="findField == 'title'"> <!-- 검색 필드가 제목일 경우 -->
-			AND N.TITLE LIKE #{findName}      <!-- 검색 필드 값대로 검색 -->
-		</if>
-		<if test="findField == 'content'"> <!-- 검색 필드가 내용일 경우 -->
-			AND N.CONTENT LIKE #{findName}    <!-- 검색 필드 값대로 검색 -->
-		</if>
-		<if test="findField == 'nickname'"> <!-- 검색 필드가 닉네임일 경우 -->
-			AND U.NICKNAME LIKE #{findName}     <!-- 검색 필드 값대로 검색 -->
-		</if>
-	</where>
-	ORDER BY ID DESC)
-	WHERE rNum &gt;= #{startrow}
-	AND rNum &lt;= #{endrow}
-</select>
+		 rNum &gt;= #{startrow} AND rNum &lt;= #{endrow}
+	 </where>
+	
+	</select>
+	
+	<!-- 닉네임 기준으로 id넘버 찾기 -->
+	<select id="findUserIdByNickname" resultType="int">
+		SELECT id FROM m_user where nickname = #{findName}
+	</select>
+	
+	<!-- FAQ 작성 -->
+	<insert id="faq_in">
+		INSERT INTO NORMAL_POST(id, code_no, user_id, question_content, answer_content)
+		VAlUES(NORMAL_POST_SEQ.NEXTVAL, 10003, )
+	</insert>
+
+	<!-- 공지 작성 -->
+	<insert id="notice_in">
+		INSERT INTO NORMAL_POST (ID, CODE_NO, USER_ID, TITLE, CONTENT)
+		VALUES(NORMAL_POST_SEQ.NEXTVAL, 10001, #{userId}, #{title},
+		#{content})
+	</insert>
+	
+	<!-- 공지 내용보기 -->
+	<select id="notice_cont" resultMap="postInfo">
+		
+	</select>
+	
+	<!-- 공지 수정 -->
+	<update id="notice_up">
+	
+	</update>
+	
+	<!-- 공지 삭제 -->
+	<delete id="notice_del">
+	
+	</delete>
 </mapper>

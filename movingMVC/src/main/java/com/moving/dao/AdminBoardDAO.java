@@ -10,4 +10,16 @@ public interface AdminBoardDAO {
 
 	List<NormalPostVO> boardList(NormalPostVO np);
 
+	int findUserIdByNickname(String findName);
+
+	void insertFaq(NormalPostVO np);
+
+	void noticeWrite(NormalPostVO np);
+
+	NormalPostVO noticeCont(int id);
+
+	void noticeEdit(NormalPostVO np);
+
+	void noticeDel(int id);
+
 }

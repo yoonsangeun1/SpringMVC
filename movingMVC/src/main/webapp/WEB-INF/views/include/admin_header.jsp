@@ -260,7 +260,7 @@
 						<li><p class="hyper">------------</p></li>
 						<li><a href="/moving.com/admin/member" class="hyper">회원 관리</a></li>
 						<li><a href="/moving.com/admin/project" class="hyper">펀딩 관리</a></li>
-						<li><a href="/moving.com/admin/board" class="hyper">게시글 관리</a></li>
+						<li><a href="/moving.com/admin/board?codeNo=0" class="hyper">게시글 관리</a></li>
 						<li><a href="/moving.com/admin/movie" class="hyper">영화 관리</a></li>
 					</ul>
 				</div>
