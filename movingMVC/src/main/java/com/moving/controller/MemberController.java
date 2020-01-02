@@ -8,13 +8,18 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.moving.domain.MUserVO;
+import com.moving.domain.ProjectPostVO;
 import com.moving.domain.SocialProfileVO;
 import com.moving.service.MUserService;
 
@@ -221,7 +226,6 @@ public class MemberController {
 			}else {
 				session.setAttribute("id",dm.getId()); //세션 id에 시퀀스번호값 저장
 				session.setAttribute("userid",mLogin_email); //세션 이메일아이디에 아이디값 저장
-				session.setAttribute("password",mLogin_password); //세션 이메일아이디에 아이디값 저장
 				session.setAttribute("nickname",dm.getNickname()); //세션 닉네임에 VO객체저장
 				session.setAttribute("name",dm.getName()); //세션 이름에 VO객체저장
 				session.setAttribute("email",dm.getEmail()); //세션 이메일에 VO객체저장
@@ -289,4 +293,6 @@ public class MemberController {
 		
 		return null;
 	}//member_logout()
+	
+
 }

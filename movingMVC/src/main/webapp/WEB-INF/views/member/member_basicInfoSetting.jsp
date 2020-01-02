@@ -43,4 +43,9 @@
 			</div>
 		</section>
 	</form>
+	
+	<form id="mBIsetting_form" method="post" action="member_point_charge_ok">
+		<input name="userPoint" type="number" size="30">원
+		<button type="submit" id="phone_modify_btn" class="modify_btn">충전</button>
+	</form>
 </div>

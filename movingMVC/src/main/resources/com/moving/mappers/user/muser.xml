@@ -45,11 +45,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		and user_status=1
 	</select>
 	
-	<!-- 회원전환 -->
-	<update id="member_change" parameterType="mUserVO">
-		update m_user set business_name=#{businessName}, user_lv=3, business_register_no=#{businessRegisterNo}, business_license_image_path=#{businessLicenseImagePath}
-		 where userid=#{userid}
-	</update>
 	
 	<!-- 사업자명 중복검색  -->
 	<select id="check_businessName" parameterType="java.lang.String" resultType="com.moving.domain.MUserVO">
@@ -72,6 +67,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 	
+	<!-- 회원전환 -->
+	<update id="member_change" parameterType="mUserVO">
+		update m_user set business_name=#{businessName}, user_lv=3, business_register_no=#{businessRegisterNo}, business_license_image_path=#{businessLicenseImagePath}
+		 where userid=#{userid}
+	</update>
 	<!-- 이메일 중복체크 -->
 	<select id="edit_emailCheck" parameterType="java.lang.String" resultType="com.moving.domain.MUserVO"> 
 							<!-- pType과 rType 생략가능 , pType String , rType MUserVO로 축약가능  --> 
@@ -87,6 +87,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="findSocialAcount" resultType="socialProfileVO">
 		select * from social_profile where user_id = #{id}
 	</select>
+	
+	<!-- 포인트 충전 -->
+	<update id="pointCharge">
+		update m_user set user_point = user_point + #{userPoint} where userid = #{userid}
+	</update>
+	
+	<!-- 회원정보창 비동기식 출력 -->
+	<select id="test" resultType="java.util.Map">
+		select id, nickname from m_user where userid=#{attribute}
+	</select>
+	
+	<update id="profileImageUpload" parameterType="mUserVO">
+		update m_user set profile_image_url = #{profileImageUrl} where userid=#{userid}
+	</update>
 </mapper>
 
 

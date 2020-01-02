@@ -1,5 +1,7 @@
 package com.moving.service;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -87,6 +89,21 @@ public class MUserServiceImpl implements MUserService {
 	@Override
 	public SocialProfileVO findSocialAcount(int id) {
 		return this.mUserDAO.findSocialAcount(id);
+	}
+
+	@Override
+	public void pointCharge(MUserVO m) {
+		this.mUserDAO.pointCharge(m);
+	}
+
+	@Override
+	public Map<String, Object> test(String attribute) {
+		return this.mUserDAO.test(attribute);
+	}
+
+	@Override
+	public void memberProfileUpload(MUserVO m) {
+		this.mUserDAO.memberProfileUpload(m);
 	}
 
 }

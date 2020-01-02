@@ -1,5 +1,7 @@
 package com.moving.dao;
 
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -87,7 +89,22 @@ public class MUserDAOImpl implements MUserDAO {
 	@Override
 	public SocialProfileVO findSocialAcount(int id) {
 		return this.sqlSession.selectOne("findSocialAcount",id);
-	}
+	}//id를 기준으로 소셜계정 검색
+
+	@Override
+	public void pointCharge(MUserVO m) {
+		this.sqlSession.update("pointCharge",m);
+	}//포인트 충전
+
+	@Override
+	public Map<String, Object> test(String attribute) {
+		return this.sqlSession.selectOne("mUser.test",attribute);
+	}//정보창 비동기식 출력
+
+	@Override
+	public void memberProfileUpload(MUserVO m) {
+		this.sqlSession.update("profileImageUpload",m);
+	}//회원 프로필사진 등록
 
 
 }
