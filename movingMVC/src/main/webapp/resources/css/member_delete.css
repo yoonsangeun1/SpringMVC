@@ -1,0 +1,214 @@
+@charset "UTF-8";
+
+#mDelete_wrap {
+	width: 1200px;
+	height: auto;
+	min-height: 930px;
+	margin: auto auto;
+	align-items: center;
+	display: flex;
+	justify-content: center;
+	background-color: #F5F5F5;
+}
+
+#mDelete_form{
+	float:left;
+	width: 800px; 
+	min-height: 800px;
+	height: auto;
+	margin: auto auto;
+	display: inline-block;
+	box-sizing: border-box;
+	background-color: white;
+	border-radius: 5px;
+	border: 1px solid #e8e8e8;
+	outline: none;
+}
+
+#mDelete_form section {
+	float:left;
+	min-height: 300px;
+	padding-top: 30px;
+	padding-bottom: 30px;
+	box-sizing: border-box;
+	margin-left: 50px;
+}
+
+
+#mDelete_textBox1 {
+	float:left;
+	width:600px;
+	height:60px;
+	margin-top : 150px; 
+}
+#mDelete_textBox1 h2{
+	line-height: 40px;
+	font-size: 32px;
+	font-weight: bold;
+	margin-top:10px;
+	margin-left:30px;
+}
+
+#mDelete_textBox2 {
+	float:left;
+	width:100%;
+	height:auto;
+	line-height:2;
+	margin-top:30px;
+}
+
+#mDelete_textBox2 h2 {
+	font-weight:bold;
+	font-size:25px;
+}
+
+#mDelete_textBox2 p {
+	font-size:15px;
+}
+#select_memberDeleteReason {
+	float:left;
+	width:400px;
+	height:50px;
+}
+#deleteReason_textBox3 {
+	float:left;
+	width:100%;
+	margin-top : 20px;
+	height:auto;
+}
+#deleteReasonInput {
+	float:left;
+	width:400px;
+	height:50px;
+}
+#deleteReasonCheck_message {
+	float: left;
+    width: 400px;
+    height: 20px;
+    margin-left : 12px;
+    margin-top : 10px;
+    line-height: 1.2;
+}
+#mDelete_textBox4 {
+	float:left;
+	width:600px;
+	min-height:100px;
+	line-height:2;
+	margin-top:30px;
+}
+
+#mDelete_textBox4 h2 {
+	font-size:25px;
+	font-weight:bold;
+}
+
+#mDelete_textBox4 p {
+	font-size:15px;
+}
+#mDelete_textBox4 em {
+	letter-spacing: -.5px;
+    color: #ff9191;
+    font-size: 15px;
+}
+
+#mDelete_textBox4 dt {
+	font-weight:bold;
+	font-size:20px;
+	border-top: solid 1px #e4e4e4;
+	padding-top : 16px;
+}
+
+#mDelete_textBox4 dd {
+	margin-left:10px;
+	font-size:15px;
+}
+
+#dropConfirm {
+	width:20px;
+	height:20px;
+}
+.agree_checkbox {
+	cursor:pointer;
+}
+.agree_checkbox span {
+	font-size:15px;
+}
+#agreeCheck_message {
+	float: left;
+    width: 400px;
+    height: 20px;
+    margin-left : 12px;
+    margin-top : 10px;
+    line-height: 1.2;
+}
+#mDelete_textBox5 {
+	float:left;
+	width:600px;
+	min-height:50px;
+	line-height:2;
+	margin-top : 30px;
+}
+
+#mDelete_textBox5 h2 {
+		font-size:25px;
+	font-weight:bold;
+}
+
+#mDelete_textBox5 p {
+		font-size:15px;
+}
+
+#member_check {
+	flaot:left;
+	width:350px;
+	min-height:70px;
+}
+#delete_userid {
+	float: left;
+    width: 300px;
+    height: 50px;
+    border : none;
+}
+#delete_password {
+	float:left;
+	width:300px;
+	height:50px;
+}
+
+#mDelete_btn_box {
+	float:left;
+	width:688px;
+	margin : 30px 30px;
+}
+
+#mDelete_btn {
+	position: relative;
+    float: left;
+    border: 0;
+    cursor: pointer;
+    font: bold 15px 'lucida sans', 'trebuchet MS', 'Tahoma';
+    color: #fff;
+    text-transform: uppercase;
+    background: #fc636b;
+    border-radius: 3px;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, .3);
+    margin-left: 60px;
+    width: 200px;
+    height: 56px; 
+}
+
+#mDelete_cancel_btn {
+    position: relative;
+    float: left;
+    border: 0;
+    cursor: pointer;
+    font: bold 15px 'lucida sans', 'trebuchet MS', 'Tahoma';
+    color: #fff;
+    text-transform: uppercase;
+    background: #b3a9eb;
+    border-radius: 3px;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, .3);
+    margin-left: 100px;
+    width: 200px;
+    height: 56px; 
+}

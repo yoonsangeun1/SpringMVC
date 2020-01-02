@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.moving.dao.MUserDAO;
 import com.moving.domain.MUserVO;
+import com.moving.domain.SocialProfileVO;
 
 @Service
 public class MUserServiceImpl implements MUserService {
@@ -61,5 +62,31 @@ public class MUserServiceImpl implements MUserService {
 	public MUserVO check_businessRegisterNo(String businessRegisterNo) {
 		return this.mUserDAO.check_businessRegisterNO(businessRegisterNo);
 	}//사업자등록번호 중복검색
+
+	@Override
+	public void deleteUser(MUserVO dm) {
+		this.mUserDAO.deleteUser(dm);
+	}//회원탈퇴
+
+	@Override
+	public void updatePassword(MUserVO m) {
+		this.mUserDAO.updatePassword(m);
+	}//설정 > 비밀번호 재설정
+
+	@Override
+	public MUserVO editEmailCheck(String setting_email) {
+		return this.mUserDAO.editEmailCheck(setting_email);
+	}//이메일아이디 변경 중복체크
+
+
+	@Override
+	public void updatephone(MUserVO dm) {
+		this.mUserDAO.updatePhone(dm);
+	}//휴대폰번호 변경
+
+	@Override
+	public SocialProfileVO findSocialAcount(int id) {
+		return this.mUserDAO.findSocialAcount(id);
+	}
 
 }

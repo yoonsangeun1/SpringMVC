@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.moving.domain.MUserVO;
+import com.moving.domain.SocialProfileVO;
 
 @Repository
 public class MUserDAOImpl implements MUserDAO {
@@ -55,11 +56,37 @@ public class MUserDAOImpl implements MUserDAO {
 	@Override
 	public MUserVO check_businessName(String businessName) {
 		return this.sqlSession.selectOne("check_businessName",businessName);
-	}
+	}//사업자명 중복체크
 
 	@Override
 	public MUserVO check_businessRegisterNO(String businessRegisterNo) {
 		return this.sqlSession.selectOne("check_businessRegisterNo",businessRegisterNo);
+	}//사업자번호 중복체크
+
+	@Override
+	public void deleteUser(MUserVO dm) {
+		this.sqlSession.update("member_delete",dm);
+	}//회원탈
+
+	@Override
+	public void updatePassword(MUserVO m) {
+		this.sqlSession.update("password_change",m);
+	}//설정 > 비밀번호 재설정
+
+	@Override
+	public MUserVO editEmailCheck(String setting_email) {
+		// TODO Auto-generated method stub
+		return this.sqlSession.selectOne("edit_emailCheck",setting_email);
+	}//설정 > 비밀번호 재설정
+
+	@Override
+	public void updatePhone(MUserVO dm) {
+		this.sqlSession.update("phone_change",dm);
+	}//휴대폰번호 변경
+
+	@Override
+	public SocialProfileVO findSocialAcount(int id) {
+		return this.sqlSession.selectOne("findSocialAcount",id);
 	}
 
 

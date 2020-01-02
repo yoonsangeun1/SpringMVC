@@ -40,6 +40,7 @@
 <script src="${pageContext.request.contextPath}/resources/js/jquery.js"></script>
 <%-- <script src="${pageContext.request.contextPath}/resources/js/social.js"></script> --%>
 <script src="${pageContext.request.contextPath}/resources/editor/js/HuskyEZCreator.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/header_icon.js"></script>  <%-- 헤더 js --%>
 <script>
 	function removeAllLi(){
 		$('#SNS_None_Ul').empty();
@@ -126,31 +127,135 @@
 				<%-- 상단 메뉴 첫번째 --%>
 				<div id="sns_headerMenu">
 					<div class="flex-container">
-						<div style="flex-grow: 1;">
-							<a href="../funding/funding_list.jsp">Project</a>
+					<div style="flex-grow: 1;">
+						<a href="/moving.com/project/list">Project</a>
+					</div>
+					<div style="flex-grow: 1;">
+						<a href="../movie/movie_mainList.jsp">Movies</a>
+					</div>
+					<div style="flex-grow: 12;">
+						<div id="header_logo">
+							<a href="/moving.com/main"><img src="${pageContext.request.contextPath}/images/logo.png"
+								alt="로고 이미지" width="150" height="25" /></a>
 						</div>
-						<div style="flex-grow: 1;">
-							<a href="../movie/movie_mainList.jsp">Movies</a>
+					</div>
+					<div style="flex-grow: 0.8;">
+						<input id="snsHeader_searchbar" name="header_searchbar"
+							placeholder="Search" style="color: #656969; border: none;"
+							size="3">&nbsp;&nbsp; <a href="#"><i
+							class="fas fa-search"></i></a>
+					</div>
+					<div style="flex-grow: 0.6;">
+						<a href="/moving.com/social/main">SNS</a>
+					</div>
+					<div style="flex-grow: 0.6;">
+						<c:if test="${empty userid}">
+					<div style="flex-grow: 0.6;">
+						<a href="/moving.com/member/login">Login</a>
+					</div>
+					</c:if>
+					<c:if test="${!empty userid}">
+					<div style="flex-grow: 0.6;">
+<!-- 					<form name="user_logout" method="post" action="member_logout"> -->
+						<!-- 로그인 후 보여지는 알림아이콘  -->
+						<div class="header_notification_container">
+							<button  type="button" id="header_notification_btn">
+								<i class="far fa-bell" aria-hidden="true" style="font-size: 30px;"></i>
+							</button>
 						</div>
-						<div style="flex-grow: 12;">
-							<div id="header_logo">
-								<a href="/moving.com/social/main"><img
-									src="${pageContext.request.contextPath}/images/logo_w.png" alt="로고 이미지" width="150" height="25" /></a>
+						
+						<!-- 알림아이콘 클릭시 생성되는 알림리스트창 -->
+						<div id="header_notification_container_activebox" style="display:none">
+							<div id="notification_list">
+								<div class="notification_cont"></div>
+								<div class="notification_cont"></div>
+								<div class="notification_cont"></div>
+								<div class="notification_cont"></div>
+								<div class="notification_cont"></div>
+								<div class="notification_cont"></div>
+								<div class="notification_cont"></div>
+								<div class="notification_cont"></div>
+								<div class="notification_cont"></div>
+							</div>
+							<div id="notificationList_all">
+								<a class="noti_all_btn" href="#">알림 전체보기 ></a>
 							</div>
 						</div>
-						<div style="flex-grow: 0.8;">
-							<input name="header_searchbar" placeholder="Search"
-								style="color: white; border: none; background-color: #6a67ce;"
-								size="3">&nbsp;&nbsp; <a href="#"><i
-								class="fas fa-search"></i></a>
+						
+						<!-- 로그인 후  보여지는 프로필아이콘 -->
+						<div class="header_profile_container">
+							<button type="button" id="header_profile_btn">
+								<i class="far fa-user-circle" aria-hidden="true" style="font-size: 30px;"></i>	
+							</button>
 						</div>
-						<div style="flex-grow: 0.6;">
-							<a href="../index.jsp">Main</a>
+						
+						<!-- 프로필아이콘 클릭시 생성되는 내 정보창 -->
+						<div id="header_profile_container_activebox" style="display:none;">
+							<div id="MymenuLayout_contatainer">
+<!-- 								<button type="button" class="profile_modify_btn button_cb3a9eb border"> -->
+<!-- 									정보 수정 -->
+<!-- 								</button> -->
+								<div class="MyMenuUserInfo_userInfo" onclick="location='/moving.com/member/mypage';"> 
+									<a class="MyMenuUserInfo_profileLink">
+										<span class="MyMenuUserInfo_name">${name}</span> &nbsp;&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i>
+										<span class="MyMenuUserInfo_avatar"><i class="far fa-user-circle" aria-hidden="true" style="font-size:60px;"></i></span>
+										<span class="MyMenuUserInfo_userLevel">${user_lv}</span> 
+									</a>
+								</div>
+							</div>
+							
+							<div id="MymenuUserActive_writeBoard" onclick="location.href='http://www.naver.com';">
+								<span class="wirte_Board">내가 쓴 글</span>
+								<br>
+								<i class="far fa-edit"></i>
+							</div>
+							<div id="MymenuUserActive_reward" onclick="location.href='http://www.naver.com';">
+								<span class="my_reward">나의 리워드</span>
+								<br>
+								<i class="fas fa-gift"></i>
+							</div>
+							<div id="MymenuUserActive_like" onclick="location.href='http://www.naver.com';">
+								<span class="like_project">좋아한</span>
+								<br>
+								<i class="far fa-heart"></i>
+							</div>
+							<ul class="MyMenu_subMenu">
+								<li>
+									<a href="#" class="MyMenu_subMenuBtn">
+										나의 포인트 ${user_point} 점
+										<i class="fas fa-chevron-right" aria-hidden="true" style="float:right"></i>
+									</a>
+								</li>
+								<li>
+									<a href="#" class="MyMenu_subMenuBtn">
+										나의 지지서명<i class="fas fa-chevron-right" aria-hidden="true" style="float:right"></i>
+									</a>
+								</li>
+								<li>
+									<a href="/moving.com/member_change" class="MyMenu_subMenuBtn"> 
+											 회원 전환<i class="fas fa-chevron-right" aria-hidden="true" style="float: right"></i>
+									</a>
+								</li>
+								<li>
+									<a href="/moving.com/member_infosetting" class="MyMenu_subMenuBtn">
+										설정<i class="fas fa-chevron-right" aria-hidden="true" style="float:right"></i>
+									</a>
+								</li>
+							</ul>
+							
+							<div id="MyMenuUserActive_logout">
+								<input type="button" value="로그아웃" class="logout button_cb3a9eb border" onclick="location='/moving.com/member_logout';">
+<!-- 								<input type="hidden"> -->
+							</div>
+
 						</div>
-						<div style="flex-grow: 0.6;">
-							<a href="../member/member_snsLogin.jsp">Login</a>
-							<a href="/moving.com/not_real_login">임시로그인</a>
-						</div>
+<!-- 					</form> -->
+					</div>
+					</c:if>
+						
+<%-- 						<a href="/moving.com/not_real_login">임시로그인 ${userid}</a> --%>
+					</div>
+						
 					</div>
 				</div>
 			</div>

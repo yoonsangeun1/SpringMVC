@@ -15,38 +15,6 @@ function change_check() {
 	}
 }
 
-//function businessName_check() {
-//	$("#mChange_Check").hide(); //중복체크 메세지영역 숨김
-//	$businessName=$.trim($("#mChange_businessName").val());
-//	
-//	$.ajax({
-//		type="POST",
-//		url : "check_businessName",
-//		data : {"businessName":$businessName},
-//		datatype : "int",
-//		success : function(data) {
-//			if(data==1) { //중복된 사업자명이 있다면
-//				$('#mChange_message').css("display","block");
-//				$newtext='<font color="red" size="3"><b>&nbsp;&nbsp;&nbsp;중복된 사업자명입니다. 다시 입력해주세요.</b></font>';
-//				$("#mChange_Check").text(''); //nickcheck영역 문자열을 초기화
-//				$("#mChange_Check").show(); //nickcheck영역을 보이게함.
-//				$("#mChange_Check").append($newtext); //nickcheck영역에 문자열을 추가
-//				$("#mChange_businessName").val('').focus();
-//				return false;
-//			}else { //중복된 사업자명이 없다면
-//				$newtext='<font color="blue" size="3"><b>&nbsp;&nbsp;&nbsp;사용 가능한 사업자명입니다.</b></font>';
-//				$("#mChange_Check").text(''); //nickcheck영역 문자열을 초기화
-//				$("#mChange_Check").show(); //nickcheck영역을 보이게함.
-//				$("#mChange_Check").append($newtext); //nickcheck영역에 문자열을 추가
-//				$("#mChange_businessRegisterNo").val('').focus();
-//			}
-//		},
-//		error : function() {
-//			alert("아작스 오류");
-//		}
-//	});
-//}
-
 /** 사업자명 중복체크 */
 function businessName_check() {
 	$mChange_businessName=$.trim($("#mChange_businessName").val());
@@ -134,6 +102,7 @@ function businessRegisterNo_check() {
 		}
 	}); //$.ajax
 	
+	/** 사업자등록번호 형식 xxx-xx-xxxxx */
 	$(document).ready(function () {
 		   $(function () {
 		            
