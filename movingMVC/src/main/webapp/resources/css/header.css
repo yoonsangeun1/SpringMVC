@@ -144,6 +144,21 @@
     
 }
 
+#profile_image {
+	width:20px;
+	height:20px;
+	object-fit:cover; 
+}
+
+/* .Avatar_image { */
+/* 	float:left; */
+/* 	width:30px; */
+/* 	height:30px; */
+/* 	background-image: url("../images/member_profile.png"); */
+/*     background-size : cover; */
+/*     margin-left : 7px; */
+/* }  */
+
 /* 프로필버튼 클릭시 생성되는 마이메뉴창 */
 #header_profile_container_activebox {
 	position : absolute;
@@ -185,8 +200,12 @@
 	margin-top:40px;
 }
 .MyMenuUserInfo_avatar {
+	width: 60px;
+    height: 60px;
 	float : right;
 	margin-right : 30px;
+	background-image: url("../images/member_profile.png");
+    background-size : cover;
 }
 
 .MyMenuUserInfo_userLevel {
@@ -360,7 +379,7 @@
 }
 
 #sns_headerMenu a {
-	color: white;
+	color: black;
 }
 
 #snsHeader_searchbar input::placeholder {
@@ -537,3 +556,4 @@ body {
 	padding: 0px 30px;
 	width: 1200px;
 }
+
