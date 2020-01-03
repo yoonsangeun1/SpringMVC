@@ -2,6 +2,7 @@
 <%@ include file="../include/sns_header.jsp"%>
 <%@ taglib prefix="c"
     		uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <div id="SNS_Profile_All">							<!-- 배경화면 전체 지정 -->
 	<div id="SNS_Profile_Wrap">						<!-- 오브젝트 항목 래핑 -->
@@ -13,10 +14,10 @@
 				<c:if test="${!empty s_pro.profileImagePath}">
 					<div id="SNS_Profile_Background" style="background-image:url('${s_pro.backgroundImagePath}')">
 				</c:if>
-					<c:if test="${!empty s_pro.profileImagePath}">					<!-- 회원 이미지가 없을 경우 기본 이미지로 설정 -->
+					<c:if test="${s_pro.profileImagePath != 'default'}">					<!-- 회원 이미지가 없을 경우 기본 이미지로 설정 -->
 						<img id="SNS_Profile_Photo" src="${s_pro.profileImagePath}">
 					</c:if>
-					<c:if test="${empty s_pro.profileImagePath}">
+					<c:if test="${s_pro.profileImagePath == 'default'}">
 						<img id="SNS_Profile_Photo" src="../images/member_profile.png">
 					</c:if>
 					<div id="SNS_Profile_Title_Name">
@@ -101,11 +102,11 @@
 							<li>
 							<input type="hidden" id="postId_${s_post.id }" value="${s_post.id }">
 								<div class="SNS_Profile_Post">
-									<c:if test="${!empty s_pro.profileImagePath}">
+									<c:if test="${s_pro.profileImagePath != 'default'}">
 										<img class="SNS_Content_user_img"
 											src="${s_pro.profileImagePath}" width="40" height="40" alt="">
 									</c:if>
-									<c:if test="${empty s_pro.profileImagePath}">
+									<c:if test="${s_pro.profileImagePath == 'default'}">
 										<img class="SNS_Content_user_img"
 											src="../images/member_profile.png" width="40" height="40"
 											alt="">
@@ -186,7 +187,7 @@
 											style="margin-top: 7px; list-style: none; align-items: center;">
 
 											<c:if test="${empty s_post.mCommentVO }">
-												<li><p>작성된 댓글이 아직 없습니다</p></li>
+												<li class="no_comment"><p>작성된 댓글이 아직 없습니다</p></li>
 											</c:if>
 										</ul>
 
@@ -215,10 +216,9 @@
 											<input type="hidden" id="social_post_id" size="40" value="${s_post.id }">
 											<p id="sessionId">${sessionSocial.nickname}</p>
 											<input name="content_${s_post.id }" data-contentno="${s_post.id }"
-												class="content SNS_Comment_Write_Chat"> <input id="write"
-												name="write_${s_post.id}" class="write SNS_Comment_Write_Button" type="button"
-												value="작성">
-												
+												class="content SNS_Comment_Write_Chat">
+											<input id="write"	name="write_${s_post.id}" class="write SNS_Comment_Write_Button"
+												type="button"	value="작성">
 										</div>
 
 
@@ -521,7 +521,12 @@
 								<div class="SNS_Profile_Image">
 									<img class="SNS_Profile_Image_Photo" src="${s_pro.profileImagePath}">
 									<div class="SNS_Profile_Image_Info">
-										<p>${s_post.content}</p>
+										<c:if test="${fn:length(s_post.content)>100}">
+											<p>${fn:substring(s_post.content,0,99)}...</p>										
+										</c:if>
+										<c:if test="${fn:length(s_post.content)<=100}">
+											<p>${fn:substring(s_post.content,0,99)}</p>		
+										</c:if>
 									</div>
 									<div class="SNS_Profile_Image_Center">
 										<p>더 보기</p>
