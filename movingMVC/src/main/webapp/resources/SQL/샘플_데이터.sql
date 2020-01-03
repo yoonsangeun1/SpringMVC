@@ -24,6 +24,16 @@ INSERT INTO code_master VALUES (code_master_seq.nextval, 100, 10006,'Q&A', 'Q&A'
 INSERT INTO code_master VALUES (code_master_seq.nextval, 100, 10007,'소셜 게시글', '소셜 게시글','social_post',sysdate);
 --프로젝트 관련
 INSERT INTO code_master VALUES (code_master_seq.nextval, 200, 20001,'프로젝트', '프로젝트','project_post',sysdate);
+INSERT INTO code_master VALUES (code_master_seq.nextval, 300, 2000101,'프로젝트', '프로젝트_범죄/스릴러','video_post',sysdate);
+INSERT INTO code_master VALUES (code_master_seq.nextval, 300, 2000102,'프로젝트', '프로젝트_액션/어드벤쳐','video_post',sysdate);
+INSERT INTO code_master VALUES (code_master_seq.nextval, 300, 2000103,'프로젝트', '프로젝트_다큐/드라마/청춘','video_post',sysdate);
+INSERT INTO code_master VALUES (code_master_seq.nextval, 300, 2000104,'프로젝트', '프로젝트_역사/시대극','video_post',sysdate);
+INSERT INTO code_master VALUES (code_master_seq.nextval, 300, 2000105,'프로젝트', '프로젝트_판타지/SF','video_post',sysdate);
+INSERT INTO code_master VALUES (code_master_seq.nextval, 300, 2000106,'프로젝트', '프로젝트_멜로/로맨스','video_post',sysdate);
+INSERT INTO code_master VALUES (code_master_seq.nextval, 300, 2000107,'프로젝트', '프로젝트_코메디','video_post',sysdate);
+INSERT INTO code_master VALUES (code_master_seq.nextval, 300, 2000108,'프로젝트', '프로젝트_애니메이션','video_post',sysdate);
+INSERT INTO code_master VALUES (code_master_seq.nextval, 300, 2000109,'프로젝트', '프로젝트_기타','video_post',sysdate);
+
 INSERT INTO code_master VALUES (code_master_seq.nextval, 200, 20002,'리워드', '리워드','reward',sysdate);
 INSERT INTO code_master VALUES (code_master_seq.nextval, 200, 20003,'주문서', '주문서','order_sheet',sysdate);
 INSERT INTO code_master VALUES (code_master_seq.nextval, 200, 20004,'주문수량', '주문수량','order_entity',sysdate);
