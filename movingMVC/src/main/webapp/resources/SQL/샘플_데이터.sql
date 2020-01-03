@@ -519,5 +519,109 @@ sysdate,'박진우','m',
 172, 72,
  'naver.com');
  
+
+ ALTER TABLE profile_post
+   DROP
+      CONSTRAINT profile_post_user_id_fk
+      CASCADE;
+
+ALTER TABLE profile_post
+   DROP
+      CONSTRAINT FK_code_master_TO_profile_post
+      CASCADE;
+      
+      ALTER TABLE profile_post
+   DROP
+      PRIMARY KEY
+      CASCADE
+      KEEP INDEX;
+      
+drop table profile_post;
+
+CREATE TABLE profile_post (
+   id NUMBER(38) NOT NULL, /* 아이디 */
+   code_no NUMBER(38) DEFAULT 10005, /* 코드_번호 */
+   user_id NUMBER(38), /* 회원_아이디 */
+   title VARCHAR2(200), /* 제목 */
+   category VARCHAR2(50), /* 카테고리 */
+   content CLOB, /* 내용 */
+   hit NUMBER(38) DEFAULT 0, /* 조회수 */
+   register_date DATE DEFAULT sysdate, /* 등록_일 */
+   comment_count NUMBER(38) DEFAULT 0, /* 댓글_개수 */
+   move_count NUMBER(38) DEFAULT 0, /* 무브_개수 */
+   thumbnail_image VARCHAR2(4000), /* 썸네일_이미지 */
+   name VARCHAR2(50), /* 이름 */
+   sex VARCHAR2(1), /* 성별 */
+   birth_date DATE, /* 생년월일_일 */
+   age NUMBER(38), /* 나이 */
+   email VARCHAR2(40), /* 이메일 */
+   height NUMBER(38) DEFAULT 0, /* 신장 */
+   weight NUMBER(38), /* 몸무게 */
+   job VARCHAR2(1000), /* 직업 */
+   school VARCHAR2(1000), /* 학력 */
+   specification VARCHAR2(1000), /* 경력 */
+   website_url VARCHAR2(300) /* 홈페이지_url */
+);
+
+CREATE UNIQUE INDEX profile_post_id_pk
+   ON profile_post (
+      id ASC
+   );
+
+ALTER TABLE profile_post
+   ADD
+      CONSTRAINT PK_profile_post
+      PRIMARY KEY (
+         id
+      );
+
+      
+      ALTER TABLE profile_post
+   ADD
+      CONSTRAINT profile_post_user_id_fk
+      FOREIGN KEY (
+         user_id
+      )
+      REFERENCES m_user (
+         id
+      )
+      ON DELETE SET NULL;
+
+tcALTER TABLE profile_post
+   ADD
+      CONSTRAINT FK_code_master_TO_profile_post
+      FOREIGN KEY (
+         code_no
+      )
+      REFERENCES code_master (
+         code_no
+      );
+      
+ SELECT * FROM
+ (SELECT ROW_NUMBER() OVER(ORDER BY P.ID DESC) rNum,
+ P.thumbnail_Image, P.ID AS board_actors_id,
+ P.NAME,P.USER_ID
+ FROM PROFILE_POST P
+  ORDER BY board_actors_id DESC)
+ WHERE RNUM >= 1
+ AND rNum <= 10
  
+ SELECT * FROM
+ (SELECT ROW_NUMBER() OVER(ORDER BY N.ID DESC) rNum,
+ N.ID AS board_free_id, N.TITLE, U.NICKNAME, S.ID AS social_profile_id,
+ N.REGISTER_DATE AS board_free_registerDate, N.HIT
+FROM NORMAL_POST N 
+ LEFT OUTER JOIN M_USER U ON N.USER_ID = U.ID 
+ LEFT OUTER JOIN SOCIAL_PROFILE S ON U.ID = S.USER_ID
+ ORDER BY board_free_id DESC)
+ WHERE rNum >= 1
+ AND rNum <= 10
+ 
+ SELECT P.ID AS board_actors_id, P.USER_ID AS board_actors_user_id,
+ P.HIT,THUMBNAIL_IMAGE,CATEGORY,
+ EMAIL,BIRTH_DATE,HEIGHT,
+ SEX,WEBSITE_URL,CONTENT,REGISTER_DATE AS board_actors_registerDate,
+ NAME,ETCTEXT
+ FROM PROFILE_POST P
+ WHERE P.ID=110
  

@@ -12,5 +12,6 @@ public interface BoardFreeService {
 	NormalPostVO getCont(int id);
 	void editBoardFree(NormalPostVO bf);
 	void delBoardFree(int id);
+	NormalPostVO getCont2(int id);
 
 }//BoardFreeService

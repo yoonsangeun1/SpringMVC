@@ -91,7 +91,7 @@ public class NormalPostVO {
 		this.moveCount = moveCount;
 	}
 	public String getRegisterDate() {
-		return registerDate;
+		return registerDate.substring(0,10);
 	}
 	public void setRegisterDate(String registerDate) {
 		this.registerDate = registerDate;

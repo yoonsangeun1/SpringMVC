@@ -58,9 +58,15 @@ onclick="location=
 이 get방식으로 전달 --%>  
 <input type="button" value="삭제"
 onclick="delconfirm()" />
+
+<c:if test="${(empty findField) && (empty findName)}"> <%--검색 전 --%>
+<input type="button" value="목록" 
+onclick="location='/moving.com/board/free?page=${page}';" />
+</c:if>
+<c:if test="${(!empty findField) || (!empty findName)}"> <%-- 검색 후 --%>
 <input type="button" value="목록"
-onclick="location=
-'/moving.com/board/free?page=${page}';"/>
+onclick="location='/moving.com/board/free?page=${page}&findField=${findField}&findName=${findName}';" />
+</c:if>
    </th>  
   </tr>
  </table>
@@ -228,6 +234,10 @@ $('#replies').on('click','.replyLi button',function(){
 	 if(msg == "BOARD/FREE_EDIT"){
 		 alert("글수정을 성공 했습니다!");
 	 }//if boardFreeController에서 글쓰기 성공 시 출력.
+	 
+	 if(msg == "BOARD/FREE_CONT_X"){
+		 alert("본인 게시글만 삭제 가능합니다!");
+	 }//글삭제 시 본인 게시글만 삭제 가능하게 함.
  </script>
  
 </body>

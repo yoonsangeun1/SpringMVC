@@ -49,4 +49,9 @@ public class BoardFreeServiceImpl implements BoardFreeService {
 		this.boardFreeDao.delBoardFree(id);
 	}//게시글 삭제
 
+	@Override
+	public NormalPostVO getCont2(int id) {
+		return this.boardFreeDao.getCont2(id);
+	}
+
 }//BoardFreeServiceImpl class

@@ -153,7 +153,9 @@ public class BoardFreeController {
 	@RequestMapping("/board/free_cont")
 	public ModelAndView board_free_cont(
 			int id,
-			int page) throws Exception{
+			int page,
+			String findField,
+			String findName) throws Exception{	
 		
 		//번호에 해당하는 디비 레코드 값을 가져옴.
 		NormalPostVO bf=this.boardFreeService.getCont(id);
@@ -162,7 +164,9 @@ public class BoardFreeController {
 		
 		cm.addObject("bf",bf);
 		cm.addObject("page",page);
-		
+		cm.addObject("findField",findField);
+		cm.addObject("findName",findName);
+	
 		return cm;
 		
 	}//board_free_cont()
@@ -182,7 +186,7 @@ public class BoardFreeController {
 
 		if(session.getAttribute("id") != null) { /*세션에 값이 있을경우*/
 			
-		NormalPostVO bf=this.boardFreeService.getCont(id); //글번호 id를 기준으로 검색
+		NormalPostVO bf=this.boardFreeService.getCont2(id); //글번호 id를 기준으로 검색
 		
 		int m_userid=(int) session.getAttribute("id"); //세션으로 받아온 id를 m_userid에 저장
 		
@@ -243,7 +247,7 @@ public class BoardFreeController {
 		
 		if(session.getAttribute("id") != null) { /*세션에 값이 있을경우*/
 			
-			NormalPostVO bf=this.boardFreeService.getCont(id); //글번호 id를 기준으로 검색
+			NormalPostVO bf=this.boardFreeService.getCont2(id); //글번호 id를 기준으로 검색
 			
 			int m_userid=(int) session.getAttribute("id"); //세션으로 받아온 id를 m_userid에 저장		
 			
@@ -257,10 +261,8 @@ public class BoardFreeController {
 				return "redirect:/board/free?page="+page; //view 페이지로 이동.
 				
 			}else { /*본인 게시글 삭제가 아닐경우*/
-				out.println("<script>");
-				out.println("alert('본인 게시글만 삭제 가능합니다!');");
-				out.println("history.back();");
-				out.println("</script>");
+				rttr.addFlashAttribute("msg","BOARD/FREE_CONT_X"); 
+				return "redirect:/board/free_cont?id="+id+"&page="+page;
 			}//if else
 			
 			}else { /*세션이 값이 없을 경우*/
