@@ -215,9 +215,9 @@
 											<input type="hidden" id="social_post_id" size="40" value="${s_post.id }">
 											<p id="sessionId">${sessionSocial.nickname}</p>
 											<input name="content_${s_post.id }" data-contentno="${s_post.id }"
-												class="content SNS_Comment_Write_Chat"> <input id="write"
-												name="write_${s_post.id}" class="write SNS_Comment_Write_Button" type="button"
-												value="작성">
+												class="content SNS_Comment_Write_Chat">
+											<input id="write"	name="write_${s_post.id}" class="write SNS_Comment_Write_Button"
+												type="button"	value="작성">
 												
 										</div>
 
