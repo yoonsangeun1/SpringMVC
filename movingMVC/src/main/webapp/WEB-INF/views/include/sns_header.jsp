@@ -132,14 +132,14 @@
 				<div id="sns_headerMenu">
 					<div class="flex-container">
 					<div style="flex-grow: 1;">
-						<a href="/moving.com/project/list">Project</a>
+						<a href="/moving.com/project/list?category=20001">Project</a>
 					</div>
 					<div style="flex-grow: 1;">
-						<a href="../movie/movie_mainList.jsp">Movies</a>
+						<a href="#">Movies</a>
 					</div>
 					<div style="flex-grow: 12;">
 						<div id="header_logo">
-							<a href="/moving.com/main"><img src="${pageContext.request.contextPath}/images/logo.png"
+							<a href="/moving.com/social/main"><img src="${pageContext.request.contextPath}/resources/images/logo_w.png"
 								alt="로고 이미지" width="150" height="25" /></a>
 						</div>
 					</div>
@@ -150,12 +150,12 @@
 							class="fas fa-search"></i></a>
 					</div>
 					<div style="flex-grow: 0.6;">
-						<a href="/moving.com/social/main">SNS</a>
+						<a href="/moving.com/board/free">Board</a>
 					</div>
 					<div style="flex-grow: 0.6;">
 						<c:if test="${empty userid}">
 					<div style="flex-grow: 0.6;">
-						<a href="/moving.com/member/login">Login</a>
+						<a href="/moving.com/social/login">Login</a>
 					</div>
 					</c:if>
 					<c:if test="${!empty userid}">
@@ -218,6 +218,7 @@
 								<br>
 								<i class="fas fa-gift"></i>
 							</div>
+							
 							<div id="MymenuUserActive_like" onclick="location.href='http://www.naver.com';">
 								<span class="like_project">좋아한</span>
 								<br>
@@ -256,10 +257,7 @@
 <!-- 					</form> -->
 					</div>
 					</c:if>
-						
-<%-- 						<a href="/moving.com/not_real_login">임시로그인 ${userid}</a> --%>
 					</div>
-						
 					</div>
 				</div>
 			</div>
