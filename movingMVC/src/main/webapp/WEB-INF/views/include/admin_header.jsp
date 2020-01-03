@@ -22,41 +22,23 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/aboutMoving.css" />
 
 <%-- board css 추가 --%>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/board_notice.css" />
-<%-- 공지사항 --%>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/board_event.css" />
-<%-- 이벤트 --%>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/board_faq.css" />
-<%-- FAQ --%>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/board_actors.css" />
-<%-- 배우 모집 --%>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/board_contest.css" />
-<%-- 시나리오 모집 --%>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/board_free.css" />
-<%-- 자유게시판 --%>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/board_write.css" />
-<%-- 글 작성 폼 --%>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/board_qna.css" />
-<%-- Q & A--%>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/board_notice.css" /><%-- 공지사항 --%>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/board_event.css" /><%-- 이벤트 --%>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/board_faq.css" /><%-- FAQ --%>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/board_actors.css" /><%-- 배우 모집 --%>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/board_contest.css" /><%-- 시나리오 모집 --%>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/board_free.css" /><%-- 자유게시판 --%>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/board_write.css" /><%-- 글 작성 폼 --%>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/board_qna.css" /><%-- Q & A--%>
 
 <%-- funding css 추가 --%>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/funding_list.css" />
-<%-- 펀딩 리스트 --%>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/funding_write.css" />
-<%-- 펀딩 글 작성 폼 --%>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/funding_cont.css" />
-<%-- 펀딩 글 보기 --%>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/funding_list.css" /><%-- 펀딩 리스트 --%>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/funding_write.css" /><%-- 펀딩 글 작성 폼 --%>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/funding_cont.css" /><%-- 펀딩 글 보기 --%>
 
 <%-- member css 추가 --%>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/member_login.css" />
-<%-- 로그인 폼 --%>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/member_join.css" />
-<%-- 회원가입 폼 --%>
-
-<%-- movie css 추가 --%>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/movie_cont.css" />
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/movie_mainList.css" />
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/movie_categoryList.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/member_login.css" /><%-- 로그인 폼 --%>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/member_join.css" /><%-- 회원가입 폼 --%>
 
 <%-- sns css 추가 --%>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/social_main.css" />
@@ -76,15 +58,10 @@
 <script src="${pageContext.request.contextPath}/resources/js/jquery.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/member_join.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/member_login.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/board_event.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/board_faq.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/funding_write.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/move_banner.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/movie_cont.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/slide.js"></script>
-<%-- <script src="${pageContext.request.contextPath}/resources/js/social.js"></script> --%>
 <script src="${pageContext.request.contextPath}/resources/js/header_icon.js"></script>
+<%-- <script src="${pageContext.request.contextPath}/resources/js/slide.js"></script> --%>
 <script src="${pageContext.request.contextPath}/resources/js/movie_upload.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/admin_notice.js"></script>
 <script src="${pageContext.request.contextPath}/resources/editor/js/HuskyEZCreator.js" charset="UTF-8"></script>
 
 </head>
@@ -101,22 +78,25 @@
 				<div id="sns_headerMenu">
 										<div class="flex-container">
 					<div style="flex-grow: 1;">
-						<a href="/moving.com/project/list">Project</a>
+						<a href="/moving.com/project/list?category=20001">Project</a>
 					</div>
 					<div style="flex-grow: 1;">
-						<a href="../movie/movie_mainList.jsp">Movies</a>
+						<a href="#">Movies</a>
 					</div>
 					<div style="flex-grow: 12;">
 						<div id="header_logo">
-							<a href="/moving.com/main"><img src="${pageContext.request.contextPath}/images/logo.png"
+							<a href="/moving.com/admin"><img src="${pageContext.request.contextPath}/resources/images/logo_w.png"
 								alt="로고 이미지" width="150" height="25" /></a>
 						</div>
 					</div>
-					<div style="flex-grow: 0.8;">
+					<!-- <div style="flex-grow: 0.8;">
 						<input id="snsHeader_searchbar" name="header_searchbar"
 							placeholder="Search" style="color: #656969; border: none;"
 							size="3">&nbsp;&nbsp; <a href="#"><i
 							class="fas fa-search"></i></a>
+					</div> -->
+					<div style="flex-grow: 0.6;">
+						<a href="/moving.com/board/free">Board</a>
 					</div>
 					<div style="flex-grow: 0.6;">
 						<a href="/moving.com/social/main">SNS</a>
@@ -125,7 +105,7 @@
 					
 						<c:if test="${empty userid}">
 					<div style="flex-grow: 0.6;">
-						<a href="/moving.com/member/login">Login</a>
+						<a href="/moving.com/social/login">Login</a>
 					</div>
 					</c:if>
 					
@@ -243,7 +223,9 @@
 	
 				<!-- 관리자 정보, 사진, 이름 -->
 				<div id="admin_info">
-					<a href="#"> <img src="${pageContext.request.contextPath}/resources/images/member_profile.png" width="120" height="120" alt="등록된 사진이 없습니다." />
+					<a href="#"> 
+					<img src="${pageContext.request.contextPath}/resources/images/member_profile.png" 
+					width="120" height="120" alt="등록된 사진이 없습니다." />
 					</a>
 					<ul>
 						<li>관리자 정보:</li>
@@ -254,7 +236,7 @@
 				<div id="admin_menu">
 					<ul>
 						<!-- ul li태그로 메뉴구성 -->
-						<li><a href="/moving.com/admin/" class="hyper">HOME</a></li>
+						<li><a href="/moving.com/admin" class="hyper">HOME</a></li>
 						<li><a href="/moving.com/admin/dashboard" class="hyper">DASHBOARD</a></li>
 						<li><a href="/moving.com/admin/general" class="hyper">GENERAL</a></li>
 						<li><p class="hyper">------------</p></li>

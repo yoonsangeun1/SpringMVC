@@ -54,19 +54,19 @@
 	<!-- <div class="after"> </div>  -->
 
 	<div id="footer_moving">
-		<a href="#"><img src="../images/test.png" alt="test" width="20"
+		<a href="#"><img src="${pageContext.request.contextPath}/resources/images/test.png" alt="test" width="20"
 			height="20" align="center" /></a>&nbsp;&nbsp;Moving, PBC © 2019
 	</div>
 
 
 	<div id="footer_sns">
-		<a href="#"><img src="../images/test.png" alt="test" width="20"
+		<a href="#"><img src="${pageContext.request.contextPath}/resources/images/test.png" alt="test" width="20"
 			height="20" align="center" /></a>&nbsp;&nbsp;&nbsp; <a href="#"><img
-			src="../images/test.png" alt="test" width="20" height="20"
+			src="${pageContext.request.contextPath}/resources/images/test.png" alt="test" width="20" height="20"
 			align="center" /></a>&nbsp;&nbsp;&nbsp; <a href="#"><img
-			src="../images/test.png" alt="test" width="20" height="20"
+			src="${pageContext.request.contextPath}/resources/images/test.png" alt="test" width="20" height="20"
 			align="center" /></a>&nbsp;&nbsp;&nbsp; <a href="#"><img
-			src="../images/test.png" alt="test" width="20" height="20"
+			src="${pageContext.request.contextPath}/resources/images/test.png" alt="test" width="20" height="20"
 			align="center" /></a>&nbsp;&nbsp;&nbsp;
 	</div>
 
