@@ -41,6 +41,10 @@
 <%-- <script src="${pageContext.request.contextPath}/resources/js/social.js"></script> --%>
 <script src="${pageContext.request.contextPath}/resources/editor/js/HuskyEZCreator.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/header_icon.js"></script>  <%-- 헤더 js --%>
+<script src="${pageContext.request.contextPath}/resources/js/member_join.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/member_login.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/member_change.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/member_setting.js"></script>
 <script>
 	function removeAllLi(){
 		$('#SNS_None_Ul').empty();

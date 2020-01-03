@@ -2,7 +2,7 @@
 <%@ include file="../include/sns_header.jsp"%>
 
 <div id="mLogin_wrap">
-	<form method="post" action="member_login_ok" onsubmit="return login_check();" id="mLogin_form">
+	<form method="post" action="social_login_ok" onsubmit="return login_check();" id="mLogin_form">
 <!-- 		<div id="mLogin_form"> -->
 			<section>
 				<div id="mLogin_text">
@@ -45,7 +45,7 @@
 				</div>
 				<div id="not_Movingmember">
 					<hr class="my-hr1" />
-					<span>아직 무빙 계정이 없나요? &nbsp;&nbsp;&nbsp;<a href="join">회원가입</a></span>
+					<span>아직 무빙 계정이 없나요? &nbsp;&nbsp;&nbsp;<a href="/moving.com/social/join">회원가입</a></span>
 					<hr class="my-hr1" />
 				</div>
 			</section>

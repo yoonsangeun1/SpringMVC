@@ -4,7 +4,7 @@
 <%@ include file="../include/sns_header.jsp"%>
 
 <div id="SNS_Insert_Page">
-	<form id="mJoin_form" method="post" action="social_join_ok" style="min-height: 0px;">
+	<form id="mJoin_form" method="post" action="social_modify_ok" style="min-height: 0px;">
 			<section>
 				<h2 class="mJoin_text">소셜 계정 전환</h2>
 					<div id="info_field">

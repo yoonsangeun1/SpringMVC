@@ -16,13 +16,18 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.moving.domain.AttachedFileVO;
+import com.moving.domain.MUserVO;
 import com.moving.domain.SocialPostVO;
 import com.moving.domain.SocialProfileVO;
+import com.moving.service.MUserService;
 import com.moving.service.SocialService;
 import com.oreilly.servlet.MultipartRequest;
+
+import pwdconv.PwdChange;
 
 @Controller
 public class SocialController {
@@ -30,6 +35,187 @@ public class SocialController {
 	@Autowired
 	private SocialService socialService;
 	
+	@Autowired
+	private MUserService mUserService;
+
+	//소셜에서 유저 회원가입 페이지
+	@RequestMapping(value="social/join")	
+	public ModelAndView social_join() {
+		String [] phonelist = {"010","011","016","017","018","019"};
+		ModelAndView m = new ModelAndView("member/member_snsJoin");
+		m.addObject("phonelist",phonelist);
+		
+		return m;
+	}//member_join()
+	
+	//이메일 중복체크
+	@RequestMapping(value="social/join_emailCheck")
+	@ResponseBody
+	public int memeber_emailcheck(String email, HttpServletResponse response) throws Exception {
+		response.setContentType("text/html;charset=UTF-8");
+		MUserVO db_email = this.mUserService.emailCheck(email); //이메일 중복검색
+		int re = -1; //중복 이메일이 없을때 반환값
+		if(db_email != null) { //중복 이메일이 있을때
+				re=1;
+		}
+		return re;
+	}//memeber_emailcheck()
+		
+	//닉네임 중복체크
+	@RequestMapping(value="social/nickcheck")
+	public String member_nickcheck(String nickname, HttpServletResponse response) throws Exception {
+		response.setContentType("text/html;charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		MUserVO db_nickname = this.mUserService.nickCheck(nickname); //닉네임 중복검색
+		int re = -1; //중복 닉네임이 없을때 반환값
+	
+		if(db_nickname != null) { //중복닉네임이 있을때
+			re=1;
+		}
+		out.println(re); //값을 반환
+		return null;
+	}//member_nickcheck()
+	
+	//회원가입 완료
+	@RequestMapping("/social/social_join_ok")
+	public String member_join_ok(MUserVO m, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		response.setContentType("text/html;charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		m.setPassword(PwdChange.getPassWordToXEMD5String(m.getPassword())); // 비번을 암호화 하여 저장
+		
+		//회원가입시 입력한 휴대폰번호를 하나의 문자열로 합침
+		String phone= request.getParameter("phone01") + "-" + request.getParameter("phone02") + "-" + request.getParameter("phone03");
+		
+		//회원가입시 선택한 선호장르를 DB에 저장
+		String[] values=new String[3];
+		if(request.getParameterValues("genre_like") != null) {
+			values = request.getParameterValues("genre_like");
+
+			System.out.println(values.length);
+			
+			int genre_count=3;
+			
+			switch(values.length) {
+			case 3:
+				m.setGenre03(values[2]);
+				genre_count--;
+			case 2:
+				m.setGenre02(values[1]);
+				genre_count--;
+			case 1:
+				m.setGenre01(values[0]);
+				genre_count--;
+				break;
+			}
+			switch(genre_count) {
+			case 3:
+				m.setGenre01("NULL");
+			case 2:
+				m.setGenre02("NULL");
+			case 1:
+				m.setGenre03("NULL");
+				break;
+			}
+		}else {  
+			m.setGenre01("NULL");			
+			m.setGenre02("NULL");			
+			m.setGenre03("NULL");			
+		}	
+		//하나의 문자열로 합친 휴대폰번호를 DB에 저장
+		m.setPhone(phone);
+		this.mUserService.insertUser(m); //회원저장
+		
+		out.println("<script>");
+		out.println("alert('MOVING회원이 되신 것을 환영합니다 !');");
+		out.println("location='/moving.com/social/login';");
+		out.println("</script>");
+		
+		return null;
+	}//member_join_ok()
+	
+	//소셜에서 로그인
+	@RequestMapping("/social/login")
+	public String social_login(){
+		return "member/member_snsLogin";
+	}
+	
+	//로그인 인증
+	@RequestMapping("/social/social_login_ok")
+	public String member_login_ok(String mLogin_email, String mLogin_password, MUserVO m,
+			HttpServletResponse response, HttpServletRequest request, HttpSession session) throws Exception {
+		response.setContentType("text/html;charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		session = request.getSession();
+
+		MUserVO dm = this.mUserService.loginCheck(mLogin_email); //로그인 인증
+
+		if(dm == null) { //
+			out.println("<script>");
+			out.println("alert('가입되지 않은 회원입니다 !');");
+			out.println("history.back();");
+			out.println("</script>");
+		}else {
+			if(!dm.getPassword().equals(PwdChange.getPassWordToXEMD5String(mLogin_password))) {
+				out.println("<script>");
+				out.println("alert('비밀번호가 일치하지 않습니다 !');");
+				out.println("history.back();");
+				out.println("</script>");
+			}else {
+				session.setAttribute("id",dm.getId()); //세션 id에 시퀀스번호값 저장
+				session.setAttribute("userid",mLogin_email); //세션 이메일아이디에 아이디값 저장
+				session.setAttribute("nickname",dm.getNickname()); //세션 닉네임에 VO객체저장
+				session.setAttribute("name",dm.getName()); //세션 이름에 VO객체저장
+				session.setAttribute("email",dm.getEmail()); //세션 이메일에 VO객체저장
+				session.setAttribute("genre01",dm.getGenre01()); //세션 장르1에 VO객체저장
+				session.setAttribute("genre02",dm.getGenre02()); //세션 장르2에 VO객체저장
+				session.setAttribute("genre03",dm.getGenre03()); //세션 장르3에 VO객체저장
+				session.setAttribute("phone",dm.getPhone()); //세션 휴대폰번호에 VO객체저장
+				session.setAttribute("publish_availability",dm.getPublishAvailability()); //세션 마이페이지 공개여부에 VO객체저장
+				session.setAttribute("profile_image_url",dm.getProfileImageUrl()); //세션 프로필사진에 VO객체저장
+				session.setAttribute("user_status",dm.getUserStatus()); //세션 회원상태에 VO객체저장
+				session.setAttribute("user_type",dm.getUserType()); //세션 회원유형에 VO객체저장
+
+				if(dm.getUserLv()==1) {
+					session.setAttribute("user_lv", "개인회원");
+				}else if(dm.getUserLv()==2) {
+					session.setAttribute("user_lv", "휴면회원");
+				}else if(dm.getUserLv()==3) {
+					session.setAttribute("user_lv", "제작사");
+				}else {
+					session.setAttribute("user_lv", "관리자");
+				}
+				//					session.setAttribute("user_lv",dm.getUserLv()); //세션 회원등급에 VO객체저장
+				session.setAttribute("user_point",dm.getUserPoint()); //세션 회원포인트에 VO객체저장 
+				session.setAttribute("register_date",dm.getRegisterDate()); //세션 회원가입날짜에 VO객체저장
+				session.setAttribute("business_name",dm.getBusinessName()); //세션 사업자이름에 VO객체저장
+				session.setAttribute("business_register_no",dm.getBusinessRegisterNo()); //세션 사업자등록번호에 VO객체저장
+				session.setAttribute("business_license_image_path",dm.getBusinessLicenseImagePath()); //세션 사업자등록증이미지경로에 VO객체저장
+				session.setAttribute("deactivate_date",dm.getDeactivateDate()); //세션 탈퇴날짜에 VO객체저장
+				session.setAttribute("deactivate_reason",dm.getDeactivateReason()); //세션 탈퇴사유 VO객체저장
+
+				SocialProfileVO svo = this.mUserService.findSocialAcount(dm.getId());
+				if(svo!=null) {
+					session.setAttribute("sessionSocial", svo);
+				}
+				out.println("<script>");
+				out.println("alert('MOVING 로그인을 환영합니다 !');");
+				out.println("location='/moving.com/social/main';");
+				out.println("</script>");
+
+				return null;
+			}
+		}
+		return null;
+	}//member_login_ok()
+
+	//소셜 회원으로 전환
+	@RequestMapping(value="/social/modify")	
+	public ModelAndView social_modify() {
+		System.out.println("아이고");
+		ModelAndView m = new ModelAndView("social/social_modify");
+		return m;
+	}//social_join()
+
 	//소셜 메인페이지
 	@RequestMapping(value="/social/main",method=RequestMethod.GET)
 	public ModelAndView social_main(
@@ -42,7 +228,7 @@ public class SocialController {
 		if(session.getAttribute("id")==null){
 			out.println("<script>");
 			out.println("alert('로그인이 필요합니다.');");
-			out.println("location='/moving.com/main'");
+			out.println("location='/moving.com/social/login'");
 			out.println("</script>");
 			
 			return null;
@@ -66,27 +252,26 @@ public class SocialController {
 			m.addObject("s_post", socialPostVO);
 			m.addObject("s_pro", socialProfileVO);
 			m.setViewName("social/social_main");
+			return m;
 		}
 		else {
 			System.out.println("아이디 없음");
-			/*out.println("<script>");
-			out.println("alert('소셜 계정으로 전환하세요');");
-			out.println("location='/moving.com/social/join'");
-			out.println("</script>");*/
-			m.setViewName("social/social_join");
+			
+			out.println("<script>");
+			out.println("if(confirm('무빙 SNS를 이용하시려면 소셜 계정으로 전환하세요') == true){"
+					+ "location='/moving.com/social/modify';"
+					+ "}else{"
+					+ "location='/moving.com/main';}");
+			out.println("</script>");
+			
+			//m.setViewName("social/social_modify");
 		}
-		return m;
+		return null;
 	}//social_main()
 	
-	@RequestMapping(value="/social/join")	
-	public ModelAndView social_join() {
-		System.out.println("아이고");
-		ModelAndView m = new ModelAndView("social/social_join");
-		return m;
-	}//social_join()
-	
-	@RequestMapping("social/social_join_ok")
-	public String social_join_ok(SocialProfileVO s_pro, HttpServletRequest request) throws Exception {
+	//소셜회원 전환 완료
+	@RequestMapping("social/social_modify_ok")
+	public String social_modify_ok(SocialProfileVO s_pro, HttpServletRequest request) throws Exception {
 		HttpSession session=request.getSession();//세션 값 전체를 가져온다.
 		
 		int using_id=(int)session.getAttribute("id");//세션에서 아이디값을 가져온다.
@@ -108,7 +293,7 @@ public class SocialController {
 			this.socialService.insertSocialProfile(s_pro);
 			return "redirect:/social/profile?id="+using_id; //프로필 폼으로 이동
 		}
-	}//social_join_ok()
+	}//social_modify_ok()
 	
 	//메신저
 	@RequestMapping(value="/social/messenger")

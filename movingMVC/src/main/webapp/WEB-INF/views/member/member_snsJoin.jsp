@@ -4,7 +4,7 @@
 <%@ include file="../include/sns_header.jsp"%>
 
 <div id="mJoin_wrap">
-	<form id="mJoin_form" method="post" action="member_join_ok" onsubmit="return join_check();">
+	<form id="mJoin_form" method="post" action="social_join_ok" onsubmit="return join_check();">
 <!-- 		<div id="mJoin_form"> -->
 			<section>
 				<div class="am_Movingmember">
