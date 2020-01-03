@@ -1,6 +1,7 @@
 package com.moving.dao;
 
 import com.moving.domain.MUserVO;
+import com.moving.domain.SocialProfileVO;
 
 public interface MUserDAO {
 
@@ -23,6 +24,16 @@ public interface MUserDAO {
 	MUserVO check_businessName(String businessName); //사업자명 중복검색
 
 	MUserVO check_businessRegisterNO(String businessRegisterNo); //사업자 등록번호 중복검색
+
+	void deleteUser(MUserVO dm); //회원탈퇴
+
+	void updatePassword(MUserVO m); // 설정 > 비밀번호 재설정
+
+	MUserVO editEmailCheck(String setting_email); //이메일아이디 변경 중복체크
+
+	void updatePhone(MUserVO dm); //휴대폰번호 변경
+
+	SocialProfileVO findSocialAcount(int id);
 
 
 }

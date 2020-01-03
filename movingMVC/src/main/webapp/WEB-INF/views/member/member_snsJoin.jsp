@@ -1,109 +1,123 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" 
+    uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="../include/sns_header.jsp"%>
 
-<div id="msJoin_wrap">
-	<form method="post" action="#" onclick="#">
-		<div id="mJoin_form">
+<div id="mJoin_wrap">
+	<form id="mJoin_form" method="post" action="member_join_ok" onsubmit="return join_check();">
+<!-- 		<div id="mJoin_form"> -->
 			<section>
-				<div id="am_Movingmember">
+				<div class="am_Movingmember">
 					<hr class="my-hr1" />
 					<span>무빙 계정이 있으신가요? &nbsp;&nbsp;&nbsp;<a
-						href="member_snsLogin.jsp">로그인</a></span>
+						href="login">로그인</a></span>
 					<hr class="my-hr1" />
 				</div>
-				<table id="mJoin_table" border="">
-					<tr>
-						<td colspan="2">
-							<h2>회원가입</h2>
-						</td>
-					</tr>
-					<tr>
-						<th colspan="2"><input placeholder="이름" size="30"
-							class="input_text" /></th>
-					</tr>
-					<tr>
-						<th colspan="2"><input type="email" placeholder="이메일 아이디"
-							size="30" class="input_text" /></th>
-					</tr>
-					<tr>
-						<th colspan="2"><input type="password"
-							placeholder="비밀번호(영문, 숫자, 특수문자 포함 8자 이상)" size="30"
-							class="input_text" /></th>
-					</tr>
-					<tr>
-						<th colspan="2"><input type="password" placeholder="비밀번호 재입력"
-							size="30" class="input_text" /></th>
-					</tr>
-					<tr>
-						<th colspan="2"><span><b>선호 장르 선택(최대 3개 선택 가능):</b></span> <input
-							type="checkbox" name="genre_like" value="adventure">어드벤쳐
-							<input type="checkbox" name="genre_like" value="documentary">다큐멘터리
-							<input type="checkbox" name="genre_like" value="history">시대극
-							<input type="checkbox" name="genre_like" value="thriller">스릴러
-							<input type="checkbox" name="genre_like" value="fantasy">판타지
-							<input type="checkbox" name="genre_like" value="romance">로맨스
-							<input type="checkbox" name="genre_like" value="comedy">코미디
-							<input type="checkbox" name="genre_like" value="animation">애니메이션
-							<input type="checkbox" name="genre_like" value="etc_like">기타
-						</th>
-					</tr>
-					<tr>
-						<td colspan="2" id="remember_me"><input type="checkbox"
-							id="save_id" class="save_id" /><span>Send me a weekly mix
-								of handpicked projects, plus occasional Kickstarter news</span></td>
-					</tr>
-					<tr>
-						<td colspan="2" id="remember_me"><input type="checkbox"
-							id="save_id" class="save_id" /><span>Contact me about
-								participating in Kickstarter research</span></td>
-					</tr>
-					<tr>
-						<th colspan="2">
-							<button type="submit" class="join" id="joinBtn">회원가입</button>
-						</th>
-					</tr>
-					<tr>
-						<td colspan="2">By signing up, you agree to our terms of use,
-							privacy policy, and cookie policy. <br /> <a href="#">Readmore</a>
-						</td>
-					</tr>
-					<tr>
-						<th colspan="2">
-							<div class="text-strikethru">
-								<div class="line"></div>
-								<div class="text">or</div>
+				
+				<h2 class="mJoin_text">회원가입</h2>
+					
+					<div id="email_field" class="email_field">
+						<div class="mv_email"> 
+							<input type="email" id="email" name="email" class="text_input" placeholder="이메일 계정" oninput="userid_check();"> 
+							<button type="button" class="btnCheckEmail" id="btnCheckEmail" onclick="emailTokenInput();">인증하기</button>
+					 
+							<div id="emailCheck_message">
+								<span id="emailCheck"></span>
 							</div>
-						</th>
-					</tr>
+							<div class="emailToken" style="display:none">
+								<div class="emailTokenInput">
+									<input id="email_check" name="email_check" class="text_input"  placeholder="인증번호 입력">
+									<button type="button" id="btnCheckToken" name="btnCheckToken" class="btnCheckToken">인증하기</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="info_field">
+						<div id="info_name_nick">
+							<input type="text" maxlength="4" name="name" id="name" class="text_infoInput" placeholder="이름">
+							<input name="nickname" id="nickname" class="text_infoNickInput" placeholder="닉네임" oninput="nick_check();">
+							<br/>
+<!-- 							<input type="button" value="중복확인" class="nickCheckBtn" onclick="nick_check();"> -->
+						</div>
+						<div id="nickcheck_message">
+							<span id="nickcheck"></span>
+						</div>
+						
+							<input type="password" name="password" id="password" class="text_infoInput" placeholder="비밀번호">
+							<input type="password" name="password2" id="password2" class="text_infoInput" placeholder="비밀번호 확인">
+							
+						<div id="pwdCheck_message">
+							<span id="pwdcheck"></span>
+						</div>
+						<div id="phone_box">
+						<span style="font:bold 15px 'lucida sans', 'trebuchet MS', 'Tahoma'; color:gray;">&nbsp;휴대폰 번호</span>
+						&nbsp;&nbsp;&nbsp;&nbsp;
+						<select name="phone01" id="phone01" class="input_box" style="width:90px; height:51px;
+						margin:5px auto; padding:1px 0px; font:bold 15px 'lucida sans', 'trebuchet MS', 'Tahoma'; color:gray;" 
+						onchange="domain_list();">
+     					<c:forEach var="p" items="${phonelist}">
+      						<option value="${p}">${p}</option>
+     					</c:forEach>
+     					</select>
+     					&nbsp;-&nbsp;
+     					<input name="phone02" id="phone02" 
+     					 maxlength="4" class="input_box" style="width:86px; height:45px;
+						margin:5px auto; padding:1px 0px; font:bold 15px 'lucida sans', 'trebuchet MS', 'Tahoma'; color:gray;" />
+						&nbsp;-&nbsp;
+						<input name="phone03" id="phone03" 
+						 maxlength="4" class="input_box" style="width:86px; height:45px;
+						margin:5px auto; padding:1px 0px; font:bold 15px 'lucida sans', 'trebuchet MS', 'Tahoma'; color:gray;"/>
+						
 
-					<!-- <div class="social-join"></div> -->
-					<tr>
-						<th colspan="2">
-							<button type="button" class="join" id="facebookJoinBtn">
-								<i class="icon_facebook"></i>페이스북으로 회원가입
-							</button>
-						</th>
-					</tr>
-					<tr>
-						<th>
-							<button class="social-join" type="button" id="kakaoJoinBtn">
-								<i class="icon_kakao"></i>카카오
-							</button>
-							<button class="social-join" type="button" id="naverJoinBtn">
-								<i class="icon_naver"></i>네이버
-							</button>
-							<button class="social-join" type="button" id="googleJoinBtn">
-								<i class="icon google color"></i>구글
-							</button>
-						</th>
-					</tr>
-
-				</table>
-
-			</section>
-		</div>
-
+						<input type="hidden" name="phone" id="phone" value="${phone}">
+						</div>
+					</div>
+					
+					<div id="genreCheck_field">
+					<span style="font-size:20px;"><b>선호 장르 선택(최대 3개 선택 가능):</b></span><br /><br />
+						 	<input type="checkbox" class="genre_check" name="genre_like" value="history" onclick="CountChecked(this)"><span class="genre_name">시대극</span>
+							<input type="checkbox" class="genre_check" name="genre_like" value="documentary" onclick="CountChecked(this)"><span class="genre_name">다큐멘터리</span>
+							<input type="checkbox" class="genre_check" name="genre_like" value="adventure" onclick="CountChecked(this)"><span class="genre_name">어드벤쳐</span> <br />
+							<input type="checkbox" class="genre_check" name="genre_like" value="thriller" onclick="CountChecked(this)"><span class="genre_name">스릴러</span>
+							<input type="checkbox" class="genre_check" name="genre_like" value="fantasy" onclick="CountChecked(this)"><span class="genre_name">판타지</span>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	
+							<input type="checkbox" class="genre_check" name="genre_like" value="romance" onclick="CountChecked(this)"><span class="genre_name">로맨스</span> <br />
+							<input type="checkbox" class="genre_check" name="genre_like" value="comedy" onclick="CountChecked(this)"><span class="genre_name">코미디</span>
+							<input type="checkbox" class="genre_check" name="genre_like" value="animation" onclick="CountChecked(this)"><span class="genre_name">애니메이션</span>
+							<input type="checkbox" class="genre_check" name="genre_like" value="etc_like" onclick="CountChecked(this)"><span class="genre_name">기타</span>
+					</div>
+					
+					<div id="joinBtn_field">
+						<div class="joinBtn1">
+							<input type="submit" class="join" id="joinBtn" value="회원가입" disabled="disabled">
+						</div>
+						
+<!-- 						<div class="separator_join"> -->
+<!-- 						<span>----------------------------------------------또는-----------------------------------------------</span> -->
+<!-- 						</div> -->
+						
+<!-- 						<div class="joinBtn2"> -->
+<!-- 								<button type="button" class="join" id="facebookJoinBtn"> -->
+<!-- 								<i class="icon_facebook"></i>페이스북으로 회원가입 -->
+<!-- 							</button> -->
+<!-- 							<button class="social-join" type="button" id="kakaoJoinBtn"> -->
+<!-- 								카카오 -->
+<!-- 							</button> -->
+<!-- 							<button class="social-join" type="button" id="naverJoinBtn"> -->
+<!-- 								네이버 -->
+<!-- 							</button> -->
+<!-- 							<button class="social-join" type="button" id="googleJoinBtn"> -->
+<!-- 								구글 -->
+<!-- 							</button> -->
+<!-- 							<button class="social-join" type="button" id="twitterJoinBtn"> -->
+<!-- 								트위터 -->
+<!-- 							</button> -->
+<!-- 						</div> -->
+					</div>
+					</section>
+<!-- 			</div> -->
 	</form>
 </div>
+
 
 <%@ include file="../include/footer.jsp"%>

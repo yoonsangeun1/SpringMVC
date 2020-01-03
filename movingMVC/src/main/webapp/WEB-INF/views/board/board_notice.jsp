@@ -11,36 +11,32 @@
 </head>
 <body>
 
-	<div id="bFree_body"> <%--전체 body div묶음 --%>
+	<div id="bNotice_body"> <%--전체 body div묶음 --%>
 	
-		<div id="bFree_community"> <%-- 커뮤니티 배우모집,시나리오 공모 등  div --%>
-		 <div class="bFree_community_tit"> <%--커뮤니티--%>
-		  	<h1>커뮤니티</h1>
-		 </div> <%--커뮤니티 --%>
-		 
-		  <div class="bFree_community_list"> <%--커뮤니티 밑에 리스트들 div --%>
-		   <ul>
-		   
-		    <li>
-		     <a href="actors">배우모집</a>
-		    </li>
-		    
-		    <li>
-		     <a href="contest">시나리오 공모</a>
-		    </li>
-		    
-		    <li class="bFree_community_list_notice">
-		     <a href="notice">자유게시판</a>
-		    </li>
-		    
-		    <li>
-		     <a href="qna">QnA</a> <%--QnA 작업해야 됨 --%>
-		    </li>
-	    
-		   </ul>
-		  </div> <%--커뮤니티 밑에 리스트들 div --%>
-		
-		</div> <%--커뮤니티 배우모집,시나리오 공모 등 div --%>
+<div id="bNotice_update"> <%--왼쪽 업데이트 사항. 공지,이벤트 등 div --%>
+       <div class="bNotice_update_tit"> <%--업데이트--%>
+           <h1>업데이트</h1>
+       </div> <%--업데이트 --%>
+       
+        <div class="bNotice_update_list"> <%--업데이트 밑에 리스트들 div --%>
+         <ul>
+         
+          <li class="bNotice_update_list_notice">
+           <a href="notice">공지사항</a>
+          </li>
+          
+          <li>
+           <a href="event">이벤트</a>
+          </li>
+          
+          <li>
+           <a href="faq">FAQ</a>
+          </li>
+          
+         </ul>
+        </div> <%--업데이트 밑에 리스트들 div --%>
+      
+      </div> <%--왼쪽 업데이트 사항. 공지,이벤트 등 div --%>
 
 <form method="get" action="/moving.com/board/notice"> <!-- 검색필드 넘겨주기 위한 form -->
 		<table id="bFree_table" cellspacing="0">

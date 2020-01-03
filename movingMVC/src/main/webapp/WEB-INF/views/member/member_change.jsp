@@ -10,7 +10,7 @@
 			
 			<div id="mChange_info1">
 				<span>● 회원 기본정보 </span>
-				<input id="mChange_userid" class="user_input" value="${userid}" readonly>
+				<input id="mChange_userid" class="user_input" value="회원 이메일아이디 : ${userid}" readonly>
 				<input id="mChange_name" class="user_input" value="회원 이름 : ${name}" readonly >
 				<input id="mChange_userLv" class="user_input" value="회원 유형 : ${user_lv}" readonly> 
 			</div>

@@ -75,3 +75,401 @@
 	font-size:15px;
 }
 
+
+
+/******************************** member_basicInfoSetting 페이지 *********************************/
+
+#mBIsetting_wrap {
+	width: 1200px;
+	height: auto;
+	min-height: 750px;
+	display: flex;
+	margin: auto auto;
+	background-color: #F5F5F5;
+}
+
+#mBIsetting_form {
+	width: 460px;
+	min-height: 400px;	
+	height: auto;
+	margin: auto auto;
+	margin-top : 150px;
+	margin-bottom : 50px;
+	display: inline-block;
+	box-sizing: border-box;
+	background-color: white;
+	border-radius: 5px;
+	border: 1px solid #e8e8e8;
+	outline: none;
+}
+
+#mBIsetting_form h2 {
+	line-height: 40px;
+	font-size: 30px;
+	font-weight: bold;
+	margin-top:10px;
+	margin-left:30px;
+}
+
+#mBIsetting_form section {
+	float:left;
+	min-height:300px;
+	padding-top: 30px;
+	padding-bottom: 30px;
+	box-sizing: border-box;
+}
+
+#mBIsetting_input_box {
+	float:left;
+	width:100%;
+	min-height:95px;
+/* 	border: 1px solid black; */
+	margin:10px 10px 0 10px;
+}
+
+#mBIsetting_info_box {
+	float:left;
+	line-height:1.2;
+	margin-top : 15px;
+}
+
+.bi_input {
+	width: 415px;  
+	font-size: 17px;
+	margin: 5px;
+	height: 45px;
+	padding: 10px 5px;
+	font: bold 15px 'lucida sans', 'trebuchet MS', 'Tahoma';
+	border: 0;
+	float: left;
+	background-color: #eae6fa;
+	border-radius: 3px;
+}
+
+#mBIsetting_phone_box{
+	float:left;
+	line-height:1.2;
+	margin-top:15px;
+}
+
+#mBIsetting_phone_inputbox {
+	float: left;
+    margin-left: 7px;
+    margin-right: 6px;
+    margin-top: 7px;
+}
+
+#edit_phone01, #edit_phone02, #edit_phone03 {
+	background-color: #eae6fa;
+	border: 0;
+	font-size: 17px;
+	font: bold 15px 'lucida sans', 'trebuchet MS', 'Tahoma';
+	border-radius: 3px;
+}
+
+
+.modify_btn {
+		float:left;
+	width:100px;
+	height:65px;
+	margin:5px; 
+}
+
+#mBIsetting_button_box {
+    float: left;
+    width: 100%;
+    /* min-height: 100px; */
+    /* border: 1px solid black; */
+    margin-top: 30px;
+}
+
+#mBIsetting_btn, #mBIsetting_cancel_btn {
+    position: relative;
+    float: left;
+    border: 0;
+    cursor: pointer;
+    font: bold 15px 'lucida sans', 'trebuchet MS', 'Tahoma';
+    color: #fff;
+    text-transform: uppercase;
+    background: #b3a9eb;
+    border-radius: 3px;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, .3);
+    margin-left: 20px;
+      width: 200px;
+    height: 56px;
+}
+
+/******************************** member_pwdSetting 페이지 *********************************/
+
+#mPwdSetting_wrap {
+	width: 1200px;
+	height: auto;
+	min-height: 750px;
+	display: flex;
+	margin: auto auto;
+	background-color: #F5F5F5;
+}
+
+#mPwdSetting_form {
+	width: 460px;
+	min-height: 400px;	
+	height: auto;
+	margin: auto auto;
+	margin-top : 150px;
+	margin-bottom : 50px;
+	display: inline-block;
+	box-sizing: border-box;
+	background-color: white;
+	border-radius: 5px;
+	border: 1px solid #e8e8e8;
+	outline: none;
+}
+
+#mPwdSetting_text h2 {
+	line-height: 40px;
+	font-size: 32px;
+	font-weight: bold;
+	margin-top:10px;
+	margin-left:30px;
+}
+
+#mPwdSetting_form section {
+	float:left;
+	min-height:300px;
+	padding-top: 30px;
+	padding-bottom: 30px;
+	box-sizing: border-box;
+}
+#mPwdSetting_input_box {
+float: left;
+    width: 100%;
+    min-height: 95px;
+    /* border: 1px solid black; */
+    margin: 10px 10px 0 10px;
+}
+.pwdSetting_input {
+	width: 415px;
+	font-size: 17px;
+	margin: 5px;
+	height: 45px;
+	padding: 10px 5px;
+	font: bold 15px 'lucida sans', 'trebuchet MS', 'Tahoma';
+	border: 0;
+	float: left;
+	background-color: #eee; 
+	border-radius: 3px; 
+}
+
+#mPwdSetting_text2 {
+	float:left;
+	width:407px;
+	height:15px;
+	margin:5px 5px 5px 15px;
+}
+
+#pwdSettingCheck_message {
+	float:left;
+	width:405px;
+	height:15px;
+	margin-left :12px;
+/* 	border:1px solid red; */
+	line-height: 1.2;
+}
+
+#mPwdSetting_button_box {
+    float: left;
+    width: 100%;
+    /* min-height: 100px; */
+    /* border: 1px solid black; */
+    margin-top: 30px;
+}
+
+#mPwdSetting_btn, #mPwdSetting_cancel_btn {
+    position: relative;
+    float: left;
+    border: 0;
+    cursor: pointer;
+    font: bold 15px 'lucida sans', 'trebuchet MS', 'Tahoma';
+    color: #fff;
+    text-transform: uppercase;
+    background: #b3a9eb;
+    border-radius: 3px;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, .3);
+    margin-left: 20px;
+      width: 200px;
+    height: 56px;
+}
+/******************************** member_profileSetting 페이지 *********************************/
+
+#mPsetting_wrap {
+		width: 1200px;
+	height: auto;
+	min-height: 930px;
+	margin: auto auto;
+	align-items: center;
+	display: flex;
+	justify-content: center;
+	background-color: #F5F5F5;
+}
+
+#mPsetting_form {
+		width: 460px;
+	min-height: 600px;
+	height: auto;
+	margin : auto auto;
+	margin-top:150px; 
+	margin-bottom : 50px;
+	display: inline-block;
+	box-sizing: border-box;
+	background-color: white;
+	border-radius: 5px;
+	border: 1px solid #e8e8e8;
+	outline: none;
+}
+
+#mPsetting_form section {
+	float:left;
+	min-height: 300px;
+	padding-top: 30px;
+	padding-bottom: 30px;
+	box-sizing: border-box; 
+}
+
+#mPsetting_text h2{
+		line-height: 40px;
+	font-size: 32px;
+	font-weight: bold;
+	margin-top:10px;
+	margin-left:30px;
+}
+
+#mPsetting_image_box {
+	float: left;
+    width: 460px;
+    min-height: 200px;
+}
+#mPsetting_image_box h3{
+	line-height: 40px;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 15px;
+    margin-left: 30px;
+}
+
+#profileimg-wrap {
+	float: left;
+    width: 460px;
+    min-height: 150px;
+}
+
+#resultProfileImg {
+	position: relative;
+    display: block;
+    padding: 0;
+    width: 220px;
+    height: 220px;
+    margin: 0 auto 25px;
+    background: #000;
+    border-radius: 50%;
+    overflow: hidden; 
+}
+
+#image_upload {
+	width : 220px;
+	height:220px;
+	background-color: transparent;
+	cursor: pointer; 
+}
+#img {
+	width: 220px;
+    height: 220px;
+    object-fit:cover; 
+}
+
+#setting_profileimg {
+	width: 300px;
+    height: 50px;
+    margin: auto auto;
+    padding: 10px;
+}
+
+#mPsetting_text2 {
+	float: left;
+    width: 429px;
+    height: 75px;
+    line-height: 40px;
+    font-size: 15px;
+    margin-top: 35px;
+    margin-left: 30px;
+}
+
+#mPsetting_text2 h3 {
+	font-size:20px;
+	font-weight:bold;
+}
+
+#check_genrelike_wrap {
+    float: left;
+    width: 418px;
+    min-height: 100px;
+    margin: 0px 20px;
+}
+
+#check_genrelike_wrap ul {
+	list-style : none;
+	height: 110px;
+    margin-left: 10px;
+    width: 400px;
+}
+
+#check_genrelike_wrap ul li	{
+	float:left;
+	width:33%;
+	margin-bottom : 15px;
+	height:20px;	
+}
+
+#btn_updatePhoto {
+	text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin-left: 20px;
+    padding: 0px;
+    cursor: pointer;
+    height: 35px;
+    width: 120px;
+    color: #fff;
+    font-weight: bold;
+}
+
+#btn_deletePhoto {
+	text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin-left: 20px;
+    padding: 0px;
+    cursor: pointer;
+    height: 35px;
+    width: 90px;
+    color: #fff;
+    font-weight: bold;
+}
+
+#mPsetting_button_box {
+	float: left;
+    width: 100%;
+    margin-top: 30px;
+}
+
+#mPsetting_btn, #mPsetting_cancel_btn {
+    float: left;
+    border: 0;
+    cursor: pointer;
+    font: bold 15px 'lucida sans', 'trebuchet MS', 'Tahoma';
+    color: #fff;
+    background: #b3a9eb;
+    border-radius: 3px;
+    margin-left: 20px;
+    width: 200px;
+    height: 56px;
+}

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.moving.domain.MUserVO;
+import com.moving.domain.SocialProfileVO;
 import com.moving.service.MUserService;
 
 import pwdconv.PwdChange;
@@ -61,8 +62,9 @@ public class MemberController {
 
 	//회원저장
 	@RequestMapping("member/member_join_ok")
-	public String member_join_ok(MUserVO m, HttpServletRequest request) throws Exception {
-		
+	public String member_join_ok(MUserVO m, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		response.setContentType("text/html;charset=UTF-8");
+		PrintWriter out = response.getWriter();
 		m.setPassword(PwdChange.getPassWordToXEMD5String(m.getPassword())); // 비번을 암호화 하여 저장
 		
 		//회원가입시 입력한 휴대폰번호를 하나의 문자열로 합침
@@ -98,7 +100,7 @@ public class MemberController {
 				m.setGenre03("NULL");
 				break;
 			}
-		}else { 
+		}else {  
 			m.setGenre01("NULL");			
 			m.setGenre02("NULL");			
 			m.setGenre03("NULL");			
@@ -106,7 +108,13 @@ public class MemberController {
 		//하나의 문자열로 합친 휴대폰번호를 DB에 저장
 		m.setPhone(phone);
 		this.mUserService.insertUser(m); //회원저장
-		return "redirect:/member/login"; //로그인 폼으로 이동
+		
+		out.println("<script>");
+		out.println("alert('MOVING회원이 되신 것을 환영합니다 !');");
+		out.println("location='/moving.com/member/login';");
+		out.println("</script>");
+		
+		return null;
 	}//member_join_ok()
 	
 	//이메일 중복체크
@@ -213,6 +221,7 @@ public class MemberController {
 			}else {
 				session.setAttribute("id",dm.getId()); //세션 id에 시퀀스번호값 저장
 				session.setAttribute("userid",mLogin_email); //세션 이메일아이디에 아이디값 저장
+				session.setAttribute("password",mLogin_password); //세션 이메일아이디에 아이디값 저장
 				session.setAttribute("nickname",dm.getNickname()); //세션 닉네임에 VO객체저장
 				session.setAttribute("name",dm.getName()); //세션 이름에 VO객체저장
 				session.setAttribute("email",dm.getEmail()); //세션 이메일에 VO객체저장
@@ -243,7 +252,16 @@ public class MemberController {
 				session.setAttribute("deactivate_date",dm.getDeactivateDate()); //세션 탈퇴날짜에 VO객체저장
 				session.setAttribute("deactivate_reason",dm.getDeactivateReason()); //세션 탈퇴사유 VO객체저장
 				
-				return "redirect:/main";
+				SocialProfileVO svo = this.mUserService.findSocialAcount(dm.getId());
+				if(svo!=null) {
+					session.setAttribute("sessionSocial", svo);
+				}
+				out.println("<script>");
+				out.println("alert('MOVING로그인을 환영합니다 !');");
+				out.println("location='/moving.com/main';");
+				out.println("</script>");
+				
+				return null;
 			}
 		}
 		return null;
@@ -254,6 +272,13 @@ public class MemberController {
 	public String member_logout(HttpServletResponse response, HttpSession session) throws Exception {
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out = response.getWriter();
+		String userid=(String)session.getAttribute("userid");
+	      if(userid==null) {
+	         out.println("<script>");
+	         out.println("alert('로그인이 필요한 페이지입니다 !');");
+	         out.println("location='member/login';");
+	         out.println("</script>");
+	      }
 		
 		session.invalidate(); //세션만료 > 로그아웃
 		

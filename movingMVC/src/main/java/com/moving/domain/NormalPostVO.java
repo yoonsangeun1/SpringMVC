@@ -21,6 +21,8 @@ public class NormalPostVO {
 	/* JOIN 검색, resultMap을 위한 변수 */
 	private List<MCommentVO> mCommentVO;			/* 댓글 VO */
 	private MUserVO mUserVO;						/* 회원 VO */
+	private ReplyPostVO replyPostVO;				/* 댓글 VO */
+	private ProfilePostVO profilePostVO;			/* 배우모집 VO */
 	private List<AttachedFileVO> attachedFileVO; 	/* 첨부파일 VO */
 	private List<MoveVO> moveVO; 					/* 무브(좋아요) VO */
 	private SocialProfileVO socialProfileVO;		/* SNS VO*/
@@ -89,7 +91,7 @@ public class NormalPostVO {
 		this.moveCount = moveCount;
 	}
 	public String getRegisterDate() {
-		return registerDate.substring(0,10);
+		return registerDate;
 	}
 	public void setRegisterDate(String registerDate) {
 		this.registerDate = registerDate;
@@ -117,6 +119,18 @@ public class NormalPostVO {
 	}
 	public void setmUserVO(MUserVO mUserVO) {
 		this.mUserVO = mUserVO;
+	}
+	public ReplyPostVO getReplyPostVO() {
+		return replyPostVO;
+	}
+	public void setReplyPostVO(ReplyPostVO replyPostVO) {
+		this.replyPostVO = replyPostVO;
+	}
+	public ProfilePostVO getProfilePostVO() {
+		return profilePostVO;
+	}
+	public void setProfilePostVO(ProfilePostVO profilePostVO) {
+		this.profilePostVO = profilePostVO;
 	}
 	public int getStartrow() {
 		return startrow;

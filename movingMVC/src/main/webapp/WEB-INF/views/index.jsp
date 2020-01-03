@@ -42,6 +42,8 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/member_mypage.css" /><%-- 마이페이지 폼 --%>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/member_change.css" /><%-- 회원전환 폼 --%>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/member_infosetting.css" /><%-- 회원설정 폼 --%>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/member_delete.css" /><%-- 회원탈퇴 폼 --%>
+
 
 <%-- movie css 추가 --%>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/video_content.css" />
@@ -60,12 +62,13 @@
 <script src="${pageContext.request.contextPath}/resources/js/member_join.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/member_login.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/member_change.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/member_setting.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/board_event.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/board_faq.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/funding_write.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/move_banner.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/movie_cont.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/social.js"></script>
+<%-- <script src="${pageContext.request.contextPath}/resources/js/social.js"></script> --%>
 <%-- <script src="${pageContext.request.contextPath}/resources/js/slide.js"></script> --%>
 
 

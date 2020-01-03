@@ -82,6 +82,7 @@ public class BoardFreeController {
 	//글쓰기로 이동
 	@RequestMapping("/board/free_write")
 	public ModelAndView board_free_write(
+			int page,
 			HttpSession session,
 			HttpServletResponse response,
 			HttpServletRequest request) throws Exception{
@@ -92,8 +93,11 @@ public class BoardFreeController {
 		if(session.getAttribute("id") != null) { //세션으로 id 값이 있을경우.
 		int id=(int)session.getAttribute("id");
 		
+		ModelAndView fw=new ModelAndView("board/board_free_write");
+		fw.addObject("page",page); //페이지 값을 넘겨줌.
+		
 		if(id != 0) {
-			return new ModelAndView("board/board_free_write");
+			return fw;
 		}//if
 		
 		}else {

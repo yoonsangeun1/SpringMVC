@@ -86,7 +86,7 @@
 						<td>
 							<%-- 줄거리 입력 --%>
 							<div id="aMUploadC_cont">
-								<textarea name="content" id="aMUploadC_contText" class="txtbox content"
+								<textarea name="content" id="aMUploadC_co.ntText" class="txtbox content"
 									placeholder="내용을 입력하세요." rows="22" cols="85"></textarea>
 									<script type="text/javascript">
 										var oEditors = []; //전역변수

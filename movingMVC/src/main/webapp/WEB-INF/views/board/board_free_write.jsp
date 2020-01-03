@@ -24,7 +24,7 @@
    </tr>
    <tr>
     <th>글내용</th>
-    <td><textarea name="content" id="content" onkeyUp="checkByte(this.form);"
+    <td><textarea name="content" id="content"
     rows="10" cols="100"></textarea>
     
 <script type="text/javascript">
@@ -47,6 +47,8 @@
     <th colspan="2">
     <input type="submit" value="저장" />
     <input type="reset" value="취소" />
+    <input type="button" value="목록" 
+    onclick="location='/moving.com/board/free?page=${page}';" />
     </th>
    </tr>
   </table>

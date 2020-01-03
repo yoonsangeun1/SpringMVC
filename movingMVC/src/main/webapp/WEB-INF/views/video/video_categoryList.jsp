@@ -7,31 +7,54 @@
 	<div id="movie_box">
 	
 		<div id="fList_title">
-			<section>
-				<h3>Movies</h3>
-				<p>Discover the artists and organizations using Kickstarter to
-					realize ambitious projects in visual art and performance.</p>
-				<%-- 세부 카테고리별 보기 버튼 --%>
-				<div id="title_category_container">
-					<span><a href="#">Explore Animation</a></span>
-					<span><a href="#">Explore Romance</a></span>
-					<span><a href="#">Explore Action</a></span>
-					<span><a href="#">Explore Art</a></span>
+			<%-- 세부 카테고리별 보기 버튼 --%>
+			<c:if test="${!empty dvdList}">
+				<div id="other_category_container">
+					<span><a href="videocategory?codeNo=3000101">Thriller</a></span>
+					<span><a href="videocategory?codeNo=3000102">Action</a></span>
+					<span><a href="videocategory?codeNo=3000103">Youth</a></span>
+					<span><a href="videocategory?codeNo=3000104">History</a></span>
+					<span><a href="videocategory?codeNo=3000105">S·F</a></span>
+					<span><a href="videocategory?codeNo=3000106">Love</a></span>
+					<span><a href="videocategory?codeNo=3000107">Comedy</a></span>
+					<span><a href="videocategory?codeNo=3000108">Animation</a></span>
+					<span><a href="videocategory?codeNo=3000109">Etc</a></span>
 				</div>
-			</section>
+			</c:if>
+			<c:if test="${empty dvdList}">
+				<div id="other_category_container">
+					<span><a href="videocategory?codeNo=3000101">Thriller</a></span>
+					<span><a href="videocategory?codeNo=3000102">Action</a></span>
+					<span><a href="videocategory?codeNo=3000103">Youth</a></span>
+					<span><a href="videocategory?codeNo=3000104">History</a></span>
+					<span><a href="videocategory?codeNo=3000105">S·F</a></span>
+					<span><a href="videocategory?codeNo=3000106">Love</a></span>
+					<span><a href="videocategory?codeNo=3000107">Comedy</a></span>
+					<span><a href="videocategory?codeNo=3000108">Animation</a></span>
+					<span><a href="videocategory?codeNo=3000109">Etc</a></span>
+				</div>
+			</c:if>
 		</div>
+		
+		<nav id="list_count" style="float: right;
+									margin: 75px 26px 12px 0px;
+									font-size: 20px;
+									font-weight: bold;
+									font-style: italic;
+									color: navy;
+									text-align: center;
+									text-shadow: 3px 3px 4px #808080;
+									line-height: 20px;">
+							 
+			<c:if test="${!empty dvdList}">
+				<c:forEach var="codeNo" items="${dvdList}" begin="1" end="1" step="1">
+					All Videos&nbsp;:&nbsp;${totalCount}
+				</c:forEach>
+			</c:if>
+			
+		</nav> <%-- 총 게시물 수 list_count --%>
 		
 		<div class="clear"></div>
-		
-		<div id="list_count" style="align: center;
-							 float: right;
-							 margin-right: 69px;
-							 font-size: 20px;
-							 font-weight: bold;">
-							 
-			총 영상물 수 : ${totalCount}개
-			
-		</div>
 		
 		<c:if test="${!empty dvdList}">
 			<div class="cinema">
@@ -41,10 +64,10 @@
 						 style="cursor: pointer;"> <%-- yoo-hyeok.tistory.com/47 --%>
 						<img src="../images/m_sidemirror.jpg" class="image" alt="사물이 거울에 보이는 것보다 가까이 있음">
 						<div class="container">
-							<c:if test="${fn:length(videoPostVO.titleKorean) > 16}">
-								${fn:substring(videoPostVO.titleKorean, 0, 16)} ... 
+							<c:if test="${fn:length(videoPostVO.titleKorean) > 14}">
+								${fn:substring(videoPostVO.titleKorean, 0, 14)} ... 
 							</c:if>
-							<c:if test="${fn:length(videoPostVO.titleKorean) < 16}">
+							<c:if test="${fn:length(videoPostVO.titleKorean) < 14}">
 								${videoPostVO.titleKorean}
 							</c:if>
 						</div>
@@ -53,21 +76,16 @@
 								<h4>
 									[감독]
 									<br />
-									<c:if test="${fn:length(videoPostVO.director) > 16}">
-										${fn:substring(videoPostVO.director, 0, 16)} ... 
-									</c:if>
-									<c:if test="${fn:length(videoPostVO.director) < 16}">
-										${videoPostVO.director}
-									</c:if>
+									${videoPostVO.director}
 								</h4>
 								<br />
 								<h4>
 									[배우]
 									<br />
-									<c:if test="${fn:length(videoPostVO.actor) > 20}">
-										${fn:substring(videoPostVO.actor, 0, 20)} ... 
+									<c:if test="${fn:length(videoPostVO.actor) > 17}">
+										${fn:substring(videoPostVO.actor, 0, 17)} ... 
 									</c:if>
-									<c:if test="${fn:length(videoPostVO.actor) < 20}">
+									<c:if test="${fn:length(videoPostVO.actor) < 17}">
 										${videoPostVO.actor}
 									</c:if>
 								</h4>
@@ -75,10 +93,10 @@
 								<h5>
 									[Synopsis]
 									<br />
-									<c:if test="${fn:length(videoPostVO.content) > 16}">
-										${fn:substring(videoPostVO.content, 0, 16)} ... 
+									<c:if test="${fn:length(videoPostVO.content) > 45}">
+										${fn:substring(videoPostVO.content, 0, 45)} ... 
 									</c:if>
-									<c:if test="${fn:length(videoPostVO.content) < 16}">
+									<c:if test="${fn:length(videoPostVO.content) < 45}">
 										${videoPostVO.content}
 									</c:if>
 								</h5>
@@ -89,55 +107,58 @@
 			</div>
 		</c:if>
 		
-		<div class="clear"></div>
-		
-		<div id="list_page_num" style="margin-top: 10%;
-									   margin-bottom: 10%;
-									   margin-left: 550px;
-									   font-size: 25px;">
-									   
+		<div id="list_page_notice" style="margin-top: 12%;
+										  margin-bottom: 20%;
+										  font-size: 25px;
+										  font-style: italic;
+										  text-align: center;
+										  line-height: 25px;">
+			
 			<c:if test="${empty dvdList}"> 리스트가 비었습니다. </c:if>
 			
-			<%-- 현재 쪽 번호 --%>
-			<c:if test="${page <= 1}">
-				[Prev]
-				&nbsp;
-			</c:if>
+		</div>
+		
+		<c:if test="${!empty dvdList}">
+			<div id="vPost_search">	<%-- 검색 구간 전체 DIV --%>
+				<select name = "vPost_combo" id="vPost_combo">
+					<option value="title_content">제목+내용</option>
+					<option value="title">제목</option>
+					<option value="content">내용</option>
+					<option value="name">이름</option>
+				</select>
+				<div id="vPost_input"> <%-- 검색 입력 창, 버튼 --%>
+					<input id="search_text" name="search_text" size="20" />
+					<input type="submit" class="search_btn button_wce8e8e8" value="검색" />
+				</div>
+			</div>
+		</c:if>
+		
+		<div class="clear"></div>
+		
+		<div id="list_page_num" style="margin-top: 5%;
+									   margin-bottom: 10%;
+									   font-size: 25px;
+									   text-align: center;
+									   line-height: 25px;">
 			
-			<%-- 현재 페이지가 첫 페이지보다 높은 숫자일 경우 --%>
-			<c:if test="${page > 1}">
-				<a href="videocategory?page=${page - 1}">
-					[Prev]
-					&nbsp;
-				</a>
-			</c:if>
-			
-			<c:forEach var="p" begin="${startpage}" end="${endpage}" step="1">
-			
-				<%-- 현재 쪽 번호가 선택된 경우 --%>
-				<c:if test="${p == page}">
-					${p}
-				</c:if>
+			<c:if test="${!empty dvdList}">
+				<c:forEach var="p" begin="${startpage}" end="${endpage}" step="1">
 				
-				<%-- 현재 쪽 번호가 선택 안 된 경우 --%>
-				<c:if test="${p != page}">
-					<a href="videocategory?page=${p}">
+					<%-- 현재 쪽 번호가 선택된 경우 --%>
+					<c:if test="${p == page}">
+						&nbsp;
 						${p}
-					</a>
-				</c:if>
+						&nbsp;
+					</c:if>
+					
+					<%-- 현재 쪽 번호가 선택 안 된 경우 --%>
+					<c:if test="${p != page}">
+						<a href="videocategory?codeNo=${videoPostVO.codeNo}&page=${p}">
+							${p}
+						</a>
+					</c:if>
 				
-			</c:forEach>
-			
-			<c:if test="${page >= maxpage}"> <%-- 마지막 페이지일 경우 --%>
-				&nbsp;
-				[Next]
-			</c:if>
-			
-			<c:if test="${page < maxpage}"><%-- 마지막 페이지보다 낮은 숫자의 페이지일 경우 --%>
-				<a href="videocategory?page=${page + 1}">
-					&nbsp;
-					[Next]
-				</a>
+				</c:forEach>
 			</c:if>
 			
 		</div><%-- list_page_num --%>

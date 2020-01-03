@@ -25,29 +25,56 @@ public class AdminVideoController {
 	
 	/* 영화 업로드 완료 */
 	@RequestMapping(value="/movie_upload_ok")
-	public String insertMovieOk(VideoPostVO vp,HttpServletResponse response,HttpServletRequest request,HttpSession session) throws Exception {
-		
+	public String insertMovieOk(VideoPostVO vp,
+			HttpServletResponse response,HttpServletRequest request,HttpSession session) throws Exception {
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out=response.getWriter();
-		String admin_id=String.valueOf(session.getAttribute("id"));
+		String admin_lv=(String)session.getAttribute("user_lv");
 		
-		if(admin_id == null) {
+		if(admin_lv == null) {
 			out.println("<script>");
 			out.println("alert('다시 로그인 하세요!');");
-			out.println("location='admin_login';");
+			out.println("location='/moving.com/member/login';");
 			out.println("</script>");
 		}else {
+			if(!admin_lv.equals("관리자")) {
+				out.println("<script>");
+				out.println("alert('접근 권한이 없습니다!');");
+				out.println("location='/moving.com/main';");
+				out.println("</script>");
+			}else {
+				
+			int admin_id=(Integer)session.getAttribute("id");
+			vp.setUserId(admin_id);
 			this.adminVideoService.insertMovie(vp); // 영화 저장
 			return "redirect:/admin/movie"; // 영화 관리 목록보기로 이동
 		}
-		
+		}
 		return null;
 		
 	}//insertMovieOk()
 	
 	/* 영화 목록 */
 	@RequestMapping(value="/movie")
-	public String movie(@ModelAttribute VideoPostVO vp, Model m,HttpServletRequest request) {
+	public String movie(@ModelAttribute VideoPostVO vp, Model m,
+			HttpServletResponse response,HttpServletRequest request,HttpSession session) throws Exception {
+		response.setContentType("text/html;charset=UTF-8");
+		PrintWriter out=response.getWriter();
+		String admin_lv=(String)session.getAttribute("user_lv");
+		System.out.println(admin_lv);
+		if(admin_lv == null) {
+			out.println("<script>");
+			out.println("alert('다시 로그인 하세요!');");
+			out.println("location='/moving.com/member/login';");
+			out.println("</script>");
+		}else {
+			if(!admin_lv.equals("관리자")) {
+				out.println("<script>");
+				out.println("alert('접근 권한이 없습니다!');");
+				out.println("location='/moving.com/main';");
+				out.println("</script>");
+			}else {
+				
 		int page=1; // 쪽번호
 		int limit=10; // 한 페이지에 보여지는 목록 개수
 		if(request.getParameter("page") != null) { // get으로 전달된 페이지 번호가 있는 경우
@@ -81,5 +108,8 @@ public class AdminVideoController {
 		m.addAttribute("findName",findName); //검색어
 		
 		return "admin/admin_movie"; // 뷰 페이지 경로 지정
+			}
+		}
+		return null;
 	}
 }

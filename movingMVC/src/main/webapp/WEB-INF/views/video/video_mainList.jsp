@@ -1,27 +1,15 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="../include/header.jsp" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <meta charset="UTF-8">
-
-<link rel="stylesheet" type="text/css" href="./resources/css/movie_mainList.css" />
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script>
-$(document).ready(function () {
-	$(".postView").click(function () {
-		$(".postViewArea").show();
-	});
-	$(".postViewAreaClose").click(function () {
-		$(".postViewArea").hide();
-	})
-});
-</script>
 
 <div id="movie_main_list">
 	<!-- 영상 목록 이름, 영상 포스트 -->
 
 	<div id="slide_show">
-		<!-- 슬라이드 쇼 -->
+		<!-- 상단 글 -->
 		<h1>
 			독립 영화의 모든 것
 			<br />
@@ -42,18 +30,94 @@ $(document).ready(function () {
 				<div class="listName">
 					범죄/스릴러
 				</div>
+				<c:if test="${!empty topLs}">
+					<div class="moreView">
+						<a href="videocategory?codeNo=3000101">더 보기</a>
+					</div>
+				</c:if>
+			</div>
+			<c:if test="${!empty topLs}">
+				<c:forEach var="videoPostVO" items="${topLs}">
+					<div class="dvd_video_film"><%-- 범죄/스릴러 첫 번째 영상 --%>
+						<div class="videoPost">
+							<a href="content?codeNo=${videoPostVO.codeNo}">
+								
+							</a>
+						</div>
+						<div class="videoTitle">
+							<a href="content?codeNo=${videoPostVO.codeNo}">${videoPostVO.titleKorean}</a>
+						</div>
+						<div class="postBtn">
+							<div class="producerProf">
+								<img src="../images/profile.jpg">
+							</div>
+							<div class="producerName">
+								<b>${videoPostVO.director}</b>
+							</div>
+							<div class="share">
+								<a href="#"><img src="../images/share.png"></a>
+							</div>
+							<div class="join">
+								<a href="https://www.youtube.com/channel/UCriPmQ2RpvdNSZkMwuOmTnQ"><img src="../images/join.PNG"></a>
+							</div>
+							<div class="clear"></div>
+							<div class="hyperLink">
+								<a href="http://www.youtube.com"><font size="2px">youtube.com</font></a>
+							</div>
+						</div>
+						<div id="coverIntro">
+							<button class="intro"><I>Intro post&nbsp;&nbsp;+&nbsp;</I></button>
+						</div>
+						<div id="modDiv" style="display: none;">
+							<div class="introPostImage">
+								<img src="../images/video01.PNG" />
+							</div>
+							<div class="introPostTitle">${videoPostVO.titleKorean}(${videoPostVO.titleEnglish})</div>
+							<div class="introPostGrade">${videoPostVO.grade}</div>
+							<div class="introPostGenre">${videoPostVO.genre} | </div>
+							<div class="introPostRDate">${videoPostVO.releaseDate} | </div>
+							<div class="introPostVLength">${videoPostVO.videoLength} | </div>
+							<div class="introPostEra">${videoPostVO.eraBackground} | </div>
+							<div class="introPostRate">${videoPostVO.rate}</div>
+							<div class="introPostDir">감독&nbsp;${videoPostVO.director}</div>
+							<div class="introPostHit">조회 수&nbsp;${videoPostVO.hit}</div>
+							<div class="introPostCont">내용&nbsp;${videoPostVO.content}</div>
+							<div>
+								<button type="button" class="close" onclick="modDivClose();"><I>close</I></button>
+							</div>
+						</div>
+						<script>
+							$(".intro").click(function () {
+								$("#modDiv").show();
+							});
+							function modDivClose() {
+								$("#modDiv").hide();
+							}
+						</script>
+					</div>
+				</c:forEach>
+			</c:if>
+		</div>
+		
+		<hr class="category_line">
+		
+		<div id="action"><!-- 액션 -->
+			<div class="listName_and_moreBtn">
+				<div class="listName">
+					액션/어드벤쳐
+				</div>
 				<div class="moreView">
-					<a href="videocategory">더 보기</a>
+					<a href="videocategory?codeNo=3000102">더 보기</a>
 				</div>
 			</div>
-			<div class="dvd_video_film"><%-- 범죄/스릴러 첫 번째 영상 --%>
+			<div class="dvd_video_film"><%-- 액션 첫 번째 영상 --%>
 				<div class="videoPost">
-					<a href="content">
+					<a href="content?genre=${videoPostVO.genre}">
 						
 					</a>
 				</div>
 				<div class="videoTitle">
-					<a href="content">제목을 입력하세요.</a>
+					<a href="content?genre=${videoPostVO.genre}">제목을 입력하세요.</a>
 				</div>
 				<div class="postBtn">
 					<div class="producerProf">
@@ -73,226 +137,35 @@ $(document).ready(function () {
 						<a href="http://www.youtube.com"><font size="2px">youtube.com</font></a>
 					</div>
 				</div>
-				<button class="postView">a b o u t	&nbsp;	&nbsp;	p o s t</button>
-				<div class="postViewArea" style="display: none;">
-					<button class="postViewAreaClose">c a n c l e</button>
+				<div id="coverIntro">
+					<button class="intro"><I>Intro post&nbsp;&nbsp;+&nbsp;</I></button>
 				</div>
-			</div>
-			<div class="dvd_video_film"><%-- 범죄/스릴러 두 번째 영상 --%>
-				<div class="videoPost">
-					<a href="content">
-						
-					</a>
-				</div>
-				<div class="videoTitle">
-					<a href="content">제목을 입력하세요.</a>
-				</div>
-				<div class="postBtn">
-					<div class="producerProf">
-						<img src="../images/profile.jpg">
+				<div id="modDiv" style="display: none;">
+					<div class="introPostImage">
+						<img src="../images/video01.PNG" />
 					</div>
-					<div class="producerName">
-						<b>우리 조 파이팅!</b>
-					</div>
-					<div class="share">
-						<a href="#"><img src="../images/share.png"></a>
-					</div>
-					<div class="join">
-						<a href="#"><img src="../images/join.PNG"></a>
-					</div>
-					<div class="clear"></div>
-					<div class="hyperLink">
-						<a href="http://www.youtube.com"><font size="2px">youtube.com</font></a>
+					<div class="introPostTitle">${videoPostVO.titleKorean}(${videoPostVO.titleEnglish})</div>
+					<div class="introPostGrade">${videoPostVO.grade}</div>
+					<div class="introPostGenre">${videoPostVO.genre} | </div>
+					<div class="introPostRDate">${videoPostVO.releaseDate} | </div>
+					<div class="introPostVLength">${videoPostVO.videoLength} | </div>
+					<div class="introPostEra">${videoPostVO.eraBackground} | </div>
+					<div class="introPostRate">${videoPostVO.rate}</div>
+					<div class="introPostDir">감독&nbsp;${videoPostVO.director}</div>
+					<div class="introPostHit">조회 수&nbsp;${videoPostVO.hit}</div>
+					<div class="introPostCont">내용&nbsp;${videoPostVO.content}</div>
+					<div>
+						<button type="button" class="close" onclick="modDivClose();"><I>close</I></button>
 					</div>
 				</div>
-				
-			</div>
-			<div class="dvd_video_film"><%-- 범죄/스릴러 세 번째 영상 --%>
-				<div class="videoPost">
-					<a href="content">
-						
-					</a>
-				</div>
-				<div class="videoTitle">
-					<a href="content">제목을 입력하세요.</a>
-				</div>
-				<div class="postBtn">
-					<div class="producerProf">
-						<img src="../images/profile.jpg">
-					</div>
-					<div class="producerName">
-						<b>우리 조 파이팅!</b>
-					</div>
-					<div class="share">
-						<a href="#"><img src="../images/share.png"></a>
-					</div>
-					<div class="join">
-						<a href="#"><img src="../images/join.PNG"></a>
-					</div>
-					<div class="clear"></div>
-					<div class="hyperLink">
-						<a href="http://www.youtube.com"><font size="2px">youtube.com</font></a>
-					</div>
-				</div>
-				
-			</div>
-			<div class="dvd_video_film"><%-- 범죄/스릴러 네 번째 영상 --%>
-				<div class="videoPost">
-					<a href="content">
-						
-					</a>
-				</div>
-				<div class="videoTitle">
-					<a href="content">제목을 입력하세요.</a>
-				</div>
-				<div class="postBtn">
-					<div class="producerProf">
-						<img src="../images/profile.jpg">
-					</div>
-					<div class="producerName">
-						<b>우리 조 파이팅!</b>
-					</div>
-					<div class="share">
-						<a href="#"><img src="../images/share.png"></a>
-					</div>
-					<div class="join">
-						<a href="#"><img src="../images/join.PNG"></a>
-					</div>
-					<div class="clear"></div>
-					<div class="hyperLink">
-						<a href="http://www.youtube.com"><font size="2px">youtube.com</font></a>
-					</div>
-				</div>
-				
-			</div>
-		</div>
-		
-		<hr class="category_line">
-		
-		<div id="action"><!-- 액션 -->
-			<div class="listName_and_moreBtn">
-				<div class="listName">
-					액션/어드벤처
-				</div>
-				<div class="moreView">
-					<a href="videocategory">더 보기</a>
-				</div>
-			</div>
-			<div class="dvd_video_film"><%-- 액션 첫 번째 영상 --%>
-				<div class="videoPost">
-					<a href="content">
-						
-					</a>
-				</div>
-				<div class="videoTitle">
-					<a href="content">제목을 입력하세요.</a>
-				</div>
-				<div class="postBtn">
-					<div class="producerProf">
-						<img src="../images/profile.jpg">
-					</div>
-					<div class="producerName">
-						<b>우리 조 파이팅!</b>
-					</div>
-					<div class="share">
-						<a href="#"><img src="../images/share.png"></a>
-					</div>
-					<div class="join">
-						<a href="#"><img src="../images/join.PNG"></a>
-					</div>
-					<div class="clear"></div>
-					<div class="hyperLink">
-						<a href="http://www.youtube.com"><font size="2px">youtube.com</font></a>
-					</div>
-				</div>
-				
-			</div>
-			<div class="dvd_video_film"><%-- 액션 두 번째 영상 --%>
-				<div class="videoPost"><%-- 영화 첫 화면, 마우스 오버 시 영상 빨리 감기로 몇 초간 재생, 동영상 편집 필요할 듯 함 --%>
-					<a href="content">
-						
-					</a>
-				</div>
-				<div class="videoTitle"><%-- 영화 이름 --%>
-					<a href="content">제목을 입력하세요.</a>
-				</div>
-				<div class="postBtn">
-					<div class="producerProf"><%-- 게시자 프로필 사진 --%>
-						<img src="../images/profile.jpg">
-					</div>
-					<div class="producerName"><%-- 게시자 --%>
-						<b>우리 조 파이팅!</b>
-					</div>
-					<div class="share"><%-- 유튜브 공유하기 카피하려고 만듦 --%>
-						<a href="#"><img src="../images/share.png"></a>
-					</div>
-					<div class="join"><%-- 게시자 홈페이지로 이동 --%>
-						<a href="#"><img src="../images/join.PNG"></a>
-					</div>
-					<div class="clear"></div>
-					<div class="hyperLink"><%-- moving main site로 이동 --%>
-						<a href="http://www.youtube.com"><font size="2px">youtube.com</font></a>
-					</div>
-				</div>
-				
-			</div>
-			<div class="dvd_video_film"><%-- 액션 세 번째 영상 --%>
-				<div class="videoPost">
-					<a href="content">
-						
-					</a>
-				</div>
-				<div class="videoTitle">
-					<a href="content">제목을 입력하세요.</a>
-				</div>
-				<div class="postBtn">
-					<div class="producerProf">
-						<img src="../images/profile.jpg">
-					</div>
-					<div class="producerName">
-						<b>우리 조 파이팅!</b>
-					</div>
-					<div class="share">
-						<a href="#"><img src="../images/share.png"></a>
-					</div>
-					<div class="join">
-						<a href="#"><img src="../images/join.PNG"></a>
-					</div>
-					<div class="clear"></div>
-					<div class="hyperLink">
-						<a href="http://www.youtube.com"><font size="2px">youtube.com</font></a>
-					</div>
-				</div>
-				
-			</div>
-			<div class="dvd_video_film"><%-- 액션 네 번째 영상 --%>
-				<div class="videoPost">
-					<a href="content">
-						
-					</a>
-				</div>
-				<div class="videoTitle">
-					<a href="content">제목을 입력하세요.</a>
-				</div>
-				<div class="postBtn">
-					<div class="producerProf">
-						<img src="../images/profile.jpg">
-					</div>
-					<div class="producerName">
-						<b>우리 조 파이팅!</b>
-					</div>
-					<div class="share">
-						<a href="#"><img src="../images/share.png"></a>
-					</div>
-					<div class="join">
-						<a href="#"><img src="../images/join.PNG"></a>
-					</div>
-					<div class="clear"></div>
-					<div class="hyperLink">
-						<a href="http://www.youtube.com"><font size="2px">youtube.com</font></a>
-					</div>
-				</div>
-				
+				<script>
+					$(".intro").click(function () {
+						$("#modDiv").show();
+					});
+					function modDivClose() {
+						$("#modDiv").hide();
+					}
+				</script>
 			</div>
 		</div>
 		
@@ -304,17 +177,17 @@ $(document).ready(function () {
 					다큐멘터리/드라마/청춘
 				</div>
 				<div class="moreView">
-					<a href="videocategory">더 보기</a>
+					<a href="videocategory?codeNo=3000103">더 보기</a>
 				</div>
 			</div>
 			<div class="dvd_video_film">
 				<div class="videoPost">
-					<a href="content">
+					<a href="content?genre=${videoPostVO.genre}">
 						
 					</a>
 				</div>
 				<div class="videoTitle">
-					<a href="content">제목을 입력하세요.</a>
+					<a href="content?genre=${videoPostVO.genre}">제목을 입력하세요.</a>
 				</div>
 				<div class="postBtn">
 					<div class="producerProf">
@@ -327,101 +200,42 @@ $(document).ready(function () {
 						<a href="#"><img src="../images/share.png"></a>
 					</div>
 					<div class="join">
-						<a href="#"><img src="../images/join.PNG"></a>
+						<a href="https://www.youtube.com/channel/UCriPmQ2RpvdNSZkMwuOmTnQ"><img src="../images/join.PNG"></a>
 					</div>
 					<div class="clear"></div>
 					<div class="hyperLink">
 						<a href="http://www.youtube.com"><font size="2px">youtube.com</font></a>
 					</div>
 				</div>
-				
-			</div>
-			<div class="dvd_video_film">
-				<div class="videoPost">
-					<a href="content">
-						
-					</a>
+				<div id="coverIntro">
+					<button class="intro"><I>Intro post&nbsp;&nbsp;+&nbsp;</I></button>
 				</div>
-				<div class="videoTitle">
-					<a href="content">제목을 입력하세요.</a>
-				</div>
-				<div class="postBtn">
-					<div class="producerProf">
-						<img src="../images/profile.jpg">
+				<div id="modDiv" style="display: none;">
+					<div class="introPostImage">
+						<img src="../images/video01.PNG" />
 					</div>
-					<div class="producerName">
-						<b>우리 조 파이팅!</b>
-					</div>
-					<div class="share">
-						<a href="#"><img src="../images/share.png"></a>
-					</div>
-					<div class="join">
-						<a href="#"><img src="../images/join.PNG"></a>
-					</div>
-					<div class="clear"></div>
-					<div class="hyperLink">
-						<a href="http://www.youtube.com"><font size="2px">youtube.com</font></a>
+					<div class="introPostTitle">${videoPostVO.titleKorean}(${videoPostVO.titleEnglish})</div>
+					<div class="introPostGrade">${videoPostVO.grade}</div>
+					<div class="introPostGenre">${videoPostVO.genre} | </div>
+					<div class="introPostRDate">${videoPostVO.releaseDate} | </div>
+					<div class="introPostVLength">${videoPostVO.videoLength} | </div>
+					<div class="introPostEra">${videoPostVO.eraBackground} | </div>
+					<div class="introPostRate">${videoPostVO.rate}</div>
+					<div class="introPostDir">감독&nbsp;${videoPostVO.director}</div>
+					<div class="introPostHit">조회 수&nbsp;${videoPostVO.hit}</div>
+					<div class="introPostCont">내용&nbsp;${videoPostVO.content}</div>
+					<div>
+						<button type="button" class="close" onclick="modDivClose();"><I>close</I></button>
 					</div>
 				</div>
-				
-			</div>
-			<div class="dvd_video_film">
-				<div class="videoPost">
-					<a href="content">
-						
-					</a>
-				</div>
-				<div class="videoTitle">
-					<a href="content">제목을 입력하세요.</a>
-				</div>
-				<div class="postBtn">
-					<div class="producerProf">
-						<img src="../images/profile.jpg">
-					</div>
-					<div class="producerName">
-						<b>우리 조 파이팅!</b>
-					</div>
-					<div class="share">
-						<a href="#"><img src="../images/share.png"></a>
-					</div>
-					<div class="join">
-						<a href="#"><img src="../images/join.PNG"></a>
-					</div>
-					<div class="clear"></div>
-					<div class="hyperLink">
-						<a href="http://www.youtube.com"><font size="2px">youtube.com</font></a>
-					</div>
-				</div>
-				
-			</div>
-			<div class="dvd_video_film">
-				<div class="videoPost">
-					<a href="content">
-						
-					</a>
-				</div>
-				<div class="videoTitle">
-					<a href="content">제목을 입력하세요.</a>
-				</div>
-				<div class="postBtn">
-					<div class="producerProf">
-						<img src="../images/profile.jpg">
-					</div>
-					<div class="producerName">
-						<b>우리 조 파이팅!</b>
-					</div>
-					<div class="share">
-						<a href="#"><img src="../images/share.png"></a>
-					</div>
-					<div class="join">
-						<a href="#"><img src="../images/join.PNG"></a>
-					</div>
-					<div class="clear"></div>
-					<div class="hyperLink">
-						<a href="http://www.youtube.com"><font size="2px">youtube.com</font></a>
-					</div>
-				</div>
-				
+				<script>
+					$(".intro").click(function () {
+						$("#modDiv").show();
+					});
+					function modDivClose() {
+						$("#modDiv").hide();
+					}
+				</script>
 			</div>
 		</div>
 		
@@ -433,17 +247,17 @@ $(document).ready(function () {
 					역사/시대극
 				</div>
 				<div class="moreView">
-					<a href="videocategory">더 보기</a>
+					<a href="videocategory?codeNo=3000104">더 보기</a>
 				</div>
 			</div>
 			<div class="dvd_video_film">
 				<div class="videoPost">
-					<a href="content">
+					<a href="content?genre=${videoPostVO.genre}">
 						
 					</a>
 				</div>
 				<div class="videoTitle">
-					<a href="content">제목을 입력하세요.</a>
+					<a href="content?genre=${videoPostVO.genre}">제목을 입력하세요.</a>
 				</div>
 				<div class="postBtn">
 					<div class="producerProf">
@@ -456,101 +270,42 @@ $(document).ready(function () {
 						<a href="#"><img src="../images/share.png"></a>
 					</div>
 					<div class="join">
-						<a href="#"><img src="../images/join.PNG"></a>
+						<a href="https://www.youtube.com/channel/UCriPmQ2RpvdNSZkMwuOmTnQ"><img src="../images/join.PNG"></a>
 					</div>
 					<div class="clear"></div>
 					<div class="hyperLink">
 						<a href="http://www.youtube.com"><font size="2px">youtube.com</font></a>
 					</div>
 				</div>
-				
-			</div>
-			<div class="dvd_video_film">
-				<div class="videoPost">
-					<a href="content">
-						
-					</a>
+				<div id="coverIntro">
+					<button class="intro"><I>Intro post&nbsp;&nbsp;+&nbsp;</I></button>
 				</div>
-				<div class="videoTitle">
-					<a href="content">제목을 입력하세요.</a>
-				</div>
-				<div class="postBtn">
-					<div class="producerProf">
-						<img src="../images/profile.jpg">
+				<div id="modDiv" style="display: none;">
+					<div class="introPostImage">
+						<img src="../images/video01.PNG" />
 					</div>
-					<div class="producerName">
-						<b>우리 조 파이팅!</b>
-					</div>
-					<div class="share">
-						<a href="#"><img src="../images/share.png"></a>
-					</div>
-					<div class="join">
-						<a href="#"><img src="../images/join.PNG"></a>
-					</div>
-					<div class="clear"></div>
-					<div class="hyperLink">
-						<a href="http://www.youtube.com"><font size="2px">youtube.com</font></a>
+					<div class="introPostTitle">${videoPostVO.titleKorean}(${videoPostVO.titleEnglish})</div>
+					<div class="introPostGrade">${videoPostVO.grade}</div>
+					<div class="introPostGenre">${videoPostVO.genre} | </div>
+					<div class="introPostRDate">${videoPostVO.releaseDate} | </div>
+					<div class="introPostVLength">${videoPostVO.videoLength} | </div>
+					<div class="introPostEra">${videoPostVO.eraBackground} | </div>
+					<div class="introPostRate">${videoPostVO.rate}</div>
+					<div class="introPostDir">감독&nbsp;${videoPostVO.director}</div>
+					<div class="introPostHit">조회 수&nbsp;${videoPostVO.hit}</div>
+					<div class="introPostCont">내용&nbsp;${videoPostVO.content}</div>
+					<div>
+						<button type="button" class="close" onclick="modDivClose();"><I>close</I></button>
 					</div>
 				</div>
-				
-			</div>
-			<div class="dvd_video_film">
-				<div class="videoPost">
-					<a href="content">
-						
-					</a>
-				</div>
-				<div class="videoTitle">
-					<a href="content">제목을 입력하세요.</a>
-				</div>
-				<div class="postBtn">
-					<div class="producerProf">
-						<img src="../images/profile.jpg">
-					</div>
-					<div class="producerName">
-						<b>우리 조 파이팅!</b>
-					</div>
-					<div class="share">
-						<a href="#"><img src="../images/share.png"></a>
-					</div>
-					<div class="join">
-						<a href="#"><img src="../images/join.PNG"></a>
-					</div>
-					<div class="clear"></div>
-					<div class="hyperLink">
-						<a href="http://www.youtube.com"><font size="2px">youtube.com</font></a>
-					</div>
-				</div>
-				
-			</div>
-			<div class="dvd_video_film">
-				<div class="videoPost">
-					<a href="content">
-						
-					</a>
-				</div>
-				<div class="videoTitle">
-					<a href="content">제목을 입력하세요.</a>
-				</div>
-				<div class="postBtn">
-					<div class="producerProf">
-						<img src="../images/profile.jpg">
-					</div>
-					<div class="producerName">
-						<b>우리 조 파이팅!</b>
-					</div>
-					<div class="share">
-						<a href="#"><img src="../images/share.png"></a>
-					</div>
-					<div class="join">
-						<a href="#"><img src="../images/join.PNG"></a>
-					</div>
-					<div class="clear"></div>
-					<div class="hyperLink">
-						<a href="http://www.youtube.com"><font size="2px">youtube.com</font></a>
-					</div>
-				</div>
-				
+				<script>
+					$(".intro").click(function () {
+						$("#modDiv").show();
+					});
+					function modDivClose() {
+						$("#modDiv").hide();
+					}
+				</script>
 			</div>
 		</div>
 		
@@ -562,17 +317,17 @@ $(document).ready(function () {
 					판타지/공상과학
 				</div>
 				<div class="moreView">
-					<a href="videocategory">더 보기</a>
+					<a href="videocategory?codeNo=3000105">더 보기</a>
 				</div>
 			</div>
 			<div class="dvd_video_film">
 				<div class="videoPost">
-					<a href="content">
+					<a href="content?genre=${videoPostVO.genre}">
 						
 					</a>
 				</div>
 				<div class="videoTitle">
-					<a href="content">제목을 입력하세요.</a>
+					<a href="content?genre=${videoPostVO.genre}">제목을 입력하세요.</a>
 				</div>
 				<div class="postBtn">
 					<div class="producerProf">
@@ -585,101 +340,42 @@ $(document).ready(function () {
 						<a href="#"><img src="../images/share.png"></a>
 					</div>
 					<div class="join">
-						<a href="#"><img src="../images/join.PNG"></a>
+						<a href="https://www.youtube.com/channel/UCriPmQ2RpvdNSZkMwuOmTnQ"><img src="../images/join.PNG"></a>
 					</div>
 					<div class="clear"></div>
 					<div class="hyperLink">
 						<a href="http://www.youtube.com"><font size="2px">youtube.com</font></a>
 					</div>
 				</div>
-				
-			</div>
-			<div class="dvd_video_film">
-				<div class="videoPost">
-					<a href="content">
-						
-					</a>
+				<div id="coverIntro">
+					<button class="intro"><I>Intro post&nbsp;&nbsp;+&nbsp;</I></button>
 				</div>
-				<div class="videoTitle">
-					<a href="content">제목을 입력하세요.</a>
-				</div>
-				<div class="postBtn">
-					<div class="producerProf">
-						<img src="../images/profile.jpg">
+				<div id="modDiv" style="display: none;">
+					<div class="introPostImage">
+						<img src="../images/video01.PNG" />
 					</div>
-					<div class="producerName">
-						<b>우리 조 파이팅!</b>
-					</div>
-					<div class="share">
-						<a href="#"><img src="../images/share.png"></a>
-					</div>
-					<div class="join">
-						<a href="#"><img src="../images/join.PNG"></a>
-					</div>
-					<div class="clear"></div>
-					<div class="hyperLink">
-						<a href="http://www.youtube.com"><font size="2px">youtube.com</font></a>
+					<div class="introPostTitle">${videoPostVO.titleKorean}(${videoPostVO.titleEnglish})</div>
+					<div class="introPostGrade">${videoPostVO.grade}</div>
+					<div class="introPostGenre">${videoPostVO.genre} | </div>
+					<div class="introPostRDate">${videoPostVO.releaseDate} | </div>
+					<div class="introPostVLength">${videoPostVO.videoLength} | </div>
+					<div class="introPostEra">${videoPostVO.eraBackground} | </div>
+					<div class="introPostRate">${videoPostVO.rate}</div>
+					<div class="introPostDir">감독&nbsp;${videoPostVO.director}</div>
+					<div class="introPostHit">조회 수&nbsp;${videoPostVO.hit}</div>
+					<div class="introPostCont">내용&nbsp;${videoPostVO.content}</div>
+					<div>
+						<button type="button" class="close" onclick="modDivClose();"><I>close</I></button>
 					</div>
 				</div>
-				
-			</div>
-			<div class="dvd_video_film">
-				<div class="videoPost">
-					<a href="content">
-						
-					</a>
-				</div>
-				<div class="videoTitle">
-					<a href="content">제목을 입력하세요.</a>
-				</div>
-				<div class="postBtn">
-					<div class="producerProf">
-						<img src="../images/profile.jpg">
-					</div>
-					<div class="producerName">
-						<b>우리 조 파이팅!</b>
-					</div>
-					<div class="share">
-						<a href="#"><img src="../images/share.png"></a>
-					</div>
-					<div class="join">
-						<a href="#"><img src="../images/join.PNG"></a>
-					</div>
-					<div class="clear"></div>
-					<div class="hyperLink">
-						<a href="http://www.youtube.com"><font size="2px">youtube.com</font></a>
-					</div>
-				</div>
-				
-			</div>
-			<div class="dvd_video_film">
-				<div class="videoPost">
-					<a href="content">
-						
-					</a>
-				</div>
-				<div class="videoTitle">
-					<a href="content">제목을 입력하세요.</a>
-				</div>
-				<div class="postBtn">
-					<div class="producerProf">
-						<img src="../images/profile.jpg">
-					</div>
-					<div class="producerName">
-						<b>우리 조 파이팅!</b>
-					</div>
-					<div class="share">
-						<a href="#"><img src="../images/share.png"></a>
-					</div>
-					<div class="join">
-						<a href="#"><img src="../images/join.PNG"></a>
-					</div>
-					<div class="clear"></div>
-					<div class="hyperLink">
-						<a href="http://www.youtube.com"><font size="2px">youtube.com</font></a>
-					</div>
-				</div>
-				
+				<script>
+					$(".intro").click(function () {
+						$("#modDiv").show();
+					});
+					function modDivClose() {
+						$("#modDiv").hide();
+					}
+				</script>
 			</div>
 		</div>
 		
@@ -691,17 +387,17 @@ $(document).ready(function () {
 					연애
 				</div>
 				<div class="moreView">
-					<a href="videocategory">더 보기</a>
+					<a href="videocategory?codeNo=3000106">더 보기</a>
 				</div>
 			</div>
 			<div class="dvd_video_film">
 				<div class="videoPost">
-					<a href="content">
+					<a href="content?genre=${videoPostVO.genre}">
 						
 					</a>
 				</div>
 				<div class="videoTitle">
-					<a href="content">제목을 입력하세요.</a>
+					<a href="content?genre=${videoPostVO.genre}">제목을 입력하세요.</a>
 				</div>
 				<div class="postBtn">
 					<div class="producerProf">
@@ -714,101 +410,42 @@ $(document).ready(function () {
 						<a href="#"><img src="../images/share.png"></a>
 					</div>
 					<div class="join">
-						<a href="#"><img src="../images/join.PNG"></a>
+						<a href="https://www.youtube.com/channel/UCriPmQ2RpvdNSZkMwuOmTnQ"><img src="../images/join.PNG"></a>
 					</div>
 					<div class="clear"></div>
 					<div class="hyperLink">
 						<a href="http://www.youtube.com"><font size="2px">youtube.com</font></a>
 					</div>
 				</div>
-				
-			</div>
-			<div class="dvd_video_film">
-				<div class="videoPost">
-					<a href="content">
-						
-					</a>
+				<div id="coverIntro">
+					<button class="intro"><I>Intro post&nbsp;&nbsp;+&nbsp;</I></button>
 				</div>
-				<div class="videoTitle">
-					<a href="content">제목을 입력하세요.</a>
-				</div>
-				<div class="postBtn">
-					<div class="producerProf">
-						<img src="../images/profile.jpg">
+				<div id="modDiv" style="display: none;">
+					<div class="introPostImage">
+						<img src="../images/video01.PNG" />
 					</div>
-					<div class="producerName">
-						<b>우리 조 파이팅!</b>
-					</div>
-					<div class="share">
-						<a href="#"><img src="../images/share.png"></a>
-					</div>
-					<div class="join">
-						<a href="#"><img src="../images/join.PNG"></a>
-					</div>
-					<div class="clear"></div>
-					<div class="hyperLink">
-						<a href="http://www.youtube.com"><font size="2px">youtube.com</font></a>
+					<div class="introPostTitle">${videoPostVO.titleKorean}(${videoPostVO.titleEnglish})</div>
+					<div class="introPostGrade">${videoPostVO.grade}</div>
+					<div class="introPostGenre">${videoPostVO.genre} | </div>
+					<div class="introPostRDate">${videoPostVO.releaseDate} | </div>
+					<div class="introPostVLength">${videoPostVO.videoLength} | </div>
+					<div class="introPostEra">${videoPostVO.eraBackground} | </div>
+					<div class="introPostRate">${videoPostVO.rate}</div>
+					<div class="introPostDir">감독&nbsp;${videoPostVO.director}</div>
+					<div class="introPostHit">조회 수&nbsp;${videoPostVO.hit}</div>
+					<div class="introPostCont">내용&nbsp;${videoPostVO.content}</div>
+					<div>
+						<button type="button" class="close" onclick="modDivClose();"><I>close</I></button>
 					</div>
 				</div>
-				
-			</div>
-			<div class="dvd_video_film">
-				<div class="videoPost">
-					<a href="content">
-						
-					</a>
-				</div>
-				<div class="videoTitle">
-					<a href="content">제목을 입력하세요.</a>
-				</div>
-				<div class="postBtn">
-					<div class="producerProf">
-						<img src="../images/profile.jpg">
-					</div>
-					<div class="producerName">
-						<b>우리 조 파이팅!</b>
-					</div>
-					<div class="share">
-						<a href="#"><img src="../images/share.png"></a>
-					</div>
-					<div class="join">
-						<a href="#"><img src="../images/join.PNG"></a>
-					</div>
-					<div class="clear"></div>
-					<div class="hyperLink">
-						<a href="http://www.youtube.com"><font size="2px">youtube.com</font></a>
-					</div>
-				</div>
-				
-			</div>
-			<div class="dvd_video_film">
-				<div class="videoPost">
-					<a href="content">
-						
-					</a>
-				</div>
-				<div class="videoTitle">
-					<a href="content">제목을 입력하세요.</a>
-				</div>
-				<div class="postBtn">
-					<div class="producerProf">
-						<img src="../images/profile.jpg">
-					</div>
-					<div class="producerName">
-						<b>우리 조 파이팅!</b>
-					</div>
-					<div class="share">
-						<a href="#"><img src="../images/share.png"></a>
-					</div>
-					<div class="join">
-						<a href="#"><img src="../images/join.PNG"></a>
-					</div>
-					<div class="clear"></div>
-					<div class="hyperLink">
-						<a href="http://www.youtube.com"><font size="2px">youtube.com</font></a>
-					</div>
-				</div>
-				
+				<script>
+					$(".intro").click(function () {
+						$("#modDiv").show();
+					});
+					function modDivClose() {
+						$("#modDiv").hide();
+					}
+				</script>
 			</div>
 		</div>
 		
@@ -820,17 +457,17 @@ $(document).ready(function () {
 					코미디
 				</div>
 				<div class="moreView">
-					<a href="videocategory">더 보기</a>
+					<a href="videocategory?codeNo=3000107">더 보기</a>
 				</div>
 			</div>
 			<div class="dvd_video_film">
 				<div class="videoPost">
-					<a href="content">
+					<a href="content?genre=${videoPostVO.genre}">
 						
 					</a>
 				</div>
 				<div class="videoTitle">
-					<a href="content">제목을 입력하세요.</a>
+					<a href="content?genre=${videoPostVO.genre}">제목을 입력하세요.</a>
 				</div>
 				<div class="postBtn">
 					<div class="producerProf">
@@ -843,101 +480,42 @@ $(document).ready(function () {
 						<a href="#"><img src="../images/share.png"></a>
 					</div>
 					<div class="join">
-						<a href="#"><img src="../images/join.PNG"></a>
+						<a href="https://www.youtube.com/channel/UCriPmQ2RpvdNSZkMwuOmTnQ"><img src="../images/join.PNG"></a>
 					</div>
 					<div class="clear"></div>
 					<div class="hyperLink">
 						<a href="http://www.youtube.com"><font size="2px">youtube.com</font></a>
 					</div>
 				</div>
-				
-			</div>
-			<div class="dvd_video_film">
-				<div class="videoPost">
-					<a href="content">
-						
-					</a>
+				<div id="coverIntro">
+					<button class="intro"><I>Intro post&nbsp;&nbsp;+&nbsp;</I></button>
 				</div>
-				<div class="videoTitle">
-					<a href="content">제목을 입력하세요.</a>
-				</div>
-				<div class="postBtn">
-					<div class="producerProf">
-						<img src="../images/profile.jpg">
+				<div id="modDiv" style="display: none;">
+					<div class="introPostImage">
+						<img src="../images/video01.PNG" />
 					</div>
-					<div class="producerName">
-						<b>우리 조 파이팅!</b>
-					</div>
-					<div class="share">
-						<a href="#"><img src="../images/share.png"></a>
-					</div>
-					<div class="join">
-						<a href="#"><img src="../images/join.PNG"></a>
-					</div>
-					<div class="clear"></div>
-					<div class="hyperLink">
-						<a href="http://www.youtube.com"><font size="2px">youtube.com</font></a>
+					<div class="introPostTitle">${videoPostVO.titleKorean}(${videoPostVO.titleEnglish})</div>
+					<div class="introPostGrade">${videoPostVO.grade}</div>
+					<div class="introPostGenre">${videoPostVO.genre} | </div>
+					<div class="introPostRDate">${videoPostVO.releaseDate} | </div>
+					<div class="introPostVLength">${videoPostVO.videoLength} | </div>
+					<div class="introPostEra">${videoPostVO.eraBackground} | </div>
+					<div class="introPostRate">${videoPostVO.rate}</div>
+					<div class="introPostDir">감독&nbsp;${videoPostVO.director}</div>
+					<div class="introPostHit">조회 수&nbsp;${videoPostVO.hit}</div>
+					<div class="introPostCont">내용&nbsp;${videoPostVO.content}</div>
+					<div>
+						<button type="button" class="close" onclick="modDivClose();"><I>close</I></button>
 					</div>
 				</div>
-				
-			</div>
-			<div class="dvd_video_film">
-				<div class="videoPost">
-					<a href="content">
-						
-					</a>
-				</div>
-				<div class="videoTitle">
-					<a href="content">제목을 입력하세요.</a>
-				</div>
-				<div class="postBtn">
-					<div class="producerProf">
-						<img src="../images/profile.jpg">
-					</div>
-					<div class="producerName">
-						<b>우리 조 파이팅!</b>
-					</div>
-					<div class="share">
-						<a href="#"><img src="../images/share.png"></a>
-					</div>
-					<div class="join">
-						<a href="#"><img src="../images/join.PNG"></a>
-					</div>
-					<div class="clear"></div>
-					<div class="hyperLink">
-						<a href="http://www.youtube.com"><font size="2px">youtube.com</font></a>
-					</div>
-				</div>
-				
-			</div>
-			<div class="dvd_video_film">
-				<div class="videoPost">
-					<a href="content">
-						
-					</a>
-				</div>
-				<div class="videoTitle">
-					<a href="content">제목을 입력하세요.</a>
-				</div>
-				<div class="postBtn">
-					<div class="producerProf">
-						<img src="../images/profile.jpg">
-					</div>
-					<div class="producerName">
-						<b>우리 조 파이팅!</b>
-					</div>
-					<div class="share">
-						<a href="#"><img src="../images/share.png"></a>
-					</div>
-					<div class="join">
-						<a href="#"><img src="../images/join.PNG"></a>
-					</div>
-					<div class="clear"></div>
-					<div class="hyperLink">
-						<a href="http://www.youtube.com"><font size="2px">youtube.com</font></a>
-					</div>
-				</div>
-				
+				<script>
+					$(".intro").click(function () {
+						$("#modDiv").show();
+					});
+					function modDivClose() {
+						$("#modDiv").hide();
+					}
+				</script>
 			</div>
 		</div>
 		
@@ -949,17 +527,17 @@ $(document).ready(function () {
 					애니메이션
 				</div>
 				<div class="moreView">
-					<a href="videocategory">더 보기</a>
+					<a href="videocategory?codeNo=3000108">더 보기</a>
 				</div>
 			</div>
 			<div class="dvd_video_film">
 				<div class="videoPost">
-					<a href="content">
+					<a href="content?genre=${videoPostVO.genre}">
 						
 					</a>
 				</div>
 				<div class="videoTitle">
-					<a href="content">제목을 입력하세요.</a>
+					<a href="content?genre=${videoPostVO.genre}">제목을 입력하세요.</a>
 				</div>
 				<div class="postBtn">
 					<div class="producerProf">
@@ -972,101 +550,42 @@ $(document).ready(function () {
 						<a href="#"><img src="../images/share.png"></a>
 					</div>
 					<div class="join">
-						<a href="#"><img src="../images/join.PNG"></a>
+						<a href="https://www.youtube.com/channel/UCriPmQ2RpvdNSZkMwuOmTnQ"><img src="../images/join.PNG"></a>
 					</div>
 					<div class="clear"></div>
 					<div class="hyperLink">
 						<a href="http://www.youtube.com"><font size="2px">youtube.com</font></a>
 					</div>
 				</div>
-				
-			</div>
-			<div class="dvd_video_film">
-				<div class="videoPost">
-					<a href="content">
-						
-					</a>
+				<div id="coverIntro">
+					<button class="intro"><I>Intro post&nbsp;&nbsp;+&nbsp;</I></button>
 				</div>
-				<div class="videoTitle">
-					<a href="content">제목을 입력하세요.</a>
-				</div>
-				<div class="postBtn">
-					<div class="producerProf">
-						<img src="../images/profile.jpg">
+				<div id="modDiv" style="display: none;">
+					<div class="introPostImage">
+						<img src="../images/video01.PNG" />
 					</div>
-					<div class="producerName">
-						<b>우리 조 파이팅!</b>
-					</div>
-					<div class="share">
-						<a href="#"><img src="../images/share.png"></a>
-					</div>
-					<div class="join">
-						<a href="#"><img src="../images/join.PNG"></a>
-					</div>
-					<div class="clear"></div>
-					<div class="hyperLink">
-						<a href="http://www.youtube.com"><font size="2px">youtube.com</font></a>
+					<div class="introPostTitle">${videoPostVO.titleKorean}(${videoPostVO.titleEnglish})</div>
+					<div class="introPostGrade">${videoPostVO.grade}</div>
+					<div class="introPostGenre">${videoPostVO.genre} | </div>
+					<div class="introPostRDate">${videoPostVO.releaseDate} | </div>
+					<div class="introPostVLength">${videoPostVO.videoLength} | </div>
+					<div class="introPostEra">${videoPostVO.eraBackground} | </div>
+					<div class="introPostRate">${videoPostVO.rate}</div>
+					<div class="introPostDir">감독&nbsp;${videoPostVO.director}</div>
+					<div class="introPostHit">조회 수&nbsp;${videoPostVO.hit}</div>
+					<div class="introPostCont">내용&nbsp;${videoPostVO.content}</div>
+					<div>
+						<button type="button" class="close" onclick="modDivClose();"><I>close</I></button>
 					</div>
 				</div>
-				
-			</div>
-			<div class="dvd_video_film">
-				<div class="videoPost">
-					<a href="content">
-						
-					</a>
-				</div>
-				<div class="videoTitle">
-					<a href="content">제목을 입력하세요.</a>
-				</div>
-				<div class="postBtn">
-					<div class="producerProf">
-						<img src="../images/profile.jpg">
-					</div>
-					<div class="producerName">
-						<b>우리 조 파이팅!</b>
-					</div>
-					<div class="share">
-						<a href="#"><img src="../images/share.png"></a>
-					</div>
-					<div class="join">
-						<a href="#"><img src="../images/join.PNG"></a>
-					</div>
-					<div class="clear"></div>
-					<div class="hyperLink">
-						<a href="http://www.youtube.com"><font size="2px">youtube.com</font></a>
-					</div>
-				</div>
-				
-			</div>
-			<div class="dvd_video_film">
-				<div class="videoPost">
-					<a href="content">
-						
-					</a>
-				</div>
-				<div class="videoTitle">
-					<a href="content">제목을 입력하세요.</a>
-				</div>
-				<div class="postBtn">
-					<div class="producerProf">
-						<img src="../images/profile.jpg">
-					</div>
-					<div class="producerName">
-						<b>우리 조 파이팅!</b>
-					</div>
-					<div class="share">
-						<a href="#"><img src="../images/share.png"></a>
-					</div>
-					<div class="join">
-						<a href="#"><img src="../images/join.PNG"></a>
-					</div>
-					<div class="clear"></div>
-					<div class="hyperLink">
-						<a href="http://www.youtube.com"><font size="2px">youtube.com</font></a>
-					</div>
-				</div>
-				
+				<script>
+					$(".intro").click(function () {
+						$("#modDiv").show();
+					});
+					function modDivClose() {
+						$("#modDiv").hide();
+					}
+				</script>
 			</div>
 		</div>
 		
@@ -1078,17 +597,17 @@ $(document).ready(function () {
 					기타
 				</div>
 				<div class="moreView">
-					<a href="videocategory">더 보기</a>
+					<a href="videocategory?codeNo=3000109">더 보기</a>
 				</div>
 			</div>
 			<div class="dvd_video_film">
 				<div class="videoPost">
-					<a href="content">
+					<a href="content?genre=${videoPostVO.genre}">
 						
 					</a>
 				</div>
 				<div class="videoTitle">
-					<a href="content">제목을 입력하세요.</a>
+					<a href="content?genre=${videoPostVO.genre}">제목을 입력하세요.</a>
 				</div>
 				<div class="postBtn">
 					<div class="producerProf">
@@ -1101,101 +620,42 @@ $(document).ready(function () {
 						<a href="#"><img src="../images/share.png"></a>
 					</div>
 					<div class="join">
-						<a href="#"><img src="../images/join.PNG"></a>
+						<a href="https://www.youtube.com/channel/UCriPmQ2RpvdNSZkMwuOmTnQ"><img src="../images/join.PNG"></a>
 					</div>
 					<div class="clear"></div>
 					<div class="hyperLink">
 						<a href="http://www.youtube.com"><font size="2px">youtube.com</font></a>
 					</div>
 				</div>
-				
-			</div>
-			<div class="dvd_video_film">
-				<div class="videoPost">
-					<a href="content">
-						
-					</a>
+				<div id="coverIntro">
+					<button class="intro"><I>Intro post&nbsp;&nbsp;+&nbsp;</I></button>
 				</div>
-				<div class="videoTitle">
-					<a href="content">제목을 입력하세요.</a>
-				</div>
-				<div class="postBtn">
-					<div class="producerProf">
-						<img src="../images/profile.jpg">
+				<div id="modDiv" style="display: none;">
+					<div class="introPostImage">
+						<img src="../images/video01.PNG" />
 					</div>
-					<div class="producerName">
-						<b>우리 조 파이팅!</b>
-					</div>
-					<div class="share">
-						<a href="#"><img src="../images/share.png"></a>
-					</div>
-					<div class="join">
-						<a href="#"><img src="../images/join.PNG"></a>
-					</div>
-					<div class="clear"></div>
-					<div class="hyperLink">
-						<a href="http://www.youtube.com"><font size="2px">youtube.com</font></a>
+					<div class="introPostTitle">${videoPostVO.titleKorean}(${videoPostVO.titleEnglish})</div>
+					<div class="introPostGrade">${videoPostVO.grade}</div>
+					<div class="introPostGenre">${videoPostVO.genre} | </div>
+					<div class="introPostRDate">${videoPostVO.releaseDate} | </div>
+					<div class="introPostVLength">${videoPostVO.videoLength} | </div>
+					<div class="introPostEra">${videoPostVO.eraBackground} | </div>
+					<div class="introPostRate">${videoPostVO.rate}</div>
+					<div class="introPostDir">감독&nbsp;${videoPostVO.director}</div>
+					<div class="introPostHit">조회 수&nbsp;${videoPostVO.hit}</div>
+					<div class="introPostCont">내용&nbsp;${videoPostVO.content}</div>
+					<div>
+						<button type="button" class="close" onclick="modDivClose();"><I>close</I></button>
 					</div>
 				</div>
-				
-			</div>
-			<div class="dvd_video_film">
-				<div class="videoPost">
-					<a href="content">
-						
-					</a>
-				</div>
-				<div class="videoTitle">
-					<a href="content">제목을 입력하세요.</a>
-				</div>
-				<div class="postBtn">
-					<div class="producerProf">
-						<img src="../images/profile.jpg">
-					</div>
-					<div class="producerName">
-						<b>우리 조 파이팅!</b>
-					</div>
-					<div class="share">
-						<a href="#"><img src="../images/share.png"></a>
-					</div>
-					<div class="join">
-						<a href="#"><img src="../images/join.PNG"></a>
-					</div>
-					<div class="clear"></div>
-					<div class="hyperLink">
-						<a href="http://www.youtube.com"><font size="2px">youtube.com</font></a>
-					</div>
-				</div>
-				
-			</div>
-			<div class="dvd_video_film">
-				<div class="videoPost">
-					<a href="content">
-						
-					</a>
-				</div>
-				<div class="videoTitle">
-					<a href="content">제목을 입력하세요.</a>
-				</div>
-				<div class="postBtn">
-					<div class="producerProf">
-						<img src="../images/profile.jpg">
-					</div>
-					<div class="producerName">
-						<b>우리 조 파이팅!</b>
-					</div>
-					<div class="share">
-						<a href="#"><img src="../images/share.png"></a>
-					</div>
-					<div class="join">
-						<a href="#"><img src="../images/join.PNG"></a>
-					</div>
-					<div class="clear"></div>
-					<div class="hyperLink">
-						<a href="http://www.youtube.com"><font size="2px">youtube.com</font></a>
-					</div>
-				</div>
-				
+				<script>
+					$(".intro").click(function () {
+						$("#modDiv").show();
+					});
+					function modDivClose() {
+						$("#modDiv").hide();
+					}
+				</script>
 			</div>
 		</div>
 		

@@ -27,6 +27,9 @@ public class MUserVO {							//회원 정보
 	private String businessLicenseImagePath; 	//사업자등록증이미지경로
 	private String deactivateDate; 				//탈퇴_날짜
 	private String deactivateReason; 			//탈퇴_사유
+	private String deactivateReasonList; 			//탈퇴_사유_셀렉트
+	
+	
 	
 	/* 페이징 관련 변수 */
 	private int startrow; 						// 시작행 번호
@@ -175,6 +178,12 @@ public class MUserVO {							//회원 정보
 	public void setDeactivateReason(String deactivateReason) {
 		this.deactivateReason = deactivateReason;
 	}
+	public String getDeactivateReasonList() {
+		return deactivateReasonList;
+	}
+	public void setDeactivateReasonList(String deactivateReasonList) {
+		this.deactivateReasonList = deactivateReasonList;
+	}
 	public int getStartrow() {
 		return startrow;
 	}
@@ -199,5 +208,6 @@ public class MUserVO {							//회원 정보
 	public void setFindField(String findField) {
 		this.findField = findField;
 	}
+	
 	
 }//M_user class

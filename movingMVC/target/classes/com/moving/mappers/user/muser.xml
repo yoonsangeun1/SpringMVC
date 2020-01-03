@@ -14,29 +14,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 이메일 중복체크 -->
 	<select id="emailCheck" parameterType="java.lang.String" resultType="com.moving.domain.MUserVO"> 
 							<!-- pType과 rType 생략가능 , pType String , rType MUserVO로 축약가능  --> 
-		select * from m_user where email=#{email}
+		select * from m_user where email=#{userid}
 	</select>
 	
 	<!-- 회원저장 -->
 	<insert id="insertUser">
-		insert into m_user (id,userid,name,nickname,email,password,phone,genre_01,genre_02,genre_03)
-		 values(m_user_seq.nextval,#{email},#{name},#{nickname},#{email},#{password},#{phone},#{genre01},#{genre02},#{genre03})
+		insert into m_user (id,userid,name,nickname,email,password,phone,genre_01,genre_02,genre_03,profile_image_url)
+		 values(m_user_seq.nextval,#{email},#{name},#{nickname},#{email},#{password},#{phone},#{genre01},#{genre02},#{genre03},'default')
 	</insert>
 	
 	<!-- 비번찾기 > 회원정보검색 -->
 	<select id="pwd_find" resultType="mUserVO">
-		select * from m_user where email=#{email} and name=#{name}
+		select * from m_user where email=#{email} and name=#{name} and user_status=1
 	</select>
 	
 	<!-- 임시 비번수정 -->
 	<update id="pwd_edit">
 		update m_user set password=#{password}
-		where email=#{email}
+		where email=#{email} and user_status=1
 	</update>
 	
 	<!-- 이메일 아이디 찾기 > 회원정보 검색 -->
 	<select id="email_find" resultType="mUserVO">
-		select * from m_user where email=#{email}
+		select * from m_user where email=#{email} and user_status=1
 	</select>
 	
 	<!-- 	로그인인증 -->
@@ -60,18 +60,33 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="check_businessRegisterNo" parameterType="java.lang.String" resultType="com.moving.domain.MUserVO">
 		select * from m_user where business_register_no=#{businessRegisterNo}
 	</select>
-<!-- 	회원정보수정 -->
-<!-- 	<update id="m_edit"> -->
-<!-- 		update member set mem_pwd=#{mem_pwd},mem_name=#{mem_name},mem_phone01=#{mem_phone01},mem_phone02=#{mem_phone02} -->
-<!-- 		,mem_phone03=#{mem_phone03},mail_id=#{mail_id},mail_domain=#{mail_domain} -->
-<!-- 		where mem_id=#{mem_id} -->
-<!-- 	</update> -->
 	
-<!-- 	회원탈퇴 -->
-<!-- 	<update id="m_del"> -->
-<!-- 		update member set mem_delcont=#{mem_delcont}, mem_state=2, mem_deldate=sysdate where mem_id=#{mem_id} -->
-<!-- 	</update> -->
-
+	<!-- 비밀번호 수정 -->
+	<update id="password_change" parameterType="mUserVO">
+		update m_user set password=#{password} where userid=#{userid}
+	</update>
+	
+	<!-- 회원탈퇴 -->
+	<update id="member_delete">
+		update m_user set user_status=0, deactivate_date=sysdate, deactivate_reason=#{deactivateReason} where userid=#{userid}
+	</update>
+	
+	
+	<!-- 이메일 중복체크 -->
+	<select id="edit_emailCheck" parameterType="java.lang.String" resultType="com.moving.domain.MUserVO"> 
+							<!-- pType과 rType 생략가능 , pType String , rType MUserVO로 축약가능  --> 
+		select * from m_user where email=#{setting_email}
+	</select>
+	
+	<!-- 휴대폰번호 변경 -->
+	<update id="phone_change" parameterType="mUserVO">
+		update m_user set phone=#{phone} where userid=#{userid}
+	</update>
+	
+	<!-- id를 기준으로 소셜계정검색 -->
+	<select id="findSocialAcount" resultType="socialProfileVO">
+		select * from social_profile where user_id = #{id}
+	</select>
 </mapper>
 
 

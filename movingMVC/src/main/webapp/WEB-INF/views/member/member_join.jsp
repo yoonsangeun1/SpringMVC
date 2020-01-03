@@ -27,7 +27,7 @@
 							<div class="emailToken" style="display:none">
 								<div class="emailTokenInput">
 									<input id="email_check" name="email_check" class="text_input"  placeholder="인증번호 입력">
-									<input type="button" id="btnCheckToken" name="btnCheckToken" class="btnCheckToken"  value="인증">
+									<button type="button" id="btnCheckToken" name="btnCheckToken" class="btnCheckToken">인증하기</button>
 								</div>
 							</div>
 						</div>

@@ -5,10 +5,34 @@
 	<div class="h1">
 		<h1>게시글 관리</h1>
 	</div>
+	
 	<%-- 게시판 글 목록표 생성 --%>
 	<table id="aBoard_table" border="1">
 		<tr>
-			<td colspan="6" align="right" style="text-align: right">게시물 수  : ${boardCount }개</td>
+			<td>
+			<form method="get" action="/moving.com/admin/board?codeNo=${codeNo}">
+				<select class="slt" name="codeNo">
+					<option value="0"
+						<c:if test="${codeNo==0 }"> ${'selected' }</c:if>>전체</option>
+					<option value="10001"
+						<c:if test="${codeNo==10001 }"> ${'selected' }</c:if>>공지사항</option>
+					<option value="10002"
+						<c:if test="${codeNo==10002 }"> ${'selected' }</c:if>>자유게시판</option>
+					<option value="10003"
+						<c:if test="${codeNo==10003 }"> ${'selected' }</c:if>>FAQ</option>
+					<option value="10004"
+						<c:if test="${codeNo==10004 }"> ${'selected' }</c:if>>공모전</option>
+					<option value="10005"
+						<c:if test="${codeNo==10005 }"> ${'selected' }</c:if>>회원 프로필</option>
+					<option value="10006"
+						<c:if test="${codeNo==10006 }"> ${'selected' }</c:if>>Q&A</option>
+				</select>
+				
+				<button type="submit" >이동</button>
+			</form>
+			</td>
+			
+			<td colspan="5" align="right" style="text-align: right">게시물 수  : ${boardCount }개</td>
 		</tr>
 		<tr>
 			<th scope="col" class="aBT_check"><input type="checkbox" name="aBoard_check" value="checkB" /></th>
@@ -19,13 +43,13 @@
 			<th scope="col" class="aBT_hit">조회수</th>
 		</tr>
 		<c:if test="${!empty nplist}">
-			<c:forEach var="n" items="${nplist}">
+			<c:forEach var="n" items="${nplist }">
 			<tr>
-				<td class="bCheck"><input type="checkbox" name="checkBoard" value="boardCheck" /></td>
+				<td class="bCheck"><input type="checkbox" name="checkBoard" value="${n.codeNo }" /></td>
 				<td class="bNo">${n.id }</td>
 				<td class="bTitle">${n.title }</td>
 				<td class="bUserId">${n.mUserVO.nickname }</td>
-				<td class="bHegisterDate">${n.registerDate }</td>
+				<td class="bRegisterDate">${n.registerDate }</td>
 				<td class="bHit">${n.hit }</td>
 			</tr>
 			</c:forEach>
@@ -122,7 +146,7 @@
 		<%-- 검색전 페이징 --%>
 		<c:if test="${(empty findField) && (empty findName)}">
 			<c:if test="${page<=1 }">[이전]&nbsp;</c:if>
-			<c:if test="${page>1 }"><a href="board?page=${page-1 }">[이전]</a>&nbsp;</c:if>
+			<c:if test="${page>1 }"><a href="board?codeNo=${codeNo }&page=${page-1 }">[이전]</a>&nbsp;</c:if>
 			
 			<%-- 현재 쪽번호 --%>
 			<c:forEach var="a" begin="${startpage }" end="${endpage }" step="1">
@@ -131,18 +155,18 @@
 				<c:if test="${a==page }"><${a }></c:if>
 				
 				<%-- 현재 쪽번호가 선택되지 않은 경우 --%>
-				<c:if test="${a != page }"><a href="board?page=${a}">[${a }]</a>&nbsp;</c:if>
+				<c:if test="${a != page }"><a href="board?codeNo=${codeNo }&page=${a}">[${a }]</a>&nbsp;</c:if>
 			</c:forEach>
 							
 			<c:if test="${page >= maxpage }">[다음]</c:if>
-			<c:if test="${page < maxpage }"><a href="board?page=${page+1 }">[다음]</a></c:if>
+			<c:if test="${page < maxpage }"><a href="board?codeNo=${codeNo }&page=${page+1 }">[다음]</a></c:if>
 		</c:if>
 						
 		<%-- 검색후 페이징 --%>
 		<c:if test="${(!empty findField) || (!empty findName) }">
 			<c:if test="${page<=1 }">[이전]&nbsp;</c:if>
 			<c:if test="${page>1 }">
-				<a href="board?page=${page-1 }&findField=${findField}&findName=${findName}">[이전]</a>&nbsp;
+				<a href="board?codeNo=${codeNo }&age=${page-1 }&findField=${findField}&findName=${findName}">[이전]</a>&nbsp;
 			</c:if>
 							
 		<%-- 현재 쪽번호 --%>
@@ -153,14 +177,14 @@
 								
 			<%-- 현재 쪽번호가 아닌 경우 --%>
 			<c:if test="${a!=page }">
-				<a href="board?page=${a}&findField=${findField}&findName=${findName}">[${a}]</a>&nbsp;
+				<a href="board?codeNo=${codeNo }&page=${a}&findField=${findField}&findName=${findName}">[${a}]</a>&nbsp;
 			</c:if>
 								
 		</c:forEach>
 							
 		<c:if test="${page >= maxpage }">[다음]</c:if>
 		<c:if test="${page < maxpage}">
-			<a href="board?page=${page+1}&findField=${findField}&findName=${findName}">[다음]</a>
+			<a href="board?codeNo=${codeNo }&page=${page+1}&findField=${findField}&findName=${findName}">[다음]</a>
 		</c:if>
 		</c:if>
 		<%-- 검색후 페이징 --%>
@@ -168,10 +192,11 @@
 	
 	<%-- 검색창, 검색조건 콤보박스 --%>
 	<div id="aBoard_search">
-		<form>
+		<form action="/moving.com/admin/board?codeNo=${codeNo}&findField=${findField}&findName=${findName}">
+			<input type="hidden" name="codeNo" value="${codeNo }" />
 			<select class="select" name="findField">
-				<option value="all"
-					<c:if test="${findField=='all' }">${'selected' }</c:if>>전체</option>
+				<option value="title+content"
+					<c:if test="${findField=='title+content' }">${'selected' }</c:if>>제목+내용</option>
 				<option value="title"
 					<c:if test="${findField=='title' }">${'selected' }</c:if>>제목</option>
 				<option value="content"
@@ -179,7 +204,7 @@
 				<option value="nickname"
 					<c:if test="${findField=='nickname' }">${'selected' }</c:if>>작성자</option>
 			</select>
-			
+		
 			<%-- 검색 텍스트필드, 버튼 --%>
 			<input type="text" name="findName" class="input_box" placeholder="검색어를 입력하세요." value="${findName }" />
 			<button type="submit" class="btn">검색</button>
@@ -187,7 +212,5 @@
 	
 		
 	</div>
-	
-
 </div>
 <%@ include file="../include/admin_footer.jsp" %>

@@ -6,7 +6,7 @@ public class VideoPostVO {
 	
 	private int id; // 아이디
 	private int codeNo; // 영화 코드 번호
-	private String userId; // 회원 아이디
+	private int userId; // 회원 아이디
 	private String genre; // 영화 장르
 	private String titleEnglish; // 영화 영문 제목
 	private String titleKorean; // 영화 한글 제목
@@ -50,10 +50,10 @@ public class VideoPostVO {
 	public void setCodeNo(int codeNo) {
 		this.codeNo = codeNo;
 	}
-	public String getUserId() {
+	public int getUserId() {
 		return userId;
 	}
-	public void setUserId(String userId) {
+	public void setUserId(int userId) {
 		this.userId = userId;
 	}
 	public String getGenre() {

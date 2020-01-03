@@ -30,10 +30,10 @@ function join_check() {
 	}
 	if(!($password == "")) {
 		if($password.length < 4 || $password.length > 10){
-			$newtext='<font color="red" size="3"><b>&nbsp;&nbsp;&nbsp;비밀번호는 4~10자 한글,영문,숫자 조합만 가능합니다.</b></font>';
-			$("#pwdcheck").text('');
-			$("#pwdcheck").show(); 
-			$("#pwdcheck").append($newtext); 
+			$("#pwdcheck").text('비밀번호는 4~10자 한글,영문,숫자 조합만 가능합니다.');
+			$("#pwdcheck").css("color","red");
+			$("#pwdcheck").css("font-size","15px");
+			$("#pwdcheck").css("font-weight","bold");
 			$("#password2").val("");
 			$("#password").val('').focus();
 			return false;
@@ -98,24 +98,13 @@ function CountChecked(obj) {
 		obj.checked = false;
 		return false;
 	}
-//	if(checkCount < 3) {
-//		alert("선호장르를 3개 선택해주세요 !");
-//		return false;
-//	}
-	
 }
 
 
 /** 이메일아이디 실시간 중복체크 */
 function userid_check(){ 
-//	$("#emailCheck_message").hide(); //이메일발송 메세지영역 숨김
 	$email=$.trim($("#email").val());
 
-//	if($.trim($("#email").val()) == "") {
-//		alert("인증에 필요한 이메일을 입력해주세요 !");
-////		$("#email").val("").focus();
-//		return false;
-//	}
 	$.ajax({ //$는 jQuery , $.ajax는 jQuery내의 아작스 실행
 		type:"POST", //데이터를 서버로 보내는 방법
 		url:"join_emailCheck", //아작스 서버 주소 파일명->컨트롤러에 등록한 매핑주소
@@ -161,9 +150,7 @@ function userid_check(){
 
 /** 비밀번호 - 비밀번호확인 일치여부 체크 */
 $(function(){
-
     $('#password2').keyup(function(){
-
         if($('#password').val() != $('#password2').val()){
           $('#pwdcheck').text("비밀번호가 일치하지 않습니다 ! :P ");
           $("#pwdcheck").css("color","red");
@@ -173,19 +160,23 @@ $(function(){
           $("#password2").css("background-color","#FFCECE");
           $("#joinBtn").prop("disabled",true);
           $("#joinBtn").css("background-color","#aaaaaa");
-        } else{
-          $('#pwdcheck').text("비밀번호가 일치합니다 ! :) ");
-		  $("#pwdcheck").css("color","#9d8ce2");
-		  $("#pwdcheck").css("font-size","15px");
-		  $("#pwdcheck").css("font-weight","bold");
-		  $("#password").css("background-color","#eae6fa");
-          $("#password2").css("background-color","#eae6fa");
-          $("#joinBtn").prop("disabled",false);
-          $("#joinBtn").css("background-color","#9d8ce2");
+        }else {
+        	$('#pwdcheck').text("비밀번호가 일치합니다 ! :) ");
+          	$("#pwdcheck").css("color","#9d8ce2");
+        	$("#pwdcheck").css("font-size","15px");
+        	$("#pwdcheck").css("font-weight","bold");
+          	$("#password").css("background-color","#eae6fa");
+            $("#password2").css("background-color","#eae6fa");
+            $("#joinBtn").prop("disabled",false);
+            $("#joinBtn").css("background-color","#9d8ce2");
         }
-
     });
 });
+ 
+
+
+
+
 
 $(function(){
 	$('#name').keyup(function() {

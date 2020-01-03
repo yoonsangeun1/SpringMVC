@@ -59,7 +59,7 @@
 	<insert id="insertMovieVideo">
 		INSERT INTO video_post(id, code_no, user_id, title_english, title_korean,
 		director, actor, release_date, content, era_background, video_file_path, video_length, rate)
-		VALUES (video_post_seq.nextval, #{codeNo}, 1, #{titleEnglish}, #{titleKorean},
+		VALUES (video_post_seq.nextval, #{codeNo}, #{userId}, #{titleEnglish}, #{titleKorean},
 		#{director}, #{actor}, TO_DATE(#{releaseDate},'yyyy-mm-dd'), #{content},
 		#{eraBackground}, 0, 0, #{rate})
 	</insert>
