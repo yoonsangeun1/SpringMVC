@@ -6,7 +6,7 @@ import com.moving.domain.VideoPostVO;
 
 public interface VideoPostDAO {
 	
-	List<VideoPostVO> getTopLs(int codeNo); // 메인 리스트
+	List<VideoPostVO> getCategoryAll(VideoPostVO videoPostVO); // 메인 페이지
 	
 	int getTotalCount(int codeNo); // 총 게시물
 	
@@ -15,5 +15,5 @@ public interface VideoPostDAO {
 	VideoPostVO getContent(int id); // 내용 보기
 
 	void updateHit(int id); // 조회 수
-	
+
 }

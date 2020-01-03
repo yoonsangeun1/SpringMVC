@@ -6,7 +6,7 @@ import com.moving.domain.VideoPostVO;
 
 public interface VideoPostService {
 	
-	List<VideoPostVO> getTopLs(int codeNo); // 메인 상위 포스터 불러오기
+	List<VideoPostVO> getCategoryAll(VideoPostVO videoPostVO); // 메인 페이지
 	
 	int getTotalCount(int codeNo); // 총 게시물 수
 

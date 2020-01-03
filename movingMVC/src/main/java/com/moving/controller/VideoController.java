@@ -19,31 +19,33 @@ public class VideoController {
 	@Autowired
 	// 의존성을 주입시킨다.
 	private VideoPostService videoPostService;
-	
+	// 서비스 연결
 	ModelAndView modelView = new ModelAndView();
 	// view page 경로 설정
 	
-	
 	@RequestMapping("video/videomain")
 	// 영화 HOME
-	public ModelAndView video_mainList
-	(HttpServletRequest request, int codeNo)
+	public ModelAndView mainPage()
 	throws Exception {
-		
-		List<VideoPostVO> topLs = this.videoPostService.getTopLs(codeNo);
-		modelView.addObject("topLs", topLs);
-		
 		modelView.setViewName("video/video_mainList");
 		return modelView;
 	}
 	
+	@RequestMapping("video/category")
+	public String Video_categoryList(HttpServletRequest request) {
+		
+		int codeNo = Integer.parseInt(request.getParameter("codeNo"));
+		System.out.println(codeNo);
+		return "redirect:/video/videocategory?codeNo=" + codeNo;
+	}
 	
-	@RequestMapping("video/videocategory")
+	@RequestMapping("/video/videocategory")
 	// 영상 장르별 목록 보기
 	public ModelAndView video_categoryList
-	(HttpServletRequest request, VideoPostVO videoPostVO, int codeNo)
+	(HttpServletRequest request, VideoPostVO videoPostVO)
 	throws Exception {
-		codeNo = videoPostVO.getCodeNo();
+		
+
 		int page = 1;
 		// 현재 페이지 번호
 		if (request.getParameter("page") != null) {
@@ -51,6 +53,22 @@ public class VideoController {
 			page = Integer.parseInt(request.getParameter("page"));
 			// get으로 전달 된 페이지 번호를 정수 숫자로 바꿔서 저장
 		}
+		
+		int codeNo = 1 ;		
+		if(request.getParameter("codeNo") != null){
+			codeNo = Integer.parseInt(request.getParameter("codeNo"));
+		}
+		
+		
+		String findField = request.getParameter("findField"); // 검색 필드(콤보박스)
+		String findName = request.getParameter("findName"); // 검색어
+		
+		videoPostVO.setFindField(findField);
+		videoPostVO.setFindName("%" + findName + "%"); // %는 오라클에서 앞이나 뒤에서 다른 글자를 포함해서 찾을 때 사용
+		videoPostVO.setCodeNo(codeNo);
+		
+		System.out.println("2번쨰="+codeNo);
+		
 		int limit = 12;
 		// 한 페이지에 보여지는 VIDEO 개수
 		videoPostVO.setStartrow((page - 1) * 12 + 1);
@@ -59,6 +77,8 @@ public class VideoController {
 		// 끝 행
 		int totalCount = this.videoPostService.getTotalCount(codeNo);
 		// 총 게시물 수
+//		System.out.println(codeNo); // 코드 넘버가 장르 번호와 맞는지 확인하기 위함
+//		System.out.println(totalCount); // codeNo에 맞춰서 카운터를 제대로 불러오는지 확인하기 위함
 		List<VideoPostVO> dvdList = this.videoPostService.getVideoPost(videoPostVO);
 		// 영상물 목록
 		int maxpage = (int) ((double) totalCount / limit + 0.95);
@@ -70,6 +90,9 @@ public class VideoController {
 		if (endpage > startpage + 10 - 1) {
 			endpage = startpage + 10 - 1;
 		}
+		
+		modelView.addObject("codeNo", codeNo);
+		// 테스트용
 		modelView.addObject("totalCount", totalCount);
 		// 총 게시물
 		modelView.addObject("dvdList", dvdList);
@@ -82,13 +105,16 @@ public class VideoController {
 		// 마지막 페이지
 		modelView.addObject("maxpage", maxpage);
 		// 총 페이지
+		modelView.addObject("findField", findField);
+		// 검색 필드
+		modelView.addObject("findName", findName);
+		// 검색 어
 		modelView.setViewName("video/video_categoryList");
 		// view resolver
 		return modelView;
 		// 반환시킴.
 	}
 	// video_categoryList.jsp
-	
 	
 	@RequestMapping("video/content")
 	// 영상 상세 페이지 내용 보기

@@ -10,7 +10,7 @@
 }
 #slide_show, #video_list { /**바디 상단 글 , 카테고리들을 감싸고 있는 div css*/
 	float: left;
-	width: 1198px;
+	width: 1200px;
 	height: auto;
 	margin: 0px 0px 0px 0px;
 }
@@ -19,148 +19,117 @@
 	font-size: 35px;
 	font-family: '맑은 고딕';
 	color: navy;
-	margin-top: 200px;
-	margin-bottom: 120px;
+	margin-top: 220px;
+	margin-bottom: 180px;
 	line-height: 100px;
 	text-shadow: 2px 2px 6px gray; /**그림자 효과*/
 	font-weight: bold; /**글자 굵기*/
 }
 #Upcoming_movies {
-	width: 130px;
+	width: 150px;
 	text-align: center;
-	color: navy;
-	margin-left: 1057px;
-	margin-bottom: 15px;
-	font-size: 14px;
+	margin-left: 1043px;
+	margin-bottom: 14px;
+	font-size: 17px;
+	line-height: 24px;
+	border-bottom: 2px outset red;
 }
 #thriller, #action, #documentary, #history, #sf,
 #love, #comedy, #ani, #etc { /**카테고리별 css 동시에 동일하게 적용*/
-	width: 1197px;
-	height: 490px;
-	position: relative;
+	width: 1200px;
+	height: 510px;
+}
+#thriller {
+	background-image: url("../images/thrillerCategory.png");
+	background-repeat: no-repeat;
+	background-size: 1200px 510px;
+}
+#action {
+	background-image: url("../images/actionCategory.jpg");
+	background-repeat: no-repeat;
+	background-size: 1200px 510px;
+}
+#documentary {
+	background-image: url("../images/dacuCategory.jpg");
+	background-repeat: no-repeat;
+	background-size: 1200px 510px;
+}
+#history {
+	background-image: url("../images/historyCategory.jpg");
+	background-repeat: no-repeat;
+	background-size: 1200px 510px;
+}
+#sf {
+	background-image: url("../images/sfCategory.jpg");
+	background-repeat: no-repeat;
+	background-size: 1200px 510px;
+}
+#love {
+	background-image: url("../images/loveCategory.jpg");
+	background-repeat: no-repeat;
+	background-size: 1200px 510px;
+}
+#comedy {
+	background-image: url("../images/comedyCategory.jpg");
+	background-repeat: no-repeat;
+	background-size: 1200px 510px;
+}
+#ani {
+	background-image: url("../images/aniCategory.jpg");
+	background-repeat: no-repeat;
+	background-size: 1200px 510px;
+}
+#etc {
+	background-image: url("../images/etcCategory.jpg");
+	background-repeat: no-repeat;
+	background-size: 1124px 510px;
+	background-position: right;
 }
 .listName_and_moreBtn {
 	float: left;
-	width: 1196px;
-	position: relative;
+	width: 1200px;
 }
-.listName { /**장르 이름*/
+.listName a { /**장르 이름*/
 	float: left;
 	width: 268px;
-	margin-top: 35px;
-	margin-left: 15px;
+	margin-top: 40px;
+	margin-left: 45px;
 	text-align: left;
 	font-size: 25px;
 	font-weight: bold;
-	color: navy;
-	text-shadow: 2px 2px 6px gray;
-	position: relative;
+	line-height: 25px;
+	color: white;
+	text-shadow: 4px 4px 4px black;
 }
-.moreView { /**더 보기 버튼*/
+#loveListName a, #comedyListName a {
+	float: left;
+	width: 268px;
+	margin-top: 40px;
+	margin-left: 45px;
+	text-align: left;
+	font-size: 25px;
+	font-weight: bold;
+	line-height: 25px;
+	color: white;
+	text-shadow: 4px 4px 4px gray;
+}
+#etcListName a {
+	float: left;
+	width: 268px;
+	margin-top: 40px;
+	margin-left: 45px;
+	text-align: left;
+	font-size: 25px;
+	font-weight: bold;
+	line-height: 25px;
+	color: navy;
+	text-shadow: 4px 4px 4px silver;
+}
+.moreView img { /**더 보기 버튼*/
 	float: right;
-	width: 80px;
-	margin-top: 35px;
+	width: 100px;
+	margin-top: 207px;
 	margin-right: 30px;
-	font-size: 15px;
-	font-weight: bold;
-	color: navy;
-	text-align: center;
-	text-shadow: 2px 2px 6px gray;
-	position: relative;
-}
-.dvd_video_film { /**영화 포스터*/
-	float: left;
-	width: 280px;
-	height: 345px;
-	margin-top: 52px;
-	margin-left: 14px;
-	border-right: 4px solid navy;
-	border-radius: 20px;
-	box-shadow: 24px 0 40px 0 rgba(0, 0, 0, 0.5), 0 0 0 0 rgba(0, 0, 0, 0);
-	position: static;
-	background-color: white;
-}
-.videoPost {
-	width: 278px;
-	height: 157px;
-}
-.videoTitle {
-	width: 278px;
-	height: 50px;
-	text-align: center;
-	font-size: 15px;
-	line-height: 50px;
-	border-bottom: 1px solid #464646;
-	border-top: 1px solid #464646;
-}
-.postBtn { /*producerProf, producerName, share, join, hyperLink*/
-	width: 278px;
-	height: 100px;
-}
-.producerProf img { /**제작사 사진*/
-	float: left;
-	width: 40px;
-	height: 40px;
-	margin-top: 14px;
-	margin-left: 6px;
-	border-radius: 20px;
-}
-.producerName b { /**제작사 이름*/
-	float: left;
-	margin-top: 29px;
-	margin-left: 6px;
-	font-family: "맑은 고딕";
-	font-size: 14px;
-	color: black;
-	font-weight: bold;
-	font-style: italic;
-	text-align: center;
-	text-shadow: 1px 1px 3px gray;
-}
-.share img { /**공유하기*/
-	float: left;
-	width: 25px;
-	height: 25px;
-	margin-top: 23px;
-	margin-left: 16px;
-	border-radius: 20px;
-}
-.join img { /**방문하기*/
-	float: left;
-	width: 70px;
-	height: 30px;
-	margin-top: 21px;
-	margin-left: 11px;
-}
-.hyperLink { /**하이퍼링크*/
-	float: left;
-	width: 96px;
-	height: 15px;
-	margin-top: 18px;
-	margin-left: 12px;
-}
-.intro {
-	width: 278px; height: 39px;
-	background-color: white;
-	border-bottom-left-radius: 15px;
-	border-bottom-right-radius: 15px; 
-	border-top-color: navy;
-	border-right-color: navy;
-	border-left-color: white;
-	border-bottom: white;
-	font-size: 17px;
-	font-style: italic;
-	text-align: right;
-	text-shadow: 1px 1px 3px gray;
-	color: teal;
-}
-#modDiv {
-	width: 700px; height: 500px;
-	background-color: silver;
-	position: absolute;
-	top: 30%; left: 95%;
-	padding: 20px;
-	z-index: 1000;
 }
 /**부가적인 설정*/
 .category_line { /**hr tag 설정*/
@@ -168,20 +137,22 @@
 	height: 7px;
 	background: #ccc;
 	position: relative;
+	margin-top: 7px;
+	margin-bottom: 7px;
 }
-.clear{
-    clear:both; /*float속성을 제거해서 잘못된 UI적용을 막아줌*/
-}
-#Upcoming_movies a:hover, .moreView a:hover, .videoPost a:hover, .videoTitle a:hover, .hyperLink a:hover {
+#Upcoming_movies a:hover {
 	color: gray;
 	text-shadow: 1px 1px 3px silver;
 } /**각 id 또는 class 하이퍼링크 개별 적용*/
-#Upcoming_movies a:link, .moreView a:link, .videoPost a:link, .videoTitle a:link, .hyperLink a:link {
+.listName a:hover, #loveListName a:hover, #comedyListName a:hover, #etcListName a:hover {
+	text-decoration: none; /*하이퍼링크된 곳에 마우스를 갖다댔을 때 액션*/
+}
+#Upcoming_movies a:link, .moreView a:link, .listName a:link, #loveListName a:link, #comedyListName a:link, #etcListName a:link {
 	text-decoration: none; /* 하이퍼링크된 곳의 밑줄선을 없앰 */
 }
-#Upcoming_movies a:active, .moreView a:active, .videoPost a:active, .videoTitle a:active, .hyperLink a:active {
+#Upcoming_movies a:active, .moreView a:active .listName a:active, #loveListName a:active, #comedyListName a:active, #etcListName a:active {
 	text-decoration: none; /* 하이퍼링크된 곳을 클릭하는 순간 밑줄 선 없앰 */
 }
-#Upcoming_movies a:visited, .moreView a:visited, .videoPost a:visited, .videoTitle a:visited, .hyperLink a:visited {
+#Upcoming_movies a:visited, .moreView a:visited .listName a:visited, #loveListName a:visited, #comedyListName a:visited, #etcListName a:visited {
 	text-decoration: none; /* 한번이라도 클릭한 곳의 밑줄선 없앰 */
 }
