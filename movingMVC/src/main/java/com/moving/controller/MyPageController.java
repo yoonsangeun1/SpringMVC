@@ -367,7 +367,7 @@ public class MyPageController {
 	
 	/** 프로필 설정 완료 */
 	@RequestMapping("member_profileSetting_ok")
-	public String member_profileSetting_ok(MUserVO m, HttpSession session,
+	public String member_profileSetting_ok(MUserVO m, String nickname,HttpSession session,
 			HttpServletResponse response, HttpServletRequest request)throws Exception {
 		
 		response.setContentType("text/html;charset=UTF-8");
@@ -386,6 +386,44 @@ public class MyPageController {
 			 */
 			int fileSize = 5 * 1024 * 1024; //첨부파일 최대크기(5M)
 			MultipartRequest multi = null; //첨부파일을 가져오는 api
+			multi = new MultipartRequest(request,saveFolder,fileSize,"UTF-8");
+			
+			File UpFile = multi.getFile("profile_file"); //첨부파일을 가져옴.
+			if(UpFile != null) { //첨부한 파일이 있는 경우
+				String fileName = UpFile.getName(); //첨부한 파일명
+				
+				Calendar c = Calendar.getInstance();
+				int year = c.get(Calendar.YEAR); //년값
+				int month = c.get(Calendar.MONTH)+1; //월값, 1월은 0반환
+				int date = c.get(Calendar.DATE); //일값
+				
+				String profile_Image = saveFolder+File.separator+"profile_Image";
+				String homedir = profile_Image + File.separator +year+"-"+month+"-"+date; //오늘 날짜 폴더경로 지정
+				
+				File file = new File(profile_Image);
+				if(!(file.exists())) {
+					file.mkdir();
+				}
+				File afile = new File(homedir);
+				if(!(afile.exists())) {
+					afile.mkdir();
+				}
+				
+				/** 첨부파일 확장자 구하기 */
+				int index = fileName.lastIndexOf(".");
+				//첨부한 파일에서 .를 맨 오른쪽부터 찾아서 가장먼저 나오는 .의 위치번호를 왼쪽부터 세어서 번호값을반환. 첫문자는 0
+				String fileExtendsion = fileName.substring(index+1);
+				//마침표 이후부터 마지막 문자까지 구함. 즉 확장자를 구함.
+				String refilename = "("+nickname+")"+year+month+date+"."+fileExtendsion; //새로운 첨부파일명을 저장
+				String fileDBName = "/"+year+"-"+month+"-"+date+"/"+refilename; //DB에 저장되는 레코드값
+				UpFile.renameTo(new File(homedir+"/"+refilename)); //바뀌어진 첨부파일명으로 업로드
+				
+				m.setProfileImageUrl(fileDBName);
+			}else {
+				m.setProfileImageUrl("default");
+			}
+			m.setUserid(userid);
+			this.mUserService.memberProfileUpload(m);
 		}
 		
 		return null;
@@ -458,5 +496,33 @@ public class MyPageController {
 		}
 		return null;
 	}//member_delete_ok()
-
+	
+	/**포인트 충전*/
+	
+	@RequestMapping("member_point_charge_ok")
+	public String member_point_charge_ok(MUserVO m, HttpSession session,
+			HttpServletResponse response, HttpServletRequest request)throws Exception {
+		
+		response.setContentType("text/html;charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		String userid=(String)session.getAttribute("userid");
+		
+		if(userid==null) {
+			out.println("<script>");
+			out.println("alert('로그인이 필요한 페이지입니다 !');");
+			out.println("location='member/login';");
+			out.println("</script>");
+		}else {
+			m.setUserid(userid);
+			this.mUserService.pointCharge(m);
+			session.setAttribute("user_point", m.getUserPoint());
+			out.println("<script>");
+			out.println("alert('포인트 충전이 완료되었습니다  !');");
+			out.println("location='member_infosetting';");
+			out.println("</script>");
+			
+		}
+		
+		return null;
+	}
 }	

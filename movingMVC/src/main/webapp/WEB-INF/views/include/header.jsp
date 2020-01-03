@@ -59,6 +59,7 @@
 <script src="${pageContext.request.contextPath}/resources/js/member_join.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/member_login.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/member_change.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/member_setting.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/board_event.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/board_faq.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/funding_write.js"></script>
@@ -151,11 +152,33 @@ $(function(){ // document ready
 						
 						<!-- 로그인 후  보여지는 프로필아이콘 -->
 						<div class="header_profile_container">
-							<button type="button" id="header_profile_btn">
+							<button type="button" id="header_profile_btn" onclick="getUserInfo();">
 								<i class="far fa-user-circle" aria-hidden="true" style="font-size: 30px;"></i>	
 							</button>
 						</div>
 						
+						<script>
+							function getUserInfo() {
+								$.getJSON("/moving.com/getUserInfo", function(data) {
+									//get방식으로 json 데이터를 비동기식으로 가져와서 data에 저장
+									//alert(project_post_id); 
+									var myLevel = data.userLv;
+									if(myLevel==1) {
+										myLevel="개인회원";
+									}else if(myLevel==3) {
+										myLevel="제작사";
+									}else if(myLevel==4) {
+										myLevel="관리자";
+									}
+									var myName = data.name;
+									var myPoint = "나의 포인트 "+data.userPoint+"점";
+									
+									$('#myName').html(myName);//태그와 문자를 함께 변경 적용
+									$('#myLevel').html(myLevel);//태그와 문자를 함께 변경 적용
+									$('#myPoint').html(myPoint);//태그와 문자를 함께 변경 적용
+									});//매핑 주소 써주기	
+							}
+						</script>
 						<!-- 프로필아이콘 클릭시 생성되는 내 정보창 -->
 						<div id="header_profile_container_activebox" style="display:none;">
 							<div id="MymenuLayout_contatainer">
@@ -164,9 +187,9 @@ $(function(){ // document ready
 <!-- 								</button> -->
 								<div class="MyMenuUserInfo_userInfo" onclick="location='/moving.com/member/mypage';"> 
 									<a class="MyMenuUserInfo_profileLink">
-										<span class="MyMenuUserInfo_name">${name}</span> &nbsp;&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i>
-										<span class="MyMenuUserInfo_avatar"><i class="far fa-user-circle" aria-hidden="true" style="font-size:60px;"></i></span>
-										<span class="MyMenuUserInfo_userLevel">${user_lv}</span> 
+										<span class="MyMenuUserInfo_name" id="myName">${name}</span> &nbsp;&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i>
+										<span class="MyMenuUserInfo_avatar" ><i class="far fa-user-circle" aria-hidden="true" style="font-size:60px;"></i></span>
+										<span class="MyMenuUserInfo_userLevel" id="myLevel">${user_lv}</span> 
 									</a>
 								</div>
 							</div>
@@ -188,13 +211,13 @@ $(function(){ // document ready
 							</div>
 							<ul class="MyMenu_subMenu">
 								<li>
-									<a href="#" class="MyMenu_subMenuBtn">
+									<a href="#" class="MyMenu_subMenuBtn" id="myPoint">
 										나의 포인트 ${user_point} 점
 										<i class="fas fa-chevron-right" aria-hidden="true" style="float:right"></i>
 									</a>
 								</li>
 								<li>
-									<a href="#" class="MyMenu_subMenuBtn">
+									<a href="#" class="MyMenu_subMenuBtn" >
 										나의 지지서명<i class="fas fa-chevron-right" aria-hidden="true" style="float:right"></i>
 									</a>
 								</li>

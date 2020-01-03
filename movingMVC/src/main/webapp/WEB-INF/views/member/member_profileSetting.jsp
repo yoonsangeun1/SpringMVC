@@ -13,17 +13,25 @@
 			</div>
 			<div id="mPsetting_image_box">
 				<h3>프로필 사진</h3>
+				<input name="nickname" value="${nickname}" style="display:none;">
 				<div id="profileimg-wrap">
 					<div id="resultProfileImg">
-						<div id="image_upload" onclick="document.all.profile_file.click();"><img id="img" src="${pageContext.request.contextPath}/images/member_profile.png"/></div>
+						<div id="image_upload" class="aaa" ><img id="img" src="${pageContext.request.contextPath}/images/member_profile.png"/></div>
 					</div>
 					 
 					<p id="setting_profileimg">
-						<button type="button" onclick="document.all.profile_file.click();" id="btn_updatePhoto" class="btn_updatePhoto button_cb3a9eb button_f12 button_r4 vertical group border">프로필 사진 등록</button>
+						<button type="button" id="btn_updatePhoto" class="aaa button_cb3a9eb button_f12 button_r4 vertical group border">프로필 사진 등록</button>
 						<button type="button" id="btn_deletePhoto" class="btn_deletePhoto button_cb3a9eb button_f12 button_r4 vertical group border">삭제</button>
 						<input type="file" id="profile_file" name="profile_file" style="display:none;"/> 
 					</p>
 					
+					<script>
+					$(function(){
+						$('#profileimg-wrap').on('click','.aaa',function() {
+							document.all.profile_file.click();
+						});
+					})
+					</script>
 					</div>
 			</div>
 			<div id="mPsetting_text2">

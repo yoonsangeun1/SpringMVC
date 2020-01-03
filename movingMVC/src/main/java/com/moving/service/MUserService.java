@@ -1,5 +1,7 @@
 package com.moving.service;
 
+import java.util.Map;
+
 import com.moving.domain.MUserVO;
 import com.moving.domain.SocialProfileVO;
 
@@ -20,4 +22,7 @@ public interface MUserService {
 	MUserVO editEmailCheck(String setting_email); //이메일아이디 변경 중복체크
 	void updatephone(MUserVO dm); // 휴대폰번호 변경
 	SocialProfileVO findSocialAcount(int id); //id를 기준으로 소셜계정 검색
+	void pointCharge(MUserVO m); //포인트 충전
+	Map<String, Object> test(String attribute); //정보창 비동기식 출력
+	void memberProfileUpload(MUserVO m); //프로필 이미지 등록
 }
