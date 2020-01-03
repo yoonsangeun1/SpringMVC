@@ -31,7 +31,7 @@
     </th>
     <td>
      <div class="select_img" style="boader:1px; width:200px; height:250px;">
-     <img src="${ba.thumbnailImage}" />
+     <img src="${ba.thumbnailImage}" width="200" height="250" />
 	 </div>
      <input type="file" id="thumbnailImage" name="thumbnailImage"
      style="margin:20px;"
@@ -43,11 +43,34 @@
    <tr>
     <th>카테고리</th>
     <td>
-    <input type="radio" name="category" value="actor"/>배우
-    <input type="radio" name="category" value="stunt" />스턴트맨
-    <input type="radio" name="category" value="childactor" />아역배우
-    <input type="radio" name="category" value="etc"/>기타
-    <input id="etctext" name="etctext" size="30" disabled/>
+    <input type="radio" name="category" value="actor"
+    <c:if test="${ba.category eq 'actor'}">
+    checked
+    </c:if>
+    />배우
+    <input type="radio" name="category" value="stunt"
+    <c:if test="${ba.category eq 'stunt'}">
+    checked
+    </c:if>
+     />스턴트맨
+    <input type="radio" name="category" value="childactor"
+    <c:if test="${ba.category eq 'childactor'}">
+    checked
+    </c:if>
+     />아역배우
+    <input type="radio" name="category" value="etc"
+    <c:if test="${ba.category eq 'etc'}">
+    checked
+    </c:if>
+    />기타
+    <input id="etctext" name="etctext" size="30" 
+    <c:if test="${ba.category eq 'etc'}">
+    enabled
+    </c:if> 
+    <c:if test="${!ba.category eq 'etc'}">
+    disabled
+    </c:if>
+    value="${ba.etctext}"/>
     </td>
    </tr>
    
@@ -156,7 +179,7 @@
  <script>
  function actors_check(){ //submit 
 	
-	 var count = $("input:radio[name=category]:checked").length; //체크박스 선택된 개수 구함
+	 var count = $("input:radio[name=category]:checked").length; //라디오 선택된 개수 구함
 	 
 	 if(count < 1){
 		 alert("카테고리를 선택해주세요!");

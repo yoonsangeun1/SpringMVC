@@ -72,17 +72,31 @@ g<%@ page contentType="text/html; charset=UTF-8"%>
      <c:when test="${fn:length(bflist.title) > 20}"> <%--20자 이상일 경우 --%>
 	  <c:set var="title" value="${fn:substring(bflist.title,0,19)}..." />
 	   <td>
+	    <c:if test="${(empty findField) && (empty findName)}"> <%--검색 전 --%>
         <a href="/moving.com/board/free_cont?id=${bflist.id}&page=${page}">
 	  ${title} <!-- set쪽에 bflist.title로 해서 가져오면 값이 적용이 안됨 ? -->
 	    </a><%-- board_cont?bno=번호값&page=쪽번호 2개의 피라미터 값이 get방식으로 전달됨. --%>
+	    </c:if>
+		<c:if test="${(!empty findField) || (!empty findName)}"> <%-- 검색 후 --%>
+		<a href="/moving.com/board/free_cont?id=${bflist.id}&page=${page}&findField=${findField}&findName=${findName}">
+		 ${title}
+		</a>
+   		</c:if>
        </td>
      </c:when>
      
      <c:otherwise>
       <td>
-       <a href="/moving.com/board/free_cont?id=${bflist.id}&page=${page}">
-	   ${bflist.title}
-	   </a><%-- board_cont?bno=번호값&page=쪽번호 2개의 피라미터 값이 get방식으로 전달됨. --%>
+        <c:if test="${(empty findField) && (empty findName)}"> <%--검색 전 --%>
+        <a href="/moving.com/board/free_cont?id=${bflist.id}&page=${page}">
+	  ${bflist.title} <!-- set쪽에 bflist.title로 해서 가져오면 값이 적용이 안됨 ? -->
+	    </a><%-- board_cont?bno=번호값&page=쪽번호 2개의 피라미터 값이 get방식으로 전달됨. --%>
+	    </c:if>
+		<c:if test="${(!empty findField) || (!empty findName)}"> <%-- 검색 후 --%>
+		<a href="/moving.com/board/free_cont?id=${bflist.id}&page=${page}&findField=${findField}&findName=${findName}">
+		 ${bflist.title}
+		</a>
+		</c:if>
       </td>
      </c:otherwise>
      
@@ -226,6 +240,7 @@ g<%@ page contentType="text/html; charset=UTF-8"%>
      <select name="findField" id="findField">
       <option value="title"
       <c:if test="${findField == 'title'}">
+      
       ${'selected'}</c:if>>제목</option> <%--필드 콤보박스 제목을 선택했을 시
       selected로 기본값 부여 --%>
       <option value="content"

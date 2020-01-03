@@ -63,7 +63,8 @@
 						<div>
 							<%-- 배우들 사진 --%>
 							<a href="/moving.com/board/actors_cont?id=${balist.id}&page=${page}"> 
-							<img src="${balist.thumbnailImage}" />
+							<img src="${balist.thumbnailImage}"
+							width="180.4" height="225.5" />
 							</a>
 						</div>
 						<%-- 배우들 사진 --%>

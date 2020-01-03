@@ -18,8 +18,8 @@ select * from M_USER where id=5
 select * from SOCIAL_PROFILE where id=4
 insert into M_COMMENT (id, social_profile_id_from, social_post_id)
 values(m_comment_seq.nextval, 4, 77)
-select * from M_COMMENT
-update SOCIAL_PROFILE set profile_image_path='default' where id=4
+
+update SOCIAL_PROFILE set profile_image_url='default'where id=4
 --일반회원
 INSERT INTO m_user (id, userid, nickname, email, password, genre_01, genre_02, genre_03)
 VALUES (m_user_seq.nextval, 'moving@gmail.com', '무빙', 'moving@gmail.com', 'moving', null, null, null);

@@ -33,7 +33,7 @@
    <tr>
     <th>썸네일</th>
     <td>
-	<img src="${ba.thumbnailImage}" />
+	<img src="${ba.thumbnailImage}" width="200" height="250" />
     </td>
    </tr>
    

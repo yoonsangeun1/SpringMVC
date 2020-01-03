@@ -48,6 +48,11 @@ public class BoardFreeDAOImpl implements BoardFreeDAO {
 	public void delBoardFree(int id) {
 		this.sqlSession.delete("bf_del", id);
 	}//게시글 삭제
+
+	@Override
+	public NormalPostVO getCont2(int id) {
+		return this.sqlSession.selectOne("bf_cont2",id);
+	}//조회수 증가 없이 내용보기
 	
 	
 	
