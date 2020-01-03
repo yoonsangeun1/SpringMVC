@@ -17,6 +17,8 @@
 	min-height: 800px;
 	height: auto;
 	margin: auto auto;
+	margin-top:150px;
+	margin-bottom : 50px;
 	display: inline-block;
 	box-sizing: border-box;
 	background-color: white;
@@ -39,7 +41,7 @@
 	float:left;
 	width:600px;
 	height:60px;
-	margin-top : 150px; 
+	margin-top :25px; 
 }
 #mDelete_textBox1 h2{
 	line-height: 40px;

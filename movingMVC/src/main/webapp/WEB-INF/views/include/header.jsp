@@ -37,11 +37,14 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/funding_cont.css" /><%-- 펀딩 글 보기 --%>
 
 <%-- member css 추가 --%>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/member_login.css" /><%-- 로그인 폼 --%>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/member_join.css" /><%-- 회원가입 폼 --%>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/member_mypage.css" /><%-- 마이페이지 폼 --%>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/member_change.css" /><%-- 회원전환 폼 --%>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/member_delete.css" /><%-- 회원전환 폼 --%>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/member_find.css" /><%-- 회원전환 폼 --%>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/member_infosetting.css" /><%-- 회원설정 폼 --%>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/member_join.css" /><%-- 회원가입 폼 --%>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/member_login.css" /><%-- 로그인 폼 --%>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/member_mypage.css" /><%-- 마이페이지 폼 --%>
+
 
 <%-- movie css 추가 --%>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/video_content.css" />
@@ -66,6 +69,7 @@
 <script src="${pageContext.request.contextPath}/resources/js/funding_write.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/move_banner.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/video_viewPg.js"></script>
+<%-- <script src="${pageContext.request.contextPath}/resources/js/social.js"></script> --%>
 <%-- <script src="${pageContext.request.contextPath}/resources/js/slide.js"></script> --%>
 
 <!--  <script>
@@ -119,12 +123,12 @@ $(function(){ // document ready
 					</div>
 					<div style="flex-grow: 0.6;">
 						<c:if test="${empty userid}">
-					<div style="flex-grow: 0.6;">
-						<a href="/moving.com/member/login">Login</a>
-					</div>
-					</c:if>
-					<c:if test="${!empty userid}">
-					<div style="flex-grow: 0.6;">
+							<div style="flex-grow: 0.6;">
+							<a href="/moving.com/member/login">Login</a>
+							</div>
+						</c:if>
+						<c:if test="${!empty userid}">
+						<div style="flex-grow: 0.6;">
 <!-- 					<form name="user_logout" method="post" action="member_logout"> -->
 						<!-- 로그인 후 보여지는 알림아이콘  -->
 						<div class="header_notification_container">
@@ -134,7 +138,7 @@ $(function(){ // document ready
 						</div>
 						
 						<!-- 알림아이콘 클릭시 생성되는 알림리스트창 -->
-						<div id="header_notification_container_activebox" style="display:none">
+						<div id="header_notification_container_activebox" style="display:none; font:15px '맑은 고딕' black;">
 							<div id="notification_list">
 								<div class="notification_cont"></div>
 								<div class="notification_cont"></div>
@@ -154,7 +158,13 @@ $(function(){ // document ready
 						<!-- 로그인 후  보여지는 프로필아이콘 -->
 						<div class="header_profile_container">
 							<button type="button" id="header_profile_btn" onclick="getUserInfo();">
-								<i class="far fa-user-circle" aria-hidden="true" style="font-size: 30px;"></i>	
+								<c:if test="${profile_image_url == 'default'}">
+									<img class="Avatar_image" src="./images/member_profile.png"	style="width:30px; height:30px; border-radius: 50%;">
+								</c:if>
+								
+								<c:if test="${profile_image_url != 'default'}">
+									<img class="Avatar_image" src="${profile_image_url}" style="width:30px; height:30px; border-radius: 50%;">
+								</c:if>
 							</button>
 						</div>
 						
@@ -162,7 +172,6 @@ $(function(){ // document ready
 							function getUserInfo() {
 								$.getJSON("/moving.com/getUserInfo", function(data) {
 									//get방식으로 json 데이터를 비동기식으로 가져와서 data에 저장
-									//alert(project_post_id); 
 									var myLevel = data.userLv;
 									if(myLevel==1) {
 										myLevel="개인회원";
@@ -173,23 +182,31 @@ $(function(){ // document ready
 									}
 									var myName = data.name;
 									var myPoint = "나의 포인트 "+data.userPoint+"점";
+									var myProfile = data.profileImageUrl;
 									
 									$('#myName').html(myName);//태그와 문자를 함께 변경 적용
 									$('#myLevel').html(myLevel);//태그와 문자를 함께 변경 적용
 									$('#myPoint').html(myPoint);//태그와 문자를 함께 변경 적용
+									$('#myProfileImage').html(myProfile);//태그와 문자를 함께 변경 적용
 									});//매핑 주소 써주기	
 							}
 						</script>
 						<!-- 프로필아이콘 클릭시 생성되는 내 정보창 -->
-						<div id="header_profile_container_activebox" style="display:none;">
+						<div id="header_profile_container_activebox" style="display:none; font-color:black;">
 							<div id="MymenuLayout_contatainer">
 <!-- 								<button type="button" class="profile_modify_btn button_cb3a9eb border"> -->
 <!-- 									정보 수정 -->
 <!-- 								</button> -->
-								<div class="MyMenuUserInfo_userInfo" onclick="location='/moving.com/member/mypage';"> 
+								<div class="MyMenuUserInfo_userInfo" onclick="location='/moving.com/member_mypage';"> 
 									<a class="MyMenuUserInfo_profileLink">
 										<span class="MyMenuUserInfo_name" id="myName">${name}</span> &nbsp;&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i>
-										<span class="MyMenuUserInfo_avatar" ><i class="far fa-user-circle" aria-hidden="true" style="font-size:60px;"></i></span>
+										<c:if test="${profile_image_url == 'default'}">
+											<img class="MyMenuUserInfo_avatar" src="./images/member_profile.png"	style="width:60px; height:60px; border-radius: 50%;">
+										</c:if>
+								
+										<c:if test="${profile_image_url != 'default'}">
+											<img id="MyMenuUserInfo_avatar" class="MyMenuUserInfo_avatar" src="${profile_image_url}" style="width:60px; height:60px; border-radius: 50%;">
+										</c:if>
 										<span class="MyMenuUserInfo_userLevel" id="myLevel">${user_lv}</span> 
 									</a>
 								</div>

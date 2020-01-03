@@ -63,7 +63,19 @@
 <script src="${pageContext.request.contextPath}/resources/js/movie_upload.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/admin_notice.js"></script>
 <script src="${pageContext.request.contextPath}/resources/editor/js/HuskyEZCreator.js" charset="UTF-8"></script>
+<style>
 
+#sns_headerMenu #asss #MyMenu_subMenu li a{
+	color: black;
+}
+	#asss a {
+	color:black;
+}
+
+#asss #MyMenu_subMenu li a{
+	color:black;
+}
+</style>
 </head>
 <body>
 	<div id="SNS_All">
@@ -78,10 +90,10 @@
 				<div id="sns_headerMenu">
 										<div class="flex-container">
 					<div style="flex-grow: 1;">
-						<a href="/moving.com/project/list?category=20001">Project</a>
+						<a href="/moving.com/project/list?category=20001" style="color:white">Project</a>
 					</div>
 					<div style="flex-grow: 1;">
-						<a href="#">Movies</a>
+						<a href="#" style="color:white">Movies</a>
 					</div>
 					<div style="flex-grow: 12;">
 						<div id="header_logo">
@@ -96,53 +108,79 @@
 							class="fas fa-search"></i></a>
 					</div> -->
 					<div style="flex-grow: 0.6;">
-						<a href="/moving.com/board/free">Board</a>
+						<a href="/moving.com/board/free" style="color:white">Board</a>
 					</div>
 					<div style="flex-grow: 0.6;">
-						<a href="/moving.com/social/main">SNS</a>
+						<a href="/moving.com/social/main" style="color:white">SNS</a>
 					</div>
-					<div style="flex-grow: 0.6;">
-					
-						<c:if test="${empty userid}">
-					<div style="flex-grow: 0.6;">
-						<a href="/moving.com/social/login">Login</a>
-					</div>
-					</c:if>
-					
-					<c:if test="${!empty userid}">
-					<div style="flex-grow: 0.6;">
-<!-- 					<form name="user_logout" method="post" action="member_logout"> -->
-						<!-- 로그인 후 보여지는 알림아이콘  -->
-						<div class="header_notification_container">
-							<button  type="button" id="header_notification_btn">
-								<i class="far fa-bell" aria-hidden="true" style="font-size: 30px;"></i>
-							</button>
-						</div>
-						
-						<!-- 알림아이콘 클릭시 생성되는 알림리스트창 -->
-						<div id="header_notification_container_activebox" style="display:none">
-							<div id="notification_list">
-								<div class="notification_cont"></div>
-								<div class="notification_cont"></div>
-								<div class="notification_cont"></div>
-								<div class="notification_cont"></div>
-								<div class="notification_cont"></div>
-								<div class="notification_cont"></div>
-								<div class="notification_cont"></div>
-								<div class="notification_cont"></div>
-								<div class="notification_cont"></div>
+											<c:if test="${empty userid}">
+							<div style="flex-grow: 0.6;">
+								<a href="member/login">Login</a>
 							</div>
-							<div id="notificationList_all">
-								<a class="noti_all_btn" href="#">알림 전체보기 ></a>
-							</div>
-						</div>
+						</c:if>
+						<c:if test="${!empty userid}">
+							<div style="flex-grow: 0.6;">
+<!-- 							<form name="user_logout" method="post" action="member_logout"> -->
+							<!-- 로그인 후 보여지는 알림아이콘  -->
+								<div class="header_notification_container">
+									<button  type="button" id="header_notification_btn">
+									<i class="far fa-bell" aria-hidden="true" style="font-size: 30px; color:white; " ></i>
+									</button>
+								</div>
 						
-						<!-- 로그인 후  보여지는 프로필아이콘 -->
-						<div class="header_profile_container">
-							<button type="button" id="header_profile_btn">
-								<i class="far fa-user-circle" aria-hidden="true" style="font-size: 30px;"></i>	
-							</button>
-						</div>
+							<!-- 알림아이콘 클릭시 생성되는 알림리스트창 -->
+								<div id="header_notification_container_activebox" style="display:none">
+									<div id="notification_list">
+										<div class="notification_cont"></div>
+										<div class="notification_cont"></div>
+										<div class="notification_cont"></div>
+										<div class="notification_cont"></div>
+										<div class="notification_cont"></div>
+										<div class="notification_cont"></div>
+										<div class="notification_cont"></div>
+										<div class="notification_cont"></div>
+										<div class="notification_cont"></div>
+									</div>
+									<div id="notificationList_all">
+										<a class="noti_all_btn" href="#">알림 전체보기 ></a>
+									</div>
+								</div>
+						
+							<!-- 로그인 후  보여지는 프로필아이콘 -->
+							<div class="header_profile_container">
+								<button type="button" id="header_profile_btn" onclick="getUserInfo();">
+									<c:if test="${profile_image_url == 'default'}">
+										<img class="Avatar_image" src="./images/member_profile.png"	style="width:30px; height:30px; border-radius: 50%; color:white;">
+									</c:if>
+								
+									<c:if test="${profile_image_url != 'default'}">
+										<img calss="Avatar_image" src="${profile_image_url}" style="width:30px; height:30px; border-radius: 50%;">
+									</c:if>
+								</button>
+							</div>
+						
+							<script>
+								function getUserInfo() {
+									$.getJSON("/moving.com/getUserInfo", function(data) {
+										//get방식으로 json 데이터를 비동기식으로 가져와서 data에 저장
+										//alert(project_post_id); 
+										var myLevel = data.userLv;
+										if(myLevel==1) {
+											myLevel="개인회원";
+										}else if(myLevel==3) {
+											myLevel="제작사";
+										}else if(myLevel==4) {
+											myLevel="관리자";
+										}
+										var myName = data.name;
+										var myPoint = "나의 포인트 "+data.userPoint+"점";
+										
+										$('#myName').html(myName);//태그와 문자를 함께 변경 적용
+										$('#myLevel').html(myLevel);//태그와 문자를 함께 변경 적용
+										$('#myPoint').html(myPoint);//태그와 문자를 함께 변경 적용
+										});//매핑 주소 써주기	
+								}
+							</script>
 						
 						<!-- 프로필아이콘 클릭시 생성되는 내 정보창 -->
 						<div id="header_profile_container_activebox" style="display:none;">
@@ -150,10 +188,16 @@
 <!-- 								<button type="button" class="profile_modify_btn button_cb3a9eb border"> -->
 <!-- 									정보 수정 -->
 <!-- 								</button> -->
-								<div class="MyMenuUserInfo_userInfo" onclick="location='/moving.com/member/mypage';"> 
+								<div class="MyMenuUserInfo_userInfo" onclick="location='/moving.com/member_mypage';"> 
 									<a class="MyMenuUserInfo_profileLink">
-										<span class="MyMenuUserInfo_name">${name}</span> &nbsp;&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i>
-										<span class="MyMenuUserInfo_avatar"><i class="far fa-user-circle" aria-hidden="true" style="font-size:60px;"></i></span>
+										<span class="MyMenuUserInfo_name">${name}</span> &nbsp;&nbsp;
+										<c:if test="${profile_image_url == 'default'}">
+											<img class="MyMenuUserInfo_avatar" src="./images/member_profile.png"	style="width:60px; height:60px; border-radius: 50%;">
+										</c:if>
+								
+										<c:if test="${profile_image_url != 'default'}">
+											<img class="MyMenuUserInfo_avatar" src="${profile_image_url}" style="width:60px; height:60px; border-radius: 50%;">
+										</c:if>
 										<span class="MyMenuUserInfo_userLevel">${user_lv}</span> 
 									</a>
 								</div>
@@ -188,7 +232,7 @@
 								</li>
 								<li>
 									<a href="/moving.com/member_change" class="MyMenu_subMenuBtn"> 
-											 회원 전환<i class="fas fa-chevron-right" aria-hidden="true" style="float: right"></i>
+											 회원 전환<i class="fas fa-chevron-right" aria-hidden="true" style="float: right"></i> 
 									</a>
 								</li>
 								<li>
@@ -200,13 +244,11 @@
 							
 							<div id="MyMenuUserActive_logout">
 								<input type="button" value="로그아웃" class="logout button_cb3a9eb border" onclick="location='/moving.com/member_logout';">
-<!-- 								<input type="hidden"> -->
 							</div>
-
 						</div>
 <!-- 					</form> -->
 					</div>
-					</c:if>
+						</c:if>
 						
 <%-- 						<a href="/moving.com/not_real_login">임시로그인 ${userid}</a> --%>
 					</div>

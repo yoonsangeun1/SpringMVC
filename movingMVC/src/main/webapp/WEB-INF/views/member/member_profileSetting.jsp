@@ -13,14 +13,30 @@
 			</div>
 			<div id="mPsetting_image_box">
 				<h3>프로필 사진</h3>
-				<input name="nickname" value="${nickname}" style="display:none;">
+				<input name="nickname" value="${nickname}" style="display : none;">
 				<div id="profileimg-wrap">
 					<div id="resultProfileImg">
-						<div id="image_upload" class="aaa" ><img id="img" src="${pageContext.request.contextPath}/images/member_profile.png"/></div>
+						<div id="image_upload" class="aaa" >
+						
+						<img id="img" 
+							<c:if test="${profile_image_url == 'default'}">
+								src="${pageContext.request.contextPath}/images/member_profile.png"
+						  	</c:if>
+						  	<c:if test="${profile_image_url != 'default'}">
+						  		src="${profile_image_url}"
+						  	</c:if>
+						 />
+						
+						</div>
 					</div>
 					 
 					<p id="setting_profileimg">
+					<c:if test="${profile_image_url == 'default'}">
 						<button type="button" id="btn_updatePhoto" class="aaa button_cb3a9eb button_f12 button_r4 vertical group border">프로필 사진 등록</button>
+					</c:if>
+					<c:if test="${profile_image_url != 'default'}">
+						<button type="button" id="btn_updatePhoto" class="aaa button_cb3a9eb button_f12 button_r4 vertical group border">프로필 사진 변경</button>
+					</c:if>
 						<button type="button" id="btn_deletePhoto" class="btn_deletePhoto button_cb3a9eb button_f12 button_r4 vertical group border">삭제</button>
 						<input type="file" id="profile_file" name="profile_file" style="display:none;"/> 
 					</p>
