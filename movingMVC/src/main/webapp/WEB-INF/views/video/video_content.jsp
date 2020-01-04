@@ -29,43 +29,20 @@
 		</div>
 		<%-- 영상 기본 정보 코드 end --%>
 		
-		<%-- 댓글과 답글 관련 기능 start --%>
-		
-		<%-- 댓글 작성란 코드 start --%>
-		<div id="review">
-			<div class="reviewer">
-				<img src="../images/m_publisher.PNG">
-			</div>
-			<div id="reviewText">
-				<textarea name="air_type" wrap="VIRTUAL" placeholder="공개 댓글 추가..."></textarea>
-			</div>
-			<div id="footer" class="review-commentbox">
-				<div id="buttons" class="review-commentbox">
-					<button id="cancel-button" class="review-commentbox style-text size-default">
-					취소
-					</button>
-					<button id="submit-button" class="review-commentbox style-primary size-default">
-					댓글
-					</button>
-				</div> 
-			</div>
+		<div id="video_reply_service">
+			<h5>REPLY</h5>
 		</div>
-		<%-- 댓글 작성란 코드 end --%>
-		<%-- 댓글 목록란 코드 start --%>
 		
-		<%-- 댓글 목록란 코드 end --%>
-		
-		<%-- 댓글과 답글 관련 기능 end --%>
-		
-		<%-- 추가 비디오 목록 코드 start --%> 
+		<%-- 
+		추가 비디오 목록 코드 start 
 		<div id="other_Movie"><!-- 다른 동영상들을 담고 있는 div -->
 			<div class="mVideo"><!-- 영화 동영상 각각 div 설정 -->
 				<p class="otherMovieTitle">${videoPostVO.titleKorean}</p>
 				<a href="content?id=${videoPostVO.id}&page=${page}"><img src="../images/replyuser.png" width="280px" height="200px" /></a>
 			</div>
 		</div>
-		<%-- 추가 비디오 목록 코드 end --%> 
-		
+		추가 비디오 목록 코드 end 
+		 --%>
 	</div>
 	<%-- 전체 영화 관람 페이지 코딩 end --%>
 

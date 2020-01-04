@@ -20,7 +20,7 @@
 	float: left;
 	width: 1100px;
 	padding-top: 20px;
-	font-size: 20px;
+	font-size: 24px;
 	font-family: '맑은 고딕';
 	font-style: italic;
 	text-align: center;
@@ -29,8 +29,8 @@
 	margin-top: 564px;
 }
 #other_category_container span {
-	margin-left: 25px;
-	margin-right: 25px;
+	margin-left: 15px;
+	margin-right: 15px;
 }
 /*목록 페이지*/
 .cinema {
@@ -45,20 +45,21 @@
 	width: 247px;
 	border-right: 2px solid black;
 	border-bottom: 2px solid black;
+	border-top: 1px solid white;
+	border-left: 1px solid white;
 	margin: 75px 26px 150px 26px;
 	
-	background-color: teal; /**w3schools source*/
+	background-color: white; /**w3schools source*/
 	box-shadow: 14px 14px 12px #888888;
 	border-radius: 14px;
 }
 /*영상 이미지*/
 .mBox_item img {
-	min-width: 245px;
-	width: 240px;
+	width: 244px;
 	height: 240px;
 	border-top-left-radius: 14px;
 	border-top-right-radius: 14px;
-	border-bottom: 1px solid white;
+	border-bottom: 1px solid silver;
 }
 /*영상 제목*/
 .container {
@@ -69,11 +70,11 @@
 	font-weight: bold;
 	display: block;
 	text-align: center;
-	text-shadow: 3px 3px 4px black;
+	text-shadow: 3px 3px 4px silver;
 	margin-top: 24px;
 	margin-left: 2px;
 	line-height: 22px;
-	color: white;
+	color: black;
 }
 /*영상 간략 설명란*/
 .movie_postInfo {
@@ -87,8 +88,8 @@
 }
 /*영상 간략 설명 글*/
 .info_cont {
-	text-shadow: 3px 3px 4px black;
-	color: white;
+	text-shadow: 3px 3px 4px silver;
+	color: black;
 	font-size: 14px;
 	font-weight: bold;
 	margin-top: 17px;
@@ -96,14 +97,14 @@
 	line-height: 20px;
 }
 /*검색 구간 전체 DIV */
-#vPost_search{
+#vPost_search {
 	width:1200px;
 	display:inline-block;
 	text-align:center;
 	margin-top: 75px;
 }
 /*검색 구간 콤보 박스*/
-#vPost_combo{
+#findField {
 	display: inline-block;
 	width: auto; height: 32px;
 	padding-left: 9px;
@@ -112,12 +113,20 @@
 	color: #a5a5a5;
 	border: 1px solid #ccc;
 	border-radius: 4px;
+	margin-left: auto;
+	margin-right: auto;
 }
-/*검색 입력 창 ,버튼 통합 DIV*/
-#vPost_input{
+/*검색 입력 창, 버튼 통합 DIV*/
+#vPost_input {
 	display:inline-table;
 }
-
+#findName {
+	height: 25px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	color: #a5a5a5;
+	padding-top: 4px;
+}
 /*기타 부수거리 작업*/
 /*영상 액션 주기 (크기 변화)*/
 .mBox_item:hover {

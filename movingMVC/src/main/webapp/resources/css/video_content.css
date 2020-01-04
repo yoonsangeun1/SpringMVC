@@ -22,7 +22,8 @@
 #videoInfo {
 	width: 1200px;
 	margin: 0px auto;
-	padding-top: 75px;
+	margin-top: 75px;
+	border: 1px solid red;
 }
 /*영상 제목*/
 .subTitle {
@@ -30,20 +31,16 @@
 	font-size: 20px;
 	color: black;
 	font-family: '맑은 고딕';
-	margin-top: 24px;
-	margin-left: 20px;
+	margin: 24px 0px 0px 2px; 
 	line-height: 20px;
 }
 /*영상 설명란*/
 .subInfo {
 	float: left;
 	font-size: 12px;
-	font-style: italic;
 	font-family: '맑은 고딕';
 	color: #808080;
-	margin-top: 12px;
-	margin-bottom: 24px;
-	margin-left: 20px;
+	margin: 12px 0px 24px 2px;
 	line-height: 12px;
 }
 /*영상 게시자*/
@@ -52,7 +49,6 @@
 	width: 55px;
 	height: 50px;
 	margin-top: 12px;
-	margin-left: 20px;
 	border-radius: 25px;
 }
 #videoInfo b {
@@ -75,51 +71,22 @@
 	font-family: '맑은 고딕';
 	margin-top: 40px;
 	margin-bottom: 20px;
-	margin-left: 25px;
+	margin-left: 57px;
 	line-height: 28px;
 }
 
 
-/**댓글 작성 CSS start*/
-#review {
-	float: left;
-	width: 750px;
+/**댓글 감싸기*/
+#video_reply_service {
+	width: 1200px;
+	height: 700px;
 	border: 1px solid red;
-	margin-left: 70px;
+	font-size: large;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	padding-top: 350px;
 }
-.reviewer img{
-	float: left;
-	width: 55px;
-	height: 50px;
-	border: 1px solid red;
-	border-radius: 25px;
-}
-#reviewText textarea {
-	font-style: italic;
-	width: 684px;
-	height: 25px;
-	overflow-y: hidden;
-	background: clear;
-	margin-left: 3px;
-	border: 1px solid red;
-}
-
-#footer.review-commentbox {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: flex-end;
-}
-#buttons.review-commentbox {
-	display: flex;
-	flex-direction: row;
-}
-#cancel-button.review-commentbox, #submit-button.review-commentbox {
-	margin-left: 8px;
-	font-size: 1.4rem;
-}
-/**댓글 목록 CSS start*/
-
 
 
 /**페이지 아래 우측 공간 추가 영상 목록*/

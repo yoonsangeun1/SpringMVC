@@ -14,11 +14,10 @@ public class VideoPostDAOImpl implements VideoPostDAO {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	// 상위 4개의 video만 나열
-	// 메인 리스트
+	// 영화 서비스 메인 페이지
 	@Override
-	public List<VideoPostVO> getTopLs(int codeNo) {
-		return this.sqlSession.selectList("topLs", codeNo);
+	public List<VideoPostVO> getCategoryAll(VideoPostVO videoPostVO) {
+		return this.sqlSession.selectList("videoMainPage", videoPostVO);
 	}
 	
 	// 총 게시물 수
@@ -44,6 +43,5 @@ public class VideoPostDAOImpl implements VideoPostDAO {
 	public void updateHit(int id) {
 		this.sqlSession.selectOne("videoUpdateHit", id);
 	}
-
 	
 }

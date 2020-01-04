@@ -43,11 +43,42 @@
 				</div>
 			</div>
 			<div id="mInfo_button">
-				<button class="profile_modify_btn button_cb3a9eb border" onclick="location='#';">프로필 설정</button>
+				<button class="profile_modify_btn button_cb3a9eb border" onclick="location='/moving.com/member_profileSetting';">프로필 설정</button>
 				<button class="userChange button_cb3a9eb border" onclick="location='/moving.com/member_change';">회원전환</button>
 			</div>
 		</div>
+		
+					<script>
+							function getUserInfo() {
+								$.getJSON("/moving.com/getUserInfo", function(data) {
+									//get방식으로 json 데이터를 비동기식으로 가져와서 data에 저장
+									var myLevel = data.userLv;
+									if(myLevel==1) {
+										myLevel="개인회원";
+									}else if(myLevel==3) {
+										myLevel="제작사";
+									}else if(myLevel==4) {
+										myLevel="관리자";
+									}
+									var myName = data.name;
+									var myPoint = "나의 포인트 "+data.userPoint+"점";
+									var myProfile = data.profileImageUrl;
+									
+									$('#myProfileImage').html(myProfile);//태그와 문자를 함께 변경 적용
+									$('#myLevel').html(myLevel);//태그와 문자를 함께 변경 적용
+									$('#myPoint').html(myPoint);//태그와 문자를 함께 변경 적용
+									$('#myName').html(myName);//태그와 문자를 함께 변경 적용
+									});//매핑 주소 써주기	
+							}
+						</script>
 		<div id="mMypage_profileImg">
+			<c:if test="${profile_image_url == 'default'}">
+				<img id="myProfileImage" class="Avatar_image" src="./images/member_profile.png"	style="width:220px; height:220px; border-radius: 50%;">
+			</c:if>
+								
+			<c:if test="${profile_image_url != 'default'}">
+				<img id="myProfileImage" class="Avatar_image" src="${profile_image_url}" style="width:220px; height:220px; border-radius: 50%;">
+			</c:if>
 		</div>
 		<div id="mMypage_funding_wrap">
 			<div id="mMypage_fundingBtn">

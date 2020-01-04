@@ -15,10 +15,10 @@ public class VideoPostServiceImpl implements VideoPostService {
 	@Autowired
 	private VideoPostDAO videoPostDao;
 	
-	// 메인 상위 리스트
+	// 메인 페이지
 	@Override
-	public List<VideoPostVO> getTopLs(int codeNo) {
-		return this.videoPostDao.getTopLs(codeNo);
+	public List<VideoPostVO> getCategoryAll(VideoPostVO videoPostVO) {
+		return this.videoPostDao.getCategoryAll(videoPostVO);
 	}
 	
 	// 총 게시물 수 불러오기

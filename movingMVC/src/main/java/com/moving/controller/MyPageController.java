@@ -1,6 +1,5 @@
 package com.moving.controller;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 
 import java.io.File;
 import java.io.PrintWriter;
@@ -14,7 +13,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -32,7 +30,7 @@ public class MyPageController {
 
 
 	/** 마이페이지 */
-	@RequestMapping(value="member/mypage")	
+	@RequestMapping(value="member_mypage")	
 	public ModelAndView member_mypage(HttpServletResponse response, HttpSession session) throws Exception{
 
 		response.setContentType("text/html;charset=UTF-8");
@@ -43,9 +41,10 @@ public class MyPageController {
 			out.println("alert('로그인이 필요한 페이지입니다 !');");
 			out.println("location='member/login';");
 			out.println("</script>");
+		}else {
+			return new ModelAndView("member/member_mypage");
 		}
-
-		return new ModelAndView("member/member_mypage");
+		return null;
 	}//member_mypage()
 
 
@@ -345,7 +344,7 @@ public class MyPageController {
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		String userid=(String)session.getAttribute("userid");
-
+		
 		if(userid==null) {
 			out.println("<script>");
 			out.println("alert('로그인이 필요한 페이지입니다 !');");
@@ -367,12 +366,13 @@ public class MyPageController {
 	
 	/** 프로필 설정 완료 */
 	@RequestMapping("member_profileSetting_ok")
-	public String member_profileSetting_ok(MUserVO m, String nickname,HttpSession session,
+	public String member_profileSetting_ok(MUserVO m,HttpSession session,
 			HttpServletResponse response, HttpServletRequest request)throws Exception {
 		
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		String userid=(String)session.getAttribute("userid");
+		String nickname = (String)session.getAttribute("nickname");
 		
 		if(userid==null) {
 			out.println("<script>");
@@ -408,23 +408,30 @@ public class MyPageController {
 				if(!(afile.exists())) {
 					afile.mkdir();
 				}
+				Random r = new Random();
+				int random = r.nextInt(100000000); //0이상 1억미만 사이의 정수숫자 난수 발생
 				
 				/** 첨부파일 확장자 구하기 */
 				int index = fileName.lastIndexOf(".");
 				//첨부한 파일에서 .를 맨 오른쪽부터 찾아서 가장먼저 나오는 .의 위치번호를 왼쪽부터 세어서 번호값을반환. 첫문자는 0
 				String fileExtendsion = fileName.substring(index+1);
 				//마침표 이후부터 마지막 문자까지 구함. 즉 확장자를 구함.
-				String refilename = "("+nickname+")"+year+month+date+"."+fileExtendsion; //새로운 첨부파일명을 저장
-				String fileDBName = "/"+year+"-"+month+"-"+date+"/"+refilename; //DB에 저장되는 레코드값
+				String refilename = "("+nickname+")"+year+month+date+random+"."+fileExtendsion; //새로운 첨부파일명을 저장
+				String fileDBName = "/moving.com/resources/profile_Image/"+year+"-"+month+"-"+date+"/"+refilename; //DB에 저장되는 레코드값
 				UpFile.renameTo(new File(homedir+"/"+refilename)); //바뀌어진 첨부파일명으로 업로드
 				
 				m.setProfileImageUrl(fileDBName);
 			}else {
 				m.setProfileImageUrl("default");
 			}
+			
 			m.setUserid(userid);
 			this.mUserService.memberProfileUpload(m);
 		}
+		out.println("<script>");
+		out.println("alert('프로필 사진이 등록되었습니다 !');");
+		out.println("location='member_mypage';");
+		out.println("</script>");
 		
 		return null;
 	}
