@@ -257,9 +257,7 @@ public class MemberController {
 				session.setAttribute("deactivate_reason",dm.getDeactivateReason()); //세션 탈퇴사유 VO객체저장
 				
 				SocialProfileVO svo = this.mUserService.findSocialAcount(dm.getId());
-				if(svo!=null) {
-					session.setAttribute("sessionSocial", svo);
-				}
+				session.setAttribute("sessionSocial", svo);
 				out.println("<script>");
 				out.println("alert('MOVING로그인을 환영합니다 !');");
 				out.println("location='/moving.com/main';");

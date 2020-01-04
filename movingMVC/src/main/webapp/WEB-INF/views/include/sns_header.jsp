@@ -46,6 +46,9 @@
 <script src="${pageContext.request.contextPath}/resources/js/member_change.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/member_setting.js"></script>
 <script>
+// $(function(){ 
+//   getCommentList();
+// });
 	function removeAllLi(){
 		$('#SNS_None_Ul').empty();
 	}

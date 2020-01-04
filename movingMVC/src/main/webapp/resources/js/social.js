@@ -15,7 +15,7 @@ var id = getParameterByName('id');
 
 //댓글 추가
 $(function(){ 
-   getCommentList();
+//   getCommentList();
    $('#write').on('click', function() {
    //var sessionId="<%=session.getAttribute('id')%>"
    //   var sessionTest=sessionId;
@@ -46,7 +46,7 @@ $(function(){
       }),
       success: function(data) {//댓글 저장 성공시 SUCCESS 문자열 반환
          if(data=='SUCCESS') {
-            alert('댓글이 등록되었습니다!');
+//            alert('댓글이 등록되었습니다!');
             getCommentList();//댓글 목록 함수 호출! 갱신된 내용 가져옴.
             getCommentCount();//댓글 개수 불러오기
             $('#content').val("");

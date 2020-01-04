@@ -10,19 +10,19 @@
 			<div id="SNS_left_title">
 				<div id="SNS_Profile_Name">
 				<c:if test="${empty s_pro.nickname}">
-					<a href="profile?id=${id}">비회원</a>
+					<a href="profile?id=${sessionSocial.id}">비회원</a>
 				</c:if>
 				<c:if test="${!empty s_pro.nickname}">
-					<a href="profile?id=${id}">${s_pro.nickname}</a>
+					<a href="profile?id=${sessionSocial.id}">${s_pro.nickname}</a>
 				</c:if>
 				</div> 
 				<c:if test="${!empty s_pro.profileImagePath}">
 					<img class="SNS_Profile_Picture" src="${s_pro.profileImagePath}"
-						width="30px" height="30px" alt="" onclick="location='/moving.com/social/profile?id='+${id}">
+						width="30px" height="30px" alt="" onclick="location='/moving.com/social/profile?id='+${sessionSocial.id}">
 				</c:if>
 				<c:if test="${empty s_pro.profileImagePath}">
 					<img class="SNS_Profile_Picture" src="../images/member_profile.png"
-						width="30px" height="30px" alt="" onclick="location='/moving.com/social/profile?id='+${id}">
+						width="30px" height="30px" alt="" onclick="location='/moving.com/social/profile?id='+${sessionSocial.id}">
 				</c:if>
 			</div>
 			<br />
@@ -39,7 +39,6 @@
 		</div>
 		<div id="SNS_main_mid">
 			<!-- 중간 글쓰기, 글보기 -->
-			<c:if test="${!empty s_pro.id}">
 				<form action="post_write_ok/0" enctype="mutipart/form-data" method="post" name="timeLineWriter">
 					<div id="mid_pad">
 						<div id="SNS_Profile_Upload_Top">
@@ -59,7 +58,6 @@
 						</div>
 					</div>
 				</form>
-			</c:if>
 				<%-- 
 				<form action="post_write_ok/${id}" enctype="mutipart/form-data" method="post" name="timeLineWriter">
 					<div id="SNS_Profile_Writer">

@@ -24,7 +24,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT id AS social_profile_id, nickname, background_image_path,introduce, profile_image_path,
 		follower_count,follow_count,user_id
 		from social_profile
-		WHERE user_id = #{id}
+		WHERE id = #{id}
 	</select>
 	
 	<!-- 소셜 프로필 번호로 회원 프로필 검색 -->
@@ -149,6 +149,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="insertSocialProfile">
 		insert into social_profile(id,nickname,user_id,user_type,introduce,profile_image_path,background_image_path)
 		values (social_profile_seq.nextval,#{nickname},#{userId},1,#{introduce},default,default)
+		<selectKey keyProperty="id" resultType="Integer" order="AFTER">
+			select social_profile_seq.currval from dual
+		</selectKey>
 	</insert>
 	<!-- ==================================<구분선>====================================== -->
 	<!-- 회원에 해당하는  게시글 검색 (게시글 + 댓글 + 작성자) -->

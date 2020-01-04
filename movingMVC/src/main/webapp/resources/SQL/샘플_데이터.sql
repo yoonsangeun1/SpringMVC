@@ -64,10 +64,10 @@ INSERT INTO code_master VALUES (code_master_seq.nextval, 300, 3000206,'티저장
 INSERT INTO code_master VALUES (code_master_seq.nextval, 300, 3000207,'티저장르', '티저_코메디','video_post',sysdate);
 INSERT INTO code_master VALUES (code_master_seq.nextval, 300, 3000208,'티저장르', '티저_애니메이션','video_post',sysdate);
 INSERT INTO code_master VALUES (code_master_seq.nextval, 300, 3000209,'티저장르', '티저_기타','video_post',sysdate);
-
+select * from SOCIAL_PROFILE order by id desc
 -- 1. 범죄/스릴러 2. 액션/어드벤쳐 3. 다큐/드라마/청춘 4. 역사/시대극 5. 판타지/SF 6. 멜로/로맨스 7. 코메디 8.애니메이션 9. 기타
-
---부가기능 전체
+delete from SOCIAL_PROFILE where user_id=5
+select * from M_USER where name='bb'--부가기능 전체
 INSERT INTO code_master VALUES (code_master_seq.nextval, 800, 800,'부가기능', '부가기능',null,sysdate);
 --댓글, 첨부파일, 무브(좋아요), 메세지, 신고, 추천리스트
 INSERT INTO code_master VALUES (code_master_seq.nextval, 800, 80001,'부가기능', '댓글','m_comment',sysdate);
@@ -424,8 +424,9 @@ ALTER TABLE NORMAL_POST DROP COLUMN content3;
   WHERE N.USER_ID = M.ID
   AND N.ID=67
 
-  SELECT * FROM M_USER;
-  
+  SELECT * FROM social_profile;
+  delete from social_profile;
+  delete from m_user
    SELECT N.ID AS board_notice_id, N.USER_ID AS board_notice_user_id,
  N.TITLE, N.HIT, N.CONTENT, M.NICKNAME
  FROM NORMAL_POST N, M_USER M

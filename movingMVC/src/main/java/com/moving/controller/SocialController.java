@@ -31,10 +31,10 @@ import pwdconv.PwdChange;
 
 @Controller
 public class SocialController {
-	
+
 	@Autowired
 	private SocialService socialService;
-	
+
 	@Autowired
 	private MUserService mUserService;
 
@@ -44,10 +44,10 @@ public class SocialController {
 		String [] phonelist = {"010","011","016","017","018","019"};
 		ModelAndView m = new ModelAndView("member/member_snsJoin");
 		m.addObject("phonelist",phonelist);
-		
+
 		return m;
 	}//member_join()
-	
+
 	//이메일 중복체크
 	@RequestMapping(value="social/join_emailCheck")
 	@ResponseBody
@@ -56,11 +56,11 @@ public class SocialController {
 		MUserVO db_email = this.mUserService.emailCheck(email); //이메일 중복검색
 		int re = -1; //중복 이메일이 없을때 반환값
 		if(db_email != null) { //중복 이메일이 있을때
-				re=1;
+			re=1;
 		}
 		return re;
 	}//memeber_emailcheck()
-		
+
 	//닉네임 중복체크
 	@RequestMapping(value="social/nickcheck")
 	public String member_nickcheck(String nickname, HttpServletResponse response) throws Exception {
@@ -68,33 +68,33 @@ public class SocialController {
 		PrintWriter out = response.getWriter();
 		MUserVO db_nickname = this.mUserService.nickCheck(nickname); //닉네임 중복검색
 		int re = -1; //중복 닉네임이 없을때 반환값
-	
+
 		if(db_nickname != null) { //중복닉네임이 있을때
 			re=1;
 		}
 		out.println(re); //값을 반환
 		return null;
 	}//member_nickcheck()
-	
+
 	//회원가입 완료
 	@RequestMapping("/social/social_join_ok")
 	public String member_join_ok(MUserVO m, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		m.setPassword(PwdChange.getPassWordToXEMD5String(m.getPassword())); // 비번을 암호화 하여 저장
-		
+
 		//회원가입시 입력한 휴대폰번호를 하나의 문자열로 합침
 		String phone= request.getParameter("phone01") + "-" + request.getParameter("phone02") + "-" + request.getParameter("phone03");
-		
+
 		//회원가입시 선택한 선호장르를 DB에 저장
 		String[] values=new String[3];
 		if(request.getParameterValues("genre_like") != null) {
 			values = request.getParameterValues("genre_like");
 
 			System.out.println(values.length);
-			
+
 			int genre_count=3;
-			
+
 			switch(values.length) {
 			case 3:
 				m.setGenre03(values[2]);
@@ -124,21 +124,21 @@ public class SocialController {
 		//하나의 문자열로 합친 휴대폰번호를 DB에 저장
 		m.setPhone(phone);
 		this.mUserService.insertUser(m); //회원저장
-		
+
 		out.println("<script>");
 		out.println("alert('MOVING회원이 되신 것을 환영합니다 !');");
 		out.println("location='/moving.com/social/login';");
 		out.println("</script>");
-		
+
 		return null;
 	}//member_join_ok()
-	
+
 	//소셜에서 로그인
 	@RequestMapping("/social/login")
 	public String social_login(){
 		return "member/member_snsLogin";
 	}
-	
+
 	//로그인 인증
 	@RequestMapping("/social/social_login_ok")
 	public String member_login_ok(String mLogin_email, String mLogin_password, MUserVO m,
@@ -208,14 +208,6 @@ public class SocialController {
 		return null;
 	}//member_login_ok()
 
-	//소셜 회원으로 전환
-	@RequestMapping(value="/social/modify")	
-	public ModelAndView social_modify() {
-		System.out.println("아이고");
-		ModelAndView m = new ModelAndView("social/social_modify");
-		return m;
-	}//social_join()
-
 	//소셜 메인페이지
 	@RequestMapping(value="/social/main",method=RequestMethod.GET)
 	public ModelAndView social_main(
@@ -225,232 +217,216 @@ public class SocialController {
 			) throws Exception{
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out= response.getWriter();
+
 		if(session.getAttribute("id")==null){
 			out.println("<script>");
 			out.println("alert('로그인이 필요합니다.');");
 			out.println("location='/moving.com/social/login'");
 			out.println("</script>");
-			
+
 			return null;
-		}
-		int id=(int)session.getAttribute("id");
-		System.out.println("id="+id);
+		}else {
+			if(session.getAttribute("sessionSocial")==null){
+				out.println("<script>");
+				out.println("if(confirm('무빙 SNS를 이용하시려면 소셜 계정으로 전환하세요') == true){"
+						+ "location='/moving.com/social/modify';"
+						+ "}else{"
+						+ "location='/moving.com/main';}");
+				out.println("</script>");
 
-		ModelAndView m=new ModelAndView();
+				return null;
+			}else {//소셜 계정이 있는 경우
+				int id=(int)session.getAttribute("id");
 
-		SocialProfileVO db_id = socialService.checkId(id);
-
-		int re=1;
-		if(db_id == null ) re=-1;
-		System.out.println(re);
-		if(re == 1) //id값이 있을 경우
-		{
-			SocialProfileVO socialProfileVO=socialService.socialProfileInfo(id);
-			System.out.println("성공");
-			System.out.println(socialProfileVO.getUserId()); //id값 출력
-			List<SocialPostVO> socialPostVO=socialService.selectSocialPost(); //id로 검색하여 게시글ㄹ
-			m.addObject("s_post", socialPostVO);
-			m.addObject("s_pro", socialProfileVO);
-			m.setViewName("social/social_main");
-			return m;
+				ModelAndView m=new ModelAndView();
+				SocialProfileVO sessionSocial=(SocialProfileVO) session.getAttribute("sessionSocial");
+				List<SocialPostVO> socialPostVO=socialService.selectSocialPost(); //id로 검색하여 게시글ㄹ
+				m.addObject("s_post", socialPostVO);
+				m.addObject("s_pro", sessionSocial);
+				m.setViewName("social/social_main");
+				return m;
+			}
 		}
-		else {
-			System.out.println("아이디 없음");
-			
-			out.println("<script>");
-			out.println("if(confirm('무빙 SNS를 이용하시려면 소셜 계정으로 전환하세요') == true){"
-					+ "location='/moving.com/social/modify';"
-					+ "}else{"
-					+ "location='/moving.com/main';}");
-			out.println("</script>");
-			
-			//m.setViewName("social/social_modify");
-		}
-		return null;
 	}//social_main()
-	
+
+	//소셜 회원으로 전환
+	@RequestMapping(value="/social/modify")	
+	public ModelAndView social_modify() {
+		ModelAndView m = new ModelAndView("social/social_modify");
+		return m;
+	}//social_modify()
+
 	//소셜회원 전환 완료
 	@RequestMapping("social/social_modify_ok")
-	public String social_modify_ok(SocialProfileVO s_pro, HttpServletRequest request) throws Exception {
-		HttpSession session=request.getSession();//세션 값 전체를 가져온다.
-		
-		int using_id=(int)session.getAttribute("id");//세션에서 아이디값을 가져온다.
-		String introduce=request.getParameter("introduce"); //자기소개
-		String nickname=request.getParameter("nickname");  //닉네임
-		
-		if(using_id==0) {
-//			out.println("<script>");
-//			out.println("alert('로그인해주세요!')");
-//			out.println("</script>");
-			return "redirect:/main";
-		}
-		else {
-			System.out.println("id : "+using_id);
+	public String social_modify_ok(SocialProfileVO s_pro, Model m, 
+			HttpServletRequest request, HttpServletResponse response
+			, HttpSession session) throws Exception {
+		session=request.getSession();
+		response.setContentType("text/html;charset=UTF-8");
+		PrintWriter out= response.getWriter();
+
+		if(session.getAttribute("id")==null){
+			out.println("<script>");
+			out.println("alert('로그인이 필요합니다.');");
+			out.println("location='/moving.com/social/login'");
+			out.println("</script>");
+
+			return null;
+		}else {
+			int using_id=(int)session.getAttribute("id");//현재 로그인중인 m_user id값
+			String introduce=request.getParameter("introduce"); //자기소개
+			String nickname=request.getParameter("nickname");  //닉네임
+
 			s_pro.setUserId(using_id);
 			s_pro.setNickname(nickname);
 			s_pro.setIntroduce(introduce);
-	
+
 			this.socialService.insertSocialProfile(s_pro);
-			return "redirect:/social/profile?id="+using_id; //프로필 폼으로 이동
+			session.setAttribute("sessionSocial", s_pro);
+			
+			m.addAttribute("s_pro", s_pro);
+			m.addAttribute("id", s_pro.getId());
+			
+			return "redirect:/social/profile?id="+s_pro.getId(); //프로필 폼으로 이동
 		}
 	}//social_modify_ok()
-	
-	//메신저
-	@RequestMapping(value="/social/messenger")
-	public String social_messenger() {
-		return "social/social_messenger";
-	}//social_messenger()
 
+	
 	//프로필 페이지 매핑
 	@RequestMapping(value="/social/profile")
-	public ModelAndView social_profile(
+	public String social_profile(int id,//social_profile의 id임!!
 			HttpServletRequest request,
-			HttpServletResponse response, int id,
-			HttpSession session
+			HttpServletResponse response, 
+			HttpSession session,Model m
 			) throws Exception{
 		response.setContentType("text/html;charset=UTF-8");
+		PrintWriter out= response.getWriter();
 		session=request.getSession();
-		
-		int using_id=(int)session.getAttribute("id");
-		SocialProfileVO sessionSocial=this.socialService.selectIDFromUserID(using_id);//세션 아이디로 소셜 아이디를 검색한다.
-		
-		session.setAttribute("sessionSocial", sessionSocial);
-		System.out.println(sessionSocial.getNickname());
-		ModelAndView m=new ModelAndView();
-		if((Integer)id==null) {//아이디가 없을 경우
-			m.setViewName("main");
-		}
-		SocialProfileVO socialProfileVO=socialService.socialProfileInfo(id);
-		
-		m.addObject("s_pro", socialProfileVO);
-		m.addObject("id", id);
-		m.setViewName("social/social_profile");
+//		SocialProfileVO s_pro=(SocialProfileVO) session.getAttribute("sessionSocial");
+//		System.out.println("아이디: " +id);
+//		System.out.println("id="+s_pro.getId());
+//		if(session.getAttribute("id")==null){
+//			out.println("<script>");
+//			out.println("alert('로그인이 필요합니다.');");
+//			out.println("location='/moving.com/social/login'");
+//			out.println("</script>");
+//
+//			return null;
+//		}else {
+//			System.out.println(s_pro.getId());
+//			if(session.getAttribute("sessionSocial")==null){
+//				out.println("<script>");
+//				out.println("if(confirm('무빙 SNS를 이용하시려면 소셜 계정으로 전환하세요') == true){"
+//						+ "location='/moving.com/social/modify';"
+//						+ "}else{"
+//						+ "location='/moving.com/main';}");
+//				out.println("</script>");
+//
+//				return null;
+//			}else {//소셜 계정이 있는 경우
 
-		return m;
+				//SocialProfileVO sessionSocial=(SocialProfileVO) session.getAttribute("sessionSocial");
+				SocialProfileVO socialProfileVO=socialService.socialProfileInfo(id);
+
+				m.addAttribute("s_pro", socialProfileVO);
+				m.addAttribute("id", id);
+				//m.addObject("socialId", id);
+
+
+				return "social/social_profile";
+//			}
+//		}
 	}//social_profile() 
-	
-	@RequestMapping(value="/social/post_write_ok/{id}")
+
+	@RequestMapping(value="/social/post_write_ok")
 	public String social_profile_write(
 			HttpServletRequest request,
-			HttpServletResponse response, @PathVariable("id") int id
+			HttpServletResponse response
 			,SocialPostVO s_post
 			)throws Exception{
 		HttpSession session=request.getSession();//세션 값 전체를 가져온다.
-		
-		int using_id=(int)session.getAttribute("id");//세션에서 아이디값을 가져온다.
-		
-		SocialProfileVO getSocial_id=this.socialService.selectIDFromUserID(using_id);
-		
-		int social_id=getSocial_id.getId();
-		
-		s_post.setSocialId(social_id);
-		this.socialService.insertPost(s_post);
-		
-		if(id==0) {
-			return "redirect:/social/main";
-		}else {
-			return "redirect:/social/profile?id="+id;
-		}
+
+		SocialProfileVO Social_id=(SocialProfileVO) session.getAttribute("sessionSocial");
+
+		s_post.setSocialId(Social_id.getId());//소셜 아이디를 기준으로 게시글 넣기
+		this.socialService.insertPost(s_post);//게시글 넣는 메서드
+
+		return "redirect:/social/profile?id="+Social_id.getId();//내 계정으로 복귀
 	}
-	
-	@RequestMapping(value="/social/post_share_ok/{id}")
+
+	//게시글 공유 완료
+	@RequestMapping(value="/social/post_share_ok")
 	public String social_post_share(
 			HttpServletRequest request,
-			HttpServletResponse response, @PathVariable("id") int id
+			HttpServletResponse response
 			, SocialPostVO s_post
-			,int post_id,
-			int user_id
+			,int id,//게시글 번호
+			int socialId//글쓴사람 회원번호
 			)throws Exception{
-		HttpSession session=request.getSession();//세션 값 전체를 가져온다.
+		HttpSession session=request.getSession();
+
+		SocialProfileVO getSocial_id=(SocialProfileVO)session.getAttribute("sessionSocial");
 		
-		int using_id=(int)session.getAttribute("id");//세션에서 아이디값을 가져온다.
-		if(id==0)
-		{
-			return "redirect:/main";
-		}
-		SocialProfileVO getSocial_id=this.socialService.selectIDFromUserID(using_id);//세션 아이디로 소셜 아이디를 검색한다.
-		String user=request.getParameter("user_id");
-		user_id=Integer.parseInt(user);
-		//System.out.println(sharedPost.getContent());
-		int social_id=getSocial_id.getId();
-		s_post.setSocialId(social_id);
-		String sharedPostContent=socialService.selectSocialPostOne(post_id).getContent();
-		int re=1;
-		//String sharedNickname=socialService.socialProfileInfo(user_id).getNickname();
-		SocialProfileVO sharedNickname=socialService.socialProfileInfoWithId(user_id);
-		if(sharedNickname == null) re=-1;
-		System.out.println(re);
-		s_post.setContent("<공유된 게시글입니다><br/>"+sharedPostContent+"<br/>"+"By. <a href='/moving.com/social/profile?id="+sharedNickname.getUserId()+"'>"+sharedNickname.getNickname()+"</a>");
-		System.out.println(post_id);
-		System.out.println("user_id : "+user_id);
+		s_post.setSocialId(getSocial_id.getId());//내 id 저장 
 		
-		this.socialService.insertPost(s_post);
-		
-		if(id==0) {
-			return "redirect:/social/main";
-		}else {
-			return "redirect:/social/profile?id="+id;
-		}
+		//String user=request.getParameter("user_id");//유저 아이디를 받기(내가 공유하고자 하는 글의 작성자)
+		//user_id=Integer.parseInt(user);
+		String sharedPostContent=socialService.selectSocialPostOne(id).getContent();
+		SocialProfileVO sharedNickname=socialService.socialProfileInfoWithId(socialId);//작성자 아이디를 기준으로 닉네임 가져오기
+		s_post.setContent("<공유된 게시글입니다><br/>"+sharedPostContent+"<br/>"
+				+"By. <a href='/moving.com/social/profile?id="+sharedNickname.getId()+"'>"+sharedNickname.getNickname()+"</a>");
+
+		this.socialService.insertPost(s_post);//게시글 저장
+
+		return "redirect:/social/profile?id="+getSocial_id.getId();//내 홈피로 이동
 	}
-	
-	@RequestMapping(value="social/post_del_ok/{id}")
+
+	//게시글 삭제 완료
+	@RequestMapping(value="social/post_del_ok")
 	public String social_profile_delete(
 			HttpServletRequest request,
 			HttpServletResponse response, 
-			int post_id,
-			int user_id,
-			int page_num,
-			@PathVariable("id") int page_id,
-			HttpSession session,Model m
-			)throws Exception{
+			HttpSession session,Model m,
+			int id,//게시글 번호
+			int socialId,//게시글 작성자
+			int page_num//메인 페이지인지 프로필 페이지인지 여부
+			) throws Exception{
 		session=request.getSession();//세션 값 전체를 가져온다.
-		
-		int using_id=(int)session.getAttribute("id");//세션에서 아이디값을 가져온다.
-		
-		SocialProfileVO getSocial_id=this.socialService.selectIDFromUserID(using_id);
-		user_id=getSocial_id.getId();
-		
-		if(using_id==page_id) {
-			this.socialService.deletePost(post_id);
-			if(page_num==0) {
-				return "redirect:/social/main";
-			}
-			else {
-				return "redirect:/social/profile?id="+using_id;			
-			}
+		SocialProfileVO getSocial_id=(SocialProfileVO) session.getAttribute("sessionSocial");
+		int user_id=getSocial_id.getId();
+		if(user_id==socialId) {
+			this.socialService.deletePost(id);
+			return "redirect:/social/profile?id="+user_id;
 		}
-		else {
-			return "redirect:/social/profile?id="+using_id;
-		}
-		
+		return null;
 	}
-	
+
 	@RequestMapping("social_attach_ok")
 	public String bbs_write_ok(AttachedFileVO aFile,HttpServletRequest request,
 			HttpSession session,int page_num
 			) throws Exception{
-		
+
 		String saveFolder=request.getRealPath("resources/upload");
-		/* 첨부파일 업로드 경로, 실제 톰캣프로젝트 경로를 반환->
+		 /*첨부파일 업로드 경로, 실제 톰캣프로젝트 경로를 반환->
 		 * d:\spring_work\.metadata\.plugins\org.eclipse.wst.
 		 * server.core\tmp0\wtbwebapps\project\ 
 		 * resources\ upload
 		 */
 		int fileSize=200*1024*1024;//첨부파일 최대크기(5M)
-		
+
 		MultipartRequest multi=null;//첨부파일을 가져오는 api
-		
+
 		multi=new MultipartRequest(request,saveFolder,fileSize,"UTF-8");
-		
-//		String bbs_name=multi.getParameter("bbs_name");
-//		String bbs_title=multi.getParameter("bbs_title");
-//		String bbs_pwd=multi.getParameter("bbs_pwd");
-//		String bbs_cont=multi.getParameter("bbs_cont");
+
+		//		String bbs_name=multi.getParameter("bbs_name");
+		//		String bbs_title=multi.getParameter("bbs_title");
+		//		String bbs_pwd=multi.getParameter("bbs_pwd");
+		//		String bbs_cont=multi.getParameter("bbs_cont");
 		//글쓴이,제목,비번,내용을 가져옴
 
 		File UpFile=multi.getFile("bbs_file");//첨부한 파일을 가져옴.
 		int using_id=(int)session.getAttribute("id");//세션에서 아이디값을 가져온다.
-		
+
 		if(UpFile != null) {//첨부한 파일이 있는경우
 			String fileName=UpFile.getName();//첨부한 파일명
 			Calendar c=Calendar.getInstance();
@@ -468,7 +444,7 @@ public class SocialController {
 			int random=r.nextInt(100000000);//0이상 1억미만 사
 			//이의 정수숫자 난수발생
 
-			/* 첨부한 파일확장자 구함. */
+			// 첨부한 파일확장자 구함. 
 			int index=fileName.lastIndexOf(".");//첨부한 파일
 			//에서 .를 맨오른쪽부터 찾아서 가장먼저 나오는 .의 위치번
 			//호를 왼쪽부터 세어서 번호값을 반환. 첫문자는 0부터 셈
@@ -487,4 +463,11 @@ public class SocialController {
 		if(page_num==1) return "redirect:/social/main";
 		else			return "redirect:/social/profile?id="+using_id;
 	}//social_attach_ok()
+
+	//메신저
+	@RequestMapping(value="/social/messenger")
+	public String social_messenger() {
+		return "social/social_messenger";
+	}//social_messenger()
+
 }

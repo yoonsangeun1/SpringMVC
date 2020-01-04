@@ -124,6 +124,22 @@ CREATE TABLE code_master (
 	register_date DATE /* 등록_날짜 */
 );
 
+COMMENT ON TABLE code_master IS '코드_마스터';
+
+COMMENT ON COLUMN code_master.id IS '아이디';
+
+COMMENT ON COLUMN code_master.code_type_id IS '코드_유형_아이디';
+
+COMMENT ON COLUMN code_master.code_no IS '코드_번호';
+
+COMMENT ON COLUMN code_master.category_name_reference IS '카테고리_명_참조';
+
+COMMENT ON COLUMN code_master.category_name IS '카테고리_명';
+
+COMMENT ON COLUMN code_master.table_name IS '테이블_명';
+
+COMMENT ON COLUMN code_master.register_date IS '등록_날짜';
+
 CREATE UNIQUE INDEX code_master_id_pk
 	ON code_master (
 		id ASC
@@ -171,6 +187,22 @@ CREATE TABLE order_entity (
 	total_price NUMBER(38) /* 총_가격 */
 );
 
+COMMENT ON TABLE order_entity IS '주문_수량';
+
+COMMENT ON COLUMN order_entity.id IS '아이디';
+
+COMMENT ON COLUMN order_entity.code_no IS '코드_번호';
+
+COMMENT ON COLUMN order_entity.order_sheet_id IS '주문_문서_아이디';
+
+COMMENT ON COLUMN order_entity.reward_id IS '리워드_아이디';
+
+COMMENT ON COLUMN order_entity.count IS '수량';
+
+COMMENT ON COLUMN order_entity.price IS '금액';
+
+COMMENT ON COLUMN order_entity.total_price IS '총_가격';
+
 CREATE UNIQUE INDEX order_entity_id_pk
 	ON order_entity (
 		id ASC
@@ -193,6 +225,22 @@ CREATE TABLE order_sheet (
 	order_date DATE, /* 주문_일 */
 	status NUMBER(1) DEFAULT 1 /* 상태 */
 );
+
+COMMENT ON TABLE order_sheet IS '주문_문서';
+
+COMMENT ON COLUMN order_sheet.id IS '아이디';
+
+COMMENT ON COLUMN order_sheet.code_no IS '코드_번호';
+
+COMMENT ON COLUMN order_sheet.user_id IS '회원_아이디';
+
+COMMENT ON COLUMN order_sheet.address IS '주소';
+
+COMMENT ON COLUMN order_sheet.total_price IS '총_금액';
+
+COMMENT ON COLUMN order_sheet.order_date IS '주문_일';
+
+COMMENT ON COLUMN order_sheet.status IS '상태';
 
 CREATE UNIQUE INDEX order_sheet_id_pk
 	ON order_sheet (
@@ -222,6 +270,34 @@ CREATE TABLE attached_file (
 	social_post_id NUMBER(38), /* 소셜_게시글_아이디 */
 	reply_post_id NUMBER(38) /* 답글_게시글_아이디 */
 );
+
+COMMENT ON TABLE attached_file IS '첨부_파일';
+
+COMMENT ON COLUMN attached_file.id IS '아이디';
+
+COMMENT ON COLUMN attached_file.code_no IS '코드_번호';
+
+COMMENT ON COLUMN attached_file.file_type IS '파일_타입';
+
+COMMENT ON COLUMN attached_file.file_path IS '파일_경로';
+
+COMMENT ON COLUMN attached_file.thumbnail_path IS '썸네일_경로';
+
+COMMENT ON COLUMN attached_file.no IS '순번';
+
+COMMENT ON COLUMN attached_file.register_date IS '등록_날짜';
+
+COMMENT ON COLUMN attached_file.profile_post_id IS '프로필_게시글_아이디';
+
+COMMENT ON COLUMN attached_file.normal_post_id IS '일반_게시글_아이디';
+
+COMMENT ON COLUMN attached_file.video_post_id IS '영상_게시글_아이디';
+
+COMMENT ON COLUMN attached_file.project_post_id IS '프로젝트_게시글_아이디';
+
+COMMENT ON COLUMN attached_file.social_post_id IS '소셜_게시글_아이디';
+
+COMMENT ON COLUMN attached_file.reply_post_id IS '답글_게시글_아이디';
 
 CREATE UNIQUE INDEX file_id_pk
 	ON attached_file (
@@ -253,6 +329,36 @@ CREATE TABLE reply_post (
 	publish_availability NUMBER(1) DEFAULT 1 /* 공개_여부 */
 );
 
+COMMENT ON TABLE reply_post IS '답글_게시글';
+
+COMMENT ON COLUMN reply_post.id IS '아이디';
+
+COMMENT ON COLUMN reply_post.code_no IS '코드_번호';
+
+COMMENT ON COLUMN reply_post.user_id IS '회원_아이디';
+
+COMMENT ON COLUMN reply_post.category IS '분류';
+
+COMMENT ON COLUMN reply_post.title IS '제목';
+
+COMMENT ON COLUMN reply_post.content IS '내용';
+
+COMMENT ON COLUMN reply_post.hit IS '조회수';
+
+COMMENT ON COLUMN reply_post.register_date IS '등록_일';
+
+COMMENT ON COLUMN reply_post.comment_count IS '댓글_개수';
+
+COMMENT ON COLUMN reply_post.move_count IS '무브_개수';
+
+COMMENT ON COLUMN reply_post.reply_post_id IS '답글_게시글_아이디';
+
+COMMENT ON COLUMN reply_post.reply_step IS '답글_계층';
+
+COMMENT ON COLUMN reply_post.reply_order IS '답글_정렬순서';
+
+COMMENT ON COLUMN reply_post.publish_availability IS '공개_여부';
+
 CREATE UNIQUE INDEX reply_post_id_pk
 	ON reply_post (
 		id ASC
@@ -274,6 +380,20 @@ CREATE TABLE delivery (
 	billing_no VARCHAR2(25), /* 운송장번호 */
 	status NUMBER(1) DEFAULT 1 /* 상태 */
 );
+
+COMMENT ON TABLE delivery IS '배송';
+
+COMMENT ON COLUMN delivery.id IS '아이디';
+
+COMMENT ON COLUMN delivery.code_no IS '코드_번호';
+
+COMMENT ON COLUMN delivery.order_sheet_id IS '주문_문서_아이디';
+
+COMMENT ON COLUMN delivery.delivery_firm IS '배송_사';
+
+COMMENT ON COLUMN delivery.billing_no IS '운송장번호';
+
+COMMENT ON COLUMN delivery.status IS '상태';
 
 CREATE UNIQUE INDEX delivery_id_pk
 	ON delivery (
@@ -299,6 +419,26 @@ CREATE TABLE social_post (
 	register_date DATE DEFAULT sysdate, /* 등록_일 */
 	publish_availability NUMBER(1) DEFAULT 1 /* 공개_여부 */
 );
+
+COMMENT ON TABLE social_post IS '소셜_게시글';
+
+COMMENT ON COLUMN social_post.id IS '아이디';
+
+COMMENT ON COLUMN social_post.code_no IS '코드_번호';
+
+COMMENT ON COLUMN social_post.social_id IS '소셜_아이디';
+
+COMMENT ON COLUMN social_post.content IS '내용';
+
+COMMENT ON COLUMN social_post.project_id IS '프로젝트_아이디';
+
+COMMENT ON COLUMN social_post.comment_count IS '댓글_개수';
+
+COMMENT ON COLUMN social_post.move_count IS '무브_개수';
+
+COMMENT ON COLUMN social_post.register_date IS '등록_일';
+
+COMMENT ON COLUMN social_post.publish_availability IS '공개_여부';
 
 CREATE UNIQUE INDEX social_post_id_pk
 	ON social_post (
@@ -333,6 +473,42 @@ CREATE TABLE project_post (
 	register_date DATE DEFAULT sysdate /* 등록_일 */
 );
 
+COMMENT ON TABLE project_post IS '프로젝트_게시글';
+
+COMMENT ON COLUMN project_post.id IS '아이디';
+
+COMMENT ON COLUMN project_post.user_id IS '회원_아이디';
+
+COMMENT ON COLUMN project_post.code_no IS '코드_번호';
+
+COMMENT ON COLUMN project_post.code IS '분류번호';
+
+COMMENT ON COLUMN project_post.title IS '제목';
+
+COMMENT ON COLUMN project_post.introduce IS '소개';
+
+COMMENT ON COLUMN project_post.content IS '내용';
+
+COMMENT ON COLUMN project_post.business IS '제작사';
+
+COMMENT ON COLUMN project_post.target_price IS '목표_금액';
+
+COMMENT ON COLUMN project_post.now_price IS '현재_금액';
+
+COMMENT ON COLUMN project_post.target_limit IS '목표_기한';
+
+COMMENT ON COLUMN project_post.left_limit IS '남은_기한';
+
+COMMENT ON COLUMN project_post.sponser_count IS '후원자_수';
+
+COMMENT ON COLUMN project_post.hit IS '조회수';
+
+COMMENT ON COLUMN project_post.comment_count IS '댓글_개수';
+
+COMMENT ON COLUMN project_post.move_count IS '무브_개수';
+
+COMMENT ON COLUMN project_post.register_date IS '등록_일';
+
 CREATE UNIQUE INDEX project_post_id_pk
 	ON project_post (
 		id ASC
@@ -358,6 +534,28 @@ CREATE TABLE recommend_list (
 	normal_post_id NUMBER(38), /* 일반_게시글_아이디 */
 	normal_post_banner_title VARCHAR2(200) /* 일반_게시글_광고_제목 */
 );
+
+COMMENT ON TABLE recommend_list IS '추천_리스트';
+
+COMMENT ON COLUMN recommend_list.id IS '아이디';
+
+COMMENT ON COLUMN recommend_list.code_no IS '코드_번호';
+
+COMMENT ON COLUMN recommend_list.social_profile_id IS '소셜_프로필_아이디';
+
+COMMENT ON COLUMN recommend_list.social_profile_banner_title IS '소셜_프로필_광고_제목';
+
+COMMENT ON COLUMN recommend_list.profile_post_id IS '프로필_게시글_아이디';
+
+COMMENT ON COLUMN recommend_list.profile_post_banner_title IS '프로필_게시글_광고_제목';
+
+COMMENT ON COLUMN recommend_list.project_post_id IS '프로젝트_게시글_아이디';
+
+COMMENT ON COLUMN recommend_list.project_banner_title IS '프로젝트_광고_제목';
+
+COMMENT ON COLUMN recommend_list.normal_post_id IS '일반_게시글_아이디';
+
+COMMENT ON COLUMN recommend_list.normal_post_banner_title IS '일반_게시글_광고_제목';
 
 CREATE UNIQUE INDEX recom_list_id_pk
 	ON recommend_list (
@@ -394,6 +592,46 @@ CREATE TABLE video_post (
 	register_date DATE DEFAULT sysdate /* 등록_일 */
 );
 
+COMMENT ON TABLE video_post IS '영상_게시글';
+
+COMMENT ON COLUMN video_post.id IS '아이디';
+
+COMMENT ON COLUMN video_post.code_no IS '코드_번호';
+
+COMMENT ON COLUMN video_post.user_id IS '회원_아이디';
+
+COMMENT ON COLUMN video_post.genre IS '장르';
+
+COMMENT ON COLUMN video_post.title_english IS '제목_영문';
+
+COMMENT ON COLUMN video_post.title_korean IS '제목_한글';
+
+COMMENT ON COLUMN video_post.director IS '감독';
+
+COMMENT ON COLUMN video_post.actor IS '배우';
+
+COMMENT ON COLUMN video_post.release_date IS '개봉_일';
+
+COMMENT ON COLUMN video_post.content IS '내용';
+
+COMMENT ON COLUMN video_post.grade IS '평점';
+
+COMMENT ON COLUMN video_post.era_background IS '시대_배경';
+
+COMMENT ON COLUMN video_post.video_file_path IS '영상_파일_경로';
+
+COMMENT ON COLUMN video_post.video_length IS '영상_길이';
+
+COMMENT ON COLUMN video_post.rate IS '관람등급';
+
+COMMENT ON COLUMN video_post.hit IS '조회수';
+
+COMMENT ON COLUMN video_post.comment_count IS '댓글_개수';
+
+COMMENT ON COLUMN video_post.move_count IS '무브_개수';
+
+COMMENT ON COLUMN video_post.register_date IS '등록_일';
+
 CREATE UNIQUE INDEX video_post_id_pk
 	ON video_post (
 		id ASC
@@ -412,9 +650,23 @@ CREATE TABLE social_message (
 	code_no NUMBER(38) DEFAULT 80004, /* 코드_번호 */
 	social_id_from NUMBER(38) NOT NULL, /* 소셜_아이디_보낸이 */
 	social_id_to NUMBER(38) NOT NULL, /* 소셜_아이디_받는이 */
-	content CLOB, /* 내용 */
+	content varchar2(4000), /* 내용 */
 	register_date DATE DEFAULT sysdate /* 등록_일 */
 );
+
+COMMENT ON TABLE social_message IS '소셜_메시지';
+
+COMMENT ON COLUMN social_message.id IS '아이디';
+
+COMMENT ON COLUMN social_message.code_no IS '코드_번호';
+
+COMMENT ON COLUMN social_message.social_id_from IS '소셜_아이디_보낸이';
+
+COMMENT ON COLUMN social_message.social_id_to IS '소셜_아이디_받는이';
+
+COMMENT ON COLUMN social_message.content IS '내용';
+
+COMMENT ON COLUMN social_message.register_date IS '등록_일';
 
 CREATE UNIQUE INDEX PK_social_message
 	ON social_message (
@@ -454,6 +706,54 @@ CREATE TABLE m_user (
 	deactivate_date DATE, /* 탈퇴_날짜 */
 	deactivate_reason CLOB /* 탈퇴 */
 );
+
+COMMENT ON TABLE m_user IS '회원';
+
+COMMENT ON COLUMN m_user.id IS '아이디';
+
+COMMENT ON COLUMN m_user.code_no IS '코드_번호';
+
+COMMENT ON COLUMN m_user.userid IS '회원아이디';
+
+COMMENT ON COLUMN m_user.nickname IS '닉네임';
+
+COMMENT ON COLUMN m_user.name IS '이름';
+
+COMMENT ON COLUMN m_user.email IS '이메일';
+
+COMMENT ON COLUMN m_user.password IS '비밀번호';
+
+COMMENT ON COLUMN m_user.genre_01 IS '장르1';
+
+COMMENT ON COLUMN m_user.genre_02 IS '장르2';
+
+COMMENT ON COLUMN m_user.genre_03 IS '장르3';
+
+COMMENT ON COLUMN m_user.phone IS '전화번호';
+
+COMMENT ON COLUMN m_user.publish_availability IS '공개_여부';
+
+COMMENT ON COLUMN m_user.profile_image_url IS '프로필_사진_url';
+
+COMMENT ON COLUMN m_user.user_status IS '회원_상태';
+
+COMMENT ON COLUMN m_user.user_type IS '회원_유형';
+
+COMMENT ON COLUMN m_user.user_lv IS '회원_등급';
+
+COMMENT ON COLUMN m_user.user_point IS '회원_포인트';
+
+COMMENT ON COLUMN m_user.register_date IS '등록_일';
+
+COMMENT ON COLUMN m_user.business_name IS '사업자이름';
+
+COMMENT ON COLUMN m_user.business_register_no IS '사업자등록번호';
+
+COMMENT ON COLUMN m_user.business_license_image_path IS '사업자등록증이미지경로';
+
+COMMENT ON COLUMN m_user.deactivate_date IS '탈퇴_날짜';
+
+COMMENT ON COLUMN m_user.deactivate_reason IS '탈퇴';
 
 CREATE UNIQUE INDEX user_id_pk
 	ON m_user (
@@ -500,6 +800,18 @@ CREATE TABLE payment (
 	status NUMBER(1) DEFAULT 1 /* 상태 */
 );
 
+COMMENT ON TABLE payment IS '결제';
+
+COMMENT ON COLUMN payment.id IS '아이디';
+
+COMMENT ON COLUMN payment.code_no IS '코드_번호';
+
+COMMENT ON COLUMN payment.order_sheet_id IS '주문_문서_아이디';
+
+COMMENT ON COLUMN payment.payment_method IS '결제_방법';
+
+COMMENT ON COLUMN payment.status IS '상태';
+
 CREATE UNIQUE INDEX payment_id_pk
 	ON payment (
 		id ASC
@@ -528,6 +840,32 @@ CREATE TABLE social_profile (
 	my_list_name VARCHAR2(50) /* 내_리스트_명 */
 );
 
+COMMENT ON TABLE social_profile IS '소셜_프로필';
+
+COMMENT ON COLUMN social_profile.id IS '아이디';
+
+COMMENT ON COLUMN social_profile.code_no IS '코드_번호';
+
+COMMENT ON COLUMN social_profile.user_id IS '회원_아이디';
+
+COMMENT ON COLUMN social_profile.nickname IS '닉네임';
+
+COMMENT ON COLUMN social_profile.background_image_path IS '배경_이미지_경로';
+
+COMMENT ON COLUMN social_profile.introduce IS '소개';
+
+COMMENT ON COLUMN social_profile.user_type IS '회원_타입';
+
+COMMENT ON COLUMN social_profile.profile_image_path IS '프로필_이미지_경로';
+
+COMMENT ON COLUMN social_profile.follower_count IS '팔로워_수';
+
+COMMENT ON COLUMN social_profile.follow_count IS '팔로우_수';
+
+COMMENT ON COLUMN social_profile.post_count IS '게시글_수';
+
+COMMENT ON COLUMN social_profile.my_list_name IS '내_리스트_명';
+
 CREATE UNIQUE INDEX social_profile_id_pk
 	ON social_profile (
 		id ASC
@@ -554,6 +892,30 @@ CREATE TABLE reward (
 	select_count NUMBER(38) DEFAULT 0, /* 선택한_수 */
 	register_date DATE DEFAULT sysdate /* 등록_날짜 */
 );
+
+COMMENT ON TABLE reward IS '리워드';
+
+COMMENT ON COLUMN reward.id IS '아이디';
+
+COMMENT ON COLUMN reward.code_no IS '코드_번호';
+
+COMMENT ON COLUMN reward.project_post_id IS '프로젝트_게시글_아이디';
+
+COMMENT ON COLUMN reward.title IS '제목';
+
+COMMENT ON COLUMN reward.content IS '내용';
+
+COMMENT ON COLUMN reward.price IS '금액';
+
+COMMENT ON COLUMN reward.delivery_fee_existence IS '배송_비_유무';
+
+COMMENT ON COLUMN reward.delivery_expect_date IS '전달_예정_일';
+
+COMMENT ON COLUMN reward.limit_count IS '제한_수';
+
+COMMENT ON COLUMN reward.select_count IS '선택한_수';
+
+COMMENT ON COLUMN reward.register_date IS '등록_날짜';
 
 CREATE UNIQUE INDEX reward_id_pk
 	ON reward (
@@ -584,6 +946,34 @@ CREATE TABLE move (
 	profile_post_id NUMBER(38) /* 프로필_게시글_아이디 */
 );
 
+COMMENT ON TABLE move IS '무브';
+
+COMMENT ON COLUMN move.id IS '아이디';
+
+COMMENT ON COLUMN move.code_no IS '코드_번호';
+
+COMMENT ON COLUMN move.register_date IS '등록_날짜';
+
+COMMENT ON COLUMN move.user_id_from IS '회원_아이디_보낸이';
+
+COMMENT ON COLUMN move.user_id_to IS '회원_아이디_받는이';
+
+COMMENT ON COLUMN move.social_profile_id_from IS '소셜_프로필_아이디_보낸이';
+
+COMMENT ON COLUMN move.social_profile_id_to IS '소셜_프로필_아이디_받는이';
+
+COMMENT ON COLUMN move.normal_post_id IS '일반_게시글_아이디';
+
+COMMENT ON COLUMN move.video_post_id IS '영상_게시글_아이디';
+
+COMMENT ON COLUMN move.project_post_id IS '프로젝트_게시글_아이디';
+
+COMMENT ON COLUMN move.social_post_id IS '소셜_게시글_아이디';
+
+COMMENT ON COLUMN move.reply_post_id IS '답글_게시글_아이디';
+
+COMMENT ON COLUMN move.profile_post_id IS '프로필_게시글_아이디';
+
 CREATE UNIQUE INDEX move_id_pk
 	ON move (
 		id ASC
@@ -604,6 +994,18 @@ CREATE TABLE code_type_master (
 	code_type_name_english VARCHAR2(50), /* 코드_유형_명_영문 */
 	register_date DATE /* 등록_날짜 */
 );
+
+COMMENT ON TABLE code_type_master IS '코드_유형_마스터';
+
+COMMENT ON COLUMN code_type_master.id IS '아이디';
+
+COMMENT ON COLUMN code_type_master.code_type_id IS '코드_유형_아이디';
+
+COMMENT ON COLUMN code_type_master.code_type_name IS '코드_유형_명';
+
+COMMENT ON COLUMN code_type_master.code_type_name_english IS '코드_유형_명_영문';
+
+COMMENT ON COLUMN code_type_master.register_date IS '등록_날짜';
 
 CREATE UNIQUE INDEX code_type_master_id_pk
 	ON code_type_master (
@@ -646,6 +1048,34 @@ CREATE TABLE normal_post (
 	answer_content CLOB /* 답변_내용 */
 );
 
+COMMENT ON TABLE normal_post IS '자유글, 공지글, 공모전, FAQ - 게시글	';
+
+COMMENT ON COLUMN normal_post.id IS '아이디';
+
+COMMENT ON COLUMN normal_post.code_no IS '코드_번호';
+
+COMMENT ON COLUMN normal_post.user_id IS '회원_아이디';
+
+COMMENT ON COLUMN normal_post.user_category IS '회원_분류';
+
+COMMENT ON COLUMN normal_post.title IS '제목';
+
+COMMENT ON COLUMN normal_post.content IS '내용';
+
+COMMENT ON COLUMN normal_post.hit IS '조회수';
+
+COMMENT ON COLUMN normal_post.comment_count IS '댓글_개수';
+
+COMMENT ON COLUMN normal_post.move_count IS '무브_개수';
+
+COMMENT ON COLUMN normal_post.register_date IS '등록_일';
+
+COMMENT ON COLUMN normal_post.limit_date IS '기한_날짜';
+
+COMMENT ON COLUMN normal_post.question_content IS '질문_내용';
+
+COMMENT ON COLUMN normal_post.answer_content IS '답변_내용';
+
 CREATE UNIQUE INDEX normal_post_id_pk
 	ON normal_post (
 		id ASC
@@ -664,7 +1094,7 @@ CREATE TABLE m_comment (
 	code_no NUMBER(38) DEFAULT 80001, /* 코드_번호 */
 	user_id_from NUMBER(38), /* 회원_아이디_보낸이 */
 	social_profile_id_from NUMBER(38), /* 소셜_프로필_아이디_보낸이 */
-	content CLOB, /* 내용 */
+	content VARCHAR2(1000), /* 내용 */
 	register_date DATE DEFAULT sysdate, /* 등록_일 */
 	grade NUMBER(38), /* 평점 */
 	move_count NUMBER(38) DEFAULT 0, /* 무브_개수 */
@@ -678,6 +1108,42 @@ CREATE TABLE m_comment (
 	profile_post_id NUMBER(38), /* 프로필_게시글_아이디 */
 	project_post_id NUMBER(38) /* 프로젝트_게시글_아이디 */
 );
+
+COMMENT ON TABLE m_comment IS '댓글';
+
+COMMENT ON COLUMN m_comment.id IS '아이디';
+
+COMMENT ON COLUMN m_comment.code_no IS '코드_번호';
+
+COMMENT ON COLUMN m_comment.user_id_from IS '회원_아이디_보낸이';
+
+COMMENT ON COLUMN m_comment.social_profile_id_from IS '소셜_프로필_아이디_보낸이';
+
+COMMENT ON COLUMN m_comment.content IS '내용';
+
+COMMENT ON COLUMN m_comment.register_date IS '등록_일';
+
+COMMENT ON COLUMN m_comment.grade IS '평점';
+
+COMMENT ON COLUMN m_comment.move_count IS '무브_개수';
+
+COMMENT ON COLUMN m_comment.comment_count IS '댓글_개수';
+
+COMMENT ON COLUMN m_comment.comment_id_reply IS '댓글_아이디_답글';
+
+COMMENT ON COLUMN m_comment.reply_step IS '답글_계층';
+
+COMMENT ON COLUMN m_comment.reply_order IS '답글_정렬순서';
+
+COMMENT ON COLUMN m_comment.video_post_id IS '영상_게시글_아이디';
+
+COMMENT ON COLUMN m_comment.normal_post_id IS '일반_게시글_아이디';
+
+COMMENT ON COLUMN m_comment.social_post_id IS '소셜_게시글_아이디';
+
+COMMENT ON COLUMN m_comment.profile_post_id IS '프로필_게시글_아이디';
+
+COMMENT ON COLUMN m_comment.project_post_id IS '프로젝트_게시글_아이디';
 
 CREATE UNIQUE INDEX comment_id_pk
 	ON m_comment (
@@ -716,6 +1182,50 @@ CREATE TABLE profile_post (
 	website_url VARCHAR2(300) /* 홈페이지_url */
 );
 
+COMMENT ON TABLE profile_post IS '프로필_게시글';
+
+COMMENT ON COLUMN profile_post.id IS '아이디';
+
+COMMENT ON COLUMN profile_post.code_no IS '코드_번호';
+
+COMMENT ON COLUMN profile_post.user_id IS '회원_아이디';
+
+COMMENT ON COLUMN profile_post.title IS '제목';
+
+COMMENT ON COLUMN profile_post.category IS '카테고리';
+
+COMMENT ON COLUMN profile_post.content IS '내용';
+
+COMMENT ON COLUMN profile_post.hit IS '조회수';
+
+COMMENT ON COLUMN profile_post.register_date IS '등록_일';
+
+COMMENT ON COLUMN profile_post.comment_count IS '댓글_개수';
+
+COMMENT ON COLUMN profile_post.move_count IS '무브_개수';
+
+COMMENT ON COLUMN profile_post.name IS '이름';
+
+COMMENT ON COLUMN profile_post.sex IS '성별';
+
+COMMENT ON COLUMN profile_post.birth_date IS '생년월일_일';
+
+COMMENT ON COLUMN profile_post.age IS '나이';
+
+COMMENT ON COLUMN profile_post.email IS '이메일';
+
+COMMENT ON COLUMN profile_post.height IS '신장';
+
+COMMENT ON COLUMN profile_post.weight IS '몸무게';
+
+COMMENT ON COLUMN profile_post.job IS '직업';
+
+COMMENT ON COLUMN profile_post.school IS '학력';
+
+COMMENT ON COLUMN profile_post.specification IS '경력';
+
+COMMENT ON COLUMN profile_post.website_url IS '홈페이지_url';
+
 CREATE UNIQUE INDEX profile_post_id_pk
 	ON profile_post (
 		id ASC
@@ -748,6 +1258,40 @@ CREATE TABLE report (
 	profile_post_id NUMBER(38) /* 프로필_게시글_아이디 */
 );
 
+COMMENT ON TABLE report IS '신고';
+
+COMMENT ON COLUMN report.id IS '아이디';
+
+COMMENT ON COLUMN report.code_no IS '코드_번호';
+
+COMMENT ON COLUMN report.title IS '제목';
+
+COMMENT ON COLUMN report.content IS '내용';
+
+COMMENT ON COLUMN report.register_date IS '등록_일';
+
+COMMENT ON COLUMN report.user_id_from IS '회원_아이디_보낸이';
+
+COMMENT ON COLUMN report.user_id_to IS '회원_아이디_받는이';
+
+COMMENT ON COLUMN report.social_profile_id_from IS '소셜_프로필_아이디_보낸이';
+
+COMMENT ON COLUMN report.social_profile_id_to IS '소셜_프로필_아이디_받는이';
+
+COMMENT ON COLUMN report.comment_id IS '댓글_아이디';
+
+COMMENT ON COLUMN report.normal_post_id IS '일반_게시글_아이디';
+
+COMMENT ON COLUMN report.social_message_id IS '소셜_메시지_아이디';
+
+COMMENT ON COLUMN report.video_post_id IS '영상_게시글_아이디';
+
+COMMENT ON COLUMN report.project_post_id IS '프로젝트_게시글_아이디';
+
+COMMENT ON COLUMN report.social_post_id IS '소셜_게시글_아이디';
+
+COMMENT ON COLUMN report.profile_post_id IS '프로필_게시글_아이디';
+
 CREATE UNIQUE INDEX PK_report
 	ON report (
 		id ASC
@@ -770,6 +1314,22 @@ CREATE TABLE follow (
 	social_profile_id_from NUMBER(38), /* 소셜_프로필_아이디_보낸이 */
 	social_profile_id_to NUMBER(38) /* 소셜_프로필_아이디_받는이 */
 );
+
+COMMENT ON TABLE follow IS '팔로우';
+
+COMMENT ON COLUMN follow.id IS '아이디';
+
+COMMENT ON COLUMN follow.code_no IS '코드_번호';
+
+COMMENT ON COLUMN follow.register_date IS '등록_날짜';
+
+COMMENT ON COLUMN follow.user_id_from IS '회원_아이디_보낸이';
+
+COMMENT ON COLUMN follow.user_id_to IS '회원_아이디_받는이';
+
+COMMENT ON COLUMN follow.social_profile_id_from IS '소셜_프로필_아이디_보낸이';
+
+COMMENT ON COLUMN follow.social_profile_id_to IS '소셜_프로필_아이디_받는이';
 
 CREATE UNIQUE INDEX PK_follow
 	ON follow (
@@ -796,6 +1356,28 @@ CREATE TABLE tag (
 	profile_post_id NUMBER(38), /* 프로필_게시글_아이디 */
 	reply_post_id NUMBER(38) /* 답글_게시글_아이디 */
 );
+
+COMMENT ON TABLE tag IS '태그';
+
+COMMENT ON COLUMN tag.id IS '아이디';
+
+COMMENT ON COLUMN tag.code_no IS '코드_번호';
+
+COMMENT ON COLUMN tag.tag_name IS '태그_명';
+
+COMMENT ON COLUMN tag.register_date IS '등록_날짜';
+
+COMMENT ON COLUMN tag.normal_post_id IS '일반_게시글_아이디';
+
+COMMENT ON COLUMN tag.social_post_id IS '소셜_게시글_아이디';
+
+COMMENT ON COLUMN tag.video_post_id IS '영상_게시글_아이디';
+
+COMMENT ON COLUMN tag.project_post_id IS '프로젝트_게시글_아이디';
+
+COMMENT ON COLUMN tag.profile_post_id IS '프로필_게시글_아이디';
+
+COMMENT ON COLUMN tag.reply_post_id IS '답글_게시글_아이디';
 
 CREATE UNIQUE INDEX PK_tag
 	ON tag (

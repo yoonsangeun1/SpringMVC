@@ -3,7 +3,12 @@
 <%@ taglib prefix="c"
     		uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
+<script>
+	$('.SNS_Comment_Write_Button').on('click', function() {
+		$('#SNS_Profile_Writer').animate({background:"white"},10);
+		$('#SNS_Profile_Writer').animate({background:"black"},280);
+	}
+</script>
 <div id="SNS_Profile_All">							<!-- 배경화면 전체 지정 -->
 	<div id="SNS_Profile_Wrap">						<!-- 오브젝트 항목 래핑 -->
 		<div id="SNS_Profile_Top">
@@ -41,8 +46,10 @@
 				<li class="SNS_Profile_Menu_Button SNS_Background" onclick="setScrollX(0);">타임라인</li>
 				<li class="SNS_Profile_Menu_Button SNS_Background" onclick="setScrollX(1250);">프로필 정보</li>
 				<li class="SNS_Profile_Menu_Button SNS_Background" onclick="setScrollX(2500);">모아보기</li>
-				<li class="SNS_Profile_Menu_Button SNS_Background" onclick="setScrollX(3750);">후원하기</li>
-				<li class="SNS_Profile_Menu_Button SNS_Background" onclick="setScrollX(5000);">팔로우 목록</li>
+				<li class="SNS_Profile_Menu_Button SNS_Background" onclick="setScrollX(3750);">팔로우 목록</li>
+<%-- 				<c:if test="${sessionSocial.id != s_pro.id}"> --%>
+				<li class="SNS_Profile_Menu_Button SNS_Background" onclick="alert(${sessionSocial.id});">메시지 보내기</li>
+<%-- 				</c:if> --%>
 			</ul>
 		</div>
 		<div id="SNS_Profile_Down">
@@ -62,7 +69,7 @@
 // 										});
 <!-- 							</script> -->
 			<div id="SNS_Profile_Story">
-				<form action="post_write_ok/${id}" enctype="mutipart/form-data"
+				<form action="post_write_ok" enctype="mutipart/form-data"
 					method="post" name="timeLineWriter">
 					<div id="SNS_Profile_Writer">
 						<div id="SNS_Profile_Upload_Top">
@@ -101,6 +108,8 @@
 							
 							<li>
 							<input type="hidden" id="postId_${s_post.id }" value="${s_post.id }">
+							<input type="hidden" id="id" value="${s_post.id }">
+							<input type="hidden" id="socialId" value="${s_pro.id }">
 								<div class="SNS_Profile_Post">
 									<c:if test="${s_pro.profileImagePath != 'default'}">
 										<img class="SNS_Content_user_img"
@@ -153,10 +162,12 @@
 										</script>
 										</div>
 									</div>
+									<c:if test="${sessionSocial.id==s_pro.id}">
 									<input class="SNS_Option_Button" type="button" value="삭제"
 										onclick="if(confirm('정말로 삭제할까요?') == true){
-									location='/moving.com/social/post_del_ok/${id}?post_id=${s_post.id}&user_id=${s_post.socialId}&page_num=1';}else{return}"
+									location='/moving.com/social/post_del_ok?id=${s_post.id}&socialId=${s_pro.id}&page_num=1';}else{return}"
 										style="float: right;">
+									</c:if>
 									<%-- 								<img class="SNS_Content_Image" alt="사진" src="${s_pro.profileImagePath}"> --%>
 									<div class="SNS_Content_Cont_Profile">
 										<%-- 게시글 넘버 : ${s_post.id}<br/>
@@ -172,7 +183,7 @@
 											<input class="SNS_Cont_Option_Funding" type="button"
 												value="공유하기"
 												onclick="if(confirm('공유할까요?') == true){
-											location='/moving.com/social/post_share_ok/${id}?post_id=${s_post.id}&user_id=${s_pro.id}';}else{return}"
+											location='/moving.com/social/post_share_ok?id=${s_post.id}&socialId=${s_pro.id}';}else{return}"
 												style="float: right;">
 										</div>
 									</div>
@@ -320,7 +331,7 @@
 										      }),
 										      success: function(data) {//댓글 저장 성공시 SUCCESS 문자열 반환
 										         if(data=='SUCCESS') {
-										            alert('댓글이 등록되었습니다!');
+// 										            alert('댓글이 등록되었습니다!');
 										            t(rno);
 										           // getCommentList();//댓글 목록 함수 호출! 갱신된 내용 가져옴.
 										           // getCommentCount();//댓글 개수 불러오기
