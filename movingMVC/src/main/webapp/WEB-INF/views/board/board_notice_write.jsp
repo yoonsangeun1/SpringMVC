@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
+<%@ include file="../include/header.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -51,8 +52,8 @@
    </tr>
   </table>
  </form> 
-</body>
-</html>
+
+<%@ include file="../include/footer.jsp"%>
 
 
 

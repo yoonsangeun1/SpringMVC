@@ -141,7 +141,7 @@ public class BoardActorsController { /*배우모집 컨트롤러*/
 			ba.setUserId(user_id); //ProfilePostVO ba.setUserId에 id 값을 넣어둠.
 			
 			//파일 저장 경로
-			filePath = saveFolder + "resources" + File.separator +"photo_upload" + File.separator;
+			filePath = saveFolder + "resources" + File.separator +"photo_upload";
 			
 			multi=new MultipartRequest(request,filePath,fileSize,"UTF-8");
 			File UpFile=multi.getFile("thumbnailImage"); //첨부한 파일을 가져옴.
@@ -156,7 +156,7 @@ public class BoardActorsController { /*배우모집 컨트롤러*/
 			if(!file.exists()) { //file 폴더가 없다면
 				file.mkdirs();   //자동 생성
 			}else {
-				 fileyyyyMMFolder = new File(filePath + todayFolder +File.separator);
+				 fileyyyyMMFolder = new File(filePath + File.separator + todayFolder +File.separator);
 				if(!fileyyyyMMFolder.exists()) {//년월 폴더가 없다면
 					fileyyyyMMFolder.mkdirs();
 				}//if 	
@@ -296,18 +296,202 @@ public class BoardActorsController { /*배우모집 컨트롤러*/
 	//게시글 수정 완료
 	@RequestMapping("/board/actors_edit_ok")
 	public String board_actors_edit_ok(ProfilePostVO ba,
-			int page,
-			int id,
+			HttpServletRequest request,
+			HttpServletResponse response,
+			HttpSession session,
 			RedirectAttributes rttr) throws Exception{
 		
-		this.boardActorsService.editBoardActors(ba);
+		response.setContentType("text/html;charset=UTF-8");
+		PrintWriter out=response.getWriter();
+		session=request.getSession();	
 		
-		rttr.addFlashAttribute("msg","BOARD/ACTORS_EDIT");
+		String saveFolder = request.getRealPath("/"); //파일 기본경로
+		int fileSize=10*1024*1024; //첨부파일 최대크기(10MB)
+		MultipartRequest multi=null; //첨부파일을 가져오는 api
+		String filePath=null;
+		String todayFolder=null;
+		String fileName=null;
+		File fileyyyyMMFolder = null;
+		String sFileInfo="";
+		int id=0;
+		int page=0;
 		
-		return "redirect:/board/actors_cont?id="+id+"&page="+page;
+		if(session.getAttribute("id") != null) {
+			
+			int user_id=(int)session.getAttribute("id"); //세션으로 받아온 id를 user_id에 저장
+			ba.setUserId(user_id); //ProfilePostVO ba.setUserId에 id값을 넣어둠.	
+			
+			//파일 저장 경로
+			filePath = saveFolder + "resources" + File.separator + "photo_upload";
+			
+			multi = new MultipartRequest(request,filePath,fileSize,"UTF-8");
+			File UpFile = multi.getFile("thumbnailImage"); //첨부한 파일을 가져옴.
+			
+			if(multi.getParameter("id") != null) {
+				id = Integer.parseInt(multi.getParameter("id"));
+			}//if
+			
+			if(multi.getParameter("page") != null) {
+				page = Integer.parseInt(multi.getParameter("page"));
+			}//if
+			
+			if(UpFile != null) {
+				
+				fileName=UpFile.getName(); //첨부한 파일명
+				SimpleDateFormat formatterFolder = new SimpleDateFormat("yyyyMM"); //년월만 저장
+				todayFolder = formatterFolder.format(new java.util.Date()); 
+				
+				File file = new File(filePath); //기본 경로 폴더 생성하기
+				if(!file.exists()) { //file 폴더가 없다면
+					file.mkdirs(); //자동 생성
+				}else {
+					fileyyyyMMFolder = new File(filePath + File.separator + todayFolder + File.separator);
+					if(!fileyyyyMMFolder.exists()) { //년월폴더가 없다면
+						fileyyyyMMFolder.mkdirs();
+					}//if
+				}//if else
+				
+				String realFileNm = "";
+				SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
+				String today = formatter.format(new java.util.Date());
+				
+				//해당 폴더에 생성될 이미지 파일 명
+				realFileNm = today + UUID.randomUUID().toString() + fileName.substring(fileName.lastIndexOf("."));
+				UpFile.renameTo(new File(fileyyyyMMFolder + "/" + realFileNm));
+				
+				/////////// DB에 파일 쓰기 //////////////////
+				sFileInfo += "/moving.com/resources/pohoto_upload/"+todayFolder+File.separator+realFileNm;
+				
+				ba.setThumbnailImage(sFileInfo);
+				
+				ba.setCategory(multi.getParameter("category"));
+				ba.setEmail(multi.getParameter("email"));
+				ba.setBirthDate(multi.getParameter("birthDate"));
+				
+				String height_string=multi.getParameter("height");
+				if(height_string == "" || height_string.equals("")
+						|| height_string == null) {
+					int height = Integer.parseInt(height_string+0); 
+					ba.setHeight(height);
+				}else {
+					int height = Integer.parseInt(height_string);
+					ba.setHeight(height);
+				}//if else
+				
+				if(multi.getParameter("etctext") == "" 
+				|| multi.getParameter("etctext") == null ||
+				multi.getParameter("etctext").equals("")) {
+					ba.setEtctext("");
+				}else {
+					ba.setEtctext(multi.getParameter("etctext"));
+				}
+				
+				ba.setSex(multi.getParameter("sex"));
+				ba.setWebsiteUrl(multi.getParameter("websiteUrl"));
+				ba.setContent(multi.getParameter("content"));
+				ba.setId(id);
+				
+				this.boardActorsService.editBoardActors(ba); //새로 등록한 썸네일이 있을 경우
+				
+			}else {//새로 등록한 썸네일이 없을 경우
+				
+				System.out.println(page+"+"+id);
+				
+				ba.setCategory(multi.getParameter("category"));
+				ba.setEmail(multi.getParameter("email"));
+				ba.setBirthDate(multi.getParameter("birthDate"));
+				
+				String height_string=multi.getParameter("height");
+				if(height_string == "" || height_string.equals("")||
+					height_string == null) {
+					int height = Integer.parseInt(height_string+0); 
+					ba.setHeight(height);
+				}else {
+					int height = Integer.parseInt(height_string);
+					ba.setHeight(height);
+				}//if else
+				
+				if(multi.getParameter("etctext") == "" 
+				|| multi.getParameter("etctext") == null ||
+				multi.getParameter("etctext").equals("")) {
+					ba.setEtctext("");
+				}else {
+					ba.setEtctext(multi.getParameter("etctext"));
+				}
+				
+				ba.setSex(multi.getParameter("sex"));
+				ba.setWebsiteUrl(multi.getParameter("websiteUrl"));
+				ba.setContent(multi.getParameter("content"));
+				ba.setId(id);
+
+				System.out.println(ba.getContent());
+				System.out.println(ba.getSex());
+				System.out.println(ba.getWebsiteUrl());
+				System.out.println(ba.getEtctext());
+				System.out.println(ba.getCategory());
+				System.out.println(ba.getId());
+				
+				this.boardActorsService.editBoardActors2(ba);
+				
+			}//if else
+			
+			rttr.addFlashAttribute("msg","BOARD/ACTORS_EDIT");
+			
+			return "redirect:/board/actors_cont?id="+id+"&page="+page;
+	
+		}else {
+			out.println("<script>");
+			out.println("alert('로그인을 해주세요!');");
+			out.println("location='/moving.com/member/login';");
+			out.println("</script>");
+		}//if else
+		
+		return null;
 		
 	}//board_actors_edit_ok()
 	
+	//게시글 삭제
+	@RequestMapping("/board/actors_del")
+	public String board_actors_del(int id,int page,
+			HttpServletResponse response,
+			HttpServletRequest request,
+			HttpSession session,
+			RedirectAttributes rttr) throws Exception{
+	
+		response.setContentType("text/html;charset=UTF-8");
+		PrintWriter out=response.getWriter();
+		session=request.getSession();
+		
+		if(session.getAttribute("id") != null) { //세션에 값이 있을 경우
+		
+			ProfilePostVO ba=this.boardActorsService.getCont2(id);
+			
+			int m_userid = (int) session.getAttribute("id");
+			
+			if(m_userid == ba.getUserId()) { //m_user의 id와 normal_post의
+				//user_id가 일치한다면
+				
+				this.boardActorsService.delBoardActors(id);
+			
+				rttr.addFlashAttribute("msg","BOARD/ACTORS_DEL");
+				
+				return "redirect:/board/actors?page="+page;
+				
+			}else { /*본인 게시글이 아닐 경우*/
+				rttr.addFlashAttribute("msg","BOARD/ACTORS_CON_X");
+				return "redirect:/board/actors_cont?id="+id+"&page="+page;
+			}//if else
+	
+		}else { /*세션에 값이 없을 경우*/
+			out.println("<script>");
+			out.println("alert('로그인을 해주세요!');");
+			out.println("location='/moving.com/member/login';");
+			out.println("</script>");
+		}//if else
+		
+		return null;
+		
+	}//board_actors_del()
 	
 	
 	
@@ -319,4 +503,6 @@ public class BoardActorsController { /*배우모집 컨트롤러*/
 	
 	
 	
-}//BoardActorsController class
+	
+	
+}//BoardActorsController class/

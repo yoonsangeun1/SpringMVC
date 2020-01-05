@@ -13,7 +13,7 @@
 
 	<div id="bNotice_body"> <%--전체 body div묶음 --%>
 	
-<div id="bNotice_update"> <%--왼쪽 업데이트 사항. 공지,이벤트 등 div --%>
+<div id="bNotice_update"> <%-- 업데이트 사항. 공지,이벤트 등 div --%>
        <div class="bNotice_update_tit"> <%--업데이트--%>
            <h1>업데이트</h1>
        </div> <%--업데이트 --%>
@@ -39,7 +39,7 @@
       </div> <%--왼쪽 업데이트 사항. 공지,이벤트 등 div --%>
 
 <form method="get" action="/moving.com/board/notice"> <!-- 검색필드 넘겨주기 위한 form -->
-		<table id="bFree_table" cellspacing="0">
+		<table id="bNotice_table" cellspacing="0">
 		 <thead>
 				<%--thead 요소는 테이블의 제목 그룹화. 한 번만 선언 가능하며,
   tbody나 tfoot 보다 먼저 위치.  --%>
@@ -65,20 +65,34 @@
 			
 			
 	<c:choose>
-     <c:when test="${fn:length(bnlist.title) > 20}"> <%--20자 이상일 경우 --%>
-	  <c:set var="title" value="${fn:substring(bnlist.title,0,19)}..." />
+     <c:when test="${fn:length(bnlist.title) > 19}"> <%--20자 이상일 경우 --%>
+	  <c:set var="title" value="${fn:substring(bnlist.title,0,18)}..." />
 	   <td>
+		<c:if test="${(empty findField) && (empty findName)}"> <%--검색 전 --%>
         <a href="/moving.com/board/notice_cont?id=${bnlist.id}&page=${page}">
-	  ${title} <!-- set쪽에 bnlist.title로 해서 가져오면 값이 적용이 안됨 ? -->
+	  ${title} <!-- set쪽에 bflist.title로 해서 가져오면 값이 적용이 안됨 ? -->
 	    </a><%-- board_cont?bno=번호값&page=쪽번호 2개의 피라미터 값이 get방식으로 전달됨. --%>
+	    </c:if>
+		<c:if test="${(!empty findField) || (!empty findName)}"> <%-- 검색 후 --%>
+		<a href="/moving.com/board/notice_cont?id=${bnlist.id}&page=${page}&findField=${findField}&findName=${findName}">
+		 ${title}
+		</a>
+   		</c:if>
        </td>
      </c:when>
      
      <c:otherwise>
       <td>
-       <a href="/moving.com/board/notice_cont?id=${bnlist.id}&page=${page}">
-	   ${bnlist.title}
-	   </a><%-- board_cont?bno=번호값&page=쪽번호 2개의 피라미터 값이 get방식으로 전달됨. --%>
+       <c:if test="${(empty findField) && (empty findName)}"> <%--검색 전 --%>
+        <a href="/moving.com/board/notice_cont?id=${bnlist.id}&page=${page}">
+	  ${bnlist.title} <!-- set쪽에 bflist.title로 해서 가져오면 값이 적용이 안됨 ? -->
+	    </a><%-- board_cont?bno=번호값&page=쪽번호 2개의 피라미터 값이 get방식으로 전달됨. --%>
+	    </c:if>
+		<c:if test="${(!empty findField) || (!empty findName)}"> <%-- 검색 후 --%>
+		<a href="/moving.com/board/notice_cont?id=${bnlist.id}&page=${page}&findField=${findField}&findName=${findName}">
+		 ${bnlist.title}
+		</a>
+		</c:if>
       </td>
      </c:otherwise>
      
@@ -120,7 +134,12 @@
 
      </c:choose>
      		
-			<td id="time">${bnlist.registerDate}</td>
+     		
+			<td id="time">
+			<c:if test="${fn:length(bnlist.registerDate) > 10}"> <%--10글자 이상일 시 --%>
+			<c:out value="${fn:substring(bnlist.registerDate,0,10)}" /> <%--잘라서 출력 --%>
+			</c:if>	
+			</td>
 			<td id="hit">${bnlist.hit}</td>
 		   </tr>
 		  </c:forEach>
@@ -134,11 +153,11 @@
 		</tbody>
 	   </table>
 		
-    <div id="bFree_writing"> <%-- 글 쓰기 폼 div --%>
+<%--     <div id="bFree_writing"> 글 쓰기 폼 div
       <input type="button" class="bFree_writing_btn button
        button_c9d8ce2 button_f12 button_p1024 button_r4" 
       value="글 쓰기" onclick="location='/moving.com/board/notice_write';" />
-    </div> <%-- 글 쓰기 폼 div --%>
+    </div> 글 쓰기 폼 div --%>
     
     <div style="clear:both"></div>
 		

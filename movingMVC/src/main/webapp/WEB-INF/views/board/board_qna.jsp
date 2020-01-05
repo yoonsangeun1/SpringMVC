@@ -20,7 +20,7 @@
 		   <ul>
 		   
 		    <li>
-		     <a href="actors">배우모집</a>
+		     <a href="actors">배우 프로필</a>
 		    </li>
 		    
 		    <li>

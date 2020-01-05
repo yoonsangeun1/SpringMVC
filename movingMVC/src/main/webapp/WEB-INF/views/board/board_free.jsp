@@ -1,4 +1,4 @@
-g<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ include file="../include/header.jsp"%>
@@ -22,7 +22,7 @@ g<%@ page contentType="text/html; charset=UTF-8"%>
 		   <ul>
 		   
 		    <li>
-		     <a href="actors">배우모집</a>
+		     <a href="actors">배우 프로필</a>
 		    </li>
 		    
 		    <li>
@@ -55,7 +55,7 @@ g<%@ page contentType="text/html; charset=UTF-8"%>
 		 <th id="hit"><span>조회수</span></th>
 		</tr>
 		
-			</thead>
+		</thead>
 
 		<tbody>
 		 <c:if test="${!empty bflist}"> <%--bflist에 값이 있으면 --%>
@@ -69,8 +69,8 @@ g<%@ page contentType="text/html; charset=UTF-8"%>
 			
 			
 	<c:choose>
-     <c:when test="${fn:length(bflist.title) > 20}"> <%--20자 이상일 경우 --%>
-	  <c:set var="title" value="${fn:substring(bflist.title,0,19)}..." />
+     <c:when test="${fn:length(bflist.title) > 19}"> <%--20자 이상일 경우 --%>
+	  <c:set var="title" value="${fn:substring(bflist.title,0,18)}..." />
 	   <td>
 	    <c:if test="${(empty findField) && (empty findName)}"> <%--검색 전 --%>
         <a href="/moving.com/board/free_cont?id=${bflist.id}&page=${page}">
@@ -138,8 +138,14 @@ g<%@ page contentType="text/html; charset=UTF-8"%>
 
      </c:choose>
      		
-			<td id="time">${bflist.registerDate}</td>
+			<td id="time">
+			<c:if test="${fn:length(bflist.registerDate) > 10}"> <%--10글자 이상일 시 --%>
+			<c:out value="${fn:substring(bflist.registerDate,0,10)}" /> <%--잘라서 출력 --%>
+			</c:if>	
+			</td>
+			
 			<td id="hit">${bflist.hit}</td>
+			
 		   </tr>
 		  </c:forEach>
   		 </c:if>

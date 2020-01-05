@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
+<%@ include file="../include/header.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -57,8 +58,7 @@
    <tr>
     <th>생년월일</th>
     <td>
-    <input type="number" id="birthDate" name="birthDate" style="width:195px;"
-    maxlength="8" oninput="maxLengthCheck(this)"/>
+    <input type="date" id="birthDate" name="birthDate" style="width:195px;"/>
     <label>예: 19700101 ( 1970년생 01월 01월 생 )</label>
     </td>
    </tr>
@@ -126,7 +126,7 @@
  });
  </script>
  
- <script>  
+<script>  
  	function maxLengthCheck(object){ //input number는 maxlength가 안됨. 스크립트로 maxlength 지정
 	  if (object.value.length > object.maxLength){
 	   	object.value = object.value.slice(0, object.maxLength);
@@ -180,7 +180,7 @@
 	 }//if
 	 
 	 //생년월일이 19900101 이런식이 아닌 19903333 이런식으로 값이 이상하게 하는것을 방지
-	 var birth_pattern = /^(19|20)\d{2}(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[0-1])$/;
+	 var birth_pattern = /^(19|20)\d{2}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[0-1])$/;
 	 if(!birth_pattern .test($("#birthDate").val())){
 		 alert("생년월일을 제대로 입력해주세요!");
 		 $($("#birthDate").val('').focus());
@@ -208,8 +208,7 @@
  }//subcheck()
  </script>
  
-</body>
-</html>
+<%@ include file="../include/footer.jsp"%>
 
 
 

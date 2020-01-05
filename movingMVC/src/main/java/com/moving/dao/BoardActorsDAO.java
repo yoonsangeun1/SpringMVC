@@ -13,5 +13,7 @@ public interface BoardActorsDAO {
 	ProfilePostVO getCont(int id);
 	ProfilePostVO getCont2(int id);
 	void editBoardActors(ProfilePostVO ba);
-
+	void editBoardActors2(ProfilePostVO ba);
+	void delBoardActors(int id);
+	
 }//BoardActorsDAO interface

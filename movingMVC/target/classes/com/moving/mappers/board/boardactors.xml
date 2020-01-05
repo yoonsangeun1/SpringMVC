@@ -83,7 +83,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  NAME,ETCTEXT) 
  VALUES(PROFILE_POST_SEQ.NEXTVAL,10005,#{userId},
  #{thumbnailImage},#{category},#{email},
- to_date(#{birthDate},'yyyyMMdd'),#{height},#{sex},
+ to_date(#{birthDate},'yyyy-MM-dd'),#{height},#{sex},
  #{websiteUrl},#{content},sysdate,
  #{name},#{etctext,jdbcType=VARCHAR})
 </insert>
@@ -117,6 +117,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  WHERE P.ID=#{id}
 </select>
 
+<!-- 내용수정 -->
+<update id="ba_edit">
+ UPDATE PROFILE_POST
+ SET THUMBNAIL_IMAGE=#{thumbnailImage},
+ CATEGORY=#{category},ETCTEXT=#{etctext,jdbcType=VARCHAR},
+ EMAIL=#{email},BIRTH_DATE=to_date(#{birthDate},'yyyy-MM-dd'), HEIGHT=#{height},
+ SEX=#{sex},WEBSITE_URL=#{websiteUrl}, CONTENT=#{content}
+ WHERE ID=#{id}
+</update>
+
+<update id="ba_edit2">
+ UPDATE PROFILE_POST
+ SET CATEGORY=#{category}, ETCTEXT=#{etctext,jdbcType=VARCHAR},
+ EMAIL=#{email},BIRTH_DATE=to_date(#{birthDate},'yyyy-MM-dd'), HEIGHT=#{height},
+ SEX=#{sex}, WEBSITE_URL=#{websiteUrl}, CONTENT=#{content}
+ WHERE ID=#{id}
+</update>
+
+<delete id="ba_del">
+ DELETE FROM PROFILE_POST
+ WHERE ID=#{id}
+</delete>
 
 
 </mapper>

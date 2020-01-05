@@ -47,8 +47,17 @@ public class BoardActorsDAOImpl implements BoardActorsDAO {
 	@Override
 	public void editBoardActors(ProfilePostVO ba) {
 		this.sqlSession.update("ba_edit",ba);
-	}//게시물 수정
+	}//썸네일 넣은 상태에서 수정
 
+	@Override
+	public void editBoardActors2(ProfilePostVO ba) {
+		this.sqlSession.update("ba_edit2",ba);
+	}//새로 넣은 썸네일 없이 수정
+
+	@Override
+	public void delBoardActors(int id) {
+		this.sqlSession.delete("ba_del",id);
+	}//게시글 삭제
 	
 	
 	

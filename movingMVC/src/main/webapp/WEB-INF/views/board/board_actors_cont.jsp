@@ -1,5 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
+<%@ include file="../include/header.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -66,7 +68,7 @@
    <tr>
     <th>생년월일</th>
     <td>
-	${ba.birthDate}
+	${fn:substring(ba.birthDate,0,10)}
     </td>
    </tr>
    
@@ -107,7 +109,7 @@
     <th colspan="2">
     <input type="button" value="수정"
     onclick="location='/moving.com/board/actors_edit?id=${ba.id}&page=${page}';" />
-    <input type="reset" value="취소"
+    <input type="reset" value="삭제"
     onclick="delconfirm()" />
     <input type="button" value="목록"
     onclick="location='/moving.com/board/actors?page=${page}';" />
@@ -120,10 +122,24 @@
 	 if(confirm("삭제하시겠습니까?")){
 		 location.replace('/moving.com/board/actors_del?id=${ba.id}&page=${page}');//yes
 	 }else{
-		 location.replace('/moving.com/board/actors_cont?id=${id}&page=${page}');//no
+		 location.replace('/moving.com/board/actors_cont?id=${ba.id}&page=${page}');//no
 	 }//if else
  }//function delconfirm()
 </script>
+
+<script>
+ var msg="${msg}"; 
  
-</body>
-</html>
+ if(msg == "BOARD/ACTORS_EDIT"){
+	 alert("글수정을 성공 했습니다!");
+ }//if
+ 
+ if(msg == "BOARD/ACTORS_CON_X"){
+	 alert("본인 게시글만 삭제 가능합니다!");
+ }//if
+ 
+ 
+ 
+</script>
+
+<%@ include file="../include/footer.jsp"%>
