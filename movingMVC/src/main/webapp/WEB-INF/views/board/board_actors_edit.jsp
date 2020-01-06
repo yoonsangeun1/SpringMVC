@@ -1,5 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
+<%@ include file="../include/header.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,8 +11,11 @@
 <script src="../resources/editor/js/HuskyEZCreator.js" charset="UTF-8"></script>
 </head>
 <body>
- <form method="post" action="/moving.com/board/actors_write_ok"
+ <form method="post" action="actors_edit_ok"
  onsubmit="return actors_check();" enctype="multipart/form-data">
+ <input type="hidden" name="id" value="${ba.id}" />
+ <input type="hidden" name="page" value="${page}" />
+ 
   <table border="1" style="width:1024px" cellspacing="0" > <!-- width 임시로 넣어둠. -->
    <caption>연기자 프로필 수정</caption>
    <tr>
@@ -42,7 +47,7 @@
    
    <tr>
     <th>카테고리</th>
-    <td>
+    <td>										<%--eq는 equals, ne 는 !=  --%>
     <input type="radio" name="category" value="actor"
     <c:if test="${ba.category eq 'actor'}">
     checked
@@ -64,10 +69,10 @@
     </c:if>
     />기타
     <input id="etctext" name="etctext" size="30" 
-    <c:if test="${ba.category eq 'etc'}">
+    <c:if test="${ba.category eq 'etc'}">	
     enabled
     </c:if> 
-    <c:if test="${!ba.category eq 'etc'}">
+    <c:if test="${ba.category ne 'etc'}">	
     disabled
     </c:if>
     value="${ba.etctext}"/>
@@ -77,15 +82,15 @@
    <tr>
     <th>E-MAIL</th>
     <td>
-    <input type="email" id="email" name="email" size="26"/>
+    <input type="email" id="email" name="email" size="26" value="${ba.email}"/>
     </td>
    </tr>
    
    <tr>
     <th>생년월일</th>
     <td>
-    <input type="number" id="birthDate" name="birthDate" style="width:195px;"
-    maxlength="8" oninput="maxLengthCheck(this)"/>
+    <input type="date" id="birthDate" name="birthDate" style="width:195px;"
+     value="${fn:substring(ba.birthDate,0,10) }" />
     <label>예: 19700101 ( 1970년생 01월 01월 생 )</label>
     </td>
    </tr>
@@ -94,25 +99,34 @@
     <td colspan="2">
     <label style="font-weight:bold; margin-left:100px;">신장</label>
     <input type="number" id="height" name="height"style="margin-right:10px; 
-    width:196.5px;  margin-left:95px;" maxlength="3" oninput="maxLengthCheck(this)">cm
+    width:196.5px;  margin-left:95px;" maxlength="3" oninput="maxLengthCheck(this)"
+    value="${ba.height}">cm
     <label>(소수점 X)</label>
   	<label style="font-weight:bold; margin-left:200px;">성별</label>
-  	<input type="radio" name="sex" value="male"/>남성
-  	<input type="radio" name="sex" value="female"/>여성
+  	<input type="radio" name="sex" value="male"
+  	<c:if test="${ba.sex eq 'male'}">
+  	checked
+  	</c:if>
+  	/>남성
+  	<input type="radio" name="sex" value="female"
+  	<c:if test="${ba.sex eq 'female'}">
+  	checked
+  	</c:if>
+  	/>여성
     </td>
    </tr>
    
    <tr>
     <th>웹사이트</th>
     <td>
-    <input id="websiteUrl" name="websiteUrl" size="111"/>
+    <input id="websiteUrl" name="websiteUrl" size="111" value="${ba.websiteUrl}"/>
     </td>
    </tr>
   
    <tr>
     <th>내용</th>
     <td  class="actors_write_td">
-    <textarea name="content" id="content" rows="10" cols="100"></textarea>
+    <textarea name="content" id="content" rows="10" cols="100">${ba.content}</textarea>
     
 <script type="text/javascript">
 	var oEditors = []; //전역변수
@@ -153,7 +167,7 @@
  });
  </script>
  
- <script>  
+<script>  
  	function maxLengthCheck(object){ //input number는 maxlength가 안됨. 스크립트로 maxlength 지정
 	  if (object.value.length > object.maxLength){
 	   	object.value = object.value.slice(0, object.maxLength);
@@ -201,7 +215,7 @@
 	 }//if
 	 
 	 //생년월일이 19900101 이런식이 아닌 19903333 이런식으로 값이 이상하게 하는것을 방지
-	 var birth_pattern = /^(19|20)\d{2}(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[0-1])$/;
+	 var birth_pattern = /^(19|20)\d{2}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[0-1])$/;
 	 if(!birth_pattern .test($("#birthDate").val())){
 		 alert("생년월일을 제대로 입력해주세요!");
 		 $($("#birthDate").val('').focus());
@@ -229,8 +243,7 @@
  }//subcheck()
  </script>
  
-</body>
-</html>
+<%@ include file="../include/footer.jsp"%>
 
 
 

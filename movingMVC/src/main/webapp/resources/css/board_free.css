@@ -14,6 +14,7 @@
 }
 
 #bFree_community{	/*커뮤니티 전체*/
+	margin-top:46px;
 	width:1200px;
 	background:#9d8ce2;
 	position:relative;	
@@ -99,11 +100,11 @@
 	float:left;
 }
 
-#bFree_writing form{
+/* #bFree_writing form{
 	width:1200px;
 	height:auto;
 	float:left;
-}
+} */
 
 .bFree_writing_btn{ /*글 쓰기 버튼*/
 	margin-top:20px;
@@ -148,10 +149,10 @@
 	text-align:center;
 }
 
-#bFree_combo{ /*검색 구간 콤보박스*/
+#findField{ /*검색 구간 콤보박스*/
 	display:inline-block;
 	width:auto; height:31px;
-	padding:7px 12px;
+	padding:6px 12px;
 	font-size:12px;
 	color:#a5a5a5;
 	border:1px solid #ccc;
@@ -161,4 +162,271 @@
 #bFree_input{ /*텍필 ,버튼 통합 div*/
 	display:inline-table;
 }
+
+#findName{
+	height:23px;
+}
+
+
+
+
+/*   board_free_cont.jsp css  */
+
+#bFree_cont_body{
+	font-size:16px;
+	line-height:25px;
+	width:1200px;
+	height:auto;
+	min-height:800px;
+	border:1px solid #e8e8e8;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+#bFree_cont_table{ /* 테이블 */
+	width:900px;
+	height:auto;
+	min-height:300px;
+	border-top:1px solid grey;
+	border-bottom:1px solid grey;
+	margin-top:100px;
+	margin-left:auto;
+	margin-right:auto;
+	position:relative;
+	box-sizing:border-box;
+	table-layout: fixed;
+}
+
+#bFree_cont_table th, #bFree_cont_table td{
+	padding:10px;
+}
+
+#bFree_cont_title{ /* 제목 */
+	width:70%;
+	height:auto;
+	border-top:1px solid grey;
+	text-align:left;
+}
+
+#bFree_cont_date{ /* 등록날짜 */ 
+	width:30%;
+	height:auto;
+	border-top:1px solid grey;
+	text-align:right;
+}
+
+#bFree_cont_nickname{ /* 닉네임 */
+	width:70%;
+	height:50px;
+	border-top:1px solid grey;
+	text-align:left;
+}
+
+#bFree_cont_table #bFree_cont_hit{ /* 조회수 */
+	width:30%;
+	height:50px;
+	border-top:1px solid grey;
+	text-align:center;
+	padding-left:100px;
+}
+
+#bFree_cont_content{ /* 내용 */
+	width:100%;
+	height:auto;
+	border-top:1px solid grey;
+	border-bottom:1px solid grey;
+}
+
+#bFree_cont_button{ /* 버튼 div */
+	width:1200px;
+	margin-top:30px;
+	margin-bottom:30px;
+	padding-right:150px;
+	text-align:right;
+}
+
+.bFree_cont_btn{ /* 밑 버튼들 */
+	cursor:pointer;
+}
+
+.bFree_cont_btn:hover{ /*버튼 호버시 */
+	background-color:#6a67ce;
+}
+
+
+/* board_free_write.jsp css      */
+
+#bFree_write_body{ /* 전체 div */
+	font-size:16px;
+	line-height:25px;
+	width:1200px;
+	height:auto;
+	min-height:800px;
+	border:1px solid #e8e8e8;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+#bFree_write_table{ /* 테이블 */
+	width:900px;
+	height:auto;
+	min-height:300px;
+	border-top:1px solid grey;
+	border-bottom:1px solid grey;
+	margin-top:100px;
+	margin-left:auto;
+	margin-right:auto;
+	position:relative;
+	box-sizing:border-box;
+	table-layout: fixed;
+}
+
+#bFree_write_table th, #bFree_write_table td{
+	padding:10px;
+}
+
+#bFree_write_nickname{ /*닉네임 */
+	width:10%;
+	height:auto;
+	border-top:1px solid grey;
+	text-align:center;
+}
+
+#bFree_write_nickname_2{ /*닉네임 2*/
+	width:90%;
+	height:auto;
+	border-top:1px solid grey;
+	text-align:left;
+}
+
+#bFree_write_title{ /* 제목 */
+	width:10%;
+	height:auto;
+	border-top:1px solid grey;
+	text-align:left;
+}
+
+#bFree_write_title_2{ /* 제목 2 */
+	width:90%;
+	height:auto;
+	border-top:1px solid grey;
+	text-align:left;
+}
+
+#bFree_write_table #title{
+	width:720px;
+}
+
+#bFree_write_table #bFree_write_content{ /* 내용 */
+	width:100%;
+	height:auto;
+	border-top:1px solid grey;
+	border-bottom:1px solid grey;
+	padding-left:80px;
+}
+
+#bFree_write_button{ /* 버튼 div */
+	width:1200px;
+	margin-top:30px;
+	margin-bottom:30px;
+	padding-right:150px;
+	text-align:right;
+}
+
+.bFree_write_btn{ /* 밑 버튼들 */
+	cursor:pointer;
+}
+
+.bFree_write_btn:hover{ /*버튼 호버시 */
+	background-color:#6a67ce;
+}
+
+/* board_free_edit.jsp css   */
+
+#bFree_edit_body{ /* 전체 div */
+	font-size:16px;
+	line-height:25px;
+	width:1200px;
+	height:auto;
+	min-height:800px;
+	border:1px solid #e8e8e8;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+#bFree_edit_table{ /* 테이블 */
+	width:900px;
+	height:auto;
+	min-height:300px;
+	border-top:1px solid grey;
+	border-bottom:1px solid grey;
+	margin-top:100px;
+	margin-left:auto;
+	margin-right:auto;
+	position:relative;
+	box-sizing:border-box;
+	table-layout: fixed;
+}
+
+#bFree_edit_table th, #bFree_edit_table td{
+	padding:10px;
+}
+
+#bFree_edit_nickname{ /*닉네임 */
+	width:10%;
+	height:auto;
+	border-top:1px solid grey;
+	text-align:center;
+}
+
+#bFree_edit_nickname_2{ /*닉네임 2*/
+	width:90%;
+	height:auto;
+	border-top:1px solid grey;
+	text-align:left;
+}
+
+#bFree_edit_title{ /* 제목 */
+	width:10%;
+	height:auto;
+	border-top:1px solid grey;
+	text-align:left;
+}
+
+#bFree_edit_title_2{ /* 제목 2 */
+	width:90%;
+	height:auto;
+	border-top:1px solid grey;
+	text-align:left;
+}
+
+#bFree_edit_table #title{
+	width:720px;
+}
+
+#bFree_edit_table #bFree_edit_content{ /* 내용 */
+	width:100%;
+	height:auto;
+	border-top:1px solid grey;
+	border-bottom:1px solid grey;
+	padding-left:80px;
+}
+
+#bFree_edit_button{ /* 버튼 div */
+	width:1200px;
+	margin-top:30px;
+	margin-bottom:30px;
+	padding-right:150px;
+	text-align:right;
+}
+
+.bFree_edit_btn{ /* 밑 버튼들 */
+	cursor:pointer;
+}
+
+.bFree_edit_btn:hover{ /*버튼 호버시 */
+	background-color:#6a67ce;
+}
+
+
 

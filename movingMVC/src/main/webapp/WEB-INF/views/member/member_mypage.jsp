@@ -13,7 +13,10 @@
 		
 		$(this).addClass('current');
 		$("#"+tab_id).addClass('current');
-	})
+
+	});
+	
+	getUserInfo();
  })
  
 </script>
@@ -22,10 +25,21 @@
 	<div id="mMypage_form">
 		<div id="mMypage_info">
 			<div id="mMypage_user">
-				<span id="mInfo_name" class="mInfo_text">${name} </span>
+				<span id="mInfo_name" class="mInfo_text">${userInfo.name} </span>
 <!-- 				<span id="mInfo_snsText" class="mInfo_text">SNS주소 :</span> -->
 				<br />
-				<span id="mInfo_userType" class="mInfo_text"> ${user_lv}</span>
+				<c:if test="${userInfo.userLv==1}">
+				<span id="mInfo_userType" class="mInfo_text"> 개인 회원</span>
+				</c:if>
+				<c:if test="${userInfo.userLv==2}">
+				<span id="mInfo_userType" class="mInfo_text"> 우수 회원</span>
+				</c:if>
+				<c:if test="${userInfo.userLv==3}">
+				<span id="mInfo_userType" class="mInfo_text"> 제작사 회원</span>
+				</c:if>
+				<c:if test="${userInfo.userLv==4}">
+				<span id="mInfo_userType" class="mInfo_text"> 관리자</span>
+				</c:if>
 <!-- 				<span id="mInfo_snsAdress" class="mInfo_text"> {getSocial_id} </span> -->
 			</div>
 			<div id="mMypage_action">
@@ -35,49 +49,28 @@
 				</div>
 				<div id="mInfo_board" class="mInfo_text2" onclick="location='#';">
 					<span>내가 쓴 게시글 <br />
-					&nbsp;&nbsp;{getBoardCount} 개</span>
+					&nbsp;&nbsp;{userInfo.getBoardCount} 개</span>
 				</div>
 				<div id="mInfo_point"class="mInfo_text2" onclick="location='#';">
 					<span>포인트 <br />
-					&nbsp;&nbsp;&nbsp;${user_point} 점</span>
+					&nbsp;&nbsp;&nbsp;${userInfo.userPoint} 점</span>
 				</div>
 			</div>
+			<c:if test="${mid==id }">
 			<div id="mInfo_button">
 				<button class="profile_modify_btn button_cb3a9eb border" onclick="location='/moving.com/member_profileSetting';">프로필 설정</button>
 				<button class="userChange button_cb3a9eb border" onclick="location='/moving.com/member_change';">회원전환</button>
 			</div>
+			</c:if>
 		</div>
 		
-					<script>
-							function getUserInfo() {
-								$.getJSON("/moving.com/getUserInfo", function(data) {
-									//get방식으로 json 데이터를 비동기식으로 가져와서 data에 저장
-									var myLevel = data.userLv;
-									if(myLevel==1) {
-										myLevel="개인회원";
-									}else if(myLevel==3) {
-										myLevel="제작사";
-									}else if(myLevel==4) {
-										myLevel="관리자";
-									}
-									var myName = data.name;
-									var myPoint = "나의 포인트 "+data.userPoint+"점";
-									var myProfile = data.profileImageUrl;
-									
-									$('#myProfileImage').html(myProfile);//태그와 문자를 함께 변경 적용
-									$('#myLevel').html(myLevel);//태그와 문자를 함께 변경 적용
-									$('#myPoint').html(myPoint);//태그와 문자를 함께 변경 적용
-									$('#myName').html(myName);//태그와 문자를 함께 변경 적용
-									});//매핑 주소 써주기	
-							}
-						</script>
 		<div id="mMypage_profileImg">
-			<c:if test="${profile_image_url == 'default'}">
+			<c:if test="${userInfo.profileImageUrl == 'default'}">
 				<img id="myProfileImage" class="Avatar_image" src="./images/member_profile.png"	style="width:220px; height:220px; border-radius: 50%;">
 			</c:if>
 								
-			<c:if test="${profile_image_url != 'default'}">
-				<img id="myProfileImage" class="Avatar_image" src="${profile_image_url}" style="width:220px; height:220px; border-radius: 50%;">
+			<c:if test="${userInfo.profileImageUrl != 'default'}">
+				<img id="myProfileImage" class="Avatar_image" src="${userInfo.profileImageUrl}" style="width:220px; height:220px; border-radius: 50%;">
 			</c:if>
 		</div>
 		<div id="mMypage_funding_wrap">

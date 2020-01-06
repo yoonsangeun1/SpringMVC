@@ -1,30 +1,63 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
+<%@ include file="../include/header.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>자유게시판 글쓰기</title>
-<script src="../resources/js/jquery.js"></script>
 <script src="../resources/js/board_free.js"></script>
 <script src="../resources/editor/js/HuskyEZCreator.js" charset="UTF-8"></script>
 </head>
 <body>
  <form method="post" action="/moving.com/board/free_write_ok"
  onsubmit="return free_check();">
-  <table border="1" style="width:1024px"> <!-- width 임시로 넣어둠. -->
-   <caption>자유게시판 글쓰기</caption>
+ 
+ <div id="bFree_write_body"> <%--body 전체 div --%>
+ 
+ <div id="bFree_community">
+		<%-- 커뮤니티 배우모집,시나리오 공모 등  div --%>
+		<div class="bFree_community_tit">
+			<%--커뮤니티--%>
+			<h1>커뮤니티</h1>
+		</div>
+		<%--커뮤니티 --%>
+
+		<div class="bFree_community_list">
+			<%--커뮤니티 밑에 리스트들 div --%>
+			<ul>
+
+				<li><a href="actors">배우 프로필</a></li>
+
+				<li><a href="contest">시나리오 공모</a></li>
+
+				<li class="bFree_community_list_free"><a href="free">자유게시판</a></li>
+
+				<li><a href="qna">QnA</a> <%--QnA 작업해야 됨 --%></li>
+
+			</ul>
+		</div>
+		<%--커뮤니티 밑에 리스트들 div --%>
+
+	</div>
+	<%--커뮤니티 배우모집,시나리오 공모 등 div --%>
+ 
+ 
+  <table border="1" id="bFree_write_table" cellspacing="0">
+  
    <tr>
-    <th>글쓴이</th>
-    <td><div class="nickname">${nickname}</div> <%--input? --%>
-    </td>   
+    <th id="bFree_write_nickname">닉네임 : </th>
+    <th id="bFree_write_nickname_2">${nickname}</th>   
    </tr> 
+   
    <tr>
-    <th>제목</th>
-  <td><input name="title" id="title" size="36" /></td>
+    <th id="bFree_write_title">&nbsp;&nbsp;&nbsp;제목 : </th>
+  <td id="bFree_write_title_2">
+  <input name="title" id="title" size="56" maxlength="35" oninput="maxLengthCheck(this)" />
+  </td>
    </tr>
+   
    <tr>
-    <th>글내용</th>
-    <td><textarea name="content" id="content"
+    <td colspan="2" id="bFree_write_content"><textarea name="content" id="content"
     rows="10" cols="100"></textarea>
     
 <script type="text/javascript">
@@ -43,18 +76,33 @@
     </td>
    </tr> 
    
-   <tr>
-    <th colspan="2">
-    <input type="submit" value="저장" />
-    <input type="reset" value="취소" />
-    <input type="button" value="목록" 
-    onclick="location='/moving.com/board/free?page=${page}';" />
-    </th>
-   </tr>
   </table>
+  
+  <div id="bFree_write_button"> <%--버튼 div --%>
+  
+    <input type="submit" value="저장" class="bFree_write_btn button
+       button_c9d8ce2 button_f12 button_p1024 button_r4"/>
+    <input type="reset" value="취소" class="bFree_write_btn button
+       button_c9d8ce2 button_f12 button_p1024 button_r4" />
+    <input type="button" value="목록" class="bFree_write_btn button
+       button_c9d8ce2 button_f12 button_p1024 button_r4"
+    onclick="location='/moving.com/board/free?page=${page}';" />
+  
+  </div> <%--버튼 div --%>
+  
+  </div> <%--body 전체 div --%>
+  
  </form> 
-</body>
-</html>
+ 
+ <script>  
+ 	function maxLengthCheck(object){ //input number는 maxlength가 안됨. 스크립트로 maxlength 지정
+	  if (object.value.length > object.maxLength){
+	   	object.value = object.value.slice(0, object.maxLength);
+	    }//if
+	  }//function()
+ </script>
+
+<%@ include file="../include/footer.jsp"%>
 
 
 

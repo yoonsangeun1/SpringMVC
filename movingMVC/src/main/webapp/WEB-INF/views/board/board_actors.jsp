@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>배우 모집</title>
+<title>배우 프로필</title>
 </head>
 <body>
 	<div id="bActors_body">
@@ -22,7 +22,7 @@
 				<%--업데이트 밑에 리스트들 div --%>
 				<ul>
 
-					<li class="bActors_community_list_actors"><a href="actors">배우모집</a>
+					<li class="bActors_community_list_actors"><a href="actors">배우 프로필</a>
 					</li>
 
 					<li><a href="contest">시나리오 공모</a></li>

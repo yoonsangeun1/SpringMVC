@@ -258,10 +258,18 @@ public class MemberController {
 				
 				SocialProfileVO svo = this.mUserService.findSocialAcount(dm.getId());
 				session.setAttribute("sessionSocial", svo);
-				out.println("<script>");
-				out.println("alert('MOVING로그인을 환영합니다 !');");
-				out.println("location='/moving.com/main';");
-				out.println("</script>");
+				if(dm.getUserLv()==4) {
+					out.println("<script>");
+					out.println("alert('MOVING관리자님 환영합니다 !');");
+					out.println("location='/moving.com/admin';");
+					out.println("</script>");
+				}else {
+					out.println("<script>");
+					out.println("alert('MOVING로그인을 환영합니다 !');");
+					out.println("location='/moving.com/main';");
+					out.println("</script>");
+				}
+				
 				
 				return null;
 			}

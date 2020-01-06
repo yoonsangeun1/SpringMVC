@@ -106,4 +106,9 @@ public class MUserServiceImpl implements MUserService {
 		this.mUserDAO.memberProfileUpload(m);
 	}
 
+	@Override
+	public MUserVO selectUserInfo(int mid) {
+		return this.mUserDAO.selectUserInfo(mid);
+	}
+
 }

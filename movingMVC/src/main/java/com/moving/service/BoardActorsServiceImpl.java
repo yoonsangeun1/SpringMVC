@@ -48,5 +48,16 @@ public class BoardActorsServiceImpl implements BoardActorsService {
 	public void editBoardActors(ProfilePostVO ba) {
 		this.boardActorsDao.editBoardActors(ba);
 	}
+
+	@Override
+	public void editBoardActors2(ProfilePostVO ba) {
+		this.boardActorsDao.editBoardActors2(ba);
+	}
+
+	@Override
+	public void delBoardActors(int id) {
+		this.boardActorsDao.delBoardActors(id);
+	}
+
 	
 }//BoardActorsServiceImpl class

@@ -146,13 +146,17 @@ public class BoardNoticeController {
 	@RequestMapping("/board/notice_cont")
 	public ModelAndView board_notice_cont(
 			int id, //id는 게시글 시퀀스 id
-			int page) throws Exception{
+			int page,
+			String findField,
+			String findName) throws Exception{
 		
 		//번호에 해당하는 디비 레코드값을 가져옴
 		NormalPostVO bn=this.boardNoticeService.getCont(id);
 		
 		ModelAndView cm=new ModelAndView("/board/board_notice_cont");
 		
+		cm.addObject("findField",findField);
+		cm.addObject("findName",findName);
 		cm.addObject("bn",bn);
 		cm.addObject("page",page);
 		

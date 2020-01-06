@@ -84,7 +84,7 @@
 				<div id="header_menuBar">
 					<div class="flex-container">
 						<div style="flex-grow: 1;">
-							<a href="project/list">Project</a>
+							<a href="project/list?category=20001">Project</a>
 						</div>
 						<div style="flex-grow: 1;">
 							<a href="./movie/movie_mainList.jsp">Movies</a>
@@ -140,11 +140,11 @@
 							<div class="header_profile_container">
 								<button type="button" id="header_profile_btn" onclick="getUserInfo();">
 									<c:if test="${profile_image_url == 'default'}">
-										<img class="Avatar_image" src="./images/member_profile.png"	style="width:30px; height:30px; border-radius: 50%;">
+										<img class="Avatar_image avatar_image_change" src="${pageContext.request.contextPath}/images/member_profile.png"	style="width:30px; height:30px; border-radius: 50%;">
 									</c:if>
 								
 									<c:if test="${profile_image_url != 'default'}">
-										<img calss="Avatar_image" src="${profile_image_url}" style="width:30px; height:30px; border-radius: 50%;">
+										<img calss="Avatar_image avatar_image_change" src="${profile_image_url}" style="width:30px; height:30px; border-radius: 50%;">
 									</c:if>
 								</button>
 							</div>
@@ -162,13 +162,17 @@
 											myLevel="관리자";
 										}
 										var myName = data.name;
-										var myPoint = "나의 포인트 "+data.userPoint+"점";
+										var myPoint = "나의 포인트 "+data.userPoint+" 점";
 										var myProfile = data.profileImageUrl;
 										
+										if(myProfile == 'default') {
+											myProfile = "${pageContext.request.contextPath}/images/member_profile.png";
+										}
 										$('#myName').html(myName);//태그와 문자를 함께 변경 적용
 										$('#myLevel').html(myLevel);//태그와 문자를 함께 변경 적용
 										$('#myPoint').html(myPoint);//태그와 문자를 함께 변경 적용
-										$('#myProfileImage').html(myProfile);//태그와 문자를 함께 변경 적용
+										$('.avatar_image_change').attr('src', myProfile);//태그와 문자를 함께 변경 적용
+										$('.MyMenuUserInfo_avatar').attr('src', myProfile);//태그와 문자를 함께 변경 적용
 										});//매핑 주소 써주기	
 								}
 							</script>
@@ -176,14 +180,11 @@
 						<!-- 프로필아이콘 클릭시 생성되는 내 정보창 -->
 						<div id="header_profile_container_activebox" style="display:none;">
 							<div id="MymenuLayout_contatainer">
-<!-- 								<button type="button" class="profile_modify_btn button_cb3a9eb border"> -->
-<!-- 									정보 수정 -->
-<!-- 								</button> -->
-								<div class="MyMenuUserInfo_userInfo" onclick="location='/moving.com/member_mypage';"> 
+								<div class="MyMenuUserInfo_userInfo" onclick="location='/moving.com/member_mypage?mid=${id}';"> 
 									<a class="MyMenuUserInfo_profileLink">
 										<span class="MyMenuUserInfo_name">${name}</span> &nbsp;&nbsp;
 										<c:if test="${profile_image_url == 'default'}">
-											<img class="MyMenuUserInfo_avatar" src="./images/member_profile.png"	style="width:60px; height:60px; border-radius: 50%;">
+											<img class="MyMenuUserInfo_avatar" src="${pageContext.request.contextPath}/images/member_profile.png"	style="width:60px; height:60px; border-radius: 50%;">
 										</c:if>
 								
 										<c:if test="${profile_image_url != 'default'}">
@@ -204,7 +205,7 @@
 								<br>
 								<i class="fas fa-gift"></i>
 							</div>
-							<div id="MymenuUserActive_like" onclick="location.href='http://www.naver.com';">
+							<div id="MymenuUserActive_like" onclick="location.href='member_mypage?mid=${id}';">
 								<span class="like_project">좋아한</span>
 								<br>
 								<i class="far fa-heart"></i>
