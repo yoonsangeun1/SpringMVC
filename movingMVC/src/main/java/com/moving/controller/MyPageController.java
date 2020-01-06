@@ -92,8 +92,14 @@ public class MyPageController {
 			out.println("alert('로그인이 필요한 페이지입니다 !');");
 			out.println("location='member/login';");
 			out.println("</script>");
+		}else {
+			ModelAndView m = new ModelAndView("member/member_change");
+			MUserVO db_businessInfo = this.mUserService.emailCheck(userid);
+			m.addObject("businessName",db_businessInfo.getBusinessName());
+			m.addObject("businessRegisterNo",db_businessInfo.getBusinessRegisterNo());
+			return m;
 		}
-		return new ModelAndView("member/member_change");
+		return null;
 	}//member_mypage()
 
 	/** 회원전환 완료 + 사업자 등록번호 이미지 업로드시 경로를 디비에 저장 */
