@@ -101,7 +101,7 @@ $(function(){ // document ready
 			<div id="header_menuBar">
 				<div class="flex-container">
 					<div style="flex-grow: 1;">
-						<a href="/moving.com/project/list">Project</a>
+						<a href="/moving.com/project/list?category=20001">Project</a>
 					</div>
 					<div style="flex-grow: 1;">
 						<a href="../movie/movie_mainList.jsp">Movies</a>
@@ -181,23 +181,21 @@ $(function(){ // document ready
 										myLevel="관리자";
 									}
 									var myName = data.name;
-									var myPoint = "나의 포인트 "+data.userPoint+"점";
+									var myPoint = "나의 포인트 "+data.userPoint+" 점";
 									var myProfile = data.profileImageUrl;
 									
 									$('#myName').html(myName);//태그와 문자를 함께 변경 적용
 									$('#myLevel').html(myLevel);//태그와 문자를 함께 변경 적용
 									$('#myPoint').html(myPoint);//태그와 문자를 함께 변경 적용
-									$('#myProfileImage').html(myProfile);//태그와 문자를 함께 변경 적용
+									$('.Avatar_image').attr('src', myProfile);//태그와 문자를 함께 변경 적용
+									$('.MyMenuUserInfo_avatar').attr('src', myProfile);//태그와 문자를 함께 변경 적용
 									});//매핑 주소 써주기	
 							}
 						</script>
 						<!-- 프로필아이콘 클릭시 생성되는 내 정보창 -->
 						<div id="header_profile_container_activebox" style="display:none; font-color:black;">
 							<div id="MymenuLayout_contatainer">
-<!-- 								<button type="button" class="profile_modify_btn button_cb3a9eb border"> -->
-<!-- 									정보 수정 -->
-<!-- 								</button> -->
-								<div class="MyMenuUserInfo_userInfo" onclick="location='/moving.com/member_mypage';"> 
+								<div class="MyMenuUserInfo_userInfo" onclick="location='/moving.com/member_mypage?mid=${id}';"> 
 									<a class="MyMenuUserInfo_profileLink">
 										<span class="MyMenuUserInfo_name" id="myName">${name}</span> &nbsp;&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i>
 										<c:if test="${profile_image_url == 'default'}">
@@ -222,7 +220,7 @@ $(function(){ // document ready
 								<br>
 								<i class="fas fa-gift"></i>
 							</div>
-							<div id="MymenuUserActive_like" onclick="location.href='http://www.naver.com';">
+							<div id="MymenuUserActive_like" onclick="location.href='member_mypage';">
 								<span class="like_project">좋아한</span>
 								<br>
 								<i class="far fa-heart"></i>

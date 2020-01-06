@@ -28,11 +28,10 @@ public class MyPageController {
 	@Autowired
 	private MUserService mUserService;
 
-
-	/** 마이페이지 */
-	@RequestMapping(value="member_mypage")	
-	public ModelAndView member_mypage(HttpServletResponse response, HttpSession session) throws Exception{
-
+	/** 헤더 */
+	@RequestMapping(value="member_header")
+	public ModelAndView member_header(HttpServletResponse response, HttpSession session) throws Exception {
+		
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		String userid=(String)session.getAttribute("userid");
@@ -42,7 +41,40 @@ public class MyPageController {
 			out.println("location='member/login';");
 			out.println("</script>");
 		}else {
-			return new ModelAndView("member/member_mypage");
+			MUserVO db_img = this.mUserService.emailCheck(userid);
+//			String img = db_img.getProfileImageUrl();
+			ModelAndView m = new ModelAndView("include/header");
+			m.addObject("db_img",db_img.getProfileImageUrl());
+			return m;
+		}
+		return null;
+	}
+	
+	
+	/** 마이페이지 */
+	@RequestMapping(value="member_mypage")	
+	public ModelAndView member_mypage(HttpServletResponse response, HttpSession session, int mid) throws Exception{
+
+		
+		response.setContentType("text/html;charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		String userid=(String)session.getAttribute("userid");
+		if(userid==null) {
+			out.println("<script>");
+			out.println("alert('로그인이 필요한 페이지입니다 !');");
+			out.println("location='member/login';");
+			out.println("</script>");
+		}else {
+			
+//			MUserVO db_img = this.mUserService.emailCheck(userid);
+//			String img = db_img.getProfileImageUrl();
+			ModelAndView m = new ModelAndView("member/member_mypage");
+//			m.addObject("db_img",img);
+			MUserVO userInfo = this.mUserService.selectUserInfo(mid);
+			m.addObject("mid",mid);
+			m.addObject("userInfo",userInfo);
+			return m;
+			
 		}
 		return null;
 	}//member_mypage()
@@ -409,14 +441,14 @@ public class MyPageController {
 					afile.mkdir();
 				}
 				Random r = new Random();
-				int random = r.nextInt(100000000); //0이상 1억미만 사이의 정수숫자 난수 발생
+				int random = r.nextInt(10000); //0이상 1만 사이의 정수숫자 난수 발생
 				
 				/** 첨부파일 확장자 구하기 */
 				int index = fileName.lastIndexOf(".");
 				//첨부한 파일에서 .를 맨 오른쪽부터 찾아서 가장먼저 나오는 .의 위치번호를 왼쪽부터 세어서 번호값을반환. 첫문자는 0
 				String fileExtendsion = fileName.substring(index+1);
 				//마침표 이후부터 마지막 문자까지 구함. 즉 확장자를 구함.
-				String refilename = "("+nickname+")"+year+month+date+random+"."+fileExtendsion; //새로운 첨부파일명을 저장
+				String refilename = "("+nickname+")"+year+"-"+month+"-"+date+"_"+random+"."+fileExtendsion; //새로운 첨부파일명을 저장
 				String fileDBName = "/moving.com/resources/profile_Image/"+year+"-"+month+"-"+date+"/"+refilename; //DB에 저장되는 레코드값
 				UpFile.renameTo(new File(homedir+"/"+refilename)); //바뀌어진 첨부파일명으로 업로드
 				
@@ -430,7 +462,7 @@ public class MyPageController {
 		}
 		out.println("<script>");
 		out.println("alert('프로필 사진이 등록되었습니다 !');");
-		out.println("location='member_mypage';");
+		out.println("location='member_mypage?mid="+session.getAttribute("id")+"';");
 		out.println("</script>");
 		
 		return null;

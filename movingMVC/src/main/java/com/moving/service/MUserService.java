@@ -25,4 +25,5 @@ public interface MUserService {
 	void pointCharge(MUserVO m); //포인트 충전
 	Map<String, Object> test(String attribute); //정보창 비동기식 출력
 	void memberProfileUpload(MUserVO m); //프로필 이미지 등록
+	MUserVO selectUserInfo(int mid); //회원정보 검색
 }

@@ -101,6 +101,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="profileImageUpload" parameterType="mUserVO">
 		update m_user set profile_image_url = #{profileImageUrl} where userid=#{userid}
 	</update>
+	
+	<!-- 회원 검색 -->
+	<select id="selectUserInfo" resultType="mUserVO">
+		select * from m_user where id=#{mid}
+	</select>
 </mapper>
 
 
