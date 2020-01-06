@@ -29,7 +29,7 @@
 			<ul id="SNS_ul1">
 				<!-- 좌측 메뉴 생성 -->
 				<li><a href="#">즐겨찾기</a></li>
-				<li><a href="messenger">메신저</a></li>
+				<li><a href="/moving.com/social/messenger?socialIdFrom=${sessionSocial.id}&socialIdTo=0">메신저</a></li>
 				<li><a href="#">영상</a></li>
 				<li><a href="#">페이지</a></li>
 				<li><a href="#">그룹</a></li>
@@ -39,7 +39,7 @@
 		</div>
 		<div id="SNS_main_mid">
 			<!-- 중간 글쓰기, 글보기 -->
-				<form action="post_write_ok/0" enctype="mutipart/form-data" method="post" name="timeLineWriter">
+				<form action="post_write_ok?id=${sessionSocial.id}?page_num=0" enctype="mutipart/form-data" method="post" name="timeLineWriter">
 					<div id="mid_pad">
 						<div id="SNS_Profile_Upload_Top">
 							<ul id="SNS_None_Ul"></ul>
@@ -100,7 +100,7 @@
 										 alt="프로필 사진">
 								</c:if>
 								<div class="SNS_Content_info">
-									<div class="SNS_Content_Author">${s.socialProfileVO.nickname}</div>
+									<div class="SNS_Content_Author" onclick="location='/moving.com/social/profile?id=${s.socialProfileVO.id}';">${s.socialProfileVO.nickname}</div>
 									<c:set var="date" value="${s.registerDate}"/>
 									<div class="SNS_Content_Write_Time">
 										<script>/* 시간 차 계산 후 출력 */
@@ -177,10 +177,10 @@
 									</li> 
 								</ul>
 								</c:if>
-							</c:forEach>
 								<c:if test="${empty s_reply}">
 										<div class="SNS_Comment_None">댓글이 아직 없습니다. 댓글을 작성해보세요 </div>
 								</c:if>
+							</c:forEach>
 								<div class="SNS_Comment_Write">
 								<c:if test="${empty s.socialProfileVO.profileImagePath}">
 									<img class="SNS_Content_user_img SNS_Profile_Picture"
