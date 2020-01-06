@@ -39,7 +39,7 @@
 <%-- member css 추가 --%>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/member_change.css" /><%-- 회원전환 폼 --%>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/member_delete.css" /><%-- 회원전환 폼 --%>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/member_find.css" /><%-- 회원전환 폼 --%>
+<%-- <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/member_find.css" />회원전환 폼 --%>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/member_infosetting.css" /><%-- 회원설정 폼 --%>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/member_join.css" /><%-- 회원가입 폼 --%>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/member_login.css" /><%-- 로그인 폼 --%>
@@ -159,38 +159,41 @@ $(function(){ // document ready
 						<div class="header_profile_container">
 							<button type="button" id="header_profile_btn" onclick="getUserInfo();">
 								<c:if test="${profile_image_url == 'default'}">
-									<img class="Avatar_image" src="./images/member_profile.png"	style="width:30px; height:30px; border-radius: 50%;">
+									<img class="Avatar_image avatar_image_change" src="${pageContext.request.contextPath}/images/member_profile.png"	style="width:30px; height:30px; border-radius: 50%;">
 								</c:if>
 								
 								<c:if test="${profile_image_url != 'default'}">
-									<img class="Avatar_image" src="${profile_image_url}" style="width:30px; height:30px; border-radius: 50%;">
+									<img class="Avatar_image avatar_image_change" src="${profile_image_url}" style="width:30px; height:30px; border-radius: 50%;">
 								</c:if>
 							</button>
 						</div>
 						
 						<script>
-							function getUserInfo() {
-								$.getJSON("/moving.com/getUserInfo", function(data) {
-									//get방식으로 json 데이터를 비동기식으로 가져와서 data에 저장
-									var myLevel = data.userLv;
-									if(myLevel==1) {
-										myLevel="개인회원";
-									}else if(myLevel==3) {
-										myLevel="제작사";
-									}else if(myLevel==4) {
-										myLevel="관리자";
-									}
-									var myName = data.name;
-									var myPoint = "나의 포인트 "+data.userPoint+" 점";
-									var myProfile = data.profileImageUrl;
-									
-									$('#myName').html(myName);//태그와 문자를 함께 변경 적용
-									$('#myLevel').html(myLevel);//태그와 문자를 함께 변경 적용
-									$('#myPoint').html(myPoint);//태그와 문자를 함께 변경 적용
-									$('.Avatar_image').attr('src', myProfile);//태그와 문자를 함께 변경 적용
-									$('.MyMenuUserInfo_avatar').attr('src', myProfile);//태그와 문자를 함께 변경 적용
-									});//매핑 주소 써주기	
-							}
+						function getUserInfo() {
+							$.getJSON("/moving.com/getUserInfo", function(data) {
+								//get방식으로 json 데이터를 비동기식으로 가져와서 data에 저장
+								var myLevel = data.userLv;
+								if(myLevel==1) {
+									myLevel="개인회원";
+								}else if(myLevel==3) {
+									myLevel="제작사";
+								}else if(myLevel==4) {
+									myLevel="관리자";
+								}
+								var myName = data.name;
+								var myPoint = "나의 포인트 "+data.userPoint+" 점";
+								var myProfile = data.profileImageUrl;
+								
+								if(myProfile == 'default') {
+									myProfile = "${pageContext.request.contextPath}/images/member_profile.png";
+								}
+								$('#myName').html(myName);//태그와 문자를 함께 변경 적용
+								$('#myLevel').html(myLevel);//태그와 문자를 함께 변경 적용
+								$('#myPoint').html(myPoint);//태그와 문자를 함께 변경 적용
+								$('.avatar_image_change').attr('src', myProfile);//태그와 문자를 함께 변경 적용
+								$('.MyMenuUserInfo_avatar').attr('src', myProfile);//태그와 문자를 함께 변경 적용
+								});//매핑 주소 써주기	
+						}
 						</script>
 						<!-- 프로필아이콘 클릭시 생성되는 내 정보창 -->
 						<div id="header_profile_container_activebox" style="display:none; font-color:black;">
@@ -199,7 +202,7 @@ $(function(){ // document ready
 									<a class="MyMenuUserInfo_profileLink">
 										<span class="MyMenuUserInfo_name" id="myName">${name}</span> &nbsp;&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i>
 										<c:if test="${profile_image_url == 'default'}">
-											<img class="MyMenuUserInfo_avatar" src="./images/member_profile.png"	style="width:60px; height:60px; border-radius: 50%;">
+											<img class="MyMenuUserInfo_avatar" src="${pageContext.request.contextPath}/images/member_profile.png"	style="width:60px; height:60px; border-radius: 50%;">
 										</c:if>
 								
 										<c:if test="${profile_image_url != 'default'}">
@@ -220,7 +223,7 @@ $(function(){ // document ready
 								<br>
 								<i class="fas fa-gift"></i>
 							</div>
-							<div id="MymenuUserActive_like" onclick="location.href='member_mypage';">
+							<div id="MymenuUserActive_like" onclick="location.href='member_mypage?mid=${id}';">
 								<span class="like_project">좋아한</span>
 								<br>
 								<i class="far fa-heart"></i>
