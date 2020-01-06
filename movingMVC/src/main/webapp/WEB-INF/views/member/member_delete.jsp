@@ -77,8 +77,6 @@
 				</div>
 			</div>
 			
-			<hr>
-			<hr>
 			<div id="mDelete_btn_box">
 				<input type="submit" name="mDelete_btn" value="회원 탈퇴"	id="mDelete_btn">
 				<input type="button" value="돌아가기" id="mDelete_cancel_btn" onclick="location='./member_infosetting';">

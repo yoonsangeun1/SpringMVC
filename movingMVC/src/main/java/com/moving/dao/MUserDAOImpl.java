@@ -106,5 +106,10 @@ public class MUserDAOImpl implements MUserDAO {
 		this.sqlSession.update("profileImageUpload",m);
 	}//회원 프로필사진 등록
 
+	@Override
+	public MUserVO selectUserInfo(int mid) {
+		return this.sqlSession.selectOne("selectUserInfo",mid);
+	}
+
 
 }

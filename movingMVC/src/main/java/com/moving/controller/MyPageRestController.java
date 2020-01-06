@@ -13,7 +13,7 @@ import com.moving.domain.SocialProfileVO;
 import com.moving.service.MUserService;
 
 @RestController
-public class restcontroller {
+public class MyPageRestController {
 
 
 	@Autowired
@@ -30,7 +30,6 @@ public class restcontroller {
 		MUserVO entity=null;
 		try {
 			MUserVO dm = this.mUserService.loginCheck((String)session.getAttribute("userid")); //로그인 인증
-			System.out.println((String)session.getAttribute("userid"));
 			session.setAttribute("id",dm.getId()); //세션 id에 시퀀스번호값 저장
 			session.setAttribute("userid",dm.getUserid()); //세션 이메일아이디에 아이디값 저장
 			session.setAttribute("nickname",dm.getNickname()); //세션 닉네임에 VO객체저장
@@ -44,7 +43,6 @@ public class restcontroller {
 			session.setAttribute("profile_image_url",dm.getProfileImageUrl()); //세션 프로필사진에 VO객체저장
 			session.setAttribute("user_status",dm.getUserStatus()); //세션 회원상태에 VO객체저장
 			session.setAttribute("user_type",dm.getUserType()); //세션 회원유형에 VO객체저장
-			
 			if(dm.getUserLv()==1) {
 				session.setAttribute("user_lv", "개인회원");
 			}else if(dm.getUserLv()==2) {

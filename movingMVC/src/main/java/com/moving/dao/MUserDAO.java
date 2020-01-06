@@ -43,5 +43,7 @@ public interface MUserDAO {
 
 	void memberProfileUpload(MUserVO m); //회원 프로필사진 등록
 
+	MUserVO selectUserInfo(int mid);
+
 
 }
