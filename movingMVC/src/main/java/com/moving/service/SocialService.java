@@ -38,4 +38,6 @@ public interface SocialService {
 
 	List<SocialMessageVO> getTalkBalloon(SocialMessageVO message_listVO);
 
+	SocialMessageVO selectLastMessage(SocialMessageVO message_listVO);
+
 }

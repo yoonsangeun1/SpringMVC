@@ -92,4 +92,9 @@ public class SocialServiceImpl implements SocialService {
 	public List<SocialMessageVO> getTalkBalloon(SocialMessageVO message_listVO) {
 		return this.socialDAO.getTalkBalloon(message_listVO);
 	}
+
+	@Override
+	public SocialMessageVO selectLastMessage(SocialMessageVO message_listVO) {
+		return this.socialDAO.selectLastMessage(message_listVO);
+	}
 }

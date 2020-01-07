@@ -37,4 +37,6 @@ public interface SocialDAO {
 	void insertSocialReport(ReportVO report);
 
 	List<SocialMessageVO> getTalkBalloon(SocialMessageVO message_listVO);
+
+	SocialMessageVO selectLastMessage(SocialMessageVO message_listVO);
 }

@@ -8,7 +8,8 @@ public class SocialMessageVO {
 	private String content;			/* 내용 */
 	private String registerDate; /* 전송일 */
 	private int mid; /* 멤버 목록 */
-	
+	private SocialProfileVO socialProfileVO;/*메시지 보낸 사람 정보 */
+	private SocialMessageVO socialMessageVO;
 	
 	public int getMid() {
 		return mid;
@@ -16,13 +17,17 @@ public class SocialMessageVO {
 	public void setMid(int mid) {
 		this.mid = mid;
 	}
-	private SocialProfileVO socialProfileVO;/*메시지 보낸 사람 정보 */
-	
 	public SocialProfileVO getSocialProfileVO() {
 		return socialProfileVO;
 	}
 	public void setSocialProfileVO(SocialProfileVO socialProfileVO) {
 		this.socialProfileVO = socialProfileVO;
+	}
+	public SocialMessageVO getSocialMessageVO() {
+		return socialMessageVO;
+	}
+	public void setSocialMessageVO(SocialMessageVO socialMessageVO) {
+		this.socialMessageVO = socialMessageVO;
 	}
 	public int getCodeNo() {
 		return codeNo;

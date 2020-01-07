@@ -3,6 +3,8 @@
 <%@ taglib prefix="c"
     		uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%-- <script src="${pageContext.request.contextPath}/resources/js/social.js"></script>
+ --%>
 <script>
 	$('.SNS_Comment_Write_Button').on('click', function() {
 		$('#SNS_Profile_Writer').animate({background:"white"},10);
@@ -13,17 +15,17 @@
 	<div id="SNS_Profile_Wrap">						<!-- 오브젝트 항목 래핑 -->
 		<div id="SNS_Profile_Top">
 			<div id="SNS_Profile_Ground">
-				<c:if test="${empty s_pro.profileImagePath}">
-					<div id="SNS_Profile_Background" style="background-image:url(../images/sns_back1.jpg)">
+				<c:if test="${'default' == s_pro.backgroundImagePath}">
+					<div id="SNS_Profile_Background" style="background-image:url(${pageContext.request.contextPath}/resources/images/sns_back1.jpg)">
 				</c:if>
-				<c:if test="${!empty s_pro.profileImagePath}">
+				<c:if test="${'default' != s_pro.backgroundImagePath}">
 					<div id="SNS_Profile_Background" style="background-image:url('${s_pro.backgroundImagePath}')">
 				</c:if>
-					<c:if test="${!empty s_pro.profileImagePath}">					<!-- 회원 이미지가 없을 경우 기본 이미지로 설정 -->
-						<img id="SNS_Profile_Photo" src="${s_pro.profileImagePath}">
+					<c:if test="${'default' != profile_image_url}">					<!-- 회원 이미지가 없을 경우 기본 이미지로 설정 -->
+						<img id="SNS_Profile_Photo" src="${profile_image_url}">
 					</c:if>
-					<c:if test="${empty s_pro.profileImagePath}">
-						<img id="SNS_Profile_Photo" src="../images/member_profile.png">
+					<c:if test="${'default' == profile_image_url}">
+						<img id="SNS_Profile_Photo" src="${pageContext.request.contextPath}/resources/images/member_profile.png">
 					</c:if>
 					<div id="SNS_Profile_Title_Name">
 					<c:if test="${!empty s_pro.nickname}">
@@ -113,20 +115,20 @@
 					</c:if>
 					<c:if test="${!empty s_pro.socialPostVO}">
 						<c:forEach var="s_post" items="${s_pro.socialPostVO}">
-							${s_post.id}번 게시글 / <b>${s_pro.id}</b> 사용자 
+<%-- 							${s_post.id}번 게시글 / <b>${s_pro.id}</b> 사용자  --%>
 							
 							<li>
 							<input type="hidden" id="postId_${s_post.id }" value="${s_post.id }">
 							<input type="hidden" id="id" value="${s_post.id }">
 							<input type="hidden" id="socialId" value="${s_pro.id }">
 								<div class="SNS_Profile_Post">
-									<c:if test="${!empty s_pro.profileImagePath}">
+									<c:if test="${'default' != profile_image_url}">
 										<img class="SNS_Content_user_img"
-											src="${s_pro.profileImagePath}" width="40" height="40" alt="">
+											src="${profile_image_url}" width="40" height="40" alt="">
 									</c:if>
-									<c:if test="${empty s_pro.profileImagePath}">
+									<c:if test="${'default' == profile_image_url}">
 										<img class="SNS_Content_user_img"
-											src="../images/member_profile.png" width="40" height="40"
+											src="${pageContext.request.contextPath}/resources/images/member_profile.png" width="40" height="40"
 											alt="">
 									</c:if>
 									<div class="SNS_Content_info">
@@ -192,7 +194,7 @@
 											<input class="SNS_Cont_Option_Funding" type="button"
 												value="공유하기"
 												onclick="if(confirm('공유할까요?') == true){
-											location='/moving.com/social/post_share_ok?id=${s_post.id}&socialId=${s_pro.id}';}else{return}"
+											location='/moving.com/social/post_share_ok?id=${s_post.id}&socialId=${s_pro.id}&page_num=1';}else{return}"
 												style="float: right;">
 										</div>
 									</div>
@@ -221,16 +223,16 @@
 											</script>
 											<%-- 본인의 프로필 사진이 있다면,없다면 분기 나누기 나중에 프로필사진--%>
 											<%-- 프로필 이미지가 있을 경우 --%>
-											<c:if test="${!empty s_pro.profileImagePath}">
+											<c:if test="${'default' != profile_image_url}">
 												<img class="SNS_Content_user_img"
 													class="SNS_Profile_Picture" src="${profile_image_url }"
 													width="30" height="30" alt="">
 											</c:if>
 											<%-- 프로필 이미지가 없을 경우 --%>
-											<c:if test="${empty s_pro.profileImagePath}">
+											<c:if test="${'default' == profile_image_url}">
 												<img class="SNS_Content_user_img"
 													class="SNS_Profile_Picture"
-													src="../images/member_profile.png" width="30" height="30"
+													src="${pageContext.request.contextPath}/resources/images/member_profile.png" width="30" height="30"
 													alt="">
 											</c:if>
 											<input type="hidden" id="social_post_id" size="40" value="${s_post.id }">

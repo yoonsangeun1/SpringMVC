@@ -301,6 +301,8 @@ li.SNS_Profile_Menu_Button:last-child{
 	line-height: 1.5;
 	display: inline-block;
 	vertical-align: middle;
+	-webkit-text-stroke: 1px #000;
+	padding:0px;
 }
 
 /* 상단 메뉴 열거 */

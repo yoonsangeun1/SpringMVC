@@ -404,6 +404,7 @@ public class SocialController {
 			, SocialPostVO s_post
 			,int id,//게시글 번호
 			int socialId//글쓴사람 회원번호
+			,int page_num
 			)throws Exception{
 		HttpSession session=request.getSession();
 
@@ -419,8 +420,10 @@ public class SocialController {
 				+"By. <a href='/moving.com/social/profile?id="+sharedNickname.getId()+"'>"+sharedNickname.getNickname()+"</a>");
 
 		this.socialService.insertPost(s_post);//게시글 저장
-
-		return "redirect:/social/profile?id="+getSocial_id.getId();//내 홈피로 이동
+		if(page_num==0)	
+			return "redirect:/social/main";//내 홈피로 이동
+		else
+			return "redirect:/social/profile?id="+getSocial_id.getId();//내 홈피로 이동
 	}
 
 	//게시글 삭제 완료
@@ -437,10 +440,7 @@ public class SocialController {
 		session=request.getSession();//세션 값 전체를 가져온다.
 		
 		SocialProfileVO getSocial_id=(SocialProfileVO) session.getAttribute("sessionSocial");
-		int user_id=getSocial_id.getId();
-		
-		System.out.println(user_id);
-		System.out.println(socialId);
+		int user_id=getSocial_id.getUserId();
 		
 		if(user_id==socialId) {
 			this.socialService.deletePost(id);

@@ -8,6 +8,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<id column="mid" property="mid"/>
 		<association property="socialProfileVO" javaType="com.moving.domain.SocialProfileVO"
 		column="mid" select="selectMessageSender"/>
+		<association property="socialMessageVO" javaType="com.moving.domain.SocialMessageVO"
+		column="content" select="selectLastMessage"/>
 	</resultMap>
 
 	<!-- 같이 대화한 상대 리스트 뽑기 -->
@@ -19,19 +21,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 대화한 상대의 정보 뽑기 -->
 	<select id="selectMessageSender" resultType="socialProfileVO">
-	SELECT nickname, profile_image_path 
-	FROM social_profile
-	WHERE id = #{id}
+		SELECT nickname, profile_image_path 
+		FROM social_profile
+		WHERE id = #{id}
+	</select>
+	
+	<select id="selectLastMessage" resultType="socialMessageVO">
+		SELECT * FROM(SELECT content,social_id_from,social_id_to,register_date FROM social_message WHERE 
+		(social_id_to = #{socialIdTo} and social_id_from=#{socialIdFrom})or
+		(social_id_from=#{socialIdTo} and social_id_to=#{socialIdFrom})order by register_date desc)
+		WHERE rownum=1
 	</select>
 	
 	<resultMap type="socialMessageVO" id="selectMessageList"/>
 	
 	<select id="getTalkBalloon" resultMap="selectMessageList">
 		SELECT content,social_id_from,social_id_to,register_date FROM social_message WHERE 
-		(social_id_to = ${social_id_to} and social_id_from=${social_id_from})or
-		(social_id_from=${social_id_from} and social_id_to=${social_id_to})
+		(social_id_to = ${socialIdTo} and social_id_from=${socialIdFrom})or
+		(social_id_from=${socialIdTo} and social_id_to=${socialIdFrom})
 		order by register_date
 	</select>
+	
+	<insert id="insertMessage">
+		INSERT INTO social_message (id,social_id_from,social_id_to,content,register_date) 
+		VALUES (social_message_seq.nextval,#{socialIdFrom},#{socialIdTo},#{content},sysdate)
+	</insert>
 		<!-- <resultMap type="socialProfileVO" id="getMessageList">
 			<collection property="socialMessageVO" javaType="java.util.ArrayList"
 				ofType="selectMessageList"	column="id"

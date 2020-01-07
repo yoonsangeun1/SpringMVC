@@ -38,7 +38,6 @@
 
 <%-- javascript 추가 (우선, abc순)--%>
 <script src="${pageContext.request.contextPath}/resources/js/jquery.js"></script>
-<%-- <script src="${pageContext.request.contextPath}/resources/js/social.js"></script> --%>
 <script src="${pageContext.request.contextPath}/resources/editor/js/HuskyEZCreator.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/header_icon.js"></script>  <%-- 헤더 js --%>
 <script src="${pageContext.request.contextPath}/resources/js/member_join.js"></script>

@@ -88,4 +88,9 @@ public class SocialDAOImpl implements SocialDAO {
 	public List<SocialMessageVO> getTalkBalloon(SocialMessageVO message_listVO) {
 		return this.sqlsession.selectList("getTalkBalloon",message_listVO);
 	}
+
+	@Override
+	public SocialMessageVO selectLastMessage(SocialMessageVO message_listVO) {
+		return this.sqlsession.selectOne("selectLastMessage",message_listVO);
+	}
 }

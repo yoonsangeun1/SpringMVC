@@ -2,6 +2,7 @@
 <%@ include file="../include/sns_header.jsp"%>
 <%@ taglib prefix="c" 
             uri="http://java.sun.com/jsp/jstl/core" %>
+<script src="${pageContext.request.contextPath}/resources/js/social.js"></script>
 	<!-- 배경화면 전체 지정 -->
 	<div id="SNS_Wrap">
 		<!-- 오브젝트 항목 래핑 -->
@@ -149,7 +150,7 @@
 									 style="float: right;">
 								</c:if>
 							</div>
-							<img class="SNS_Content_Image" alt="사진" src="../images/sns_photo.gif">
+<!-- 							<img class="SNS_Content_Image" alt="사진" src="../images/sns_photo.gif"> -->
 							<div class="SNS_Content_Cont">
 								${s.content}
 							<c:if test="${s.projectId==2}">
@@ -157,7 +158,8 @@
 							</c:if>
 								<div class="SNS_Cont_Option">
 									<div class="SNS_Cont_Option_Move">무브!</div>
-									<div class="SNS_Cont_Option_Funding">공유하기</div>
+									<div class="SNS_Cont_Option_Funding" onclick="if(confirm('공유할까요?') == true){
+											location='/moving.com/social/post_share_ok?id=${s.id}&socialId=${s_pro.id}&page_num=0';}else{return}">공유하기</div>
 								</div>
 							</div>
 							<div class="SNS_Comment">
