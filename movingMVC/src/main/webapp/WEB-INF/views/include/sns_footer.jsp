@@ -4,23 +4,20 @@
 <%-- 구분선 --%>
 <div class="border_bottom_b20"></div>
 
-<div id="global_footer_wrap">
+<div id="global_footer_wrap" style="z-index: 30">
 	
-	<%-- 구분선 --%>
-	<div class="border_bottom20"></div>
-
 	<div id="footer_container">
 		<section id="footer_about">
-			<h4>ABOUT</h4>
-			<ul>
-							<li><a href="../banner/aboutMoving.jsp">About us</a></li>
-							<li><a href="../board/board_notice.jsp">Notice</a></li>
-							<li><a href="../board/board_actors.jsp">Jobs</a></li>
-							<li><a href="../board/board_faq.jsp">FAQ</a></li>
-							<li><a href="../board/board_qna.jsp">Q&A</a></li>
+						<h4>ABOUT</h4>
+						<ul>
+							<li><a href="/moving.com/aboutMoving">About us</a></li>
+							<li><a href="/moving.com/board/notice">Notice</a></li>
+							<li><a href="/moving.com/board/actors">Jobs</a></li>
+							<li><a href="/moving.com/board/faq">FAQ</a></li>
+							<li><a href="/moving.com/board/qna">Q&A</a></li>
 
 						</ul>
-		</section>
+					</section>
 		<section id="footer_help">
 			<h4>SUPPORT</h4>
 			<ul>

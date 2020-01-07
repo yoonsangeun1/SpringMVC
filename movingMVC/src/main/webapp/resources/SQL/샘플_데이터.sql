@@ -3,6 +3,7 @@ VALUES (1, 'admin@moving.com', '관리자', 'admin@moving.com', '912ec803b2ce49e
 update m_user set profile_image_url='default'
 
 alter table video_post modify (video_file_path varchar2(4000))
+alter table SOCIAL_PROFILE modify (nickname varchar2(4000))
 /* 코드_유형_마스터 */
 INSERT INTO code_type_master VALUES (code_type_master_seq.nextval, 100, '게시글', 'post', sysdate);
 INSERT INTO code_type_master VALUES (code_type_master_seq.nextval, 200, '프로젝트', 'project', sysdate);

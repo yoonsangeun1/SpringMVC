@@ -6,7 +6,7 @@
 			
 			<div id="global_footer_wrap">
 				<%-- 하단 메뉴 : 장르  이름 나중에 바꾸기 subcategory_bar --%>
-				<section id="subcategory_bar">
+				<%-- <section id="subcategory_bar">
 					<nav>
 						<ul>
 							<li><a href="#">어드벤쳐</a></li>
@@ -22,8 +22,8 @@
 					</nav>
 				</section>
 
-				<%-- 구분선 --%>
-				<div class="border_bottom20"></div>
+				구분선
+				<div class="border_bottom20"></div> --%>
 			
 				<!-- <div class="bafore"> </div>  -->
 

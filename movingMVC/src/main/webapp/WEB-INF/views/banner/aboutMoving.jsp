@@ -68,7 +68,7 @@
 			</p>
 			<button
 				class="Project_look button_cb3a9eb button_f24 button_r4 border"
-				onclick="location='../funding/funding_list.jsp';">프로젝트 둘러보기
+				onclick="location='/moving.com/project/list?category=20001';">프로젝트 둘러보기
 			</button>
 		</div>
 	</div>

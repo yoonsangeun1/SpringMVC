@@ -87,7 +87,7 @@
 							<a href="project/list?category=20001">Project</a>
 						</div>
 						<div style="flex-grow: 1;">
-							<a href="./movie/movie_mainList.jsp">Movies</a>
+							<a href="/moving.com/video/videomain">Movies</a>
 						</div>
 						<div style="flex-grow: 12;">
 							<div id="header_logo">
@@ -144,7 +144,7 @@
 									</c:if>
 								
 									<c:if test="${profile_image_url != 'default'}">
-										<img calss="Avatar_image avatar_image_change" src="${profile_image_url}" style="width:30px; height:30px; border-radius: 50%;">
+										<img class="Avatar_image avatar_image_change" src="${profile_image_url}" style="width:30px; height:30px; border-radius: 50%;">
 									</c:if>
 								</button>
 							</div>
@@ -184,7 +184,7 @@
 									<a class="MyMenuUserInfo_profileLink">
 										<span class="MyMenuUserInfo_name">${name}</span> &nbsp;&nbsp;
 										<c:if test="${profile_image_url == 'default'}">
-											<img class="MyMenuUserInfo_avatar" src="${pageContext.request.contextPath}/images/member_profile.png"	style="width:60px; height:60px; border-radius: 50%;">
+											<img class="MyMenuUserInfo_avatar" src="${pageContext.request.contextPath}/resources/images/member_profile.png"	style="width:60px; height:60px; border-radius: 50%;">
 										</c:if>
 								
 										<c:if test="${profile_image_url != 'default'}">
@@ -243,7 +243,7 @@
 						</c:if>
 					</div>
 				</div>
-				<div class="border_bottom_b10"></div>
+				<div class="border_bottom_10"></div>
 
 				<%-- 상단 메뉴 두번째  category_bar --%>
 <!-- 				<div id="header_menu2">
@@ -284,23 +284,23 @@
 
 					<div class="slider_banners">
 
-						<img class="auto_mySlides" src="./resources/images/0001.jpg" width="1200"
+						<img class="auto_mySlides" src="${pageContext.request.contextPath}/resources/images/0001.jpg" width="1200"
 							height="675" onclick="Move_biMoving()"> <!-- 무빙 -->
 							
-						<img class="auto_mySlides" src="./resources/images/01010.png" width="1200"
+						<img class="auto_mySlides" src="${pageContext.request.contextPath}/resources/images/01010.png" width="1200"
 							height="675" onclick="Move_biSns()"> <!-- SNS -->
 							
-						<img class="auto_mySlides" src="./resources/images/0011.jpg" width="1200"
+						<img class="auto_mySlides" src="${pageContext.request.contextPath}/resources/images/0011.jpg" width="1200"
 							height="675" onclick="Move_biProject()"> <!-- 프로젝트  -->
 							
-						<img class="auto_mySlides" src="./resources/images/0003.jpg" width="1200"
+						<img class="auto_mySlides" src="${pageContext.request.contextPath}/resources/images/0003.jpg" width="1200"
 							height="675" onclick="Move_biTeaser()"> <!-- 영화감상/자유게시판 -->
 							
 <!-- 						<img class="auto_mySlides" src="./images/s1.PNG" width="1200" -->
 <!-- 							height="675" onclick="Move_biTeaser()"> 자유게시판 -->
-						<img class="auto_mySlides" src="./resources/images/0002.jpg" width="1200"
+						<img class="auto_mySlides" src="${pageContext.request.contextPath}/resources/images/0002.jpg" width="1200"
 							height="675" onclick="Move_biStatistics()"> <!-- 통계 -->
-						<img class="auto_mySlides" src="./resources/images/0004.jpg" width="1200"
+						<img class="auto_mySlides" src="${pageContext.request.contextPath}/resources/images/0004.jpg" width="1200"
 							height="675" onclick="Move_biStatistics()"> <!-- 통계 -->
 					</div>
 
@@ -330,18 +330,18 @@
 					<div class="quickmenu1">
 						<button
 							class="quickBtn button_cb3a9eb button_f12 button_r4 vertical group border"
-							onclick="location='./member/join';">회원가입</button>
+							onclick="location='/moving.com/member/join';">회원가입</button>
 					</div>
 					<div class="quickmenu2">
 						<button
 							class="quickBtn button_cb3a9eb button_f12 button_r4 vertical group border"
-							onclick="location='./board/board_actors.jsp';">배우모집</button>
+							onclick="location='/moving.com/board/actors';">배우모집</button>
 					</div>
 
 					<div class="quickmenu3">
 						<button
 							class="quickBtn button_cb3a9eb button_f12 button_r4 vertical group border"
-							onclick="location='./board/board_event.jsp';">이벤트</button>
+							onclick="location='/moving.com/board/event';">이벤트</button>
 					</div>
 
 					<button
@@ -356,7 +356,7 @@
 				<div id="biMoving_wrap">
 					<%-- 반복적 css적용은 class // 하나하나 css적용은 id --%>
 					<div class="biMoving_logo">
-						<img src="./resources/images/header_logo.png" width="400" height="150"
+						<img src="${pageContext.request.contextPath}/resources/images/header_logo.png" width="400" height="150"
 							alt="moving_logo" />
 					</div>
 					<div class="biMoving_text">
@@ -372,7 +372,7 @@
 
 				<div id="biSns_wrap">
 					<div class="biSns_logo">
-						<img src="./resources/images/sns_network_img.png" width="300" height="300"
+						<img src="${pageContext.request.contextPath}/resources/images/sns_network_img.png" width="300" height="300"
 							alt="sns_logo" />
 					</div>
 
@@ -389,13 +389,13 @@
 					</div>
 					<button
 						class="biSns_button button_cb3a9eb button_f24 button_r4 border"
-						onclick="location='./sns/SNS_Main.jsp';">SNS 바로가기</button>
+						onclick="location='/moving.com/social/main';">SNS 바로가기</button>
 				</div>
 
 
 				<div id="biProject_wrap">
 					<div class="biProject_logo">
-						<img src="./resources/images/cooperation.png" width="350" height="350"
+						<img src="${pageContext.request.contextPath}/resources/images/cooperation.png" width="350" height="350"
 							alt="project_logo" />
 					</div>
 
@@ -414,28 +414,28 @@
 					</div>
 
 					<div class="biProject_actor_img">
-						<img src="./resources/images/actor_img.png" width="180" height="180"
+						<img src="${pageContext.request.contextPath}/resources/images/actor_img.png" width="180" height="180"
 							alt="actor_img" />
 					</div>
 					<div class="biProject_scenario_img">
-						<img src="./resources/images/scenario_img.png" width="180" height="180"
+						<img src="${pageContext.request.contextPath}/resources/images/scenario_img.png" width="180" height="180"
 							alt="scenario_img" />
 					</div>
 					<div class="biProject_button">
 						<button
 							class="biProject_actorButton button_cb3a9eb button_f24 button_r4 border"
-							onclick="location='./board/board_actors.jsp';">배우모집 게시판
+							onclick="location='/moving.com/board/actors';">배우모집 게시판
 						</button>
 
 						<button
 							class="biProject_writerButton button_cb3a9eb button_f24 button_r4 border"
-							onclick="location='./board/board_contest.jsp';">시나리오
+							onclick="location='/moving.com/board/event';">시나리오
 							공모게시판</button>
 					</div>
 				</div>
 
 				<div class="clear"></div>
-				<img src="./resources/images/0005.jpg" width="1200px" height="260px"
+				<img src="${pageContext.request.contextPath}/resources/images/0005.jpg" width="1200px" height="260px"
 					style="margin: 0px;">
 
 
@@ -445,7 +445,7 @@
 				<div id="biTeaser_wrap">
 
 					<div class="biTeaser_logo">
-						<img src="./resources/images/teaser_logo.png" width="400" height="300"
+						<img src="${pageContext.request.contextPath}/resources/images/teaser_logo.png" width="400" height="300"
 							alt="teaser_logo" />
 					</div>
 					<div class="biTeaser_text">
@@ -475,7 +475,7 @@
 
 					<button
 						class="biTeaser_button button_cb3a9eb button_f24 button_r4 border"
-						onclick="location='./movie/movie_mainList.jsp';">영화 감상하기
+						onclick="location='/moving.com/video/videomain';">영화 감상하기
 					</button>
 				</div>
 
@@ -484,7 +484,7 @@
 				<div id="biBoard_wrap">
 
 					<div class="biBoard_logo">
-						<img src="./resources/images/board_logo.png" width="400" height="300"
+						<img src="${pageContext.request.contextPath}/resources/images/board_logo.png" width="400" height="300"
 							alt="board_logo" />
 					</div>
 
@@ -501,7 +501,7 @@
 
 					<button
 						class="biBoard_button button_cb3a9eb button_f24 button_r4 border"
-						onclick="location='./board/board_free.jsp';">자유게시판</button>
+						onclick="location='/moving.com/board/free';">자유게시판</button>
 				</div>
 
 				<div class="clear"></div>
@@ -509,7 +509,7 @@
 
 
 					<div class="biStatistics_logo">
-						<img src="./resources/images/chart_logo.png" width="400" height="300"
+						<img src="${pageContext.request.contextPath}/resources/images/chart_logo.png" width="400" height="300"
 							alt="statistics_logo" />
 					</div>
 
@@ -522,7 +522,7 @@
 							style="color: #9d8ce2">MOVING</span>과 함께 할래요?<br/>
 						<button
 							class="biJoin_btn button_cb3a9eb button_f24 button_r4 border"
-							onclick="location='./member/member_join.jsp';">MOVING과
+							onclick="location='/moving.com/member/join';">MOVING과
 							함께하기</button>
 
 					</div>
@@ -545,7 +545,7 @@
 
 						<div class="biSupport_button">
 							<button class="biProject_look_button button_f24 button_r4 border"
-								onclick="location='./funding/funding_list.jsp';">프로젝트
+								onclick="location='/moving.com/project/list?category=20001';">프로젝트
 								둘러보기</button>
 						</div>
 					</div>
@@ -568,7 +568,7 @@
 
 			<div id="global_footer_wrap">
 				<%-- 하단 메뉴 : 장르  이름 나중에 바꾸기 subcategory_bar --%>
-				<section id="subcategory_bar">
+				<%-- <section id="subcategory_bar">
 					<nav>
 						<ul>
 							<li><a href="#">어드벤쳐</a></li>
@@ -584,8 +584,8 @@
 					</nav>
 				</section>
 
-				<%-- 구분선 --%>
-				<div class="border_bottom20"></div>
+				구분선
+				<div class="border_bottom20"></div> --%>
 
 				<!-- <div class="bafore"> </div>  -->
 
@@ -593,11 +593,11 @@
 					<section id="footer_about">
 						<h4>ABOUT</h4>
 						<ul>
-							<li><a href="aboutMoving">About us</a></li>
-							<li><a href="board/notice">Notice</a></li>
-							<li><a href="board/actors">Jobs</a></li>
-							<li><a href="board/faq">FAQ</a></li>
-							<li><a href="board/qna">QnA</a></li>
+							<li><a href="/moving.com/aboutMoving">About us</a></li>
+							<li><a href="/moving.comboard/notice">Notice</a></li>
+							<li><a href="/moving.comboard/actors">Jobs</a></li>
+							<li><a href="/moving.comboard/faq">FAQ</a></li>
+							<li><a href="/moving.comboard/qna">QnA</a></li>
 
 						</ul>
 					</section>

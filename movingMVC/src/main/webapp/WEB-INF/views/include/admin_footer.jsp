@@ -7,18 +7,17 @@
 
 <div id="global_footer_wrap">
 	
-	<%-- 구분선 --%>
-	<div class="border_bottom20"></div>
 
 	<div id="footer_container">
 		<section id="footer_about">
 			<h4>ABOUT</h4>
 			<ul>
-				<li><a href="#">About us</a></li>
-				<li><a href="#">Our charter</a></li>
-				<li><a href="#">Stats</a></li>
-				<li><a href="#">Press</a></li>
-				<li><a href="#">Jobs</a></li>
+				<li><a href="/moving.com/aboutMoving">About us</a></li>
+				<li><a href="/moving.com/board/notice">Notice</a></li>
+				<li><a href="/moving.com/board/actors">Jobs</a></li>
+				<li><a href="/moving.com/board/faq">FAQ</a></li>
+				<li><a href="/moving.com/board/qna">Q&A</a></li>
+
 			</ul>
 		</section>
 		<section id="footer_help">

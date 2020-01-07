@@ -101,7 +101,7 @@ $(function(){ // document ready
 						<a href="/moving.com/project/list?category=20001">Project</a>
 					</div>
 					<div style="flex-grow: 1;">
-						<a href="../movie/movie_mainList.jsp">Movies</a>
+						<a href="/moving.com/video/videomain">Movies</a>
 					</div>
 					<div style="flex-grow: 12;">
 						<div id="header_logo">
