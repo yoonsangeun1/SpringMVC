@@ -232,11 +232,26 @@
    
   </div> <%--검색 구간 전체 div --%>
  	
- 	
- 	
  	</div> <%--커뮤니티 제외 전체 --%>
-
  
  </div> <%--전체 div 묶음 --%>
+ 
+ <script>
+	 var msg="${msg}"; //컨트롤러에서 rttr로 설정한 키 이름을 EL로 받아와 저장했음.
+	 
+	 if(msg == "BOARD/QNA_INSERT"){
+		 alert("글쓰기가 성공 했습니다!");
+	 }//if boardFreeController에서 글쓰기 성공 시 출력.
+	 
+/* 	 if(msg == "BOARD/QNA_EDIT"){
+		 alert("글수정이 성공 했습니다!");
+	 }//수정 */
+	 
+	 if(msg == "BOARD/QNA_DEL"){
+		 alert("글삭제가 성공 했습니다!");
+	 }//삭제
+	 
+	 
+	</script>
  
 <%@ include file="../include/footer.jsp" %>

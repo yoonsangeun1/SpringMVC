@@ -9,5 +9,10 @@ public interface BoardReplyService {
 
 	int getTotalCount(ReplyPostVO bq);
 	List<NormalPostVO> getBoardQnaList(ReplyPostVO bq);
+	void inBoardQna(ReplyPostVO bq);
+	ReplyPostVO getCont(int id);
+	ReplyPostVO getCont2(int id);
+	void editBoardQna(ReplyPostVO bq);
+	void delBoardQna(int id);
 
 }

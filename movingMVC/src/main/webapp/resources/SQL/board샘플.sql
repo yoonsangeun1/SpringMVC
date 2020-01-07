@@ -58,3 +58,12 @@ select * from project_post where id=0;
 
 select * from  m_comment;
 
+
+
+
+
+------------------------------ 2020-01-07------------------------------
+
+select * from reply_Post;
+
+delete from reply_post where id=1;

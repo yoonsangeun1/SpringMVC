@@ -75,12 +75,50 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <!-- 질문 글쓰기 -->
 <insert id="bq_in">
- INSERT INTO REPLY_POST (ID,USER_ID,TITLE,CONTENT,CODE_NO,REPLY_STEP,REPLYORDER)
+ INSERT INTO REPLY_POST (ID,USER_ID,TITLE,CONTENT,CODE_NO,REPLY_STEP,REPLY_ORDER)
  VALUES(reply_post_seq.nextval,#{userId},#{title},
  #{content},10006,reply_post_seq.nextval,0)
 </insert>
 
- 
+<!-- 질문 내용보기 -->
+<select id="bq_cont" resultMap="boardInfo">
+ SELECT R.ID AS board_qna_id, R.USER_ID AS board_qna_user_id,
+ R.TITLE, R.HIT, R.CONTENT, U.NICKNAME,
+ R.REGISTER_DATE AS board_qna_registerDate
+ FROM REPLY_POST R, M_USER U
+ WHERE R.USER_ID = U.ID
+ AND R.ID=#{id}
+</select>
+
+<!-- 조회수 증가 -->
+<update id="bq_hit">
+ UPDATE REPLY_POST
+ SET HIT=HIT+1
+ WHERE ID=#{id}
+</update>
+
+ <!-- 질문 내용가져오기 , 조회수 증가 없음 -->
+<select id="bq_cont2" resultMap="boardInfo">
+ SELECT R.ID AS board_qna_id, R.USER_ID AS board_qna_user_id,
+ R.TITLE, R.HIT, R.CONTENT, U.NICKNAME
+ FROM REPLY_POST R, M_USER U
+ WHERE R.USER_ID = U.ID
+ AND R.ID=#{id}
+</select>
+
+<!-- 질문 게시글 수정 -->
+<update id="bq_edit">
+UPDATE REPLY_POST
+SET TITLE=#{title},
+	CONTENT=#{content}
+WHERE ID=#{id}
+</update>
+
+<!-- 질문 게시글 삭제 -->
+<delete id="bq_del">
+ DELETE FROM REPLY_POST
+ WHERE ID=#{id}
+</delete>
 
 </mapper>
 
