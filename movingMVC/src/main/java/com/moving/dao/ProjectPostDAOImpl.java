@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.moving.domain.MCommentVO;
 import com.moving.domain.ProjectPostVO;
+import com.moving.domain.RewardVO;
 
 @Repository
 public class ProjectPostDAOImpl implements ProjectPostDAO {
