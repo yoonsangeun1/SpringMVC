@@ -32,14 +32,13 @@ public class ProjectCommentController {
 	public ResponseEntity<String> selectCommentCount(@PathVariable("id") int id) {
 		/* @PathVariable("id") 애노테이션은 웹주소 경로에서 원하는 자료를 추출하는 용도로 사용.
 		 * 여기서는 {id}에 주어진 게시판 번호값을 가져와서 int id에 저장 */
-		System.out.println(id);
 		ResponseEntity<String> entity=null;
 		try {
 			ProjectPostVO db_count=projectPostService.selectCommentCount(id);
 			int re=1;
 			if(db_count == null ) re=-1;
 			if(re == 1) //값이 있을 경우
-			entity=new ResponseEntity<>(""+this.projectPostService.selectCommentCountActors(id).getCommentCount(), HttpStatus.OK);
+			entity=new ResponseEntity<>(""+this.projectPostService.selectCommentCount(id).getCommentCount(), HttpStatus.OK);
 		}catch(Exception e) { 
 			e.printStackTrace(); 
 			entity=new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -78,6 +77,23 @@ public class ProjectCommentController {
 		}
 		return entity;
 	}//selectCommentList()
+	
+	//Map 타입 : 게시판 번호에 해당하는 댓글 목록 불러오기(Actors)
+		@RequestMapping(value="allProject/{id}", method=RequestMethod.GET)
+		public List<Map<String, Object>> selectCommentListMapProject(@PathVariable("id") int id) {
+			 /*@PathVariable("id") 애노테이션은 웹주소 경로에서 원하는 자료를 추출하는 용도로 사용.
+			 * 여기서는 {id}에 주어진 게시판 번호값을 가져와서 int id에 저장*/ 
+			List<Map<String, Object>> entity=null;
+			try {
+				
+				entity=this.projectPostService.selectCommentListMap(id);
+				//System.out.println(entity.get(0).get(PROFILE_IMAGE_PATH));
+			}catch(Exception e) { 
+				e.printStackTrace(); 
+				//entity=new ResponseEntity<>();
+			}
+			return entity;
+		}//selectCommentList()
 	
 	//Map 타입 : 게시판 번호에 해당하는 댓글 목록 불러오기(Normal)
 		@RequestMapping(value="allNormal/{id}", method=RequestMethod.GET)

@@ -27,5 +27,10 @@ public class AdminMemberDAOImpl implements AdminMemberDAO{
 	@Override
 	public MUserVO memberInfo(String userid) {
 		return this.sqlSession.selectOne("am_info",userid);
-	}
+	} // 회원 정보 팝업창 띄우기
+
+	@Override
+	public void memberEdit(MUserVO mu) {
+		this.sqlSession.update("am_up",mu);
+	} // 회원 정보 수정
 }

@@ -12,4 +12,7 @@ public interface AdminVideoDAO {
 
 	List<VideoPostVO> videoList(VideoPostVO vp);
 
+	void insertTeaser(VideoPostVO vp);
+
+
 }

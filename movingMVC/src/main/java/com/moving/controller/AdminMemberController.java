@@ -15,7 +15,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.moving.domain.MUserVO;
 import com.moving.service.AdminMemberService;
 
-@RequestMapping(value="/admin")
 @Controller
 public class AdminMemberController {
 	
@@ -23,8 +22,8 @@ public class AdminMemberController {
 	private AdminMemberService adminMemberService;
 	
 	/* 관리자 회원관리 목록 */
-	@RequestMapping(value="/member")
-	public String member(@ModelAttribute MUserVO mu,Model m,HttpServletRequest request) {
+	@RequestMapping(value="/admin/member")
+	public String member(@ModelAttribute MUserVO mu,Model m,HttpServletRequest request) throws Exception {
 		int page=1; // 쪽번호
 		int limit=10; // 한 페이지에 보여지는 목록 개수
 		if(request.getParameter("page") != null) { // get으로 전달된 페이지 번호가 있는 경우
@@ -62,8 +61,8 @@ public class AdminMemberController {
 	}//member()
 	
 	/* 회원 클릭했을 때 나오는 회원정보 창 */
-	@RequestMapping(value="/memberInfo")
-	public ModelAndView memberInfo(@RequestParam("userid") String userid,@RequestParam("page") int page, MUserVO mu) {
+	@RequestMapping(value="/admin/memberInfo")
+	public ModelAndView memberInfo(@RequestParam("userid") String userid,@RequestParam("page") int page, MUserVO mu) throws Exception {
 		
 		mu=this.adminMemberService.memberInfo(userid);
 		ModelAndView m = new ModelAndView();
@@ -71,6 +70,15 @@ public class AdminMemberController {
 		m.addObject("page",page);
 		m.setViewName("admin/admin_member_info");
 		return m;
+	}
+	
+	/* 회원 정보 수정 */
+	@RequestMapping(value="/admin/member_edit_ok")
+	public String memberEdit(MUserVO mu, String userid, int page) throws Exception {
+		
+		this.adminMemberService.memberEdit(mu);
+		
+		return "redirect:/admin/memberInfo?userid="+userid+"&page="+page;
 	}
 }
  

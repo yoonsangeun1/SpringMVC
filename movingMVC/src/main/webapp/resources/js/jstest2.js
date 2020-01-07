@@ -22,7 +22,7 @@ var id = getParameterByName('id');
 */
 //댓글 추가
 $(function(){ 
-   getCommentList();
+  getCommentList();
    $('#write').on('click', function() {
    //var sessionId="<%=session.getAttribute('id')%>"
    //   var sessionTest=sessionId;
@@ -34,6 +34,11 @@ $(function(){
       $('#content').val('').focus();
       return false;
    }
+   if(sessionId=='') {
+	      alert('댓글 작성을 위하여 로그인해주세요!');
+	      location='/moving.com/member/login'
+	      return false;
+	   }
 
    $.ajax({//jQuery ajax
       type: 'post',//서버로 자료를 보내는 법
@@ -89,7 +94,7 @@ function comment_check() {
 function getCommentList() {
 	var sessionId=$('#sessionId').text();//로그인한 아이디
 	var project_post_id = $('#project_post_id').val();//게시글 번호
-	$.getJSON("/moving.com/comments/all/" + project_post_id, function(data) {
+	$.getJSON("/moving.com/comments/allProject/" + project_post_id, function(data) {
 		//get방식으로 json 데이터를 비동기식으로 가져와서 data에 저장
 		//alert(project_post_id);
 		var str = "";
@@ -193,6 +198,7 @@ $(function(){
 /* 댓글 삭제 */
 $(function(){
 	$('#replies').on('click','.replies .delete',function() {
+		if(confirm('삭제하시겠습니까?')) {
 		var reply=$(this).parent();
 		var rno=reply.attr('data-commentId');//댓글 번호
 
@@ -212,6 +218,9 @@ $(function(){
 				}
 			}
 		});
+		}else {
+			return false;
+		}
 	});
 })
    

@@ -7,11 +7,13 @@
 	</div>
 	
 	<%-- 회원정보 표 --%>
+	<form method="post" action="/moving.com/admin/member_edit_ok">
+	<input type="hidden" name="page" value="${page}" />
 	<table id="aMember_statusTable" border="1">
 		<tr>
-			<th rowspan="6">
+			<th rowspan="7">
 				<a href="#">
-					<img src="/moving.com/resources/images/member_profile.png" width="100" height="120"
+					<img src="/moving.com/resources/images/member_profile.png" width="110" height="120"
 					 alt="사진을 등록해 주세요.">
 				</a>
 			</th>
@@ -32,15 +34,40 @@
 		</tr>
 		<tr>
 			<th>
-				선호 장르 1 &nbsp;<input id="memberGenre01" name="genre01" value="${mu.genre01 }" />
+				선호 장르 1 &nbsp;
+				<c:choose>
+					<c:when test="${mu.genre01 == 'NULL'}">
+						<input id="memberGenre01" name="genre01" />
+					</c:when>
+					<c:otherwise>
+						<input id="memberGenre01" name="genre01" value=${mu.genre01 } />
+					</c:otherwise>
+				</c:choose>
+				
 			</th>
 			<th>
-				선호 장르 2 &nbsp;<input id="memberGenre02" name="genre02" value="${mu.genre02 }" />
+				선호 장르 2 &nbsp;
+				<c:choose>
+					<c:when test="${mu.genre02 == 'NULL'}">
+						<input id="memberGenre02" name="genre02" />
+					</c:when>
+					<c:otherwise>
+						<input id="memberGenre02" name="genre02" value=${mu.genre02 } />
+					</c:otherwise>
+				</c:choose>
 			</th>
 		</tr>
 		<tr>
 			<th>
-				선호 장르 3 &nbsp;<input id="memberGenre03" name="genre03" value="${mu.genre03 }" />
+				선호 장르 3 &nbsp;
+				<c:choose>
+					<c:when test="${mu.genre03 == 'NULL'}">
+						<input id="memberGenre03" name="genre03" />
+					</c:when>
+					<c:otherwise>
+						<input id="memberGenre03" name="genre03" value=${mu.genre03 } />
+					</c:otherwise>
+				</c:choose>
 			</th>
 			<th>
 				E-mail &nbsp;<input id="memberEMail" name="email" value="${mu.email }" />
@@ -79,6 +106,15 @@
 		</tr>
 		<tr>
 			<th>
+				탈퇴 사유 &nbsp;
+				<input name="delete" value="" /> 
+			</th>
+			<th>
+				신고 누적횟수 &nbsp;
+			</th>
+		</tr>
+		<tr>
+			<th>
 				<button type="button" class="btn" >사진 변경</button>
 			</th>
 			<th>
@@ -88,5 +124,12 @@
 				사업자 번호 &nbsp;<input id="memberBusinessRegisterNo" name="businessRegisterNo" value="${mu.businessRegisterNo }" />
 			</th>
 		</tr>
+		<tr>
+			<td colspan="3" align="center">
+				<button type="submit">수정</button>
+				<button type="reset">취소</button>
+			</td>
+		</tr>
 	</table>
+	</form>
 </div>

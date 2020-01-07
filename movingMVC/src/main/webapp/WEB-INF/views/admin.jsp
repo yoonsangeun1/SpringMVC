@@ -63,7 +63,19 @@
 <script src="${pageContext.request.contextPath}/resources/js/movie_upload.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/admin_notice.js"></script>
 <script src="${pageContext.request.contextPath}/resources/editor/js/HuskyEZCreator.js" charset="UTF-8"></script>
+<style>
 
+#sns_headerMenu #asss #MyMenu_subMenu li a{
+	color: black;
+}
+	#asss a {
+	color:black;
+}
+
+#asss #MyMenu_subMenu li a{
+	color:black;
+}
+</style>
 </head>
 <body>
 	<div id="SNS_All">
@@ -103,7 +115,7 @@
 					</div>
 											<c:if test="${empty userid}">
 							<div style="flex-grow: 0.6;">
-								<a href="member/login" color:white;>Login</a>
+								<a href="member/login">Login</a>
 							</div>
 						</c:if>
 						<c:if test="${!empty userid}">
@@ -112,7 +124,7 @@
 							<!-- 로그인 후 보여지는 알림아이콘  -->
 								<div class="header_notification_container">
 									<button  type="button" id="header_notification_btn">
-									<i class="far fa-bell" aria-hidden="true" style="font-size: 30px; color:white;"></i>
+									<i class="far fa-bell" aria-hidden="true" style="font-size: 30px; color:white; " ></i>
 									</button>
 								</div>
 						
@@ -138,7 +150,7 @@
 							<div class="header_profile_container">
 								<button type="button" id="header_profile_btn" onclick="getUserInfo();">
 									<c:if test="${profile_image_url == 'default'}">
-										<img class="Avatar_image" src="./images/member_profile.png"	style="width:30px; height:30px; color:white; border-radius: 50%;">
+										<img class="Avatar_image" src="${pageContext.request.contextPath}/resources/images/member_profile.png"	style="width:30px; height:30px; border-radius: 50%; color:white;">
 									</c:if>
 								
 									<c:if test="${profile_image_url != 'default'}">
@@ -176,11 +188,11 @@
 <!-- 								<button type="button" class="profile_modify_btn button_cb3a9eb border"> -->
 <!-- 									정보 수정 -->
 <!-- 								</button> -->
-								<div class="MyMenuUserInfo_userInfo" onclick="location='/moving.com/member_mypage';"> 
+								<div class="MyMenuUserInfo_userInfo" onclick="location.href='/moving.com/member_mypage?mid=${id}';"> 
 									<a class="MyMenuUserInfo_profileLink">
 										<span class="MyMenuUserInfo_name">${name}</span> &nbsp;&nbsp;
 										<c:if test="${profile_image_url == 'default'}">
-											<img class="MyMenuUserInfo_avatar" src="./images/member_profile.png"	style="width:60px; height:60px; border-radius: 50%;">
+											<img class="MyMenuUserInfo_avatar" src="${pageContext.request.contextPath}/resources/images/member_profile.png"	style="width:60px; height:60px; border-radius: 50%;">
 										</c:if>
 								
 										<c:if test="${profile_image_url != 'default'}">
@@ -253,12 +265,18 @@
 	
 				<!-- 관리자 정보, 사진, 이름 -->
 				<div id="admin_info">
-					<a href="#"> 
-					<img src="${pageContext.request.contextPath}/resources/images/member_profile.png" 
-					width="120" height="120" alt="등록된 사진이 없습니다." />
+					<a href="/moving.com/member_mypage?mid=${id }"> 
+					<c:if test="${profile_image_url == 'default'}">
+						<img class="MyMenuUserInfo_avatar"
+							src="${pageContext.request.contextPath}/resources/images/member_profile.png"
+							style="width: 120px; height: 120px; border-radius: 50%;">
+					</c:if> <c:if test="${profile_image_url != 'default'}">
+						<img class="MyMenuUserInfo_avatar" src="${profile_image_url}"
+							style="width: 120px; height: 120px; border-radius: 50%;">
+					</c:if> 
 					</a>
 					<ul>
-						<li>관리자 정보:</li>
+						<li>관리자 정보: ${nickname }</li>
 					</ul>
 				</div>
 				
@@ -284,7 +302,6 @@
 					</ul>
 				</div>
 			</div>
-		
 		
 
 

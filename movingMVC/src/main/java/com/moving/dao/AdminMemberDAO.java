@@ -12,4 +12,7 @@ public interface AdminMemberDAO {
 
 	MUserVO memberInfo(String userid);
 
+	void memberEdit(MUserVO mu);
+
+
 }

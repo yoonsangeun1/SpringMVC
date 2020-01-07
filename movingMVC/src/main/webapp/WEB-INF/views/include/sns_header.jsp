@@ -230,7 +230,7 @@
 <!-- 								<button type="button" class="profile_modify_btn button_cb3a9eb border"> -->
 <!-- 									정보 수정 -->
 <!-- 								</button> -->
-								<div class="MyMenuUserInfo_userInfo" onclick="location='/moving.com/member_mypage';"> 
+								<div class="MyMenuUserInfo_userInfo" onclick="location='/moving.com/member_mypage?mid=${id}';"> 
 									<a class="MyMenuUserInfo_profileLink">
 										<span class="MyMenuUserInfo_name">${name}</span> &nbsp;&nbsp;
 										<c:if test="${profile_image_url == 'default'}">

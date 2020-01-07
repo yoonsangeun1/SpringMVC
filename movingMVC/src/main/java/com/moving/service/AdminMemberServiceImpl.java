@@ -28,5 +28,10 @@ public class AdminMemberServiceImpl implements AdminMemberService{
 	public MUserVO memberInfo(String userid) {
 		return this.adminMemberDao.memberInfo(userid);
 	}
+
+	@Override
+	public void memberEdit(MUserVO mu) {
+		this.adminMemberDao.memberEdit(mu);
+	}
 	
 }

@@ -28,4 +28,9 @@ public class AdminVideoServiceImpl implements AdminVideoService {
 	public List<VideoPostVO> videoList(VideoPostVO vp) {
 		return this.adminVideoDao.videoList(vp);
 	}
+
+	@Override
+	public void insertTeaser(VideoPostVO vp) {
+		this.adminVideoDao.insertTeaser(vp);
+	}
 }

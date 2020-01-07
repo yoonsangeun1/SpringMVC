@@ -37,12 +37,14 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/funding_cont.css" /><%-- 펀딩 글 보기 --%>
 
 <%-- member css 추가 --%>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/member_login.css" /><%-- 로그인 폼 --%>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/member_join.css" /><%-- 회원가입 폼 --%>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/member_login.css" /><%-- 로그인 폼 --%>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/member_mypage.css" /><%-- 마이페이지 폼 --%>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/member_change.css" /><%-- 회원전환 폼 --%>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/member_infosetting.css" /><%-- 회원설정 폼 --%>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/member_find.css" /> <%-- 회원찾기 폼 --%>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/member_delete.css" /><%-- 회원탈퇴 폼 --%>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/member_point.css" /><%-- 포인트충전 폼 --%>
 
 
 <%-- movie css 추가 --%>
@@ -51,14 +53,13 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/video_categoryList.css" />
 
 <%-- sns css 추가 --%>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/social_main.css" />
+<%-- <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/social_main.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/social_profile.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/social_messenger.css" />
-
+ --%>
 <%-- javascript 추가 (우선, abc순)--%>
 <script src="${pageContext.request.contextPath}/resources/js/jquery.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/header_icon.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/jstest.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/member_join.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/member_login.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/member_change.js"></script>
@@ -68,8 +69,7 @@
 <script src="${pageContext.request.contextPath}/resources/js/funding_write.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/move_banner.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/movie_cont.js"></script>
-<%-- <script src="${pageContext.request.contextPath}/resources/js/social.js"></script> --%>
-<%-- <script src="${pageContext.request.contextPath}/resources/js/slide.js"></script> --%>
+<script src="${pageContext.request.contextPath}/resources/js/slide.js"></script>
 
 
 </head>
@@ -212,16 +212,16 @@
 							</div>
 							<ul class="MyMenu_subMenu">
 								<li>
-									<a href="#" class="MyMenu_subMenuBtn">
+									<a href="/moving.com/member_point" class="MyMenu_subMenuBtn">
 										나의 포인트 ${user_point} 점
 										<i class="fas fa-chevron-right" aria-hidden="true" style="float:right"></i>
 									</a>
 								</li>
-								<li>
-									<a href="#" class="MyMenu_subMenuBtn">
-										나의 지지서명<i class="fas fa-chevron-right" aria-hidden="true" style="float:right"></i>
-									</a>
-								</li>
+<!-- 								<li> -->
+<!-- 									<a href="#" class="MyMenu_subMenuBtn"> -->
+<!-- 										나의 지지서명<i class="fas fa-chevron-right" aria-hidden="true" style="float:right"></i> -->
+<!-- 									</a> -->
+<!-- 								</li> -->
 								<li>
 									<a href="/moving.com/member_change" class="MyMenu_subMenuBtn"> 
 											 회원 전환<i class="fas fa-chevron-right" aria-hidden="true" style="float: right"></i> 

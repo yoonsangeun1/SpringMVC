@@ -71,3 +71,7 @@ WHERE rNum >=11
 AND rNum <=20 AND code_no like '10001'
 	SELECT id FROM m_user where nickname like '%하%'
 	
+select * from normal_post where id=69;
+
+update normal_post set title='^^', content='아니', code_no='10005' where id=59;
+	

@@ -10,6 +10,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- 		<association property="" javaType="com.moving.domain." autoMapping="true"/> -->
 	</resultMap>
 	
+	<!-- 회원 수 -->
 	<select id="am_count" resultType="int">
 		SELECT COUNT(ID) FROM M_USER
 		<where>
@@ -29,6 +30,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</where>
 	</select>
 	
+	<!-- 회원 목록 -->
 	<select id="am_list" resultMap="memberInfo">
 		SELECT * FROM (SELECT ROWNUM rNum, id, nickname, 
 		userid, name, phone, user_status, publish_availability, user_point, user_lv
@@ -52,8 +54,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE rNum &gt;= #{startrow} and rNum &lt;= #{endrow}
 	</select>
 	
+	<!-- 회원 정보 페이지 구성요소 -->
 	<select id="am_info" resultMap="memberInfo">
 		SELECT profile_image_url, id, userid, name, nickname, genre_01, genre_02, genre_03, email, phone, publish_availability,
 		user_status, user_type, user_lv, business_name, business_register_no FROM M_USER WHERE userid = #{userid}
 	</select>
+	
+	<!-- 회원 정보 수정 -->
+	<update id="am_up">
+		UPDATE M_USER SET PUBLISH_AVAILABILITY = #{publishAvailability}, USER_STATUS = #{userStatus}, USER_LV = #{userLv} 
+		WHERE USERID = #{userid}
+	</update>
 </mapper>

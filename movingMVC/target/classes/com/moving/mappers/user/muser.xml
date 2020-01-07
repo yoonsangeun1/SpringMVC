@@ -98,6 +98,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select id, nickname from m_user where userid=#{attribute}
 	</select>
 	
+	<!-- 프로필사진 등록  -->
 	<update id="profileImageUpload" parameterType="mUserVO">
 		update m_user set profile_image_url = #{profileImageUrl} where userid=#{userid}
 	</update>
@@ -106,6 +107,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectUserInfo" resultType="mUserVO">
 		select * from m_user where id=#{mid}
 	</select>
+	
+	<!-- id를 기준으로 게시글갯수 -->
+	<select id = "selectBoardCount" resultType="int">
+	select sum(cnt) sum_count from
+	(
+	select count(id) cnt from normal_post where user_id = #{mid}
+	UNION ALL
+	select count(id) cnt from profile_post where user_id = #{mid}
+	UNION ALL
+	select count(id) cnt from reply_post where user_id = #{mid}
+	UNION ALL
+	select count(id) cnt from project_post where user_id = #{mid}
+	)
+	</select>
+	
+	<update id="socialProfileUpload">
+		update social_profile set profile_image_path = #{profileImageUrl} where user_id = #{id}
+	</update>
+	
 </mapper>
 
 

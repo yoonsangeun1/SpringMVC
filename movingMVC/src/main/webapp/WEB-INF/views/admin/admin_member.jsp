@@ -188,18 +188,29 @@
 	
 	
 </div>
-			<script>
-				var x=750;
-				var y=650;
-				var popupX = (screen.availWidth - x) / 2;
-				if(window.screenLeft < 0){
-					popupX += window.screen.width*-1;
-				}else if(window.screenLeft > window.screen.width ){
-					popupX += window.screen.width;
-				}
-				var popupY = (screen.availHeight / 2);
-				function popup(userid){
-					window.open('memberInfo?userid='+userid+'&page=${page}','회원정보','width='+x+',height='+y+',left='+popupX+',top='+popupY+',location=no,status=no,scrollbars=yes,resizable=no');
-				}
-			</script>
+<script>
+	var x=750;
+	var y=650;
+	var popupX = (screen.availWidth - x) / 2;
+	if(window.screenLeft < 0){
+		popupX += window.screen.width*-1;
+	}else if(window.screenLeft > window.screen.width ){
+		popupX += window.screen.width;
+	}
+	var popupY = (screen.availHeight / 2);
+	function popup(userid){
+		window.open('memberInfo?userid='+userid+'&page=${page}','회원정보','width='+x+',height='+y+',left='+popupX+',top='+popupY+',location=no,status=no,scrollbars=yes,resizable=no');
+	}
+	
+	var msg = "${msg}";//자바스크립트에서 스프링컨트롤러에서 설정한 키이름을 EL(표현언어)로 참조 가능하다.
+	if (msg == 'SUCCESS') {
+		alert("게시물 저장에 성공했습니다!");
+	}
+	if (msg == "EDIT") {
+		alert("게시물 수정에 성공했습니다!");
+	}
+	if (msg == 'DEL') {
+		alert('게시물 삭제에 성공했습니다!');
+	}
+</script>
 <%@ include file="../include/admin_footer.jsp" %>

@@ -40,6 +40,11 @@
 	text-align: center;
 }
 
+#aBoard_table .non:hover {
+	cursor: default;
+	background-color: white;
+}
+
 #aBoard_table td { /* 게시판 글 목록표 td */
 	border-bottom-width: 1px;
 	border-bottom-style: solid;
@@ -102,6 +107,22 @@
 #aBoard_table .aBT_hit {
 	width: 100px;
 	border-top-right-radius: 5px;
+}
+
+#aBoard_wrap .editBtn { /* 글쓰기, 삭제 버튼 */
+	float: right;
+}
+
+#aBoard_wrap .but {
+	display: inline-block;
+    min-width: 56px;
+    height: 36px;
+    padding: 9px 12px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border: 1px solid #d3d3d3;
+    text-align: center;
+    vertical-align: top;
 }
 
 #aBoard_pageCtrl { /* 페이지 목록 */

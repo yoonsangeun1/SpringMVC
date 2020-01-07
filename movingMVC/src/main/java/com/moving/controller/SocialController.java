@@ -299,11 +299,14 @@ public class SocialController {
 			int using_id=(int)session.getAttribute("id");//현재 로그인중인 m_user id값
 			String introduce=request.getParameter("introduce"); //자기소개
 			String nickname=request.getParameter("nickname");  //닉네임
-
+			String profileImage= (String)session.getAttribute("profile_image_url");
+			
+			System.out.println(profileImage);
 			s_pro.setUserId(using_id);
 			s_pro.setNickname(nickname);
 			s_pro.setIntroduce(introduce);
-
+			s_pro.setProfileImagePath(profileImage);
+			
 			this.socialService.insertSocialProfile(s_pro);
 			session.setAttribute("sessionSocial", s_pro);
 			

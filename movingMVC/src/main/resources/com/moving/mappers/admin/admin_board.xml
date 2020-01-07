@@ -6,14 +6,34 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="AdminBoard">
 
+	<!-- 노멀 포스트 정보만 검색해도, 알아서 저자 정보 값이 검색되어 저장됨 -->
 	<resultMap type="normalPostVO" id="postInfo" autoMapping="true">
 		<association property="mUserVO" javaType="com.moving.domain.MUserVO" autoMapping="true"
 		column="user_id" select="selectBoardAuthor"/>
+	</resultMap>
+	
+	<resultMap type="normalPostVO" id="postInfo1" autoMapping="true">
 		<association property="replyPostVO" javaType="com.moving.domain.ReplyPostVO" autoMapping="true"/>
 		<association property="profilePostVO" javaType="com.moving.domain.ProfilePostVO" autoMapping="true"/>
 	</resultMap>
 	
-	<!-- 작성자 불러오기 -->
+	<!-- VO가 서로 연결만 되어있고, 값은 들어가있지 않은 상태. join 검색 필요 -->
+	<resultMap type="normalPostVO" id="postInfoJoin" autoMapping="true">
+		<id property="id" column="normal_post_id"/>
+		<association property="mUserVO" javaType="com.moving.domain.MUserVO" autoMapping="true" >
+			<id property="id" column="m_user_id"/>
+		</association>
+	</resultMap>
+	
+	
+	
+	
+<!-- 	<select id="sample" resultMap="postInfo"> -->
+<!-- 		SELECT * FROM normal_post -->
+<!-- 		WHERE id = #{id} -->
+<!-- 	</select> -->
+	
+	<!-- 작성자 아이디 불러오기 -->
 	<select id="selectBoardAuthor" resultType="mUserVO">
 		SELECT * FROM M_USER
 		WHERE ID = #{user_id}
@@ -82,10 +102,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	SELECT * FROM
 		(
 		SELECT ROW_NUMBER() OVER(ORDER BY id DESC) rNum,
-		code_no, id, title, user_id, register_date
+		code_no, id, title, user_id, register_date, hit
 		FROM 	
 			(
-			select code_no, id, title, user_id, register_date, move_count from normal_post
+			select code_no, id, title, user_id, register_date, hit from normal_post
 				<where>		
 				<if test="findField == ''"></if> 
 				<if test="findField == 'title+content'">
@@ -110,7 +130,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</if>
 		</where> 
 			UNION ALL
-			select code_no, id, title, user_id, register_date, move_count from profile_post
+			select code_no, id, title, user_id, register_date, hit from profile_post
 				<where>		
 				<if test="findField == ''"></if> 
 				<if test="findField == 'title+content'">
@@ -150,28 +170,34 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- FAQ 작성 -->
 	<insert id="faq_in">
 		INSERT INTO NORMAL_POST(id, code_no, user_id, question_content, answer_content)
-		VAlUES(NORMAL_POST_SEQ.NEXTVAL, 10003, )
+		VAlUES(NORMAL_POST_SEQ.NEXTVAL, 10003, #{questionContent}, #{answerContent})
 	</insert>
 
 	<!-- 공지 작성 -->
 	<insert id="notice_in">
 		INSERT INTO NORMAL_POST (ID, CODE_NO, USER_ID, TITLE, CONTENT)
-		VALUES(NORMAL_POST_SEQ.NEXTVAL, 10001, #{userId}, #{title},
+		VALUES(NORMAL_POST_SEQ.NEXTVAL, #{codeNo}, #{userId}, #{title},
 		#{content})
 	</insert>
 	
 	<!-- 공지 내용보기 -->
-	<select id="notice_cont" resultMap="postInfo">
-		
+	<select id="notice_cont" resultMap="postInfoJoin">
+		SELECT 
+		N.id AS normal_post_id, N.user_id, N.title, N.hit, N.content,
+		U.id AS m_user_id, U.nickname
+		FROM normal_post N, m_user U
+		WHERE N.user_id = U.id AND N.id = #{nickname}
 	</select>
 	
 	<!-- 공지 수정 -->
 	<update id="notice_up">
-	
+		UPDATE NORMAL_POST SET TITLE = #{title}, CODE_NO = #{codeNo}, CONTENT = #{content}
+		WHERE ID = #{id}
 	</update>
 	
 	<!-- 공지 삭제 -->
 	<delete id="notice_del">
-	
+		DELETE FROM NORMAL_POST
+		WHERE ID = #{id}
 	</delete>
 </mapper>

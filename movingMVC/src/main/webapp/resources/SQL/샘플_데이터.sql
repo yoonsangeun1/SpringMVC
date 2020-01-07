@@ -1,3 +1,8 @@
+INSERT INTO m_user (id, userid, nickname, email, password, profile_image_url)
+VALUES (1, 'admin@moving.com', '관리자', 'admin@moving.com', '912ec803b2ce49e4a541068d495ab570', 'default');
+update m_user set profile_image_url='default'
+
+alter table video_post modify (video_file_path varchar2(4000))
 /* 코드_유형_마스터 */
 INSERT INTO code_type_master VALUES (code_type_master_seq.nextval, 100, '게시글', 'post', sysdate);
 INSERT INTO code_type_master VALUES (code_type_master_seq.nextval, 200, '프로젝트', 'project', sysdate);
@@ -64,10 +69,10 @@ INSERT INTO code_master VALUES (code_master_seq.nextval, 300, 3000206,'티저장
 INSERT INTO code_master VALUES (code_master_seq.nextval, 300, 3000207,'티저장르', '티저_코메디','video_post',sysdate);
 INSERT INTO code_master VALUES (code_master_seq.nextval, 300, 3000208,'티저장르', '티저_애니메이션','video_post',sysdate);
 INSERT INTO code_master VALUES (code_master_seq.nextval, 300, 3000209,'티저장르', '티저_기타','video_post',sysdate);
-select * from SOCIAL_PROFILE order by id desc
+
 -- 1. 범죄/스릴러 2. 액션/어드벤쳐 3. 다큐/드라마/청춘 4. 역사/시대극 5. 판타지/SF 6. 멜로/로맨스 7. 코메디 8.애니메이션 9. 기타
-delete from SOCIAL_PROFILE 
-select * from M_USER where name='bb'--부가기능 전체
+
+--부가기능 전체
 INSERT INTO code_master VALUES (code_master_seq.nextval, 800, 800,'부가기능', '부가기능',null,sysdate);
 --댓글, 첨부파일, 무브(좋아요), 메세지, 신고, 추천리스트
 INSERT INTO code_master VALUES (code_master_seq.nextval, 800, 80001,'부가기능', '댓글','m_comment',sysdate);
@@ -97,16 +102,15 @@ INSERT INTO code_master VALUES (code_master_seq.nextval, 500, 50005,'소셜 프�
 
 --DELETE FROM code_master;
 SELECT * FROM code_master;
-select * from SocialMessage WHERE social_id_to=31, social_id_from=31
+
 /* 회원 */
 --관리자
-select * from social_profile
 INSERT INTO m_user (id, userid, nickname, email, password, genre_01, genre_02, genre_03)
 VALUES (m_user_seq.nextval, 'admin@gmail.com', '관리자', 'admin@gmail.com', 'admin', null, null, null);
 --관리자 회원 회원등급 부여
 UPDATE m_user 
 SET user_lv = 4
-WHERE id=2;
+WHERE id=1;
 --일반회원
 INSERT INTO m_user (id, userid, nickname, email, password, genre_01, genre_02, genre_03)
 VALUES (m_user_seq.nextval, 'moving@gmail.com', '무빙', 'moving@gmail.com', 'moving', null, null, null);
@@ -124,17 +128,16 @@ select * from M_USER;
 
 /* 소셜_프로필 */
 INSERT INTO social_profile (id, code_no, user_id, nickname, profile_image_path, follower_count, follow_count,post_count)
-VALUES						(social_profile_seq.nextval, 50005, 1, '박진우', '/경로', 0,0,0);
+VALUES                  (social_profile_seq.nextval, 50005, 1, '박진우', '/경로', 0,0,0);
 INSERT INTO social_profile (id, code_no, user_id, nickname, profile_image_path, follower_count, follow_count,post_count)
-VALUES						(social_profile_seq.nextval, 50005, 3, '윤상은', '/경로', 0,0,0);
+VALUES                  (social_profile_seq.nextval, 50005, 3, '윤상은', '/경로', 0,0,0);
 select * from social_profile;
-select * from social_post;
-select * from social_message where social_id_from=30 or social_id_to=30
+
 /* 소셜  메세지*/
 INSERT INTO social_message (id,code_no,social_id_from,social_id_to,content,register_date)
-VALUES					   (social_message_seq.nextval,80004,2,3,'박진우ㅎㅇ',sysdate);
-INSERT INTO social_message VALUES(social_message_seq.nextval,80004,31,30,'ㅂㅎㅇ2',sysdate);
-INSERT INTO social_message VALUES(social_message_seq.nextval,80004,30,31,'윤산은',sysdate);
+VALUES                  (social_message_seq.nextval,80004,2,3,'박진우ㅎㅇ',sysdate);
+INSERT INTO social_message VALUES(social_message_seq.nextval,80004,2,3,'ㅂㅎㅇ2',sysdate);
+INSERT INTO social_message VALUES(social_message_seq.nextval,80004,3,2,'윤산은',sysdate);
 INSERT INTO social_message VALUES(social_message_seq.nextval,80004,3,2,'윤산은2',sysdate);
 INSERT INTO social_message VALUES(social_message_seq.nextval,80004,2,3,'ㅂㅎㅇ3',sysdate);
 select * from social_message ORDER BY register_date desc;
@@ -142,10 +145,10 @@ select * from social_message ORDER BY register_date desc;
 /* 소셜_게시글 */
 --일반 게시글
 INSERT INTO social_post(id,code_no,social_id,content,register_date,comment_count,move_count)
-VALUES			(social_post_seq.nextval,10007,2,'내용이다',sysdate,0,0);
+VALUES         (social_post_seq.nextval,10007,2,'내용이다',sysdate,0,0);
 --프로젝트 홍보 게시글
 INSERT INTO social_post(id,code_no,social_id,content,project_id,register_date,comment_count,move_count)
-VALUES			(social_post_seq.nextval,10007,2,'프로젝트 홍보하려고',1,sysdate,0,0);
+VALUES         (social_post_seq.nextval,10007,2,'프로젝트 홍보하려고',1,sysdate,0,0);
 
 select * from social_post ORDER BY register_date desc;
 
@@ -157,64 +160,64 @@ VALUES (project_post_seq.nextval, 3, '제목이다.', '내용', '슈박스', 100
 select * from PROJECT_POST;
 
 /* 일반_게시글 */
-INSERT INTO normal_post (id,						code_no,user_id,title,content,hit,comment_count,move_count,register_date)
-VALUES					(normal_post_seq.nextval,10002,3,'제목이다.','내용',0,0,0,sysdate);
+INSERT INTO normal_post (id,                  code_no,user_id,title,content,hit,comment_count,move_count,register_date)
+VALUES               (normal_post_seq.nextval,10002,3,'제목이다.','내용',0,0,0,sysdate);
 select * from normal_post;
 
 /* 프로필_게시글 */
-INSERT INTO profile_post(id,						code_no,user_id,title,content,hit,register_date, name, sex, birth_date, age, email, height, weight, job, school, specification, website_url)
-VALUES					(profile_post_seq.nextval,10005,3,'프로필','프로필',0,sysdate,'박진우','m','1996-02-13', 24, 'rmatjd2003@naver.com', 172, 72, '취업준비생', '울산대학교 수석 입학', '운전면허증 장롱면허 2년차', 'naver.com');
+INSERT INTO profile_post(id,                  code_no,user_id,title,content,hit,register_date, name, sex, birth_date, age, email, height, weight, job, school, specification, website_url)
+VALUES               (profile_post_seq.nextval,10005,3,'프로필','프로필',0,sysdate,'박진우','m','1996-02-13', 24, 'rmatjd2003@naver.com', 172, 72, '취업준비생', '울산대학교 수석 입학', '운전면허증 장롱면허 2년차', 'naver.com');
 select * from profile_post;
 
 /* 계층형_게시글 */
 --question
-INSERT INTO reply_post(id,						code_no,user_id,title,content,hit,register_date,move_count,reply_post_id,reply_step,reply_order)
-VALUES					(reply_post_seq.nextval,10006,3,'질문있다','내용',0,sysdate,0,reply_post_seq.nextval,0,0);
+INSERT INTO reply_post(id,                  code_no,user_id,title,content,hit,register_date,move_count,reply_id,step,reply_order)
+VALUES               (reply_post_seq.nextval,10006,3,'질문있다','내용',0,sysdate,0,reply_post_seq.nextval,0,0);
 --answer
-INSERT INTO reply_post(id,						code_no,user_id,title,content,hit,register_date,move_count,reply_post_id,step,reply_order)
-VALUES					(reply_post_seq.nextval,10006,3,'답한다','내용',0,sysdate,0,1,1,1);
+INSERT INTO reply_post(id,                  code_no,user_id,title,content,hit,register_date,move_count,reply_id,step,reply_order)
+VALUES               (reply_post_seq.nextval,10006,3,'답한다','내용',0,sysdate,0,1,1,1);
 
 select * from reply_post;
 
 /* 영상_게시글 */
 --영화 - 전체
-INSERT INTO video_post(id,						code_no,user_id,title_english,title_korean,director,actor,release_date,content,grade,era_background,video_file_path,video_length,rate,hit,register_date,comment_count,move_count)
-VALUES					(video_post_seq.nextval,30001,1,'English Title','한글제목','박진우감독','박진우배우',sysdate,'줄거리',5.0,'현재','/경로',120,'pg',0,sysdate,0,0);
+INSERT INTO video_post(id,                  code_no,user_id,title_english,title_korean,director,actor,release_date,content,grade,era_background,video_file_path,video_length,rate,hit,register_date,comment_count,move_count)
+VALUES               (video_post_seq.nextval,30001,1,'English Title','한글제목','박진우감독','박진우배우',sysdate,'줄거리',5.0,'현재','/경로',120,'pg',0,sysdate,0,0);
 --영화 - 범죄/스릴러인 경우
-INSERT INTO video_post(id,						code_no,user_id,title_english,title_korean,director,actor,release_date,content,grade,era_background,video_file_path,video_length,rate,hit,register_date,comment_count,move_count)
-VALUES					(video_post_seq.nextval,3000101,1,'English Title','한글제목','박진우감독','박진우배우',sysdate,'줄거리',5.0,'현재','/경로',120,'pg',0,sysdate,0,0);
+INSERT INTO video_post(id,                  code_no,user_id,title_english,title_korean,director,actor,release_date,content,grade,era_background,video_file_path,video_length,rate,hit,register_date,comment_count,move_count)
+VALUES               (video_post_seq.nextval,3000101,1,'English Title','한글제목','박진우감독','박진우배우',sysdate,'줄거리',5.0,'현재','/경로',120,'pg',0,sysdate,0,0);
 --티저
-INSERT INTO video_post(id,						code_no,user_id,title_korean,content,video_file_path,rate,register_date,hit,comment_count,move_count)
-VALUES					(video_post_seq.nextval,30002,1,'한글제목','줄거리','/경로','pg',sysdate,0,0,0);
+INSERT INTO video_post(id,                  code_no,user_id,title_korean,content,video_file_path,rate,register_date,hit,comment_count,move_count)
+VALUES               (video_post_seq.nextval,30002,1,'한글제목','줄거리','/경로','pg',sysdate,0,0,0);
 
 select * from video_post;
 
 /* 무브 */
 -- 사람이 사람에게
 INSERT INTO move(id,code_no,user_id_from,user_id_to,register_date)
-VALUES			(move_seq.nextval,80003,1,2,sysdate);
+VALUES         (move_seq.nextval,80003,1,2,sysdate);
 -- 사람이 프로젝트에
 INSERT INTO move(id,code_no,user_id_from,project_id,register_date)
-VALUES			(move_seq.nextval,80003,1,1,sysdate);
+VALUES         (move_seq.nextval,80003,1,1,sysdate);
 -- 사람이 영화에게
 INSERT INTO move(id,code_no,user_id_from,movie_id,register_date)
-VALUES			(move_seq.nextval,80003,1,1,sysdate);
+VALUES         (move_seq.nextval,80003,1,1,sysdate);
 -- SNS프로필이 SNS 게시글에게
 INSERT INTO move(id,code_no,social_profile_id,social_post_id,register_date)
-VALUES			(move_seq.nextval,80003,2,1,sysdate);
+VALUES         (move_seq.nextval,80003,2,1,sysdate);
 
 
 /* 댓글 */
 -- 사람이 프로젝트에(추가필요)
 -- 사람이 일반게시글에 
 INSERT INTO m_comment(id,code_no,user_id,normal_post_id,content,move_count,register_date,comment_id_reply,step,reply_order)
-VALUES			(move_seq.nextval,80001,1,1,'뎃글ㄹ네용',0,sysdate,move_seq.nextval,0,0);
+VALUES         (move_seq.nextval,80001,1,1,'뎃글ㄹ네용',0,sysdate,move_seq.nextval,0,0);
 -- 사람이 영화에게
 INSERT INTO m_comment(id,code_no,user_id,movie_id,content,grade,move_count,register_date,comment_id_reply,step,reply_order)
-VALUES			(move_seq.nextval,80001,1,1,'뎃글ㄹ네용',5,0,sysdate,move_seq.nextval,0,0);
+VALUES         (move_seq.nextval,80001,1,1,'뎃글ㄹ네용',5,0,sysdate,move_seq.nextval,0,0);
 -- SNS프로필이 SNS 게시글에게+댓글에 답글
 INSERT INTO m_comment(id,code_no,social_profile_id,social_post_id,content,move_count,register_date,comment_id_reply,step,reply_order)
-VALUES			(move_seq.nextval,80001,2,2,'뎃글ㄹ네용',0,sysdate,6,0,0);
+VALUES         (move_seq.nextval,80001,2,2,'뎃글ㄹ네용',0,sysdate,6,0,0);
 -- 댓글에 답글
 select * from m_comment;
 
@@ -335,18 +338,7 @@ AND U.nickname LIKE '관리자';
 
 select * from code_master;
 --delete from code_master;
-select * from social_message 
-select * from social_profile
-
-insert into social_message (id, social_id_from, social_id_to, content)
-values (social_message_seq.nextval, 31, 37, '31이 37에게')
-
-select id from
-(
-select social_id_from id from social_message where social_id_to =37
-union
-select social_id_to id from social_message where social_id_from =37
-) order by register_date desc
+select * from CODE_MASTER where category_name is null;
 
  SELECT * FROM
  (SELECT 
@@ -361,7 +353,7 @@ select social_id_to id from social_message where social_id_from =37
  AND rNum <=10
  
  INSERT INTO social_profile (id, code_no, user_id, nickname, profile_image_path, follower_count, follow_count,post_count)
-VALUES						(social_profile_seq.nextval, 50005, 1, '박진우', '/경로', 0,0,0);
+VALUES                  (social_profile_seq.nextval, 50005, 1, '박진우', '/경로', 0,0,0);
 
   SELECT * FROM
  (SELECT ROW_NUMBER() OVER(ORDER BY N.ID DESC) rNum,
@@ -437,17 +429,15 @@ ALTER TABLE NORMAL_POST DROP COLUMN content3;
   WHERE N.USER_ID = M.ID
   AND N.ID=67
 
-  SELECT * FROM social_profile;
-  delete from social_profile;
-  delete from m_user
+  SELECT * FROM M_USER;
+  
    SELECT N.ID AS board_notice_id, N.USER_ID AS board_notice_user_id,
  N.TITLE, N.HIT, N.CONTENT, M.NICKNAME
  FROM NORMAL_POST N, M_USER M
  WHERE N.USER_ID = M.ID
  AND N.ID=13
 
-  SELECT * FROM social_POST;
-  SELECT * FROM social_profile;
+  SELECT * FROM NORMAL_POST;
   
    SELECT * FROM
  (SELECT ROW_NUMBER() OVER(ORDER BY N.ID DESC) rNum,
@@ -621,10 +611,7 @@ tcALTER TABLE profile_post
       REFERENCES code_master (
          code_no
       );
-
-      SELECT id AS social_post_social_id, user_type, nickname, profile_image_path,user_id
-		FROM social_profile
-		WHERE id = 30
+      
  SELECT * FROM
  (SELECT ROW_NUMBER() OVER(ORDER BY P.ID DESC) rNum,
  P.thumbnail_Image, P.ID AS board_actors_id,

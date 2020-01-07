@@ -42,7 +42,6 @@ public class MyPageController {
 			out.println("</script>");
 		}else {
 			MUserVO db_img = this.mUserService.emailCheck(userid);
-//			String img = db_img.getProfileImageUrl();
 			ModelAndView m = new ModelAndView("include/header");
 			m.addObject("db_img",db_img.getProfileImageUrl());
 			return m;
@@ -71,6 +70,8 @@ public class MyPageController {
 			ModelAndView m = new ModelAndView("member/member_mypage");
 //			m.addObject("db_img",img);
 			MUserVO userInfo = this.mUserService.selectUserInfo(mid);
+			int boardCount = this.mUserService.selectBoardCount(mid);
+			m.addObject("boardCount",boardCount);
 			m.addObject("mid",mid);
 			m.addObject("userInfo",userInfo);
 			return m;
@@ -394,6 +395,7 @@ public class MyPageController {
 			
 			ModelAndView em = new ModelAndView("member/member_profileSetting");
 			em.addObject("userid",userid);
+			em.addObject("profile_image_url",db_genre.getProfileImageUrl());
 			em.addObject("genre01",db_genre.getGenre01());
 			em.addObject("genre02",db_genre.getGenre02());
 			em.addObject("genre03",db_genre.getGenre03());
@@ -402,8 +404,8 @@ public class MyPageController {
 		return null;
 	}
 	
-	/** 프로필 설정 완료 */
-	@RequestMapping("member_profileSetting_ok")
+	/** 프로필 사진 등록 완료*/
+	@RequestMapping("member_profileSetting_ok") 
 	public String member_profileSetting_ok(MUserVO m,HttpSession session,
 			HttpServletResponse response, HttpServletRequest request)throws Exception {
 		
@@ -462,13 +464,14 @@ public class MyPageController {
 			}else {
 				m.setProfileImageUrl("default");
 			}
-			
 			m.setUserid(userid);
+			m.setId((int)session.getAttribute("id"));
 			this.mUserService.memberProfileUpload(m);
 		}
+			
 		out.println("<script>");
 		out.println("alert('프로필 사진이 등록되었습니다 !');");
-		out.println("location='member_mypage?mid="+session.getAttribute("id")+"';");
+        out.println("location='member_mypage?mid="+session.getAttribute("id")+"';");
 		out.println("</script>");
 		
 		return null;
@@ -541,6 +544,28 @@ public class MyPageController {
 		}
 		return null;
 	}//member_delete_ok()
+	
+	
+	@RequestMapping(value="member_point")
+	public ModelAndView member_point(HttpServletResponse response, HttpSession session) throws Exception {
+		
+		response.setContentType("text/html;charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		String userid=(String)session.getAttribute("userid");
+		if(userid==null) {
+			out.println("<script>");
+			out.println("alert('로그인이 필요한 페이지입니다 !');");
+			out.println("location='member/login';");
+			out.println("</script>");
+		}else {
+			MUserVO db_point = this.mUserService.emailCheck(userid);
+			ModelAndView m = new ModelAndView("member/member_point");
+			m.addObject("db_point",db_point.getUserPoint());
+			m.addObject("db_emailId",db_point.getUserid());
+			return m;
+		}
+		return null;
+	}
 	
 	/**포인트 충전*/
 	

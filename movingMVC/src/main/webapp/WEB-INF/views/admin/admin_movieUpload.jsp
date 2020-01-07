@@ -16,7 +16,7 @@
 	<%-- 업로드 화면 구성 --%>
 	<div id="aMovie_upload" class="tab-content on">
 
-		<form method="post" action="/moving.com/admin/movie_upload_ok" onsubmit="return movie_check();">
+		<form method="post" action="/moving.com/admin/movie/movie_upload_ok" onsubmit="return movie_check();">
 		
 			<%-- 업로드 창 중앙 div --%>
 			<div id="aMUploadCenter">
@@ -86,22 +86,21 @@
 						<td>
 							<%-- 줄거리 입력 --%>
 							<div id="aMUploadC_cont">
-								<textarea name="content" id="aMUploadC_co.ntText" class="txtbox content"
+								<textarea name="content" id="aMUploadC_contText" class="txtbox content"
 									placeholder="내용을 입력하세요." rows="22" cols="85"></textarea>
 									<script type="text/javascript">
 										var oEditors = []; //전역변수
 
-										nhn.husky.EZCreator
-												.createInIFrame({ //스마트 에디터 프레임 생성
-													oAppRef : oEditors,
-													elPlaceHolder : "aMUploadC_contText",
-													sSkinURI : "../resources/editor/SmartEditor2Skin.html",
-													bUseToolbar : true, //툴 바 사용 여부
-													bUseVerticalResizer : true, //입력창 크기 조절 사용 여부
-													ㅠUseVerticalResizer : true, //모드 탭(Editor | HTML | TEXT ) 사용 여부
-												});
+										nhn.husky.EZCreator.createInIFrame({ //스마트 에디터 프레임 생성
+											oAppRef : oEditors,
+											elPlaceHolder : "aMUploadC_contText",
+											sSkinURI : "${pageContext.request.contextPath}/resources/editor/SmartEditor2Skin.html",
+											bUseToolbar : true, //툴 바 사용 여부
+											bUseVerticalResizer : true, //입력창 크기 조절 사용 여부
+											bUseVerticalResizer : true, //모드 탭(Editor | HTML | TEXT ) 사용 여부
+										});
 									</script>
-								</div>
+							</div>
 						</td>
 					</tr>
 					<tr>
@@ -184,7 +183,7 @@
 	<%-- 티저 업로드 화면 구성 --%>
 	<div id="aMovie_upload2" class="tab-content">
 
-		<form method="post" action="/moving.com/admin/teaser_upload_ok" onsubmit="return teaser_check();">
+		<form method="post" action="/moving.com/admin/movie/teaser_upload_ok" onsubmit="return teaser_check();">
 		
 			<%-- 업로드 창 중앙 div --%>
 			<div id="aMUploadCenter">
@@ -192,10 +191,16 @@
 
 					<%-- 카테고리 콤보박스 --%>
 					<tr>
+						<th>감독</th>
+						<td>
+							<input name="director" id="aMUploadC_directorT"/>
+						</td>
+					</tr>
+					<tr>
 						<th>장르</th>
 						<td>
 							<div id="aMUploadC_combo">
-								<select id="aMUploadC_genreT" name="aMUploadC_genreT" class="combo">
+								<select id="aMUploadC_genreT" name="codeNo" class="combo">
 									<option value="30002">선택하세요.</option>
 									<option value="3000201">범죄/스릴러</option>
 									<option value="3000202">액션/어드벤쳐</option>
@@ -206,6 +211,14 @@
 									<option value="3000207">코미디</option>
 									<option value="3000208">애니메이션</option>
 									<option value="3000209">기타</option>
+								</select>
+								&nbsp;&nbsp;&nbsp;상영등급&nbsp;
+								<select id="aMUploadC_ratingT" name="rate" class="combo">
+									<option value="null">선택하세요.</option>
+									<option value="g">전체 관람가</option>
+									<option value="pg-13">12세 이상 관람가</option>
+									<option value="r">15세 이상 관람가</option>
+									<option value="nc-17">청소년 관람불가</option>
 								</select>
 							</div>
 						</td>
@@ -218,8 +231,12 @@
 							<%-- 제목 입력 --%>
 							<div id="aMUploadC_title">
 
-								<input type="text" name="aMUpload_titleTextT" class="title"
+								<input type="text" name="titleKorean" class="korean title"
 									id="aMUploadC_titleTextT" placeholder="한글 제목을 입력하세요."/>
+								<input type="text" name="titleEnglish" class="english title"
+									id="aMUploadC_titleTextT2" placeholder="영문 제목을 입력하세요."/>
+								<input type="date" name="releaseDate" class="year"
+									id="aMUploadC_titleTextT3" placeholder="연도"/>
 							</div>
 						</td>
 					</tr>
@@ -228,8 +245,8 @@
 						<td>
 							<%-- 줄거리 입력 --%>
 							<div id="aMUploadC_cont">
-								<textarea name="aMUploadC_contTextT" id="aMUploadC_contTextT" class="txtbox content"
-									placeholder="내용을 입력하세요." rows="20"></textarea>
+								<textarea name="content" id="aMUploadC_contTextT" class="txtbox content"
+									placeholder="내용을 입력하세요." rows="22" cols="85"></textarea>
 							</div>
 						</td>
 					</tr>
@@ -249,17 +266,6 @@
 							<div id="aMUploadC_image">
 							
 							</div>
-						</td>
-					</tr>
-					<tr>
-						<th>태그</th>
-						<td>
-						
-							<%-- 태그 --%>
-							<div id="aMUploadC_tag">
-								<input name="aMUC_tag" id="aMUC_tag" class="txtbox tag"/>
-							</div>
-							
 						</td>
 					</tr>
 					<tr>

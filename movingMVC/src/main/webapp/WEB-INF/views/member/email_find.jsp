@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <title>이메일 아이디 찾기</title>
-<link rel="stylesheet" type="text/css" href="/resources/css/member_find.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/member_find.css" />
 <script src="../resources/js/jquery.js"></script>
 <script>
 function emailfind_check() {
@@ -28,10 +28,10 @@ function emailfind_check() {
 				가입여부를 확인해드립니다.
 			</div>
 			<div id="emailFind_input">
-				<input type="email" id="find_email" name="find_email" placeholder="이메일 계정입력">
+				<input type="email" id="find_email" name="find_email" class="find_input" placeholder="이메일 아이디입력">
 			</div>
 			<div id="emailFind_button">
-				<input type="submit" class="find_button" value="찾기"/>
+				<input type="submit" class="find_button button_cb3a9eb button_f12 button_r4 vertical group border" value="찾기"/>
 			</div>
 		</form>
 	</div>

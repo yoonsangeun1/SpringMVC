@@ -57,7 +57,14 @@
  		 <c:if test="${!empty bqlist}"> <%--bqlist에 값이 있으면 --%>
  		  <c:forEach var="bqlist" items="${bqlist}">
  		   <tr style="height:44px">
+ 		   <c:if test="${bqlist.replyOrder <= 1}"> <%--원본글일때 --%>
  		    <td id="no">${bqlist.id}</td>
+ 		   </c:if>
+ 		   
+ 		   <c:if test="${bqlist.replyOrder > 1}"> <%-- 답변글일때 --%>
+ 		   <td></td>
+ 		   </c:if>
+ 		   
  		   <c:set var="bqlist.title" value="${bqlist.title}" /> <%--변수에 제목값 저장 --%>
  		   <c:set var="bqlist.mUserVO.nickname" value="${bqlist.mUserVO.nickname}" />
  		   
@@ -67,12 +74,18 @@
  		      <td>
  		       <c:if test="${(empty findFiled) && (empty findName)}"> <%--검색 전 --%>
  		       <a href="/moving.com/board/qna_cont?id=${bqlist.id}&page=${page}">
+ 		       <c:if test="${bqlist.replyOrder > 1}">
+ 		        <img src="../resources/images/bQna.gif" />
+ 		       </c:if>
  		        ${title}
  		       </a>
  		       </c:if>
  		       
  		       <c:if test="${(!empty findField) || (!empty findName)}"> <%--검색 후 --%>
  		       <a href="/moving.com/board/free_cont?id=${bqlist.id}&page=${page}&findField=${findField}&findNam${findName}">
+ 		        <c:if test="${bqlist.replyOrder > 1}">
+ 		        <img src="../resources/images/bQna.gif" />
+ 		       </c:if>
  		       ${title}
  		       </a>
  		       </c:if>
@@ -83,11 +96,17 @@
  		     <td>
  		      <c:if test="${(empty findFiled) && (empty ifndName)}"> <%--검색 전 --%>
  		      <a href="/moving.com/board/qna_cont?id=${bqlist.id}&page=${page}">
+ 		       <c:if test="${bqlist.replyOrder > 1}">
+ 		        <img src="../resources/images/bQna.gif" />
+ 		       </c:if>
  		      ${bqlist.title}
  		      </a>
  		      </c:if>
  		      <c:if test="${(!empty findField) || (!empty findName)}"> <%--검색 후 --%>
  		      <a href="/moving.com/board/qna_cont?id=${bqlist.id}&page=${page}&findField=${findField}&findName=${findName}">
+ 		       <c:if test="${bqlist.replyOrder > 1}">
+ 		        <img src="../resources/images/bQna.gif" />
+ 		       </c:if>
  		       ${bqlist.title}
  		      </a>
  		      </c:if>
@@ -232,11 +251,26 @@
    
   </div> <%--검색 구간 전체 div --%>
  	
- 	
- 	
  	</div> <%--커뮤니티 제외 전체 --%>
-
  
  </div> <%--전체 div 묶음 --%>
+ 
+ <script>
+	 var msg="${msg}"; //컨트롤러에서 rttr로 설정한 키 이름을 EL로 받아와 저장했음.
+	 
+	 if(msg == "BOARD/QNA_INSERT"){
+		 alert("글쓰기가 성공 했습니다!");
+	 }//if boardFreeController에서 글쓰기 성공 시 출력.
+	 
+/* 	 if(msg == "BOARD/QNA_EDIT"){
+		 alert("글수정이 성공 했습니다!");
+	 }//수정 */
+	 
+	 if(msg == "BOARD/QNA_DEL"){
+		 alert("글삭제가 성공 했습니다!");
+	 }//삭제
+	 
+	 
+	</script>
  
 <%@ include file="../include/footer.jsp" %>

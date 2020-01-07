@@ -6,7 +6,7 @@ public class ReplyPostVO {				/* 계층형 게시판 */
 	
 	private int id;						/* 아이디 */
 	private int code_no; 				/* 코드_번호 10006 */
-	private int user_id; 				/* 회원_아이디 */
+	private int userId; 				/* 회원_아이디 */
 	private String category; 			/* 분류 */
 	private String title; 				/* 제목 */
 	private String content; 			/* 내용 */
@@ -34,13 +34,6 @@ public class ReplyPostVO {				/* 계층형 게시판 */
 	private String findName; //검색어
 	private String findField; //검색필드
 	
-	
-	public SocialProfileVO getSocialProfileVO() {
-		return socialProfileVO;
-	}
-	public void setSocialProfileVO(SocialProfileVO socialProfileVO) {
-		this.socialProfileVO = socialProfileVO;
-	}
 	public int getId() {
 		return id;
 	}
@@ -53,11 +46,11 @@ public class ReplyPostVO {				/* 계층형 게시판 */
 	public void setCode_no(int code_no) {
 		this.code_no = code_no;
 	}
-	public int getUser_id() {
-		return user_id;
+	public int getUserId() {
+		return userId;
 	}
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 	public String getCategory() {
 		return category;
@@ -149,6 +142,12 @@ public class ReplyPostVO {				/* 계층형 게시판 */
 	public void setMoveVO(List<MoveVO> moveVO) {
 		this.moveVO = moveVO;
 	}
+	public SocialProfileVO getSocialProfileVO() {
+		return socialProfileVO;
+	}
+	public void setSocialProfileVO(SocialProfileVO socialProfileVO) {
+		this.socialProfileVO = socialProfileVO;
+	}
 	public int getStartrow() {
 		return startrow;
 	}
@@ -173,6 +172,9 @@ public class ReplyPostVO {				/* 계층형 게시판 */
 	public void setFindField(String findField) {
 		this.findField = findField;
 	}
+	
+	
+
 	
 	
 	

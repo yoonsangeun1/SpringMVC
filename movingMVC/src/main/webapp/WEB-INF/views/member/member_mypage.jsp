@@ -49,7 +49,7 @@
 				</div>
 				<div id="mInfo_board" class="mInfo_text2" onclick="location='#';">
 					<span>내가 쓴 게시글 <br />
-					&nbsp;&nbsp;{userInfo.getBoardCount} 개</span>
+					&nbsp;&nbsp;${boardCount} 개</span>
 				</div>
 				<div id="mInfo_point"class="mInfo_text2" onclick="location='#';">
 					<span>포인트 <br />

@@ -28,6 +28,11 @@ public class AdminVideoDAOImpl implements AdminVideoDAO {
 	public List<VideoPostVO> videoList(VideoPostVO vp) {
 		return this.sqlSession.selectList("vp_list",vp);
 	} // 영화 게시물 목록
+
+	@Override
+	public void insertTeaser(VideoPostVO vp) {
+		this.sqlSession.insert("insertTeaserVideo",vp);
+	} // 티저 게시물 저장
 	
 	
 }

@@ -49,11 +49,12 @@
 	</select>
 	
 	<!-- 티저 게시글 작성 -->
-<!-- 	<insert id="insertTeaserVideo"> -->
-<!-- 		INSERT INTO VIDEO_POST (id, code_no, user_id, title_english, -->
-<!-- 		 title_korean, content, video_file_path, rate)  -->
-<!-- 		 VALUES (video_post_seq.nextval, #{code_no}, 1 -->
-<!-- 	</insert> -->
+	<insert id="insertTeaserVideo">
+		INSERT INTO VIDEO_POST (id, code_no, user_id, title_english, title_korean,
+		director, release_date, content, video_file_path, rate)
+		VALUES (video_post_seq.nextval, #{codeNo}, #{userId}, #{titleEnglish}, #{titleKorean},
+		#{director}, TO_DATE(#{releaseDate}, 'yyyy-mm-dd'), #{content}, 0, #{rate})
+	</insert>
 	
 	<!-- 영화 게시글 작성 -->
 	<insert id="insertMovieVideo">

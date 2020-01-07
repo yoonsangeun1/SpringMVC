@@ -4,6 +4,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.moving.dao.MUserDAO;
 import com.moving.domain.MUserVO;
@@ -99,16 +100,29 @@ public class MUserServiceImpl implements MUserService {
 	@Override
 	public Map<String, Object> test(String attribute) {
 		return this.mUserDAO.test(attribute);
-	}
-
+	}//정보창 비동기식 출력
+	
+	@Transactional
 	@Override
 	public void memberProfileUpload(MUserVO m) {
 		this.mUserDAO.memberProfileUpload(m);
-	}
-
+		this.mUserDAO.socialProfileUpload(m);
+	}//프로필 사진 등록
+	
 	@Override
 	public MUserVO selectUserInfo(int mid) {
 		return this.mUserDAO.selectUserInfo(mid);
+	}//회원정보 검색
+
+	@Override
+	public int selectBoardCount(int mid) {
+		return this.mUserDAO.selectBoardCount(mid);
+	}//게시글 갯수 검색
+
+	@Override
+	public void socialProfileUpload(MUserVO m) {
+		this.mUserDAO.socialProfileUpload(m);
 	}
+
 
 }
