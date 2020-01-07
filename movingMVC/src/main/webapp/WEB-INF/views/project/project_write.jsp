@@ -1,8 +1,9 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="../include/header.jsp"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!-- 크라우드 펀딩 글 작성 페이지 -->
 <div id="fWrite_wrap" style="padding-top:90px">
-<form method="post" action="" onsubmit="return check();">
+<!-- <form method="post" action="" onsubmit=""> -->
 
 	
 	
@@ -10,14 +11,14 @@
 		<div id="fWrite_title">
 
 			<ul class="menu">
-				<li class="option on" data-tab="fWrite_cont">기본 정보</li>
-				<li class="option" data-tab="fWrite_reward">리워드</li>
-				<li class="option" data-tab="fWrite_director">제작사</li>
-				<li class="option" data-tab="fWrite_calculate">정산</li>
-				<li class="option" data-tab="fWrite_preview">미리보기</li>
-				<li><button type="submit" class="btn" >검토 요청하기</button></li>
+				<li class="option on" id="a" data-tab="fWrite_cont">기본 정보</li>
+				<li class="option" id="b" data-tab="fWrite_reward">리워드</li>
+				<li class="option" id="c" data-tab="fWrite_director">제작사</li>
+				<li class="option" id="d" data-tab="fWrite_calculate">정산</li>
+				<li class="option" id="e" data-tab="fWrite_preview">미리보기</li>
+				<li><button type="submit" class="btn">검토 요청하기</button></li>
 			</ul>
-<!-- 			<but1ton type="submit" class="btn" >검토 요청하기</button> -->
+			<!-- 			<but1ton type="submit" class="btn" >검토 요청하기</button> -->
 			<!-- 알림  -->
 			<div id="fWrite_Alert">
 						<p align="center">알림</p>
@@ -28,7 +29,8 @@
 		
 		<!-- 본문 내용 : 기본 정보 -->
 		<div id="fWrite_cont" class="menu-option on">
-			<table border="1">
+		<form method="post" action="/moving.com/project/write_ok?id=${projectPostVO.id }" onsubmit="">
+			<table border="1" style="border: 1px solid gray">
 				<tr>
 					<th>
 						<dl>
@@ -36,7 +38,9 @@
 							<dd>담당자와 소통은 프로젝트 번호로 진행됩니다.</dd>
 						</dl>
 					</th>
-					<td><textarea rows="7" cols="30"></textarea></td>
+					<td><textarea rows="7" cols="30" readonly="readonly">프로젝트 번호 : ${projectPostVO.id }
+						http://localhost:8084/moving.com/project/content?id=${projectPostVO.id }로 프로젝트 개설 이후 접근 가능합니다. 
+					</textarea></td>
 				</tr>
 				<tr>
 					<th rowspan="2">
@@ -45,11 +49,11 @@
 							<dd>주요 안내를 받으실 이메일과 휴대폰 번호를 등록해 주세요. 정보 변경은 회원정보설정에서 가능합니다.</dd>
 						</dl>
 					</th>
-					<td><input type="text" id="email" name="email" /> <input
+					<td><input type="text" id="email" name="email" placeholder="이메일 주소를 입력하세요" value="${email }"/> <input
 						type="button" id="checkEmail" name="checkEmail" value="인증하기" /></td>
 				</tr>
 				<tr>
-					<td><input type="text" id="phone" name="phone" /> <input
+					<td><input type="text" id="phone" name="phone" placeholder="전화 번호를 입력하세요" value="${phone }"/> <input
 						type="button" id="checkPhone" name="checkPhone" value="인증하기" /></td>
 				</tr>
 				<tr>
@@ -59,16 +63,35 @@
 							<dd>프로젝트 성격과 리워드를 짐작할 수 있게 간결하고 직관적으로 작성해주세요.</dd>
 						</dl>
 					</th>
-					<td><input name="title" id="title" size="20" /></td>
+					<c:if test="${empty projectPostVO.title }">
+					<td><input name="title" id="title" size="20"  placeholder="프로젝트 제목을 입력하세요"/></td>
+					</c:if>
+					<c:if test="${!empty projectPostVO.title }">
+					<td><input name="title" id="title" size="20" value="${projectPostVO.title }" /></td>
+					</c:if>
+				</tr>
+				<tr>
+					<th>
+						<dl>
+							<dt>프로젝트 소개글</dt>
+							<dd>프로젝트 성격과 리워드를 짐작할 수 있게 간결하고 직관적으로 작성해주세요.</dd>
+						</dl>
+					</th>
+					<c:if test="${empty projectPostVO.introduce }">
+					<td><input name="introduce" id="introduce" size="20"  placeholder="프로젝트 한 줄 소개글을 입력하세요"/></td>
+					</c:if>
+					<c:if test="${!empty projectPostVO.introduce }">
+					<td><input name="introduce" id="introduce" size="20" value="${projectPostVO.introduce }" /></td>
+					</c:if>
 				</tr>
 				<tr>
 					<th>
 						<dl>
 							<dt>해쉬 태그</dt>
-							<dd>검색, 알림 등에 사용되는 짧은 제목도 함께 작성해주세요.</dd>
+							<dd>검색, 알림 등에 사용되는 짧은 제목도 함께 작성해주세요. </dd>
 						</dl>
 					</th>
-					<td><input name="hashtag" id="hashtag" size="20" /></td>
+					<td><input name="hashtag" id="hashtag" size="20" placeholder="태그명은 쉼표로 구분해주세요(ex. 태그1, 태그2 )"/></td>
 				</tr>
 				<tr>
 					<th>
@@ -77,7 +100,12 @@
 							<dd>마감일 자정 기준 목표금액 미달성 시, 펀딩은 취소됩니다. (리워드 평균 목표금액 : 300만원)</dd>
 						</dl>
 					</th>
-					<td><input name="goalMoney" id="goalMoney" size="20" /> 원</td>
+					<c:if test="${empty projectPostVO.targetPrice }">
+					<td><input name="targetPrice" id="goalMoney" size="20" /> 원</td>
+					</c:if>
+					<c:if test="${!empty projectPostVO.introduce }">
+					<td><input name="targetPrice" id="goalMoney" size="20" value="${projectPostVO.targetPrice }"/> 원</td>
+					</c:if>
 				</tr>
 				<tr>
 					<th>
@@ -89,7 +117,7 @@
 							</dd>
 						</dl>
 					</th>
-					<th><input type="file" name="titleImg" id="titleImg" />
+					<th><input type="file" name="thumbnailPath" id="titleImg" />
 						<ul>
 							<li>사이즈: 가로 120px 세로 675px</li>
 							<li>용량: 3MB 미만</li>
@@ -104,16 +132,16 @@
 							<dd>오픈 후, 노출될 카테고리를 선택해 주세요.</dd>
 						</dl>
 					</th>
-					<td><select name="category">
-							<option value="thriller">범죄/스릴러</option>
-							<option value="action">액션/어드벤쳐</option>
-							<option value="dacumentary">다큐/드라마/청춘</option>
-							<option value="history">역사/시대극</option>
-							<option value="fantasy">환타지/SF</option>
-							<option value="romance">멜로/로멘스</option>
-							<option value="comedy">코미디</option>
-							<option value="animation">애니메이션</option>
-							<option value="etc" selected>기타</option>
+					<td><select name="codeNo">
+							<option value="2000101">범죄 &amp; 스릴러</option>
+							<option value="2000102">액션 &amp; 어드벤쳐</option>
+							<option value="2000103">다큐 &amp; 드라마/청춘</option>
+							<option value="2000104">역사 &amp; 시대극</option>
+							<option value="2000105">판타지 &amp; SF</option>
+							<option value="2000106">멜로 &amp; 로맨스</option>
+							<option value="2000107">코미디</option>
+							<option value="2000108">애니메이션</option>
+							<option value="2000109" selected>기타</option>
 					</select></td>
 				</tr>
 				<tr>
@@ -125,12 +153,11 @@
 					</th>
 					<td><b>서포터에게 제공하는 리워드(제품/서비스)의 종류를 선택하세요</b> <select
 						name="rewardCategory">
-							<option value="1">티켓</option>
-							<option value="2">영화DVD</option>
-							<option value="3">기념품</option>
-							<option value="4">SW(모바일 리워드)</option>
-							<option value="5">기타</option>
-
+							<option value="2000201">티켓</option>
+							<option value="2000202">영화DVD</option>
+							<option value="2000203">기념품</option>
+							<option value="2000204">SW(모바일 리워드)</option>
+							<option value="2000205">기타</option>
 					</select></td>
 				</tr>
 				<tr>
@@ -159,23 +186,84 @@
 							<dd>프로젝트 진행 기간은 평균 30일입니다.</dd>
 						</dl>
 					</th>
-					<td><input type="date" name="date" /></td>
+					<c:if test="${empty projectPostVO.targetLimit }">
+					<td><input type="date" name="targetLimit" /></td>
+					</c:if>
+					<c:if test="${!empty projectPostVO.targetLimit }">
+					<td><input type="date" name="targetLimit" value="${fn:substring(projectPostVO.targetLimit,0,10)  }" /></td>
+					</c:if>
 				</tr>
 				<tr height="50">
-					<th colspan="2"><input type="submit" value="저장하기" /> <input
-						type="button" value="다음 단계로>"
-						onclick="location='funding_write2.jsp';" /> <input type="reset"
-						value="초기화" /></th>
+					<th colspan="2"><input type="submit" value="저장하기" /> 
+					<input type="button" value="다음 단계로>" id="nextButton" 
+					data-tab="fWrite_reward" onclick="$('html, body').stop().animate({scrollTop : 0}, 500);" /> 
+						<input type="reset" value="초기화" /></th>
 				</tr>
 			</table>
-
+		</form>
 		</div>
 		
 		<!-- 본문 내용 : 리워드 -->
 		<div id="fWrite_reward" class="menu-option">
-			<table border="1">
+			<%------첫번째 리워드------------------------------------------------ --%>
+			<c:if test="${!empty rewardVO}">
+				<c:forEach var="r" items="${rewardVO }">
 
-				<%------첫번째 리워드------------------------------------------------ --%>
+				</c:forEach>
+			</c:if>
+			<div id="fWrite_reward1">
+				<form method="post" action="/moving.com/rewards/write" onsubmit="">
+					<input type="hidden" id="projectPostId" size="40" value="${projectPostVO.id }">
+					<table border="1">
+						<tr>
+							<th rowspan="8">리워드</th>
+							<td>금액</td>
+							<td><input type="number" name="price" size="12" /> 원 정렬순서 <input
+								name="no" size="5" /> <input type="button" name="close" value="x" /></td>
+						</tr>
+						<tr>
+							<td>리워드 명</td>
+							<td><input name="reward" size="50" /></td>
+
+						</tr>
+						<tr>
+							<td>상세 설명</td>
+							<td><textarea rows="10" cols="38"></textarea></td>
+						</tr>
+						<!-- <tr>
+					<td>옵션 조건</td>
+					<td>
+						나중에
+					</td>
+				</tr> -->
+						<tr>
+							<td>배송 조건</td>
+							<td>배송료 <input type="radio" name="deliveryFeeExistence"
+								value="1" />2500원 <input type="radio"
+								name="deliveryFeeExistence" value="0" />없음 <!-- 					<input name="money" size="12" /> 나중에 -->
+							</td>
+						</tr>
+						<tr>
+							<td>제한 수량</td>
+							<td>리워드를 <input type="number" name="limitCount" size="12" />개로
+								제한합니다.
+							</td>
+						</tr>
+						<tr>
+							<td>발송 시작일</td>
+							<td>
+								<!-- 나중에 -->
+							</td>
+						</tr>
+						<tr>
+							<th colspan="3"><input type="submit" name="save"
+								value="저장하기" /></th>
+						</tr>
+						<%-- 저장하기 누르면 ->유효성 검증 실행 -> 끝나면 -> 새 리워드 추가하기로 멘트 바뀜 -> 분기 줘야 함.--%>
+					</table>
+				</form>
+			</div>
+			<%------두번째 리워드------------------------------------------------ 
 				<tr>
 					<th rowspan="8">리워드</th>
 					<td>금액</td>
@@ -217,60 +305,15 @@
 				<tr>
 					<th colspan="3"><input type="button" name="save" value="저장하기" />
 					</th>
-				</tr>
-				<%-- 저장하기 누르면 ->유효성 검증 실행 -> 끝나면 -> 새 리워드 추가하기로 멘트 바뀜 -> 분기 줘야 함.--%>
-
-				<%------두번째 리워드------------------------------------------------ --%>
-				<tr>
-					<th rowspan="8">리워드</th>
-					<td>금액</td>
-					<td><input name="amount" size="12" /> 원 정렬순서 <input
-						name="orderno" size="5" /> <input type="button" name="close"
-						value="x" /></td>
-				</tr>
-				<tr>
-					<td>리워드 명</td>
-					<td><input name="reward" size="50" /></td>
-
-				</tr>
-				<tr>
-					<td>상세 설명</td>
-					<td><textarea rows="10" cols="38"></textarea></td>
-				</tr>
-				<tr>
-					<td>옵션 조건</td>
-					<td>
-						<!-- 나중에 -->
-					</td>
-				</tr>
-				<tr>
-					<td>배송 조건</td>
-					<td>배송료 <input name="money" size="12" /> <!-- 나중에 -->
-					</td>
-				</tr>
-				<tr>
-					<td>제한 수량</td>
-					<td>리워드를 <input name="money" size="12" />개로 제한합니다.
-					</td>
-				</tr>
-				<tr>
-					<td>발송 시작일</td>
-					<td>
-						<!-- 나중에 -->
-					</td>
-				</tr>
-				<tr>
-					<th colspan="3"><input type="button" name="save" value="저장하기" />
-					</th>
-				</tr>
+				</tr>--%>
 
 
 				<%---------------------------------------------------------------------------------------------- --%>
-
+			<table>
 				<tr height="50">
 					<th colspan="3"><input type="submit" value="저장하기" /> <input
-						type="button" value="다음 단계로>"
-						onclick="location='funding_write3.jsp';" /> <input type="reset"
+						type="button" value="다음 단계로>" onclick="$('html, body').stop().animate({scrollTop : 0}, 500);" id="nextButton2"
+						 data-tab="fWrite_director" /> <input type="reset"
 						value="초기화" /></th>
 				</tr>
 			</table>
@@ -382,8 +425,8 @@
 				</tr>
 				<tr height="50">
 					<th colspan="2"><input type="submit" value="저장하기" /> <input
-						type="button" value="다음 단계로>"
-						onclick="location='funding_write4.jsp';" /> <input type="reset"
+						type="button" value="다음 단계로>" onclick="$('html, body').stop().animate({scrollTop : 0}, 500);" id="nextButton3"
+						 data-tab="fWrite_calculate"/> <input type="reset"
 						value="초기화" /></th>
 				</tr>
 			</table>
@@ -403,7 +446,7 @@
 							<li>부가 서비스 이용 시, 추가 수수료가 발생될 수 있습니다.</li>
 							<li>리워드가 없는 기부후원 프로젝트의 경우, 수수료가 다르게 적용됩니다.</li>
 							<li>자세한 내용은 와디즈 수수료 정책을 확인해주세요.</li>
-						</ul> <input type="checkbox" name="warn" value="yes" />무딩 수수료 정책을
+						</ul> <input type="checkbox" name="warn" value="yes" />무빙 수수료 정책을
 						확인하였습니다.
 					</td>
 
@@ -444,188 +487,213 @@
 
 				<tr height="50">
 					<th colspan="3"><input type="submit" value="저장하기" /> <input
-						type="button" value="다음 단계로>"
-						onclick="location='funding_write.jsp';" /> <input type="reset"
+						type="button" value="다음 단계로>" onclick="$('html, body').stop().animate({scrollTop : 0}, 500);" id="nextButton4"
+						data-tab="fWrite_preview" /> <input type="reset"
 						value="초기화" /></th>
 				</tr>
 			</table>
 		</div>
 
-			<div id="fWrite_preview" class="menu-option">
-				<div id="fCont_title">
-					<h3>${projectInfo.title }</h3>
-					<p>${projectInfo.introduce }</p>
-				</div>
-
-				<%-- 펀딩 메인 이미지, 모금 정보 --%>
-				<div id="fCont_subtitle">
-					<%-- 펀딩 메인 이미지 --%>
-					<div id="fCont_mainImage">
-						<img src="../images/funding05.PNG" width="700" height="400"
-							src="펀딩이미지05" />
-						<div class="fCont_tags">
-							<span class="sumCont_sub fCont_tag"><i
-								class="fas fa-tag fa-lg"></i> Project We Love</span> <span
-								class="sumCont_sub fCont_tag"><i class="fas fa-tag fa-lg"></i>
-								Documentary</span> <span class="sumCont_sub fCont_tag"><i
-								class="fas fa-map-marker-alt fa-lg"></i> 독도, 대한민국 </span> <span
-								class="sumCont_sub fCont_tag"><i
-								class="fas fa-hashtag fa-lg"></i> 감동적인</span>
-						</div>
-					</div>
-
-					<%-- 펀딩 메인 정보 요약 --%>
-					<div id="fCont_sumCont">
-						<div id="fCont_sumContTS">
-							<div class="progress length">
-								<!-- 여기에 수정해야 할 것 : 퍼센트 표시 바. -->
-								<div class="progress-bar length" role="progressbar"
-									aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"
-									style="width: ${ projectInfo.nowPrice div projectInfo.targetPrice * 100}%">
-									<span class="sr-only">${ projectInfo.nowPrice div projectInfo.targetPrice * 100}%
-										Complete</span>
-								</div>
-							</div>
-							<span class="sumCont_title">${ projectInfo.nowPrice } 원</span> <span
-								class="sumCont_sub">목표 금액 ${projectInfo.targetPrice } 원 중</span>
-							<span class="sumCont_title">${projectInfo.sponserCount } 명</span>
-							<span class="sumCont_sub">프로젝트 후원자</span> <span
-								class="sumCont_title">${projectInfo.leftLimit }</span> <span
-								class="sumCont_sub">남은 목표 일수</span>
-
-							<button class="fCont_sumContBtn button button_f16 shadow"
-								type="button">이 프로젝트 밀어주기</button>
-							<div id="fCont_share">
-								<button
-									class="fCont_shareBtn button button_wce8e8e8 button_f12 shadow"
-									type="button">
-									<i class="fas fa-heart"></i> Remind Me
-								</button>
-								<div class="fCont_shareIcon fa-2x">
-									<a href="#"><i class="fab fa-facebook"></i></a>
-								</div>
-								<div class="fCont_shareIcon fa-2x">
-									<a href="#"><i class="fab fa-twitter"></i></a>
-								</div>
-								<div class="fCont_shareIcon fa-2x">
-									<a href="#"><i class="fas fa-envelope"></i></a>
-								</div>
-								<div class="fCont_shareIcon fa-2x">
-									<a href="#"><i class="fas fa-link"></i></a>
-								</div>
-							</div>
-							<span class="sumCont_sub"><a href="#">All or Nothing</a>.
-								이 프로젝트는 Sat, November 23 2019 1:59 PM UTC +09:00 까지 목표금액 달성시에만
-								후원금이 전달됩니다.</span>
-						</div>
-					</div>
-
-
-				</div>
-
-				<div class="clear"></div>
-
-				<%-- 펀딩 하위 메뉴 --%>
-				<div id="fCont_menubar">
-					<div id="fCont_row">
-						<script>
-							function setScrollX(xValue) {
-								/* $('#SNS_Profile_Down').scrollLeft($('#SNS_Profile_Down').scrollLeft() + xValue); */
-								$('#fCont_cont').animate({
-									scrollLeft : xValue
-								}, 400);
-							}//클릭시 게시글
-						</script>
-						<button class="fCont_menu" onclick="setScrollX(0)">Campaign</button>
-						<button class="fCont_menu" onclick="setScrollX(1250)">FAQ</button>
-						<button class="fCont_menu" onclick="setScrollX(2500)">Updates</button>
-						<button class="fCont_menu" onclick="setScrollX(3750)">
-							Comments
-							<%-- 댓글 개수가 0이 아닌 경우 개수 출력 --%>
-							<c:if test="${projectInfo.commentCount != 0}">
-								<span class="commentCount"><b>${projectInfo.commentCount }</b></span>
-							</c:if>
-						</button>
-						<button class="fCont_menu" onclick="setScrollX(5000)">Communities</button>
-					</div>
-				</div>
-
-
-				<div id="fCont_cont">
-					<div id="fCont_scrollCont">
-
-						<%-- 상세 정보 --%>
-						<div id="fCont_CampaignCont">
-							<h3>About</h3>
-							<p>${projectInfo.content }</p>
-							<c:if test="${!empty projectInfo.attachedFileVO }">
-								<c:forEach var="file" items="${projectInfo.attachedFileVO }">
-									<img src="${file.filePath }" width="800" height="1200"
-										alt="fundingCont" />
-								</c:forEach>
-							</c:if>
-							<c:if test="${empty projectInfo.attachedFileVO }">
-								<p>첨부 파일이 없습니다!</p>
-								<!-- <img src="../images/fundingCont01.png" width="800" height="1200" alt="fundingCont"/>
-		 -->
-							</c:if>
-						</div>
-
-
-
-						<div id="fCont_FAQCont"></div>
-						<div id="fCont_UpdatesCont"></div>
-
-
-						<%------------------------------------------------------------------------------------------------ --%>
-						<div id="fCont_CommentsCont">
-							<div class="SNS_Comment">
-
-								<%------------------------------------------------------------------------------------------------ --%>
-								<div class="SNS_Comment_Write">
-									<%-- 본인의 프로필 사진이 있다면,없다면 분기 나누기 --%>
-									<img class="SNS_Content_user_img" class="SNS_Profile_Picture"
-										src="../images/member_profile.png" width=30px height=30px
-										alt=""> <input name="content" id="content"
-										class="SNS_Comment_Write_Chat"> <input
-										class="SNS_Comment_Write_Button" name="write" id="write"
-										type="button" value="작성"
-										onclick="reply_check(); selectCommentCount();">
-								</div>
-								<%-- 댓글 목록 출력 --%>
-								<%-- 댓글이 있다면 --%>
-								<ul id="replies"
-									style="margin-top: 7px; list-style: none; align-items: center;">
-									<c:if test="${!empty projectInfo.mCommentVO }">
-										<c:forEach var="comment" items="${projectInfo.mCommentVO }">
-											<li style="align-items: center;"><c:if
-													test="${!empty comment.mUserVO.profileImageUrl }">
-													<img class="SNS_Content_user_img"
-														class="SNS_Profile_Picture"
-														src="${comment.mUserVO.profileImageUrl }" width=30px
-														height=30px alt="">
-												</c:if> <c:if test="${empty comment.mUserVO.profileImageUrl }">
-													<img class="SNS_Content_user_img"
-														class="SNS_Profile_Picture"
-														src="../images/member_profile.png" width=30px height=30px
-														alt="">
-												</c:if>
-												<p>${comment.mUserVO.nickname }</p>
-												<p>${comment.content }</p></li>
-										</c:forEach>
-									</c:if>
-									<c:if test="${empty projectInfo.mCommentVO }">
-										<li><p>작성된 댓글이 아직 없습니다</p></li>
-									</c:if>
-								</ul>
-							</div>
-
-						</div>
-						<div id="fCont_CommunitiesCont"></div>
-					</div>
-				</div>
-
+			<div id="fWrite_preview" class="menu-option">	<div id="fCont_title" style="padding-top: 45px;">
+				<h3>${projectPostVO.title }</h3>
+				<p>${projectPostVO.introduce }</p>
 			</div>
+		
+			<%-- 펀딩 메인 이미지, 모금 정보 --%>
+			<div id="fCont_subtitle">
+				<%-- 펀딩 메인 이미지 --%>
+				<div id="fCont_mainImage">
+					<img src="../images/funding05.PNG" width="700" height="400"
+						src="펀딩이미지05" />
+					<div class="fCont_tags">
+						<span class="sumCont_sub fCont_tag"><i
+							class="fas fa-tag fa-lg"></i> Project We Love</span> <span
+							class="sumCont_sub fCont_tag"><i class="fas fa-tag fa-lg"></i>
+							Documentary</span> <span class="sumCont_sub fCont_tag"><i
+							class="fas fa-map-marker-alt fa-lg"></i> 독도, 대한민국 </span> <span
+							class="sumCont_sub fCont_tag"><i
+							class="fas fa-hashtag fa-lg"></i> 감동적인</span>
+					</div>
+				</div>
+		
+				<%-- 펀딩 메인 정보 요약 --%>
+				<div id="fCont_sumCont">
+					<div id="fCont_sumContTS">
+						<div class="progress length">
+							<!-- 여기에 수정해야 할 것 : 퍼센트 표시 바. -->
+							<div class="progress-bar length" role="progressbar"
+								aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"
+								style="width: ${ projectPostVO.nowPrice div projectPostVO.targetPrice * 100}%">
+								<span class="sr-only">${ projectPostVO.nowPrice div projectPostVO.targetPrice * 100}%
+									Complete</span>
+							</div>
+						</div>
+						<span class="sumCont_title">${ projectPostVO.nowPrice } 원</span> <span
+							class="sumCont_sub">목표 금액 ${projectPostVO.targetPrice } 원 중</span> <span
+							class="sumCont_title">${projectPostVO.sponserCount } 명</span> <span
+							class="sumCont_sub">프로젝트 후원자</span> <span class="sumCont_title">${projectPostVO.leftLimit }</span>
+						<span class="sumCont_sub">남은 목표 일수</span>
+		
+						<button class="fCont_sumContBtn button button_f16 shadow"
+							type="button">이 프로젝트 밀어주기</button>
+						<div id="fCont_share">
+							<button
+								class="fCont_shareBtn button button_wce8e8e8 button_f12 shadow"
+								type="button">
+								<i class="fas fa-heart"></i> Remind Me
+							</button>
+							<div class="fCont_shareIcon fa-2x">
+								<a href="#"><i class="fab fa-facebook"></i></a>
+							</div>
+							<div class="fCont_shareIcon fa-2x">
+								<a href="#"><i class="fab fa-twitter"></i></a>
+							</div>
+							<div class="fCont_shareIcon fa-2x">
+								<a href="#"><i class="fas fa-envelope"></i></a>
+							</div>
+							<div class="fCont_shareIcon fa-2x">
+								<a href="#"><i class="fas fa-link"></i></a>
+							</div>
+						</div>
+						<span class="sumCont_sub"><a href="#">All or Nothing</a>. 이
+							프로젝트는 Sat, November 23 2019 1:59 PM UTC +09:00 까지 목표금액 달성시에만 후원금이
+							전달됩니다.</span>
+					</div>
+				</div>
+		
+		
+			</div>
+		
+			<div class="clear"></div>
+		
+			<%-- 펀딩 하위 메뉴 --%>
+			<div id="fCont_menubar">
+				<div id="fCont_row">
+					<script>
+						function setScrollX(xValue) {
+							/* $('#SNS_Profile_Down').scrollLeft($('#SNS_Profile_Down').scrollLeft() + xValue); */
+							$('#fCont_cont').animate({
+								scrollLeft : xValue
+							}, 400);
+						}//클릭시 게시글
+					</script>
+					<button class="fCont_menu" onclick="setScrollX(0)">Campaign</button>
+					<button class="fCont_menu" onclick="setScrollX(1250)">FAQ</button>
+					<button class="fCont_menu" onclick="setScrollX(2500)">Updates</button>
+					<button class="fCont_menu" onclick="setScrollX(3750)">
+						Comments
+						<%-- 댓글 개수가 0이 아닌 경우 개수 출력 --%>
+						<span class="commentCount">
+						<c:if test="${projectPostVO.commentCount != 0}">
+							<b>${projectPostVO.commentCount }</b>
+						</c:if>
+						</span>
+					</button>
+					<button class="fCont_menu" onclick="setScrollX(5000)">Communities</button>
+				</div>
+			</div>
+		
+		
+			<div id="fCont_cont">
+				<div id="fCont_scrollCont">
+		
+					<%-- 상세 정보 --%>
+					<div id="fCont_CampaignCont">
+						<h3>About</h3>
+						<p>${projectPostVO.content }</p>
+						<c:if test="${!empty projectPostVO.attachedFileVO }">
+							<c:forEach var="file" items="${projectPostVO.attachedFileVO }">
+								<img src="${file.filePath }" width="800" height="1200"
+									alt="fundingCont" />
+							</c:forEach>
+						</c:if>
+						<c:if test="${empty projectPostVO.attachedFileVO }">
+							<p>첨부 파일이 없습니다!</p>
+							<!-- <img src="../images/fundingCont01.png" width="800" height="1200" alt="fundingCont"/>
+				 -->
+						</c:if>
+					</div>
+		
+		
+		
+					<div id="fCont_FAQCont"></div>
+					<div id="fCont_UpdatesCont"></div>
+		
+		
+					<%------------------------------------------------------------------------------------------------ --%>
+					<div id="fCont_CommentsCont">
+						<div class="SNS_Comment">
+		
+							<%------------------------------------------------------------------------------------------------ --%>
+							<%-- 댓글 작성 --%>
+							<div class="SNS_Comment_Write">
+							<script>
+								$("input[name^='delete']").on('click', function() {
+								alert('제박');
+								});
+							</script>
+								<%-- 본인의 프로필 사진이 있다면,없다면 분기 나누기 나중에 프로필사진--%>
+								<%-- 프로필 이미지가 있을 경우 --%>
+								<c:if test="${'default' != profile_image_url }">
+									<img class="SNS_Content_user_img" class="SNS_Profile_Picture"
+										src="${profile_image_url }" width="30" height="30"
+										alt="">
+								</c:if>
+								<%-- 프로필 이미지가 없을 경우 --%>
+								<c:if test="${'default' == profile_image_url }">
+									<img class="SNS_Content_user_img" class="SNS_Profile_Picture"
+										src="../images/member_profile.png" width="30" height="30" alt="">
+								</c:if>
+								<input type="hidden" id="project_post_id" size="40" value="${projectPostVO.id }">
+								<p id="sessionId">${nickname }</p>
+								<input id="content" name="content" class="SNS_Comment_Write_Chat">
+								<input id="write" name="write" class="SNS_Comment_Write_Button" type="button" 
+								value="작성" >
+							</div>
+							
+							<%-- 댓글 목록 출력 --%>
+							<%-- 댓글이 있다면 --%>
+							<ul id="replies"
+								style="margin-top: 7px; list-style: none; align-items: center;">
+								<%-- <c:if test="${!empty projectPostVO.mCommentVO }">
+									<c:forEach var="comment" items="${projectPostVO.mCommentVO }">
+										<li class="replies_li" style="align-items: center;">
+											<div class="comment_no"></div>
+											프로필 이미지가 있을 경우
+											<input type="hidden" class="id" value="${comment.id }">
+											<c:if test="${!empty comment.mUserVO.profileImageUrl }">
+												<img class="SNS_Content_user_img" class="SNS_Profile_Picture"
+													src="${comment.mUserVO.profileImageUrl }" width="30" height="30" alt="">
+											</c:if> 
+											프로필 이미지가 없을 경우
+											<c:if test="${empty comment.mUserVO.profileImageUrl }">
+												<img class="SNS_Content_user_img" class="SNS_Profile_Picture"
+													src="../images/member_profile.png" width="30" height="30" alt="">
+											</c:if>
+											<p><a href="/moving.com/member/mypage?id=${comment.id }">
+											${comment.mUserVO.nickname }</a></p>
+											<input name="modify_content" class="modify_content SNS_Comment_Write_Chat" value="${comment.content }" >
+											<c:set var="sessionId" value="${id }"></c:set>
+											<c:if test="${comment.id == sessionId }">
+											<button type="button" name="modify" class="modify SNS_Comment_Write_Button" >수정</button>
+											<button type="button" name="delete" class="delete SNS_Comment_Write_Button" >삭제</button>
+											</c:if>
+											</li>
+									</c:forEach>
+								</c:if>
+								<c:if test="${empty projectPostVO.mCommentVO }">
+									<li><p>작성된 댓글이 아직 없습니다</p></li>
+								</c:if> --%>
+							</ul>
+						</div>
+		
+					</div>
+					<div id="fCont_CommunitiesCont"></div>
+				</div>
+			</div>
+		
+		</div>
+
 
 		</div>
 	</form>

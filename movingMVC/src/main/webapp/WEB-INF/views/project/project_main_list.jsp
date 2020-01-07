@@ -2,7 +2,7 @@
 <%@ include file="../include/header.jsp"%>
 <link rel="stylesheet" type="text/css" href="../css/funding_list.css" />
 
-<div class="fList_wrap" style="width: 100%">
+<div class="fList_wrap" style="width: 100%">v 
 	<%-- 상단 메뉴 두번째  category_bar --%>
 	<div id="header_menu2" style="height: 45px; padding-top: 10px;">
 		<nav id="menu_bar" style="line-height: 45px;">
@@ -22,7 +22,11 @@
 	</div>
 		<div class="border_bottom_b20" ></div>
 
-
+  <div id="bFree_writing"> <%-- 글 쓰기 폼 div --%>
+      <input type="button" class="bFree_writing_btn button
+       button_c9d8ce2 button_f12 button_p1024 button_r4" 
+      value="글 쓰기" onclick="location='/moving.com/project/write';" />
+    </div> <%-- 글 쓰기 폼 div --%>
 	<%-- MainDIV 2. 펀딩 리스트 시작 --%>
 	<div id="fList_project" style="padding-top: 30px;" >
 		<%-- 좌측 리스트 --%>

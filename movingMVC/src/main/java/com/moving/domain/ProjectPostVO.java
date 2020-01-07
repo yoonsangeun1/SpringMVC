@@ -7,7 +7,7 @@ public class ProjectPostVO {		/* 프로젝트 게시글 */
 	private int id;					/* 아이디 */
 	private int userId;				/* 회원_아이디 */
 	private int codeNo; 			/* 코드_번호 20001 */
-	private int code;				/* 분류번호 */
+	private int statusCode;			/* 완성 미완성 분류 */
 	private String title;			/* 제목 */
 	private String introduce;		/* 소개글 */
 	private String content; 		/* 내용 */
@@ -55,11 +55,11 @@ public class ProjectPostVO {		/* 프로젝트 게시글 */
 	public void setCodeNo(int codeNo) {
 		this.codeNo = codeNo;
 	}
-	public int getCode() {
-		return code;
+	public int getStatusCode() {
+		return statusCode;
 	}
-	public void setCode(int code) {
-		this.code = code;
+	public void setStatusCode(int statusCode) {
+		this.statusCode = statusCode;
 	}
 	public String getTitle() {
 		return title;

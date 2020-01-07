@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.moving.domain.MCommentVO;
 import com.moving.domain.ProjectPostVO;
+import com.moving.domain.RewardVO;
 
 public interface ProjectPostDAO {
 
@@ -45,4 +46,13 @@ public interface ProjectPostDAO {
 	List<Map<String, Object>> selectCommentListMapNormal(int id);
 	
 	void updateCommentCountNormal(int id);
+	
+	public int insertSelectProjectPost(ProjectPostVO projectPostVO);
+
+	public void updateProjectPost(ProjectPostVO projectPostVO);
+
+	public void insertProjectReward(RewardVO rewardVO);
+
+	public void selectProjectReward(int projectPostId);
+	
 }

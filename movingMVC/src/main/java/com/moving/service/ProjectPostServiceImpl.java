@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.moving.dao.ProjectPostDAO;
 import com.moving.domain.MCommentVO;
 import com.moving.domain.ProjectPostVO;
+import com.moving.domain.RewardVO;
 
 @Service
 public class ProjectPostServiceImpl implements ProjectPostService {
@@ -89,4 +90,23 @@ public class ProjectPostServiceImpl implements ProjectPostService {
 		return projectPostDAO.selectCommentListMapNormal(id);
 	}
 
+	@Override
+	public int insertSelectProjectPost(ProjectPostVO projectPostVO) {
+		return projectPostDAO.insertSelectProjectPost(projectPostVO);
+	}
+
+	@Override
+	public void updateProjectPost(ProjectPostVO projectPostVO) {
+		projectPostDAO.updateProjectPost(projectPostVO);
+	}
+
+	@Override
+	public void insertProjectReward(RewardVO rewardVO) {
+		projectPostDAO.insertProjectReward(rewardVO);
+	}
+
+	@Override
+	public void selectProjectReward(int projectPostId) {
+		projectPostDAO.selectProjectReward(projectPostId);
+	}
 }

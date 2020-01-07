@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.moving.domain.MCommentVO;
 import com.moving.domain.ProjectPostVO;
+import com.moving.domain.RewardVO;
 
 public interface ProjectPostService {
 	
@@ -23,11 +24,19 @@ public interface ProjectPostService {
 	//게시글에 해당하는 댓글 개수 불러오면서 저장
 	ProjectPostVO selectCommentCount(int id);
 	int selectListCount(ProjectPostVO projectPostVO);//게시글 리스트 개수 구하기
-	List<ProjectPostVO> selectProjectList(ProjectPostVO projectPostVO);
-	MCommentVO selectCommentCountActors(int id);
-	List<Map<String, Object>> selectCommentListMapActors(int id);
-	List<Map<String, Object>> selectCommentListMapNormal(int id);
+	List<ProjectPostVO> selectProjectList(ProjectPostVO projectPostVO);//프로젝트 리스트 불러오기
 	
+	MCommentVO selectCommentCountActors(int id);//Actors 댓글 개수 카운트
+	List<Map<String, Object>> selectCommentListMapActors(int id);//Actors 댓글 개수 카운트
+	List<Map<String, Object>> selectCommentListMapNormal(int id);//Normal 댓글 개수 카운트
+	
+	
+	int insertSelectProjectPost(ProjectPostVO projectPostVO);//초기 게시글 저장
+	void updateProjectPost(ProjectPostVO projectPostVO);//게시글 수정
+
+	void insertProjectReward(RewardVO rewardVO);
+
+	void selectProjectReward(int projectPostId);
 
 
 }

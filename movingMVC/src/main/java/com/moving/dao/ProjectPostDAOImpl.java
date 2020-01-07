@@ -111,4 +111,24 @@ public class ProjectPostDAOImpl implements ProjectPostDAO {
 		sqlSession.update("projectPost.updateCommentCountNormal", id);
 	}
 	
+	@Override
+	public int insertSelectProjectPost(ProjectPostVO projectPostVO) {
+		return sqlSession.insert("insertSelectProjectPost", projectPostVO);
+	}
+
+	@Override
+	public void updateProjectPost(ProjectPostVO projectPostVO) {
+		sqlSession.update("updateProjectPost", projectPostVO);
+	}
+
+	@Override
+	public void insertProjectReward(RewardVO rewardVO) {
+		sqlSession.insert("insertProjectReward", rewardVO);
+	}
+
+	@Override
+	public void selectProjectReward(int projectPostId) {
+		sqlSession.insert("selectProjectReward", projectPostId);
+	}
+	
 }

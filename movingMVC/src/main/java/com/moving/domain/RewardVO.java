@@ -4,7 +4,7 @@ public class RewardVO {					/* 리워드 */
 	
 	private int id; 					/* 아이디 */
 	private int codeNo; 				/* 코드_번호 20002 */
-	private int projectPostId; 				/* 프로젝트_아이디 */
+	private int projectPostId; 			/* 프로젝트_아이디 */
 	private String title; 				/* 제목 */
 	private String content; 			/* 내용 */
 	private int price; 					/* 금액 */
@@ -13,7 +13,15 @@ public class RewardVO {					/* 리워드 */
 	private int limitCount; 			/* 제한_수 */
 	private int selectCount; 			/* 선택한_수 */
 	private String registerDate; 		/* 등록_날짜 */
+	private int no;						/* 정렬 순서 */
 	
+	
+	public int getNo() {
+		return no;
+	}
+	public void setNo(int no) {
+		this.no = no;
+	}
 	public int getId() {
 		return id;
 	}

@@ -7,9 +7,11 @@ alter table m_comment drop column content
 alter table m_comment modify (content varchar2(1000));
 alter table m_comment add (content_tmp varchar2(1000));
 update PROJECT_POST set introduce='소개' where id=3 
-
+alter table profile_post add (thumbnail_image varchar2(4000))
+alter table profile_post add (etctext varchar2(4000))
 select * from project_post
-
+alter table profile_post modify  (sex varchar2(40))
+select * from REWARD
 SELECT P.id as project_post_id, P.title 
 		FROM project_post P
 		SELECT P.id, P.title 
@@ -195,3 +197,4 @@ SELECT dd|| '일'|| SUBSTR (hms, 1, 2)|| '시'|| SUBSTR (hms, 3, 2)|| '분'|| SU
 	select * from project_post
 	
 	update project_post set now_price=4000 where id=2;
+	update project_post set target_limit=TO_DATE ('2020-01-28', 'yyyy-mm-dd hh24:mi:ss')
