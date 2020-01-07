@@ -36,7 +36,7 @@
 				</div>
 				<div id="SNS_Profile_Foreground">
 					<div id="SNS_Profile_Introduce">
-						<p>${s_pro.introduce}</p>
+						<p>${fn:substring(s_pro.introduce,0,39)}</p>
 						<c:if test="${s_pro.id==sessionSocial.id}">
 							<input id="SNS_Profile_Edit_Intro" type="button" value="수정하기" 
 								onclick="location='/moving.com/social/update?sessionId=${sessionSocial.id}';">
@@ -53,7 +53,7 @@
 				<li class="SNS_Profile_Menu_Button SNS_Background" onclick="setScrollX(3750);">팔로우 목록</li>
 <%-- 				<c:if test="${sessionSocial.id != s_pro.id}"> --%>
 				<c:if test="${s_pro.id==sessionSocial.id}">
-					<li class="SNS_Profile_Menu_Button SNS_Background" onclick="location='/moving.com/social/messenger?socialIdFrom=${sessionSocial.id}&socialIdTo=0';">메시지 보내기</li>
+					<li class="SNS_Profile_Menu_Button SNS_Background" onclick="location='/moving.com/social/messenger?socialIdFrom=${sessionSocial.id}&socialIdTo=0';">메신저</li>
 				</c:if>
 				<c:if test="${s_pro.id!=sessionSocial.id}">
 					<li class="SNS_Profile_Menu_Button SNS_Background" onclick="location='/moving.com/social/messenger?socialIdFrom=${sessionSocial.id}&socialIdTo=${s_pro.id}';">메시지 보내기</li>
@@ -78,7 +78,7 @@
 // 										});
 <!-- 							</script> -->
 			<div id="SNS_Profile_Story">
-				<form action="post_write_ok" enctype="mutipart/form-data"
+				<form action="post_write_ok?page_num=1" enctype="mutipart/form-data"
 					method="post" name="timeLineWriter">
 					<div id="SNS_Profile_Writer">
 						<div id="SNS_Profile_Upload_Top">
@@ -174,7 +174,7 @@
 									<c:if test="${sessionSocial.id==s_pro.id}">
 									<input class="SNS_Option_Button" type="button" value="삭제"
 										onclick="if(confirm('정말로 삭제할까요?') == true){
-									location='/moving.com/social/post_del_ok?id=${s_post.id}&socialId=${s_pro.id}&page_num=1';}else{return}"
+												location='/moving.com/social/post_del_ok?id=${s_post.id}&socialId=${s_pro.id}&page_num=1';}else{return}"
 										style="float: right;">
 									</c:if>
 									<%-- 								<img class="SNS_Content_Image" alt="사진" src="${s_pro.profileImagePath}"> --%>

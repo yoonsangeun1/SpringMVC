@@ -39,7 +39,8 @@
 			</c:if>
 			</div>
 		</div>
-		<div id="SNS_Messenger_Mid">
+		<c:if test="${socialIdTo!=0}">
+				<div id="SNS_Messenger_Mid">
 			<div id="SNS_Messenger_Mid_Up">
 				<c:if test="${empty m_pro.profileImagePath}">
 					<img id="SNS_Messenger_Photo" src="../images/member_profile.png">
@@ -51,24 +52,28 @@
 			</div>
 			<div id="SNS_Messenger_Mid_Down">
 				<div id="SNS_Messenger_Intro">
-					<div id="SNS_Messenger_Text">
-						<div id="SNS_Messenger_Text_Left"><div id="SNS_Messenger_Text_U">홍채 팝니다.</div></div>
-						<div id="SNS_Messenger_Text_Right"><div id="SNS_Messenger_Text_M">안 사요.</div></div>
-						<div id="SNS_Messenger_Text_Left"><div id="SNS_Messenger_Text_U">홍채.</div></div>
-						<div id="SNS_Messenger_Text_Left"><div id="SNS_Messenger_Text_U">팝니다.</div></div>
-						<div id="SNS_Messenger_Text_Left"><div id="SNS_Messenger_Text_U">홍채 팝니다.</div></div>
-						<div id="SNS_Messenger_Text_Left"><div id="SNS_Messenger_Text_U">홍채 팝니다.</div></div>
-						<div id="SNS_Messenger_Text_Right"><div id="SNS_Messenger_Text_M">안 사요.</div></div>
-						<div id="SNS_Messenger_Text_Left"><div id="SNS_Messenger_Text_U">사세요.</div></div>
-						<div id="SNS_Messenger_Text_Left"><div id="SNS_Messenger_Text_U">팝니다.</div></div>
-						<div id="SNS_Messenger_Text_Left"><div id="SNS_Messenger_Text_U">홍채 팝니다.</div></div>
-						<div id="SNS_Messenger_Text_Left"><div id="SNS_Messenger_Text_U">홍채 팝니다.</div></div>
-						<div id="SNS_Messenger_Text_Right"><div id="SNS_Messenger_Text_M">안 사요.</div></div>
-						<div id="SNS_Messenger_Text_Left"><div id="SNS_Messenger_Text_U">홍채.</div></div>
-						<div id="SNS_Messenger_Text_Left"><div id="SNS_Messenger_Text_U">팝니다.</div></div>
-						<div id="SNS_Messenger_Text_Left"><div id="SNS_Messenger_Text_U">홍채 팝니다.</div></div>
+				<div id="SNS_Messenger_Text">
+					<input type="hidden" id="sessionId" value="${sessionId}">
+					<ul>
+						<li><div id="SNS_Messenger_Text_Left"><div id="SNS_Messenger_Text_U">홍채 팝니다.</div></div></li>
+						<li><div id="SNS_Messenger_Text_Right"><div id="SNS_Messenger_Text_M">안 사요.</div></div></li>
+						<li><div id="SNS_Messenger_Text_Left"><div id="SNS_Messenger_Text_U">홍채.</div></div></li>
+						<li><div id="SNS_Messenger_Text_Left"><div id="SNS_Messenger_Text_U">팝니다.</div></div></li>
+						<li><div id="SNS_Messenger_Text_Left"><div id="SNS_Messenger_Text_U">홍채 팝니다.</div></div></li>
+						<li><div id="SNS_Messenger_Text_Left"><div id="SNS_Messenger_Text_U">홍채 팝니다.</div></div></li>
+						<li><div id="SNS_Messenger_Text_Right"><div id="SNS_Messenger_Text_M">안 사요.</div></div></li>
+						<li><div id="SNS_Messenger_Text_Left"><div id="SNS_Messenger_Text_U">사세요.</div></div></li>
+						<li><div id="SNS_Messenger_Text_Left"><div id="SNS_Messenger_Text_U">팝니다.</div></div></li>
+						<li><div id="SNS_Messenger_Text_Left"><div id="SNS_Messenger_Text_U">홍채 팝니다.</div></div></li>
+						<li><div id="SNS_Messenger_Text_Left"><div id="SNS_Messenger_Text_U">홍채 팝니다.</div></div></li>
+						<li><div id="SNS_Messenger_Text_Right"><div id="SNS_Messenger_Text_M">안 사요.</div></div></li>
+						<li><div id="SNS_Messenger_Text_Left"><div id="SNS_Messenger_Text_U">홍채.</div></div></li>
+						<li><div id="SNS_Messenger_Text_Left"><div id="SNS_Messenger_Text_U">팝니다.</div></div></li>
+						<li><div id="SNS_Messenger_Text_Left"><div id="SNS_Messenger_Text_U">홍채 팝니다.</div></div></li>
+					</ul>
 					</div>
 					<textarea id="SNS_Messenger_Text_Write">안 산다고</textarea>
+						<input id="SNS_Messenger_Send" type="button" value="보내기">
 				</div>
 			</div>
 		</div>
@@ -86,11 +91,10 @@
 				<ul id="SNS_Friend_Ul">
 					<li id="SNS_Friend_Li"><input id="SNS_Friend_Button" type="button" value="프로필 바로가기" onclick="location.href='/moving.com/social/profile?id=${m_pro.id}';"></li>
 <!-- 					<li id="SNS_Friend_Li"><input id="SNS_Friend_Button" type="button" value="닉네임 변경하기"></li> -->
-					<li id="SNS_Friend_Li"><input id="SNS_Friend_Button" type="button" value="차단하기"></li>
 					<li id="SNS_Friend_Li"><input id="SNS_Friend_Button" type="button" value="신고하기"></li>
 				</ul>
 			</div>
 		</div>
+		</c:if>
 	</div>
-
 <%@ include file="../include/sns_footer.jsp"%>

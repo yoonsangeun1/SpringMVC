@@ -197,11 +197,18 @@ public class SocialController {
 				if(svo!=null) {
 					session.setAttribute("sessionSocial", svo);
 				}
-				out.println("<script>");
-				out.println("alert('MOVING 로그인을 환영합니다 !');");
-				out.println("location='/moving.com/social/main';");
-				out.println("</script>");
-
+				if(dm.getUserLv()==4) {
+					out.println("<script>");
+					out.println("if(confirm('무빙 관리자님을 환영합니다. 관리자 페이지로 이동하시겠습니까?')==true){");
+					out.println("location='/moving.com/admin';}");
+					out.println("else{location='/moving.com/social/main';}");
+					out.println("</script>");
+				}else {
+					out.println("<script>");
+					out.println("alert('MOVING 로그인을 환영합니다 !');");
+					out.println("location='/moving.com/social/main';");
+					out.println("</script>");
+				}
 				return null;
 			}
 		}
@@ -358,15 +365,31 @@ public class SocialController {
 			HttpServletRequest request,
 			HttpServletResponse response
 			,SocialPostVO s_post
+			,int page_num
 			)throws Exception{
 		HttpSession session=request.getSession();//세션 값 전체를 가져온다.
 
 		SocialProfileVO Social_id=(SocialProfileVO)session.getAttribute("sessionSocial");
-
+		System.out.println(Social_id.getId());
 		s_post.setSocialId(Social_id.getId());//소셜 아이디를 기준으로 게시글 넣기
 		this.socialService.insertPost(s_post);//게시글 넣는 메서드
-
-		return "redirect:/social/profile?id="+Social_id.getId();//내 계정으로 복귀
+		
+		if(page_num==0) {//메인으로 갈 때
+			return "redirect:/social/main";
+		}
+		else {
+			return "redirect:/social/profile?id="+Social_id.getId();//내 계정으로 복귀
+		}
+	}
+	
+	@RequestMapping(value="/social/go_profile")
+	public String go_profile(
+			int m_id//작성자 유저아이디 번호
+			)throws Exception{
+		SocialProfileVO s_pro=this.socialService.selectIDFromUserID(m_id);
+		System.out.println("회원 번호는 : "+s_pro.getId());
+		
+		return "redirect:/social/profile?id="+s_pro.getId();//내 홈피로 이동
 	}
 
 	//게시글 공유 완료
@@ -406,9 +429,18 @@ public class SocialController {
 			int socialId,//게시글 작성자
 			int page_num//메인 페이지인지 프로필 페이지인지 여부
 			) throws Exception{
+		
 		session=request.getSession();//세션 값 전체를 가져온다.
+		
 		SocialProfileVO getSocial_id=(SocialProfileVO) session.getAttribute("sessionSocial");
 		int user_id=getSocial_id.getId();
+		if(page_num==0) {
+			SocialProfileVO getRealSocial_id=this.socialService.selectIDFromUserID(user_id);
+			user_id=getRealSocial_id.getId();
+		}
+		System.out.println(user_id);
+		System.out.println(socialId);
+		
 		if(user_id==socialId) {
 			this.socialService.deletePost(id);
 			if(page_num==0) {
@@ -416,6 +448,9 @@ public class SocialController {
 			}else if(page_num==1) {
 				return "redirect:/social/profile?id="+user_id;
 			}
+		}
+		else {
+			System.out.println("실패");
 		}
 		return null;
 	}
@@ -524,9 +559,11 @@ public class SocialController {
 					List<SocialMessageVO> mlist=this.socialService.getMessageList(s_pro.getId());
 					//대화 목록
 					SocialProfileVO m_pro=this.socialService.socialProfileInfoWithId(socialIdTo);
+					
 					m.addAttribute("mlist", mlist);
 					m.addAttribute("m_pro", m_pro);
 					m.addAttribute("socialIdFrom", socialIdFrom);
+					m.addAttribute("socialIdTo", socialIdTo);
 					
 					return "social/social_messenger";
 				}else {
@@ -583,4 +620,18 @@ public class SocialController {
 		
 		return "redirect:/social/profile?id="+sessionId;
 	}
+	
+	//소셜 회원 신고
+		@RequestMapping(value="/social/report")
+		public ModelAndView social_report(
+				int reportId,
+				int sendId
+				) {
+			ModelAndView m = new ModelAndView("social/social_report");
+			SocialProfileVO s_pro=this.socialService.socialProfileInfoWithId(reportId);
+			
+			m.addObject("s_pro",s_pro);
+			
+			return m;
+		}//social_update()
 }

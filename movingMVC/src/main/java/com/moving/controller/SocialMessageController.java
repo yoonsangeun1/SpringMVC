@@ -34,4 +34,9 @@ public class SocialMessageController {
 		}
 		return entity;
 	}//selectCommentList()
+	
+	@RequestMapping(value="insertMessage/{socialIdTo}")
+	public String insertMessage(@PathVariable("socialIdTo") int socialIdTo) {
+		return null;
+	}
 }

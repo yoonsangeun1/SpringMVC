@@ -39,7 +39,7 @@
 		</div>
 		<div id="SNS_main_mid">
 			<!-- 중간 글쓰기, 글보기 -->
-				<form action="post_write_ok?id=${sessionSocial.id}?page_num=0" enctype="mutipart/form-data" method="post" name="timeLineWriter">
+				<form action="post_write_ok?page_num=0" enctype="mutipart/form-data" method="post" name="timeLineWriter">
 					<div id="mid_pad">
 						<div id="SNS_Profile_Upload_Top">
 							<ul id="SNS_None_Ul"></ul>
@@ -100,7 +100,7 @@
 										 alt="프로필 사진">
 								</c:if>
 								<div class="SNS_Content_info">
-									<div class="SNS_Content_Author" onclick="location='/moving.com/social/profile?id=${s.socialProfileVO.id}';">${s.socialProfileVO.nickname}</div>
+									<div class="SNS_Content_Author" onclick="location='/moving.com/social/go_profile?m_id=${s.socialProfileVO.userId}';">${s.socialProfileVO.nickname}</div>
 									<c:set var="date" value="${s.registerDate}"/>
 									<div class="SNS_Content_Write_Time">
 										<script>/* 시간 차 계산 후 출력 */
@@ -145,7 +145,8 @@
 								<c:if test="${id==s.socialProfileVO.userId}">
 										<input class="SNS_Option_Button" type="button" value="삭제"	onclick="
 										if(confirm('정말로 삭제할까요?') == true){
-									location='/moving.com/social/post_del_ok/${id}?post_id=${s.id}&user_id=${s.socialProfileVO.userId}&page_num=0';}else{return}" style="float: right;">
+									location='/moving.com/social/post_del_ok?id=${s.id}&socialId=${s.socialProfileVO.userId}&page_num=0';}else{return}"
+									 style="float: right;">
 								</c:if>
 							</div>
 							<img class="SNS_Content_Image" alt="사진" src="../images/sns_photo.gif">
@@ -164,8 +165,14 @@
 								<c:if test="${!empty s_reply}">
 								<ul id="SNS_None_Ul_Main">
 									<li>
-										<img class="SNS_Content_user_img SNS_Profile_Picture" src="${s_reply.socialProfileVO.profileImagePath}"
-											width=30px height=30px alt="">
+										<c:if test="${empty s.socialProfileVO.profileImagePath}">
+											<img class="SNS_Content_user_img SNS_Profile_Picture" src="../images/member_profile.png"
+												width=30px height=30px alt="">
+										</c:if>
+										<c:if test="${!empty s.socialProfileVO.profileImagePath}">
+											<img class="SNS_Content_user_img SNS_Profile_Picture" src="${s_reply.socialProfileVO.profileImagePath}"
+												width=30px height=30px alt="">
+										</c:if>
 										<c:if test="${!empty s_reply.socialProfileVO.nickname}">
 											<p>${s_reply.socialProfileVO.nickname}</p>
 										</c:if>

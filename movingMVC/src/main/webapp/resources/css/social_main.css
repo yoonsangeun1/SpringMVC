@@ -397,6 +397,7 @@
 }
 /* 작성자, 제목, 내용을 표시한다. */
 .SNS_Content_Author {
+	width: 300px;
    font-size: 16px;
    margin-top: 3px;
    float: left;

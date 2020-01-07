@@ -66,7 +66,7 @@ INSERT INTO code_master VALUES (code_master_seq.nextval, 300, 3000208,'티저장
 INSERT INTO code_master VALUES (code_master_seq.nextval, 300, 3000209,'티저장르', '티저_기타','video_post',sysdate);
 select * from SOCIAL_PROFILE order by id desc
 -- 1. 범죄/스릴러 2. 액션/어드벤쳐 3. 다큐/드라마/청춘 4. 역사/시대극 5. 판타지/SF 6. 멜로/로맨스 7. 코메디 8.애니메이션 9. 기타
-delete from SOCIAL_PROFILE where user_id=5
+delete from SOCIAL_PROFILE 
 select * from M_USER where name='bb'--부가기능 전체
 INSERT INTO code_master VALUES (code_master_seq.nextval, 800, 800,'부가기능', '부가기능',null,sysdate);
 --댓글, 첨부파일, 무브(좋아요), 메세지, 신고, 추천리스트
@@ -100,6 +100,7 @@ SELECT * FROM code_master;
 select * from SocialMessage WHERE social_id_to=31, social_id_from=31
 /* 회원 */
 --관리자
+select * from social_profile
 INSERT INTO m_user (id, userid, nickname, email, password, genre_01, genre_02, genre_03)
 VALUES (m_user_seq.nextval, 'admin@gmail.com', '관리자', 'admin@gmail.com', 'admin', null, null, null);
 --관리자 회원 회원등급 부여
@@ -127,6 +128,7 @@ VALUES						(social_profile_seq.nextval, 50005, 1, '박진우', '/경로', 0,0,0
 INSERT INTO social_profile (id, code_no, user_id, nickname, profile_image_path, follower_count, follow_count,post_count)
 VALUES						(social_profile_seq.nextval, 50005, 3, '윤상은', '/경로', 0,0,0);
 select * from social_profile;
+select * from social_post;
 select * from social_message where social_id_from=30 or social_id_to=30
 /* 소셜  메세지*/
 INSERT INTO social_message (id,code_no,social_id_from,social_id_to,content,register_date)
@@ -444,7 +446,8 @@ ALTER TABLE NORMAL_POST DROP COLUMN content3;
  WHERE N.USER_ID = M.ID
  AND N.ID=13
 
-  SELECT * FROM NORMAL_POST;
+  SELECT * FROM social_POST;
+  SELECT * FROM social_profile;
   
    SELECT * FROM
  (SELECT ROW_NUMBER() OVER(ORDER BY N.ID DESC) rNum,
@@ -618,7 +621,10 @@ tcALTER TABLE profile_post
       REFERENCES code_master (
          code_no
       );
-      
+
+      SELECT id AS social_post_social_id, user_type, nickname, profile_image_path,user_id
+		FROM social_profile
+		WHERE id = 30
  SELECT * FROM
  (SELECT ROW_NUMBER() OVER(ORDER BY P.ID DESC) rNum,
  P.thumbnail_Image, P.ID AS board_actors_id,

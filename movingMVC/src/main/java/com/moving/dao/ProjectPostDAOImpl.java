@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.moving.domain.MCommentVO;
 import com.moving.domain.ProjectPostVO;
+import com.moving.domain.RewardVO;
 
 @Repository
 public class ProjectPostDAOImpl implements ProjectPostDAO {
@@ -109,6 +110,26 @@ public class ProjectPostDAOImpl implements ProjectPostDAO {
 	@Override
 	public void updateCommentCountNormal(int id) {
 		sqlSession.update("projectPost.updateCommentCountNormal", id);
+	}
+	
+	@Override
+	public int insertSelectProjectPost(ProjectPostVO projectPostVO) {
+		return sqlSession.insert("insertSelectProjectPost", projectPostVO);
+	}
+
+	@Override
+	public void updateProjectPost(ProjectPostVO projectPostVO) {
+		sqlSession.update("updateProjectPost", projectPostVO);
+	}
+
+	@Override
+	public void insertProjectReward(RewardVO rewardVO) {
+		sqlSession.insert("insertProjectReward", rewardVO);
+	}
+
+	@Override
+	public void selectProjectReward(int projectPostId) {
+		sqlSession.insert("selectProjectReward", projectPostId);
 	}
 	
 }
