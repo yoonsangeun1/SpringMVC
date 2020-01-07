@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.moving.domain.MCommentVO;
 import com.moving.domain.ProjectPostVO;
-import com.moving.domain.SocialProfileVO;
 import com.moving.service.ProjectPostService;
 
 @RestController
@@ -40,7 +39,7 @@ public class ProjectCommentController {
 			int re=1;
 			if(db_count == null ) re=-1;
 			if(re == 1) //값이 있을 경우
-			entity=new ResponseEntity<>(""+this.projectPostService.selectCommentCount(id).getCommentCount(), HttpStatus.OK);
+			entity=new ResponseEntity<>(""+this.projectPostService.selectCommentCountActors(id).getCommentCount(), HttpStatus.OK);
 		}catch(Exception e) { 
 			e.printStackTrace(); 
 			entity=new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -63,14 +62,15 @@ public class ProjectCommentController {
 		return entity;
 	}//selectCommentList()
 
-	//Map 타입 : 게시판 번호에 해당하는 댓글 목록 불러오기
+	//Map 타입 : 게시판 번호에 해당하는 댓글 목록 불러오기(Actors)
 	@RequestMapping(value="all/{id}", method=RequestMethod.GET)
 	public List<Map<String, Object>> selectCommentListMap(@PathVariable("id") int id) {
 		 /*@PathVariable("id") 애노테이션은 웹주소 경로에서 원하는 자료를 추출하는 용도로 사용.
 		 * 여기서는 {id}에 주어진 게시판 번호값을 가져와서 int id에 저장*/ 
 		List<Map<String, Object>> entity=null;
 		try {
-			entity=this.projectPostService.selectCommentListMap(id);
+			
+			entity=this.projectPostService.selectCommentListMapActors(id);
 			//System.out.println(entity.get(0).get(PROFILE_IMAGE_PATH));
 		}catch(Exception e) { 
 			e.printStackTrace(); 
@@ -78,6 +78,23 @@ public class ProjectCommentController {
 		}
 		return entity;
 	}//selectCommentList()
+	
+	//Map 타입 : 게시판 번호에 해당하는 댓글 목록 불러오기(Normal)
+		@RequestMapping(value="allNormal/{id}", method=RequestMethod.GET)
+		public List<Map<String, Object>> selectCommentListMapNormal(@PathVariable("id") int id) {
+			 /*@PathVariable("id") 애노테이션은 웹주소 경로에서 원하는 자료를 추출하는 용도로 사용.
+			 * 여기서는 {id}에 주어진 게시판 번호값을 가져와서 int id에 저장*/ 
+			List<Map<String, Object>> entity=null;
+			try {
+				
+				entity=this.projectPostService.selectCommentListMapNormal(id);
+				//System.out.println(entity.get(0).get(PROFILE_IMAGE_PATH));
+			}catch(Exception e) { 
+				e.printStackTrace(); 
+				//entity=new ResponseEntity<>();
+			}
+			return entity;
+		}//selectCommentList()
 	
 	//댓글 작성하기
 	@RequestMapping(value="/write", method=RequestMethod.POST)
@@ -109,6 +126,7 @@ public class ProjectCommentController {
 		}
 		return entity;
 	}//insertComment()
+	
 	
 	//댓글 수정하기
 	@RequestMapping(value="/update/{id}", method= {RequestMethod.PUT, RequestMethod.PATCH})

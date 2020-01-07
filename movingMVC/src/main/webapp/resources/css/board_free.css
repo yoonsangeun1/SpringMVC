@@ -89,9 +89,34 @@
 	box-sizing:border-box;
 }
 
+#bFree_table tr:hover{
+	background:#f3e9ec;
+}
+
 #bFree_table th, #bFree_table td{
 	border-top:1px solid grey;
 	padding:10px;
+}
+
+#bFree_table a{ /*테이블 하이퍼링크*/
+	color:black;
+	text-decoration:none;
+}
+
+#bFree_table a:link{ /*방문 전*/
+	color:black;
+}
+
+#bFree_table a:visited{ /*방문 후*/
+	color:grey;
+}
+
+#bFree_table a:hover{ /*호버 시*/
+	text-decoration:underline;
+}
+
+#bFree_table #author a:visited{ /*닉네임은 방문 후에도 블랙*/
+	color:black;
 }
 
 #bFree_writing{ /*글 쓰기 div*/
@@ -149,7 +174,7 @@
 	text-align:center;
 }
 
-#findField{ /*검색 구간 콤보박스*/
+#bFree_body #findField{ /*검색 구간 콤보박스*/
 	display:inline-block;
 	width:auto; height:31px;
 	padding:6px 12px;
@@ -181,6 +206,7 @@
 	border:1px solid #e8e8e8;
 	margin-left:auto;
 	margin-right:auto;
+	overflow:hidden;
 }
 
 #bFree_cont_table{ /* 테이블 */
@@ -251,6 +277,23 @@
 
 .bFree_cont_btn:hover{ /*버튼 호버시 */
 	background-color:#6a67ce;
+}
+
+#bFree_cont_body #fCont_CommentsCont{ /*댓글 div*/
+	width:1200px;
+	height:auto;
+	min-height:500px;
+	padding:0px 20px;
+	float:left;
+}
+
+#bFree_cont_body .SNS_Comment{
+	width: 1150px;
+    height: auto;
+    border-top: 1px solid grey;
+    margin-bottom: 6px;
+    text-align: left;
+    float: left;
 }
 
 

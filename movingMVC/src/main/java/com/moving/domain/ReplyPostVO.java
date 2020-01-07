@@ -5,26 +5,42 @@ import java.util.List;
 public class ReplyPostVO {				/* 계층형 게시판 */
 	
 	private int id;						/* 아이디 */
-	private int code_no; 				/* 코드_번호 10005 */
+	private int code_no; 				/* 코드_번호 10006 */
 	private int user_id; 				/* 회원_아이디 */
 	private String category; 			/* 분류 */
 	private String title; 				/* 제목 */
 	private String content; 			/* 내용 */
 	private int hit; 					/* 조회수 */
-	private String register_date; 		/* 등록_일 */
-	private int comment_count;			/* 댓글_개수 */
-	private int move_count; 			/* 무브_개수 */
-	private int reply_post_id; 			/* 답글_게시글_아이디 */
-	private int reply_step; 			/* 답글_계층 */
-	private int reply_order; 			/* 답글_정렬순서 */
-	private int publish_availability; 	/* 공개_여부 */
+	private String registerDate; 		/* 등록_일 */
+	private int commentCount;			/* 댓글_개수 */
+	private int moveCount; 			/* 무브_개수 */
+	private int replyPostId; 			/* 답글_게시글_아이디 */
+	private int replyStep; 			/* 답글_계층 */
+	private int replyOrder; 			/* 답글_정렬순서 */
+	private int publishAvailability; 	/* 공개_여부 */
 	
 	/* JOIN 검색, resultMap을 위한 변수 */
 	private List<MCommentVO> mCommentVO;			/* 댓글 VO */
 	private MUserVO mUserVO;						/* 회원 VO */
 	private List<AttachedFileVO> attachedFileVO; 	/* 첨부파일 VO */
 	private List<MoveVO> moveVO; 					/* 무브(좋아요) VO */
+	private SocialProfileVO socialProfileVO;		/*SNS VO*/
 	
+	//페이징 관련변수(쪽나누기)
+	private int startrow; //시작행 번호
+	private int endrow; //끝행 번호
+	
+	//검색기능
+	private String findName; //검색어
+	private String findField; //검색필드
+	
+	
+	public SocialProfileVO getSocialProfileVO() {
+		return socialProfileVO;
+	}
+	public void setSocialProfileVO(SocialProfileVO socialProfileVO) {
+		this.socialProfileVO = socialProfileVO;
+	}
 	public int getId() {
 		return id;
 	}
@@ -67,47 +83,47 @@ public class ReplyPostVO {				/* 계층형 게시판 */
 	public void setHit(int hit) {
 		this.hit = hit;
 	}
-	public String getRegister_date() {
-		return register_date;
+	public String getRegisterDate() {
+		return registerDate;
 	}
-	public void setRegister_date(String register_date) {
-		this.register_date = register_date;
+	public void setRegisterDate(String registerDate) {
+		this.registerDate = registerDate;
 	}
-	public int getComment_count() {
-		return comment_count;
+	public int getCommentCount() {
+		return commentCount;
 	}
-	public void setComment_count(int comment_count) {
-		this.comment_count = comment_count;
+	public void setCommentCount(int commentCount) {
+		this.commentCount = commentCount;
 	}
-	public int getMove_count() {
-		return move_count;
+	public int getMoveCount() {
+		return moveCount;
 	}
-	public void setMove_count(int move_count) {
-		this.move_count = move_count;
+	public void setMoveCount(int moveCount) {
+		this.moveCount = moveCount;
 	}
-	public int getReply_post_id() {
-		return reply_post_id;
+	public int getReplyPostId() {
+		return replyPostId;
 	}
-	public void setReply_post_id(int reply_post_id) {
-		this.reply_post_id = reply_post_id;
+	public void setReplyPostId(int replyPostId) {
+		this.replyPostId = replyPostId;
 	}
-	public int getReply_step() {
-		return reply_step;
+	public int getReplyStep() {
+		return replyStep;
 	}
-	public void setReply_step(int reply_step) {
-		this.reply_step = reply_step;
+	public void setReplyStep(int replyStep) {
+		this.replyStep = replyStep;
 	}
-	public int getReply_order() {
-		return reply_order;
+	public int getReplyOrder() {
+		return replyOrder;
 	}
-	public void setReply_order(int reply_order) {
-		this.reply_order = reply_order;
+	public void setReplyOrder(int replyOrder) {
+		this.replyOrder = replyOrder;
 	}
-	public int getPublish_availability() {
-		return publish_availability;
+	public int getPublishAvailability() {
+		return publishAvailability;
 	}
-	public void setPublish_availability(int publish_availability) {
-		this.publish_availability = publish_availability;
+	public void setPublishAvailability(int publishAvailability) {
+		this.publishAvailability = publishAvailability;
 	}
 	public List<MCommentVO> getmCommentVO() {
 		return mCommentVO;
@@ -133,5 +149,31 @@ public class ReplyPostVO {				/* 계층형 게시판 */
 	public void setMoveVO(List<MoveVO> moveVO) {
 		this.moveVO = moveVO;
 	}
+	public int getStartrow() {
+		return startrow;
+	}
+	public void setStartrow(int startrow) {
+		this.startrow = startrow;
+	}
+	public int getEndrow() {
+		return endrow;
+	}
+	public void setEndrow(int endrow) {
+		this.endrow = endrow;
+	}
+	public String getFindName() {
+		return findName;
+	}
+	public void setFindName(String findName) {
+		this.findName = findName;
+	}
+	public String getFindField() {
+		return findField;
+	}
+	public void setFindField(String findField) {
+		this.findField = findField;
+	}
+	
+	
 	
 }

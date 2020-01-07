@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>자유게시판 내용</title>
+<script src="../resources/js/normal_post_comment.js"></script>
 
 </head>
 <body>
@@ -84,6 +85,69 @@
 				</c:if>
 				
 	</div> <%--버튼들 div --%>		
+	
+	 <div id="fCont_CommentsCont">
+				<div class="SNS_Comment">
+
+					<%------------------------------------------------------------------------------------------------ --%>
+					<%-- 댓글 작성 --%>
+					<div class="SNS_Comment_Write">
+						<%-- 본인의 프로필 사진이 있다면,없다면 분기 나누기 나중에 프로필사진--%>
+						<%-- 프로필 이미지가 있을 경우 --%>
+						<c:if test="${'default' != profile_image_url }">
+							<img class="SNS_Content_user_img" class="SNS_Profile_Picture"
+								src="${profile_image_url}" width="30" height="30"
+								alt="">
+						</c:if>
+						<%-- 프로필 이미지가 없을 경우 --%>
+						<c:if test="${'default' == profile_image_url }">
+							<img class="SNS_Content_user_img" class="SNS_Profile_Picture"
+								src="${pageContext.request.contextPath}/resources/images/member_profile.png" width="30" height="30" alt="">
+						</c:if>
+						<input type="hidden" id="normal_post_id" size="40" value="${bf.id}">
+						<p id="sessionId">${nickname}</p>
+						<input id="content" name="content" class="SNS_Comment_Write_Chat">
+						<input id="write" name="write" class="SNS_Comment_Write_Button" type="button" 
+						value="작성" >
+					</div>
+					
+					<%-- 댓글 목록 출력 --%>
+					<%-- 댓글이 있다면 --%>
+					<ul id="replies" 
+						style="margin-top: 7px; list-style: none; align-items: center;">
+						 <c:if test="${!empty bf.mCommentVO }">
+							<c:forEach var="comment" items="${bf.mCommentVO }">
+								<li class='replies' data-commentId='${comment.id }' style="align-items: center;">
+									<div class='comment_no' style='display:none'>${comment.id}</div>
+									<input type="hidden" class="id" value="${comment.id }">
+									<c:if test="${ comment.mUserVO.profileImageUrl != 'default'}">
+										<img class="SNS_Content_user_img" class="SNS_Profile_Picture"
+											src="${comment.mUserVO.profileImageUrl }" width="30" height="30" alt="">
+									</c:if> 
+									<c:if test="${comment.mUserVO.profileImageUrl == 'default'}">
+										<img class="SNS_Content_user_img" class="SNS_Profile_Picture"
+											src="${pageContext.request.contextPath}/resources/images/member_profile.png" width="30" height="30" alt="">
+									</c:if>
+									<p><a href="/moving.com/member_mypage?mid=${comment.userIdFrom}">
+									${comment.mUserVO.nickname }</a></p>
+									<p class='comment_content_${comment.id }'>${comment.content}</p>
+									<input name='comment_txt_${comment.id }' class='comment_txt' value='${comment.content }' style='display: none;'>
+									<c:set var="sessionId" value="${id }"></c:set>
+									<c:if test="${comment.userIdFrom == sessionId }">
+									<button type="button" name="modify_${comment.id}" class="modify SNS_Comment_Write_Button" >수정</button>
+									<button type="button" name="modify_ok_${comment.id}" class="modify_ok SNS_Comment_Write_Button"  style='display: none;'>수정 완료</button>
+									<button type="button" name="delete_${comment.id}" class="delete SNS_Comment_Write_Button" >삭제</button>
+									</c:if>
+									</li>
+							</c:forEach>
+						</c:if>
+						<c:if test="${empty bf.mCommentVO}">
+							<li><p>작성된 댓글이 아직 없습니다</p></li>
+						</c:if>
+					</ul>
+				</div>
+
+			</div>
 	
 	</div> <%--body 전체 div --%>
 

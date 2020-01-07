@@ -50,7 +50,7 @@
 		<tr>
 		 <th id="no"><span>번호</span></th>
 		 <th id="title"><span>제목</span></th>
-		 <th id="author"><span>글쓴이</span></th>
+		 <th id="author"><span>닉네임</span></th>
 		 <th id="time"><span>날짜</span></th>
 		 <th id="hit"><span>조회수</span></th>
 		</tr>
@@ -69,7 +69,7 @@
 			
 			
 	<c:choose>
-     <c:when test="${fn:length(bflist.title) > 19}"> <%--20자 이상일 경우 --%>
+     <c:when test="${fn:length(bflist.title) > 19}"> <%--19자 넘을경우 --%>
 	  <c:set var="title" value="${fn:substring(bflist.title,0,18)}..." />
 	   <td>
 	    <c:if test="${(empty findField) && (empty findName)}"> <%--검색 전 --%>

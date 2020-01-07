@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BoardQna">
+
+<resultMap type="replyPostVO" id="boardInfo" autoMapping="true">
+		<id property="id" column="board_qna_id"/> <!-- board_free_id는 AS로 별칭을 지정해 준 것임. -->
+		<result property="title" column="title" />
+		<result property="userId" column="board_qna_user_id" />
+		<result property="registerDate" column="board_qna_registerDate" />
+		<result property="hit" column="hit" />
+		<result property="content" column="content" />
+		
+			<association property="mUserVO" javaType="com.moving.domain.MUserVO"
+			 autoMapping="true">
+			</association>
+			
+			<association property="socialProfileVO" javaType="com.moving.domain.SocialProfileVO"
+			 autoMapping="true">
+			 <id property="id" column="social_profile_id"/>
+			</association>
+		
+</resultMap>
+
+
+<!-- 검색 저누,후 게시물 개수 -->
+<select id="bq_count" resultType="int">
+ SELECT COUNT(*) FROM REPLY_POST R
+ <where>
+ R.CODE_NO = 10006
+ <if test="findField == ''"></if> <!-- 검색값이 없을 경우 -->
+ <if test="findField == 'title'"> <!-- 검색조건이 제목인 경우 -->
+ AND R.TITLE LIKE #{findName}
+ </if>
+ <if test="findField == 'content'"><!-- 검색조건이 내용인 경우 -->
+ AND R.CONTENT LIKE #{findName}
+ </if>
+ <if test="findField == 'nickname'"><!-- 검색조건이 닉네임인 경우 -->
+ AND R.USER_ID IN
+ (SELECT U.ID FROM M_USER U
+ WHERE U.nickname LIKE #{findName})
+ </if>
+ </where>
+</select>
+
+<!-- 페이징 + 목록보기 -->
+<select id="bq_list" resultMap="boardInfo">
+ SELECT * FROM
+ (SELECT ROW_NUMBER() OVER(ORDER BY R.ID DESC) rNum,
+ R.ID AS board_qna_id, R.TITLE, U.NICKNAME, S.ID AS social_profile_id,
+ R.REGISTER_DATE AS board_qna_registerDate, R.HIT
+ FROM REPLY_POST R
+ LEFT OUTER JOIN M_USER U ON R.USER_ID = U.ID
+ LEFT OUTER JOIN SOCIAL_PROFILE S ON U.ID = S.USER_ID
+ <where>
+ R.CODE_NO = 10006
+ <if test="findField == ''"></if> <!-- 값이 없을 경우 -->
+ <if test="findField == 'title'"> <!-- 검색 필드가 제목일 경우 -->
+ AND R.TITLE LIKE #{findName}
+ </if>
+ <if test="findField == 'content'"><!-- 검색 필드가 내용일 경우 -->
+ AND R.CONTENT LIKE #{findName}
+ </if>
+ <if test="findField == 'nickname'"><!-- 검색 필드가 닉네임일 경우 -->
+ AND U.NICKNAME LIKE #{findName}
+ </if>
+ </where>
+ ORDER BY board_qna_id DESC)
+ WHERE rNum &gt;= #{startrow}
+ AND rNum &lt;= #{endrow}
+</select>
+
+<!-- 질문 글쓰기 -->
+<insert id="bq_in">
+ INSERT INTO REPLY_POST (ID,USER_ID,TITLE,CONTENT,CODE_NO,REPLY_STEP,REPLYORDER)
+ VALUES(reply_post_seq.nextval,#{userId},#{title},
+ #{content},10006,reply_post_seq.nextval,0)
+</insert>
+
+ 
+
+</mapper>
+
+
+

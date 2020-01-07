@@ -24,6 +24,9 @@ public interface ProjectPostService {
 	ProjectPostVO selectCommentCount(int id);
 	int selectListCount(ProjectPostVO projectPostVO);//게시글 리스트 개수 구하기
 	List<ProjectPostVO> selectProjectList(ProjectPostVO projectPostVO);
+	MCommentVO selectCommentCountActors(int id);
+	List<Map<String, Object>> selectCommentListMapActors(int id);
+	List<Map<String, Object>> selectCommentListMapNormal(int id);
 	
 
 

@@ -34,3 +34,27 @@ FROM NORMAL_POST N
  FROM NORMAL_POST N, M_USER M
  WHERE N.USER_ID = M.ID
  AND N.ID=143
+ 
+ alter table M_comment add (content varchar2(4000 ) )
+ 
+ INSERT INTO m_comment 
+		(id, user_id_from, content, COMMENT_ID_REPLY, PROJECT_POST_ID, profile_post_id)
+		VALUES 
+		(m_comment_seq.nextval, 4,
+		'안녕', m_comment_seq.nextval, null, 120)
+		
+select * from project_post;
+		
+select * from profile_post where id=1;
+
+insert into profile_post (id) values (0);
+select * from profile_post where id=0;
+
+insert into normal_post (id) values (0);
+select * from normal_post where id=0;
+
+insert into project_post (id) values (0);
+select * from project_post where id=0;
+
+select * from  m_comment;
+

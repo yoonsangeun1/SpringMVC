@@ -48,12 +48,12 @@ public class BoardController {
 //		return new ModelAndView("board/board_free");
 //	}//free() //free_list로 할거?야
 
-	//QnA
+/*	//QnA
 	@RequestMapping(value="/board/qna")
 	public ModelAndView qna() {
 		return new ModelAndView("board/board_qna");
 	}//qna()
-
+*/
 /*	//글 작성
 	@RequestMapping(value="/write")
 	public ModelAndView write() {

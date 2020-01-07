@@ -6,6 +6,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="BoardActors"> <!-- 배우 모집 xml -->
 
+<resultMap type="mCommentVO" id="mCommentInfo">
+	<id property="id" column="m_comment_id"/>
+	<result property="content" column="content"/>
+	<result property="userIdFrom" column="user_id_from"/>
+	<association property="mUserVO"
+		javaType="com.moving.domain.MUserVO" autoMapping="true" 
+	 column="user_id_from" select="selectCommentUser">
+	</association>
+</resultMap>
 <resultMap type="profilePostVO" id="boardInfo" autoMapping="true">
 		<id property="id" column="board_actors_id"/> <!-- board_actors_id는 AS로 별칭을 지정해 준 것임. -->
 		<result property="title" column="title" />
@@ -27,6 +36,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			 autoMapping="true">
 			 <id property="id" column="social_profile_id"/>
 			</association>
+			
+			<collection property="mCommentVO" javaType="java.util.List" ofType="MCommentVOInfo"
+			column="board_actors_id" select="selectCommentList">
+				<id property="id" column="m_comment_id"/>
+			</collection>
 			
 </resultMap>
 
@@ -115,6 +129,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  NAME,ETCTEXT
  FROM PROFILE_POST P
  WHERE P.ID=#{id}
+</select>
+
+<select id="selectCommentList" resultMap="mCommentInfo">
+SELECT id AS m_comment_id, content, user_id_from
+FROM m_comment
+WHERE profile_post_id = #{profile_post_id}
+order by m_comment_id desc
+</select>
+<select id="selectCommentUser" resultType="mUserVO">
+SELECT nickname, profile_image_url
+FROM m_user
+WHERE id = #{user_id_from}
 </select>
 
 <!-- 내용수정 -->
