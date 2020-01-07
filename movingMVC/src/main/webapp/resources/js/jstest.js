@@ -52,7 +52,7 @@ $(function(){
          if(data=='SUCCESS') {
             alert('댓글이 등록되었습니다!');
             getCommentList();//댓글 목록 함수 호출! 갱신된 내용 가져옴.
-            getCommentCount();//댓글 개수 불러오기
+            //getCommentCount();//댓글 개수 불러오기
             $('#content').val("");
          }
       }
@@ -180,7 +180,7 @@ $(function(){
 				if(data=='SUCCESS') {
 					alert('댓글이 수정되었습니다!');
 					getCommentList();//댓글 목록 함수 호출! 갱신된 내용 가져옴.
-					getCommentCount();//댓글 개수 불러오기
+					//getCommentCount();//댓글 개수 불러오기
 				}
 			}
 		});
@@ -190,6 +190,7 @@ $(function(){
 /* 댓글 삭제 */
 $(function(){
 	$('#replies').on('click','.replies .delete',function() {
+		if(confirm('삭제하시겠습니까?')) {
 		var reply=$(this).parent();
 		var rno=reply.attr('data-commentId');//댓글 번호
 
@@ -205,10 +206,13 @@ $(function(){
 				if(data=='SUCCESS'){
 					alert('댓글이 삭제되었습니다!');
 					getCommentList();//댓글 목록 함수 호출! 갱신된 내용 가져옴.
-					getCommentCount();//댓글 개수 불러오기
+					//getCommentCount();//댓글 개수 불러오기
 				}
 			}
 		});
+	}else {
+		return false;
+	}
 	});
 })
    
