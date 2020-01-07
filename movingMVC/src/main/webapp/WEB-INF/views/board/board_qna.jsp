@@ -57,7 +57,14 @@
  		 <c:if test="${!empty bqlist}"> <%--bqlist에 값이 있으면 --%>
  		  <c:forEach var="bqlist" items="${bqlist}">
  		   <tr style="height:44px">
+ 		   <c:if test="${bqlist.replyStep == 0}"> <%--원본글일때 --%>
  		    <td id="no">${bqlist.id}</td>
+ 		   </c:if>
+ 		   
+ 		   <c:if test="${bqlist.replyStep != 0}"> <%-- 답변글일때 --%>
+ 		   <td></td>
+ 		   </c:if>
+ 		   
  		   <c:set var="bqlist.title" value="${bqlist.title}" /> <%--변수에 제목값 저장 --%>
  		   <c:set var="bqlist.mUserVO.nickname" value="${bqlist.mUserVO.nickname}" />
  		   

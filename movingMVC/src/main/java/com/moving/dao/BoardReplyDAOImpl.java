@@ -54,5 +54,15 @@ public class BoardReplyDAOImpl implements BoardReplyDAO {
 	public void delBoardQna(int id) {
 		this.sqlSession.delete("bq_del",id);
 	}//질문 게시글 삭제
+
+	@Override
+	public void replyBoardQna(ReplyPostVO bq) {
+		this.sqlSession.insert("bq_reply",bq);
+	}//답변 글쓰기
+
+	@Override
+	public int selectReply(int id) {
+		return this.sqlSession.selectOne("bq_reply_select",id);
+	}//답변글이 이미 있는지 확인.
 	
 }//BoardReplyDAOImpl class

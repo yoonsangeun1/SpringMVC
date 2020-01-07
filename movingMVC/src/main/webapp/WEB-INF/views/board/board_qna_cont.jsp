@@ -6,7 +6,6 @@
 <head>
 <meta charset="UTF-8">
 <title>QnA 내용</title>
-<script src="../resources/js/normal_post_comment.js"></script>
 
 </head>
 <body>
@@ -64,6 +63,9 @@
 	
 	<div id="bQna_cont_button"> <%--버튼들 div --%>
 	
+			<input type="button" value="답변쓰기" class="bQna_cont_btn button
+			button_c9d8ce2 button_f12 button_p1024 button_r4"
+			onclick="location='/moving.com/board/qna_reply?id=${bq.id}&page=${page}';" />
 			<input type="button" value="수정" class="bQna_cont_btn button
        button_c9d8ce2 button_f12 button_p1024 button_r4"
 				onclick="location=

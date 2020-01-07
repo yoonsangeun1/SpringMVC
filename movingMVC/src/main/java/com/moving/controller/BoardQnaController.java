@@ -290,23 +290,27 @@ public class BoardQnaController { /*질문게시판 컨트롤러*/
 				
 				ReplyPostVO bq=this.boardReplyService.getCont2(id);
 				
-				int m_userid=(int) session.getAttribute("id");
+				int replycheck=this.boardReplyService.selectReply(id); //아이디를 기준으로 답변글이 있는지 확인하기 위함.
 				
-				if(m_userid == bq.getUserId()) { //m_user의 id와 reply_post의 user_id가 일치한다면
-					
-					m.addAttribute("bq",bq);
-					m.addAttribute("page",page);
-					m.addAttribute("id",id);
-					
-					return "";
-					
-				}else { /*본인 게시글이 아닌경우*/
+				System.out.println(id);
+				System.out.println(replycheck);
+				
+				if(replycheck > 0) { /*0 이상일 경우 */
 					out.println("<script>");
-					out.println("alert('본인 게시글만 수정 가능합니다!');");
+					out.println("alert('이미 답변글이 등록 된 게시글입니다!');");
 					out.println("history.back();");
 					out.println("</script>");
-				}//if else
+				}else { /* 0이상이 아닐경우 */
+					
+				ModelAndView cm=new ModelAndView();
 				
+					cm.addObject("bq",bq);
+					cm.addObject("page",page);
+					cm.setViewName("board/board_qna_reply"); //reply 페이지 ,답변 페이지
+					
+					return cm;
+				}//if else
+	
 			}else { /*세션에 값이 없을 경우*/
 				out.println("<script>");
 				out.println("alert('로그인을 해주세요!');");
@@ -315,12 +319,48 @@ public class BoardQnaController { /*질문게시판 컨트롤러*/
 			}//if else
 			
 			return null;
-			
-		}//board_qna_edit()
-		
-		return null;
 		
 	}//board_qna_reply()
+	
+	//답변 글쓰기 완료 후 목록보기로 이동
+	@RequestMapping("/board/qna_reply_ok")
+	public String board_qna_reply_ok(
+			int id,
+			int page,
+			ReplyPostVO bq,
+			HttpServletResponse response,
+			HttpServletRequest request,
+			HttpSession session) throws Exception{
+		
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out=response.getWriter();
+		session=request.getSession();
+		
+		if(session.getAttribute("id") != null) {
+			
+			int user_id=(int)session.getAttribute("id");
+			
+			System.out.println(id);
+			
+			bq.setUserId(user_id);
+			bq.setReplyStep(id);
+			
+			this.boardReplyService.replyBoardQna(bq); //답변 저장
+			
+			System.out.println("page는"+page);
+	
+			return "redirect:/board/qna?page="+page;
+			
+		}else { // 넘겨온 id 값이 없을경우, 또는 세션 만료되었을 경우?
+			out.println("<script>");
+			out.println("alert('로그인을 해주세요!');");
+			out.println("location='/moving.com/member/login';");
+			out.println("</script>");
+		}//if else
+		
+		return null;
+
+	}//board_qna_reply_ok()
 	
 	
 	
