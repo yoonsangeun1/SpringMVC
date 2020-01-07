@@ -52,13 +52,13 @@ function movie_check(){
 	} // 상영시간
 	
 	if($.trim($('#aMUploadC_titleText').val()) == ''){
-		alert('제목을 입력해주세요!');
+		alert('한글 제목을 입력해주세요!');
 		$('#aMUploadC_titleText').val('').focus();
 		return false;
 	} // 한글제목
 	
 	if($.trim($('#aMUploadC_titleText2').val()) == ''){
-		alert('제목을 입력해주세요!');
+		alert('영어 제목을 입력해주세요!');
 		$('#aMUploadC_titleText2').val('').focus();
 		return false;
 	} // 영문제목
@@ -85,15 +85,39 @@ function movie_check(){
 
 function teaser_check(){
 	
-	if($.trim($('#aMUploadC_genreT').val()) == '30001'){
+	if($.trim($('#aMUploadC_directorT').val()) == ''){
+		alert('감독을 입력해주세요!');
+		$('#aMUploadC_directorT').val('').focus();
+		return false;
+	} // 장르
+	
+	if($('#aMUploadC_genreT').val() == '30001'){
 		alert('장르를 선택해주세요!');
-		$('#aMUploadC_genreT').val('30001').focus();
+		$('#aMUploadC_genreT').val('30002').focus();
+		return false;
+	} // 장르
+	
+	if($('#aMUploadC_ratingT').val() == 'null'){
+		alert('상영등급을 선택해주세요!');
+		$('#aMUploadC_ratingT').val('null').focus();
 		return false;
 	} // 장르
 	
 	if($.trim($('#aMUploadC_titleTextT').val()) == ''){
-		alert('제목을 입력해주세요!');
+		alert('한글 제목을 입력해주세요!');
 		$('#aMUploadC_titleTextT').val('').focus();
+		return false;
+	}
+	
+	if($.trim($('#aMUploadC_titleTextT2').val()) == ''){
+		alert('영어 제목을 입력해주세요!');
+		$('#aMUploadC_titleTextT2').val('').focus();
+		return false;
+	}
+	
+	if($.trim($('#aMUploadC_titleTextT3').val()) == ''){
+		alert('날짜를 입력해주세요!');
+		$('#aMUploadC_titleTextT3').val('').focus();
 		return false;
 	}
 	

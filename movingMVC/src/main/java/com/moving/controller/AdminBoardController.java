@@ -12,11 +12,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.moving.domain.NormalPostVO;
-import com.moving.domain.VideoPostVO;
 import com.moving.service.AdminBoardService;
 
 //@RequestMapping(value="/admin")
@@ -69,7 +69,7 @@ public class AdminBoardController {
 			endpage=startpage +10 -1;
 		
 		ModelAndView npmlist=new ModelAndView();
-		
+			
 		npmlist.addObject("nplist",nplist); // nplist 키 이름에 nplist 컬렉션 저장
 		npmlist.addObject("page",page);
 		npmlist.addObject("startpage",startpage);
@@ -132,10 +132,12 @@ public class AdminBoardController {
 		session=request.getSession();
 		
 		if(session.getAttribute("id") != null) { //세션으로 id 값이 있을경우
-			int id=(int)session.getAttribute("id");
+			int user_id=(int)session.getAttribute("id");
+			ModelAndView bw = new ModelAndView("admin/admin_notice_write");
 			
-			if(id != 0) {
-				return new ModelAndView("admin/admin_notice_write");
+			
+			if(user_id != 0) {
+				return bw;
 			}//if
 		}else {
 			out.println("<script>");
@@ -168,9 +170,9 @@ public class AdminBoardController {
 			
 			this.adminBoardService.noticeWrite(np);//np값을 기준으로 글쓰기 완료하기
 				
-			rttr.addFlashAttribute("msg","BOARD/NOTICE_INSERT");
+			rttr.addFlashAttribute("msg","WRITE");
 			
-			return "redirect:/admin/notice"; //목록으로 이동
+			return "redirect:/admin/board?codeNo=0"; //목록으로 이동
 			
 		}else { //넘겨온 id값이 없을경우, 또는 세션 만료되었을 경우
 			out.println("<script>");
@@ -183,28 +185,30 @@ public class AdminBoardController {
 		
 	} // adminWriteOk()
 	
-	/* 공지 내용보기 */
-	@RequestMapping("/admin/board/notice_cont")
-	public ModelAndView adminNoticeCont(
+	/* 게시물 내용보기 */
+	@RequestMapping("/admin/board/board_cont")
+	public ModelAndView adminNoticeCont(@RequestParam("id")
 			int id, //id는 게시글 시퀀스 id
-			int page) throws Exception{
+			@RequestParam("page") int page, @RequestParam("codeNo") int codeNo) throws Exception{
 		
 		//번호에 해당하는 디비 레코드값을 가져옴
 		NormalPostVO np=this.adminBoardService.noticeCont(id);
-		
-		ModelAndView cm=new ModelAndView("/admin/notice_cont");
+		String np_cont=np.getContent().replace("\n","<br/>");
+		ModelAndView cm=new ModelAndView("/admin/admin_board_cont"); // textarea영역에서 엔터키 친부분을 다음줄로 개행
 		
 		cm.addObject("np",np);
 		cm.addObject("page",page);
+		cm.addObject("codeNo",codeNo);
 		
 		return cm;
 		
 	} // adminNoticeCont()
 	
-	/* 공지 수정 */
-	@RequestMapping("/admin/board/notice_edit")
+	/* 게시물 수정 */
+	@RequestMapping("/admin/board/board_edit")
 	public String adminNoticeEdit(int id, //게시글 번호 id
 			int page,						//페이지
+			int codeNo,
 			Model m,						
 			HttpServletRequest request,
 			HttpServletResponse response,
@@ -220,21 +224,24 @@ public class AdminBoardController {
 			
 			int m_userid=(int)session.getAttribute("id"); //세션으로 받아온 id를 m_userid에 저장
 			
-			if(m_userid == np.getUserId()) { //m_user의 id와 normal_post의
-				//user_id가 일치한다면
+//			if(m_userid == np.getUserId()) { //m_user의 id와 normal_post의
+//				//user_id가 일치한다면
 				
 				m.addAttribute("np",np);
 				m.addAttribute("page",page);
-				m.addAttribute("id",id);
+				m.addAttribute("codeNo",codeNo);
 				
-				return "admin/admin_notice_edit"; //view페이지로 이동
+				return "admin/admin_board_edit"; //view페이지로 이동
 				
-			}else { //본인 게시글 수정이 아닐경우 // 즉 해당 글을 쓴 관리자만 수정 가능?하게
-				out.println("<script>");
-				out.println("alert('본인 게시글만 수정 가능합니다!');");
-				out.println("history.back();");
-				out.println("</script>");
-			}// if else
+//			}else { //본인 게시글 수정이 아닐경우 // 즉 해당 글을 쓴 관리자만 수정 가능?하게
+//				
+//				out.println("<script>");
+//				out.println("alert('본인 게시글만 수정 가능합니다!');");
+//				out.println("alert("+m_userid+");");
+//				out.println("alert("+np.getUserId()+");");
+//				out.println("history.back();");
+//				out.println("</script>");
+//			}// if else
 			
 		}else { //세션에 값이 없을 경우
 			out.println("<script>");
@@ -248,53 +255,60 @@ public class AdminBoardController {
 	} // adminNoticeEdit()
 	
 	/* 공지 수정 완료 */
-	@RequestMapping("/admin/board/notice_edit_ok")
-	public String AdminNoticeEditOk(NormalPostVO np,
+	@RequestMapping("/admin/board/board_edit_ok")
+	public String adminNoticeEditOk(NormalPostVO np,
 			int page,
 			int id,
+			int codeNo,
+			String findField,
+			String findName,
 			RedirectAttributes rttr) throws Exception{
 		
 		this.adminBoardService.noticeEdit(np);
 		
-		rttr.addFlashAttribute("msg","BOARD/NOTICE_EDIT");
+		rttr.addFlashAttribute("msg","EDIT"); // 개사물 수정 후 수정완료 알림
 		
-		return "redirect:/admin/board/notice_cont?id="+id+"&page="+page; //해당 내용보기 페이지로 이동
+		return "redirect:/admin/board/board_cont?codeNo="+codeNo+"&id="+id+"&page="+page+"&findField="+findField+"&findName="+findName; //해당 내용보기 페이지로 이동
 		
-	} // AdminNoticeEditOk()
+	} // adminNoticeEditOk()
 	
 	/* 공지 삭제 */
-	@RequestMapping("/admin/board/notice_del")
-	public String AdminNoticeDel(int id,int page,
-			HttpServletResponse response,
+	@RequestMapping("/admin/board/board_del")
+	public String adminNoticeDel(int id, //게시글 번호 id
+			int page,						//페이지
+			int codeNo,
 			HttpServletRequest request,
+			HttpServletResponse response,
 			HttpSession session,
 			RedirectAttributes rttr) throws Exception{
 		
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out=response.getWriter();
 		session=request.getSession();
-		
+
 		if(session.getAttribute("id") != null) { //세션에 값이 있을 경우
-			
+
 			NormalPostVO np=this.adminBoardService.noticeCont(id); //글번호 id를 기준으로 검색
-			
+
 			int m_userid=(int)session.getAttribute("id"); //세션으로 받아온 id를 m_userid에 저장
-			
-			if(m_userid == np.getUserId()) { //m_user의 id와 normal_post의 user_id가 일치한다면
-				
+
+//			if(m_userid == np.getUserId()) { //m_user의 id와 normal_post의 user_id가 일치한다면
+
 				this.adminBoardService.noticeDel(id);
 				
-				rttr.addFlashAttribute("msg","BOARD/NOTICE_DEL"); //삭제 msg 전달
+				rttr.addFlashAttribute("msg","DEL"); // 게시물 삭제 후 삭제완료 알림
 				
-				return "redirect:/admin/board/notice?page="+page; //view 페이지로 이동
-				
-			}else { //본인 게시글 삭제가 아닐경우
-				out.println("<script>");
-				out.println("alert('본인 게시글만 삭제 가능합니다!');");
-				out.println("history.back();");
-				out.println("</script>");
-			}//if else
-			
+				return "redirect:/admin/board?codeNo="+codeNo+"&page="+page; //view 페이지로 이동
+
+//			}else { //본인 게시글 삭제가 아닐경우
+//				out.println("<script>");
+//				out.println("alert('본인 게시글만 삭제 가능합니다!');");
+//				out.println("alert("+m_userid+");");
+//				out.println("alert("+np.getUserId()+");");
+//				out.println("history.back();");
+//				out.println("</script>");
+//			}//if else
+
 		}else { //세션에 값이 없을 경우
 			out.println("<script>");
 			out.println("alert('로그인을 해주세요!');");
@@ -304,5 +318,5 @@ public class AdminBoardController {
 		
 		return null;
 		
-	}//AdminNoticeDel()
+	}// adminNoticeDel()
 }

@@ -8,9 +8,9 @@
 	
 	<%-- 게시판 글 목록표 생성 --%>
 	<table id="aBoard_table" border="1">
-		<tr>
-			<td>
-			<form method="get" action="/moving.com/admin/board?codeNo=${codeNo}">
+		<tr class="non">
+			<td colspan="2">
+			<form method="get" action="/moving.com/admin/board?codeNo=${codeNo}" style="float: left;">
 				<select class="slt" name="codeNo">
 					<option value="0"
 						<c:if test="${codeNo==0 }"> ${'selected' }</c:if>>전체</option>
@@ -32,10 +32,10 @@
 			</form>
 			</td>
 			
-			<td colspan="5" align="right" style="text-align: right">게시물 수  : ${boardCount }개</td>
+			<td colspan="4" align="right" style="text-align: right">게시물 수  : ${boardCount }개</td>
 		</tr>
 		<tr>
-			<th scope="col" class="aBT_check"><input type="checkbox" name="aBoard_check" value="checkB" /></th>
+			<th scope="col" class="aBT_check"><input type="checkbox" name="aBoard_check" id="ckAll" value="checkAll" /></th>
 			<th scope="col" class="aBT_no">번호</th>
 			<th scope="col" class="aBT_title">제목</th>
 			<th scope="col" class="aBT_writer">작성자</th>
@@ -44,16 +44,18 @@
 		</tr>
 		<c:if test="${!empty nplist}">
 			<c:forEach var="n" items="${nplist }">
-			<tr>
-				<td class="bCheck"><input type="checkbox" name="checkBoard" value="${n.codeNo }" /></td>
-				<td class="bNo">${n.id }</td>
-				<td class="bTitle">${n.title }</td>
-				<td class="bUserId">${n.mUserVO.nickname }</td>
-				<td class="bRegisterDate">${n.registerDate }</td>
-				<td class="bHit">${n.hit }</td>
+			<input type="hidden" name="no_${n.id}" value="${n.id }"/>
+			<tr data-value="${n.id }" class="tag" >
+				<td class="bCheck" data-value="${n.id }"><input type="checkbox" name="checkBoard" value="${n.id }" data-value="${n.id }" class="chk"/></td>
+				<td class="bNo" data-value="${n.id }">${n.id }</td>
+				<td class="bTitle" data-value="${n.id }">${n.title }</td>
+				<td class="bUserId" data-value="${n.id }">${n.mUserVO.nickname }</td>
+				<td class="bRegisterDate" data-value="${n.id }">${n.registerDate }</td>
+				<td class="bHit" data-value="${n.id }">${n.hit }</td>
 			</tr>
 			</c:forEach>
 		</c:if>
+		
 		<c:if test="${empty nplist }">
 			<tr>
 				<td colspan="6" align="center">등록된 게시글이 없습니다!</td>
@@ -140,6 +142,10 @@
 <!-- 		</tr> -->
 		
 	</table>
+	<div class="editBtn">
+			<button type="button" onclick="location.href='board/notice_write'" class="but">글쓰기</button>
+			<button type="button" id="delBtn" class="but" >삭제</button>
+	</div>
 	
 	<%-- 페이징 목록 --%>
 	<div id="aBoard_pageCtrl">
@@ -213,4 +219,80 @@
 		
 	</div>
 </div>
+<script>
+	$(function(){
+		// 체크박스 전체 선택&해제
+		$('#ckAll').click(function(){
+			if($('#ckAll').prop("checked")){
+				$("input[type=checkbox]").prop("checked",true);
+			}else{
+				$("input[type=checkbox]").prop("checked",false);
+			}
+		});
+		
+		// 체크박스 개별선택시 전체선택 해제
+		$(".chk").click(function(){
+			$('#ckAll').prop("checked",false);
+		});
+		
+// 		// 삭제버튼 기능 추가
+// 		$('#delBtn').click(function(){
+// 			if(confirm('삭제하시겠습니까?')){
+// 				$("input[name=checkBoard:checked]").each(function(){
+// 					var tr_value = $(checkBoard).val();
+// 					var tr=$("tr[data-value='"+tr_value+"']");
+// 				});
+// 			}else{
+// 				return false;
+// 			}
+// 		});
+
+		$("#delBtn").click(function() {
+			var confirmOk = confirm('삭제하시겠습니까?');
+			
+			
+				var checkArr = new Array();
+				
+				$("input[name=checkBoard]:checked").each(function() {
+					checkArr.push($(this).attr('data-value'));
+					var n_id = $(this).attr('data-value');
+					var test = $(this).val();
+					
+					$.ajax({
+						url : "/moving.com/admin/board/board_del?codeNo=${codeNo}&id="+n_id+"&page=${page}",
+						type : "get",
+						data : { checkBoard : checkArr},
+						success : function(){
+							//alert('삭제');
+// 							location.href = "/moving.com/admin/board?codeNo=0"
+						}
+						
+					});
+				});
+			//if(confirmOk){
+				alert('삭제 완료되었습니다!');
+				
+				location.href = "/moving.com/admin/board?codeNo=0"
+			//}
+			
+		});
+		
+		$(".tag :not(:first-child)").click(function(){
+			var n_id = $(this).attr('data-value');
+			location.href="board/board_cont?codeNo=${codeNo}&id="+n_id+"&page=${page}&findField=${findField}&findName=${findName}";
+		})
+	});
+	
+	var msg = "${msg}"; // 자바스크립트에서 스프링컨트롤러에서 설정한 키이름을 EL(표현언어)로 참조 가능하다.
+	if (msg == 'WRITE') {
+		alert("게시물 저장에 성공했습니다!");
+	}
+	if (msg == "EDIT") {
+		alert("게시물 수정에 성공했습니다!");
+	}
+	if (msg == 'DEL') {
+		alert('게시물 삭제에 성공했습니다!');
+	}
+	
+</script>
 <%@ include file="../include/admin_footer.jsp" %>

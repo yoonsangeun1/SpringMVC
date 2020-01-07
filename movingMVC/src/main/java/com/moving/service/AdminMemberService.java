@@ -12,4 +12,6 @@ public interface AdminMemberService {
 
 	MUserVO memberInfo(String userid);
 
+	void memberEdit(MUserVO mu);
+
 }

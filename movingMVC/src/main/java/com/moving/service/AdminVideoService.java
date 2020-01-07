@@ -12,4 +12,6 @@ public interface AdminVideoService {
 
 	List<VideoPostVO> videoList(VideoPostVO vp);
 
+	void insertTeaser(VideoPostVO vp);
+
 }
