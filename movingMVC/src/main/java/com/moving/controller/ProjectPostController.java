@@ -1,8 +1,10 @@
 package com.moving.controller;
 
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -102,10 +104,97 @@ public class ProjectPostController {
 
 	//펀딩 글쓰기
 	@RequestMapping("project/write")
-	public String write() {
-		return "project/project_write";
+	public ModelAndView write(ProjectPostVO projectPostVO, 
+			HttpServletResponse response,
+			HttpServletRequest request,
+			HttpSession session) throws Exception {
+
+		response.setContentType("text/html;charset=UTF-8");
+		PrintWriter out=response.getWriter();
+		session=request.getSession();
+		String nickname=(String)session.getAttribute("nickname");
+		
+		ModelAndView m=new ModelAndView();
+		
+		if(nickname == null) {
+			out.println("<script>");
+			out.println("alert('로그인이 필요합니다!');");
+			out.println("location='/moving.com/member/login';");
+			out.println("</script>");
+		}else {
+			String userLv=(String)session.getAttribute("user_lv");
+			
+			if(!userLv.equals("제작사")) {
+				out.println("<script>");
+				out.println("alert('일반 회원이신가요? 제작사 회원으로 전환해주세요!');");
+				out.println("location='/moving.com/member_change';");
+				out.println("</script>");
+			}else {
+				if(request.getParameter("id") !=null) {//전달받은 id값이 있는 경우 
+					int id=Integer.parseInt(request.getParameter("id"));
+					projectPostVO=projectPostService.selectprojectInfo(id);//id를 기준으로 글 정보를 불러와서
+					m.addObject("projectPostVO", projectPostVO);//모델엔뷰에 저장하여
+					m.setViewName("/project/project_write");//정보를 가지고 글쓰기 페이지로 이동
+					return m;
+				}
+				if(projectPostVO.getId() == 0) {//id값이 없는 경우 ( 새로 게시글 쓰는 경우 
+					//System.out.println("전:"+projectPostVO.getId());
+					projectPostVO.setUserId((int)session.getAttribute("id"));//세션에서 작성자 id 가져와서 저장하여
+					projectPostService.insertSelectProjectPost(projectPostVO);//새로운 프로젝트 생성
+					//System.out.println("후:"+projectPostVO.getId());
+					m.addObject("projectPostVO", projectPostVO);//프로젝트 고유번호를 가지고 
+					m.setViewName("/project/project_write");//글쓰기 페이지로 이동
+					return m;
+				}
+			}
+		}
+		return null;
+		
 	}//write()
 	
+	//펀딩 글쓰기 완료
+	@RequestMapping("project/write_ok")
+	public ModelAndView writeOk(ProjectPostVO projectPostVO, //int id, 
+			HttpServletResponse response,
+			HttpServletRequest request,
+			HttpSession session) throws Exception {
+		response.setContentType("text/html;charset=UTF-8");
+		PrintWriter out=response.getWriter();
+		session=request.getSession();
+		String nickname=(String)session.getAttribute("nickname");
+		
+		ModelAndView m=new ModelAndView();
+		
+		if(nickname == null) {
+			out.println("<script>");
+			out.println("alert('로그인이 필요합니다!');");
+			out.println("location='/moving.com/member/login';");
+			out.println("</script>");
+		}else {
+			String userLv=(String)session.getAttribute("user_lv");
+			
+			if(!userLv.equals("제작사")) {
+				out.println("<script>");
+				out.println("alert('일반 회원이신가요? 제작사 회원으로 전환해주세요!');");
+				out.println("location='/moving.com/member_change';");
+				out.println("</script>");
+			}else {
+				this.projectPostService.updateProjectPost(projectPostVO);//프로젝트 수정사항 저장
+				
+				if(request.getParameter("id") != null) {//전달받은 프로젝트 번호가 있을 경우
+					int id=Integer.parseInt(request.getParameter("id"));
+					projectPostVO=projectPostService.selectprojectInfo(id);//프로젝트 정보 저장해서 
+					m.addObject("projectPostVO", projectPostVO);
+					m.setViewName("/project/project_write");//글쓰기 페이지로 이동
+					return m;
+				}
+			}
+		}
+		return null;
+	}//write()
+	
+	
+		
 	//펀딩 카테고리리스트
 	@RequestMapping("project/category")
 	public String categoryList() {

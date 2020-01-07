@@ -289,4 +289,48 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			)
 		WHERE id= #{id}
 	</update>
+	
+	<!-- 게시물 저장 -->
+	<insert id="insertSelectProjectPost">
+		INSERT INTO project_post
+		(id, user_id)
+		VALUES
+		(project_post_seq.nextval, #{userId})
+		<selectKey keyProperty="id" resultType="Integer" order="AFTER">
+			SELECT project_post_seq.currval FROM dual
+		</selectKey>
+	</insert>
+	
+	<!-- 게시물 수정 -->
+	<update id="updateProjectPost">
+		UPDATE project_post
+		SET 
+		title = #{title},
+		introduce = #{introduce},
+		target_price = #{targetPrice},
+		code_no = #{codeNo},
+		target_limit = #{targetLimit}
+		WHERE 
+		id = #{id}
+	</update>
+	
+	<!-- 프로젝트 리워드 저장 -->
+	<insert id="insertProjectReward">
+		INSERT INTO reward
+		(id, user_id, project_post_id, title, content, price, 
+		delivery_fee_existence, delivery_expect_date, limit_count, no)
+		VALUES
+		(reward_seq.nextval, #{userId}, #{projectPostId}, #{title}, #{content}, 
+		#{price}, #{deliveryFeeExistence}, #{deliveryExpectDate}, #{limitCount}, #{no})
+		<selectKey keyProperty="id" resultType="Integer" order="AFTER">
+			SELECT reward_seq.currval FROM dual
+		</selectKey>
+	</insert>
+	
+	<!-- 프로젝트 게시글 번호를 기준으로 리워드 모두 불러오기 -->
+	<select id="selectProjectReward" resultType="rewardVO">
+		SELECT * FROM reward
+		WHERE project_post_id = #{projectPostId}
+		ORDER BY no ASC
+	</select>
 </mapper>

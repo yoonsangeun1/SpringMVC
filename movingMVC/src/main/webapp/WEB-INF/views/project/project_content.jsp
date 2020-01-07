@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="../include/header.jsp"%>
+<script src="${pageContext.request.contextPath}/resources/js/jstest2.js"></script>
 
 <!-- 크라우드 펀딩 상세 페이지 -->
 <%-- 펀딩 제목, 간략 소개글 --%>
