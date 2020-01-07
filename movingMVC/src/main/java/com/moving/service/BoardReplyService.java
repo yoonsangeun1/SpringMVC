@@ -14,5 +14,7 @@ public interface BoardReplyService {
 	ReplyPostVO getCont2(int id);
 	void editBoardQna(ReplyPostVO bq);
 	void delBoardQna(int id);
+	void replyBoardQna(ReplyPostVO bq);
+	int selectReply(int id);
 
 }

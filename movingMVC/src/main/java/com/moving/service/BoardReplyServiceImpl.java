@@ -52,5 +52,15 @@ public class BoardReplyServiceImpl implements BoardReplyService {
 	public void delBoardQna(int id) {	
 		this.boardReplyDao.delBoardQna(id);
 	}
+
+	@Override
+	public void replyBoardQna(ReplyPostVO bq) {
+		this.boardReplyDao.replyBoardQna(bq);
+	}
+
+	@Override
+	public int selectReply(int id) {
+		return this.boardReplyDao.selectReply(id);
+	}
 	
 }

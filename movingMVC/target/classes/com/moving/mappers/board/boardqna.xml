@@ -49,9 +49,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- 페이징 + 목록보기 -->
 <select id="bq_list" resultMap="boardInfo">
  SELECT * FROM
- (SELECT ROW_NUMBER() OVER(ORDER BY R.ID DESC) rNum,
+ (SELECT ROW_NUMBER() OVER(ORDER BY REPLY_STEP desc, REPLY_ORDER ASC) rNum,
  R.ID AS board_qna_id, R.TITLE, U.NICKNAME, S.ID AS social_profile_id,
- R.REGISTER_DATE AS board_qna_registerDate, R.HIT
+ R.REGISTER_DATE AS board_qna_registerDate, R.HIT, R.REPLY_ORDER
  FROM REPLY_POST R
  LEFT OUTER JOIN M_USER U ON R.USER_ID = U.ID
  LEFT OUTER JOIN SOCIAL_PROFILE S ON U.ID = S.USER_ID
@@ -68,7 +68,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  AND U.NICKNAME LIKE #{findName}
  </if>
  </where>
- ORDER BY board_qna_id DESC)
+ ORDER BY REPLY_STEP desc, REPLY_ORDER ASC)
  WHERE rNum &gt;= #{startrow}
  AND rNum &lt;= #{endrow}
 </select>
@@ -119,6 +119,20 @@ WHERE ID=#{id}
  DELETE FROM REPLY_POST
  WHERE ID=#{id}
 </delete>
+
+<!-- 답변 글쓰기 완료 -->
+<insert id="bq_reply">
+ INSERT INTO REPLY_POST (ID, USER_ID, TITLE,CONTENT,CODE_NO,
+ REPLY_STEP, REPLY_ORDER)
+ VALUES(reply_post_seq.nextval, #{userId}, #{title},
+ #{content},10006,#{id},#{replyOrder}+1) 
+</insert>
+
+<select id="bq_reply_select" resultType="int">
+ SELECT Count(*) FROM REPLY_POST
+ WHERE REPLY_ORDER = 1
+ AND REPLY_STEP = #{id}
+</select>
 
 </mapper>
 
