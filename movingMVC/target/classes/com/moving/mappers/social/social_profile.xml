@@ -147,7 +147,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 일반아이디에 해당하는 소셜 아이디로 주입 -->
 	<insert id="insertSocialProfile">
 		insert into social_profile(id,nickname,user_id,user_type,introduce,profile_image_path,background_image_path)
-		values (social_profile_seq.nextval,#{nickname},#{userId},1,#{introduce},default,default)
+		values (social_profile_seq.nextval,#{nickname},#{userId},1,#{introduce},#{profileImagePath},default)
 		<selectKey keyProperty="id" resultType="Integer" order="AFTER">
 			select social_profile_seq.currval from dual
 		</selectKey>

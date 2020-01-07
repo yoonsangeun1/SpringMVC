@@ -37,12 +37,14 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/funding_cont.css" /><%-- 펀딩 글 보기 --%>
 
 <%-- member css 추가 --%>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/member_login.css" /><%-- 로그인 폼 --%>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/member_join.css" /><%-- 회원가입 폼 --%>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/member_login.css" /><%-- 로그인 폼 --%>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/member_mypage.css" /><%-- 마이페이지 폼 --%>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/member_change.css" /><%-- 회원전환 폼 --%>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/member_infosetting.css" /><%-- 회원설정 폼 --%>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/member_find.css" /> <%-- 회원찾기 폼 --%>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/member_delete.css" /><%-- 회원탈퇴 폼 --%>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/member_point.css" /><%-- 포인트충전 폼 --%>
 
 
 <%-- movie css 추가 --%>
@@ -212,16 +214,16 @@
 							</div>
 							<ul class="MyMenu_subMenu">
 								<li>
-									<a href="#" class="MyMenu_subMenuBtn">
+									<a href="/moving.com/member_point" class="MyMenu_subMenuBtn">
 										나의 포인트 ${user_point} 점
 										<i class="fas fa-chevron-right" aria-hidden="true" style="float:right"></i>
 									</a>
 								</li>
-								<li>
-									<a href="#" class="MyMenu_subMenuBtn">
-										나의 지지서명<i class="fas fa-chevron-right" aria-hidden="true" style="float:right"></i>
-									</a>
-								</li>
+<!-- 								<li> -->
+<!-- 									<a href="#" class="MyMenu_subMenuBtn"> -->
+<!-- 										나의 지지서명<i class="fas fa-chevron-right" aria-hidden="true" style="float:right"></i> -->
+<!-- 									</a> -->
+<!-- 								</li> -->
 								<li>
 									<a href="/moving.com/member_change" class="MyMenu_subMenuBtn"> 
 											 회원 전환<i class="fas fa-chevron-right" aria-hidden="true" style="float: right"></i> 

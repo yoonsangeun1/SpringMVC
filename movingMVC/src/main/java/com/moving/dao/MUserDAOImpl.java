@@ -109,7 +109,18 @@ public class MUserDAOImpl implements MUserDAO {
 	@Override
 	public MUserVO selectUserInfo(int mid) {
 		return this.sqlSession.selectOne("selectUserInfo",mid);
+	}//회원정보 검색
+
+	@Override
+	public int selectBoardCount(int mid) {
+		return this.sqlSession.selectOne("selectBoardCount",mid);
+	}//게시글 갯수 검색
+
+	@Override
+	public void socialProfileUpload(MUserVO m) {
+		this.sqlSession.update("socialProfileUpload",m);
 	}
+
 
 
 }

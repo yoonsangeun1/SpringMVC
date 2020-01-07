@@ -1,0 +1,33 @@
+@charset "UTF-8";
+
+#mPoint_wrap {
+	width: 1200px;
+    height: auto;
+    min-height: 750px;
+    display: flex;
+    margin: auto auto;
+    background-color: #F5F5F5;
+}
+
+#mPoint_form{ 
+	width: 800px;
+    min-height: 400px;
+    height: auto;
+    margin: auto auto;
+    margin-top: 150px;
+    margin-bottom: 50px;
+    display: inline-block;
+    box-sizing: border-box;
+    background-color: white;
+    border-radius: 5px;
+    border: 1px solid #e8e8e8;
+    outline: none;
+}
+
+#mPoint_form section {
+	float: left;
+    min-height: 300px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    box-sizing: border-box;
+}
