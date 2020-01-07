@@ -1,123 +1,53 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="../include/sns_header.jsp"%>
-
-
+<%@ taglib prefix="c" 
+            uri="http://java.sun.com/jsp/jstl/core" %>
 	<div id="SNS_Messenger_Wrap">
 		<!-- 오브젝트 항목 래핑 -->
 		<div id="SNS_Messenger_Left">
-			<img id="SNS_Messenger_Photo" src="../images/model15.jpg">
-			<h4 id="SNS_Messenger_Photo_Title">채팅</h4>
+		<c:if test="${!empty s_pro.profileImagePath}">
+			<img id="SNS_Messenger_Photo" src="${s_pro.profileImagePath}"
+				onclick="location='/moving.com/social/profile?id='+${sessionSocial.id}">
+		</c:if>
+		<c:if test="${empty s_pro.profileImagePath}">
+			<img id="SNS_Messenger_Photo" src="../images/member_profile.png"
+				onclick="location='/moving.com/social/profile?id='+${sessionSocial.id}">
+		</c:if>
+		<p id="SNS_Messenger_Photo_Title">채팅</p>
 			<div id="SNS_Messenger_Chat">
+			<c:if test="${!empty mlist}">
+			<c:forEach var="mlist" items="${mlist}">
+				<div id="SNS_Messenger_Chat_List" onclick="location.href='/moving.com/social/messenger?socialIdFrom=${sessionSocial.id}&socialIdTo=${mlist.mid}';">
+					<div id="SNS_Messenger_Chatting">
+						<c:if test="${mlist.socialProfileVO.profileImagePath=='default'}">
+							<img id="SNS_Messenger_Chat_Photo" src="${mlist.socialProfileVO.profileImagePath }">
+						</c:if>
+						<c:if test="${mlist.socialProfileVO.profileImagePath!='default'}">
+							<img id="SNS_Messenger_Chat_Photo" src="../images/member_profile.png">
+						</c:if>
+						<div id="SNS_Messenger_Chat_Name">${mlist.socialProfileVO.nickname }</div>
+					</div>
+				</div>
+			</c:forEach>
+			</c:if>
+			<c:if test="${empty mlist}">
 				<div id="SNS_Messenger_Chat_List">
 					<div id="SNS_Messenger_Chatting">
-						<img id="SNS_Messenger_Chat_Photo" src="../images/sns_photo7.jpg">
-						<div id="SNS_Messenger_Chat_Name">홍채인식</div>
-						<div id="SNS_Messenger_Chat_Talk">홍채 팝니다.</div>
+						대화 목록이 없습니다.
 					</div>
-					<div id="SNS_Messenger_Chat_Day">어제</div>
 				</div>
-				<div id="SNS_Messenger_Chat_List">
-					<div id="SNS_Messenger_Chatting">
-						<img id="SNS_Messenger_Chat_Photo" src="../images/sns_photo8.jpg">
-						<div id="SNS_Messenger_Chat_Name">한지우</div>
-						<div id="SNS_Messenger_Chat_Talk">피카츄 팝니다.</div>
-					</div>
-					<div id="SNS_Messenger_Chat_Day">토요일</div>
-				</div>
-				<div id="SNS_Messenger_Chat_List">
-					<div id="SNS_Messenger_Chatting">
-						<img id="SNS_Messenger_Chat_Photo" src="../images/sns_photo9.jpg">
-						<div id="SNS_Messenger_Chat_Name">뽀로로</div>
-						<div id="SNS_Messenger_Chat_Talk">크롱 팝니다.</div>
-					</div>
-					<div id="SNS_Messenger_Chat_Day">화요일</div>
-				</div>
-				<div id="SNS_Messenger_Chat_List">
-					<div id="SNS_Messenger_Chatting">
-						<img id="SNS_Messenger_Chat_Photo" src="../images/sns_photo10.jpg">
-						<div id="SNS_Messenger_Chat_Name">안두인</div>
-						<div id="SNS_Messenger_Chat_Talk">스톰윈드 팝니다.</div>
-					</div>
-					<div id="SNS_Messenger_Chat_Day">월요일</div>
-				</div>
-				<div id="SNS_Messenger_Chat_List">
-					<div id="SNS_Messenger_Chatting">
-						<img id="SNS_Messenger_Chat_Photo" src="../images/sns_photo11.jpg">
-						<div id="SNS_Messenger_Chat_Name">윈스턴</div>
-						<div id="SNS_Messenger_Chat_Talk">바나나 팝니다.</div>
-					</div>
-					<div id="SNS_Messenger_Chat_Day">2019.10.31</div>
-				</div>
-				<div id="SNS_Messenger_Chat_List">
-					<div id="SNS_Messenger_Chatting">
-						<img id="SNS_Messenger_Chat_Photo" src="../images/sns_photo12.jpg">
-						<div id="SNS_Messenger_Chat_Name">야스오</div>
-						<div id="SNS_Messenger_Chat_Talk">대리해드립니다.</div>
-					</div>
-					<div id="SNS_Messenger_Chat_Day">2017.4.10</div>
-				</div>
-				<div id="SNS_Messenger_Chat_List">
-					<div id="SNS_Messenger_Chatting">
-						<img id="SNS_Messenger_Chat_Photo" src="../images/sns_photo12.jpg">
-						<div id="SNS_Messenger_Chat_Name">야스오</div>
-						<div id="SNS_Messenger_Chat_Talk">대리해드립니다.</div>
-					</div>
-					<div id="SNS_Messenger_Chat_Day">2017.4.9</div>
-				</div>
-				<div id="SNS_Messenger_Chat_List">
-					<div id="SNS_Messenger_Chatting">
-						<img id="SNS_Messenger_Chat_Photo" src="../images/sns_photo12.jpg">
-						<div id="SNS_Messenger_Chat_Name">야스오</div>
-						<div id="SNS_Messenger_Chat_Talk">대리해드립니다.</div>
-					</div>
-					<div id="SNS_Messenger_Chat_Day">2017.4.8</div>
-				</div>
-				<div id="SNS_Messenger_Chat_List">
-					<div id="SNS_Messenger_Chatting">
-						<img id="SNS_Messenger_Chat_Photo" src="../images/sns_photo12.jpg">
-						<div id="SNS_Messenger_Chat_Name">야스오</div>
-						<div id="SNS_Messenger_Chat_Talk">대리해드립니다.</div>
-					</div>
-					<div id="SNS_Messenger_Chat_Day">2017.4.7</div>
-				</div>
-				<div id="SNS_Messenger_Chat_List">
-					<div id="SNS_Messenger_Chatting">
-						<img id="SNS_Messenger_Chat_Photo" src="../images/sns_photo12.jpg">
-						<div id="SNS_Messenger_Chat_Name">야스오</div>
-						<div id="SNS_Messenger_Chat_Talk">대리해드립니다.</div>
-					</div>
-					<div id="SNS_Messenger_Chat_Day">2017.4.6</div>
-				</div>
-				<div id="SNS_Messenger_Chat_List">
-					<div id="SNS_Messenger_Chatting">
-						<img id="SNS_Messenger_Chat_Photo" src="../images/sns_photo12.jpg">
-						<div id="SNS_Messenger_Chat_Name">야스오</div>
-						<div id="SNS_Messenger_Chat_Talk">대리해드립니다.</div>
-					</div>
-					<div id="SNS_Messenger_Chat_Day">2017.4.5</div>
-				</div>
-				<div id="SNS_Messenger_Chat_List">
-					<div id="SNS_Messenger_Chatting">
-						<img id="SNS_Messenger_Chat_Photo" src="../images/sns_photo12.jpg">
-						<div id="SNS_Messenger_Chat_Name">야스오</div>
-						<div id="SNS_Messenger_Chat_Talk">대리해드립니다.</div>
-					</div>
-					<div id="SNS_Messenger_Chat_Day">2017.4.4</div>
-				</div>
-				<div id="SNS_Messenger_Chat_List">
-					<div id="SNS_Messenger_Chatting">
-						<img id="SNS_Messenger_Chat_Photo" src="../images/sns_photo12.jpg">
-						<div id="SNS_Messenger_Chat_Name">야스오</div>
-						<div id="SNS_Messenger_Chat_Talk">대리해드립니다.</div>
-					</div>
-					<div id="SNS_Messenger_Chat_Day">2017.4.3</div>
-				</div>
+			</c:if>
 			</div>
 		</div>
 		<div id="SNS_Messenger_Mid">
 			<div id="SNS_Messenger_Mid_Up">
-				<img id="SNS_Messenger_Photo" src="../images/sns_photo7.jpg">
-				<h4 id="SNS_Messenger_Photo_Title">홍채인식</h4>
+				<c:if test="${empty m_pro.profileImagePath}">
+					<img id="SNS_Messenger_Photo" src="../images/member_profile.png">
+				</c:if>
+				<c:if test="${!empty m_pro.profileImagePath}">
+					<img id="SNS_Messenger_Photo" src="${m_pro.image_profile_path}">
+				</c:if>
+				<p id="SNS_Messenger_Photo_Title">${m_pro.nickname}</p>
 			</div>
 			<div id="SNS_Messenger_Mid_Down">
 				<div id="SNS_Messenger_Intro">
@@ -144,13 +74,18 @@
 		</div>
 		<div id="SNS_Messenger_Right_Up">
 			<div id="SNS_Friend_Image">
-				<img src="../images/sns_photo7.jpg">
-				<h4>홍채인식</h4>
+				<c:if test="${empty m_pro.profileImagePath}">
+					<img src="../images/member_profile.png">
+				</c:if>
+				<c:if test="${!empty m_pro.profileImagePath}">
+					<img src="${m_pro.image_profile_path}">
+				</c:if>
+				<p>${m_pro.nickname}</p>
 			</div>
 			<div id="SNS_Friend_Menu">
 				<ul id="SNS_Friend_Ul">
-					<li id="SNS_Friend_Li"><input id="SNS_Friend_Button" type="button" value="프로필 바로가기"></li>
-					<li id="SNS_Friend_Li"><input id="SNS_Friend_Button" type="button" value="닉네임 변경하기"></li>
+					<li id="SNS_Friend_Li"><input id="SNS_Friend_Button" type="button" value="프로필 바로가기" onclick="location.href='/moving.com/social/profile?id=${m_pro.id}';"></li>
+<!-- 					<li id="SNS_Friend_Li"><input id="SNS_Friend_Button" type="button" value="닉네임 변경하기"></li> -->
 					<li id="SNS_Friend_Li"><input id="SNS_Friend_Button" type="button" value="차단하기"></li>
 					<li id="SNS_Friend_Li"><input id="SNS_Friend_Button" type="button" value="신고하기"></li>
 				</ul>

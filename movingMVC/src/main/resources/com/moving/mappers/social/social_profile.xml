@@ -117,7 +117,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT id AS m_comment_social_id, nickname,profile_image_path FROM social_profile
 		WHERE id = #{socialProfileIdFrom}
 	</select>
-	
 	<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@일반 단일 쿼리문@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 	
 	<!-- 소셜 게시글 작성한다. -->
@@ -153,6 +152,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			select social_profile_seq.currval from dual
 		</selectKey>
 	</insert>
+	
+	<!-- 소셜 회원 정보 수정 -->
+	<update id="updateInfo">
+		UPDATE social_profile SET nickname = #{nickname},
+		introduce = #{introduce} WHERE id = #{id}
+	</update>
 	<!-- ==================================<구분선>====================================== -->
 	<!-- 회원에 해당하는  게시글 검색 (게시글 + 댓글 + 작성자) -->
 	<select id="selectSocialPostInfo" resultMap="socialPostInfo">

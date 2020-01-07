@@ -598,3 +598,9 @@ li.SNS_Profile_Menu_Button:last-child{
     padding-bottom: 10px;
     float: left;
 }
+#SNS_Profile_Edit_Intro{
+	top: 200px;
+	left: 500px;
+	outline:none;
+	border-radius: 30px;
+}

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.moving.domain.AttachedFileVO;
+import com.moving.domain.SocialMessageVO;
 import com.moving.domain.SocialPostVO;
 import com.moving.domain.SocialProfileVO;
 
@@ -67,4 +68,13 @@ public class SocialDAOImpl implements SocialDAO {
 		this.sqlsession.insert("insertAttachFiles",aFile);
 	}
 
+	@Override
+	public List<SocialMessageVO> getMessageList(int id) {
+		return this.sqlsession.selectList("socialMessage.getMessageList",id);
+	}
+
+	@Override
+	public void updateInfo(SocialProfileVO s_pro) {
+		this.sqlsession.update("updateInfo",s_pro);
+	}
 }

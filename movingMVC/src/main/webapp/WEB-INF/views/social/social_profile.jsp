@@ -19,10 +19,10 @@
 				<c:if test="${!empty s_pro.profileImagePath}">
 					<div id="SNS_Profile_Background" style="background-image:url('${s_pro.backgroundImagePath}')">
 				</c:if>
-					<c:if test="${s_pro.profileImagePath != 'default'}">					<!-- 회원 이미지가 없을 경우 기본 이미지로 설정 -->
+					<c:if test="${!empty s_pro.profileImagePath}">					<!-- 회원 이미지가 없을 경우 기본 이미지로 설정 -->
 						<img id="SNS_Profile_Photo" src="${s_pro.profileImagePath}">
 					</c:if>
-					<c:if test="${s_pro.profileImagePath == 'default'}">
+					<c:if test="${empty s_pro.profileImagePath}">
 						<img id="SNS_Profile_Photo" src="../images/member_profile.png">
 					</c:if>
 					<div id="SNS_Profile_Title_Name">
@@ -34,10 +34,14 @@
 	 				</c:if>
 	 				</div>				
 				</div>
-				<div id="SNS_Profile_Foreground">		
+				<div id="SNS_Profile_Foreground">
 					<div id="SNS_Profile_Introduce">
-							<p>${s_pro.introduce}</p>
-					</div>		
+						<p>${s_pro.introduce}</p>
+						<c:if test="${s_pro.id==sessionSocial.id}">
+							<input id="SNS_Profile_Edit_Intro" type="button" value="수정하기" 
+								onclick="location='/moving.com/social/update?sessionId=${sessionSocial.id}';">
+						</c:if>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -48,7 +52,12 @@
 				<li class="SNS_Profile_Menu_Button SNS_Background" onclick="setScrollX(2500);">모아보기</li>
 				<li class="SNS_Profile_Menu_Button SNS_Background" onclick="setScrollX(3750);">팔로우 목록</li>
 <%-- 				<c:if test="${sessionSocial.id != s_pro.id}"> --%>
-				<li class="SNS_Profile_Menu_Button SNS_Background" onclick="alert(${sessionSocial.id});">메시지 보내기</li>
+				<c:if test="${s_pro.id==sessionSocial.id}">
+					<li class="SNS_Profile_Menu_Button SNS_Background" onclick="location='/moving.com/social/messenger?socialIdFrom=${sessionSocial.id}&socialIdTo=0';">메시지 보내기</li>
+				</c:if>
+				<c:if test="${s_pro.id!=sessionSocial.id}">
+					<li class="SNS_Profile_Menu_Button SNS_Background" onclick="location='/moving.com/social/messenger?socialIdFrom=${sessionSocial.id}&socialIdTo=${s_pro.id}';">메시지 보내기</li>
+				</c:if>
 <%-- 				</c:if> --%>
 			</ul>
 		</div>
@@ -111,11 +120,11 @@
 							<input type="hidden" id="id" value="${s_post.id }">
 							<input type="hidden" id="socialId" value="${s_pro.id }">
 								<div class="SNS_Profile_Post">
-									<c:if test="${s_pro.profileImagePath != 'default'}">
+									<c:if test="${!empty s_pro.profileImagePath}">
 										<img class="SNS_Content_user_img"
 											src="${s_pro.profileImagePath}" width="40" height="40" alt="">
 									</c:if>
-									<c:if test="${s_pro.profileImagePath == 'default'}">
+									<c:if test="${empty s_pro.profileImagePath}">
 										<img class="SNS_Content_user_img"
 											src="../images/member_profile.png" width="40" height="40"
 											alt="">
@@ -212,13 +221,13 @@
 											</script>
 											<%-- 본인의 프로필 사진이 있다면,없다면 분기 나누기 나중에 프로필사진--%>
 											<%-- 프로필 이미지가 있을 경우 --%>
-											<c:if test="${'default' != s_pro.profileImagePath }">
+											<c:if test="${!empty s_pro.profileImagePath}">
 												<img class="SNS_Content_user_img"
 													class="SNS_Profile_Picture" src="${profile_image_url }"
 													width="30" height="30" alt="">
 											</c:if>
 											<%-- 프로필 이미지가 없을 경우 --%>
-											<c:if test="${'default' == s_pro.profileImagePath }">
+											<c:if test="${empty s_pro.profileImagePath}">
 												<img class="SNS_Content_user_img"
 													class="SNS_Profile_Picture"
 													src="../images/member_profile.png" width="30" height="30"

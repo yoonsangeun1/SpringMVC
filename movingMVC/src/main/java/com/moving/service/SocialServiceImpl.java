@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.moving.dao.SocialDAO;
 import com.moving.domain.AttachedFileVO;
+import com.moving.domain.SocialMessageVO;
 import com.moving.domain.SocialPostVO;
 import com.moving.domain.SocialProfileVO;
 
@@ -71,4 +72,13 @@ public class SocialServiceImpl implements SocialService {
 		this.socialDAO.insertAttachFiles(aFile);
 	}
 
+	@Override
+	public List<SocialMessageVO> getMessageList(int id) {
+		return this.socialDAO.getMessageList(id);
+	}
+
+	@Override
+	public void updateInfo(SocialProfileVO s_pro) {
+		this.socialDAO.updateInfo(s_pro);
+	}
 }
