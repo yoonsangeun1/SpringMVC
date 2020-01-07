@@ -53,7 +53,7 @@
 				<li class="SNS_Profile_Menu_Button SNS_Background" onclick="setScrollX(3750);">팔로우 목록</li>
 <%-- 				<c:if test="${sessionSocial.id != s_pro.id}"> --%>
 				<c:if test="${s_pro.id==sessionSocial.id}">
-					<li class="SNS_Profile_Menu_Button SNS_Background" onclick="location='/moving.com/social/messenger?socialIdFrom=${sessionSocial.id}&socialIdTo=0';">메시지 보내기</li>
+					<li class="SNS_Profile_Menu_Button SNS_Background" onclick="location='/moving.com/social/messenger?socialIdFrom=${sessionSocial.id}&socialIdTo=0';">메신저</li>
 				</c:if>
 				<c:if test="${s_pro.id!=sessionSocial.id}">
 					<li class="SNS_Profile_Menu_Button SNS_Background" onclick="location='/moving.com/social/messenger?socialIdFrom=${sessionSocial.id}&socialIdTo=${s_pro.id}';">메시지 보내기</li>

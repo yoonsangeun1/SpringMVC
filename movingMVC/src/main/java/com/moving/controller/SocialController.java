@@ -368,7 +368,7 @@ public class SocialController {
 		this.socialService.insertPost(s_post);//게시글 넣는 메서드
 		
 		if(page_num==0) {//메인으로 갈 때
-			return "redirect:/social/main;";
+			return "redirect:/social/main";
 		}
 		else {
 			return "redirect:/social/profile?id="+Social_id.getId();//내 계정으로 복귀
@@ -552,9 +552,11 @@ public class SocialController {
 					List<SocialMessageVO> mlist=this.socialService.getMessageList(s_pro.getId());
 					//대화 목록
 					SocialProfileVO m_pro=this.socialService.socialProfileInfoWithId(socialIdTo);
+					
 					m.addAttribute("mlist", mlist);
 					m.addAttribute("m_pro", m_pro);
 					m.addAttribute("socialIdFrom", socialIdFrom);
+					m.addAttribute("socialIdTo", socialIdTo);
 					
 					return "social/social_messenger";
 				}else {
@@ -611,4 +613,18 @@ public class SocialController {
 		
 		return "redirect:/social/profile?id="+sessionId;
 	}
+	
+	//소셜 회원 신고
+		@RequestMapping(value="/social/report")
+		public ModelAndView social_report(
+				int reportId,
+				int sendId
+				) {
+			ModelAndView m = new ModelAndView("social/social_report");
+			SocialProfileVO s_pro=this.socialService.socialProfileInfoWithId(reportId);
+			
+			m.addObject("s_pro",s_pro);
+			
+			return m;
+		}//social_update()
 }

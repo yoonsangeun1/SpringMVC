@@ -39,7 +39,7 @@
 			</c:if>
 			</div>
 		</div>
-		<c:if test="${m_pro.id!=0}">
+		<c:if test="${socialIdTo!=0}">
 				<div id="SNS_Messenger_Mid">
 			<div id="SNS_Messenger_Mid_Up">
 				<c:if test="${empty m_pro.profileImagePath}">
@@ -96,127 +96,5 @@
 			</div>
 		</div>
 		</c:if>
-		</div>
-	<script>
-		function t(bno) {
-			var sessionId = $('#sessionId').text();//로그인한 아이디
-	
-			$.getJSON("/moving.com/socialmessage/all_list{}" + bno,
-							function(data) {
-								var str = "";
-								success: $(data).each(function() {//each()는 jQuery 반복 함수
-													str += "<li class='replies' data-messageId='"+this.ID+"' style='align-items: center'>"
-															+ "<div class='comment_no' style='display:none'>"
-															+ this.ID
-															+ "</div>"
-															+ "<img class='SNS_Content_user_img' class='SNS_Profile_Picture'"
-															+"src='../images/member_profile.png' width=30px height=30px"
-															+"alt=''/>"
-															+ "<p><a href='/moving.com/social/profile?id="+ this.SOCIAL_PROFILE_ID_FROM+ "'>"
-															+ this.NICKNAME
-															+ "</a></p><p class='comment_content_"+this.ID+"'>"
-															+ this.CONTENT
-															+ "</p>"
-															+ "<input name='comment_txt_"+this.ID+"' id='comment_txt_"+this.ID+"' class='comment_txt' value='"+this.CONTENT+"' style='display: none;'>"
-													if (sessionId == this.NICKNAME) {//로그안한 닉네임과 댓글 닉네임 비교하여 수정, 삭제 버튼 생성
-														str += "<button name='modify_"+this.ID+"'  class='modify SNS_Comment_Write_Button'>수정</button>"
-																+ "<button name='modify_ok_"+this.ID+"'  class='modify_ok SNS_Comment_Write_Button' style='display: none;'>수정완료</button>"
-																+ "<button name='delete_"+this.ID+"' class='delete SNS_Comment_Write_Button'>삭제</button>"
-													}
-													+"</li>";
-												});
-								$('#replies_' + bno).html(str);//태그와 문자를 함께 변경 적용
-							});//매핑 주소 써주기
-		}//t()
-	
-		//메세지 번호 받아오기
-		function getParameterByName(name) {
-			name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-			var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"), results = regex
-					.exec(location.search);
-			return results === null ? "" : decodeURIComponent(results[1].replace(
-					/\+/g, " "));
-		}
-		var id = getParameterByName('id');
-	
-	
-		//메세지 추가(전송)
-		$(function() {
-			$("input[name^='write']").on('click', function() {
-				var reply = $(this).parent();
-				var rno = reply.attr('data-contentPostId');//게시글번호
-				var content = $("input[name='content_" + rno + "']").val();//댓글 내용
-	
-				if (content == '') {
-					alert('댓글 내용을 입력하세요!');
-					$("input[name='content_" + rno + "']").val('').focus();
-					return false;
-				}
-	
-				$.ajax({//jQuery ajax
-					type : 'post',//서버로 자료를 보내는 법
-					url : '/moving.com/socialcomments/write',//매핑 주소
-					headers : {
-						"Content-Type" : "application/json",
-						"X-HTTP-Method-Override" : "POST"
-					//HTTP 코드 맨 머리 앞에 추가적인 정보 지정
-					},
-					dataType : 'text',//문자열
-					data : JSON.stringify({//댓글 작성자, 내용이 json이다.
-						//왼쪽에서 오른쪽으로 대입됨!! 우 -> 왼 아님!!!
-						//왼쪽이 키이름 오른쪽이 값!! 이건 동일!!
-						socialPostId : rno, //게시물 번호
-						//id: id, //댓글 작성자
-						content : content	//댓글 내용
-					}),
-					success : function(data) {//댓글 저장 성공시 SUCCESS 문자열 반환
-						if (data == 'SUCCESS') {
-							t(rno);
-							$("input[name='content_" + rno + "']").val("");
-						}
-					}
-				});
-			})
-		});
-	
-		/* 댓글 수정 화면 출력 */
-		$(function() {
-			// $("id[name^='replies']").on('click','.replies .modify',function() {
-			$('#replies').on('click', '.replies .modify', function() {
-				var reply = $(this).parent();
-				var rno = reply.attr('data-commentId');//댓글 번호
-				var replytext = reply.children(".comment_content_" + rno).text();//댓글 내용만 가져옴.
-	
-				$('.modal-title').html(rno);//댓글 번호
-				$('#replytext').val(replytext);//댓글 내용
-				$('.comment_content_' + rno).hide();
-				$("input[name ='comment_txt_" + rno + "']").show();
-				$("button[name ='modify_" + rno + "']").hide();
-				$("button[name ='modify_ok_" + rno + "']").show();
-			});
-		})
-	
-		/* 댓글 삭제 */
-		$(function() {
-			$('#replies').on('click', '.replies .delete', function() {
-				var reply = $(this).parent();
-				var rno = reply.attr('data-commentId');//댓글 번호
-	
-				$.ajax({
-					type : 'delete',
-					url : '/moving.com/socialcomments/delete/' + rno,
-					headers : {
-						"Content-Type" : "application/json",
-						"X-HTTP-Method-Override" : "DELETE"
-					},
-					dataType : 'text',
-					success : function(data) {
-						if (data == 'SUCCESS') {
-							alert('댓글이 삭제되었습니다!');
-						}
-					}
-				});
-			});
-		})
-	</script>
+	</div>
 <%@ include file="../include/sns_footer.jsp"%>
