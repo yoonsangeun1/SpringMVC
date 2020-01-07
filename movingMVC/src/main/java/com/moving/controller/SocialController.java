@@ -197,11 +197,18 @@ public class SocialController {
 				if(svo!=null) {
 					session.setAttribute("sessionSocial", svo);
 				}
-				out.println("<script>");
-				out.println("alert('MOVING 로그인을 환영합니다 !');");
-				out.println("location='/moving.com/social/main';");
-				out.println("</script>");
-
+				if(dm.getUserLv()==4) {
+					out.println("<script>");
+					out.println("if(confirm('무빙 관리자님을 환영합니다. 관리자 페이지로 이동하시겠습니까?')==true){");
+					out.println("location='/moving.com/admin';}");
+					out.println("else{location='/moving.com/social/main';}");
+					out.println("</script>");
+				}else {
+					out.println("<script>");
+					out.println("alert('MOVING 로그인을 환영합니다 !');");
+					out.println("location='/moving.com/social/main';");
+					out.println("</script>");
+				}
 				return null;
 			}
 		}
