@@ -3,6 +3,7 @@ package com.moving.dao;
 import java.util.List;
 
 import com.moving.domain.AttachedFileVO;
+import com.moving.domain.SocialMessageVO;
 import com.moving.domain.SocialPostVO;
 import com.moving.domain.SocialProfileVO;
 
@@ -27,4 +28,8 @@ public interface SocialDAO {
 	SocialProfileVO socialProfileInfoWithId(int id);
 
 	void insertAttachFiles(AttachedFileVO aFile);
+	
+	List<SocialMessageVO> getMessageList(int id);
+
+	void updateInfo(SocialProfileVO s_pro);
 }

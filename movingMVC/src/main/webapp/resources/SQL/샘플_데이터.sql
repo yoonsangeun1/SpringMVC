@@ -97,7 +97,7 @@ INSERT INTO code_master VALUES (code_master_seq.nextval, 500, 50005,'소셜 프�
 
 --DELETE FROM code_master;
 SELECT * FROM code_master;
-
+select * from SocialMessage WHERE social_id_to=31, social_id_from=31
 /* 회원 */
 --관리자
 INSERT INTO m_user (id, userid, nickname, email, password, genre_01, genre_02, genre_03)
@@ -127,12 +127,12 @@ VALUES						(social_profile_seq.nextval, 50005, 1, '박진우', '/경로', 0,0,0
 INSERT INTO social_profile (id, code_no, user_id, nickname, profile_image_path, follower_count, follow_count,post_count)
 VALUES						(social_profile_seq.nextval, 50005, 3, '윤상은', '/경로', 0,0,0);
 select * from social_profile;
-
+select * from social_message where social_id_from=30 or social_id_to=30
 /* 소셜  메세지*/
 INSERT INTO social_message (id,code_no,social_id_from,social_id_to,content,register_date)
 VALUES					   (social_message_seq.nextval,80004,2,3,'박진우ㅎㅇ',sysdate);
-INSERT INTO social_message VALUES(social_message_seq.nextval,80004,2,3,'ㅂㅎㅇ2',sysdate);
-INSERT INTO social_message VALUES(social_message_seq.nextval,80004,3,2,'윤산은',sysdate);
+INSERT INTO social_message VALUES(social_message_seq.nextval,80004,31,30,'ㅂㅎㅇ2',sysdate);
+INSERT INTO social_message VALUES(social_message_seq.nextval,80004,30,31,'윤산은',sysdate);
 INSERT INTO social_message VALUES(social_message_seq.nextval,80004,3,2,'윤산은2',sysdate);
 INSERT INTO social_message VALUES(social_message_seq.nextval,80004,2,3,'ㅂㅎㅇ3',sysdate);
 select * from social_message ORDER BY register_date desc;
@@ -333,7 +333,18 @@ AND U.nickname LIKE '관리자';
 
 select * from code_master;
 --delete from code_master;
-select * from CODE_MASTER where category_name is null;
+select * from social_message 
+select * from social_profile
+
+insert into social_message (id, social_id_from, social_id_to, content)
+values (social_message_seq.nextval, 31, 37, '31이 37에게')
+
+select id from
+(
+select social_id_from id from social_message where social_id_to =37
+union
+select social_id_to id from social_message where social_id_from =37
+) order by register_date desc
 
  SELECT * FROM
  (SELECT 

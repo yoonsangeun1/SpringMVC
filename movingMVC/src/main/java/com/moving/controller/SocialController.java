@@ -13,7 +13,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.moving.domain.AttachedFileVO;
 import com.moving.domain.MUserVO;
+import com.moving.domain.SocialMessageVO;
 import com.moving.domain.SocialPostVO;
 import com.moving.domain.SocialProfileVO;
 import com.moving.service.MUserService;
@@ -217,7 +217,8 @@ public class SocialController {
 			) throws Exception{
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out= response.getWriter();
-
+		session=request.getSession();
+		
 		if(session.getAttribute("id")==null){
 			out.println("<script>");
 			out.println("alert('로그인이 필요합니다.');");
@@ -226,26 +227,40 @@ public class SocialController {
 
 			return null;
 		}else {
-			if(session.getAttribute("sessionSocial")==null){
-				out.println("<script>");
-				out.println("if(confirm('무빙 SNS를 이용하시려면 소셜 계정으로 전환하세요') == true){"
-						+ "location='/moving.com/social/modify';"
-						+ "}else{"
-						+ "location='/moving.com/main';}");
-				out.println("</script>");
-
-				return null;
-			}else {//소셜 계정이 있는 경우
-				int id=(int)session.getAttribute("id");
-
-				ModelAndView m=new ModelAndView();
-				SocialProfileVO sessionSocial=(SocialProfileVO) session.getAttribute("sessionSocial");
-				List<SocialPostVO> socialPostVO=socialService.selectSocialPost(); //id로 검색하여 게시글ㄹ
-				m.addObject("s_post", socialPostVO);
-				m.addObject("s_pro", sessionSocial);
-				m.setViewName("social/social_main");
-				return m;
-			}
+			SocialProfileVO s_pro=socialService.selectIDFromUserID((int) session.getAttribute("id"));
+//			int re=1;
+//			if(s_pro==null) {
+//				re=-1;
+//				out.println("alert('다시해라');");
+//				session.setAttribute("sessionSocial", s_pro);
+//			}
+//			if(re==1) {
+				if(s_pro==null){
+					out.println("<script>");
+					out.println("if(confirm('무빙 SNS를 이용하시려면 소셜 계정으로 전환하세요') == true){"
+							+ "location='/moving.com/social/modify';"
+							+ "}else{"
+							+ "location='/moving.com/main';}");
+					out.println("</script>");
+	
+					return null;
+				}else {//소셜 계정이 있는 경우
+					int id=(int)session.getAttribute("id");
+	
+					ModelAndView m=new ModelAndView();
+//					SocialProfileVO sessionSocial=(SocialProfileVO) session.getAttribute("sessionSocial");
+					List<SocialPostVO> socialPostVO=socialService.selectSocialPost(); //id로 검색하여 게시글ㄹ
+					m.addObject("s_post", socialPostVO);
+					m.addObject("s_pro", s_pro);
+					session.setAttribute("sessionSocial", s_pro);
+					m.setViewName("social/social_main");
+					return m;
+				}
+//			}
+//			else {
+//				out.println("alert('세션이 만료되었습니다');");
+//				return null;
+//			}
 		}
 	}//social_main()
 
@@ -255,7 +270,7 @@ public class SocialController {
 		ModelAndView m = new ModelAndView("social/social_modify");
 		return m;
 	}//social_modify()
-
+	
 	//소셜회원 전환 완료
 	@RequestMapping("social/social_modify_ok")
 	public String social_modify_ok(SocialProfileVO s_pro, Model m, 
@@ -285,7 +300,7 @@ public class SocialController {
 			session.setAttribute("sessionSocial", s_pro);
 			
 			m.addAttribute("s_pro", s_pro);
-			m.addAttribute("id", s_pro.getId());
+//			m.addAttribute("id", s_pro.getId());
 			
 			return "redirect:/social/profile?id="+s_pro.getId(); //프로필 폼으로 이동
 		}
@@ -346,7 +361,7 @@ public class SocialController {
 			)throws Exception{
 		HttpSession session=request.getSession();//세션 값 전체를 가져온다.
 
-		SocialProfileVO Social_id=(SocialProfileVO) session.getAttribute("sessionSocial");
+		SocialProfileVO Social_id=(SocialProfileVO)session.getAttribute("sessionSocial");
 
 		s_post.setSocialId(Social_id.getId());//소셜 아이디를 기준으로 게시글 넣기
 		this.socialService.insertPost(s_post);//게시글 넣는 메서드
@@ -396,12 +411,16 @@ public class SocialController {
 		int user_id=getSocial_id.getId();
 		if(user_id==socialId) {
 			this.socialService.deletePost(id);
-			return "redirect:/social/profile?id="+user_id;
+			if(page_num==0) {
+				return "redirect:/social/main";
+			}else if(page_num==1) {
+				return "redirect:/social/profile?id="+user_id;
+			}
 		}
 		return null;
 	}
 
-	@RequestMapping("social_attach_ok")
+	@RequestMapping("social/attach_ok")
 	public String bbs_write_ok(AttachedFileVO aFile,HttpServletRequest request,
 			HttpSession session,int page_num
 			) throws Exception{
@@ -466,8 +485,102 @@ public class SocialController {
 
 	//메신저
 	@RequestMapping(value="/social/messenger")
-	public String social_messenger() {
-		return "social/social_messenger";
-	}//social_messenger()
+	public String social_messenger(
+			HttpServletRequest request,
+			HttpServletResponse response, 
+			HttpSession session,Model m,
+			int socialIdFrom,
+			int socialIdTo
+			)throws Exception{
+		response.setContentType("text/html;charset=UTF-8");
+		PrintWriter out= response.getWriter();
+		session=request.getSession();
+		
+		if(session.getAttribute("id")==null){
+			out.println("<script>");
+			out.println("alert('로그인이 필요합니다.');");
+			out.println("location='/moving.com/social/login'");
+			out.println("</script>");
 
+			return null;
+		}else {
+			SocialProfileVO s_pro=socialService.selectIDFromUserID((int) session.getAttribute("id"));
+			//s_pro에 사용자의 프로필 정보를 가져온다.
+			/*int usingId=(int) session.getAttribute("id");
+		SocialProfileVO s_pro=socialService.selectIDFromUserID(usingId);*/
+
+			if(s_pro==null){
+				out.println("<script>");
+				out.println("if(confirm('무빙 SNS를 이용하시려면 소셜 계정으로 전환하세요') == true){"
+						+ "location='/moving.com/social/modify';"
+						+ "}else{"
+						+ "location='/moving.com/main';}");
+				out.println("</script>");
+
+				return null;
+			}else {//소셜 계정이 있는 경우
+				if(s_pro.getId() == socialIdFrom) {
+					//소셜 메세지 VO에 집어넣는다.
+					List<SocialMessageVO> mlist=this.socialService.getMessageList(s_pro.getId());
+					//대화 목록
+					SocialProfileVO m_pro=this.socialService.socialProfileInfoWithId(socialIdTo);
+					m.addAttribute("mlist", mlist);
+					m.addAttribute("m_pro", m_pro);
+					m.addAttribute("socialIdFrom", socialIdFrom);
+					
+					return "social/social_messenger";
+				}else {
+					out.println("<script>");
+					out.println("alert('잘못된 접근입니다.');");
+					out.println("location='/moving.com/social/main'");
+					out.println("</script>");
+				}
+				return null;
+			}
+		}
+		
+	}//social_messenger()
+	
+	//소셜 회원정보 수정
+	@RequestMapping(value="/social/update")
+	public ModelAndView social_update(
+			int sessionId
+			) {
+		ModelAndView m = new ModelAndView("social/social_update");
+		SocialProfileVO s_pro=this.socialService.socialProfileInfoWithId(sessionId);
+		
+		m.addObject("s_pro",s_pro);
+		
+		return m;
+	}//social_update()
+	
+	//소셜 회원정보 수정 완료
+	@RequestMapping(value="/social/update_ok")
+	public String social_update_ok(
+			HttpServletRequest request,
+			HttpServletResponse response,
+			int sessionId
+			) throws Exception{
+		response.setContentType("text/html;charset=UTF-8");
+		SocialProfileVO s_pro=new SocialProfileVO();
+		PrintWriter out= response.getWriter();
+		
+		String nickname=request.getParameter("nickname");
+		String introduce=request.getParameter("introduce");
+
+		System.out.println("닉네임 길이는 "+nickname.getBytes().length);
+		System.out.println("소개의 길이는 "+introduce.getBytes().length);
+		
+		s_pro.setId(sessionId);
+		s_pro.setNickname(nickname);
+		s_pro.setIntroduce(introduce);
+		
+		System.out.println(s_pro.getId());
+		System.out.println(s_pro.getNickname());
+		System.out.println(s_pro.getIntroduce());
+		
+		this.socialService.updateInfo(s_pro);
+		
+		return "redirect:/social/profile?id="+sessionId;
+	}
 }

@@ -157,7 +157,7 @@
 					</div>
 						<c:if test="${empty userid}">
 							<div style="flex-grow: 0.6;">
-								<a href="member/login">Login</a>
+								<a href="/moving.com/social/login">Login</a>
 							</div>
 						</c:if>
 						<c:if test="${!empty userid}">
@@ -192,7 +192,7 @@
 							<div class="header_profile_container">
 								<button type="button" id="header_profile_btn" onclick="getUserInfo();">
 									<c:if test="${profile_image_url == 'default'}">
-										<img class="Avatar_image" src="./images/member_profile.png"	style="width:30px; height:30px; border-radius: 50%; color:white;">
+										<img class="Avatar_image" alt="" src="${pageContext.request.contextPath}/resources/images/member_profile.png"	style="width:30px; height:30px; border-radius: 50%; color:white;">
 									</c:if>
 								
 									<c:if test="${profile_image_url != 'default'}">
@@ -234,7 +234,7 @@
 									<a class="MyMenuUserInfo_profileLink">
 										<span class="MyMenuUserInfo_name">${name}</span> &nbsp;&nbsp;
 										<c:if test="${profile_image_url == 'default'}">
-											<img class="MyMenuUserInfo_avatar" src="./images/member_profile.png"	style="width:60px; height:60px; border-radius: 50%;">
+											<img class="MyMenuUserInfo_avatar" src="${pageContext.request.contextPath}/resources/images/member_profile.png"	style="width:60px; height:60px; border-radius: 50%;">
 										</c:if>
 								
 										<c:if test="${profile_image_url != 'default'}">

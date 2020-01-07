@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="socialMessage"><!-- 매퍼 네임스페이스명 -->
+<resultMap type="socialMessageVO" id="messageInfo">
+<id column="mid" property="mid"/>
+	<association property="socialProfileVO" javaType="com.moving.domain.SocialProfileVO"
+	column="mid" select="selectMessageSender"/>
+</resultMap>
+
+<!-- 같이 대화한 상대 리스트 뽑기 -->
+<select id="getMessageList" resultMap="messageInfo">
+	SELECT social_id_from mid FROM social_message WHERE social_id_to = #{socialIdFrom}
+	union
+	SELECT social_id_to mid FROM social_message WHERE social_id_from = #{socialIdFrom}
+</select>
+
+<!-- 대화한 상대의 정보 뽑기 -->
+<select id="selectMessageSender" resultType="socialProfileVO">
+SELECT nickname, profile_image_path 
+FROM social_profile
+WHERE id = #{id}
+</select>
+	<!-- <resultMap type="socialProfileVO" id="getMessageList">
+		<collection property="socialMessageVO" javaType="java.util.ArrayList"
+			ofType="selectMessageList"	column="id"
+			select="selectSocialProfileInfo">
+		</collection>
+	</resultMap>
+	
+	<resultMap type="socialMessageVO" id="selectSocialProfileInfo">
+		<association property="socialProfileVO" javaType="com.moving.domain.SocialProfileVO"
+			column="id">
+		
+		</association>
+	</resultMap>
+	
+	유저 아이디(번호)를 기준으로 메세지 목록 검색
+	<select id="getMessageList" resultType="socialMessageVO">
+		select * from social_message WHERE 
+		social_id_to=#{id} or social_id_from=#{id}
+	</select>
+	
+	소셜 아이디를 기준으로 메세지 송/수신자 정보를 검색한다.
+	<select id="selectSocialProfileInfo" resultType="socialProfileVO">
+		select nickname,profile_image_path from social_profile WHERE id=id
+	</select> -->
+</mapper>
