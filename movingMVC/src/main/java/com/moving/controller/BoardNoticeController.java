@@ -79,7 +79,7 @@ public class BoardNoticeController {
 		
 	}//board_notice_list
 	
-	//글쓰기로 이동
+	/*//글쓰기로 이동
 	@RequestMapping("/board/notice_write")
 	public ModelAndView board_notice_write(
 			HttpSession session,
@@ -141,6 +141,7 @@ public class BoardNoticeController {
 		return null;
 		
 	}//board_notice_write_ok()
+*/	
 	
 	//내용보기+조회수 증가 //관리자쪽에선 조회수가 필요 없을 수도 있음?
 	@RequestMapping("/board/notice_cont")
@@ -164,7 +165,7 @@ public class BoardNoticeController {
 		
 	}//board_notice_cont()
 	
-	//게시글 수정
+	/*//게시글 수정
 	@RequestMapping("/board/notice_edit")
 	public String board_notice_edit(int id, //게시글 번호 id
 			int page,						//페이지
@@ -268,5 +269,5 @@ public class BoardNoticeController {
 		return null;
 		
 	}//board_notice_del()
-
+*/
 }//BoardNoticeController class

@@ -1,4 +1,9 @@
 /**
+ *  normal_post comment js
+ *  자유 게시판 댓글 js
+ */
+
+/**
  * jstest
  */
 
@@ -19,8 +24,6 @@ $(function(){
    $('#write').on('click', function() {
    //var sessionId="<%=session.getAttribute('id')%>"
    //   var sessionTest=sessionId;
-   var project_post_id = $('#project_post_id').val();//게시글 번호
-   var profile_post_id = $('#profile_post_id').val();//게시글 번호
    var normal_post_id = $('#normal_post_id').val();  //게시물 번호
    var content=$('#content').val();//댓글 내용
 
@@ -29,7 +32,7 @@ $(function(){
       $('#content').val('').focus();
       return false;
    }
-
+   
    $.ajax({//jQuery ajax
       type: 'post',//서버로 자료를 보내는 법
       url: '/moving.com/comments/write',//매핑 주소
@@ -42,8 +45,6 @@ $(function(){
       data: JSON.stringify({//댓글 작성자, 내용이 json이다.
          //왼쪽에서 오른쪽으로 대입됨!! 우 -> 왼 아님!!!
          //왼쪽이 키이름 오른쪽이 값!! 이건 동일!!
-         projectPostId: project_post_id, //게시물 번호
-         profilePostId: profile_post_id, //게시물 번호
          normalPostId : normal_post_id,   //게시물 번호
          //id: id, //댓글 작성자
          content: content //댓글 내용
@@ -61,32 +62,12 @@ $(function(){
 });
 
 
-//댓글 작성시 내용 입력 체크
-/*function comment_check() {
-	if($.trim($('#sessionId').text()) == '') {
-		alert('로그인이 필요합니다!');
-		location='/moving.com/member/login';
-		return false;
-	}
-	if($.trim($('#content').val())=='') {
-		alert('댓글 내용을 입력하세요!');
-		$('#content').val('').focus();
-		return false;
-	}
-}*/
-
-/*function getData(){
-	<%
-	HttpSession session = request.getSession();
-	session.getAttribute("nickname");
-	%>
-}*/
-
 //댓글 목록 불러오는 함수 호출
 function getCommentList() {
 	var sessionId=$('#sessionId').text();//로그인한 아이디
-	var profile_post_id = $('#profile_post_id').val();//게시글 번호
-	$.getJSON("/moving.com/comments/all/" + profile_post_id, function(data) {
+	var normal_post_id = $('#normal_post_id').val();//게시글 번호
+
+	$.getJSON("/moving.com/comments/allNormal/" + normal_post_id, function(data) {
 		//get방식으로 json 데이터를 비동기식으로 가져와서 data에 저장
 		//alert(project_post_id);
 		var str = "";
@@ -99,7 +80,7 @@ function getCommentList() {
 				+"src='../images/member_profile.png' width=30px height=30px"
 				+"alt=''/>"
 				+"<p><a href='/moving.com/member_mypage?mid="+this.USER_ID_FROM+"'>"
-				+this.NICKNAME+"</a></p><p class='comment_content_"+this.ID+"'>"
+				+this.NICKNAME+"</a></p><p class='comment_content_"+this.ID+"' style='word-break:break-all'>"
 				+this.CONTENT+"</p>"
 				+"<input name='comment_txt_"+this.ID+"' class='comment_txt' value='"+this.CONTENT+"' style='display: none;'>"
 				//+"<input type='button' name='modify' class='modify SNS_Comment_Write_Button' value='수정' onclick='clicksss();'>"
@@ -134,8 +115,8 @@ function getCommentList() {
 
 //게시글 번호에 해당하는 댓글 개수 출력, 개수 출력되는 부분에 값 변경
 function getCommentCount() {
-	var profile_post_id = $('#profile_post_id').val();//게시글 번호
-	$.getJSON("/moving.com/comments/count/"+profile_post_id, function(data) {
+	var normal_post_id = $('#normal_post_id').val();//게시글 번호
+	$.getJSON("/moving.com/comments/count/"+normal_post_id, function(data) {
 		var commentCount= "<b>"+data+"</b>";
 		//alert(commentCount);
 		$('.commentCount').html(commentCount);

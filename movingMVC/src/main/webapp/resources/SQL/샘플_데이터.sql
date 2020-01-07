@@ -168,10 +168,10 @@ select * from profile_post;
 
 /* 계층형_게시글 */
 --question
-INSERT INTO reply_post(id,						code_no,user_id,title,content,hit,register_date,move_count,reply_id,step,reply_order)
+INSERT INTO reply_post(id,						code_no,user_id,title,content,hit,register_date,move_count,reply_post_id,reply_step,reply_order)
 VALUES					(reply_post_seq.nextval,10006,3,'질문있다','내용',0,sysdate,0,reply_post_seq.nextval,0,0);
 --answer
-INSERT INTO reply_post(id,						code_no,user_id,title,content,hit,register_date,move_count,reply_id,step,reply_order)
+INSERT INTO reply_post(id,						code_no,user_id,title,content,hit,register_date,move_count,reply_post_id,step,reply_order)
 VALUES					(reply_post_seq.nextval,10006,3,'답한다','내용',0,sysdate,0,1,1,1);
 
 select * from reply_post;

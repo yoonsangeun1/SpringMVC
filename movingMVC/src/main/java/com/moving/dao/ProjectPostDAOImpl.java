@@ -33,47 +33,47 @@ public class ProjectPostDAOImpl implements ProjectPostDAO {
 
 	@Override
 	public void insertProjectComment(MCommentVO mCommentVO) {
-		sqlSession.insert("insertProjectComment", mCommentVO);
+		sqlSession.insert("projectPost.insertProjectComment", mCommentVO);
 	}//insertProjectComment() 댓글 작성
 
 	@Override
 	public void updateProjectCommentCountOne(MCommentVO mCommentVO) {
-		sqlSession.update("updateProjectCommentCountOne", mCommentVO);
+		sqlSession.update("projectPost.updateProjectCommentCountOne", mCommentVO);
 	}//
 	
 	@Override
 	public void updateProjectCommentCount(MCommentVO mCommentVO) {
-		sqlSession.update("updateProjectComment", mCommentVO);
+		sqlSession.update("projectPost.updateProjectComment", mCommentVO);
 	}
 
 	@Override
 	public List<MCommentVO> selectCommentList(int id) {
-		return sqlSession.selectList("selectProjectComments", id);
+		return sqlSession.selectList("projectPost.selectProjectComments", id);
 	}//프로젝트 댓글 불러오기
 
 	@Override
 	public void updateProjectComment(MCommentVO mCommentVO) {
-		sqlSession.update("updateProjectComment", mCommentVO);
+		sqlSession.update("projectPost.updateProjectComment", mCommentVO);
 	}
 
 	@Override
 	public void deleteProjectComment(int id) {
-		sqlSession.delete("deleteProjectComment", id);		
+		sqlSession.delete("projectPost.deleteProjectComment", id);		
 	}
 
 	@Override
 	public List<Map<String, Object>> selectCommentListMap(int id) {
-		return sqlSession.selectList("selectCommentListMap", id);
+		return sqlSession.selectList("projectPost.selectCommentListMap", id);
 	}
 
 	@Override
 	public ProjectPostVO selectCommentCount(int id) {
-		return sqlSession.selectOne("selectCommentCount", id);
+		return sqlSession.selectOne("projectPost.selectCommentCount", id);
 	}
 
 	@Override
 	public void updateCommentCount(int id) {
-		sqlSession.update("updateCommentCount", id);
+		sqlSession.update("projectPost.updateCommentCount", id);
 	}
 
 	@Override
@@ -85,6 +85,30 @@ public class ProjectPostDAOImpl implements ProjectPostDAO {
 	public List<ProjectPostVO> selectProjectList(ProjectPostVO projectPostVO) {
 		return sqlSession.selectList("selectProjectList", projectPostVO);
 	}
+
+	@Override
+	public MCommentVO selectCommentCountActors(int id) {
+		return sqlSession.selectOne("projectPost.selectCommentCountActors", id);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectCommentListMapActors(int id) {
+		return sqlSession.selectList("projectPost.selectCommentListMapActors", id);
+	}
+
+	@Override
+	public void updateCommentCountActors(int id) {
+		sqlSession.update("projectPost.updateCommentCountActors", id);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectCommentListMapNormal(int id) {
+		return sqlSession.selectList("projectPost.selectCommentListMapNormal", id);
+	}
 	
+	@Override
+	public void updateCommentCountNormal(int id) {
+		sqlSession.update("projectPost.updateCommentCountNormal", id);
+	}
 	
 }

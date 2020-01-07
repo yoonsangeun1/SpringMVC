@@ -6,6 +6,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="BoardFree">
 
+
+
+
 <resultMap type="normalPostVO" id="boardInfo" autoMapping="true">
 		<id property="id" column="board_free_id"/> <!-- board_free_id는 AS로 별칭을 지정해 준 것임. -->
 		<result property="title" column="title" />
@@ -23,6 +26,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			 <id property="id" column="social_profile_id"/>
 			</association>
 			
+			<collection property="mCommentVO" javaType="java.util.List" ofType="BoardFree.mCommentInfo"
+			column="board_free_id" select="BoardFree.selectCommentList">
+				<id property="id" column="m_comment_id"/>
+			</collection>
+			
+</resultMap>
+
+<resultMap type="mCommentVO" id="BoardFree.mCommentInfo">
+	<id property="id" column="m_comment_id"/>
+	<result property="content" column="content"/>
+	<result property="userIdFrom" column="user_id_from"/>
+	<association property="mUserVO"
+		javaType="com.moving.domain.MUserVO" autoMapping="true" 
+	 column="user_id_from" select="BoardFree.selectCommentUser">
+	</association>
 </resultMap>
 	
 <!-- 	<collection property="mCommentVO" javaType="java.util.List" ofType="commentInfo"
@@ -154,6 +172,19 @@ FROM NORMAL_POST N
   WHERE N.USER_ID = M.ID
   AND N.ID=#{id}
  </select>
+ 
+ <!-- 댓글 -->
+ <select id="BoardFree.selectCommentList" resultMap="BoardFree.mCommentInfo">
+SELECT id AS m_comment_id, content, user_id_from
+FROM m_comment
+WHERE normal_post_id = #{board_free_id}
+order by m_comment_id desc
+</select>
+<select id="BoardFree.selectCommentUser" resultType="mUserVO">
+SELECT nickname, profile_image_url
+FROM m_user
+WHERE id = #{user_id_from}
+</select>
  
 
  </mapper>
