@@ -16,11 +16,11 @@
 					<a href="profile?id=${sessionSocial.id}">${s_pro.nickname}</a>
 				</c:if>
 				</div> 
-				<c:if test="${!empty s_pro.profileImagePath}">
-					<img class="SNS_Profile_Picture" src="${s_pro.profileImagePath}"
+				<c:if test="${'default' != profile_image_url}">
+					<img class="SNS_Profile_Picture" src="${profile_image_url}"
 						width="30px" height="30px" alt="" onclick="location='/moving.com/social/profile?id='+${sessionSocial.id}">
 				</c:if>
-				<c:if test="${empty s_pro.profileImagePath}">
+				<c:if test="${'default' == profile_image_url}">
 					<img class="SNS_Profile_Picture" src="../images/member_profile.png"
 						width="30px" height="30px" alt="" onclick="location='/moving.com/social/profile?id='+${sessionSocial.id}">
 				</c:if>

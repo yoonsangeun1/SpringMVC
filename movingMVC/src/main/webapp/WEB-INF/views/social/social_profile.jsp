@@ -13,16 +13,16 @@
 	<div id="SNS_Profile_Wrap">						<!-- 오브젝트 항목 래핑 -->
 		<div id="SNS_Profile_Top">
 			<div id="SNS_Profile_Ground">
-				<c:if test="${empty s_pro.profileImagePath}">
+				<c:if test="${empty s_pro.backgroundImagePath}">
 					<div id="SNS_Profile_Background">
 				</c:if>
-				<c:if test="${!empty s_pro.profileImagePath}">
+				<c:if test="${!empty s_pro.backgroundImagePath}">
 					<div id="SNS_Profile_Background" style="background-image:url('${s_pro.backgroundImagePath}')">
 				</c:if>
-					<c:if test="${!empty s_pro.profileImagePath}">					<!-- 회원 이미지가 없을 경우 기본 이미지로 설정 -->
-						<img id="SNS_Profile_Photo" src="${s_pro.profileImagePath}">
+					<c:if test="${'default' != profile_image_url}">					<!-- 회원 이미지가 없을 경우 기본 이미지로 설정 -->
+						<img id="SNS_Profile_Photo" src="${profile_image_url}">
 					</c:if>
-					<c:if test="${empty s_pro.profileImagePath}">
+					<c:if test="${'default' == profile_image_url}">
 						<img id="SNS_Profile_Photo" src="../images/member_profile.png">
 					</c:if>
 					<div id="SNS_Profile_Title_Name">
@@ -120,11 +120,11 @@
 							<input type="hidden" id="id" value="${s_post.id }">
 							<input type="hidden" id="socialId" value="${s_pro.id }">
 								<div class="SNS_Profile_Post">
-									<c:if test="${!empty s_pro.profileImagePath}">
+									<c:if test="${!empty profile_image_url}">
 										<img class="SNS_Content_user_img"
-											src="${s_pro.profileImagePath}" width="40" height="40" alt="">
+											src="${profile_image_url}" width="40" height="40" alt="">
 									</c:if>
-									<c:if test="${empty s_pro.profileImagePath}">
+									<c:if test="${empty profile_image_url}">
 										<img class="SNS_Content_user_img"
 											src="../images/member_profile.png" width="40" height="40"
 											alt="">
@@ -221,13 +221,13 @@
 											</script>
 											<%-- 본인의 프로필 사진이 있다면,없다면 분기 나누기 나중에 프로필사진--%>
 											<%-- 프로필 이미지가 있을 경우 --%>
-											<c:if test="${!empty s_pro.profileImagePath}">
+											<c:if test="${!empty profile_image_url}">
 												<img class="SNS_Content_user_img"
 													class="SNS_Profile_Picture" src="${profile_image_url }"
 													width="30" height="30" alt="">
 											</c:if>
 											<%-- 프로필 이미지가 없을 경우 --%>
-											<c:if test="${empty s_pro.profileImagePath}">
+											<c:if test="${empty profile_image_url}">
 												<img class="SNS_Content_user_img"
 													class="SNS_Profile_Picture"
 													src="../images/member_profile.png" width="30" height="30"
