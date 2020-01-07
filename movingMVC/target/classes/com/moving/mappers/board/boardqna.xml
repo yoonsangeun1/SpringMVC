@@ -125,13 +125,20 @@ WHERE ID=#{id}
  INSERT INTO REPLY_POST (ID, USER_ID, TITLE,CONTENT,CODE_NO,
  REPLY_STEP, REPLY_ORDER)
  VALUES(reply_post_seq.nextval, #{userId}, #{title},
- #{content},10006,#{id},#{replyOrder}+1) 
+ #{content},10006,#{id},#{replyOrder}+2) 
 </insert>
 
-<select id="bq_reply_select" resultType="int">
+<!-- 답변 글쓰기 완료 시 질문글 reply_order +1 -->
+<update id="bq_reply_order">
+ UPDATE REPLY_POST
+ SET REPLY_ORDER = REPLY_ORDER + 1
+ WHERE ID =#{id}
+</update>
+
+<select id="bq_reply_select" resultType="int"> 
  SELECT Count(*) FROM REPLY_POST
- WHERE REPLY_ORDER = 1
- AND REPLY_STEP = #{id}
+ WHERE REPLY_ORDER &gt;= 1
+ AND ID = #{id}
 </select>
 
 </mapper>

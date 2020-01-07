@@ -252,11 +252,22 @@ public class BoardQnaController { /*질문게시판 컨트롤러*/
 			
 			if(m_userid == bq.getUserId()) { /*본인 게시글일 경우*/
 				
+				int replycheck=this.boardReplyService.selectReply(id); //아이디를 기준으로 답변글이 있는지 확인하기 위함.
+				
+				if(replycheck >= 1) { /*1 이상일 경우 */
+					out.println("<script>");
+					out.println("alert('답변이 등록된 게시물이나 답변글은 삭제 불가능합니다!');");
+					out.println("history.back();");
+					out.println("</script>");
+				}else { /* 0이상이 아닐경우 */
+				
 				this.boardReplyService.delBoardQna(id);
 				
 				rttr.addFlashAttribute("msg","BOARD/QNA_DEL");
 				
 				return "redirect:/board/qna?page="+page;
+				
+				}//if else
 				
 			}else { //본인 게시글이 아닐경우
 				rttr.addFlashAttribute("msg","BOARD/QNA_CONT_X");
@@ -285,8 +296,8 @@ public class BoardQnaController { /*질문게시판 컨트롤러*/
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out=response.getWriter();
 			session=request.getSession();
-			
-			if(session.getAttribute("id") != null) { //세션 id가 있으면
+			String user_lv=(String)session.getAttribute("user_lv");
+			if(session.getAttribute("id") != null && user_lv.equals("관리자")) { //세션 id가 있으면
 				
 				ReplyPostVO bq=this.boardReplyService.getCont2(id);
 				
@@ -295,12 +306,12 @@ public class BoardQnaController { /*질문게시판 컨트롤러*/
 				System.out.println(id);
 				System.out.println(replycheck);
 				
-				if(replycheck > 0) { /*0 이상일 경우 */
+				if(replycheck >= 1) { /*1 이상일 경우 */
 					out.println("<script>");
-					out.println("alert('이미 답변글이 등록 된 게시글입니다!');");
+					out.println("alert('답변글이 등록 된 게시글이거나 답변글에 답변글은 작성 불가능합니다!');");
 					out.println("history.back();");
 					out.println("</script>");
-				}else { /* 0이상이 아닐경우 */
+				}else { /* 0일 경우 */
 					
 				ModelAndView cm=new ModelAndView();
 				
@@ -309,6 +320,7 @@ public class BoardQnaController { /*질문게시판 컨트롤러*/
 					cm.setViewName("board/board_qna_reply"); //reply 페이지 ,답변 페이지
 					
 					return cm;
+					
 				}//if else
 	
 			}else { /*세션에 값이 없을 경우*/
@@ -346,8 +358,6 @@ public class BoardQnaController { /*질문게시판 컨트롤러*/
 			bq.setReplyStep(id);
 			
 			this.boardReplyService.replyBoardQna(bq); //답변 저장
-			
-			System.out.println("page는"+page);
 	
 			return "redirect:/board/qna?page="+page;
 			

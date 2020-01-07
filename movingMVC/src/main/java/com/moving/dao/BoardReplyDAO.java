@@ -17,5 +17,6 @@ public interface BoardReplyDAO {
 	void delBoardQna(int id);
 	void replyBoardQna(ReplyPostVO bq);
 	int selectReply(int id);
+	void replyOrderUpdate(ReplyPostVO bq);
 
 }//BOardReplyDAO interface

@@ -57,11 +57,11 @@
  		 <c:if test="${!empty bqlist}"> <%--bqlist에 값이 있으면 --%>
  		  <c:forEach var="bqlist" items="${bqlist}">
  		   <tr style="height:44px">
- 		   <c:if test="${bqlist.replyStep == 0}"> <%--원본글일때 --%>
+ 		   <c:if test="${bqlist.replyOrder <= 1}"> <%--원본글일때 --%>
  		    <td id="no">${bqlist.id}</td>
  		   </c:if>
  		   
- 		   <c:if test="${bqlist.replyStep != 0}"> <%-- 답변글일때 --%>
+ 		   <c:if test="${bqlist.replyOrder > 1}"> <%-- 답변글일때 --%>
  		   <td></td>
  		   </c:if>
  		   
@@ -74,12 +74,18 @@
  		      <td>
  		       <c:if test="${(empty findFiled) && (empty findName)}"> <%--검색 전 --%>
  		       <a href="/moving.com/board/qna_cont?id=${bqlist.id}&page=${page}">
+ 		       <c:if test="${bqlist.replyOrder > 1}">
+ 		        <img src="../resources/images/bQna.gif" />
+ 		       </c:if>
  		        ${title}
  		       </a>
  		       </c:if>
  		       
  		       <c:if test="${(!empty findField) || (!empty findName)}"> <%--검색 후 --%>
  		       <a href="/moving.com/board/free_cont?id=${bqlist.id}&page=${page}&findField=${findField}&findNam${findName}">
+ 		        <c:if test="${bqlist.replyOrder > 1}">
+ 		        <img src="../resources/images/bQna.gif" />
+ 		       </c:if>
  		       ${title}
  		       </a>
  		       </c:if>
@@ -90,11 +96,17 @@
  		     <td>
  		      <c:if test="${(empty findFiled) && (empty ifndName)}"> <%--검색 전 --%>
  		      <a href="/moving.com/board/qna_cont?id=${bqlist.id}&page=${page}">
+ 		       <c:if test="${bqlist.replyOrder > 1}">
+ 		        <img src="../resources/images/bQna.gif" />
+ 		       </c:if>
  		      ${bqlist.title}
  		      </a>
  		      </c:if>
  		      <c:if test="${(!empty findField) || (!empty findName)}"> <%--검색 후 --%>
  		      <a href="/moving.com/board/qna_cont?id=${bqlist.id}&page=${page}&findField=${findField}&findName=${findName}">
+ 		       <c:if test="${bqlist.replyOrder > 1}">
+ 		        <img src="../resources/images/bQna.gif" />
+ 		       </c:if>
  		       ${bqlist.title}
  		      </a>
  		      </c:if>

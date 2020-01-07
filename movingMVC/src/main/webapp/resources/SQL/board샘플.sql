@@ -83,7 +83,7 @@ delete from reply_post where id=1;
   SELECT * FROM
  (SELECT ROW_NUMBER() OVER(ORDER BY REPLY_STEP desc, REPLY_ORDER ASC) rNum,
  R.ID AS board_qna_id, R.TITLE, U.NICKNAME, S.ID AS social_profile_id,
- R.REGISTER_DATE AS board_qna_registerDate, R.HIT, R.REPLY_ORDER
+ R.REGISTER_DATE AS board_qna_registerDate, R.HIT, R.REPLY_ORDER, R.REPLY_STEP
  FROM REPLY_POST R
  LEFT OUTER JOIN M_USER U ON R.USER_ID = U.ID
  LEFT OUTER JOIN SOCIAL_PROFILE S ON U.ID = S.USER_ID
@@ -101,4 +101,12 @@ delete from reply_post where id=1;
  WHERE REPLY_ORDER = 1
  AND REPLY_STEP = 1;
  
+  SELECT * FROM REPLY_POST
+ WHERE REPLY_ORDER = 1
+ 
+SELECT Count(*) FROM REPLY_POST
+WHERE REPLY_ORDER =1 
+AND id=21;
 
+
+delete from reply_post;
