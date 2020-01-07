@@ -14,7 +14,7 @@
 		<div id="SNS_Profile_Top">
 			<div id="SNS_Profile_Ground">
 				<c:if test="${empty s_pro.profileImagePath}">
-					<div id="SNS_Profile_Background">
+					<div id="SNS_Profile_Background" style="background-image:url(../images/sns_back1.jpg)">
 				</c:if>
 				<c:if test="${!empty s_pro.profileImagePath}">
 					<div id="SNS_Profile_Background" style="background-image:url('${s_pro.backgroundImagePath}')">
@@ -559,9 +559,6 @@
 							</c:forEach>
 						</ul>
 				</div>
-				<div id="SNS_Profile_Donate">
-					후원하기 입니다.
-				</div>
 				<div id="SNS_Profile_Friends">
 					<ul id="SNS_Profile_Friends_List">
 						<li>
@@ -576,6 +573,9 @@
 							</div>
 						</li>
 					</ul>
+				</div>
+				<div id="SNS_Profile_Donate">
+					후원하기 입니다.
 				</div>
 			</div>			
 		</div>

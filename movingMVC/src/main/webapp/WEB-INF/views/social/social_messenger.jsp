@@ -5,11 +5,11 @@
 	<div id="SNS_Messenger_Wrap">
 		<!-- 오브젝트 항목 래핑 -->
 		<div id="SNS_Messenger_Left">
-		<c:if test="${!empty s_pro.profileImagePath}">
+		<c:if test="${'default'!= m_pro.profileImagePath}">
 			<img id="SNS_Messenger_Photo" src="${s_pro.profileImagePath}"
 				onclick="location='/moving.com/social/profile?id='+${sessionSocial.id}">
 		</c:if>
-		<c:if test="${empty s_pro.profileImagePath}">
+		<c:if test="${'default'== m_pro.profileImagePath}">
 			<img id="SNS_Messenger_Photo" src="../images/member_profile.png"
 				onclick="location='/moving.com/social/profile?id='+${sessionSocial.id}">
 		</c:if>
@@ -42,10 +42,10 @@
 		<c:if test="${socialIdTo!=0}">
 				<div id="SNS_Messenger_Mid">
 			<div id="SNS_Messenger_Mid_Up">
-				<c:if test="${empty m_pro.profileImagePath}">
+				<c:if test="${'default'== m_pro.profileImagePath}">
 					<img id="SNS_Messenger_Photo" src="../images/member_profile.png">
 				</c:if>
-				<c:if test="${!empty m_pro.profileImagePath}">
+				<c:if test="${'default'!= m_pro.profileImagePath}">
 					<img id="SNS_Messenger_Photo" src="${m_pro.image_profile_path}">
 				</c:if>
 				<p id="SNS_Messenger_Photo_Title">${m_pro.nickname}</p>
@@ -72,26 +72,32 @@
 						<li><div id="SNS_Messenger_Text_Left"><div id="SNS_Messenger_Text_U">홍채 팝니다.</div></div></li>
 					</ul>
 					</div>
-					<textarea id="SNS_Messenger_Text_Write">안 산다고</textarea>
+					<textarea id="SNS_Messenger_Text_Write"></textarea>
 						<input id="SNS_Messenger_Send" type="button" value="보내기">
 				</div>
 			</div>
 		</div>
 		<div id="SNS_Messenger_Right_Up">
 			<div id="SNS_Friend_Image">
-				<c:if test="${empty m_pro.profileImagePath}">
-					<img src="../images/member_profile.png">
+				<c:if test="${'default'== m_pro.profileImagePath}">
+					<img src="${pageContext.request.contextPath}/images/member_profile.png">
 				</c:if>
-				<c:if test="${!empty m_pro.profileImagePath}">
+				<c:if test="${'default'!= m_pro.profileImagePath}}">
 					<img src="${m_pro.image_profile_path}">
 				</c:if>
-				<p>${m_pro.nickname}</p>
+				<div style="
+				    width: 230px;
+/* 				    border: 1px solid; */
+				    text-align: center;
+				">
+					<p>${m_pro.nickname}</p>
+				</div>
 			</div>
 			<div id="SNS_Friend_Menu">
 				<ul id="SNS_Friend_Ul">
 					<li id="SNS_Friend_Li"><input id="SNS_Friend_Button" type="button" value="프로필 바로가기" onclick="location.href='/moving.com/social/profile?id=${m_pro.id}';"></li>
 <!-- 					<li id="SNS_Friend_Li"><input id="SNS_Friend_Button" type="button" value="닉네임 변경하기"></li> -->
-					<li id="SNS_Friend_Li"><input id="SNS_Friend_Button" type="button" value="신고하기"></li>
+					<li id="SNS_Friend_Li"><input id="SNS_Friend_Button" type="button" value="신고하기" onclick="location.href='/moving.com/social/report?reportId=${m_pro.id}&sendId=${sessionSocial.id}';"></li>
 				</ul>
 			</div>
 		</div>

@@ -158,6 +158,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		UPDATE social_profile SET nickname = #{nickname},
 		introduce = #{introduce} WHERE id = #{id}
 	</update>
+	
+	<!-- 신고한 사람과 신고대상자 넣기 -->
+	<insert id="insertSocialReport">
+		INSERT INTO report
+		(id,title,content,social_profile_id_from,social_profile_id_to)
+		values
+		(report_seq.nextval,#{title},#{content},#{socialProfileIdFrom},#{socialProfileIdTo})
+	</insert>
 	<!-- ==================================<구분선>====================================== -->
 	<!-- 회원에 해당하는  게시글 검색 (게시글 + 댓글 + 작성자) -->
 	<select id="selectSocialPostInfo" resultMap="socialPostInfo">

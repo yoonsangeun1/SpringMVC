@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.moving.domain.AttachedFileVO;
 import com.moving.domain.MUserVO;
+import com.moving.domain.ReportVO;
 import com.moving.domain.SocialMessageVO;
 import com.moving.domain.SocialPostVO;
 import com.moving.domain.SocialProfileVO;
@@ -434,10 +435,7 @@ public class SocialController {
 		
 		SocialProfileVO getSocial_id=(SocialProfileVO) session.getAttribute("sessionSocial");
 		int user_id=getSocial_id.getId();
-		if(page_num==0) {
-			SocialProfileVO getRealSocial_id=this.socialService.selectIDFromUserID(user_id);
-			user_id=getRealSocial_id.getId();
-		}
+		
 		System.out.println(user_id);
 		System.out.println(socialId);
 		
@@ -559,7 +557,14 @@ public class SocialController {
 					List<SocialMessageVO> mlist=this.socialService.getMessageList(s_pro.getId());
 					//대화 목록
 					SocialProfileVO m_pro=this.socialService.socialProfileInfoWithId(socialIdTo);
+					SocialMessageVO message_listVO=new SocialMessageVO();
 					
+					message_listVO.setSocialIdFrom(socialIdFrom);
+					message_listVO.setSocialIdTo(socialIdTo);
+
+					List<SocialMessageVO> socialMessageVO=socialService.getTalkBalloon(message_listVO);
+					
+					m.addAttribute("m_info", socialMessageVO);
 					m.addAttribute("mlist", mlist);
 					m.addAttribute("m_pro", m_pro);
 					m.addAttribute("socialIdFrom", socialIdFrom);
@@ -631,7 +636,36 @@ public class SocialController {
 			SocialProfileVO s_pro=this.socialService.socialProfileInfoWithId(reportId);
 			
 			m.addObject("s_pro",s_pro);
-			
 			return m;
 		}//social_update()
+		
+		//신고 완료
+		@RequestMapping(value="/social/report_ok")
+		public String social_report_ok(
+				int reportId,
+				int sendId,
+				HttpServletRequest request,
+				HttpServletResponse response, 
+				HttpSession session
+				) throws Exception{
+			PrintWriter out=response.getWriter();
+			response.setContentType("text/html;charset=UTF-8");
+			session=request.getSession();
+			
+			ReportVO report=new ReportVO();
+			String reportRadio=request.getParameter("reportWhy");
+			String reason=request.getParameter("report");
+			
+			report.setSocialProfileIdTo(reportId);
+			report.setSocialProfileIdFrom(sendId);
+			report.setTitle(reportRadio);
+			report.setContent(reason);
+			
+			out.println("<script>");
+			out.println("alert('신고가 완료되었습니다!');");
+			out.println("</script>");
+			
+			this.socialService.insertSocialReport(report);
+			return "redirect:/social/messenger?socialIdFrom="+sendId+"&socialIdTo=0";
+		}
 }

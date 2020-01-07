@@ -234,11 +234,12 @@
 /* 오른쪽 메뉴 열거 */
 #SNS_Friend_Image{
 	height: 200px;
-	padding-left: 49px;
+/* 	padding-left: 49px; */
 }
 #SNS_Friend_Image img{
 	width:140px;
 	height:140px;
+	margin-left:49px;
 	border-radius: 80px;
 /* 	cursor: pointer; */
 }
@@ -271,4 +272,7 @@
 }
 #SNS_Friend_Button:focus{
 	outline: none;
+}
+.SNS_Radio_Box{
+	font-size:24px;
 }

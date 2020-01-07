@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.moving.domain.AttachedFileVO;
+import com.moving.domain.ReportVO;
 import com.moving.domain.SocialMessageVO;
 import com.moving.domain.SocialPostVO;
 import com.moving.domain.SocialProfileVO;
@@ -76,5 +77,15 @@ public class SocialDAOImpl implements SocialDAO {
 	@Override
 	public void updateInfo(SocialProfileVO s_pro) {
 		this.sqlsession.update("updateInfo",s_pro);
+	}
+
+	@Override
+	public void insertSocialReport(ReportVO report) {
+		this.sqlsession.insert("insertSocialReport",report);
+	}
+
+	@Override
+	public List<SocialMessageVO> getTalkBalloon(SocialMessageVO message_listVO) {
+		return this.sqlsession.selectList("getTalkBalloon",message_listVO);
 	}
 }

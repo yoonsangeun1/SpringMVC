@@ -579,7 +579,7 @@
 	outline:none;
 	padding-left:4px;
 	margin-left: 10px;
-	width:450px;
+	width:430px;
 	height: 22px;
 	border: 1px solid #cacaca;
 	border-radius: 7px;
@@ -593,4 +593,10 @@
 	border: none;
 	border-radius: 8px;
 	outline:none;
+	transition:0.5s;
+	cursor:pointer;
+}
+.SNS_Comment_Write_Button:hover{
+	background-color:black;
+	transform:scale(1.2);
 }

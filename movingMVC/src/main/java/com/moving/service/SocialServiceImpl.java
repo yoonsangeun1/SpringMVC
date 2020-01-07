@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.moving.dao.SocialDAO;
 import com.moving.domain.AttachedFileVO;
+import com.moving.domain.ReportVO;
 import com.moving.domain.SocialMessageVO;
 import com.moving.domain.SocialPostVO;
 import com.moving.domain.SocialProfileVO;
@@ -80,5 +81,15 @@ public class SocialServiceImpl implements SocialService {
 	@Override
 	public void updateInfo(SocialProfileVO s_pro) {
 		this.socialDAO.updateInfo(s_pro);
+	}
+
+	@Override
+	public void insertSocialReport(ReportVO report) {
+		this.socialDAO.insertSocialReport(report);
+	}
+
+	@Override
+	public List<SocialMessageVO> getTalkBalloon(SocialMessageVO message_listVO) {
+		return this.socialDAO.getTalkBalloon(message_listVO);
 	}
 }
