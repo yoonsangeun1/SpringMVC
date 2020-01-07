@@ -125,15 +125,37 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 3-1-1) 댓글 작성-->
 	<insert id="insertProjectComment">
 		INSERT INTO m_comment 
-		(id, user_id_from, content, COMMENT_ID_REPLY, PROJECT_POST_ID)
+		(id, user_id_from, content, COMMENT_ID_REPLY, 
+		PROJECT_POST_ID, profile_post_id, normal_post_id)
 		VALUES 
-		(m_comment_seq.nextval, #{userIdFrom}, #{content}, m_comment_seq.nextval, #{projectPostId})
+		(m_comment_seq.nextval, #{userIdFrom}, #{content}, m_comment_seq.nextval, 
+		#{projectPostId}, #{profilePostId}, #{normalPostId})
 	</insert>
+	
 	<!--  3-1-2) 댓글 카운트 높이기 -->
 	<update id="updateProjectCommentCountOne">
-		UPDATE m_comment 
+		<if test="projectPostId != 0">
+		UPDATE project_post 
+		</if>
+		<if test="profilePostId != 0 ">
+		UPDATE profile_post 
+		</if>
+		<if test="normalPostId != 0">
+		UPDATE normal_post
+		</if>
 		SET comment_count = comment_count + 1
-		WHERE id = #{projectPostId}
+		<where>
+		<if test="projectPostId != 0">
+		id = #{projectPostId}
+		</if>
+		<if test="profilePostId != 0 ">
+		id = #{profilePostId}
+		</if>
+		<if test="normalPostId != 0">
+		id = #{normalPostId}
+		</if>
+		</where>
+		
 	</update>
 	
 	<!-- 3-2) 댓글 내용 -->
@@ -215,4 +237,56 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 		<!-- &gt;은 ~보다 크다(>),&lt;은 ~보다 작다(<),rowNum 컬럼은 오라클에서 테이블생성시 생성되는 기본컬럼으로 
 			레코드 저장시 일련번호값이 저장됨. -->
+			
+	<!-- 1-2) 게시글에 해당하는 댓글 모두 다 목록 해시맵으로 불러오기 JSON용 HashMap 반환 -->
+	<select id="selectCommentListMapActors" resultType="java.util.Map">
+		SELECT c.id, c.user_id_from, c.profile_post_id, 
+		c.content, c.register_date, u.nickname , u.profile_image_url
+		FROM m_comment c
+		LEFT OUTER JOIN m_user u on c.user_id_from = u.id
+		WHERE c.profile_post_id = #{id}
+		ORDER BY c.register_date desc
+	</select>
+	
+	
+	<!-- 2) 아래 둘은 한 세트처럼 사용. 게시글 개수 카운트, 저장 + 카운트한 값 반환 -->
+	<!-- 2-1) 게시글의 댓글 개수 세서, 저장된 값업데이트 -->
+	<update id="updateCommentCountActors">
+		UPDATE profile_post
+		SET comment_count=(
+			SELECT COUNT(id) 
+			FROM m_comment
+			WHERE profile_post_id = #{id}
+			)
+		WHERE id= #{id}
+	</update>
+	<!-- 2-2) 게시글의 댓글 개수 저장된 값 가져오기 -->
+	<select id="selectCommentCountActors" resultType="projectPostVO">
+		SELECT comment_count 
+		FROM profile_post
+		WHERE id = #{id}
+	</select>
+	
+	<!-- 1-2) 게시글에 해당하는 댓글 모두 다 목록 해시맵으로 불러오기 JSON용 HashMap 반환 -->
+	<select id="selectCommentListMapNormal" resultType="java.util.Map">
+		SELECT c.id, c.user_id_from, c.normal_post_id, 
+		c.content, c.register_date, u.nickname , u.profile_image_url
+		FROM m_comment c
+		LEFT OUTER JOIN m_user u on c.user_id_from = u.id
+		WHERE c.normal_post_id = #{id}
+		ORDER BY c.register_date desc
+	</select>
+	
+	
+	<!-- 2) 아래 둘은 한 세트처럼 사용. 게시글 개수 카운트, 저장 + 카운트한 값 반환 -->
+	<!-- 2-1) 게시글의 댓글 개수 세서, 저장된 값업데이트 -->
+	<update id="updateCommentCountNormal">
+		UPDATE normal_post
+		SET comment_count=(
+			SELECT COUNT(id) 
+			FROM m_comment
+			WHERE normal_post_id = #{id}
+			)
+		WHERE id= #{id}
+	</update>
 </mapper>

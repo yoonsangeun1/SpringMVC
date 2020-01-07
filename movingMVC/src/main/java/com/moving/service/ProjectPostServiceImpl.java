@@ -6,8 +6,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.moving.dao.ProjectPostDAO;
 import com.moving.domain.MCommentVO;
@@ -70,6 +68,25 @@ public class ProjectPostServiceImpl implements ProjectPostService {
 	@Override
 	public List<ProjectPostVO> selectProjectList(ProjectPostVO projectPostVO) {
 		return projectPostDAO.selectProjectList(projectPostVO);
+	}
+
+	@Transactional
+	@Override
+	public MCommentVO selectCommentCountActors(int id) {
+		projectPostDAO.updateCommentCountActors(id);
+		return projectPostDAO.selectCommentCountActors(id);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectCommentListMapActors(int id) {
+		return projectPostDAO.selectCommentListMapActors(id);
+	}
+
+	@Transactional
+	@Override
+	public List<Map<String, Object>> selectCommentListMapNormal(int id) {
+		projectPostDAO.updateCommentCountNormal(id);
+		return projectPostDAO.selectCommentListMapNormal(id);
 	}
 
 }

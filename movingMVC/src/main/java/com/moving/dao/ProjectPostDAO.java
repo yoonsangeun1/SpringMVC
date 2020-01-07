@@ -35,4 +35,14 @@ public interface ProjectPostDAO {
 	int selectListCount(ProjectPostVO projectPostVO);
 
 	List<ProjectPostVO> selectProjectList(ProjectPostVO projectPostVO);
+
+	MCommentVO selectCommentCountActors(int id);
+
+	List<Map<String, Object>> selectCommentListMapActors(int id);
+
+	void updateCommentCountActors(int id);
+
+	List<Map<String, Object>> selectCommentListMapNormal(int id);
+	
+	void updateCommentCountNormal(int id);
 }

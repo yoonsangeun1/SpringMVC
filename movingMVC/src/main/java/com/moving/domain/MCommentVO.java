@@ -22,7 +22,29 @@ public class MCommentVO {						/* 댓글 */
 	
 	private MUserVO mUserVO;					/* 댓글 작성한 회원 정보 */
 	private SocialProfileVO socialProfileVO;	/* sns 댓글 작성한 회원 정보*/
+	private NormalPostVO normalPostVO;	/* sns 댓글 작성한 회원 정보*/
+	private ProfilePostVO profilePostVO;	/* sns 댓글 작성한 회원 정보*/
+	private ProjectPostVO projectPostVO;	/* sns 댓글 작성한 회원 정보*/
 	
+	
+	public NormalPostVO getNormalPostVO() {
+		return normalPostVO;
+	}
+	public void setNormalPostVO(NormalPostVO normalPostVO) {
+		this.normalPostVO = normalPostVO;
+	}
+	public ProfilePostVO getProfilePostVO() {
+		return profilePostVO;
+	}
+	public void setProfilePostVO(ProfilePostVO profilePostVO) {
+		this.profilePostVO = profilePostVO;
+	}
+	public ProjectPostVO getProjectPostVO() {
+		return projectPostVO;
+	}
+	public void setProjectPostVO(ProjectPostVO projectPostVO) {
+		this.projectPostVO = projectPostVO;
+	}
 	public int getId() {
 		return id;
 	}

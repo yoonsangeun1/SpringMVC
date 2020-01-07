@@ -58,7 +58,6 @@
 
 <%-- javascript 추가 (우선, abc순)--%>
 <script src="${pageContext.request.contextPath}/resources/js/jquery.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/jstest.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/header_icon.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/member_join.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/member_login.js"></script>
