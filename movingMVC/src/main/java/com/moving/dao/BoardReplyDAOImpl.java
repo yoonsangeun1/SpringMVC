@@ -61,8 +61,14 @@ public class BoardReplyDAOImpl implements BoardReplyDAO {
 	}//답변 글쓰기
 
 	@Override
+	public void replyOrderUpdate(ReplyPostVO bq) {
+		this.sqlSession.update("bq_reply_order",bq);
+	}//답변 글쓰기 시 질문글 order +1 해주기.
+	
+	@Override
 	public int selectReply(int id) {
 		return this.sqlSession.selectOne("bq_reply_select",id);
 	}//답변글이 이미 있는지 확인.
+
 	
 }//BoardReplyDAOImpl class

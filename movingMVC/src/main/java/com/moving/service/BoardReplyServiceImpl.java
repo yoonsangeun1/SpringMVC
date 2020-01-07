@@ -53,8 +53,10 @@ public class BoardReplyServiceImpl implements BoardReplyService {
 		this.boardReplyDao.delBoardQna(id);
 	}
 
+	@Transactional
 	@Override
 	public void replyBoardQna(ReplyPostVO bq) {
+		this.boardReplyDao.replyOrderUpdate(bq);
 		this.boardReplyDao.replyBoardQna(bq);
 	}
 
