@@ -9,10 +9,10 @@
 				<h2 class="mJoin_text">회원정보 수정</h2>
 					<div id="info_field">
 							<p style="font-size:14px;padding-left: 8px;margin-top: 20px;">닉네임</p>
-							<input name="nickname" id="SNS_Up_Join" class="text_infoNickInput" value="${s_pro.nickname}" style="margin-top: 5px;" maxlength="6">
+							<input name="nickname" id="SNS_Up_Join" class="text_infoNickInput" value="${s_pro.nickname}" style="margin-top: 5px;" maxlength="5">
 <!-- 							<input type="password" name="password" id="password" class="text_infoInput" placeholder="비밀번호 확인"> -->
 							<p style="font-size:14px;padding-left: 8px;margin-top: 30px;">자기소개</p>
-							<input name="introduce" id="introduce" class="text_infoInput" value="${s_pro.introduce}" maxlength="50">
+							<input name="introduce" id="introduce" class="text_infoInput" value="${s_pro.introduce}" maxlength="30">
 					</div>
 					
 					<div id="joinBtn_field">

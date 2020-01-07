@@ -36,7 +36,7 @@
 				</div>
 				<div id="SNS_Profile_Foreground">
 					<div id="SNS_Profile_Introduce">
-						<p>${s_pro.introduce}</p>
+						<p>${fn:substring(s_pro.introduce,0,39)}</p>
 						<c:if test="${s_pro.id==sessionSocial.id}">
 							<input id="SNS_Profile_Edit_Intro" type="button" value="수정하기" 
 								onclick="location='/moving.com/social/update?sessionId=${sessionSocial.id}';">
@@ -78,7 +78,7 @@
 // 										});
 <!-- 							</script> -->
 			<div id="SNS_Profile_Story">
-				<form action="post_write_ok" enctype="mutipart/form-data"
+				<form action="post_write_ok?page_num=1" enctype="mutipart/form-data"
 					method="post" name="timeLineWriter">
 					<div id="SNS_Profile_Writer">
 						<div id="SNS_Profile_Upload_Top">
@@ -174,7 +174,7 @@
 									<c:if test="${sessionSocial.id==s_pro.id}">
 									<input class="SNS_Option_Button" type="button" value="삭제"
 										onclick="if(confirm('정말로 삭제할까요?') == true){
-									location='/moving.com/social/post_del_ok?id=${s_post.id}&socialId=${s_pro.id}&page_num=1';}else{return}"
+												location='/moving.com/social/post_del_ok?id=${s_post.id}&socialId=${s_pro.id}&page_num=1';}else{return}"
 										style="float: right;">
 									</c:if>
 									<%-- 								<img class="SNS_Content_Image" alt="사진" src="${s_pro.profileImagePath}"> --%>

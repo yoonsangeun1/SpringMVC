@@ -358,15 +358,31 @@ public class SocialController {
 			HttpServletRequest request,
 			HttpServletResponse response
 			,SocialPostVO s_post
+			,int page_num
 			)throws Exception{
 		HttpSession session=request.getSession();//세션 값 전체를 가져온다.
 
 		SocialProfileVO Social_id=(SocialProfileVO)session.getAttribute("sessionSocial");
-
+		System.out.println(Social_id.getId());
 		s_post.setSocialId(Social_id.getId());//소셜 아이디를 기준으로 게시글 넣기
 		this.socialService.insertPost(s_post);//게시글 넣는 메서드
-
-		return "redirect:/social/profile?id="+Social_id.getId();//내 계정으로 복귀
+		
+		if(page_num==0) {//메인으로 갈 때
+			return "redirect:/social/main;";
+		}
+		else {
+			return "redirect:/social/profile?id="+Social_id.getId();//내 계정으로 복귀
+		}
+	}
+	
+	@RequestMapping(value="/social/go_profile")
+	public String go_profile(
+			int m_id//작성자 유저아이디 번호
+			)throws Exception{
+		SocialProfileVO s_pro=this.socialService.selectIDFromUserID(m_id);
+		System.out.println("회원 번호는 : "+s_pro.getId());
+		
+		return "redirect:/social/profile?id="+s_pro.getId();//내 홈피로 이동
 	}
 
 	//게시글 공유 완료
@@ -406,9 +422,18 @@ public class SocialController {
 			int socialId,//게시글 작성자
 			int page_num//메인 페이지인지 프로필 페이지인지 여부
 			) throws Exception{
+		
 		session=request.getSession();//세션 값 전체를 가져온다.
+		
 		SocialProfileVO getSocial_id=(SocialProfileVO) session.getAttribute("sessionSocial");
 		int user_id=getSocial_id.getId();
+		if(page_num==0) {
+			SocialProfileVO getRealSocial_id=this.socialService.selectIDFromUserID(user_id);
+			user_id=getRealSocial_id.getId();
+		}
+		System.out.println(user_id);
+		System.out.println(socialId);
+		
 		if(user_id==socialId) {
 			this.socialService.deletePost(id);
 			if(page_num==0) {
@@ -416,6 +441,9 @@ public class SocialController {
 			}else if(page_num==1) {
 				return "redirect:/social/profile?id="+user_id;
 			}
+		}
+		else {
+			System.out.println("실패");
 		}
 		return null;
 	}

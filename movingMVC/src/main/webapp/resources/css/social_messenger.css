@@ -51,7 +51,7 @@
 }
 #SNS_Messenger_Right_Up{
 	width:250px;
-	height:350px;
+	height:310px;
 	float: left;
 	border: 1px solid #b3a9eb;
 	margin-left: 20px;
@@ -151,7 +151,8 @@
 #SNS_Messenger_Text_Write{
 	font-size: 15px;
 	margin-top: 15px;
-	width: 457px;
+	margin-right: 11px;
+	width: 340px;
 	height: 25px;
 	resize: none;
 	border: none;
@@ -159,6 +160,21 @@
 	background: #f2f0fb;
 	padding-top: 7px;
 	padding-left: 15px;
+	float: left;
+}
+#SNS_Messenger_Send{
+	font-size: 15px;
+	height: 34px;
+	outline: none;
+	margin-top:15px;
+	border-radius: 15px;
+	border: none;
+	cursor: pointer;
+	background: #d4cff3;
+}
+#SNS_Messenger_Send:hover{
+	background: #6a67ce;
+	color: white;
 }
 #SNS_Messenger_Text_Write:focus{
 	outline:none;
@@ -228,9 +244,9 @@
 }
 #SNS_Friend_Image p{
 	padding-top: 25px;
-	padding-left: 20px;
+	padding-left: 11px;
 	font-size: 24px;
-	cursor: pointer;
+/* 	cursor: pointer; */
 }
 #SNS_Friend_Menu{
 	margin-top: 10px;

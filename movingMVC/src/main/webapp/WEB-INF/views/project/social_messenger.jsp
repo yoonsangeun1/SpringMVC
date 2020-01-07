@@ -53,7 +53,6 @@
 			<div id="SNS_Messenger_Mid_Down">
 				<div id="SNS_Messenger_Intro">
 				<div id="SNS_Messenger_Text">
-					<input type="hidden" id="sessionId" value="${sessionId}">
 					<ul>
 						<li><div id="SNS_Messenger_Text_Left"><div id="SNS_Messenger_Text_U">홍채 팝니다.</div></div></li>
 						<li><div id="SNS_Messenger_Text_Right"><div id="SNS_Messenger_Text_M">안 사요.</div></div></li>
@@ -91,6 +90,7 @@
 				<ul id="SNS_Friend_Ul">
 					<li id="SNS_Friend_Li"><input id="SNS_Friend_Button" type="button" value="프로필 바로가기" onclick="location.href='/moving.com/social/profile?id=${m_pro.id}';"></li>
 <!-- 					<li id="SNS_Friend_Li"><input id="SNS_Friend_Button" type="button" value="닉네임 변경하기"></li> -->
+					<li id="SNS_Friend_Li"><input id="SNS_Friend_Button" type="button" value="차단하기"></li>
 					<li id="SNS_Friend_Li"><input id="SNS_Friend_Button" type="button" value="신고하기"></li>
 				</ul>
 			</div>
@@ -100,11 +100,16 @@
 	<script>
 		function t(bno) {
 			var sessionId = $('#sessionId').text();//로그인한 아이디
+			//var social_post_id = $('#social_post_id').val();//게시글 번호
 	
-			$.getJSON("/moving.com/socialmessage/all_list{}" + bno,
+			$
+					.getJSON(
+							"/moving.com/socialcomments/all_list{}" + bno,
 							function(data) {
 								var str = "";
-								success: $(data).each(function() {//each()는 jQuery 반복 함수
+								success: $(data).each(
+												function() {//each()는 jQuery 반복 함수
+													/* if(this.PROFILE_IMAGE_PATH == 'default') { */
 													str += "<li class='replies' data-messageId='"+this.ID+"' style='align-items: center'>"
 															+ "<div class='comment_no' style='display:none'>"
 															+ this.ID
@@ -118,18 +123,41 @@
 															+ this.CONTENT
 															+ "</p>"
 															+ "<input name='comment_txt_"+this.ID+"' id='comment_txt_"+this.ID+"' class='comment_txt' value='"+this.CONTENT+"' style='display: none;'>"
+													//+"<input type='button' name='modify' class='modify SNS_Comment_Write_Button' value='수정' onclick='clicksss();'>"
 													if (sessionId == this.NICKNAME) {//로그안한 닉네임과 댓글 닉네임 비교하여 수정, 삭제 버튼 생성
 														str += "<button name='modify_"+this.ID+"'  class='modify SNS_Comment_Write_Button'>수정</button>"
 																+ "<button name='modify_ok_"+this.ID+"'  class='modify_ok SNS_Comment_Write_Button' style='display: none;'>수정완료</button>"
 																+ "<button name='delete_"+this.ID+"' class='delete SNS_Comment_Write_Button'>삭제</button>"
 													}
 													+"</li>";
+													/* }else if(this.PROFILE_IMAGE_PATH != 'default') {
+														str += "<li class='replies' data-commentId='"+this.ID+"' style='align-items: center'>"
+														+"<div class='comment_no' style='display:none'>"+this.ID+"</div>"
+														+"<img class='SNS_Content_user_img' class='SNS_Profile_Picture'"
+															+"src='../images/member_profile.png' width=30px height=30px"
+															+"alt=''/>"
+														+"<p><a href='/moving.com/social/profile?id="+this.SOCIAL_PROFILE_ID_FROM+"'>"
+														+this.NICKNAME+"</a></p><p class='comment_content_"+this.ID+"'>"
+														+this.CONTENT+"</p>"
+														+"<input name='comment_txt_"+this.ID+"' id='comment_txt_"+this.ID+"' class='comment_txt' value='"+this.CONTENT+"' style='display: none;'>"
+														//+"<input type='button' name='modify' class='modify SNS_Comment_Write_Button' value='수정' onclick='clicksss();'>"
+														if(sessionId == this.NICKNAME) {//로그안한 닉네임과 댓글 닉네임 비교하여 수정, 삭제 버튼 생성
+															str += "<button name='modify_"+this.ID+"'  class='modify SNS_Comment_Write_Button'>수정</button>"
+															+"<button name='modify_ok_"+this.ID+"'  class='modify_ok SNS_Comment_Write_Button' style='display: none;'>수정완료</button>"
+															+"<button name='delete_"+this.ID+"' class='delete SNS_Comment_Write_Button'>삭제</button>"
+														}
+														+"</li>";
+													} */
 												});
 								$('#replies_' + bno).html(str);//태그와 문자를 함께 변경 적용
 							});//매핑 주소 써주기
 		}//t()
 	
-		//메세지 번호 받아오기
+		/**
+		 * jstest
+		 */
+	
+		//게시글 번호 받아오기
 		function getParameterByName(name) {
 			name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
 			var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"), results = regex
@@ -139,9 +167,12 @@
 		}
 		var id = getParameterByName('id');
 	
+		//세션 아이디 가져오기
 	
-		//메세지 추가(전송)
+		//댓글 추가
 		$(function() {
+			//getCommentList();
+			//								   $('#write').on('click', function() {
 			$("input[name^='write']").on('click', function() {
 				var reply = $(this).parent();
 				var rno = reply.attr('data-contentPostId');//게시글번호
@@ -167,11 +198,15 @@
 						//왼쪽이 키이름 오른쪽이 값!! 이건 동일!!
 						socialPostId : rno, //게시물 번호
 						//id: id, //댓글 작성자
-						content : content	//댓글 내용
+						content : content
+					//댓글 내용
 					}),
 					success : function(data) {//댓글 저장 성공시 SUCCESS 문자열 반환
 						if (data == 'SUCCESS') {
+							// 										            alert('댓글이 등록되었습니다!');
 							t(rno);
+							// getCommentList();//댓글 목록 함수 호출! 갱신된 내용 가져옴.
+							// getCommentCount();//댓글 개수 불러오기
 							$("input[name='content_" + rno + "']").val("");
 						}
 					}
@@ -179,21 +214,109 @@
 			})
 		});
 	
+		//댓글 목록 불러오는 함수 호출
+		/* function getCommentList() {
+			var sessionId=$('#sessionId').text();//로그인한 아이디
+			var social_post_id = $('#social_post_id').val();//게시글 번호
+			
+			
+			$.getJSON("/moving.com/socialcomments/all/" + social_post_id, function(data) {
+				var str = "";
+				success: $(data).each(function() {//each()는 jQuery 반복 함수
+					if(this.PROFILE_IMAGE_PATH == 'default') {
+						str += "<li class='replies' data-commentId='"+this.ID+"' style='align-items: center'>"
+						+"<div class='comment_no' style='display:none'>"+this.ID+"</div>"
+						+"<img class='SNS_Content_user_img' class='SNS_Profile_Picture'"
+															+"src='../images/member_profile.png' width=30px height=30px"
+															+"alt=''/>"
+						+"<p><a href='/moving.com/social/profile?id="+this.SOCIAL_PROFILE_ID_FROM+"'>"
+						+this.NICKNAME+"</a></p><p class='comment_content_"+this.ID+"'>"
+						+this.CONTENT+"</p>"
+						+"<input name='comment_txt_"+this.ID+"' id='comment_txt_"+this.ID+"' class='comment_txt' value='"+this.CONTENT+"' style='display: none;'>"
+						//+"<input type='button' name='modify' class='modify SNS_Comment_Write_Button' value='수정' onclick='clicksss();'>"
+						if(sessionId == this.NICKNAME) {//로그안한 닉네임과 댓글 닉네임 비교하여 수정, 삭제 버튼 생성
+							str += "<button name='modify_"+this.ID+"'  class='modify SNS_Comment_Write_Button'>수정</button>"
+							+"<button name='modify_ok_"+this.ID+"'  class='modify_ok SNS_Comment_Write_Button' style='display: none;'>수정완료</button>"
+							+"<button name='delete_"+this.ID+"' class='delete SNS_Comment_Write_Button'>삭제</button>"
+						}
+						+"</li>";
+					}else if(this.PROFILE_IMAGE_PATH != 'default') {
+						str += "<li class='replies' data-commentId='"+this.ID+"' style='align-items: center'>"
+						+"<div class='comment_no' style='display:none'>"+this.ID+"</div>"
+						+"<img class='SNS_Content_user_img' class='SNS_Profile_Picture'"
+															+"src='../images/member_profile.png' width=30px height=30px"
+															+"alt=''/>"
+						+"<p><a href='/moving.com/social/profile?id="+this.SOCIAL_PROFILE_ID_FROM+"'>"
+						+this.NICKNAME+"</a></p><p class='comment_content_"+this.ID+"'>"
+						+this.CONTENT+"</p>"
+						+"<input name='comment_txt_"+this.ID+"' id='comment_txt_"+this.ID+"' class='comment_txt' value='"+this.CONTENT+"' style='display: none;'>"
+						//+"<input type='button' name='modify' class='modify SNS_Comment_Write_Button' value='수정' onclick='clicksss();'>"
+						if(sessionId == this.NICKNAME) {//로그안한 닉네임과 댓글 닉네임 비교하여 수정, 삭제 버튼 생성
+							str += "<button name='modify_"+this.ID+"'  class='modify SNS_Comment_Write_Button'>수정</button>"
+							+"<button name='modify_ok_"+this.ID+"'  class='modify_ok SNS_Comment_Write_Button' style='display: none;'>수정완료</button>"
+							+"<button name='delete_"+this.ID+"' class='delete SNS_Comment_Write_Button'>삭제</button>"
+						}
+						+"</li>";
+					}
+				});
+				$('#replies').html(str);//태그와 문자를 함께 변경 적용
+			});//매핑 주소 써주기
+		}//getCommentList() */
+	
 		/* 댓글 수정 화면 출력 */
 		$(function() {
 			// $("id[name^='replies']").on('click','.replies .modify',function() {
 			$('#replies').on('click', '.replies .modify', function() {
 				var reply = $(this).parent();
 				var rno = reply.attr('data-commentId');//댓글 번호
+				//var replytext=reply.children("#comment_txt_"+rno).text();//댓글 내용만 가져옴.
 				var replytext = reply.children(".comment_content_" + rno).text();//댓글 내용만 가져옴.
+				//var replytext=reply.children('.comment_txt').text();//댓글 내용만 가져옴.
+				//alert(getElementByName("comment_txt_"+rno));
 	
 				$('.modal-title').html(rno);//댓글 번호
 				$('#replytext').val(replytext);//댓글 내용
+				// $('.comment_content').hide();
 				$('.comment_content_' + rno).hide();
+				// $('.comment_txt').show();
 				$("input[name ='comment_txt_" + rno + "']").show();
 				$("button[name ='modify_" + rno + "']").hide();
 				$("button[name ='modify_ok_" + rno + "']").show();
 			});
+		})
+	
+		/* 댓글 수정 완료 */
+		$(function() {
+			$('#replies').on(
+					'click',
+					'.replies .modify_ok',
+					function() {
+						var reply = $(this).parent();
+						var rno = reply.attr('data-commentId');//댓글 번호
+						var replyModifyText = $(
+								"input[name='comment_txt_" + rno + "']").val();//수정한 댓글 내용 가져오기
+						//$("input[name='comment_txt_"+rno+"']")
+	
+						$.ajax({
+							type : 'put',
+							url : '/moving.com/socialcomments/update/' + rno,
+							headers : {
+								"Content-Type" : "application/json",
+								"X-HTTP-Method-Override" : "PUT"
+							},
+							data : JSON.stringify({
+								content : replyModifyText
+							}),
+							dataType : "text",
+							success : function(data) {
+								if (data == 'SUCCESS') {
+									alert('댓글이 수정되었습니다!');
+									//getCommentList();//댓글 목록 함수 호출! 갱신된 내용 가져옴.
+									//getCommentCount();//댓글 개수 불러오기
+								}
+							}
+						});
+					});
 		})
 	
 		/* 댓글 삭제 */
@@ -213,6 +336,8 @@
 					success : function(data) {
 						if (data == 'SUCCESS') {
 							alert('댓글이 삭제되었습니다!');
+							//getCommentList();//댓글 목록 함수 호출! 갱신된 내용 가져옴.
+							//getCommentCount();//댓글 개수 불러오기
 						}
 					}
 				});
