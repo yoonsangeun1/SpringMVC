@@ -115,8 +115,7 @@
 					</c:if>
 					<c:if test="${!empty s_pro.socialPostVO}">
 						<c:forEach var="s_post" items="${s_pro.socialPostVO}">
-<%-- 							${s_post.id}번 게시글 / <b>${s_pro.id}</b> 사용자  --%>
-							
+							${s_post.id}번 게시글 / <b>${s_pro.id}</b> 사용자 
 							<li>
 							<input type="hidden" id="postId_${s_post.id }" value="${s_post.id }">
 							<input type="hidden" id="id" value="${s_post.id }">
@@ -188,9 +187,8 @@
 										${s_post.content}<br />
 										<div class="SNS_Cont_Move">${s_post.moveCount}명이좋아합니다!</div>
 										<div class="SNS_Cont_Option">
-											<div class="SNS_Cont_Option_Move" onclick="location='/moving.com/social/add_move?social_id=${sessionSocial.id}&post_num=${s_post.id}&page_num=1';">
-											<!-- <input type="file" value="asdf" onchange="getCommentList()"> -->
-											무브!</div>
+												<div class="SNS_Cont_Option_Move" onclick="location='/moving.com/social/add_move?social_id=${sessionSocial.id}&post_num=${s_post.id}&page_num=1';">
+												무브!</div>
 											<input class="SNS_Cont_Option_Funding" type="button"
 												value="공유하기"
 												onclick="if(confirm('공유할까요?') == true){
@@ -479,50 +477,7 @@
 												});
 											});
 										})
-										   
-
-											/* 시간 차 계산 후 
-											출력 */
-											var writeTime = "${s_reply.registerDate}";
-											var nowTime = new Date();
-
-											var yyyy = writeTime.substr(0, 4);
-											var mm = writeTime.substr(5, 2);
-											var dd = writeTime.substr(8, 2);
-											var hh = writeTime.substr(11, 2);
-											var mi = writeTime.substr(14, 2);
-
-											var copyTime = new Date(yyyy,
-													mm - 1, dd, hh, mi);
-											var hours = Math.abs(nowTime
-													- copyTime) / 36e5;
-
-											hours = Math.floor(hours);
-
-											if (hours <= 1) {
-												hours = "조금 전";
-											} else if (hours <= 24) {
-												hours = hours + "시간 전";
-											} else if (24 < hours
-													&& hours <= 48) {
-												hours = "하루 전";
-											} else if (hours >= 48
-													&& hours < 8760) {
-												hours = (copyTime.getMonth() + 1)
-														+ "월"
-														+ copyTime.getDate()
-														+ "일 ";
-											} else if (hours >= 8760) {
-												hours = copyTime.getFullYear()
-														+ "년"
-														+ (copyTime.getMonth() + 1)
-														+ "월"
-														+ copyTime.getDate()
-														+ "일 ";
-											}
-											document.write(hours);
 										</script>
-
 									</div>
 								</div>
 							</li>
@@ -536,7 +491,7 @@
 					</div>
 				</div>
 				<div id="SNS_Profile_Collect">
-						<div id="SNS_Profile_Intro">팔로워 수 : ${s_pro.followerCount}명</div>
+<%-- 						<div id="SNS_Profile_Intro">팔로워 수 : ${s_pro.followerCount}명</div> --%>
 						<ul id="SNS_Profile_Ul">
 							<c:forEach  var="s_post" items="${s_pro.socialPostVO}">
 							<li>
@@ -550,12 +505,12 @@
 											<p>${fn:substring(s_post.content,0,99)}</p>		
 										</c:if>
 									</div>
-									<div class="SNS_Profile_Image_Center">
-										<p>더 보기</p>
-									</div>
-									<div class="SNS_Profile_Image_Like">
-										<p>❤</p>
-									</div>
+<!-- 									<div class="SNS_Profile_Image_Center"> -->
+<!-- 										<p>더 보기</p> -->
+<!-- 									</div> -->
+<!-- 									<div class="SNS_Profile_Image_Like"> -->
+<!-- 										<p>❤</p> -->
+<!-- 									</div> -->
 								</div>
 							</li>
 							</c:forEach>

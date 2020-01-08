@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.moving.domain.AttachedFileVO;
 import com.moving.domain.MUserVO;
+import com.moving.domain.MoveVO;
 import com.moving.domain.ReportVO;
 import com.moving.domain.SocialMessageVO;
 import com.moving.domain.SocialPostVO;
@@ -685,9 +686,28 @@ public class SocialController {
 		public String social_add_move(
 				int social_id,
 				int post_num,
-				int page_num
+				int page_num,Model m
 				) {
-				this.socialService.addMoveCount(post_num);//무브 카운트 +
+				MoveVO moveVO=new MoveVO();
+				MoveVO insertMoveVO=new MoveVO();
+				
+				moveVO.setSocialPostId(post_num);
+				moveVO.setSocialProfileIdFrom(social_id);	//게시글 번호와 소셜 아이디로 좋아요 여부 검색
+				insertMoveVO.setSocialPostId(post_num);
+				insertMoveVO.setSocialProfileIdFrom(social_id);	//게시글 번호와 소셜 아이디로 좋아요 여부 검색
+				
+				moveVO=this.socialService.checkMove(moveVO);	//정보를 VO에 넣은 뒤 검색
+				
+				int result=1;
+				if(moveVO==null) result=-1;
+				
+				if(result==-1) {
+					this.socialService.addMoveCount(post_num);//무브 카운트 +
+					this.socialService.insertMoveVO(insertMoveVO);
+				}else {
+					this.socialService.deMoveCount(post_num);//무브 카운트-
+					this.socialService.deleteMoveVO(moveVO);
+				}
 				
 				if(page_num==0)	return "redirect:/social/main";
 				else if(page_num==1) return "redirect:/social/profile?id="+social_id;

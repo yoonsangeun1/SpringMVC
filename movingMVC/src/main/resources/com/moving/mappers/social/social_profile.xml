@@ -172,21 +172,33 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT move_count FROM social_post WHERE id=#{userId}
 	</select>
 	
+	<!-- 소셜 아이디로 게시글에 대한 좋아요 여부 검색 -->
+	<select id="checkMove" resultType="moveVO">
+		SELECT * FROM move WHERE 
+		social_profile_id_from=#{socialProfileIdFrom} AND
+		social_post_id=#{socialPostId}
+	</select>
+	
 	<!-- 무브 카운트 -->
 	<update id="addMoveCount">
 		UPDATE social_post SET move_count=move_count+1
  		WHERE id=#{id}
 	</update>
 	<insert id="insertMoveVO">
-		
+		INSERT INTO move
+		(id,register_date,social_profile_id_from,social_post_id)
+		VALUES
+		(move_seq.nextval,sysdate,#{socialProfileIdFrom},#{socialPostId})
 	</insert>
+	
 	<!-- 무브 취소 -->
 	<update id="deMoveCount">
 		UPDATE social_post SET move_count=move_count-1
  		WHERE id=#{id}
 	</update>
 	<delete id="deleteMoveVO">
-	
+		DELETE from move
+		WHERE social_profile_id_from=#{socialProfileIdFrom}
 	</delete>
 	
 	<!-- ==================================<구분선>====================================== -->

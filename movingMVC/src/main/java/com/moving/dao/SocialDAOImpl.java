@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.moving.domain.AttachedFileVO;
+import com.moving.domain.MoveVO;
 import com.moving.domain.ReportVO;
 import com.moving.domain.SocialMessageVO;
 import com.moving.domain.SocialPostVO;
@@ -102,5 +103,25 @@ public class SocialDAOImpl implements SocialDAO {
 	@Override
 	public void addMoveCount(int post_num) {
 		this.sqlsession.update("addMoveCount",post_num);
+	}
+
+	@Override
+	public MoveVO checkMove(MoveVO moveVO) {
+		return this.sqlsession.selectOne("checkMove",moveVO);
+	}
+
+	@Override
+	public void deMoveCount(int post_num) {
+		this.sqlsession.update("deMoveCount",post_num);
+	}
+
+	@Override
+	public void deleteMoveVO(MoveVO moveVO) {
+		this.sqlsession.delete("deleteMoveVO", moveVO);
+	}
+
+	@Override
+	public void insertMoveVO(MoveVO moveVO) {
+		this.sqlsession.insert("insertMoveVO",moveVO);
 	}
 }
