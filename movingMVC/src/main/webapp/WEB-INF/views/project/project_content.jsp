@@ -5,6 +5,9 @@
 <!-- 크라우드 펀딩 상세 페이지 -->
 <%-- 펀딩 제목, 간략 소개글 --%>
 <div id="fCont_wrap" >
+<c:if test="${page == NULL }">
+<c:set var="page" value="1"/>
+</c:if>
 	<div id="fCont_title" style="padding-top: 45px;">
 		<h3>${projectInfo.title } </h3>
 		<p>${projectInfo.introduce }</p>
@@ -14,8 +17,15 @@
 	<div id="fCont_subtitle">
 		<%-- 펀딩 메인 이미지 --%>
 		<div id="fCont_mainImage">
-			<img src="../images/funding05.PNG" width="700" height="400"
-				src="펀딩이미지05" />
+			<c:if test="${projectInfo.thumbnailImage == NULL}">
+				<img src="../images/funding05.PNG" width="700" height="400"
+					src="펀딩이미지05" />
+			</c:if>
+			<c:if test="${projectInfo.thumbnailImage != NULL}">
+				<img src="${projectInfo.thumbnailImage}" width="700" height="400"
+					src="펀딩이미지05" />
+			</c:if>
+
 			<div class="fCont_tags">
 				<span class="sumCont_sub fCont_tag"><i
 					class="fas fa-tag fa-lg"></i> Project We Love</span> <span
@@ -50,8 +60,11 @@
 				<div id="fCont_share">
 					<button
 						class="fCont_shareBtn button button_wce8e8e8 button_f12 shadow"
-						type="button">
-						<i class="fas fa-heart"></i> Remind Me
+						type="button" onclick="if(confirm('추천하시겠습니까?')==true){ location='/moving.com/move?where=project&projectPostId=${projectInfo.id}'; }else {return false;}">
+						<i class="fas fa-heart"></i> Make Move!
+						<c:if test="${projectInfo.moveCount != 0}">
+					<b>${projectInfo.moveCount }</b>
+				</c:if>
 					</button>
 					<div class="fCont_shareIcon fa-2x">
 						<a href="#"><i class="fab fa-facebook"></i></a>
@@ -101,21 +114,14 @@
 				</span>
 			</button>
 			<button class="fCont_menu" onclick="setScrollX(5000)">Communities</button>
-			
-			
 			<div id="bActors_cont_button"> <%--버튼 div --%>
   		<c:if test="${id == projectInfo.userId }">
-	    <input type="button" value="수정" class="bActors_cont_btn button
-	       button_c9d8ce2 button_f12 button_p1024 button_r4"
-	    onclick="location='/moving.com/project/edit?id=${projectInfo.id}&category=${category}&page=${page}&findField=${findField}&findName=${findName}';" />
-	    <input type="reset" value="삭제" class="bActors_cont_btn button
-	       button_c9d8ce2 button_f12 button_p1024 button_r4"
-	    onclick="delconfirm()" />
-	    <input type="button" value="목록" class="bActors_cont_btn button
-	       button_c9d8ce2 button_f12 button_p1024 button_r4"
-	    onclick="location='/moving.com/project/list?category=${category}&page=${page}&findField=${findField}&findName=${findName}';" />
-    </c:if>
-    </div> <%--버튼 div --%>
+	    <button type="button" class="fCont_menu"
+	    onclick="location='/moving.com/project/write?id=${projectInfo.id}&category=${category}&page=${page}&findField=${findField}&findName=${findName}';" >수정</button>
+	    <button type="reset"  class="fCont_menu" onclick="delconfirm()" >삭제</button>
+	    </c:if>
+	    <button type="button"  class="fCont_menu"
+	    onclick="location='/moving.com/project/list?category=${category}&page=${page}';" >목록</button>
     <script>
  function delconfirm(){
 	 if(confirm("삭제하시겠습니까?")){

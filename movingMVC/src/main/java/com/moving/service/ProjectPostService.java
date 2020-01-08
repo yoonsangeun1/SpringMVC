@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.moving.domain.MCommentVO;
+import com.moving.domain.MUserVO;
+import com.moving.domain.MoveVO;
 import com.moving.domain.ProjectPostVO;
 import com.moving.domain.RewardVO;
 
@@ -41,6 +43,11 @@ public interface ProjectPostService {
 	ProjectPostVO selectBestprojectInfo();//추천순 가장 많은 프로젝트 하나 띄우기
 	List<ProjectPostVO> selectRandomProjectList(int no);//랜덤으로 프로젝트 리스트 띄우기 
 	void deleteprojectPost(int id);//프로젝트 게시글 삭제
+	
+	void updateUserBusinessInfo(MUserVO mUserVO);//유저 정보 업데이트
+	void updateProjectBusiness(ProjectPostVO projectPostVO);//동업자 정보 업데이트
+	void updateProjectStatus(int id);//프로젝트 상태 변경(미완성 ->완성)
+	void insertMove(MoveVO moveVO);//무브 버튼 클릭
 
 
 }

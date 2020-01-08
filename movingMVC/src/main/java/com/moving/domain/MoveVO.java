@@ -12,7 +12,15 @@ public class MoveVO {
 	private int videoPostId;
 	private int socialPostId;
 	private int replyPostId;
+	private int projectPostId;
+	private int profilePostId;
 	
+	public int getProjectPostId() {
+		return projectPostId;
+	}
+	public void setProjectPostId(int projectPostId) {
+		this.projectPostId = projectPostId;
+	}
 	public int getId() {
 		return id;
 	}
@@ -85,5 +93,4 @@ public class MoveVO {
 	public void setProfilePostId(int profilePostId) {
 		this.profilePostId = profilePostId;
 	}
-	private int profilePostId;
 }

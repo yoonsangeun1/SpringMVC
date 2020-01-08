@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.moving.domain.MCommentVO;
+import com.moving.domain.MUserVO;
+import com.moving.domain.MoveVO;
 import com.moving.domain.ProjectPostVO;
 import com.moving.domain.RewardVO;
 
@@ -62,5 +64,16 @@ public interface ProjectPostDAO {
 	void deleteprojectPost(int id);
 
 	void updateProjectReward(RewardVO rewardVO);
+
+	void updateUserBusinessInfo(MUserVO mUserVO);
+
+	void updateProjectBusiness(ProjectPostVO projectPostVO);
+
+	void updateProjectStatus(int id);
+
+	void insertMove(MoveVO moveVO);
+
+	void updateMoveCount(MoveVO moveVO);
+
 	
 }

@@ -244,10 +244,10 @@
 				<div class="gallery">
 					<a href="/moving.com/project/content?id=${p.id }&category=${category}"> 
 					<c:if test="${!empty p.thumbnailImage }">
-					<img src="${p.thumbnailImage }" alt="funding01" width="246" height="auto">
+					<img src="${p.thumbnailImage }" width="246" height="135">
 					</c:if>
 					<c:if test="${empty p.thumbnailImage }">
-					<img src="../images/funding01.PNG" alt="funding01" width="246" height="auto">
+					<img src="../images/funding05.PNG" width="246" height="135">
 					</c:if>
 					</a>
 					<div class="desc">${p.title }<c:if test="${p.commentCount != 0}">[${p.commentCount }]</c:if></div>

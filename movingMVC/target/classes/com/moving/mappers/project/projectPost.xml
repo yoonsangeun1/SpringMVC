@@ -38,7 +38,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 0-2-1) 프로젝트 정보 -->
 	<select id="selectProjectInfo" resultMap="projectInfo">
 		SELECT id as project_post_id, title, content, introduce, user_id, code_no, 
-		business, target_price, now_price, target_limit, left_limit, 
+		business, target_price, now_price, target_limit, left_limit, status_code,
 		sponser_count, hit, comment_count, move_count, register_date, thumbnail_image
 		FROM PROJECT_POST
 		WHERE ID = #{id}
@@ -244,7 +244,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 P.id AS project_post_id, P.title, P.introduce, P.user_id, U.NICKNAME, P.code_no,
 	 P.register_date AS project_post_register_date, P.hit, P.move_count,
 	 P.target_price, P.now_price, P.target_limit, P.left_limit, P.sponser_count, 
-	 P.comment_count, P.thumbnail_image
+	 P.comment_count, P.thumbnail_image, P.business, P.status_code
 	 FROM project_post P 
 	 LEFT OUTER JOIN m_user U ON P.user_id = U.id 
 	 <where>
@@ -299,7 +299,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	P.id AS project_post_id, P.title, P.introduce, P.user_id, U.NICKNAME, P.code_no,
 	 P.register_date AS project_post_register_date, P.hit, P.move_count,
 	 P.target_price, P.now_price, P.target_limit, P.left_limit, P.sponser_count, 
-	 P.comment_count, P.thumbnail_image
+	 P.comment_count, P.thumbnail_image, P.business, P.status_code
 	 FROM project_post P 
 	 LEFT OUTER JOIN m_user U ON P.user_id = U.id 
 	 WHERE ROWNUM = 1 AND status_code = 1
@@ -313,7 +313,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 P.id AS project_post_id, P.title, P.introduce, P.user_id, U.NICKNAME, P.code_no,
 	 P.register_date AS project_post_register_date, P.hit, P.move_count,
 	 P.target_price, P.now_price, P.target_limit, P.left_limit, P.sponser_count, 
-	 P.comment_count, P.thumbnail_image 
+	 P.comment_count, P.thumbnail_image , P.business
 	 FROM project_post P 
 	 LEFT OUTER JOIN m_user U ON P.user_id = U.id 
 	 WHERE status_code = 1
@@ -424,6 +424,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE id = #{id}
 	</update>
 	
+	<!-- 프로젝트 작성 유저의 정보 업데이트 -->
+	<update id="updateUserBusinessInfo">
+		UPDATE m_user
+		SET profile_image_url = #{profileImageUrl}, 
+		email = #{email}, 
+		phone = #{phone}
+		WHERE id = #{id}
+	</update>
+	
+	<!-- 프로젝트 동업자 정보 추가 -->
+	<update id="updateProjectBusiness">
+		UPDATE project_post
+		SET business = #{business}
+		WHERE id = #{id}
+	</update>
+	
+	<!-- 게시글 상태 변경. 미완성 -> 완성 -->
+	<update id="updateProjectStatus">
+		UPDATE project_post
+		SET status_code = 1
+		WHERE id = #{id}
+	</update>
+	
 	<!-- 프로젝트 게시글 번호를 기준으로 리워드 모두 불러오기 -->
 	<select id="selectProjectReward" resultType="rewardVO">
 		SELECT * FROM reward
@@ -436,4 +459,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		DELETE FROM project_post 
 		WHERE id = #{id}
 	</delete>
+	
+	<!-- 좋아요 -->
+	<insert id="insertMove">
+		INSERT INTO move 
+		<if test="projectPostId is not null">
+		(id, user_id_from, project_post_id)
+		 VALUES (move_seq.nextval, #{userIdFrom}, #{projectPostId})
+		</if>
+	</insert>
 </mapper>
