@@ -27,8 +27,16 @@
 					
  					<div id="mChange_file_text">
 						<span>● 사업자등록증 이미지 미리보기</span>
-						<div id="mChange_businessLicense_image" style="float:left; width:400px; height:400px; border:1px solid black;">
-							<img id="business_img"  style="width:400px; height:400px;">
+						<div id="mChange_businessLicense_image">
+							<img id="business_img"  
+								<c:if test="${businessLicenseImagePath == null }">
+									src="${pageContext.request.contextPath}/images/member_profile.png"
+								</c:if>
+								
+								<c:if test="${businessLicenseImagePath != null }">
+									src="${businessLicenseImagePath}"
+								</c:if>
+							/>
 						</div>
 						<input type="file" name="mChange_file" id="mChange_file">
 					</div>

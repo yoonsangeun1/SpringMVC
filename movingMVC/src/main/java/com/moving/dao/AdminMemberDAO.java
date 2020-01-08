@@ -14,5 +14,7 @@ public interface AdminMemberDAO {
 
 	void memberEdit(MUserVO mu);
 
+	void updateReportCount(int id);
+
 
 }

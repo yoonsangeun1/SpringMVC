@@ -56,8 +56,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 회원 정보 페이지 구성요소 -->
 	<select id="am_info" resultMap="memberInfo">
-		SELECT profile_image_url, id, userid, name, nickname, genre_01, genre_02, genre_03, email, phone, publish_availability,
-		user_status, user_type, user_lv, business_name, business_register_no FROM M_USER WHERE userid = #{userid}
+		SELECT * FROM M_USER WHERE userid = #{userid}
 	</select>
 	
 	<!-- 회원 정보 수정 -->

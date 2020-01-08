@@ -33,4 +33,9 @@ public class AdminMemberDAOImpl implements AdminMemberDAO{
 	public void memberEdit(MUserVO mu) {
 		this.sqlSession.update("am_up",mu);
 	} // 회원 정보 수정
+
+	@Override
+	public void updateReportCount(int id) {
+		this.sqlSession.update("updateReportCount",id);
+	}
 }

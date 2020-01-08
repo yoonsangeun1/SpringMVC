@@ -21,6 +21,7 @@ public class MUserVO {							//회원 정보
 	private int userType; 						//회원_유형
 	private int userLv; 						//회원_등급
 	private int userPoint; 						//회원_포인트
+	private int reportCount; 					//신고횟수
 	private String registerDate; 				//등록_일
 	private String businessName; 				//사업자 이름
 	private String businessRegisterNo; 			//사업자등록번호
@@ -208,6 +209,14 @@ public class MUserVO {							//회원 정보
 	public void setFindField(String findField) {
 		this.findField = findField;
 	}
+	public int getReportCount() {
+		return reportCount;
+	}
+	public void setReportCount(int reportCount) {
+		this.reportCount = reportCount;
+	}
+	
+	
 	
 	
 }//M_user class

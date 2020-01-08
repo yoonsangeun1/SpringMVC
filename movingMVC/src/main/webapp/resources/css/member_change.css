@@ -123,6 +123,7 @@
 	float:left;
 	width:400px;
 	height:400px;
+	border:1px solid black;
 }
 
 #mChange_businessLicense_image #business_img {

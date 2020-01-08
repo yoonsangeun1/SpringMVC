@@ -11,10 +11,16 @@
 	<input type="hidden" name="page" value="${page}" />
 	<table id="aMember_statusTable" border="1">
 		<tr>
-			<th rowspan="7">
+			<th rowspan="8">
 				<a href="#">
-					<img src="/moving.com/resources/images/member_profile.png" width="110" height="120"
-					 alt="사진을 등록해 주세요.">
+					<c:if test="${mu.profileImageUrl == 'default'}">
+						<img src="${pageContext.request.contextPath}/resources/images/member_profile.png" width="110" height="120" style="border-radius: 50%;"
+						 alt="사진을 등록해 주세요.">
+					</c:if>
+					
+					<c:if test="${mu.profileImageUrl != 'default'}">
+						<img src="${mu.profileImageUrl}" width="110" height="120" style="border-radius: 50%;">
+					</c:if>
 				</a>
 			</th>
 			<th> 
@@ -70,7 +76,7 @@
 				</c:choose>
 			</th>
 			<th>
-				E-mail &nbsp;<input id="memberEMail" name="email" value="${mu.email }" />
+				신고 횟수 ${mu.reportCount}
 			</th>
 		</tr>
 		<tr>
@@ -92,6 +98,7 @@
 					<option value="1" <c:if test="${mu.userStatus == 1}">selected</c:if>>활성회원</option>
 					<option value="2" <c:if test="${mu.userStatus == 2}">selected</c:if>>휴면회원</option>
 					<option value="0" <c:if test="${mu.userStatus == 0}">selected</c:if>>탈퇴회원</option>
+					<option value="9" <c:if test="${mu.userStatus == 9}">selected</c:if>>정지회원</option>
 				</select>
 			</th>
 			<th>
@@ -107,21 +114,33 @@
 		<tr>
 			<th>
 				탈퇴 사유 &nbsp;
-				<input name="delete" value="" /> 
+				<input name="delete" value="${mu.deactivateReason }" readonly /> 
 			</th>
 			<th>
-				신고 누적횟수 &nbsp;
+				탈퇴 날짜 : ${mu.deactivateDate}
 			</th>
 		</tr>
 		<tr>
 			<th>
-				<button type="button" class="btn" >사진 변경</button>
+				사업자 이름 &nbsp;<input id="memberBusinessName" name="businessName" value="${mu.businessName }" readonly />
 			</th>
 			<th>
-				사업자 이름 &nbsp;<input id="memberBusinessName" name="businessName" value="${mu.businessName }" />
+				사업자 번호 &nbsp;<input id="memberBusinessRegisterNo" name="businessRegisterNo" value="${mu.businessRegisterNo }" readonly/>
 			</th>
+		</tr>
+		<tr>
 			<th>
-				사업자 번호 &nbsp;<input id="memberBusinessRegisterNo" name="businessRegisterNo" value="${mu.businessRegisterNo }" />
+				사업자 등록증 이미지
+			</th>
+			<th colspan="2"	>
+				<c:if test="${mu.businessLicenseImagePath == NULL}">
+					<img src="${pageContext.request.contextPath}/resources/images/noimage.gif" style="width:400px; height:400px;">
+				</c:if>
+				
+				<c:if test="${mu.businessLicenseImagePath != NULL }">
+					<img src="${mu.businessLicenseImagePath}" style="width:400px; height:400px;">
+				</c:if>
+				
 			</th>
 		</tr>
 		<tr>

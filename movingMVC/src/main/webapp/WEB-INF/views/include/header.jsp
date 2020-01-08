@@ -210,7 +210,7 @@ $(function(){ // document ready
 								</div>
 							</div>
 							
-							<div id="MymenuUserActive_writeBoard" onclick="location.href='../member_mypage?mid=${id}';">
+							<div id="MymenuUserActive_writeBoard" onclick="location.href='member_mypage?mid=${id}';">
 								<span class="wirte_Board">내가 쓴 글</span>
 								<br>
 								<i class="far fa-edit"></i>
