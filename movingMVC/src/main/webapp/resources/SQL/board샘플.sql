@@ -108,5 +108,35 @@ SELECT Count(*) FROM REPLY_POST
 WHERE REPLY_ORDER =1 
 AND id=21;
 
-
 delete from reply_post;
+
+select * from reply_post;
+
+select * from m_user;
+
+update m_user set user_lv=4 where id=6 /*어드민 권한 주기*/
+
+ select * from PROFILE_POST;
+ 
+ delete from PROFILE_POST where id=0;
+ 
+ SELECT * FROM
+ (SELECT ROW_NUMBER() OVER(ORDER BY P.ID DESC) rNum,
+ P.thumbnail_Image, P.ID AS board_actors_id,
+ P.NAME,P.USER_ID
+ FROM PROFILE_POST P
+WHERE P.CODE_NO = 10005
+  ORDER BY board_actors_id DESC)
+ WHERE RNUM >= 1
+ AND rNum <= 100
+ 
+  SELECT * FROM
+ (SELECT ROW_NUMBER() OVER(ORDER BY P.ID DESC) rNum,
+ P.thumbnail_Image, P.ID AS board_actors_id,
+ P.NAME,P.USER_ID
+ FROM PROFILE_POST P
+ LEFT OUTER JOIN M_USER U ON P.USER_ID = U.ID
+WHERE P.CODE_NO = 10005
+  ORDER BY board_actors_id DESC)
+ WHERE RNUM >= 1
+ AND rNum <= 100

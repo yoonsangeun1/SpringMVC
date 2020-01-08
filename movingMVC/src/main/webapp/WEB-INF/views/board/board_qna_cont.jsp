@@ -63,16 +63,41 @@
 	
 	<div id="bQna_cont_button"> <%--버튼들 div --%>
 	
+		<c:if test="${user_lv eq '관리자'}"> <%--user_lv가 관리자 이면 --%>
 			<input type="button" value="답변쓰기" class="bQna_cont_btn button
 			button_c9d8ce2 button_f12 button_p1024 button_r4"
 			onclick="location='/moving.com/board/qna_reply?id=${bq.id}&page=${page}';" />
+		</c:if>
+			
+		<c:if test="${bq.replyOrder <= 1}"> <%--일반글들일 경우 --%>
 			<input type="button" value="수정" class="bQna_cont_btn button
        button_c9d8ce2 button_f12 button_p1024 button_r4"
 				onclick="location=
 '/moving.com/board/qna_edit?id=${bq.id}&page=${page}';" />
-				<%-- board_cont?bno=번호&page=쪽번호 2개의 피라미터값
-이 get방식으로 전달 --%> <input type="button" value="삭제" onclick="delconfirm()"
+				<%-- board_cont?bno=번호&page=쪽번호 2개의 피라미터값이 get방식으로 전달 --%>
+		</c:if>
+		
+		<c:if test="${bq.replyOrder >= 2}"> <%-- 답변글들일 경우  --%>
+		 <c:if test="${user_lv eq '관리자'}"> <%--세션이 관리자일경우 --%>
+		 	<input type="button" value="수정" class="bQna_cont_btn button
+       button_c9d8ce2 button_f12 button_p1024 button_r4"
+				onclick="location=
+'/moving.com/board/qna_edit?id=${bq.id}&page=${page}';" />
+				<%-- board_cont?bno=번호&page=쪽번호 2개의 피라미터값이 get방식으로 전달 --%>
+		 </c:if>
+		</c:if>
+		
+		<c:if test="${bq.replyOrder <= 1}"> <%--일반글들일 경우 --%>
+		<input type="button" value="삭제" onclick="delconfirm()"
 	class="bQna_cont_btn button button_c9d8ce2 button_f12 button_p1024 button_r4" />
+		</c:if>
+		
+		<c:if test="${bq.replyOrder >= 2}"> <%-- 답변글들일 경우 --%>
+		 <c:if test="${user_lv eq '관리자'}">   <%-- 세션이 관리자일 경우 --%>
+		 <input type="button" value="삭제" onclick="delconfirm()"
+	class="bQna_cont_btn button button_c9d8ce2 button_f12 button_p1024 button_r4" />
+		 </c:if>
+		</c:if>
 
 				<c:if test="${(empty findField) && (empty findName)}">
 					<%--검색 전 --%>
@@ -83,7 +108,7 @@
 					<%-- 검색 후 --%>
 					<input type="button" value="목록"  class="bQna_cont_btn button
        button_c9d8ce2 button_f12 button_p1024 button_r4"
-						onclick="location='/moving.com/board/Qna?page=${page}&findField=${findField}&findName=${findName}';" />
+						onclick="location='/moving.com/board/qna?page=${page}&findField=${findField}&findName=${findName}';" />
 				</c:if>
 				
 	</div> <%--버튼들 div --%>		
