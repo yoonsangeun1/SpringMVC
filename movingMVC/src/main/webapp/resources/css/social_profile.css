@@ -601,8 +601,12 @@ li.SNS_Profile_Menu_Button:last-child{
     float: left;
 }
 #SNS_Profile_Edit_Intro{
-	top: 200px;
-	left: 500px;
+/* 	top: 200px; */
+/* 	left: 500px; */
 	outline:none;
 	border-radius: 30px;
+	border: 1px solid white;
+    color: white;
+    background: #6a67ce;
+    cursor: pointer;
 }
