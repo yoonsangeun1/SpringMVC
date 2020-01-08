@@ -46,11 +46,12 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/member_mypage.css" /><%-- 마이페이지 폼 --%>
 
 
-<%-- movie css 추가 --%>
+<%-- <%-- movie css 추가 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/video_content.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/video_mainList.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/video_categoryList.css" />
-
+ --%>
+ 
 <%-- sns css 추가 --%>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/social_main.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/social_profile.css" />
