@@ -203,41 +203,124 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectListCount" resultType="int">
 		SELECT COUNT(id) FROM project_post
 		<where>
+			<if test="codeNo == 0 or codeNo == 20001">
+		 	 status_code = 1
+		 	</if>
+		 	<if test="codeNo != 0 and codeNo != 20001">
+		 	 status_code = 1 AND code_no = #{codeNo}
+		 	</if>
 			<if test="findField==''"></if><!-- 검색 전 총 레코드 개수 -->
 			<if test="findField=='title'">
-			title LIKE #{findName}
+			AND title LIKE #{findName}
 			</if><!-- 제목으로 검색시 총 레코드 개수 -->
 			<if test="findField=='content'">
-			content LIKE #{findName}
+			AND content LIKE #{findName}
 			</if><!-- 내용으로 검색시 총 레코드 개수 -->
 		</where>
 	</select>
 	
+	<resultMap type="projectPostVO" id="projectInfo2">
+		<id property="id" column="project_post_id"/>
+		<result property="title" column="title" />
+		<result property="introduce" column="introduce" />
+		<result property="userId" column="user_id" />
+		<result property="hit" column="hit" />
+		<result property="moveCount" column="move_count" />
+		<result property="targetPrice" column="target_price" />
+		<result property="nowPrice" column="now_price" />
+		<result property="leftLimit" column="left_limit" />
+		<result property="sponserCount" column="sponser_count" />
+		<result property="commentCount" column="comment_count" />
+		<result property="registerDate" column="project_post_register_date"/>
+		<result property="thumbnailImage" column="thumbnail_image"/>
+		<association property="mUserVO" javaType="com.moving.domain.MUserVO"  autoMapping="true"/>
+	</resultMap>
+	
 	<!-- 프로젝트 리스트 : 검색 전, 후 게시글 목록 구하기 -->
-	<select id="selectProjectList" resultMap="projectInfo">
-		SELECT * FROM (
+	<select id="selectProjectList" resultMap="projectInfo2">
+	 SELECT * FROM
+	 (SELECT ROW_NUMBER() OVER(ORDER BY P.id DESC) rNum,
+	 P.id AS project_post_id, P.title, P.introduce, P.user_id, U.NICKNAME,
+	 P.register_date AS project_post_register_date, P.hit, P.move_count,
+	 P.target_price, P.now_price, P.target_limit, P.left_limit, P.sponser_count, 
+	 P.comment_count, P.thumbnail_image
+	 FROM project_post P 
+	 LEFT OUTER JOIN m_user U ON P.user_id = U.id 
+	 <where>
+	 	<if test="codeNo == 0 or codeNo == 20001">
+	 	 P.status_code = 1
+	 	</if>
+	 	<if test="codeNo != 0 and codeNo != 20001">
+	 	 P.status_code = 1 AND P.code_no = #{codeNo}
+	 	</if>
+		 <!-- N.CODE_NO = 20001  -->
+		 <if test="findField == ''"></if> <!-- 값이 없을 경우 -->
+		 <if test="findField == 'title'"> <!-- 검색 필드가 제목일 경우 -->
+		 AND P.title LIKE #{findName}	   <!-- 검색 필드 값대로 검색 -->
+		 </if>
+		 <if test="findField == 'content'"> <!-- 검색 필드가 내용일 경우 -->
+		 AND P.content LIKE #{findName}	 <!-- 검색 필드 값대로 검색 -->
+		 </if>
+		 <if test="findField == 'nickname'"> <!-- 검색 필드가 닉네임일 경우 -->
+		 AND U.nickname LIKE #{findName}	  <!-- 검색 필드 값대로 검색 -->
+		 </if>
+	 </where>
+	 ORDER BY project_post_id DESC)
+	 WHERE rNum &gt;= #{startRow}
+	 AND rNum &lt;= #{endRow}
+		
+		<!-- SELECT * FROM (
 		SELECT rowNum num, A.* 
-		FROM (SELECT P.id as project_post_id, P.title <!-- , U.nickname, U.profile_image_url  -->
-		FROM project_post P<!-- , m_user U -->
-		<!-- WHERE P.user_id = U.id --> 
+		FROM (SELECT P.id as project_post_id, P.title , U.nickname, U.profile_image_url 
+		FROM project_post P, m_user U
+		WHERE P.user_id = U.id 
 		<where>
-			<!-- P.user_id = U.id  -->
-			<if test="findField==''"></if><!-- 검색 전 총 레코드 개수 -->
+			P.user_id = U.id 
+			<if test="findField==''"></if>검색 전 총 레코드 개수
 			<if test="findField=='title'">
-			<!-- AND  -->title LIKE #{findName}
-			</if><!-- 제목으로 검색시 총 레코드 개수 -->
+			AND title LIKE #{findName}
+			</if>제목으로 검색시 총 레코드 개수
 			<if test="findField=='content'">
-			<!-- AND  -->content LIKE #{findName}
-			</if><!-- 내용으로 검색시 총 레코드 개수 -->
+			AND content LIKE #{findName}
+			</if>내용으로 검색시 총 레코드 개수
 		</where>
 		ORDER BY P.id DESC) A
 		WHERE rowNum &lt;= #{endRow}
 		)
-		WHERE num &lt;= #{startRow}
+		WHERE num &lt;= #{startRow} -->
 	</select>
 		<!-- &gt;은 ~보다 크다(>),&lt;은 ~보다 작다(<),rowNum 컬럼은 오라클에서 테이블생성시 생성되는 기본컬럼으로 
 			레코드 저장시 일련번호값이 저장됨. -->
 			
+	<!-- move 수 가장 많은 프로젝트 하나 검색 -->
+	<select id="selectBestprojectInfo" resultMap="projectInfo2">
+	 SELECT 
+	P.id AS project_post_id, P.title, P.introduce, P.user_id, U.NICKNAME,
+	 P.register_date AS project_post_register_date, P.hit, P.move_count,
+	 P.target_price, P.now_price, P.target_limit, P.left_limit, P.sponser_count, 
+	 P.comment_count, P.thumbnail_image
+	 FROM project_post P 
+	 LEFT OUTER JOIN m_user U ON P.user_id = U.id 
+	 WHERE ROWNUM = 1 AND status_code = 1
+	 ORDER BY move_count DESC
+	</select>
+	
+	<!-- 랜덤으로 프로젝트 리스트 띄우기 -->
+	<select id="selectRandomProjectList" resultMap="projectInfo2" >
+	 SELECT RD.* FROM
+	 (SELECT 
+	 P.id AS project_post_id, P.title, P.introduce, P.user_id, U.NICKNAME,
+	 P.register_date AS project_post_register_date, P.hit, P.move_count,
+	 P.target_price, P.now_price, P.target_limit, P.left_limit, P.sponser_count, 
+	 P.comment_count
+	 FROM project_post P 
+	 LEFT OUTER JOIN m_user U ON P.user_id = U.id 
+	 WHERE status_code = 1
+	 ORDER BY dbms_random.value
+	 ) RD
+	 WHERE rownum &lt;= #{no}
+	</select>
+	
 	<!-- 1-2) 게시글에 해당하는 댓글 모두 다 목록 해시맵으로 불러오기 JSON용 HashMap 반환 -->
 	<select id="selectCommentListMapActors" resultType="java.util.Map">
 		SELECT c.id, c.user_id_from, c.profile_post_id, 
