@@ -7,8 +7,7 @@
 <title>배우 프로필</title>
 </head>
 <body>
-	<div id="bActors_body">
-		<%--전체 div --%>
+	<div id="bActors_body"><%--전체 div --%>
 
 		<div id="bActors_community">
 			<%--왼쪽 업데이트 사항. 공지,이벤트 등 div --%>
@@ -50,7 +49,8 @@
 			<%--주의사항 글 --%>
 		</div>
 		<%--연기자 프로필 주의사항 --%>
-
+	
+	<form method="get" action="/moving.com/board/actors"><!-- 검색필드 넘겨주기 위한 form -->
 
 		<div id="bActors_list">
 			<%-- 배우 목록들 --%>
@@ -91,17 +91,13 @@
 
 	</div><%-- 배우 목록들 --%>
 
-	<div>
-		<%-- 밑 전체 div --%>
-		<div id="bActors_writing">
-			<%-- 글 쓰기 폼 div --%>
+		<div id="bActors_writing"><%-- 글 쓰기 폼 div --%>
 			<input type="button"
 				class="bActors_writing_btn button
        button_c9d8ce2 button_f12 button_p1024 button_r4"
 				value="글 쓰기"
 				onclick="location='/moving.com/board/actors_write?page=${page}';" />
-		</div>
-		<%-- 글 쓰기 폼 div --%>
+		</div><%-- 글 쓰기 폼 div --%>
 
 		<div id="clear"></div>
 
@@ -182,14 +178,11 @@
 						href="/moving.com/board/actors?page=${page+1}&findField=${findField}&findName=${findName}">
 						&gt;&gt; </a>
 				</c:if>
-			</c:if>
-			<%--검색 후 --%>
+			</c:if><%--검색 후 --%>
 
-		</div>
-		<%--페이지 div --%>
+		</div><%--페이지 div --%>
 
-		<div id="bActors_search">
-			<%--검색 구간 전체 div --%>
+		<div id="bActors_search"><%--검색 구간 전체 div --%>
 			<select name="findField" id="findField">
 				<option value="content"
 					<c:if test="${findField == 'content'}">
@@ -199,23 +192,20 @@
     ${'selected'}</c:if>>닉네임</option>
 				<option value="name"
 					<c:if test="${findField == 'name'}">
-    ${'seleted'}</c:if>>이름</option>
+    ${'selected'}</c:if>>이름</option>
 			</select>
 
-			<div id="bActors_input">
-				<%--텍필,버튼 --%>
+			<div id="bActors_input"><%--텍필,버튼 --%>
 				<input id="findName" name="findName" size="20" value="${findName}" />
 				<input type="submit" class="search_btn button_wce8e8e8" value="검색" />
-			</div>
-			<%--텍필,버튼 --%>
+			</div><%--텍필,버튼 --%>
 
-		</div>
-		<%--검색 구간 전체 div --%>
+		</div><%--검색 구간 전체 div --%>
+		
+	</form>
 
-	</div>
-	<%--프로필 전체 감쌀 div --%>
-	</div>
-	<%--  전체 div --%>
+	</div><%--프로필 전체 감쌀 div --%>
+	
 
 	<script>
 		var msg = "${msg}";

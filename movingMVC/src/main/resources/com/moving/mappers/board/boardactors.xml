@@ -71,6 +71,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  P.thumbnail_Image, P.ID AS board_actors_id,
  P.NAME,P.USER_ID
  FROM PROFILE_POST P
+ LEFT OUTER JOIN M_USER U ON P.USER_ID = U.ID
  <where>
  P.CODE_NO = 10005
  <if test="findField == ''"></if>

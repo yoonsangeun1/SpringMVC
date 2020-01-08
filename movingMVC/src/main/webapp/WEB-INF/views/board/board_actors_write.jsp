@@ -9,34 +9,75 @@
 <script src="../resources/editor/js/HuskyEZCreator.js" charset="UTF-8"></script>
 </head>
 <body>
+	<div id="bActors_write_body"> <%--전체 div --%>
+	
+	<div id="bActors_community"><%--왼쪽 업데이트 사항. 공지,이벤트 등 div --%>
+			<div class="bActors_community_tit">
+				<%--업데이트--%>
+				<h1>커뮤니티</h1>
+			</div>
+			<%--업데이트 --%>
+
+			<div class="bActors_community_list">
+				<%--업데이트 밑에 리스트들 div --%>
+				<ul>
+
+					<li class="bActors_community_list_actors"><a href="actors">배우 프로필</a>
+					</li>
+
+					<li><a href="contest">시나리오 공모</a></li>
+
+					<li><a href="free">자유게시판</a></li>
+
+					<li><a href="qna">QnA</a> <%--QnA 작업해야 됨 --%></li>
+
+				</ul>
+			</div><%--업데이트 밑에 리스트들 div --%>
+
+		</div><%--커뮤니티 배우모집,시나리오 공모 등 div --%>
+
  <form method="post" action="/moving.com/board/actors_write_ok"
  onsubmit="return actors_check();" enctype="multipart/form-data">
-  <table border="1" style="width:1024px" cellspacing="0" > <!-- width 임시로 넣어둠. -->
-   <caption>연기자 프로필 글쓰기</caption>
-   <tr>
-    <th  style="width:230px;">글쓴이</th>
-    <td><div id="nickname">${nickname}</div> <%--input? --%>
-    </td>   
-   </tr> 
+  <table id="bActors_write_table" border="1" cellspacing="0"> <!-- width 임시로 넣어둠. -->
    
    <tr>
-    <th>이름</th>
-    <td><div id="name">${name}</div>
+    <th style="width:30%"> 닉네임 : </th>
+    <td id="bActors_write_nickname"><div id="nickname">${nickname}</div></td>
    </tr>
    
    <tr>
-    <th>썸네일 등록
-    <br/>
-    *1장만 등록 가능합니다!*
-    </th>
-    <td>
-     <div class="select_img" style="boader:1px; width:200px; height:250px;"><img src="" /></div>
+    <th style="width:30%"> 이름 : </th>
+    <td id="bActors_write_name"><div id="name">${name}</div></td>
+   </tr>
+   
+   
+   <tr>
+    <td id="bActors_write_image">
+     <div class="select_img"><img src="" /></div>
      <input type="file" id="thumbnailImage" name="thumbnailImage"
      style="margin:20px;" />
-     <label> * 사진의 기본 사이즈는 200 X 250 입니다. * </label>
+    </td>
+   </tr>
+
+    
+   <tr>
+    <th>E-MAIL</th>
+    <td   id="bActors_write_email">
+    <input type="email" id="email" name="email" size="26"/>
     </td>
    </tr>
    
+   <tr>
+    <th>신장</th>
+    <td id="bActors_write_height">
+    <input type="number" id="height" name="height" maxlength="3" oninput="maxLengthCheck(this)"
+    style="width:195px;">
+    &nbsp;&nbsp;cm
+    <label>(소수점 X)</label>
+    </td>
+   </tr>
+    
+    
    <tr>
     <th>카테고리</th>
     <td>
@@ -49,13 +90,6 @@
    </tr>
    
    <tr>
-    <th>E-MAIL</th>
-    <td>
-    <input type="email" id="email" name="email" size="26"/>
-    </td>
-   </tr>
-   
-   <tr>
     <th>생년월일</th>
     <td>
     <input type="date" id="birthDate" name="birthDate" style="width:195px;"/>
@@ -64,12 +98,8 @@
    </tr>
    
    <tr>
-    <td colspan="2">
-    <label style="font-weight:bold; margin-left:100px;">신장</label>
-    <input type="number" id="height" name="height"style="margin-right:10px; 
-    width:196.5px;  margin-left:95px;" maxlength="3" oninput="maxLengthCheck(this)">cm
-    <label>(소수점 X)</label>
-  	<label style="font-weight:bold; margin-left:200px;">성별</label>
+  	<th>성별</th>
+  	<td>
   	<input type="radio" name="sex" value="male"/>남성
   	<input type="radio" name="sex" value="female"/>여성
     </td>
@@ -78,13 +108,12 @@
    <tr>
     <th>웹사이트</th>
     <td>
-    <input id="websiteUrl" name="websiteUrl" size="111"/>
+    <input id="websiteUrl" name="websiteUrl" size="88"/>
     </td>
    </tr>
   
    <tr>
-    <th>내용</th>
-    <td  class="actors_write_td">
+    <td colspan="2" id="bActors_write_content">
     <textarea name="content" id="content" rows="10" cols="100"></textarea>
     
 <script type="text/javascript">
@@ -103,16 +132,25 @@
     </td>
    </tr> 
     
-   <tr>
-    <th colspan="2">
-    <input type="submit" value="저장" />
-    <input type="reset" value="취소" />
-    <input type="button" value="목록"
-    onclick="location='/moving.com/board/actors?page=${page}';" />
-    </th>
-   </tr>
   </table>
- </form> 
+
+ 
+	<div id="bActors_write_button"> <%--버튼 div --%>
+	
+    <input type="submit" value="저장" class="bActors_write_btn button
+       button_c9d8ce2 button_f12 button_p1024 button_r4"  />
+    <input type="reset" value="취소" class="bActors_write_btn button
+       button_c9d8ce2 button_f12 button_p1024 button_r4" />
+    <input type="button" value="목록" class="bActors_write_btn button
+       button_c9d8ce2 button_f12 button_p1024 button_r4"
+    onclick="location='/moving.com/board/actors?page=${page}';" />
+    
+    </div> <%--버튼 div --%>
+    
+  </form> 
+ 
+ </div> <%--전체 div --%>
+ 
  
  <script> //파일 업로드 시 해당 화면에 바로 띄워 지게 해줌.
  $("#thumbnailImage").change(function(){

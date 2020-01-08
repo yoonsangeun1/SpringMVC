@@ -12,39 +12,90 @@
 <script src="../resources/js/jquery.js"></script>
 </head>
 <body>
-  <table border="1" style="width:1024px" cellspacing="0" > <!-- width 임시로 넣어둠. -->
-   <caption>연기자 프로필 내용</caption>
- 
- 	<tr>
- 	 <th>조회수</th>
- 	 <td>
- 	 ${ba.hit}
- 	 </td>
+
+	<div id="bActors_cont_body"> <%--전체 div --%>
+
+		<div id="bActors_community">
+			<%--왼쪽 업데이트 사항. 공지,이벤트 등 div --%>
+			<div class="bActors_community_tit">
+				<%--업데이트--%>
+				<h1>커뮤니티</h1>
+			</div>
+			<%--업데이트 --%>
+
+			<div class="bActors_community_list">
+				<%--업데이트 밑에 리스트들 div --%>
+				<ul>
+
+					<li class="bActors_community_list_actors"><a href="actors">배우 프로필</a>
+					</li>
+
+					<li><a href="contest">시나리오 공모</a></li>
+
+					<li><a href="free">자유게시판</a></li>
+
+					<li><a href="qna">QnA</a> <%--QnA 작업해야 됨 --%></li>
+
+				</ul>
+			</div><%--업데이트 밑에 리스트들 div --%>
+
+		</div><%--커뮤니티 배우모집,시나리오 공모 등 div --%>
+	
+  <table id="bActors_cont_table" border="1" cellspacing="0" > <!-- width 임시로 넣어둠. -->
+ 	
+<%--  	<tr>
+ 	 <th> 등록 날짜 : </th>
+ 	 <td id="bActors_cont_registerDate">${ba.registerDate}</td>
  	</tr>
  	
  	<tr>
+ 	 <th> 이름 : </th>
+ 	 <td id="bActors_cont_name">${ba.name}</td>
+ 	</tr>	
+ 	
+ 	<tr>
+ 	 <th>조회수 : </th>
+ 	 <td id="bActors_cont_hit">${ba.hit}</td>
+ 	</tr> --%>
+ 	
+<%--  	<tr>
  	 <th>등록날짜</th>
  	 <td>
  	 ${ba.registerDate}
  	 </td>
- 	</tr>
+ 	</tr> --%>
  	
-   <tr>
+<%--    <tr>
     <th>이름</th>
     <td>${ba.name}
-   </tr>
+   </tr> --%>
    
    <tr>
-    <th>썸네일</th>
-    <td>
-	<img src="${ba.thumbnailImage}" width="200" height="250"
+    <td rowspan="5" id="bActors_cont_image">
+	<img src="${ba.thumbnailImage}" style="height:100%; width:100%"
 	 onerror="src='../resources/images/noimage.gif'"/>
     </td>
-   </tr>
+       </tr>
+    
+    <tr>
+     <th> 등록 날짜  </th>
+ 	 <td id="bActors_cont_registerDate" colspan="2">${ba.registerDate}</td>
+ 	</tr>
+ 	
+ 	<tr>
+ 	 <th> 이름  </th>
+ 	 <td id="bActors_cont_name" colspan="2">${ba.name}</td>	
+ 	</tr>
+ 	
+ 	<tr>
+ 	 <th>조회수  </th>
+ 	 <td id="bActors_cont_hit" colspan="2">${ba.hit}</td>
+    </tr>
+
    
    <tr>
-    <th>카테고리</th>
-	<td>
+    <th>카테고리  </th>
+	<td id="bActors_cont_category" colspan="2">
 	<c:if test="${ba.category eq 'actor'}">
 	배우
 	</c:if>
@@ -56,35 +107,34 @@
 	</c:if>
 	<c:if test="${ba.category eq 'etc'}">
 	${ba.etctext}
-	</c:if>
-	
+	</c:if>	
 	</td>
    </tr>
    
    <tr>
-    <th>E-MAIL</th>
-    <td>
+    <th colspan="2">E-MAIL  </th>
+    <td colspan="2">
 	${ba.email}
     </td>
    </tr>
    
    <tr>
-    <th>생년월일</th>
-    <td>
+    <th colspan="2">생년월일  </th>
+    <td colspan="2">
 	${fn:substring(ba.birthDate,0,10)}
     </td>
    </tr>
    
    <tr>
-    <th>신장</th>
-    <td>
+    <th colspan="2">신장  </th>
+    <td colspan="2">
     ${ba.height}
     </td>
    </tr>
    
    <tr>
-    <th>성별</th>
-    <td>
+    <th colspan="2">성별  </th>
+    <td colspan="2">
    	<c:if test="${ba.sex eq 'male'}">
    	남성
    	</c:if>  
@@ -95,32 +145,37 @@
    </tr>
    
    <tr>
-    <th>웹사이트</th>
-    <td>
+    <th colspan="2">웹사이트  </th>
+    <td colspan="2">
 	${ba.websiteUrl}
     </td>
    </tr>
   
    <tr>
-    <th>내용</th>
-    <td>
-    ${ba.content}
-    </td>
+    <th colspan="4">내용</th>
    </tr> 
-    
+   
    <tr>
-    <th colspan="2">
-    <input type="button" value="수정"
-    onclick="location='/moving.com/board/actors_edit?id=${ba.id}&page=${page}';" />
-    <input type="reset" value="삭제"
-    onclick="delconfirm()" />
-    <input type="button" value="목록"
-    onclick="location='/moving.com/board/actors?page=${page}';" />
-    </th>
+    <td colspan="4" id="bActors_cont_content">${ba.content}</td>
    </tr>
+  
   </table>
   
-  <div id="fCont_CommentsCont">
+  	<div id="bActors_cont_button"> <%--버튼 div --%>
+  
+    <input type="button" value="수정" class="bActors_cont_btn button
+       button_c9d8ce2 button_f12 button_p1024 button_r4"
+    onclick="location='/moving.com/board/actors_edit?id=${ba.id}&page=${page}';" />
+    <input type="reset" value="삭제" class="bActors_cont_btn button
+       button_c9d8ce2 button_f12 button_p1024 button_r4"
+    onclick="delconfirm()" />
+    <input type="button" value="목록" class="bActors_cont_btn button
+       button_c9d8ce2 button_f12 button_p1024 button_r4"
+    onclick="location='/moving.com/board/actors?page=${page}';" />
+    
+    </div> <%--버튼 div --%>
+    
+    <div id="fCont_CommentsCont">
 				<div class="SNS_Comment">
 
 					<%------------------------------------------------------------------------------------------------ --%>
@@ -182,6 +237,12 @@
 				</div>
 
 			</div>
+    
+    
+  
+  </div> <%--전체 div --%>
+  
+  
   
 <script>
  function delconfirm(){

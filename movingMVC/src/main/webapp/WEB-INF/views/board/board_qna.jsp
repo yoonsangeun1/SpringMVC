@@ -72,7 +72,7 @@
  		    <c:when test="${fn:length(bqlist.title) > 19}"> <%--19자 넘을경우--%>
  		     <c:set var="title" value="${fn:substring(bqlist.title,0,18)}..." />
  		      <td>
- 		       <c:if test="${(empty findFiled) && (empty findName)}"> <%--검색 전 --%>
+ 		       <c:if test="${(empty findField) && (empty findName)}"> <%--검색 전 --%>
  		       <a href="/moving.com/board/qna_cont?id=${bqlist.id}&page=${page}">
  		       <c:if test="${bqlist.replyOrder > 1}">
  		        <img src="../resources/images/bQna.gif" />
@@ -82,7 +82,7 @@
  		       </c:if>
  		       
  		       <c:if test="${(!empty findField) || (!empty findName)}"> <%--검색 후 --%>
- 		       <a href="/moving.com/board/free_cont?id=${bqlist.id}&page=${page}&findField=${findField}&findNam${findName}">
+ 		       <a href="/moving.com/board/qna_cont?id=${bqlist.id}&page=${page}&findField=${findField}&findName=${findName}">
  		        <c:if test="${bqlist.replyOrder > 1}">
  		        <img src="../resources/images/bQna.gif" />
  		       </c:if>
@@ -94,7 +94,7 @@
  		    
  		    <c:otherwise>
  		     <td>
- 		      <c:if test="${(empty findFiled) && (empty ifndName)}"> <%--검색 전 --%>
+ 		      <c:if test="${(empty findField) && (empty findName)}"> <%--검색 전 --%>
  		      <a href="/moving.com/board/qna_cont?id=${bqlist.id}&page=${page}">
  		       <c:if test="${bqlist.replyOrder > 1}">
  		        <img src="../resources/images/bQna.gif" />
@@ -102,6 +102,7 @@
  		      ${bqlist.title}
  		      </a>
  		      </c:if>
+ 		      
  		      <c:if test="${(!empty findField) || (!empty findName)}"> <%--검색 후 --%>
  		      <a href="/moving.com/board/qna_cont?id=${bqlist.id}&page=${page}&findField=${findField}&findName=${findName}">
  		       <c:if test="${bqlist.replyOrder > 1}">
@@ -146,7 +147,7 @@
  		  </tr>
  		 </c:if> 
  		</table>
- 	</form>
+
 		
     <div id="bQna_writing"> <%-- 글 쓰기 폼 div --%>
       <input type="button" class="bQna_writing_btn button
@@ -250,8 +251,12 @@
    </div> <%--텍필,버튼 --%>
    
   </div> <%--검색 구간 전체 div --%>
+ 
+ </form>
  	
  	</div> <%--커뮤니티 제외 전체 --%>
+ 
+
  
  </div> <%--전체 div 묶음 --%>
  

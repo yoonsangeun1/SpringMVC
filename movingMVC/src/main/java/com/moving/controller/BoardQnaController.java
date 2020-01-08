@@ -156,13 +156,20 @@ public class BoardQnaController { /*질문게시판 컨트롤러*/
 			int id,
 			int page,
 			String findField,
-			String findName) throws Exception{
+			String findName,
+			HttpServletRequest request,
+			HttpSession session) throws Exception{
+		
+		session=request.getSession();
+		
+		String user_lv=(String)session.getAttribute("user_lv"); //세션으로 '관리자' 값 담기
 		
 		//번호에 해당하는 디비 레코드 값을 가져옴.
 		ReplyPostVO bq=this.boardReplyService.getCont(id);
 		
 		ModelAndView cm=new ModelAndView("/board/board_qna_cont");
 		
+		cm.addObject("user_lv",user_lv); //관리자인지 아닌지 확인
 		cm.addObject("bq",bq);
 		cm.addObject("page",page);
 		cm.addObject("findField",findField);
@@ -303,9 +310,6 @@ public class BoardQnaController { /*질문게시판 컨트롤러*/
 				
 				int replycheck=this.boardReplyService.selectReply(id); //아이디를 기준으로 답변글이 있는지 확인하기 위함.
 				
-				System.out.println(id);
-				System.out.println(replycheck);
-				
 				if(replycheck >= 1) { /*1 이상일 경우 */
 					out.println("<script>");
 					out.println("alert('답변글이 등록 된 게시글이거나 답변글에 답변글은 작성 불가능합니다!');");
@@ -351,8 +355,6 @@ public class BoardQnaController { /*질문게시판 컨트롤러*/
 		if(session.getAttribute("id") != null) {
 			
 			int user_id=(int)session.getAttribute("id");
-			
-			System.out.println(id);
 			
 			bq.setUserId(user_id);
 			bq.setReplyStep(id);

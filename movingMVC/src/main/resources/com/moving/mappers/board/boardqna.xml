@@ -84,7 +84,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <select id="bq_cont" resultMap="boardInfo">
  SELECT R.ID AS board_qna_id, R.USER_ID AS board_qna_user_id,
  R.TITLE, R.HIT, R.CONTENT, U.NICKNAME,
- R.REGISTER_DATE AS board_qna_registerDate
+ R.REGISTER_DATE AS board_qna_registerDate,
+ R.REPLY_ORDER
  FROM REPLY_POST R, M_USER U
  WHERE R.USER_ID = U.ID
  AND R.ID=#{id}
@@ -100,7 +101,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  <!-- 질문 내용가져오기 , 조회수 증가 없음 -->
 <select id="bq_cont2" resultMap="boardInfo">
  SELECT R.ID AS board_qna_id, R.USER_ID AS board_qna_user_id,
- R.TITLE, R.HIT, R.CONTENT, U.NICKNAME
+ R.TITLE, R.HIT, R.CONTENT, U.NICKNAME,
+ R.REPLY_ORDER
  FROM REPLY_POST R, M_USER U
  WHERE R.USER_ID = U.ID
  AND R.ID=#{id}
