@@ -210,7 +210,7 @@ $(function(){ // document ready
 								</div>
 							</div>
 							
-							<div id="MymenuUserActive_writeBoard" onclick="location.href='http://www.naver.com';">
+							<div id="MymenuUserActive_writeBoard" onclick="location.href='../member_mypage?mid=${id}';">
 								<span class="wirte_Board">내가 쓴 글</span>
 								<br>
 								<i class="far fa-edit"></i>
@@ -227,14 +227,9 @@ $(function(){ // document ready
 							</div>
 							<ul class="MyMenu_subMenu">
 								<li>
-									<a href="#" class="MyMenu_subMenuBtn" id="myPoint">
+									<a href="/moving.com/member_point" class="MyMenu_subMenuBtn" id="myPoint">
 										나의 포인트 ${user_point} 점
 										<i class="fas fa-chevron-right" aria-hidden="true" style="float:right"></i>
-									</a>
-								</li>
-								<li>
-									<a href="#" class="MyMenu_subMenuBtn" >
-										나의 지지서명<i class="fas fa-chevron-right" aria-hidden="true" style="float:right"></i>
 									</a>
 								</li>
 								<li>

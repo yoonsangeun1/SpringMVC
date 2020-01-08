@@ -50,10 +50,14 @@ public class MUserServiceImpl implements MUserService {
 	public MUserVO loginCheck(String mLogin_email) {
 		return this.mUserDAO.loginCheck(mLogin_email);
 	}//로그인 인증
-
+	
+	@Transactional
 	@Override
 	public void memberChange(MUserVO m) {
 		this.mUserDAO.memberChange(m);
+		  m=this.mUserDAO.findMUserAccountById(m.getId());//유저 정보 가져오기
+	      m.setUserPoint(5000);   //포인트 저장
+	      this.mUserDAO.pointCharge(m);   //포인트 up
 	}//회원전환 ( 개인 > 사업자 )
 
 	@Override

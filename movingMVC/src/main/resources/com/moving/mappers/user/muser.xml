@@ -90,7 +90,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 포인트 충전 -->
 	<update id="pointCharge">
-		update m_user set user_point = user_point + #{userPoint} where userid = #{userid}
+		update m_user set user_point = user_point + #{userPoint} where id = #{id}
 	</update>
 	
 	<!-- 회원정보창 비동기식 출력 -->
@@ -125,6 +125,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="socialProfileUpload">
 		update social_profile set profile_image_path = #{profileImageUrl} where user_id = #{id}
 	</update>
+	
+	<!-- 소셜 아이디를 기준으로 회원 정보 찾기 -->
+   <select id="findMUserAccount" resultType="mUserVO">
+      select * from m_user
+      where id = (Select user_id from social_profile where id = #{socialId})
+   </select>
+   
+   <!-- id를 기준으로 회원 정보 찾기 -->
+   <select id="findMUserAccountById" resultType="mUserVO">
+      select * from m_user where id = #{id}
+   </select>
 	
 </mapper>
 

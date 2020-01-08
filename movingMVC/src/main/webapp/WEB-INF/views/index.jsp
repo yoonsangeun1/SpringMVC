@@ -182,20 +182,20 @@
 							<div id="MymenuLayout_contatainer">
 								<div class="MyMenuUserInfo_userInfo" onclick="location='/moving.com/member_mypage?mid=${id}';"> 
 									<a class="MyMenuUserInfo_profileLink">
-										<span class="MyMenuUserInfo_name">${name}</span> &nbsp;&nbsp;
+										<span class="MyMenuUserInfo_name" id="myName">${name}</span> &nbsp;&nbsp;
 										<c:if test="${profile_image_url == 'default'}">
-											<img class="MyMenuUserInfo_avatar" src="${pageContext.request.contextPath}/resources/images/member_profile.png"	style="width:60px; height:60px; border-radius: 50%;">
+											<img id="MyMenuUserInfo_avatar" class="MyMenuUserInfo_avatar" src="${pageContext.request.contextPath}/resources/images/member_profile.png"	style="width:60px; height:60px; border-radius: 50%;">
 										</c:if>
 								
 										<c:if test="${profile_image_url != 'default'}">
 											<img class="MyMenuUserInfo_avatar" src="${profile_image_url}" style="width:60px; height:60px; border-radius: 50%;">
 										</c:if>
-										<span class="MyMenuUserInfo_userLevel">${user_lv}</span> 
+										<span class="MyMenuUserInfo_userLevel" id="myLevel">${user_lv}</span> 
 									</a>
 								</div>
 							</div>
 							
-							<div id="MymenuUserActive_writeBoard" onclick="location.href='http://www.naver.com';">
+							<div id="MymenuUserActive_writeBoard" onclick="location.href='member_mypage?mid=${id}';">
 								<span class="wirte_Board">내가 쓴 글</span>
 								<br>
 								<i class="far fa-edit"></i>
@@ -212,16 +212,11 @@
 							</div>
 							<ul class="MyMenu_subMenu">
 								<li>
-									<a href="/moving.com/member_point" class="MyMenu_subMenuBtn">
+									<a href="/moving.com/member_point" class="MyMenu_subMenuBtn" id="myPoint">
 										나의 포인트 ${user_point} 점
 										<i class="fas fa-chevron-right" aria-hidden="true" style="float:right"></i>
 									</a>
 								</li>
-<!-- 								<li> -->
-<!-- 									<a href="#" class="MyMenu_subMenuBtn"> -->
-<!-- 										나의 지지서명<i class="fas fa-chevron-right" aria-hidden="true" style="float:right"></i> -->
-<!-- 									</a> -->
-<!-- 								</li> -->
 								<li>
 									<a href="/moving.com/member_change" class="MyMenu_subMenuBtn"> 
 											 회원 전환<i class="fas fa-chevron-right" aria-hidden="true" style="float: right"></i> 

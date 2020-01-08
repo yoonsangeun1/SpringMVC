@@ -121,6 +121,14 @@ public class MUserDAOImpl implements MUserDAO {
 		this.sqlSession.update("socialProfileUpload",m);
 	}
 
-
+	@Override
+	public MUserVO findMUserAccount(int socialId) {
+	    return this.sqlSession.selectOne("findMUserAccount", socialId);
+	}
+	
+	@Override
+	public MUserVO findMUserAccountById(int id) {
+	    return this.sqlSession.selectOne("findMUserAccountById", id);
+	}
 
 }

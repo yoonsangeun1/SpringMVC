@@ -96,8 +96,12 @@ public class MyPageController {
 		}else {
 			ModelAndView m = new ModelAndView("member/member_change");
 			MUserVO db_businessInfo = this.mUserService.emailCheck(userid);
+			System.out.println(db_businessInfo.getBusinessName());
+			System.out.println(db_businessInfo.getBusinessRegisterNo());
+			System.out.println(db_businessInfo.getBusinessLicenseImagePath());
 			m.addObject("businessName",db_businessInfo.getBusinessName());
 			m.addObject("businessRegisterNo",db_businessInfo.getBusinessRegisterNo());
+			m.addObject("businessLicenseImagePath",db_businessInfo.getBusinessLicenseImagePath());
 			return m;
 		}
 		return null;
@@ -111,7 +115,7 @@ public class MyPageController {
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		String userid=(String)session.getAttribute("userid");
-		
+		int id = (int)session.getAttribute("id");
 		if(userid==null) {
 			out.println("<script>");
 			out.println("alert('로그인이 필요한 페이지입니다 !');");
@@ -151,15 +155,15 @@ public class MyPageController {
 					afile.mkdir();
 				}
 				Random r = new Random();
-				int random = r.nextInt(100000000); //0이상 1억미만 사이의 정수숫자 난수 발생
+				int random = r.nextInt(10000); //0이상 1억미만 사이의 정수숫자 난수 발생
 
 				/** 첨부파일 확장자 구하기 */
 				int index = fileName.lastIndexOf(".");
 				//첨부한 파일에서 .를 맨오른쪽부터 찾아서 가장먼저 나오는 .의 위치번호를 왼쪽부터 세어서 번호값을 반환. 첫문자는 0
 				String fileExtendsion = fileName.substring(index+1);
 				//마침표 이후부터 마지막 문자까지 구함. 즉 확장자를 구함.
-				String refilename = "("+businessName+")"+year+month+date+random+"."+fileExtendsion; //새로운 첨부파일명을 저장
-				String fileDBName = "/"+year+"-"+month+"-"+date+"/"+refilename; //DB에 저장되는 레코드값
+				String refilename = "("+businessName+")"+year+"-"+month+"-"+date+"_"+random+"."+fileExtendsion; //새로운 첨부파일명을 저장
+				String fileDBName = "/moving.com/resources/business_License_Img/"+year+"-"+month+"-"+date+"/"+refilename; //DB에 저장되는 레코드값
 				UpFile.renameTo(new File(homedir+"/"+refilename)); //바뀌어진 첨부파일명으로 업로드
 
 				m.setBusinessLicenseImagePath(fileDBName); //DB에 사업자등록증이미지경로 저장
@@ -171,6 +175,7 @@ public class MyPageController {
 			m.setBusinessName(businessName);
 			m.setName(businessName);
 			m.setBusinessRegisterNo(businessRegisterNo);
+			m.setId(id);
 			this.mUserService.memberChange(m);
 
 

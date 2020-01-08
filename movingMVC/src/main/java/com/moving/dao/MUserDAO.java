@@ -49,6 +49,8 @@ public interface MUserDAO {
 
 	void socialProfileUpload(MUserVO m);
 
-
+	MUserVO findMUserAccount(int socialId);   //소셜id를 기준으로 MUser정보 가져오기
+	
+	MUserVO findMUserAccountById(int id);//아이디(시퀀스)를 기준으로 회원 정보 찾기
 
 }

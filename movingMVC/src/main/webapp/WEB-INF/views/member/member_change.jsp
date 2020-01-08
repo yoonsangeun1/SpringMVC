@@ -17,23 +17,39 @@
 			</div>
 			<div id="mChange_info2">
 				<span>● 회원전환 등록정보</span>
-				<c:if test="${user_lv!='제작사'}">
+				
+				<c:if test="${user_lv!='제작사'}"> <!--제작사 회원이 아닌경우 = 개인회원인 경우 사업자명,사업자등록번호,사업자등록증이미지 등록가능 -->
 					<input type="text" name="businessName" id="mChange_businessName" class="change_input" placeholder="사업자명" oninput="businessName_check();">
 					<input name="businessRegisterNo" id="mChange_businessRegisterNo" class="change_input" placeholder="사업자등록번호" maxlength="12" oninput="businessRegisterNo_check();">
+					<div id="mChange_message">
+						<span id="mChange_Check"></span>
+					</div>
+					
+ 					<div id="mChange_file_text">
+						<span>● 사업자등록증 이미지 미리보기</span>
+						<div id="mChange_businessLicense_image" style="float:left; width:400px; height:400px; border:1px solid black;">
+							<img id="business_img"  style="width:400px; height:400px;">
+						</div>
+						<input type="file" name="mChange_file" id="mChange_file">
+					</div>
 				</c:if>
-				<c:if test="${user_lv=='제작사'}">
+				
+				<c:if test="${user_lv=='제작사'}"> <!-- 제작사 회원인경우 // 사업자명,사업자등록번호, 사업자등록증이미지 출력 -->
 					<input type="text"  id="mChange_businessName" class="change_input" value="사업자명 : ${businessName}" readonly 
 						style="background-color : #eae6fa;">
 					<input id="mChange_businessRegisterNo" class="change_input" value="사업자 등록 번호 : ${businessRegisterNo}" readonly
 						style="background-color : #eae6fa;">
-				</c:if>
 					<div id="mChange_message">
 						<span id="mChange_Check"></span>
 					</div>
- 				<div id="mChange_file_text">
-					<span>● 사업자등록증 이미지 파일첨부</span>
-					<input name="mChange_file" type="file" id="mChange_file">
-				</div>
+					<div id="mChange_file_text">
+						<span>● 사업자등록증 이미지 미리보기 </span>
+						<div id="mChange_businessLicense_image">
+							<img id="business_img" src="${businessLicenseImagePath}" style="width:400px; height:400px;">
+						</div>
+					</div>
+					
+				</c:if>
 			</div>
 			
 			<div id="mChange_button">
