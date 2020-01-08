@@ -54,7 +54,8 @@
    <tr>
     <th id="bQna_write_title">&nbsp;&nbsp;&nbsp;제목 : </th>
   <td id="bQna_write_title_2">
-  <input name="title" id="title" size="56" maxlength="35" oninput="maxLengthCheck(this)" />
+  <input name="title" id="title" size="56" maxlength="35" oninput="maxLengthCheck(this)"
+  value="[답변]:${bq.title}"/>
   </td>
    </tr>
    

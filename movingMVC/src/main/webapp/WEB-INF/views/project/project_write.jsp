@@ -32,16 +32,15 @@
 		<form method="post" action="/moving.com/project/write_ok?id=${projectPostVO.id }" onsubmit="">
 			<table border="1" style="border: 1px solid gray">
 				<tr>
-					<th>
-						<dl>
-							<dt>프로젝트 번호</dt>
-							<dd>담당자와 소통은 프로젝트 번호로 진행됩니다.</dd>
-						</dl>
-					</th>
-					<td><textarea rows="7" cols="30" readonly="readonly">프로젝트 번호 : ${projectPostVO.id }
+					<td>프로젝트 번호</td>
+					<td>담당자와 소통은 프로젝트 번호로 진행됩니다.</td>
+					<td>
+					<div>프로젝트 번호 : ${projectPostVO.id }
 						http://localhost:8084/moving.com/project/content?id=${projectPostVO.id }로 프로젝트 개설 이후 접근 가능합니다. 
-					</textarea></td>
+					</div>
+					</td>
 				</tr>
+				
 				<tr>
 					<th rowspan="2">
 						<dl>
@@ -52,10 +51,12 @@
 					<td><input type="text" id="email" name="email" placeholder="이메일 주소를 입력하세요" value="${email }"/> <input
 						type="button" id="checkEmail" name="checkEmail" value="인증하기" /></td>
 				</tr>
+				
 				<tr>
 					<td><input type="text" id="phone" name="phone" placeholder="전화 번호를 입력하세요" value="${phone }"/> <input
 						type="button" id="checkPhone" name="checkPhone" value="인증하기" /></td>
 				</tr>
+				
 				<tr>
 					<th>
 						<dl>
@@ -70,6 +71,7 @@
 					<td><input name="title" id="title" size="20" value="${projectPostVO.title }" /></td>
 					</c:if>
 				</tr>
+				
 				<tr>
 					<th>
 						<dl>
@@ -84,6 +86,7 @@
 					<td><input name="introduce" id="introduce" size="20" value="${projectPostVO.introduce }" /></td>
 					</c:if>
 				</tr>
+				
 				<tr>
 					<th>
 						<dl>
@@ -93,6 +96,7 @@
 					</th>
 					<td><input name="hashtag" id="hashtag" size="20" placeholder="태그명은 쉼표로 구분해주세요(ex. 태그1, 태그2 )"/></td>
 				</tr>
+				
 				<tr>
 					<th>
 						<dl>
@@ -107,6 +111,7 @@
 					<td><input name="targetPrice" id="goalMoney" size="20" value="${projectPostVO.targetPrice }"/> 원</td>
 					</c:if>
 				</tr>
+				
 				<tr>
 					<th>
 						<dl>
@@ -144,6 +149,7 @@
 							<option value="2000109" selected>기타</option>
 					</select></td>
 				</tr>
+				
 				<tr>
 					<th>
 						<dl>
@@ -160,6 +166,7 @@
 							<option value="2000205">기타</option>
 					</select></td>
 				</tr>
+				
 				<tr>
 					<th>
 						<dl>
@@ -179,6 +186,7 @@
 							name="question03"></textarea></td>
 
 				</tr>
+				
 				<tr>
 					<th>
 						<dl>
@@ -199,6 +207,7 @@
 					data-tab="fWrite_reward" onclick="$('html, body').stop().animate({scrollTop : 0}, 500);" /> 
 						<input type="reset" value="초기화" /></th>
 				</tr>
+				
 			</table>
 		</form>
 		</div>

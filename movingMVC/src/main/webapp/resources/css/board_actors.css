@@ -368,6 +368,10 @@
 	vertical-align: middle;
 }
 
+#bActors_cont_table #bActors_cont_name a:visited{
+	color:black;
+}
+
 #bActors_cont_table #bActors_cont_content{ /*내용*/
 	line-height:1.3;
 	background: none;

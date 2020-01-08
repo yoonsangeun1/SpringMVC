@@ -42,33 +42,6 @@
 		</div><%--커뮤니티 배우모집,시나리오 공모 등 div --%>
 	
   <table id="bActors_cont_table" border="1" cellspacing="0" > <!-- width 임시로 넣어둠. -->
- 	
-<%--  	<tr>
- 	 <th> 등록 날짜 : </th>
- 	 <td id="bActors_cont_registerDate">${ba.registerDate}</td>
- 	</tr>
- 	
- 	<tr>
- 	 <th> 이름 : </th>
- 	 <td id="bActors_cont_name">${ba.name}</td>
- 	</tr>	
- 	
- 	<tr>
- 	 <th>조회수 : </th>
- 	 <td id="bActors_cont_hit">${ba.hit}</td>
- 	</tr> --%>
- 	
-<%--  	<tr>
- 	 <th>등록날짜</th>
- 	 <td>
- 	 ${ba.registerDate}
- 	 </td>
- 	</tr> --%>
- 	
-<%--    <tr>
-    <th>이름</th>
-    <td>${ba.name}
-   </tr> --%>
    
    <tr>
     <td rowspan="5" id="bActors_cont_image">
@@ -84,7 +57,22 @@
  	
  	<tr>
  	 <th> 이름  </th>
- 	 <td id="bActors_cont_name" colspan="2">${ba.name}</td>	
+ 	<c:if test="${(ba.socialProfileVO.id != 0) && !(ba.socialProfileVO.id == null)}">
+ 	<td id="bActors_cont_name" colspan="2">
+ 	<a href="/moving.com/social/profile?id=${ba.socialProfileVO.id}">
+ 	<img src="../images/character.gif" id="character" />
+ 	${ba.name}
+ 	</a>
+ 	</td>
+ 	</c:if>
+ 	
+ 	<c:if test="${(ba.socialProfileVO.id == 0) || (ba.socialProfileVO.id == null)}">
+ 	 <td id="bActors_cont_name" colspan="2">
+ 	<img src="../images/character.gif" id="character" />
+ 	  ${ba.name}
+ 	 </td>
+ 	</c:if>
+ 	
  	</tr>
  	
  	<tr>

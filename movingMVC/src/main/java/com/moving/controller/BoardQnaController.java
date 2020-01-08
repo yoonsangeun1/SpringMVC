@@ -239,6 +239,7 @@ public class BoardQnaController { /*질문게시판 컨트롤러*/
 		
 	}//board_qna_edit_ok
 	
+	//게시글 삭제
 	@RequestMapping("/board/qna_del")	
 	public String board_qna_del(int id,
 			int page,

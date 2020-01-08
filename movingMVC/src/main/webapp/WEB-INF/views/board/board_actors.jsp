@@ -74,9 +74,16 @@
 
 						<div id="bActors_name">
 							<%-- 배우들 이름 --%>
-							<a href="/moving.com/board/actors_cont?id=${balist.id}&page=${page}"> 
+							<c:if test="${balist.socialProfileVO.id != 0}">
+							<a href="/moving.com/social/profile?id=${balist.socialProfileVO.id}"> 
 							<img src="../images/character.gif" id="character" /> ${balist.name}
 							</a>
+							</c:if>
+							
+							<c:if test="${balist.socialProfileVO.id == 0}">
+							<img src="../images/character.gif" id="character" /> ${balist.name}
+							</c:if>
+							
 						</div>
 						<%-- 배우들 이름 --%>
 					</div>

@@ -69,9 +69,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  SELECT * FROM
  (SELECT ROW_NUMBER() OVER(ORDER BY P.ID DESC) rNum,
  P.thumbnail_Image, P.ID AS board_actors_id,
- P.NAME,P.USER_ID
+ P.NAME,P.USER_ID, S.ID AS social_profile_id
  FROM PROFILE_POST P
  LEFT OUTER JOIN M_USER U ON P.USER_ID = U.ID
+ LEFT OUTER JOIN SOCIAL_PROFILE S ON U.ID = S.USER_ID
  <where>
  P.CODE_NO = 10005
  <if test="findField == ''"></if>
@@ -113,12 +114,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- 내용보기 -->
 <select id="ba_cont" resultMap="boardInfo">
  SELECT P.ID AS board_actors_id, P.USER_ID AS board_actors_user_id,
- P.HIT,THUMBNAIL_IMAGE,CATEGORY,
- EMAIL,BIRTH_DATE,HEIGHT,
- SEX,WEBSITE_URL,CONTENT,REGISTER_DATE AS board_actors_registerDate,
- NAME,ETCTEXT
+ P.HIT,P.THUMBNAIL_IMAGE,P.CATEGORY,
+ P.EMAIL,P.BIRTH_DATE,P.HEIGHT,
+ P.SEX,P.WEBSITE_URL,P.CONTENT,P.REGISTER_DATE AS board_actors_registerDate,
+ P.NAME,P.ETCTEXT, S.ID AS social_profile_id
  FROM PROFILE_POST P
+ LEFT OUTER JOIN M_USER U ON P.USER_ID = U.ID
+ LEFT OUTER JOIN SOCIAL_PROFILE S ON U.id = S.USER_ID
  WHERE P.ID=#{id}
+ AND P.CODE_NO = 10005
 </select>
 
 <!-- 조회수 증가 없이 내용 가져오기 -->
