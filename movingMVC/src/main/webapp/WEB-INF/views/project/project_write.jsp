@@ -19,124 +19,141 @@
 				<li><button type="submit" class="btn">검토 요청하기</button></li>
 			</ul>
 			<!-- 			<but1ton type="submit" class="btn" >검토 요청하기</button> -->
-			<!-- 알림  -->
-			<div id="fWrite_Alert">
-						<p align="center">알림</p>
-						<p align="center">30분 동안 입력 또는 작성 단계별 저장이 진행되지 않으면 자동으로 로그아웃 되며, 저장하지 않은
+			<!-- 알림  -->		
+		
+			<div id="fWrite_Alert" style="float:left; width:100%">
+				<div  style="color:red; border:1px solid red; padding:10px">
+						<p align="center"> 알림: 30분 동안 입력 또는 작성 단계별 저장이 진행되지 않으면 자동으로 로그아웃 되며, 저장하지 않은
 							입력값은 반영 되지 않으니 주의하세요.</p>
+				</div>
 			</div>
 
 		
 		<!-- 본문 내용 : 기본 정보 -->
 		<div id="fWrite_cont" class="menu-option on">
 		<form method="post" action="/moving.com/project/write_ok?id=${projectPostVO.id }" onsubmit="">
-			<table border="1" style="border: 1px solid gray">
+			<table border="1" id="fWrite_cont_table" cellspacing="0">
+			
 				<tr>
-					<td>프로젝트 번호</td>
-					<td>담당자와 소통은 프로젝트 번호로 진행됩니다.</td>
+					<td id="fWrite_cont_no">프로젝트 번호<br/>
+					<p style="font-weight: initial;" >
+					담당자와 소통은 프로젝트 번호로 진행됩니다.
+					</p>
+					</td>
+					
 					<td>
-					<div>프로젝트 번호 : ${projectPostVO.id }
+					프로젝트 번호 : ${projectPostVO.id }
+					<br/>
 						http://localhost:8084/moving.com/project/content?id=${projectPostVO.id }로 프로젝트 개설 이후 접근 가능합니다. 
-					</div>
+					</td>	
+				</tr>
+				
+				<tr style="padding:10px;">
+					<td id="fWrite_cont_phone" rowspan="2">연락처
+					<p  style="font-weight: initial;" >주요 안내를 받으실 이메일과 휴대폰 번호를 등록해 주세요. 정보 변경은 회원정보설정에서 가능합니다.</p>	
+					</td>
+
+					<td>
+					<input type="text" id="email" name="email" placeholder="이메일 주소를 입력하세요" value="${email }" size="50"/>
+					<input type="button" id="checkEmail" name="checkEmail" value="인증하기" />
 					</td>
 				</tr>
 				
 				<tr>
-					<th rowspan="2">
-						<dl>
-							<dt>연락처</dt>
-							<dd>주요 안내를 받으실 이메일과 휴대폰 번호를 등록해 주세요. 정보 변경은 회원정보설정에서 가능합니다.</dd>
-						</dl>
-					</th>
-					<td><input type="text" id="email" name="email" placeholder="이메일 주소를 입력하세요" value="${email }"/> <input
-						type="button" id="checkEmail" name="checkEmail" value="인증하기" /></td>
+					<td>
+					<input type="text" id="phone" name="phone" placeholder="전화 번호를 입력하세요" value="${phone }" size="50"/> 
+					<input type="button" id="checkPhone" name="checkPhone" value="인증하기" />
+					</td>
 				</tr>
 				
 				<tr>
-					<td><input type="text" id="phone" name="phone" placeholder="전화 번호를 입력하세요" value="${phone }"/> <input
-						type="button" id="checkPhone" name="checkPhone" value="인증하기" /></td>
-				</tr>
-				
-				<tr>
-					<th>
-						<dl>
-							<dt>프로젝트 제목</dt>
-							<dd>프로젝트 성격과 리워드를 짐작할 수 있게 간결하고 직관적으로 작성해주세요.</dd>
-						</dl>
-					</th>
+				 <td id="fWrite_cont_title">프로젝트 제목<br/>
+				<p style="font-weight: initial;"> 프로젝트 성격과 리워드를 짐작할 수 있게 간결하고 직관적으로 작성해주세요. </p>
+				 </td>
+				 
 					<c:if test="${empty projectPostVO.title }">
-					<td><input name="title" id="title" size="20"  placeholder="프로젝트 제목을 입력하세요"/></td>
+					<td>
+					<input name="title" id="title" size="20"  placeholder="프로젝트 제목을 입력하세요"/>
+					</td>
 					</c:if>
-					<c:if test="${!empty projectPostVO.title }">
-					<td><input name="title" id="title" size="20" value="${projectPostVO.title }" /></td>
+					
+					<c:if test="${!empty projectPostVO.title}">
+					<td>
+					<input name="title" id="title" size="20" value="${projectPostVO.title }" />
+					</td>
 					</c:if>
 				</tr>
 				
 				<tr>
-					<th>
-						<dl>
-							<dt>프로젝트 소개글</dt>
-							<dd>프로젝트 성격과 리워드를 짐작할 수 있게 간결하고 직관적으로 작성해주세요.</dd>
-						</dl>
-					</th>
+					 <td id="fWrite_cont_intoroduce">프로젝트 소개글 <br/>
+					 <p style="font-weight: initial;">프로젝트 성격과 리워드를 짐작할 수 있게 간결하고 직관적으로 작성해주세요.</p>
+					 </td>
+					
 					<c:if test="${empty projectPostVO.introduce }">
-					<td><input name="introduce" id="introduce" size="20"  placeholder="프로젝트 한 줄 소개글을 입력하세요"/></td>
+					<td>
+					<input name="introduce" id="introduce" size="50"  placeholder="프로젝트 한 줄 소개글을 입력하세요"/>
+					</td>
 					</c:if>
+					
 					<c:if test="${!empty projectPostVO.introduce }">
-					<td><input name="introduce" id="introduce" size="20" value="${projectPostVO.introduce }" /></td>
+					<td>
+					<input name="introduce" id="introduce" size="50" value="${projectPostVO.introduce }" />
+					</td>
 					</c:if>
+					
 				</tr>
 				
 				<tr>
-					<th>
-						<dl>
-							<dt>해쉬 태그</dt>
-							<dd>검색, 알림 등에 사용되는 짧은 제목도 함께 작성해주세요. </dd>
-						</dl>
-					</th>
-					<td><input name="hashtag" id="hashtag" size="20" placeholder="태그명은 쉼표로 구분해주세요(ex. 태그1, 태그2 )"/></td>
+					<td id="fWrite_cont_hashtag">해쉬 태그<br/>
+					<p style="font-weight: initial;">검색, 알림 등에 사용되는 짧은 제목도 함께 작성해주세요.</p>
+					</td>
+					<td>
+					<input name="hashtag" id="hashtag" size="50" placeholder="태그명은 쉼표로 구분해주세요(ex. 태그1, 태그2 )"/>
+					</td>
 				</tr>
 				
 				<tr>
-					<th>
-						<dl>
-							<dt>목표 금액</dt>
-							<dd>마감일 자정 기준 목표금액 미달성 시, 펀딩은 취소됩니다. (리워드 평균 목표금액 : 300만원)</dd>
-						</dl>
-					</th>
+					<td id="fWrite_cont_targetMoney">목표 금액<br/>
+					<p style="font-weight: initial;">마감일 자정 기준 목표금액 미달성 시, 펀딩은 취소됩니다. (리워드 평균 목표금액 : 300만원) <p>
+					</td>
+					
+					<td>
+					<input name="targetAmount" id="targetAmount" size="50" placeholder="목표 금액을 입력해주세요" />
+					</td>
+					
 					<c:if test="${empty projectPostVO.targetPrice }">
-					<td><input name="targetPrice" id="goalMoney" size="20" /> 원</td>
+					<td>
+					<input name="targetPrice" id="goalMoney" size="20" /> 원
+					</td>
 					</c:if>
+					
 					<c:if test="${!empty projectPostVO.introduce }">
-					<td><input name="targetPrice" id="goalMoney" size="20" value="${projectPostVO.targetPrice }"/> 원</td>
+					<td>
+					<input name="targetPrice" id="goalMoney" size="20" value="${projectPostVO.targetPrice }"/> 원
+					</td>
 					</c:if>
 				</tr>
 				
 				<tr>
-					<th>
-						<dl>
-							<dt>대표 이미지</dt>
-							<dd>
-								메이커와 리워드가 함께 있거나, 프로젝트의 성격이 한눈에 드러나는 사진이 좋습니다. <a href="#">가이드</a>를
-								확인하세요.
-							</dd>
-						</dl>
-					</th>
-					<th><input type="file" name="thumbnailPath" id="titleImg" />
-						<ul>
+					<td id="fWrite_cont_image">대표 이미지<br/>
+					<p style="font-weight: initial;">메이커와 리워드가 함께 있거나,
+					 프로젝트의 성격이 한눈에 드러나는 사진이 좋습니다. <a href="#">가이드</a>를확인하세요.</p>
+					</td>
+					
+					<td>
+					<input type="file" name="thumbnailPath" id="titleImg" />
+						<ul  style="margin-left:13px;">
 							<li>사이즈: 가로 120px 세로 675px</li>
 							<li>용량: 3MB 미만</li>
 							<li>텍스트 및 로고 삽입 금지</li>
-						</ul></th>
+						</ul>
+					</td>
 				</tr>
 
 				<tr>
-					<th>
-						<dl>
-							<dt>카테고리</dt>
-							<dd>오픈 후, 노출될 카테고리를 선택해 주세요.</dd>
-						</dl>
-					</th>
+					<td id="fWrite_cont_category">카테고리<br/>
+					<p style="font-weight: initial;">오픈 후, 노출될 카테고리를 선택해 주세요.</p>
+					</td>
 					<td><select name="codeNo">
 							<option value="2000101">범죄 &amp; 스릴러</option>
 							<option value="2000102">액션 &amp; 어드벤쳐</option>
@@ -151,12 +168,10 @@
 				</tr>
 				
 				<tr>
-					<th>
-						<dl>
-							<dt>리워드 필수 인증 서류</dt>
-							<dd>서포터에게 제공할 리워드 (제품/서비스)의 생산 및 유통 시, 필요한 인증 서류를 첨부해주세요.</dd>
-						</dl>
-					</th>
+					<td id="fWrite_cont_document">리워드 필수 인증 서류<br/>
+					<p style="font-weight: initial;">서포터에게 제공할 리워드 (제품/서비스)의 생산 및 유통 시, 필요한 인증 서류를 첨부해주세요.</p>
+					</td>
+					
 					<td><b>서포터에게 제공하는 리워드(제품/서비스)의 종류를 선택하세요</b> <select
 						name="rewardCategory">
 							<option value="2000201">티켓</option>
@@ -164,16 +179,15 @@
 							<option value="2000203">기념품</option>
 							<option value="2000204">SW(모바일 리워드)</option>
 							<option value="2000205">기타</option>
-					</select></td>
+					</select>
+					</td>
 				</tr>
 				
 				<tr>
-					<th>
-						<dl>
-							<dt>리워드 필수 확인사항</dt>
-							<dd>답변이 미흡할 경우, 심사 시 재요청 드리며 심사 기간이 늘어날 수 있습니다.</dd>
-						</dl>
-					</th>
+					<td >리워드 필수 확인사항<br/>
+							답변이 미흡할 경우, 심사 시 재요청 드리며 심사 기간이 늘어날 수 있습니다.
+					</td>
+					
 					<td><b>Q1. 리워드가 타 크라우드펀딩사 및 온라인 커머스, 자사 홈페이지 등 다른 판매처에서
 							유통된 적이 있거나 현재 유통 중인가요?</b><br /> 선택하신 답변이 사실과 다를 경우 약정서에 근거하여 프로젝트
 						취소 및 위약벌이 부과될 수 있습니다. <br /> <input type="radio" name="warn"

@@ -164,3 +164,5 @@ WHERE P.CODE_NO = 10005
  LEFT OUTER JOIN SOCIAL_PROFILE S ON U.id = S.USER_ID
  WHERE P.ID=6
  AND P.CODE_NO = 10005;
+ 
+ alter table PROJECT_POST add(thumbnail_image varchar2(4000))
