@@ -79,7 +79,9 @@
 					<li class="tab-link_funding current" data-tab="tab-1">좋아한</li>
 					<li class="tab-link_like " data-tab="tab-2">후원한</li>
 					<li class="tab-link_make " data-tab="tab-3">만든</li>
+					<li class="tab-link_write " data-tab="tab-4">작성한</li>
 				</ul>
+				
 				<div id="top-area">
 						<div class="select-box">
 							<select id="selectProjectType">
@@ -104,7 +106,44 @@
  			<div id="tab-3" class="tab-content">
  				<br />
 				<p>만든 프로젝트가 없습니다.</p>
+				<img src="${pageContext.request.contextPath}/images/noimage.gif">
 			</div>
+ 			<div id="tab-4" class="tab-content">
+ 				<br />
+				<table id="aBoard_table" border="1">
+					<tr>
+						<th scope="col" class="aBT_check"><input type="checkbox"
+							name="aBoard_check" id="ckAll" value="checkAll" /></th>
+						<th scope="col" class="aBT_no">번호</th>
+						<th scope="col" class="aBT_title">제목</th>
+						<th scope="col" class="aBT_writer">작성자</th>
+						<th scope="col" class="aBT_date">작성일</th>
+						<th scope="col" class="aBT_hit">조회수</th>
+					</tr>
+					<c:if test="${!empty nplist}">
+						<c:forEach var="n" items="${nplist }">
+							<input type="hidden" name="no_${n.id}" value="${n.id }" />
+							<tr data-value="${n.id }" class="tag">
+								<td class="bCheck" data-value="${n.id }"><input
+									type="checkbox" name="checkBoard" value="${n.id }"
+									data-value="${n.id }" class="chk" /></td>
+								<td class="bNo" data-value="${n.id }">${n.id }</td>
+								<td class="bTitle" data-value="${n.id }">${n.title }</td>
+								<td class="bUserId" data-value="${n.id }">${n.mUserVO.nickname }</td>
+								<td class="bRegisterDate" data-value="${n.id }">${n.registerDate }</td>
+								<td class="bHit" data-value="${n.id }">${n.hit }</td>
+							</tr>
+						</c:forEach>
+					</c:if>
+
+					<c:if test="${empty nplist }">
+						<tr>
+							<td colspan="6" align="center">등록된 게시글이 없습니다!</td>
+						</tr>
+					</c:if>
+				</table>
+			</div>
+			
 		</div>
 	</div>
 	

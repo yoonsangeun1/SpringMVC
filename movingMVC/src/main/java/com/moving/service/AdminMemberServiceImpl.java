@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.moving.dao.AdminMemberDAO;
 import com.moving.domain.MUserVO;
@@ -23,10 +24,13 @@ public class AdminMemberServiceImpl implements AdminMemberService{
 	public List<MUserVO> memberList(MUserVO mu) {
 		return this.adminMemberDao.memberlist(mu);
 	}
-
+	
+	@Transactional
 	@Override
 	public MUserVO memberInfo(String userid) {
-		return this.adminMemberDao.memberInfo(userid);
+		MUserVO m=this.adminMemberDao.memberInfo(userid);
+		this.adminMemberDao.updateReportCount(m.getId());
+		return m;
 	}
 
 	@Override

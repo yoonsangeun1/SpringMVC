@@ -32,7 +32,12 @@
 				<td class="aUserId">${m.userid }</td>
 				<td class="aName">${m.name }</td>
 				<td class="aPhone">${m.phone }</td>
+				<c:if test="${m.reportCount<5 }">
 				<td class="aUserStatus">${m.userStatus }</td>
+				</c:if>
+				<c:if test="${m.reportCount>=5 }">
+				<td class="aUserStatus">신고!!!!!!</td>
+				</c:if>
 				<td class="aPublishAvailability">${m.publishAvailability }</td>
 				<td class="aUserPoint">${m.userPoint }</td>
 				<td class="aUserLv">${m.userLv }</td>

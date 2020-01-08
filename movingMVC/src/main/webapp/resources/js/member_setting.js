@@ -145,22 +145,6 @@ $(function(){
 
 /**************** 프로필정보 설정 페이지 js ****************/
 
-
-//$(document).ready(function(){
-//	
-//
-// $("#profile_file").change(function(){
-//   if(this.files && this.files[0]) {
-//    var reader = new FileReader;
-//    reader.onload = function(data) {
-//     $("#image_upload #img").attr("src", data.target.result).width(200);        
-//    }
-//    reader.readAsDataURL(this.files[0]);
-//   }
-//  });
-//
-//});
-
 //프로필 이미지 미리보기
 var sel_file;
 $(document).ready(function() {

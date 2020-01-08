@@ -154,7 +154,7 @@
 									</c:if>
 								
 									<c:if test="${profile_image_url != 'default'}">
-										<img calss="Avatar_image" src="${profile_image_url}" style="width:30px; height:30px; border-radius: 50%;">
+										<img class="Avatar_image" src="${profile_image_url}" style="width:30px; height:30px; border-radius: 50%;">
 									</c:if>
 								</button>
 							</div>
@@ -173,11 +173,17 @@
 											myLevel="관리자";
 										}
 										var myName = data.name;
-										var myPoint = "나의 포인트 "+data.userPoint+"점";
+										var myPoint = "나의 포인트 "+data.userPoint+" 점";
+										var myProfile = data.profileImageUrl;
 										
+										if(myProfile == 'default') {
+											myProfile = "${pageContext.request.contextPath}/images/member_profile.png";
+										}
 										$('#myName').html(myName);//태그와 문자를 함께 변경 적용
 										$('#myLevel').html(myLevel);//태그와 문자를 함께 변경 적용
 										$('#myPoint').html(myPoint);//태그와 문자를 함께 변경 적용
+										$('.avatar_image_change').attr('src', myProfile);//태그와 문자를 함께 변경 적용
+										$('.MyMenuUserInfo_avatar').attr('src', myProfile);//태그와 문자를 함께 변경 적용
 										});//매핑 주소 써주기	
 								}
 							</script>
@@ -265,18 +271,19 @@
 	
 				<!-- 관리자 정보, 사진, 이름 -->
 				<div id="admin_info">
-					<a href="/moving.com/member_mypage?mid=${id }"> 
 					<c:if test="${profile_image_url == 'default'}">
 						<img class="MyMenuUserInfo_avatar"
 							src="${pageContext.request.contextPath}/resources/images/member_profile.png"
-							style="width: 120px; height: 120px; border-radius: 50%;">
-					</c:if> <c:if test="${profile_image_url != 'default'}">
-						<img class="MyMenuUserInfo_avatar" src="${profile_image_url}"
-							style="width: 120px; height: 120px; border-radius: 50%;">
+							style="width: 120px; height: 120px; border-radius: 50%;"  onclick="location.href='/moving.com/member_mypage?mid=${id}';">
 					</c:if> 
-					</a>
+					
+					<c:if test="${profile_image_url != 'default'}">
+						<img class="MyMenuUserInfo_avatar" src="${profile_image_url}"
+							style="width: 120px; height: 120px; border-radius: 50%;" onclick="location.href='/moving.com/member_mypage?mid=${id}';">
+					</c:if> 
+					
 					<ul>
-						<li>관리자 정보: ${nickname }</li>
+						<li>${nickname }</li>
 					</ul>
 				</div>
 				

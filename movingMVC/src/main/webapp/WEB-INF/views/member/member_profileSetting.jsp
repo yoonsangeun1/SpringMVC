@@ -26,11 +26,12 @@
 						
 						</div>
 					</div>
-					 
+					  
 					<p id="setting_profileimg">
 					<c:if test="${profile_image_url == 'default'}">
 						<button type="button" id="btn_updatePhoto" class="aaa button_cb3a9eb button_f12 button_r4 vertical group border">프로필 사진 등록</button>
 					</c:if>
+					
 					<c:if test="${profile_image_url != 'default'}">
 						<button type="button" id="btn_updatePhoto" class="aaa button_cb3a9eb button_f12 button_r4 vertical group border">프로필 사진 변경</button>
 					</c:if>

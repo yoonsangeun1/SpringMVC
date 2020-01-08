@@ -71,9 +71,11 @@ public class MyPageController {
 //			m.addObject("db_img",img);
 			MUserVO userInfo = this.mUserService.selectUserInfo(mid);
 			int boardCount = this.mUserService.selectBoardCount(mid);
+			
 			m.addObject("boardCount",boardCount);
 			m.addObject("mid",mid);
 			m.addObject("userInfo",userInfo);
+//			m.addObject("nplist",nplist);
 			return m;
 			
 		}
@@ -550,7 +552,7 @@ public class MyPageController {
 		return null;
 	}//member_delete_ok()
 	
-	
+	/** 포인트 충전 페이지 */
 	@RequestMapping(value="member_point")
 	public ModelAndView member_point(HttpServletResponse response, HttpSession session) throws Exception {
 		
@@ -573,7 +575,6 @@ public class MyPageController {
 	}
 	
 	/**포인트 충전*/
-	
 	@RequestMapping("member_point_charge_ok")
 	public String member_point_charge_ok(MUserVO m, HttpSession session,
 			HttpServletResponse response, HttpServletRequest request)throws Exception {
@@ -581,23 +582,21 @@ public class MyPageController {
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		String userid=(String)session.getAttribute("userid");
-		
+		int id=(int)session.getAttribute("id");
 		if(userid==null) {
 			out.println("<script>");
 			out.println("alert('로그인이 필요한 페이지입니다 !');");
 			out.println("location='member/login';");
 			out.println("</script>");
 		}else {
-			m.setUserid(userid);
+			m.setId(id);
 			this.mUserService.pointCharge(m);
 			session.setAttribute("user_point", m.getUserPoint());
 			out.println("<script>");
 			out.println("alert('포인트 충전이 완료되었습니다  !');");
 			out.println("location='member_infosetting';");
 			out.println("</script>");
-			
 		}
-		
 		return null;
 	}
 }	

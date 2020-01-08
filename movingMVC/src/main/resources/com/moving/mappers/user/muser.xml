@@ -125,6 +125,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="socialProfileUpload">
 		update social_profile set profile_image_path = #{profileImageUrl} where user_id = #{id}
 	</update>
+
+	<update id="updateReportCount">
+		update m_user set report_count=
+		(
+		select sum(cnt) sum_count from
+		(
+		select count(id) cnt from report where social_profile_id_to = 
+		(select id from social_profile where user_id= #{id})
+		UNION ALL
+		select count(id) cnt from report where user_id_to = #{id}
+		)
+		) where id = #{id}
+	</update>
 	
 	<!-- 소셜 아이디를 기준으로 회원 정보 찾기 -->
    <select id="findMUserAccount" resultType="mUserVO">

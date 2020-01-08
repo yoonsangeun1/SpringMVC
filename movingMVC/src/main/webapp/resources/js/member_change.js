@@ -134,27 +134,20 @@ function check_businessRegisterNo($mChange_businessRegisterNo) {
 	return pattern.test($mChange_businessRegisterNo);
 };
 
-/** 사업자 등록증 이미지 미리보기 */
-
-var sel_file2;
+//프로필 이미지 미리보기
 $(document).ready(function() {
-	$("#mChange_file").on("change", handleImgFileSelect);
-});
-function handleImgFileSelect(e) {
-	var files2 = e.target.files2;
-	var filesArr2 = Array.prototype.slice.call(files2);
-	filesArr2.forEach(function(f) {
-		if(!f.type.match("image.*")) {
-			alert("확장자는 이미지 확장자만 가능합니다.");
-			return;
-		}
-		sel_file2 = f;
-		var reader2 = new FileReader();
-		reader2.onload = function(e) {
-			$("#business_img").attr("src", e.target.result);
-		}
-		reader2.readAsDataURL(f);
+
+	$("#mChange_file").change(function(){
+		if(this.files && this.files[0]){
+			var reader = new FileReader;
+			reader.onload = function(data){
+				$("#business_img").attr("src", data.target.result).width(400).height(400);
+			}
+			reader.readAsDataURL(this.files[0]);
+		} 
 	});
-}
+});
+
+
 
 
