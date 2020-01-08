@@ -1,5 +1,51 @@
-update m_user set id=1 where nickname='관리자'
+select * from m_user where id=2
 select * from m_user
+		where id = (Select user_id from social_profile where id = 2)
+
+SELECT * FROM
+	 (SELECT ROW_NUMBER() OVER(ORDER BY P.ID DESC) rNum,
+	 P.id AS project_post_id, P.title, P.introduce, P.user_id, U.NICKNAME,
+	 P.register_date AS project_post_register_date, P.hit
+	FROM project_post P 
+	 LEFT OUTER JOIN m_user U ON P.USER_ID = U.ID 
+	 where U.nickname LIKE '%닉%'
+	 ORDER BY project_post_id DESC)
+	 WHERE rNum >=1
+	 AND rNum <=10
+
+	 SELECT 
+	 P.id AS project_post_id, P.title, P.introduce, P.user_id, U.NICKNAME,
+	 P.register_date AS project_post_register_date, P.hit, P.move_count,
+	 P.target_price, P.now_price, P.target_limit, P.left_limit, P.sponser_count, 
+	 P.comment_count
+	 FROM project_post P 
+	 LEFT OUTER JOIN m_user U ON P.user_id = U.id 
+	 WHERE ROWNUM = 1 AND status_code = 1
+	 ORDER BY move_count DESC 
+	 
+	 SELECT RD.* FROM
+	 (SELECT 
+	 P.id AS project_post_id, P.title, P.introduce, P.user_id, U.NICKNAME,
+	 P.register_date AS project_post_register_date, P.hit, P.move_count,
+	 P.target_price, P.now_price, P.target_limit, P.left_limit, P.sponser_count, 
+	 P.comment_count
+	 FROM project_post P 
+	 LEFT OUTER JOIN m_user U ON P.user_id = U.id 
+	 WHERE status_code = 1
+	 ORDER BY dbms_random.value
+	 ) RD
+	 WHERE rownum <=4
+	 
+	 
+	 alter table PROJECT_POST add (thumbnail_image varchar2(300))
+update PROJECT_POST set introduce = '제목젬고' where id=1
+update PROJECT_POST set target_price = 50 where id=1
+update PROJECT_POST set now_price = 30 where id=1
+update PROJECT_POST set move_count = 100 where id=4
+update PROJECT_POST set status_code = 1
+
+update m_user set id=1 where nickname='관리자'
+select * from PROJECT_POST
 select * from m_user
 update m_user set profile_image_url='../images/member_profile.png' where id=2
 update m_user set profile_image_url='default' where id=3
@@ -66,10 +112,11 @@ select * from m_comment where project_post_id=2;
 --프로젝트 게시글
 alter table PROJECT_POST modify (left_limit varchar2(50));
 alter table PROJECT_POST add (introduce varchar2(500));
-
+update PROJECT_POST set status_code=1
 INSERT INTO PROJECT_POST (id, user_id, title, introduce, content, business, 
-target_price, target_limit)
-VALUES (project_post_seq.nextval, 4, '제목이다.', '내용', '소개입니다아아아아아아아아아아아아', '슈박스', 10000, '2019-12-28');
+target_price, target_limit, code_no)
+VALUES (project_post_seq.nextval, 1, '제목이다.', '내용', '소개입니다아아아아아아아아아아아아', '슈박스',
+10000, '2020-02-28', 2000101);
 
 UPDATE PROJECT_POST set introduce='소개입니다아아아아아아아아아아아아' where id=1;
 SELECT * FROM PROJECT_POST;

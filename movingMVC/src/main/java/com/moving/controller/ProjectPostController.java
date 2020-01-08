@@ -25,31 +25,48 @@ public class ProjectPostController {
 
 	//펀딩 메인 리스트
 	@RequestMapping("project/list")
-	public String main(Model listP, ProjectPostVO projectPostVO, HttpServletRequest request) {
+	public String main(Model listP, 
+			ProjectPostVO projectPostVO, 
+			HttpServletRequest request) {
 		int page=1; 
+		int limit=9; //한 페이지에 보여지는 목록 개수
+		int category=Integer.parseInt(request.getParameter("category"));
+		//int category=Integer.parseInt(request.getParameter("category"));//카테고리 받아오기
+		projectPostVO.setCodeNo(category);
+		String findName=request.getParameter("findName");
+		String findField=request.getParameter("findField");
+		//검색어, 검색 필드
+
 		if(request.getParameter("page")!=null) {
 			page=Integer.parseInt(request.getParameter("page"));
 		}
-		
-		int limit=12; //한 페이지에 보여지는 목록 개수
-		int category=Integer.parseInt(request.getParameter("category"));//카테고리 받아오기
-		if(category == 20001) {
-			limit=12;
+		if(category == 20001 && findField == null && findName == null) {//전체 목록이고 검색을 하지 않았을 경우 페이징
+			limit=3;
 		}
-		String findName=request.getParameter("find_name");
-		String findField=request.getParameter("find_field");
-		//검색어, 검색 필드
+		
+		
 		projectPostVO.setFindField(findField);
 		projectPostVO.setFindName("%"+findName+"%");
 		
+		projectPostVO.setStartRow((page-1)*9+1); //시작행번호
+		projectPostVO.setEndRow(projectPostVO.getStartRow()+limit-1);//끝행번호
+		
+		if(category == 20001 && findField == null && findName == null) {//전체 목록이고 검색을 하지 않았을 경우 페이징
+			projectPostVO.setStartRow((page-1)*3+1); //시작행번호
+			projectPostVO.setEndRow(projectPostVO.getStartRow()+limit-1);//끝행번호
+		}
+		
 		//검색 전, 후 레코드 개수
 		int totalCount=this.projectPostService.selectListCount(projectPostVO);
-		
-		projectPostVO.setStartRow((page-1)*10+1);//시작 행 번호
-		projectPostVO.setEndRow(projectPostVO.getStartRow()+limit-1);//끝 행 번호
-		
 		//검색 전, 후 레코드 목록
 		List<ProjectPostVO> plist=this.projectPostService.selectProjectList(projectPostVO);
+
+		//메인에 띄울 move 수 가장 많은 프로젝트 하나, 
+		ProjectPostVO bestOne=this.projectPostService.selectBestprojectInfo();
+		//랜덤 프로젝트 띄우기
+		List<ProjectPostVO> plist2=this.projectPostService.selectRandomProjectList(20);
+			
+			
 		
 		//총 페이지 수
 		int maxpage=(int)((double)totalCount/limit+0.95);
@@ -61,7 +78,9 @@ public class ProjectPostController {
 			endpage=startpage+10-1;
 		
 		
+		listP.addAttribute("bestOne",bestOne);
 		listP.addAttribute("plist",plist);
+		listP.addAttribute("plist2",plist2);
 		listP.addAttribute("page", page);
 		listP.addAttribute("startpage", startpage);
 		listP.addAttribute("endpage", endpage);
@@ -71,7 +90,7 @@ public class ProjectPostController {
 		listP.addAttribute("findName", findName);
 		listP.addAttribute("category", category);
 		
-		if(category == 20001 || category == 0) {
+		if(category == 20001 && findField == null && findName == null) {
 			return "project/project_main_list";
 		}else {
 			return "project/project_categoryList";
@@ -124,7 +143,7 @@ public class ProjectPostController {
 		}else {
 			String userLv=(String)session.getAttribute("user_lv");
 			
-			if(!userLv.equals("제작사")) {
+			if(!(userLv.equals("제작사") || userLv.equals("관리자"))) {
 				out.println("<script>");
 				out.println("alert('일반 회원이신가요? 제작사 회원으로 전환해주세요!');");
 				out.println("location='/moving.com/member_change';");
@@ -173,7 +192,7 @@ public class ProjectPostController {
 		}else {
 			String userLv=(String)session.getAttribute("user_lv");
 			
-			if(!userLv.equals("제작사")) {
+			if(!(userLv.equals("제작사") || userLv.equals("관리자"))) {
 				out.println("<script>");
 				out.println("alert('일반 회원이신가요? 제작사 회원으로 전환해주세요!');");
 				out.println("location='/moving.com/member_change';");

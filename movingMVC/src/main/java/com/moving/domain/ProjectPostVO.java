@@ -21,6 +21,7 @@ public class ProjectPostVO {		/* 프로젝트 게시글 */
 	private int commentCount; 		/* 댓글_개수 */
 	private int moveCount; 			/* 무브_개수 */
 	private String registerDate; 	/* 등록_일 */
+	private String thumbnailImage; 	/* 썸네일 이미지 */
 
 	/* 페이징 관련변수(쪽나누기) */
 	private int startRow;			/* 시작행 번호 */
@@ -37,6 +38,13 @@ public class ProjectPostVO {		/* 프로젝트 게시글 */
 	private List<TagVO> tagVO;					 	/* 태그 VO */
 	private List<RewardVO> rewardVO;				/* 리워드 VO */
 	
+	
+	public String getThumbnailImage() {
+		return thumbnailImage;
+	}
+	public void setThumbnailImage(String thumbnailImage) {
+		this.thumbnailImage = thumbnailImage;
+	}
 	public int getId() {
 		return id;
 	}

@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.moving.dao.MUserDAO;
 import com.moving.dao.SocialDAO;
 import com.moving.domain.AttachedFileVO;
+import com.moving.domain.MUserVO;
 import com.moving.domain.ReportVO;
 import com.moving.domain.SocialMessageVO;
 import com.moving.domain.SocialPostVO;
@@ -17,6 +19,9 @@ import com.moving.domain.SocialProfileVO;
 public class SocialServiceImpl implements SocialService {
 	@Autowired
 	private SocialDAO socialDAO;
+	
+	@Autowired
+	private MUserDAO mUserDAO;
 
 //	@Autowired
 //	private AttachedFileDAO attachedFileDAO;
@@ -31,10 +36,13 @@ public class SocialServiceImpl implements SocialService {
 		return socialDAO.socialProfileInfoWithId(id);
 	}
 
-//	@Transactional
+	@Transactional
 	@Override
 	public void insertPost(SocialPostVO socialPostVO) {
 		this.socialDAO.insertPost(socialPostVO);
+		MUserVO m=mUserDAO.findMUserAccount(socialPostVO.getSocialId());	//소셜 아이디를 기준으로 id찾기
+		m.setUserPoint(50);						//포인트 저장
+		mUserDAO.pointCharge(m);				//포인트 높이기
 //		this.attachedFileDAO.insertAttachedFile();
 	}
 	
@@ -53,9 +61,13 @@ public class SocialServiceImpl implements SocialService {
 		return socialDAO.selectSocialPostOne(post_id);
 	}
 
+	@Transactional
 	@Override
 	public void insertSocialProfile(SocialProfileVO socialProfileVO) {
 		this.socialDAO.insertSocialProfile(socialProfileVO);
+		MUserVO m=mUserDAO.findMUserAccountById(socialProfileVO.getUserId());	//아이디를 기준으로 id찾기
+		m.setUserPoint(500);						//포인트 저장
+		mUserDAO.pointCharge(m);				//포인트 높이기
 	}
 
 	@Override
@@ -83,9 +95,13 @@ public class SocialServiceImpl implements SocialService {
 		this.socialDAO.updateInfo(s_pro);
 	}
 
+	@Transactional
 	@Override
 	public void insertSocialReport(ReportVO report) {
 		this.socialDAO.insertSocialReport(report);
+		MUserVO m=mUserDAO.findMUserAccount(report.getSocialProfileIdFrom());	//소셜 아이디를 기준으로 id찾기
+		m.setUserPoint(50);						//포인트 저장
+		mUserDAO.pointCharge(m);				//포인트 높이기
 	}
 
 	@Override

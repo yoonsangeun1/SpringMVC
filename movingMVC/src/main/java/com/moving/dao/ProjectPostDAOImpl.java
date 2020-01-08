@@ -131,5 +131,15 @@ public class ProjectPostDAOImpl implements ProjectPostDAO {
 	public void selectProjectReward(int projectPostId) {
 		sqlSession.insert("selectProjectReward", projectPostId);
 	}
+
+	@Override
+	public ProjectPostVO selectBestprojectInfo() {
+		return sqlSession.selectOne("selectBestprojectInfo");
+	}
+
+	@Override
+	public List<ProjectPostVO> selectRandomProjectList(int no) {
+		return sqlSession.selectList("selectRandomProjectList", no);
+	}
 	
 }

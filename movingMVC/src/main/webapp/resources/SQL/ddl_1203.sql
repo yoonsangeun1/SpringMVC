@@ -1,8 +1,8 @@
 /* test */
-CREATE SEQUENCE test 
+CREATE SEQUENCE report_seq
 	INCREMENT BY 1
 	START WITH 1;
-
+	
 /* 코드_유형_마스터_시퀀스 */
 CREATE SEQUENCE code_type_master_seq 
 	INCREMENT BY 1

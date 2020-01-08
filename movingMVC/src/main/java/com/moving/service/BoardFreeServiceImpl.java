@@ -8,6 +8,8 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.moving.dao.BoardFreeDAO;
+import com.moving.dao.MUserDAO;
+import com.moving.domain.MUserVO;
 import com.moving.domain.NormalPostVO;
 
 @Service
@@ -15,6 +17,9 @@ public class BoardFreeServiceImpl implements BoardFreeService {
 
 	@Autowired
 	private BoardFreeDAO boardFreeDao;
+	
+	@Autowired
+	private MUserDAO mUserDAO;
 
 	@Override
 	public int getTotalCount(NormalPostVO bf) {
@@ -26,9 +31,13 @@ public class BoardFreeServiceImpl implements BoardFreeService {
 		return this.boardFreeDao.getBoardFreeList(bf);
 	}//게시물 목록들을 가져옴
 
+	@Transactional
 	@Override
 	public void inBoardFree(NormalPostVO bf) {
 		this.boardFreeDao.inBoardFree(bf);
+		MUserVO m=this.mUserDAO.findMUserAccountById(bf.getUserId());//유저 정보 가져오기
+		m.setUserPoint(50);	//포인트 저장
+		this.mUserDAO.pointCharge(m);	//포인트 up
 	}//게시물 등록
 
 	@Transactional(isolation=Isolation.READ_COMMITTED)

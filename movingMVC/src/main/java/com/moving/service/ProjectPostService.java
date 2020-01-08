@@ -37,6 +37,9 @@ public interface ProjectPostService {
 	void insertProjectReward(RewardVO rewardVO);
 
 	void selectProjectReward(int projectPostId);
+	
+	ProjectPostVO selectBestprojectInfo();//추천순 가장 많은 프로젝트 하나 띄우기
+	List<ProjectPostVO> selectRandomProjectList(int no);//랜덤으로 프로젝트 리스트 띄우기 
 
 
 }

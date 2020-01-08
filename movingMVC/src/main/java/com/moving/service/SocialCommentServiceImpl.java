@@ -6,8 +6,10 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.moving.dao.MUserDAO;
 import com.moving.dao.SocialCommentDAO;
 import com.moving.domain.MCommentVO;
+import com.moving.domain.MUserVO;
 import com.moving.domain.SocialPostVO;
 
 @Service
@@ -15,11 +17,17 @@ public class SocialCommentServiceImpl implements SocialCommentService {
 
 	@Autowired
 	private SocialCommentDAO socialCommentDAO;
+
+	@Autowired
+	private MUserDAO mUserDAO;
 	
 	@Override
 	public void insertProjectComment(MCommentVO mCommentVO) {
 		socialCommentDAO.insertProjectComment(mCommentVO);			//댓글 저장
 		socialCommentDAO.updateProjectCommentCountOne(mCommentVO);		//댓글 개수 높이기
+		MUserVO m=mUserDAO.findMUserAccount(mCommentVO.getSocialProfileIdFrom());	//소셜 아이디를 기준으로 id찾기
+		m.setUserPoint(10);						//포인트 저장
+		mUserDAO.pointCharge(m);				//포인트 높이기
 	}
 
 	@Override

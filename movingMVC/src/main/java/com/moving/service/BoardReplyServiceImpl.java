@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.moving.dao.BoardReplyDAO;
+import com.moving.dao.MUserDAO;
+import com.moving.domain.MUserVO;
 import com.moving.domain.NormalPostVO;
 import com.moving.domain.ReplyPostVO;
 
@@ -16,6 +18,9 @@ public class BoardReplyServiceImpl implements BoardReplyService {
 	@Autowired
 	private BoardReplyDAO boardReplyDao;
 
+	@Autowired
+	private MUserDAO mUserDAO;
+	
 	@Override
 	public int getTotalCount(ReplyPostVO bq) {
 		return this.boardReplyDao.getTotalCount(bq);
@@ -26,9 +31,13 @@ public class BoardReplyServiceImpl implements BoardReplyService {
 		return this.boardReplyDao.getBoardQnaList(bq);
 	}
 
+	@Transactional
 	@Override
 	public void inBoardQna(ReplyPostVO bq) {
 		this.boardReplyDao.inBoardQna(bq);
+		MUserVO m=this.mUserDAO.findMUserAccountById(bq.getUserId());//유저 정보 가져오기
+		m.setUserPoint(50);	//포인트 저장
+		this.mUserDAO.pointCharge(m);	//포인트 up
 	}
 
 	@Transactional

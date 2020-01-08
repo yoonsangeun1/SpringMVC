@@ -166,6 +166,36 @@
 					<%-- 댓글이 있다면 --%>
 					<ul id="replies"
 						style="margin-top: 7px; list-style: none; align-items: center;">
+						<c:if test="${!empty projectInfo.mCommentVO }">
+							<c:forEach var="comment" items="${projectInfo.mCommentVO }">
+								<li class='replies' data-commentId='${comment.id }' style="align-items: center;">
+									<div class='comment_no' style='display:none'>${comment.id}</div>
+									<input type="hidden" class="id" value="${comment.id }">
+									<c:if test="${ comment.mUserVO.profileImageUrl != 'default'}">
+										<img class="SNS_Content_user_img" class="SNS_Profile_Picture"
+											src="${comment.mUserVO.profileImageUrl }" width="30" height="30" alt="">
+									</c:if> 
+									<c:if test="${comment.mUserVO.profileImageUrl == 'default'}">
+										<img class="SNS_Content_user_img" class="SNS_Profile_Picture"
+											src="${pageContext.request.contextPath}/resources/images/member_profile.png" width="30" height="30" alt="">
+									</c:if>
+									<p><a href="/moving.com/member_mypage?mid=${comment.userIdFrom}">
+									${comment.mUserVO.nickname }</a></p>
+									<p class='comment_content_${comment.id }'>${comment.content}</p>
+									<input name='comment_txt_${comment.id }' class='comment_txt' value='${comment.content }' style='display: none;'>
+									<c:set var="sessionId" value="${id }"></c:set>
+									<c:if test="${comment.userIdFrom == sessionId }">
+									<button type="button" name="modify_${comment.id}" class="modify SNS_Comment_Write_Button" >수정</button>
+									<button type="button" name="modify_ok_${comment.id}" class="modify_ok SNS_Comment_Write_Button"  style='display: none;'>수정 완료</button>
+									<button type="button" name="delete_${comment.id}" class="delete SNS_Comment_Write_Button" >삭제</button>
+									</c:if>
+									</li>
+							</c:forEach>
+						</c:if>
+						<c:if test="${empty projectInfo.mCommentVO}">
+							<li><p>작성된 댓글이 아직 없습니다</p></li>
+						</c:if>
+						
 						<%-- <c:if test="${!empty projectInfo.mCommentVO }">
 							<c:forEach var="comment" items="${projectInfo.mCommentVO }">
 								<li class="replies_li" style="align-items: center;">

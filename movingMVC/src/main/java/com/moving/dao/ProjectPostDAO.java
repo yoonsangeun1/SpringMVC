@@ -54,5 +54,9 @@ public interface ProjectPostDAO {
 	public void insertProjectReward(RewardVO rewardVO);
 
 	public void selectProjectReward(int projectPostId);
+
+	ProjectPostVO selectBestprojectInfo();
+
+	List<ProjectPostVO> selectRandomProjectList(int no);
 	
 }

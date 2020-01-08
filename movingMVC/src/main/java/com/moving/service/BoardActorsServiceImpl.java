@@ -8,6 +8,8 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.moving.dao.BoardActorsDAO;
+import com.moving.dao.MUserDAO;
+import com.moving.domain.MUserVO;
 import com.moving.domain.ProfilePostVO;
 
 @Service
@@ -16,6 +18,9 @@ public class BoardActorsServiceImpl implements BoardActorsService {
 	@Autowired
 	private BoardActorsDAO boardActorsDao;
 
+	@Autowired
+	private MUserDAO mUserDAO;
+	
 	@Override
 	public int getTotalCount(ProfilePostVO ba) {
 		return this.boardActorsDao.getTotalCount(ba);
@@ -26,9 +31,13 @@ public class BoardActorsServiceImpl implements BoardActorsService {
 		return this.boardActorsDao.getBoardActorsList(ba);
 	}
 
+	@Transactional
 	@Override
 	public void inBoardActors(ProfilePostVO ba) {
 		this.boardActorsDao.inBoardActors(ba);
+		MUserVO m=this.mUserDAO.findMUserAccountById(ba.getUserId());//유저 정보 가져오기
+		m.setUserPoint(50);	//포인트 저장
+		this.mUserDAO.pointCharge(m);	//포인트 up
 	}
 
 	@Transactional(isolation=Isolation.READ_COMMITTED)

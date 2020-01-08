@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.moving.dao.MUserDAO;
 import com.moving.dao.ProjectPostDAO;
 import com.moving.domain.MCommentVO;
+import com.moving.domain.MUserVO;
 import com.moving.domain.ProjectPostVO;
 import com.moving.domain.RewardVO;
 
@@ -17,6 +19,9 @@ public class ProjectPostServiceImpl implements ProjectPostService {
 
 	@Autowired
 	private ProjectPostDAO projectPostDAO;
+	
+	@Autowired
+	private MUserDAO mUserDAO;
 
 	@Transactional
 	@Override
@@ -32,6 +37,10 @@ public class ProjectPostServiceImpl implements ProjectPostService {
 	public void insertProjectComment(MCommentVO mCommentVO) {
 		projectPostDAO.insertProjectComment(mCommentVO);			//댓글 저장
 		projectPostDAO.updateProjectCommentCountOne(mCommentVO);		//댓글 개수 높이기
+		MUserVO m=new MUserVO();
+		m.setId(mCommentVO.getUserIdFrom());	//id 저장
+		m.setUserPoint(10);						//포인트 저장
+		mUserDAO.pointCharge(m);				//포인트 높이기
 	}//insertProjectComment
 
 	@Override
@@ -108,5 +117,15 @@ public class ProjectPostServiceImpl implements ProjectPostService {
 	@Override
 	public void selectProjectReward(int projectPostId) {
 		projectPostDAO.selectProjectReward(projectPostId);
+	}
+
+	@Override
+	public ProjectPostVO selectBestprojectInfo() {
+		return projectPostDAO.selectBestprojectInfo();
+	}
+
+	@Override
+	public List<ProjectPostVO> selectRandomProjectList(int no) {
+		return projectPostDAO.selectRandomProjectList(no);
 	}
 }
