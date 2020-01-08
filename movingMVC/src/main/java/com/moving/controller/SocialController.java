@@ -440,7 +440,16 @@ public class SocialController {
 		session=request.getSession();//세션 값 전체를 가져온다.
 		
 		SocialProfileVO getSocial_id=(SocialProfileVO) session.getAttribute("sessionSocial");
-		int user_id=getSocial_id.getUserId();
+		int user_id=0;
+		
+		if(page_num==0) {
+			user_id=getSocial_id.getUserId();
+		}else{
+			user_id=getSocial_id.getId();
+		}
+		
+		System.out.println(user_id);
+		System.out.println(socialId);
 		
 		if(user_id==socialId) {
 			this.socialService.deletePost(id);
@@ -670,5 +679,18 @@ public class SocialController {
 			
 			this.socialService.insertSocialReport(report);
 			return "redirect:/social/messenger?socialIdFrom="+sendId+"&socialIdTo=0";
+		}
+		
+		@RequestMapping(value="/social/add_move")
+		public String social_add_move(
+				int social_id,
+				int post_num,
+				int page_num
+				) {
+				this.socialService.addMoveCount(post_num);//무브 카운트 +
+				
+				if(page_num==0)	return "redirect:/social/main";
+				else if(page_num==1) return "redirect:/social/profile?id="+social_id;
+				else 	return null;
 		}
 }

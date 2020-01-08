@@ -18,7 +18,14 @@ public class SocialPostVO {
 	private SocialProfileVO socialProfileVO;
 	private List<AttachedFileVO> attachedFileVO;
 	private List<MCommentVO> mCommentVO;
+	private MoveVO moveVO;
 	
+	public MoveVO getMoveVO() {
+		return moveVO;
+	}
+	public void setMoveVO(MoveVO moveVO) {
+		this.moveVO = moveVO;
+	}
 	public int getId() {
 		return id;
 	}

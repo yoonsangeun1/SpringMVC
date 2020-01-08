@@ -39,4 +39,8 @@ public interface SocialDAO {
 	List<SocialMessageVO> getTalkBalloon(SocialMessageVO message_listVO);
 
 	SocialMessageVO selectLastMessage(SocialMessageVO message_listVO);
+
+	SocialPostVO selectMoveCount(int post_num);
+
+	void addMoveCount(int post_num);
 }

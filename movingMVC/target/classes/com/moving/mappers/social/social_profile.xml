@@ -166,6 +166,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		values
 		(report_seq.nextval,#{title},#{content},#{socialProfileIdFrom},#{socialProfileIdTo})
 	</insert>
+	<!-- 무브 정보 검색 -->
+	<!-- 무브 카운트만 검색 -->
+	<select id="selectMoveCount">
+		SELECT move_count FROM social_post WHERE id=#{userId}
+	</select>
+	
+	<!-- 무브 카운트 -->
+	<update id="addMoveCount">
+		UPDATE social_post SET move_count=move_count+1
+ 		WHERE id=#{id}
+	</update>
+	<insert id="insertMoveVO">
+		
+	</insert>
+	<!-- 무브 취소 -->
+	<update id="deMoveCount">
+		UPDATE social_post SET move_count=move_count-1
+ 		WHERE id=#{id}
+	</update>
+	<delete id="deleteMoveVO">
+	
+	</delete>
+	
 	<!-- ==================================<구분선>====================================== -->
 	<!-- 회원에 해당하는  게시글 검색 (게시글 + 댓글 + 작성자) -->
 	<select id="selectSocialPostInfo" resultMap="socialPostInfo">

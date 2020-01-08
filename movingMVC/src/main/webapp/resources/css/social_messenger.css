@@ -191,28 +191,34 @@
 }
 #SNS_Messenger_Text_U{
 	width: auto;
-	height:33px;
+	min-height:33px;
+	height:auto;
 	border-radius: 10px;
 	display: inline-block;
     position: relative;
     margin: 5px 15px 10px 5px;
-	padding-top: 14px;
-	padding-left: 8px;
+	padding-top: 6px;
+	padding-bottom:6px;
+	padding-left: 11px;
 	padding-right: 8px;
 	background: #8bdff1;
+	line-height: 23px;
 }
 #SNS_Messenger_Text_M{
 	width: auto;
-	height:33px;
+	min-height:33px;
+	height:auto;
 	border-radius: 10px;
 	display: inline-block;
     position: relative;
     background: #d4d4d4;
     margin: 5px 15px 10px 5px;
-	padding-top: 14px;
-	padding-left: 8px;
+	padding-top: 6px;
+	padding-bottom:6px;
+	padding-left: 11px;
 	padding-right: 8px;
 	background: #fdacb0;
+	line-height: 23px;
 }
 #SNS_Messenger_Ul{
 	list-style: none;

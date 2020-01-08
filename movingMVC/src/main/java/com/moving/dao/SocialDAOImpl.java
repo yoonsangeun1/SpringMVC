@@ -93,4 +93,14 @@ public class SocialDAOImpl implements SocialDAO {
 	public SocialMessageVO selectLastMessage(SocialMessageVO message_listVO) {
 		return this.sqlsession.selectOne("selectLastMessage",message_listVO);
 	}
+
+	@Override
+	public SocialPostVO selectMoveCount(int post_num) {
+		return this.sqlsession.selectOne("selectMoveCount",post_num);
+	}
+
+	@Override
+	public void addMoveCount(int post_num) {
+		this.sqlsession.update("addMoveCount",post_num);
+	}
 }

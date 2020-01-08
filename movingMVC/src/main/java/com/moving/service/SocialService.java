@@ -40,4 +40,8 @@ public interface SocialService {
 
 	SocialMessageVO selectLastMessage(SocialMessageVO message_listVO);
 
+	SocialPostVO selectMoveCount(int post_num);
+
+	void addMoveCount(int post_num);
+
 }

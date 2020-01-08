@@ -113,4 +113,14 @@ public class SocialServiceImpl implements SocialService {
 	public SocialMessageVO selectLastMessage(SocialMessageVO message_listVO) {
 		return this.socialDAO.selectLastMessage(message_listVO);
 	}
+
+	@Override
+	public SocialPostVO selectMoveCount(int post_num) {
+		return this.socialDAO.selectMoveCount(post_num);
+	}
+
+	@Override
+	public void addMoveCount(int post_num) {
+		this.socialDAO.addMoveCount(post_num);
+	}
 }

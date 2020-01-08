@@ -21,10 +21,10 @@
 				<c:if test="${'default' != s_pro.backgroundImagePath}">
 					<div id="SNS_Profile_Background" style="background-image:url('${s_pro.backgroundImagePath}')">
 				</c:if>
-					<c:if test="${'default' != profile_image_url}">					<!-- 회원 이미지가 없을 경우 기본 이미지로 설정 -->
-						<img id="SNS_Profile_Photo" src="${profile_image_url}">
+					<c:if test="${'default' != s_pro.profileImagePath}">					<!-- 회원 이미지가 없을 경우 기본 이미지로 설정 -->
+						<img id="SNS_Profile_Photo" src="${s_pro.profileImagePath}">
 					</c:if>
-					<c:if test="${'default' == profile_image_url}">
+					<c:if test="${'default' == s_pro.profileImagePath}">
 						<img id="SNS_Profile_Photo" src="${pageContext.request.contextPath}/resources/images/member_profile.png">
 					</c:if>
 					<div id="SNS_Profile_Title_Name">
@@ -122,11 +122,11 @@
 							<input type="hidden" id="id" value="${s_post.id }">
 							<input type="hidden" id="socialId" value="${s_pro.id }">
 								<div class="SNS_Profile_Post">
-									<c:if test="${'default' != profile_image_url}">
+									<c:if test="${'default' != s_pro.profileImagePath}">
 										<img class="SNS_Content_user_img"
-											src="${profile_image_url}" width="40" height="40" alt="">
+											src="${s_pro.profileImagePath}" width="40" height="40" alt="">
 									</c:if>
-									<c:if test="${'default' == profile_image_url}">
+									<c:if test="${'default' == s_pro.profileImagePath}">
 										<img class="SNS_Content_user_img"
 											src="${pageContext.request.contextPath}/resources/images/member_profile.png" width="40" height="40"
 											alt="">
@@ -188,7 +188,7 @@
 										${s_post.content}<br />
 										<div class="SNS_Cont_Move">${s_post.moveCount}명이좋아합니다!</div>
 										<div class="SNS_Cont_Option">
-											<div class="SNS_Cont_Option_Move" >
+											<div class="SNS_Cont_Option_Move" onclick="location='/moving.com/social/add_move?social_id=${sessionSocial.id}&post_num=${s_post.id}&page_num=1';">
 											<!-- <input type="file" value="asdf" onchange="getCommentList()"> -->
 											무브!</div>
 											<input class="SNS_Cont_Option_Funding" type="button"
