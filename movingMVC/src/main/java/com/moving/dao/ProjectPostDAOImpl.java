@@ -141,5 +141,15 @@ public class ProjectPostDAOImpl implements ProjectPostDAO {
 	public List<ProjectPostVO> selectRandomProjectList(int no) {
 		return sqlSession.selectList("selectRandomProjectList", no);
 	}
+
+	@Override
+	public void deleteprojectPost(int id) {
+		sqlSession.delete("deleteProject", id);
+	}
+
+	@Override
+	public void updateProjectReward(RewardVO rewardVO) {
+		sqlSession.update("updateProjectReward", rewardVO);
+	}
 	
 }

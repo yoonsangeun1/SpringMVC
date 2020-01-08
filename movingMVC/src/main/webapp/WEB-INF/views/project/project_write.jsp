@@ -31,17 +31,19 @@
 		
 		<!-- 본문 내용 : 기본 정보 -->
 		<div id="fWrite_cont" class="menu-option on">
-		<form method="post" action="/moving.com/project/write_ok?id=${projectPostVO.id }" onsubmit="">
+		<form method="post" action="/moving.com/project/write_ok?id=${projectPostVO.id }" 
+		onsubmit="" enctype="multipart/form-data">
 			<table border="1" id="fWrite_cont_table" cellspacing="0">
-			
+				
 				<tr>
 					<td id="fWrite_cont_no">프로젝트 번호<br/>
 					<p style="font-weight: initial;" >
 					담당자와 소통은 프로젝트 번호로 진행됩니다.
 					</p>
 					</td>
-					
 					<td>
+					<input type="hidden" name="id" value="${projectPostVO.id }">
+					<input type="hidden" name="userId" value="${sessionUser.id }">
 					프로젝트 번호 : ${projectPostVO.id }
 					<br/>
 						http://localhost:8084/moving.com/project/content?id=${projectPostVO.id }로 프로젝트 개설 이후 접근 가능합니다. 
@@ -63,6 +65,43 @@
 					<td>
 					<input type="text" id="phone" name="phone" placeholder="전화 번호를 입력하세요" value="${phone }" size="50"/> 
 					<input type="button" id="checkPhone" name="checkPhone" value="인증하기" />
+					</td>
+				</tr>
+				
+				<tr>
+				 <!-- <form method="post" action="/moving.com/project/write_image_ok"
+ 					onsubmit="" enctype="multipart/form-data"> -->
+					<td id="fWrite_cont_image">대표 이미지<br/>
+					<p style="font-weight: initial;">메이커와 리워드가 함께 있거나,
+					 프로젝트의 성격이 한눈에 드러나는 사진이 좋습니다. <a href="#">가이드</a>를확인하세요.</p>
+					</td>
+					
+					<td>
+					 <div class="select_img">
+					 <c:if test="${!empty projectPostVO.thumbnailImage  }">
+					 <img src="${projectPostVO.thumbnailImage}" width="370" height="220"/>
+					 </c:if>
+					 <c:if test="${empty projectPostVO.thumbnailImage  }">
+					 <img src="../resources/images/noimage.gif" width="370" height="220"/>
+					 </c:if>
+					 </div>
+					<input type="file" name="thumbnailImage" id="titleImg"  />
+				       <script> //파일 업로드 시 해당 화면에 바로 띄워 지게 해줌.
+						 $("#titleImg").change(function(){
+							if(this.files && this.files[0]){
+								var reader = new FileReader;
+								reader.onload = function(data){
+									$(".select_img img").attr("src", data.target.result).width(370).height(220);
+								}
+								reader.readAsDataURL(this.files[0]);
+							} 
+						 });
+						 </script>
+						<ul  style="margin-left:13px;">
+							<li>사이즈: 가로 120px 세로 675px</li>
+							<li>용량: 3MB 미만</li>
+							<li>텍스트 및 로고 삽입 금지</li>
+						</ul>
 					</td>
 				</tr>
 				
@@ -117,17 +156,12 @@
 					<p style="font-weight: initial;">마감일 자정 기준 목표금액 미달성 시, 펀딩은 취소됩니다. (리워드 평균 목표금액 : 300만원) <p>
 					</td>
 					
-					<td>
-					<input name="targetAmount" id="targetAmount" size="50" placeholder="목표 금액을 입력해주세요" />
-					</td>
-					
 					<c:if test="${empty projectPostVO.targetPrice }">
 					<td>
-					<input name="targetPrice" id="goalMoney" size="20" /> 원
+					<input name="targetPrice" id="goalMoney" size="20" size="50" placeholder="목표 금액을 입력해주세요"  /> 원
 					</td>
 					</c:if>
-					
-					<c:if test="${!empty projectPostVO.introduce }">
+					<c:if test="${!empty projectPostVO.targetPrice }">
 					<td>
 					<input name="targetPrice" id="goalMoney" size="20" value="${projectPostVO.targetPrice }"/> 원
 					</td>
@@ -135,36 +169,38 @@
 				</tr>
 				
 				<tr>
-					<td id="fWrite_cont_image">대표 이미지<br/>
-					<p style="font-weight: initial;">메이커와 리워드가 함께 있거나,
-					 프로젝트의 성격이 한눈에 드러나는 사진이 좋습니다. <a href="#">가이드</a>를확인하세요.</p>
-					</td>
-					
-					<td>
-					<input type="file" name="thumbnailPath" id="titleImg" />
-						<ul  style="margin-left:13px;">
-							<li>사이즈: 가로 120px 세로 675px</li>
-							<li>용량: 3MB 미만</li>
-							<li>텍스트 및 로고 삽입 금지</li>
-						</ul>
-					</td>
-				</tr>
-
-				<tr>
 					<td id="fWrite_cont_category">카테고리<br/>
 					<p style="font-weight: initial;">오픈 후, 노출될 카테고리를 선택해 주세요.</p>
 					</td>
 					<td><select name="codeNo">
-							<option value="2000101">범죄 &amp; 스릴러</option>
-							<option value="2000102">액션 &amp; 어드벤쳐</option>
-							<option value="2000103">다큐 &amp; 드라마/청춘</option>
-							<option value="2000104">역사 &amp; 시대극</option>
-							<option value="2000105">판타지 &amp; SF</option>
-							<option value="2000106">멜로 &amp; 로맨스</option>
-							<option value="2000107">코미디</option>
-							<option value="2000108">애니메이션</option>
-							<option value="2000109" selected>기타</option>
+							<c:if test="${!empty projectPostVO.codeNo}">
+							<option value="content"<c:if test="${projectPostVO.codeNo == 20001}">${'selected'}</c:if>>내용</option>
+							<option value="2000101"<c:if test="${projectPostVO.codeNo == 2000101}">${'selected'}</c:if>>범죄 &amp; 스릴러</option>
+							<option value="2000102"<c:if test="${projectPostVO.codeNo == 2000102}">${'selected'}</c:if>>액션 &amp; 어드벤쳐</option>
+							<option value="2000103"<c:if test="${projectPostVO.codeNo == 2000103}">${'selected'}</c:if>>다큐 &amp; 드라마/청춘</option>
+							<option value="2000104"<c:if test="${projectPostVO.codeNo == 2000104}">${'selected'}</c:if>>역사 &amp; 시대극</option>
+							<option value="2000105"<c:if test="${projectPostVO.codeNo == 2000105}">${'selected'}</c:if>>판타지 &amp; SF</option>
+							<option value="2000106"<c:if test="${projectPostVO.codeNo == 2000106}">${'selected'}</c:if>>멜로 &amp; 로맨스</option>
+							<option value="2000107"<c:if test="${projectPostVO.codeNo == 2000107}">${'selected'}</c:if>>코미디</option>
+							<option value="2000108"<c:if test="${projectPostVO.codeNo == 2000108}">${'selected'}</c:if>>애니메이션</option>
+							<option value="2000109"<c:if test="${projectPostVO.codeNo == 2000109}">${'selected'}</c:if>>기타</option>
+							</c:if>
 					</select></td>
+				</tr>
+				
+				<tr>
+					<th>
+						<dl>
+							<dt>프로젝트 종료일</dt>
+							<dd>프로젝트 진행 기간은 평균 30일입니다.</dd>
+						</dl>
+					</th>
+					<c:if test="${empty projectPostVO.targetLimit }">
+					<td><input type="date" name="targetLimit" /></td>
+					</c:if>
+					<c:if test="${!empty projectPostVO.targetLimit }">
+					<td><input type="date" name="targetLimit" value="${fn:substring(projectPostVO.targetLimit,0,10)  }" /></td>
+					</c:if>
 				</tr>
 				
 				<tr>
@@ -201,25 +237,15 @@
 
 				</tr>
 				
-				<tr>
-					<th>
-						<dl>
-							<dt>프로젝트 종료일</dt>
-							<dd>프로젝트 진행 기간은 평균 30일입니다.</dd>
-						</dl>
-					</th>
-					<c:if test="${empty projectPostVO.targetLimit }">
-					<td><input type="date" name="targetLimit" /></td>
-					</c:if>
-					<c:if test="${!empty projectPostVO.targetLimit }">
-					<td><input type="date" name="targetLimit" value="${fn:substring(projectPostVO.targetLimit,0,10)  }" /></td>
-					</c:if>
-				</tr>
+				
 				<tr height="50">
-					<th colspan="2"><input type="submit" value="저장하기" /> 
+					<th colspan="2"><input type="submit" value="저장하기" class="bActors_write_btn button
+       button_c9d8ce2 button_f12 button_p1024 button_r4"/> 
 					<input type="button" value="다음 단계로>" id="nextButton" 
-					data-tab="fWrite_reward" onclick="$('html, body').stop().animate({scrollTop : 0}, 500);" /> 
-						<input type="reset" value="초기화" /></th>
+					data-tab="fWrite_reward" onclick="$('html, body').stop().animate({scrollTop : 0}, 500);" class="bActors_write_btn button
+       button_c9d8ce2 button_f12 button_p1024 button_r4"/> 
+						<input type="reset" value="초기화" class="bActors_write_btn button
+       button_c9d8ce2 button_f12 button_p1024 button_r4"/></th>
 				</tr>
 				
 			</table>
@@ -229,41 +255,91 @@
 		<!-- 본문 내용 : 리워드 -->
 		<div id="fWrite_reward" class="menu-option">
 			<%------첫번째 리워드------------------------------------------------ --%>
-			<c:if test="${!empty rewardVO}">
-				<c:forEach var="r" items="${rewardVO }">
-
-				</c:forEach>
+			<c:if test="${empty projectPostVO.rewardVO}">
+			리워드를 추가해주세요~
 			</c:if>
-			<div id="fWrite_reward1">
-				<form method="post" action="/moving.com/rewards/write" onsubmit="">
-					<input type="hidden" id="projectPostId" size="40" value="${projectPostVO.id }">
+			<c:if test="${!empty projectPostVO.rewardVO}">
+				<c:forEach var="r" items="${projectPostVO.rewardVO }">
+					<form method="post" action="/moving.com/rewards/edit_ok?id=${r.id }" onsubmit="">
+					<input type="hidden" name="projectPostId" value="${projectPostVO.id }">
+					<input type="hidden" name="id" value="${r.id }">
 					<table border="1">
 						<tr>
-							<th rowspan="8">리워드</th>
+							<th rowspan="8">리워드 ${r.id} -</th>
 							<td>금액</td>
-							<td><input type="number" name="price" size="12" /> 원 정렬순서 <input
-								name="no" size="5" /> <input type="button" name="close" value="x" /></td>
+							<td><input type="number" name="price" size="12" value="${r.price }" /> 원 
+							<%-- 정렬순서 <input
+								name="no" size="5" value="${r.no }"/> </td> --%>
 						</tr>
 						<tr>
 							<td>리워드 명</td>
-							<td><input name="reward" size="50" /></td>
+							<td><input name="title" size="50" value="${r.title }" /></td>
 
 						</tr>
 						<tr>
 							<td>상세 설명</td>
-							<td><textarea rows="10" cols="38"></textarea></td>
+							<td><textarea rows="10" cols="38" name="content">${r.content }</textarea></td>
 						</tr>
-						<!-- <tr>
-					<td>옵션 조건</td>
-					<td>
-						나중에
-					</td>
-				</tr> -->
+						
+						<tr>
+							<td>배송 조건</td>
+							<td>배송료 
+							<c:if test="${!empty r.deliveryFeeExistence }">
+							<input type="radio" name="deliveryFeeExistence" value="1"
+							<c:if test="${r.deliveryFeeExistence == 1}">${'checked'}</c:if> />2500원 
+							<input type="radio" name="deliveryFeeExistence" value="0" 
+							<c:if test="${r.deliveryFeeExistence == 0}">${'checked'}</c:if>
+							/>없음 
+							</c:if>
+							</td>
+						</tr>
+						<tr>
+							<td>제한 수량</td>
+							<td>리워드를 <input type="number" name="limitCount" size="12" value="${r.limitCount }" />개로
+								제한합니다.
+							</td>
+						</tr>
+						<tr>
+							<td>발송 시작일</td>
+							<td><input type="date" name="deliveryExpectDate" 
+							value="${fn:substring(r.deliveryExpectDate,0,10)  }" />
+							</td>
+						</tr>
+						<tr>
+							<th colspan="3"><input type="submit" name="save"
+								value="수정하기" /></th>
+						</tr>
+					</table>
+				</form>
+				</c:forEach>
+			</c:if>
+			
+				
+			<div id="fWrite_reward1">
+				<form method="post" action="/moving.com/rewards/write_ok?id=${projectPostVO.id }" onsubmit="">
+					<input type="hidden" name="projectPostId" value="${projectPostVO.id }">
+					<table border="1">
+						<tr>
+							<th rowspan="8">리워드 추가)</th>
+							<td>금액</td>
+							<td><input type="number" name="price" size="12" /> 원 
+							<!-- 정렬순서 <input
+								name="no" size="5" /> --><!--  <input type="button" name="close" /> --></td>
+						</tr>
+						<tr>
+							<td>리워드 명</td>
+							<td><input name="title" size="50" /></td>
+
+						</tr>
+						<tr>
+							<td>상세 설명</td>
+							<td><textarea rows="10" cols="38" name="content"></textarea></td>
+						</tr>
+					
 						<tr>
 							<td>배송 조건</td>
 							<td>배송료 <input type="radio" name="deliveryFeeExistence"
-								value="1" />2500원 <input type="radio"
-								name="deliveryFeeExistence" value="0" />없음 <!-- 					<input name="money" size="12" /> 나중에 -->
+								value="1" />2500원 <input type="radio" name="deliveryFeeExistence" value="0" />없음 <!-- 					<input name="money" size="12" /> 나중에 -->
 							</td>
 						</tr>
 						<tr>
@@ -274,61 +350,18 @@
 						</tr>
 						<tr>
 							<td>발송 시작일</td>
-							<td>
-								<!-- 나중에 -->
+							<td><input type="date" name="deliveryExpectDate" />
 							</td>
 						</tr>
 						<tr>
-							<th colspan="3"><input type="submit" name="save"
-								value="저장하기" /></th>
+							<th colspan="3">
+							<input type="submit" name="save" value="저장하기" /></th>
 						</tr>
 						<%-- 저장하기 누르면 ->유효성 검증 실행 -> 끝나면 -> 새 리워드 추가하기로 멘트 바뀜 -> 분기 줘야 함.--%>
 					</table>
 				</form>
 			</div>
-			<%------두번째 리워드------------------------------------------------ 
-				<tr>
-					<th rowspan="8">리워드</th>
-					<td>금액</td>
-					<td><input name="amount" size="12" /> 원 정렬순서 <input
-						name="orderno" size="5" /> <input type="button" name="close"
-						value="x" /></td>
-				</tr>
-				<tr>
-					<td>리워드 명</td>
-					<td><input name="reward" size="50" /></td>
-
-				</tr>
-				<tr>
-					<td>상세 설명</td>
-					<td><textarea rows="10" cols="38"></textarea></td>
-				</tr>
-				<tr>
-					<td>옵션 조건</td>
-					<td>
-						<!-- 나중에 -->
-					</td>
-				</tr>
-				<tr>
-					<td>배송 조건</td>
-					<td>배송료 <input name="money" size="12" /> <!-- 나중에 -->
-					</td>
-				</tr>
-				<tr>
-					<td>제한 수량</td>
-					<td>리워드를 <input name="money" size="12" />개로 제한합니다.
-					</td>
-				</tr>
-				<tr>
-					<td>발송 시작일</td>
-					<td>
-						<!-- 나중에 -->
-					</td>
-				</tr>
-				<tr>
-					<th colspan="3"><input type="button" name="save" value="저장하기" />
-					</th>
-				</tr>--%>
+			
 
 
 				<%---------------------------------------------------------------------------------------------- --%>
@@ -355,7 +388,7 @@
 							<dt>제작사 이름(법인명)</dt>
 						</dl>
 					</th>
-					<td><input name="director" id="director" size="20" /></td>
+					<td><input name="director" id="director" size="20" value="${business_name }"/></td>
 				</tr>
 				<tr>
 					<th>
@@ -364,7 +397,27 @@
 							<dd>메이커 프로필 영역에 노출되는 내용으로 로고나 메이커님의 사진을 넣어주세요.</dd>
 						</dl>
 					</th>
-					<td><input type="file" name="profileImg" id="profileImg" />
+					<td>
+					<div class="select_profile_img">
+					 <c:if test="${'default' !=  profile_image_url  }">
+					 <img src="${projectPostVO.thumbnailImage}" width="100" height="100"/>
+					 </c:if>
+					 <c:if test="${'default' == profile_image_url  }">
+					 <img src="${pageContext.request.contextPath}/images/member_profile.png" width="100" height="100" style="border-radius: 50px;"/>
+					 </c:if>
+					 </div>
+					<input type="file" name="profileImageUrl" id="profileImageUrl"  />
+				       <script> //파일 업로드 시 해당 화면에 바로 띄워 지게 해줌.
+						 $("#profileImageUrl").change(function(){
+							if(this.files && this.files[0]){
+								var reader = new FileReader;
+								reader.onload = function(data){
+									$(".select_profile_img img").attr("src", data.target.result).width(100).height(100);
+								}
+								reader.readAsDataURL(this.files[0]);
+							} 
+						 });
+						 </script>
 						3MB 이하의 사진만 사용할 수 있습니다.</td>
 				</tr>
 				<tr>
@@ -377,19 +430,19 @@
 					</td>
 					<td>
 						<ul>
-							<li><img src="../images/test.png" width="20" height="20"
-								alt="로고 이미지" />https://www.facebook.com/<input type="text"
-								name="link01" id="link01" size="20" /></li>
-							<li><img src="../images/test.png" width="20" height="20"
-								alt="로고 이미지" />https://twitter.com//<input type="text"
-								name="link02" id="link02" size="20" /></li>
-							<li><img src="../images/test.png" width="20" height="20"
-								alt="로고 이미지" />https://www.instagram.com/<input type="text"
-								name="link03" id="link03" size="20" /></li>
+							<li>
+							<a href="https://192.168.0.81:8084/moving.com/social/profile?id=${sessionSocial.id}">
+							무빙 SNS : https://192.168.0.81:8084/moving.com/social?id=${sessionSocial.id}</a></li>
+							<li>
+							<a href="https://192.168.0.81:8084/moving.com/member_mypage?mid=${sessionSocial.id}">
+							무빙 마이페이지 : https://192.168.0.81:8084/moving.com/member_mypage?mid=${sessionSocial.id}</a></li>
+							<li>
+							<a href="https://192.168.0.81:8084/moving.com/social/messenger?socialIdFrom=${sessionSocial.id}&socialIdTo=${sessionSocial.id}">
+							제작사에게 메시지 보내기 : https://192.168.0.81:8084/moving.com/social/messenger?socialIdFrom=${sessionSocial.id}&socialIdTo=${sessionSocial.id}</a></li>
 						</ul>
 					</td>
 				</tr>
-				<tr>
+				<!-- <tr>
 					<th>
 						<dl>
 							<dt>홈페이지 또는 블로그(선택)</dt>
@@ -402,7 +455,7 @@
 						<input name="link05" id="link05" size="30" /> <input
 						type="button" name="checkLink02" id="checkLink02" value="링크 확인" />
 					</td>
-				</tr>
+				</tr> -->
 				<tr>
 					<th>
 						<dl>
@@ -421,7 +474,7 @@
 							<dd>서포터 문의 시 소통이 가능하고, 프로젝트 페이지에 노출가능한 이메일을 입력해주세요.</dd>
 						</dl>
 					</th>
-					<td><input name="email" id="email" size="30" /></td>
+					<td><input name="email" id="email" size="30" value="${userid}"/></td>
 				</tr>
 
 				<tr>
@@ -431,9 +484,9 @@
 							<dd>서포터 문의 시 실시간 연락이 가능하고, 프로젝트 페이지에 노출가능한 대표번호를 입력해주세요.</dd>
 						</dl>
 					</td>
-					<td><input name="phone2" id="phone2" size="30" /></td>
+					<td><input name="phone2" id="phone2" size="30" value="${phone}" /></td>
 				</tr>
-				<tr>
+				<!-- <tr>
 					<th>
 						<dl>
 							<dt>카카오 플러스친구(선택)</dt>
@@ -445,7 +498,7 @@
 						<input name="phone4" id="phone4" size="30" /> 플러스친구 관리자센터 - 홍보하기에서
 						확인하실 수 있습니다.
 					</td>
-				</tr>
+				</tr> -->
 				<tr height="50">
 					<th colspan="2"><input type="submit" value="저장하기" /> <input
 						type="button" value="다음 단계로>" onclick="$('html, body').stop().animate({scrollTop : 0}, 500);" id="nextButton3"
@@ -454,7 +507,7 @@
 				</tr>
 			</table>
 		</div>
-		
+		</form>
 		<!-- 본문 내용 : 정산 -->
 		<div id="fWrite_calculate" class="menu-option">
 			<table border="1">

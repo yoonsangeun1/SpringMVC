@@ -58,5 +58,9 @@ public interface ProjectPostDAO {
 	ProjectPostVO selectBestprojectInfo();
 
 	List<ProjectPostVO> selectRandomProjectList(int no);
+
+	void deleteprojectPost(int id);
+
+	void updateProjectReward(RewardVO rewardVO);
 	
 }

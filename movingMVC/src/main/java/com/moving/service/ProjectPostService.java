@@ -34,12 +34,13 @@ public interface ProjectPostService {
 	int insertSelectProjectPost(ProjectPostVO projectPostVO);//초기 게시글 저장
 	void updateProjectPost(ProjectPostVO projectPostVO);//게시글 수정
 
-	void insertProjectReward(RewardVO rewardVO);
-
-	void selectProjectReward(int projectPostId);
+	void insertProjectReward(RewardVO rewardVO);//프로젝트 리워드 자료 넣기
+	void selectProjectReward(int projectPostId);//프로젝트 리워드 불러오기
+	void updateProjectReward(RewardVO rewardVO);//리워드 수정
 	
 	ProjectPostVO selectBestprojectInfo();//추천순 가장 많은 프로젝트 하나 띄우기
 	List<ProjectPostVO> selectRandomProjectList(int no);//랜덤으로 프로젝트 리스트 띄우기 
+	void deleteprojectPost(int id);//프로젝트 게시글 삭제
 
 
 }

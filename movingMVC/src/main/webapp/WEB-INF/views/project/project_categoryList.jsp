@@ -109,7 +109,7 @@
 			<c:if test="${!empty plist2 }">
 			<c:forEach var="p" items="${plist2 }" begin="1" end="9">
 			<div id="hover_container-category" style="float: left"
-					onclick="location.href='/moving.com/project/content?id=${p.id}&category=${category }&page=${page }';">
+					onclick="location.href='/moving.com/project/content?category=${category }&id=${p.id}&page=${page }&findField=${findField }&findName=${findName }';">
 					<img src="../images/funding01.PNG" width="370" height="222" alt="" />
 					<div class="hover_container-category-padding">
 						<h3>${p.title }
@@ -143,7 +143,7 @@
 		<c:if test="${!empty plist }">
 			<c:forEach var="p" items="${plist }">
 				<div id="hover_container-category" style="float: left"
-					onclick="location.href='/moving.com/project/content?id=${p.id}&category=${category }&page=${page }';">
+					onclick="location.href='/moving.com/project/content?id=${p.id}&category=${category }&page=${page }&findField=${findField }&findName=${findName }';">
 					<img src="../images/funding01.PNG" width="370" height="222" alt="" />
 					<div class="hover_container-category-padding">
 						<h3>${p.title }<c:if test="${p.commentCount != 0}">[${p.commentCount }]</c:if></h3>
@@ -191,7 +191,7 @@
   </c:if>
   
   	<c:if test="${a != page}"><%--현재쪽번호가 선택안된 경우 --%>
- 	 <a href="/moving.com/project/list?category=${category }&page=${a}">
+ 	 <a href="/moving.com/project/list?category=${category }&page=${a}&findField=${findField }&findName=${findName }">
   	   ${a}
  	 </a> 
   	</c:if>
@@ -202,7 +202,7 @@
 	</c:if>
 
 	<c:if test="${page<maxpage}">
-	 <a href="/moving.com/project/list?category=${category }&page=${page+1}">
+	 <a href="/moving.com/project/list?category=${category }&page=${page+1}&findField=${findField }&findName=${findName }">
 	  &gt;&gt;
 	 </a>
 	</c:if>

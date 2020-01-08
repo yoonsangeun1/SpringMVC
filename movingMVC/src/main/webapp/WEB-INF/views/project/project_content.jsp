@@ -6,7 +6,7 @@
 <%-- 펀딩 제목, 간략 소개글 --%>
 <div id="fCont_wrap" >
 	<div id="fCont_title" style="padding-top: 45px;">
-		<h3>${projectInfo.title }</h3>
+		<h3>${projectInfo.title } </h3>
 		<p>${projectInfo.introduce }</p>
 	</div>
 
@@ -101,6 +101,31 @@
 				</span>
 			</button>
 			<button class="fCont_menu" onclick="setScrollX(5000)">Communities</button>
+			
+			
+			<div id="bActors_cont_button"> <%--버튼 div --%>
+  		<c:if test="${id == projectInfo.userId }">
+	    <input type="button" value="수정" class="bActors_cont_btn button
+	       button_c9d8ce2 button_f12 button_p1024 button_r4"
+	    onclick="location='/moving.com/project/edit?id=${projectInfo.id}&category=${category}&page=${page}&findField=${findField}&findName=${findName}';" />
+	    <input type="reset" value="삭제" class="bActors_cont_btn button
+	       button_c9d8ce2 button_f12 button_p1024 button_r4"
+	    onclick="delconfirm()" />
+	    <input type="button" value="목록" class="bActors_cont_btn button
+	       button_c9d8ce2 button_f12 button_p1024 button_r4"
+	    onclick="location='/moving.com/project/list?category=${category}&page=${page}&findField=${findField}&findName=${findName}';" />
+    </c:if>
+    </div> <%--버튼 div --%>
+    <script>
+ function delconfirm(){
+	 if(confirm("삭제하시겠습니까?")){
+		 location.replace('/moving.com/project/delete?category=${category}&id=${projectInfo.id}&page=${page}');//yes
+	 }else{
+		 location.replace('/moving.com/project/content?category=${category}&id=${projectInfo.id}&page=${page}');//no
+	 }//if else
+ }//function delconfirm()
+</script>
+    
 		</div>
 	</div>
 

@@ -1,7 +1,23 @@
-select * from m_user where id=2
+update m_user set name='관리자', genre_01 = 'history', phone='010-3429-9141'
+
+where id=1
+select thumbnail_image from PROJECT_POST order by id desc
+select * from reward
+update reward set PROJECT_POST_id=47
+alter table m_user add(report_count number(38))
+
+select * from m_user where id=2 or id=1
 select * from m_user
 		where id = (Select user_id from social_profile where id = 2)
 
+		select * from(
+select id i, title t, content cont, register_date rd from project_post
+union all
+select id i, title t, content cont, register_date rd from reply_post 
+)
+update project_post set status_code=1
+order by rd desc
+select * from PROJECT_POST
 SELECT * FROM
 	 (SELECT ROW_NUMBER() OVER(ORDER BY P.ID DESC) rNum,
 	 P.id AS project_post_id, P.title, P.introduce, P.user_id, U.NICKNAME,

@@ -2053,7 +2053,8 @@ ALTER TABLE m_comment
 		)
 		REFERENCES project_post (
 			id
-		);
+		)
+		ON DELETE SET NULL;
 
 ALTER TABLE profile_post
 	ADD

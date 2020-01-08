@@ -10,6 +10,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 0-1) projectInfo resultMap 생성 -->
 	<resultMap type="projectPostVO" id="projectInfo">
 		<id property="id" column="project_post_id"/>
+		<id property="userId" column="user_id"/>
 		
 		<association property="mUserVO" javaType="com.moving.domain.MUserVO" 
 		column="user_id" select="selectProjectAuthor">
@@ -21,24 +22,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		
 		<collection property="rewardVO" 
 			javaType="java.util.ArrayList" ofType="rewardVO" 
-			column="id" select="selectProjectRewards"/>
+			column="project_post_id" select="selectProjectRewards"/>
 		<collection property="attachedFileVO" 
 			javaType="java.util.ArrayList" ofType="AttachedFileVO" 
-			column="id" select="selectProjectAttachedFiles"/>
+			column="project_post_id" select="selectProjectAttachedFiles"/>
 		<collection property="tagVO" 
 			javaType="java.util.ArrayList" ofType="tagVO" 
-			column="id" select="selectProjectTags"/>
+			column="project_post_id" select="selectProjectTags"/>
 		<collection property="mCommentVO" javaType="java.util.ArrayList" ofType="mCommentInfo"
-			 column="id" select="selectProjectComments"/>
+			 column="project_post_id" select="selectProjectComments"/>
 		<!-- 1:다 매핑 실행 결과 -->
 	</resultMap>
 	
 	<!-- 0-2) 프로젝트 정보 + 작성자 + 리워드 + 첨부파일 + 댓글 다 불러오기 -->
 	<!-- 0-2-1) 프로젝트 정보 -->
 	<select id="selectProjectInfo" resultMap="projectInfo">
-		SELECT id as project_post_id, title, content, introduce, 
+		SELECT id as project_post_id, title, content, introduce, user_id, code_no, 
 		business, target_price, now_price, target_limit, left_limit, 
-		sponser_count, hit, comment_count, move_count, register_date
+		sponser_count, hit, comment_count, move_count, register_date, thumbnail_image
 		FROM PROJECT_POST
 		WHERE ID = #{id}
 	</select>
@@ -240,7 +241,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectProjectList" resultMap="projectInfo2">
 	 SELECT * FROM
 	 (SELECT ROW_NUMBER() OVER(ORDER BY P.id DESC) rNum,
-	 P.id AS project_post_id, P.title, P.introduce, P.user_id, U.NICKNAME,
+	 P.id AS project_post_id, P.title, P.introduce, P.user_id, U.NICKNAME, P.code_no,
 	 P.register_date AS project_post_register_date, P.hit, P.move_count,
 	 P.target_price, P.now_price, P.target_limit, P.left_limit, P.sponser_count, 
 	 P.comment_count, P.thumbnail_image
@@ -295,7 +296,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- move 수 가장 많은 프로젝트 하나 검색 -->
 	<select id="selectBestprojectInfo" resultMap="projectInfo2">
 	 SELECT 
-	P.id AS project_post_id, P.title, P.introduce, P.user_id, U.NICKNAME,
+	P.id AS project_post_id, P.title, P.introduce, P.user_id, U.NICKNAME, P.code_no,
 	 P.register_date AS project_post_register_date, P.hit, P.move_count,
 	 P.target_price, P.now_price, P.target_limit, P.left_limit, P.sponser_count, 
 	 P.comment_count, P.thumbnail_image
@@ -309,10 +310,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectRandomProjectList" resultMap="projectInfo2" >
 	 SELECT RD.* FROM
 	 (SELECT 
-	 P.id AS project_post_id, P.title, P.introduce, P.user_id, U.NICKNAME,
+	 P.id AS project_post_id, P.title, P.introduce, P.user_id, U.NICKNAME, P.code_no,
 	 P.register_date AS project_post_register_date, P.hit, P.move_count,
 	 P.target_price, P.now_price, P.target_limit, P.left_limit, P.sponser_count, 
-	 P.comment_count
+	 P.comment_count, P.thumbnail_image 
 	 FROM project_post P 
 	 LEFT OUTER JOIN m_user U ON P.user_id = U.id 
 	 WHERE status_code = 1
@@ -392,7 +393,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		introduce = #{introduce},
 		target_price = #{targetPrice},
 		code_no = #{codeNo},
-		target_limit = #{targetLimit}
+		target_limit = #{targetLimit}, 
+		thumbnail_image = #{thumbnailImage}
 		WHERE 
 		id = #{id}
 	</update>
@@ -400,20 +402,38 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 프로젝트 리워드 저장 -->
 	<insert id="insertProjectReward">
 		INSERT INTO reward
-		(id, user_id, project_post_id, title, content, price, 
-		delivery_fee_existence, delivery_expect_date, limit_count, no)
+		(id,  project_post_id, title, content, price, 
+		delivery_fee_existence, delivery_expect_date, limit_count)
 		VALUES
-		(reward_seq.nextval, #{userId}, #{projectPostId}, #{title}, #{content}, 
-		#{price}, #{deliveryFeeExistence}, #{deliveryExpectDate}, #{limitCount}, #{no})
+		(reward_seq.nextval, #{projectPostId}, #{title}, #{content}, 
+		#{price}, #{deliveryFeeExistence}, #{deliveryExpectDate}, #{limitCount})
 		<selectKey keyProperty="id" resultType="Integer" order="AFTER">
 			SELECT reward_seq.currval FROM dual
 		</selectKey>
 	</insert>
 	
+	<!-- 프로젝트 리워드 수정 -->
+	<update id="updateProjectReward">
+		UPDATE reward
+		SET title = #{title}, 
+		content = #{content}, 
+		price = #{price},  
+		delivery_fee_existence = #{deliveryFeeExistence}, 
+		delivery_expect_date = #{deliveryExpectDate}, 
+		limit_count = #{limitCount}
+		WHERE id = #{id}
+	</update>
+	
 	<!-- 프로젝트 게시글 번호를 기준으로 리워드 모두 불러오기 -->
 	<select id="selectProjectReward" resultType="rewardVO">
 		SELECT * FROM reward
 		WHERE project_post_id = #{projectPostId}
-		ORDER BY no ASC
+		ORDER BY price ASC
 	</select>
+	
+	<!-- 프로젝트 게시글 번호를 기준으로 게시글 삭제 -->
+	<delete id="deleteProject" >
+		DELETE FROM project_post 
+		WHERE id = #{id}
+	</delete>
 </mapper>

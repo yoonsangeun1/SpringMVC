@@ -128,4 +128,14 @@ public class ProjectPostServiceImpl implements ProjectPostService {
 	public List<ProjectPostVO> selectRandomProjectList(int no) {
 		return projectPostDAO.selectRandomProjectList(no);
 	}
+
+	@Override
+	public void deleteprojectPost(int id) {
+		projectPostDAO.deleteprojectPost(id);
+	}
+
+	@Override
+	public void updateProjectReward(RewardVO rewardVO) {
+		projectPostDAO.updateProjectReward(rewardVO);
+	}
 }
