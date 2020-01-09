@@ -11,6 +11,7 @@ import com.moving.dao.SocialDAO;
 import com.moving.domain.AttachedFileVO;
 import com.moving.domain.MUserVO;
 import com.moving.domain.MoveVO;
+import com.moving.domain.ProfilePostVO;
 import com.moving.domain.ReportVO;
 import com.moving.domain.SocialMessageVO;
 import com.moving.domain.SocialPostVO;
@@ -148,5 +149,10 @@ public class SocialServiceImpl implements SocialService {
 	@Override
 	public List<SocialProfileVO> selectRandomSocialProfile(int no) {
 		return this.socialDAO.selectRandomSocialProfile(no);
+	}
+
+	@Override
+	public List<ProfilePostVO> selectRandomProfilePost(int no) {
+		return this.socialDAO.selectRandomProfilePost(no);
 	}
 }

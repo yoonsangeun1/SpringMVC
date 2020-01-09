@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.moving.domain.AttachedFileVO;
 import com.moving.domain.MUserVO;
 import com.moving.domain.MoveVO;
+import com.moving.domain.ProfilePostVO;
 import com.moving.domain.ProjectPostVO;
 import com.moving.domain.ReportVO;
 import com.moving.domain.SocialMessageVO;
@@ -233,6 +234,7 @@ public class SocialController {
 		PrintWriter out= response.getWriter();
 		session=request.getSession();
 		
+		List<ProfilePostVO> randomProfilePostVO=this.socialService.selectRandomProfilePost(8);
 		List<SocialProfileVO> randomSocialProfileVO=this.socialService.selectRandomSocialProfile(8);
 		List<ProjectPostVO> projectPostVO=this.projectPostService.selectRandomProjectList(20);
 		
@@ -267,10 +269,12 @@ public class SocialController {
 					ModelAndView m=new ModelAndView();
 //					SocialProfileVO sessionSocial=(SocialProfileVO) session.getAttribute("sessionSocial");
 					List<SocialPostVO> socialPostVO=socialService.selectSocialPost(); //id로 검색하여 게시글ㄹ
+
 					m.addObject("s_post", socialPostVO);
 					m.addObject("project", projectPostVO);
 					m.addObject("s_pro", s_pro);
 					m.addObject("random_s",randomSocialProfileVO);
+					m.addObject("random_p",randomProfilePostVO);
 					
 					session.setAttribute("sessionSocial", s_pro);
 					
