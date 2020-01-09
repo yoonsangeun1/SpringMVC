@@ -82,7 +82,7 @@
 					<li class="tab-link_write " data-tab="tab-4">작성한</li>
 				</ul>
 				
-				<div id="top-area">
+				<div id="top-area" >
 						<div class="select-box">
 							<select id="selectProjectType">
 								<option value="all" selected="selected">전체</option>
@@ -106,7 +106,6 @@
  			<div id="tab-3" class="tab-content">
  				<br />
 				<p>만든 프로젝트가 없습니다.</p>
-				<img src="${pageContext.request.contextPath}/images/noimage.gif">
 			</div>
  			<div id="tab-4" class="tab-content">
  				<br />
