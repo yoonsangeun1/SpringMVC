@@ -30,7 +30,7 @@
 						<div id="mChange_businessLicense_image">
 							<img id="business_img"  
 								<c:if test="${businessLicenseImagePath == null }">
-									src="${pageContext.request.contextPath}/images/member_profile.png"
+									src="${pageContext.request.contextPath}/images/noimage.gif"
 								</c:if>
 								
 								<c:if test="${businessLicenseImagePath != null }">

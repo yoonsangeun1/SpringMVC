@@ -215,10 +215,17 @@
 										}
 										var myName = data.name;
 										var myPoint = "나의 포인트 "+data.userPoint+"점";
+										var myProfile = data.profileImageUrl;
+										
+										if(myProfile == 'default') {
+											myProfile = "${pageContext.request.contextPath}/images/member_profile.png";
+										}
 										
 										$('#myName').html(myName);//태그와 문자를 함께 변경 적용
 										$('#myLevel').html(myLevel);//태그와 문자를 함께 변경 적용
 										$('#myPoint').html(myPoint);//태그와 문자를 함께 변경 적용
+										$('.avatar_image_change').attr('src', myProfile);//태그와 문자를 함께 변경 적용
+										$('.MyMenuUserInfo_avatar').attr('src', myProfile);//태그와 문자를 함께 변경 적용
 										});//매핑 주소 써주기	
 								}
 							</script>
@@ -231,44 +238,39 @@
 <!-- 								</button> -->
 								<div class="MyMenuUserInfo_userInfo" onclick="location='/moving.com/member_mypage?mid=${id}';"> 
 									<a class="MyMenuUserInfo_profileLink">
-										<span class="MyMenuUserInfo_name">${name}</span> &nbsp;&nbsp;
+										<span class="MyMenuUserInfo_name" id="myName">${name}</span> &nbsp;&nbsp;
 										<c:if test="${profile_image_url == 'default'}">
-											<img class="MyMenuUserInfo_avatar" src="${pageContext.request.contextPath}/resources/images/member_profile.png"	style="width:60px; height:60px; border-radius: 50%;">
+											<img id="MyMenuUserInfo_avatar" class="MyMenuUserInfo_avatar" src="${pageContext.request.contextPath}/resources/images/member_profile.png"	style="width:60px; height:60px; border-radius: 50%;">
 										</c:if>
 								
 										<c:if test="${profile_image_url != 'default'}">
-											<img class="MyMenuUserInfo_avatar" src="${profile_image_url}" style="width:60px; height:60px; border-radius: 50%;">
+											<img id="MyMenuUserInfo_avatar" class="MyMenuUserInfo_avatar" src="${profile_image_url}" style="width:60px; height:60px; border-radius: 50%;">
 										</c:if>
-										<span class="MyMenuUserInfo_userLevel">${user_lv}</span> 
+										<span class="MyMenuUserInfo_userLevel" id="myLevel">${user_lv}</span> 
 									</a>
 								</div>
 							</div>
 							
-							<div id="MymenuUserActive_writeBoard" onclick="location.href='http://www.naver.com';">
+							<div id="MymenuUserActive_writeBoard" onclick="location.href='/moving.com/member_mypage?mid=${id}">
 								<span class="wirte_Board">내가 쓴 글</span>
 								<br>
 								<i class="far fa-edit"></i>
 							</div>
-							<div id="MymenuUserActive_reward" onclick="location.href='http://www.naver.com';">
+							<div id="MymenuUserActive_reward" onclick="location.href='/moving.com/member_mypage?mid=${id}">
 								<span class="my_reward">나의 리워드</span>
 								<br>
 								<i class="fas fa-gift"></i>
 							</div>
-							<div id="MymenuUserActive_like" onclick="location.href='http://www.naver.com';">
+							<div id="MymenuUserActive_like" onclick="location.href='/moving.com/member_mypage?mid=${id}">
 								<span class="like_project">좋아한</span>
 								<br>
 								<i class="far fa-heart"></i>
 							</div>
 							<ul class="MyMenu_subMenu">
 								<li>
-									<a href="#" class="MyMenu_subMenuBtn">
+									<a href="/moving.com/member_point" class="MyMenu_subMenuBtn">
 										나의 포인트 ${user_point} 점
 										<i class="fas fa-chevron-right" aria-hidden="true" style="float:right"></i>
-									</a>
-								</li>
-								<li>
-									<a href="#" class="MyMenu_subMenuBtn">
-										나의 지지서명<i class="fas fa-chevron-right" aria-hidden="true" style="float:right"></i>
 									</a>
 								</li>
 								<li>
