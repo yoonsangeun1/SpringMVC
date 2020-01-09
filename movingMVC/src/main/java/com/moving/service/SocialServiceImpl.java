@@ -144,4 +144,9 @@ public class SocialServiceImpl implements SocialService {
 	public void insertMoveVO(MoveVO moveVO) {
 		this.socialDAO.insertMoveVO(moveVO);
 	}
+
+	@Override
+	public List<SocialProfileVO> selectRandomSocialProfile(int no) {
+		return this.socialDAO.selectRandomSocialProfile(no);
+	}
 }

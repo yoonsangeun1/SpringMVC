@@ -156,7 +156,9 @@
 							<c:if test="${s.projectId==2}">
 								<div class="SNS_Cont_Move">0명이 이 영화를 후원하여 0원이 모였습니다!</div>
 							</c:if>
-							<div class="SNS_Cont_Move">${s.moveCount}명이좋아합니다!</div>
+							<c:if test="${s.moveCount>=1 }">
+								<div class="SNS_Cont_Move">${s.moveCount}명이좋아합니다!</div>
+							</c:if>
 								<div class="SNS_Cont_Option">
 									<div class="SNS_Cont_Option_Move" onclick="location='/moving.com/social/add_move?social_id=${sessionSocial.id}&post_num=${s.id}&page_num=0';">무브!</div>
 									<div class="SNS_Cont_Option_Funding" onclick="if(confirm('공유할까요?') == true){
@@ -205,9 +207,8 @@
 											<input id="write"	name="write_${s.id}" class="write SNS_Comment_Write_Button"
 												type="button"	value="작성">
 										</div>
-
-
- 										<script>
+									</div>
+																			<script>
 										function t(bno) {
 											var sessionId=$('#sessionId').text();//로그인한 아이디
 											//var social_post_id = $('#social_post_id').val();//게시글 번호
@@ -282,7 +283,7 @@
 										   var content= $("input[name='content_"+rno+"']").val();//댓글 내용
 
 										   if(content=='') {
-										      alert('댓글 내용을 입력하세요!');
+// 										      alert('댓글 내용을 입력하세요!');
 										      $("input[name='content_"+rno+"']").val('').focus();
 										      return false;
 										   }
@@ -408,7 +409,7 @@
 													dataType:"text",
 													success: function(data) {
 														if(data=='SUCCESS') {
-															alert('댓글이 수정되었습니다!');
+// 															alert('댓글이 수정되었습니다!');
 															//getCommentList();//댓글 목록 함수 호출! 갱신된 내용 가져옴.
 															//getCommentCount();//댓글 개수 불러오기
 														}
@@ -434,7 +435,7 @@
 													dataType:'text',
 													success:function(data) {
 														if(data=='SUCCESS'){
-															alert('댓글이 삭제되었습니다!');
+// 															alert('댓글이 삭제되었습니다!');
 															//getCommentList();//댓글 목록 함수 호출! 갱신된 내용 가져옴.
 															//getCommentCount();//댓글 개수 불러오기
 														}
@@ -443,7 +444,7 @@
 											});
 										})
 										</script>
-									</div>
+									
 						</div>
 					</li>
 					</c:forEach>
@@ -458,20 +459,16 @@
 				<br />
 				<div id="right_profile_friends">
 					<ul id="right_profile_friends_ul">
-						<li ><img src="../images/sns_photo3.jpg">
-							<p>베잌동수</p></li>
-						<li ><img src="../images/sns_photo9.jpg">
-							<p>양드래곤</p></li>
-						<li ><img src="../images/sns_photo12.jpg">
-							<p>송타이거</p></li>
-						<li ><img src="../images/sns_photo6.jpg">
-							<p>윤상은행</p></li>
-						<li ><img src="../images/sns_photo7.jpg">
-							<p>홍채인식</p></li>
-						<li ><img src="../images/sns_photo7.jpg">
-							<p>홍채인식</p></li>
-						<li ><img src="../images/sns_photo7.jpg">
-							<p>홍채인식</p></li>
+					<c:if test="${!empty random_s}">
+						<c:forEach var="ran" items="${random_s}" begin="1" end="8">
+							<c:if test="${'default'==ran.profileImagePath }">
+								<li><img src="../images/member_profile.png"><p>${ran.nickname}</p></li>
+							</c:if>
+							<c:if test="${'default'!=ran.profileImagePath }">
+								<li><img onclick="location:/social/profile?id=${ran.id}" src="${ran.profileImagePath}"><p>${ran.nickname}</p></li>
+							</c:if>
+						</c:forEach>
+					</c:if>
 					</ul>
 				</div>
 			</div>
@@ -494,12 +491,14 @@
 				<p>추천 광고</p>
 			</div>
 			<ul id="SNS_ul2">
-				<li><a href="">제주도 항공 특가 편도 140만원 {즉시보기}</a></li>
-				<li><a href="">홍진호.. 광고까지 2번째 당첨.. 홍진호.. 광고까지 2번째 당첨..</a></li>
-				<li><a href="">5천원만 투자하시면 100원으로 돌려드립니다!</a></li>
-				<li><a href="">♚♚히어로즈 오브 더 스☆톰♚♚가입시$$전원 카드팩☜☜</a></li>
-				<li><a href="">월 4만원에 맥북을 사는 흑우가 있다?!</a></li>
-				<li><a href="">2차 프로젝트에 쏟은 기간.."2시간" 보기만 해도 10만원!(이 부과됩니다.)</a></li>
+				<c:if test="${empty project}">
+					광고영역
+				</c:if>
+				<c:if test="${!empty project}">
+					<c:forEach var="p" items="${project}" begin="1" end="7">
+						<li><a href="/moving.com/project/list?category=20001&id=${p.id}">p.title</a></li>
+					</c:forEach>
+				</c:if>
 			</ul>
 		</div>
 	</div>

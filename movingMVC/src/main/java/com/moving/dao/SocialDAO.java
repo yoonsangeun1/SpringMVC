@@ -52,4 +52,6 @@ public interface SocialDAO {
 	void deleteMoveVO(MoveVO moveVO);
 
 	void insertMoveVO(MoveVO moveVO);
+
+	List<SocialProfileVO> selectRandomSocialProfile(int no);
 }

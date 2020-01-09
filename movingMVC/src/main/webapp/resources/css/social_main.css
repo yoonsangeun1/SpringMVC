@@ -258,6 +258,7 @@
 }
 #right_profile_friends_ul p{
 	font-size: 12px;
+	margin-left: 8px;
 	margin-top: 7px;
 	float: left;
 	text-align: center;

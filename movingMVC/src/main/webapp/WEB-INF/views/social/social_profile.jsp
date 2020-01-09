@@ -108,8 +108,7 @@
 				<ul id="SNS_Content_ul">
 					<c:if test="${empty s_pro.socialPostVO}">
 						<div class="SNS_Profile_Post">
-							<p
-								style="width: 100%; height: 200px; text-align: center; line-height: 180px; font-size: 20px;">등록된
+							<p style="width: 100%; height: 200px; text-align: center; line-height: 180px; font-size: 20px;">등록된
 								게시글이 없습니다.</p>
 						</div>
 					</c:if>
@@ -185,7 +184,9 @@
 									소셜 회원 아이디 : ${s_post.socialId}<br/>
 									등록일자 : ${s_post.registerDate}<br/>--%>
 										${s_post.content}<br />
-										<div class="SNS_Cont_Move">${s_post.moveCount}명이좋아합니다!</div>
+										<c:if test="${s_post.moveCount>=1 }">
+											<div class="SNS_Cont_Move">${s_post.moveCount}명이좋아합니다!</div>
+										</c:if> 
 										<div class="SNS_Cont_Option">
 												<div class="SNS_Cont_Option_Move" onclick="location='/moving.com/social/add_move?social_id=${sessionSocial.id}&post_num=${s_post.id}&page_num=1';">
 												무브!</div>
@@ -317,7 +318,7 @@
 										   var content= $("input[name='content_"+rno+"']").val();//댓글 내용
 
 										   if(content=='') {
-										      alert('댓글 내용을 입력하세요!');
+// 										      alert('댓글 내용을 입력하세요!');
 										      $("input[name='content_"+rno+"']").val('').focus();
 										      return false;
 										   }
@@ -443,7 +444,7 @@
 													dataType:"text",
 													success: function(data) {
 														if(data=='SUCCESS') {
-															alert('댓글이 수정되었습니다!');
+// 															alert('댓글이 수정되었습니다!');
 															//getCommentList();//댓글 목록 함수 호출! 갱신된 내용 가져옴.
 															//getCommentCount();//댓글 개수 불러오기
 														}
@@ -469,7 +470,7 @@
 													dataType:'text',
 													success:function(data) {
 														if(data=='SUCCESS'){
-															alert('댓글이 삭제되었습니다!');
+// 															alert('댓글이 삭제되었습니다!');
 															//getCommentList();//댓글 목록 함수 호출! 갱신된 내용 가져옴.
 															//getCommentCount();//댓글 개수 불러오기
 														}
@@ -486,8 +487,8 @@
 				</ul>
 			</div>
 			<div id="SNS_Profile_Information">
-					<div>
-						프로필 정보입니다.
+					<div style="font-size: 19px;">
+						소셜 프로필을 작성해주세요.
 					</div>
 				</div>
 				<div id="SNS_Profile_Collect">

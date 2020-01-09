@@ -53,4 +53,5 @@ public interface SocialService {
 
 	void insertMoveVO(MoveVO moveVO);
 
+	List<SocialProfileVO> selectRandomSocialProfile(int no);
 }

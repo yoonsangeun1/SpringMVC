@@ -124,4 +124,9 @@ public class SocialDAOImpl implements SocialDAO {
 	public void insertMoveVO(MoveVO moveVO) {
 		this.sqlsession.insert("insertMoveVO",moveVO);
 	}
+
+	@Override
+	public List<SocialProfileVO> selectRandomSocialProfile(int no) {
+		return this.sqlsession.selectList("selectRandomSocialProfile",no);
+	}
 }
