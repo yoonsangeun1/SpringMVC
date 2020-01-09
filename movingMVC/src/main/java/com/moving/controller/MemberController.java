@@ -238,6 +238,7 @@ public class MemberController {
 				session.setAttribute("user_status",dm.getUserStatus()); //세션 회원상태에 VO객체저장
 				session.setAttribute("user_type",dm.getUserType()); //세션 회원유형에 VO객체저장
 				
+				
 				if(dm.getUserLv()==1) {
 					session.setAttribute("user_lv", "개인회원");
 				}else if(dm.getUserLv()==2) {
@@ -255,6 +256,7 @@ public class MemberController {
 				session.setAttribute("business_license_image_path",dm.getBusinessLicenseImagePath()); //세션 사업자등록증이미지경로에 VO객체저장
 				session.setAttribute("deactivate_date",dm.getDeactivateDate()); //세션 탈퇴날짜에 VO객체저장
 				session.setAttribute("deactivate_reason",dm.getDeactivateReason()); //세션 탈퇴사유 VO객체저장
+				session.setAttribute("report_count", dm.getReportCount());//세션 회원신고횟수에 객체저장
 				
 				SocialProfileVO svo = this.mUserService.findSocialAcount(dm.getId());
 				session.setAttribute("sessionSocial", svo);

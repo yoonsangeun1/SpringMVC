@@ -19,7 +19,7 @@
 					<div id="email_field" class="email_field">
 						<div class="mv_email"> 
 							<input type="email" id="email" name="email" class="text_input" placeholder="이메일 계정" oninput="userid_check();"> 
-							<button type="button" class="btnCheckEmail" id="btnCheckEmail" onclick="emailTokenInput();">인증하기</button>
+<!-- 							<button type="button" class="btnCheckEmail" id="btnCheckEmail" onclick="emailTokenInput();">인증하기</button> -->
 					 
 							<div id="emailCheck_message">
 								<span id="emailCheck"></span>

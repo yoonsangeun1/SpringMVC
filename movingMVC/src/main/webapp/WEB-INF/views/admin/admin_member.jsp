@@ -32,11 +32,12 @@
 				<td class="aUserId">${m.userid }</td>
 				<td class="aName">${m.name }</td>
 				<td class="aPhone">${m.phone }</td>
-				<c:if test="${m.reportCount<5 }">
-				<td class="aUserStatus">${m.userStatus }</td>
+				<c:if test="${m.reportCount < 5}">
+					<td class="aUserStatus">${m.userStatus }</td>
 				</c:if>
-				<c:if test="${m.reportCount>=5 }">
-				<td class="aUserStatus">신고!!!!!!</td>
+				
+				<c:if test="${m.reportCount >= 5 }">
+					<td class="aUserStatus">다수의 신고</td>
 				</c:if>
 				<td class="aPublishAvailability">${m.publishAvailability }</td>
 				<td class="aUserPoint">${m.userPoint }</td>
@@ -46,7 +47,7 @@
 		</c:if>
 		<c:if test="${empty mulist }">
 			<tr>
-				<td colspan="10" align="center">회원 목록이 없습니다.</th>
+				<td colspan="10" align="center">회원 목록이 없습니다.</td>
 			</tr>
 		</c:if>
 <!-- 		<tr> -->
