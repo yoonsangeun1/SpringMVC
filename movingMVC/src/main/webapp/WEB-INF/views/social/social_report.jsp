@@ -27,7 +27,7 @@
 					
 					<div id="joinBtn_field">
 						<div class="joinBtn1">
-							<input type="submit" class="join" id="joinBtn" value="수정">
+							<input type="submit" class="join" id="joinBtn" value="신고">
 						</div>
 					</div>
 					</section>

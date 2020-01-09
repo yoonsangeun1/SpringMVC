@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.moving.domain.AttachedFileVO;
 import com.moving.domain.MoveVO;
+import com.moving.domain.ProfilePostVO;
 import com.moving.domain.ReportVO;
 import com.moving.domain.SocialMessageVO;
 import com.moving.domain.SocialPostVO;
@@ -54,4 +55,6 @@ public interface SocialDAO {
 	void insertMoveVO(MoveVO moveVO);
 
 	List<SocialProfileVO> selectRandomSocialProfile(int no);
+
+	List<ProfilePostVO> selectRandomProfilePost(int no);
 }

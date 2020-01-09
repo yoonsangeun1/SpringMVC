@@ -236,14 +236,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="profileImagePath" column="profile_image_path"/>
 	</resultMap>
 	
+	<resultMap type="profilePostVO" id="selectRandomProfilePost">
+		<id property="id" column="profile_post_id"/>
+		<result property="id" column="id" />
+		<result property="name" column="name" />
+	</resultMap>
+	
 	<!-- 랜덤으로 소셜 회원 리스트 띄우기 -->
 	<select id="selectRandomSocialProfile" resultMap="selectRandomSocialProfile" >
-	 SELECT RD.* FROM
-	 (SELECT id,nickname,profile_image_path
-	 FROM social_profile
-	 ORDER BY dbms_random.value
-	 ) RD
-	 WHERE rownum &lt;= #{no}
+		 SELECT RD.* FROM
+		 (SELECT id,nickname,profile_image_path
+		 FROM social_profile
+		 ORDER BY dbms_random.value
+		 ) RD
+		 WHERE rownum &lt;= #{no}
+	</select>
+	
+	<!-- 랜덤으로 배우게시판 리스트 띄우기 -->
+	<select id="selectRandomProfilePost" resultMap="selectRandomProfilePost" >
+		 SELECT RD.* FROM
+		 (SELECT id,name
+		 FROM profile_post
+		 ORDER BY dbms_random.value
+		 ) RD
+		 WHERE rownum &lt;= #{no}
 	</select>
 </mapper>
 

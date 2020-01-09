@@ -454,7 +454,7 @@
 		<div id="SNS_main_right">
 			<!-- 우측 프로필, 뉴스, 기타 -->
 			<div id="right_profile">
-				<p>비슷한 장르 배우 추천</p>
+				<p>요즘 뜨는 회원</p>
 				<br />
 				<div id="right_profile_friends">
 					<ul id="right_profile_friends_ul">
@@ -473,6 +473,18 @@
 					</ul>
 				</div>
 			</div>
+		</div>
+		<div id="right_etc">
+			<div id="SNS_right_title">
+				<p>추천하는 배우</p>
+			</div>
+			<ul id="SNS_ul2">
+				<c:if test="${!empty random_p}">
+					<c:forEach var="ran" items="${random_p}" begin="1" end="8">
+						<li><a href="/moving.com/board/actors_cont?id=${ran.id}&page=1">${ran.name}</a></li>
+					</c:forEach>
+				</c:if>
+			</ul>
 		</div>
 		<div id="right_etc">
 			<div id="SNS_right_title">
