@@ -204,7 +204,6 @@ ul.tabs li.on {
 .tab-content {
 	display: none;
 	background: white;
-	padding: 15px;
 }
 
 .tab-content.on {

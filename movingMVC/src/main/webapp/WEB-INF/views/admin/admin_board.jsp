@@ -228,12 +228,12 @@
 			}else{
 				$("input[type=checkbox]").prop("checked",false);
 			}
-		});
+		}); //click()
 		
 		// 체크박스 개별선택시 전체선택 해제
 		$(".chk").click(function(){
 			$('#ckAll').prop("checked",false);
-		});
+		}); // click()
 		
 // 		// 삭제버튼 기능 추가
 // 		$('#delBtn').click(function(){
@@ -246,7 +246,8 @@
 // 				return false;
 // 			}
 // 		});
-
+	
+		// 삭제버튼 삭제기능 추가
 		$("#delBtn").click(function() {
 			var confirmOk = confirm('삭제하시겠습니까?');
 			
@@ -256,7 +257,6 @@
 				$("input[name=checkBoard]:checked").each(function() {
 					checkArr.push($(this).attr('data-value'));
 					var n_id = $(this).attr('data-value');
-					var test = $(this).val();
 					
 					$.ajax({
 						url : "/moving.com/admin/board/board_del?codeNo=${codeNo}&id="+n_id+"&page=${page}",
@@ -275,12 +275,12 @@
 				location.href = "/moving.com/admin/board?codeNo=0"
 			//}
 			
-		});
+		}); // click()
 		
 		$(".tag :not(:first-child)").click(function(){
 			var n_id = $(this).attr('data-value');
 			location.href="board/board_cont?codeNo=${codeNo}&id="+n_id+"&page=${page}&findField=${findField}&findName=${findName}";
-		})
+		}) // click()
 	});
 	
 	var msg = "${msg}"; // 자바스크립트에서 스프링컨트롤러에서 설정한 키이름을 EL(표현언어)로 참조 가능하다.

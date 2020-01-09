@@ -20,7 +20,7 @@
 			</tr>
 			
 			<tr valign="middle">
-				<th width="30" scope="col" class="check"><input type="checkbox" name="aMovie_check" value="check" /></th>
+				<th width="30" scope="col" class="check"><input type="checkbox" name="aMovie_check" id="ckAll" value="check" /></th>
 				<th scope="col" class="cate1 no">No.</th>
 				<th scope="col" class="cate1 director">감독</th>
 				<th scope="col" class="cate1 video">동영상</th>
@@ -34,17 +34,17 @@
 			
 			<c:if test="${!empty vplist }">
 				<c:forEach var="v" items="${vplist }">
-				<tr>
-					<td class="cate1"><input type="checkbox" name="aMovie_check" value="movCheck" /></td>
-					<td class="cate1">${v.id }</td>
-					<td class="cate1">${v.director }</td>
-					<td class="cate1">${v.videoFilePath }</td>
-					<td class="cate1">${v.titleKorean }(${v.titleEnglish })</td>
-					<td class="cate1">${v.userId }</td>
-					<td class="cate1">${v.registerDate }</td>
-					<td class="cate2">${v.hit }</td>
-					<td class="cate2">${v.commentCount }</td>
-					<td class="cate2">${v.moveCount }</td>
+				<tr class="movieInfo" data-value="${v.id}">
+					<td class="cate1" data-value="${v.id}"><input type="checkbox" name="checkBoard" value="movCheck" class="chk"/></td>
+					<td class="cate1" data-value="${v.id}">${v.id }</td>
+					<td class="cate1" data-value="${v.id}">${v.director }</td>
+					<td class="cate1" data-value="${v.id}"><iframe width="140" height="78" src="${v.videoFilePath }" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></td>
+					<td class="cate1" data-value="${v.id}">${v.titleKorean }(${v.titleEnglish })</td>
+					<td class="cate1" data-value="${v.id}">${v.userId }</td>
+					<td class="cate1" data-value="${v.id}">${v.registerDate }</td>
+					<td class="cate2" data-value="${v.id}">${v.hit }</td>
+					<td class="cate2" data-value="${v.id}">${v.commentCount }</td>
+					<td class="cate2" data-value="${v.id}">${v.moveCount }</td>
 				</tr>
 				</c:forEach>
 			</c:if>
@@ -141,6 +141,9 @@
 <!-- 			</tr> -->
 			
 		</table>
+		<div class="editBtn">
+			<button type="button" id="delBtn" class="but" >삭제</button>
+		</div>
 
 		<%-- 페이징 목록 --%>
 		<div id="aMovie_pageCtrl">
@@ -209,8 +212,72 @@
 			<%-- 검색 텍스트필드, 버튼 --%>
 			<input type="text" name="findName" class="input_box" placeholder="Type to search" value="${findName }">
 			<button type="submit" class="btn" >Search</button>
-		</form>
+			</form>
 		</div>
 	</div>
 </div>
+<script>
+	$(function(){
+		// 체크박스 전체 선택&해제
+		$('#ckAll').click(function(){
+			if($('#ckAll').prop("checked")){
+				$("input[type=checkbox]").prop("checked",true);
+			}else{
+				$("input[type=checkbox]").prop("checked",false);
+			}
+		}); //click()
+		
+		// 체크박스 개별선택시 전체선택 해제
+		$(".chk").click(function(){
+			$('#ckAll').prop("checked",false);
+		}); // click()
+		
+		// 삭제버튼 삭제기능 추가
+		$("#delBtn").click(function() {
+			var confirmOk = confirm('삭제하시겠습니까?');
+			
+			
+				var checkArr = new Array();
+				
+				$("input[name=checkBoard]:checked").each(function() {
+					checkArr.push($(this).attr('data-value'));
+					var n_id = $(this).attr('data-value');
+					
+					$.ajax({
+						url : "/moving.com/admin/movie/movie_del?id="+n_id+"&page=${page}",
+						type : "get",
+						data : { checkBoard : checkArr},
+						success : function(){
+							//alert('삭제');
+// 							location.href = "/moving.com/admin/board?codeNo=0"
+						}
+						
+					});
+				});
+			//if(confirmOk){
+				alert('삭제 완료되었습니다!');
+				
+				location.href = "/moving.com/admin/movie";
+			//}
+			
+		}); // click()
+		
+		$(".movieInfo :not(:first-child)").click(function(){
+			var n_id = $(this).attr('data-value');
+			location.href="movie/movie_cont?id="+n_id+"&page=${page}&findField=${findField}&findName=${findName}";
+		})
+	})
+	
+		var msg = "${msg}"; // 자바스크립트에서 스프링컨트롤러에서 설정한 키이름을 EL(표현언어)로 참조 가능하다.
+	if (msg == 'WRITE') {
+		alert("게시물 저장에 성공했습니다!");
+	}
+	if (msg == "EDIT") {
+		alert("게시물 수정에 성공했습니다!");
+	}
+	if (msg == 'DEL') {
+		alert('게시물 삭제에 성공했습니다!');
+	}
+	
+</script>
 <%@ include file="../include/admin_footer.jsp"%>
