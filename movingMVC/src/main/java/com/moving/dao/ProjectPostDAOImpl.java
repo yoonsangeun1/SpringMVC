@@ -178,5 +178,25 @@ public class ProjectPostDAOImpl implements ProjectPostDAO {
 	public void updateMoveCount(MoveVO moveVO) {
 		sqlSession.update("updateMoveCount", moveVO);
 	}
+
+	@Override
+	public int findMoveOrNot(MoveVO m) {
+		return sqlSession.selectOne("findMoveOrNot", m);
+	}
+
+	@Override
+	public void deleteMove(MoveVO moveVO) {
+		sqlSession.delete("deleteMove", moveVO);
+	}
+
+	@Override
+	public void downMoveCount(MoveVO moveVO) {
+		sqlSession.update("downMoveCount", moveVO);
+	}
+
+	@Override
+	public List<ProjectPostVO> selectLikeList(int mid) {
+		return sqlSession.selectList("selectLikeList", mid);
+	}
 	
 }

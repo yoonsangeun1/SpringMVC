@@ -48,6 +48,10 @@ public interface ProjectPostService {
 	void updateProjectBusiness(ProjectPostVO projectPostVO);//동업자 정보 업데이트
 	void updateProjectStatus(int id);//프로젝트 상태 변경(미완성 ->완성)
 	void insertMove(MoveVO moveVO);//무브 버튼 클릭
+	int findMoveOrNot(MoveVO m);//좋아요 여부 카운트 
+	void deleteMove(MoveVO moveVO);//무브 취소
+	
+	List<ProjectPostVO> selectLikeList(int mid);//회원 아이디를 기준으로내가 좋아한 프로젝트 찾기
 
 
 }

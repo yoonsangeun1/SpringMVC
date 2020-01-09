@@ -75,5 +75,13 @@ public interface ProjectPostDAO {
 
 	void updateMoveCount(MoveVO moveVO);
 
+	int findMoveOrNot(MoveVO m);
+
+	void deleteMove(MoveVO moveVO);
+
+	void downMoveCount(MoveVO moveVO);
+
+	List<ProjectPostVO> selectLikeList(int mid);
+
 	
 }

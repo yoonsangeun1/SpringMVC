@@ -391,6 +391,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SET 
 		title = #{title},
 		introduce = #{introduce},
+		content = #{content},
 		target_price = #{targetPrice},
 		code_no = #{codeNo},
 		target_limit = #{targetLimit}, 
@@ -464,7 +465,56 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="insertMove">
 		INSERT INTO move 
 		(id, user_id_from, project_post_id)
-		 VALUES (move_seq.nextval, #{userIdFrom}, #{projectPostId})
-		
+		VALUES 
+		(move_seq.nextval, #{userIdFrom}, #{projectPostId})
 	</insert>
+	
+	<!-- 좋아요 취소하기 -->
+	<delete id="deleteMove">
+		DELETE FROM move
+		WHERE user_id_from = #{userIdFrom} 
+		AND project_post_id = #{projectPostId}
+	</delete>
+	
+	<!-- 좋아요 카운트 높이기 -->
+	<update id="updateMoveCount">
+		UPDATE project_post
+		SET move_count = move_count + 1
+		WHERE id = #{projectPostId}
+	</update>
+	
+	<!-- 좋아요 카운트 낮추기 -->
+	<update id="downMoveCount">
+		UPDATE project_post
+		SET move_count = move_count - 1
+		WHERE id = #{projectPostId}
+	</update>
+	
+	<!-- 좋아요 여부 찾기 -->
+	<select id="findMoveOrNot" resultType="int">
+		SELECT COUNT(id) FROM move 
+		WHERE user_id_from = #{userIdFrom} AND project_post_id = #{projectPostId}
+	</select>
+	
+	<resultMap type="projectPostVO" id="minilist">
+		<id property="id" column="p_id"/>
+		<result property="title" column="title" />
+		<result property="thumbnailImage" column="thumbnail_image" />
+		<association property="mUserVO" javaType="com.moving.domain.MUserVO"  autoMapping="true">
+		<id property="id" column="user_id"/>
+		<result property="nickname" column="nickname"/>
+		</association>
+		<association property="moveVO" javaType="com.moving.domain.MoveVO"  autoMapping="true">
+		<result property="registerDate" column="like_date"/>
+		</association>
+	</resultMap>
+	
+	<!-- 회원 아이디를 기준으로 좋아요한 목록 찾기 -->
+	<select id="selectLikeList" resultMap="minilist">
+	select P.id p_id, P.title, P.thumbnail_image, M.register_date AS like_date, U.nickname, U.id AS user_id 
+	FROM project_post P, move M, m_user U
+	WHERE P.id = M.project_post_id 
+	AND M.user_id_from = user_id
+	AND M.user_id_from = #{mid}
+	</select>
 </mapper>

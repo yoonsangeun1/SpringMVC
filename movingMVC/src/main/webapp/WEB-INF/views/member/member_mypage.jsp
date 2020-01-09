@@ -97,8 +97,34 @@
 		
 			<div id="tab-1" class="tab-content current">
 				<br />
+				<c:if test="${empty likeList }">
 				<p>좋아하는 프로젝트가 없습니다.</p>
+				</c:if>
+				<c:if test="${!empty likeList }">
+				<c:forEach var="l" items="${likeList}">
+				<div id="hover_container-category" style="float: left; width: 280px; height:250px;"
+					onclick="location.href='/moving.com/project/content?category=20001&id=${l.id}';">
+						<c:if test="${l.thumbnailImage == NULL}">
+							<img src="../images/funding05.PNG" width="270" height="150"  />
+						</c:if>
+						<c:if test="${l.thumbnailImage != NULL}">
+							<img src="${l.thumbnailImage}" width="270" height="150"  />
+						</c:if>
+						<div class="hover_container-category-padding">
+						<h3>${l.title }</h3> <br/>&nbsp;&nbsp;&nbsp;좋아요 일시: ${l.moveVO.registerDate } <%-- <a href="/moving.com/member_mypage?mid=${l.mUserVO.id }">
+						by. ${l.mUserVO.nickname }</a> --%>
+						
+						</div>
+				</div>
+				</c:forEach>
+				</c:if>
   			</div>
+  			
+  			
+  			
+  			
+  			
+  			
  			<div id="tab-2" class="tab-content">
  				<br />
 				<p>후원하는 프로젝트가 없습니다.</p>

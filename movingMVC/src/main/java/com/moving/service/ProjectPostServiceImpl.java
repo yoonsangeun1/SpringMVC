@@ -171,4 +171,21 @@ public class ProjectPostServiceImpl implements ProjectPostService {
 		m.setUserPoint(5);					//포인트 저장
 		mUserDAO.pointCharge(m);				//포인트 높이기
 	}
+
+	@Override
+	public int findMoveOrNot(MoveVO m) {
+		return projectPostDAO.findMoveOrNot(m);
+	}
+
+	@Transactional
+	@Override
+	public void deleteMove(MoveVO moveVO) {
+		projectPostDAO.deleteMove(moveVO);
+		projectPostDAO.downMoveCount(moveVO);
+	}
+
+	@Override
+	public List<ProjectPostVO> selectLikeList(int mid) {
+		return projectPostDAO.selectLikeList(mid);
+	}
 }

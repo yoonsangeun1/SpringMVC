@@ -129,6 +129,16 @@ public class ProjectPostController {
 		ProjectPostVO projectInfo=projectPostService.selectprojectInfo(id);	//프로젝트 정보 불러오기
 		ModelAndView m=new ModelAndView("project/project_content");	//뷰페이지 경로 설정
 
+		if(session.getAttribute("id") != null) { /*세션에 값이 있을경우*/
+			MoveVO move=new MoveVO();
+			move.setUserIdFrom(sessionId);
+			move.setProjectPostId(id);
+			int count=projectPostService.findMoveOrNot(move);
+			m.addObject("count", count);
+		}
+		
+		
+
 		//System.out.println(projectInfo.getId());
 		m.addObject("projectInfo", projectInfo);
 		m.addObject("sessionId", sessionId);
@@ -327,6 +337,7 @@ public class ProjectPostController {
 					projectPostVO.setThumbnailImage(sFileInfo); //파일 경로 저장
 					projectPostVO.setTitle(multi.getParameter("title"));
 					projectPostVO.setIntroduce(multi.getParameter("introduce"));
+					projectPostVO.setContent(multi.getParameter("content"));
 					projectPostVO.setTargetPrice(Integer.parseInt(multi.getParameter("targetPrice")));
 					projectPostVO.setTargetLimit(multi.getParameter("targetLimit"));
 					projectPostVO.setCodeNo(Integer.parseInt(multi.getParameter("codeNo")));
@@ -535,6 +546,7 @@ public class ProjectPostController {
 				int id=Integer.parseInt(request.getParameter("id"));//리워드 id
 				int projectPostId=rewardVO.getProjectPostId();
 				rewardVO.setId(id);
+				rewardVO.setPrice(Integer.parseInt(request.getParameter("price")));
 				projectPostService.updateProjectReward(rewardVO); 
 				return "redirect:/project/write?id="+projectPostId+"&where=reward";
 			}
@@ -550,7 +562,7 @@ public class ProjectPostController {
 	
 	//펀딩 글 좋아요
 	@RequestMapping("/move")
-	public String move(MoveVO moveVO, String where,
+	public String move(MoveVO moveVO, int category,
 			HttpServletResponse response,
 			HttpServletRequest request,
 			HttpSession session) throws Exception {
@@ -567,10 +579,10 @@ public class ProjectPostController {
 		}else {
 			int id=(int)session.getAttribute("id");
 			moveVO.setUserIdFrom(id);//회원 아이디 저장
-			if(where.equals("project")) {
+			/*if(where.equals("project")) {*/
 				int projectPostId=Integer.parseInt(request.getParameter("projectPostId"));
 				moveVO.setProjectPostId(projectPostId);
-			}else if(where.equals("profile")) {
+			/*}else if(where.equals("profile")) {
 				int profilePostId=Integer.parseInt(request.getParameter("profilePostId"));
 				moveVO.setProfilePostId(profilePostId);
 			}else if(where.equals("free")) {
@@ -592,8 +604,37 @@ public class ProjectPostController {
 				int socialProfileIdTo=Integer.parseInt(request.getParameter("socialProfileIdTo"));
 				moveVO.setSocialProfileIdTo(socialProfileIdTo);
 				moveVO.setSocialProfileIdFrom(sessionSocial.getId());
-			}
+			}*/
 			projectPostService.insertMove(moveVO);
+			return "redirect:/project/content?category="+category+"&id="+projectPostId;
+		}
+		return null;
+	}
+	
+
+	//펀딩 글 좋아요
+	@RequestMapping("/move_del")
+	public String moveDelete(MoveVO moveVO, int category, int projectPostId,
+			HttpServletResponse response,
+			HttpServletRequest request,
+			HttpSession session) throws Exception {
+		response.setContentType("text/html;charset=UTF-8");
+		PrintWriter out=response.getWriter();
+		session=request.getSession();
+		String nickname=(String)session.getAttribute("nickname");
+
+		if(nickname == null) {
+			out.println("<script>");
+			out.println("alert('로그인이 필요합니다!');");
+			out.println("location='/moving.com/member/login';");
+			out.println("</script>");
+		}else {
+			int id=(int)session.getAttribute("id");
+			moveVO.setUserIdFrom(id);//회원 아이디 저장
+			//int projectPostId=Integer.parseInt(request.getParameter("projectPostId"));
+			moveVO.setProjectPostId(projectPostId);
+			projectPostService.deleteMove(moveVO);
+			return "redirect:/project/content?category="+category+"&id="+projectPostId;
 		}
 		return null;
 	}

@@ -58,14 +58,28 @@
 				<button class="fCont_sumContBtn button button_f16 shadow"
 					type="button">이 프로젝트 밀어주기</button>
 				<div id="fCont_share">
+				<c:if test="${count == 0 }">
 					<button
 						class="fCont_shareBtn button button_wce8e8e8 button_f12 shadow"
-						type="button" onclick="if(confirm('추천하시겠습니까?')==true){ location='/moving.com/move?where=project&projectPostId=${projectInfo.id}'; }else {return false;}">
-						<i class="fas fa-heart"></i> Make Move!
+						type="button"
+						onclick="if(confirm('추천하시겠습니까?')==true){ location='/moving.com/move?category=${category }&projectPostId=${projectInfo.id}'; }else {return false;}">
+						<i class="fas fa-heart"></i> MAKE MOVE!
 						<c:if test="${projectInfo.moveCount != 0}">
-					<b>${projectInfo.moveCount }</b>
-				</c:if>
+							<b>${projectInfo.moveCount }</b>
+						</c:if>
 					</button>
+				</c:if>
+				<c:if test="${count >= 1 }">
+					<button
+						class="fCont_shareBtn button button_wce8e8e8 button_f12 shadow"
+						type="button"
+						onclick="if(confirm('추천을 취소하시겠습니까?')==true){ location='/moving.com/move_del?category=${category }&projectPostId=${projectInfo.id}'; }else {return false;}">
+						<i class="fas fa-heart"></i> CANCEL MOVE!
+						<c:if test="${projectInfo.moveCount != 0}">
+							<b>${projectInfo.moveCount }</b>
+						</c:if>
+					</button>
+				</c:if>
 					<div class="fCont_shareIcon fa-2x">
 						<a href="#"><i class="fab fa-facebook"></i></a>
 					</div>
