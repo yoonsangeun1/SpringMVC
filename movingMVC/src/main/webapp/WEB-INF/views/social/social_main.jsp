@@ -29,13 +29,12 @@
 			<br />
 			<ul id="SNS_ul1">
 				<!-- 좌측 메뉴 생성 -->
-				<li><a href="#">즐겨찾기</a></li>
 				<li><a href="/moving.com/social/messenger?socialIdFrom=${sessionSocial.id}&socialIdTo=0">메신저</a></li>
-				<li><a href="#">영상</a></li>
-				<li><a href="#">페이지</a></li>
-				<li><a href="#">그룹</a></li>
-				<li><a href="#">이벤트</a></li>
-				<li><a href="#">저장한 게시글</a></li>
+				<li><a href="/moving.com/board/actors">배우</a></li>
+				<li><a href="/moving.com/video/videomain">영화</a></li>
+				<li><a href="/moving.com/project/list?category=20001">프로젝트</a></li>
+<!-- 				<li><a href="#">이벤트</a></li> -->
+<!-- 				<li><a href="#">저장한 게시글</a></li> -->
 			</ul>
 		</div>
 		<div id="SNS_main_mid">
@@ -462,10 +461,12 @@
 					<c:if test="${!empty random_s}">
 						<c:forEach var="ran" items="${random_s}" begin="1" end="8">
 							<c:if test="${'default'==ran.profileImagePath }">
-								<li><img src="../images/member_profile.png"><p>${ran.nickname}</p></li>
+								<li><img onclick="location.href='/moving.com/social/profile?id=${ran.id}'"
+								  src="../images/member_profile.png"><p>${ran.nickname}</p></li>
 							</c:if>
 							<c:if test="${'default'!=ran.profileImagePath }">
-								<li><img onclick="location:/social/profile?id=${ran.id}" src="${ran.profileImagePath}"><p>${ran.nickname}</p></li>
+								<li><img onclick="location.href='/moving.com/social/profile?id=${ran.id}'"
+								  src="${ran.profileImagePath}"><p>${ran.nickname}</p></li>
 							</c:if>
 						</c:forEach>
 					</c:if>
@@ -475,15 +476,15 @@
 		</div>
 		<div id="right_etc">
 			<div id="SNS_right_title">
-				<p>뉴스</p>
+				<p>영화 뉴스</p>
 			</div>
 			<ul id="SNS_ul2">
-				<li><a href="">[속보]팀장 윤상은.. 박진우에게 팀장 양도..."감격"</a></li>
-				<li><a href="">홍진호.. 뉴스라인 2번째 당첨.. 홍진호.. 뉴스라인 2번째 당첨..</a></li>
-				<li><a href="">박진우 감독.. 영화 "자신있나" 매출 2조 달성</a></li>
-				<li><a href="">아스날 또 "4번째"</a></li>
-				<li><a href="">(대충 감동적인 뉴스)</a></li>
-				<li><a href="">빨리 프로젝트 끝내고 싶다</a></li>
+				<li><a href="">'백두산'->'남산의 부장들' 이병헌, 연초 극장가 제대로 접수</a></li>
+				<li><a href="">외화 공습 시작 '닥터 두리틀','스타워즈' 새 정상 우뚝 ...'백두산' 3위로</a></li>
+				<li><a href="">이제훈 '사냥의 시간'으로 3년만에 스크린 복귀.. 폭발적 감정 연기 예고</a></li>
+				<li><a href="">'독립영화계 블루칩' 김한나, 신소율 김보라와 한솥밥(공식입장)</a></li>
+				<li><a href="">'시동' 마블리->뉴페이스 최성은..연기 맛집 거듭난 이유</a></li>
+				<li><a href="">"눈물 핑 돌아"..'백두산' 이병헌 김시아 부녀가 선사한 감동</a></li>
 			</ul>
 		</div>
 		<div id="right_etc2">
@@ -496,7 +497,7 @@
 				</c:if>
 				<c:if test="${!empty project}">
 					<c:forEach var="p" items="${project}" begin="1" end="7">
-						<li><a href="/moving.com/project/list?category=20001&id=${p.id}">p.title</a></li>
+						<li><a href="/moving.com/project/list?category=20001&id=${p.id}">${p.title}</a></li>
 					</c:forEach>
 				</c:if>
 			</ul>
