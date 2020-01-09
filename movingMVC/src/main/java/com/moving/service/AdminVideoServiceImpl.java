@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.moving.dao.AdminVideoDAO;
+import com.moving.domain.NormalPostVO;
 import com.moving.domain.VideoPostVO;
 
 @Service
@@ -33,4 +34,25 @@ public class AdminVideoServiceImpl implements AdminVideoService {
 	public void insertTeaser(VideoPostVO vp) {
 		this.adminVideoDao.insertTeaser(vp);
 	}
+
+	@Override
+	public VideoPostVO movieCont(int id) {
+		return this.adminVideoDao.movieCont(id);
+	}
+
+	@Override
+	public void movieEdit(VideoPostVO vp) {
+		this.adminVideoDao.movieEdit(vp);
+	}
+
+	@Override
+	public void teaserEdit(VideoPostVO vp) {
+		this.adminVideoDao.teaserEdit(vp);
+	}
+	
+	@Override
+	public void movieDel(int id) {
+		this.adminVideoDao.movieDel(id);
+	}
+
 }

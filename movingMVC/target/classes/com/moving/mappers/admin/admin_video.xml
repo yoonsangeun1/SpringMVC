@@ -53,7 +53,7 @@
 		INSERT INTO VIDEO_POST (id, code_no, user_id, title_english, title_korean,
 		director, release_date, content, video_file_path, rate)
 		VALUES (video_post_seq.nextval, #{codeNo}, #{userId}, #{titleEnglish}, #{titleKorean},
-		#{director}, TO_DATE(#{releaseDate}, 'yyyy-mm-dd'), #{content}, 0, #{rate})
+		#{director}, TO_DATE(#{releaseDate}, 'yyyy-mm-dd'), #{content}, #{videoFilePath}, #{rate})
 	</insert>
 	
 	<!-- 영화 게시글 작성 -->
@@ -62,7 +62,7 @@
 		director, actor, release_date, content, era_background, video_file_path, video_length, rate)
 		VALUES (video_post_seq.nextval, #{codeNo}, #{userId}, #{titleEnglish}, #{titleKorean},
 		#{director}, #{actor}, TO_DATE(#{releaseDate},'yyyy-mm-dd'), #{content},
-		#{eraBackground}, 0, 0, #{rate})
+		#{eraBackground}, #{videoFilePath}, #{videoLength}, #{rate})
 	</insert>
 	
 	<!-- 총 영상 게시물 수 -->
@@ -102,6 +102,35 @@
 		ORDER BY ID DESC))
 		WHERE rNum &gt;= #{startrow} and rNum &lt;= #{endrow}
 	</select>
+	
+	<!-- 영상 내용보기 -->
+	<select id="vp_cont" resultMap="videoPostInfo">
+		SELECT 
+		id, code_no, user_id, title_english, title_korean,
+		director, actor, release_date, content, era_background, video_file_path, video_length, rate 
+		FROM video_post
+		WHERE ID=#{id}
+	</select>
+	
+	
+	<update id="vp_up">
+		UPDATE VIDEO_POST
+		SET DIRECTOR = #{director}, ACTOR = #{actor}, ERA_BACKGROUND = #{eraBackground}, CODE_NO = #{codeNo}, 
+		RATE = #{rate}, VIDEO_LENGTH = #{videoLength}, TITLE_KOREAN = #{titleKorean}, TITLE_ENGLISH = #{titleEnglish}, 
+		RELEASE_DATE = #{releaseDate}, CONTENT = #{content}, VIDEO_FILE_PATH = #{videoFilePath} WHERE ID = #{id}
+	</update>
+	
+	<update id="vp_up2">
+		UPDATE VIDEO_POST
+		SET DIRECTOR = #{director}, CODE_NO = #{codeNo}, 
+		RATE = #{rate}, TITLE_KOREAN = #{titleKorean}, TITLE_ENGLISH = #{titleEnglish}, 
+		RELEASE_DATE = #{releaseDate}, CONTENT = #{content}, VIDEO_FILE_PATH = #{videoFilePath} WHERE ID = #{id}
+	</update>
+	
+	<delete id="vp_del">
+		DELETE FROM VIDEO_POST
+		WHERE ID=#{id}
+	</delete>
 	<!-- 첨부파일 저장 -->
 <!-- 	<insert id="insertVideoAttachedFile"> -->
 <!-- 		INSERT INTO ATTACHED_FILE -->

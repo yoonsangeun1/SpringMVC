@@ -12,7 +12,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.moving.domain.NormalPostVO;
 import com.moving.domain.VideoPostVO;
 import com.moving.service.AdminVideoService;
 
@@ -141,5 +145,125 @@ public class AdminVideoController {
 			}
 		}
 		return null;
+	}
+	
+	/* 영화 내용보기 */
+	@RequestMapping("/admin/movie/movie_cont")
+	public ModelAndView adminNoticeCont(@RequestParam("id")
+			int id, //id는 영화 시퀀스 id
+			@RequestParam("page") int page) throws Exception{
+		
+		//번호에 해당하는 디비 레코드값을 가져옴
+		VideoPostVO vp=this.adminVideoService.movieCont(id);
+		String vp_cont=vp.getContent().replace("\n","<br/>");
+		ModelAndView cm=new ModelAndView("admin/admin_movie_cont"); // textarea영역에서 엔터키 친부분을 다음줄로 개행
+		
+		cm.addObject("vp",vp);
+		cm.addObject("page",page);
+		
+		return cm;
+		
+	}
+	
+	/* 영화 수정 */
+	@RequestMapping("/admin/movie/movie_edit")
+	public String adminMovieEdit(int id, //게시글 번호 id
+			int page,						//페이지
+			Model m,						
+			HttpServletRequest request,
+			HttpServletResponse response,
+			HttpSession session) throws Exception{
+		
+		response.setContentType("text/html;charset=UTF-8");
+		PrintWriter out=response.getWriter();
+		session=request.getSession();
+		
+		if(session.getAttribute("id") != null) { //세션에 값이 있을 경우
+			
+			VideoPostVO vp=this.adminVideoService.movieCont(id); //글번호 id를 기준으로 검색
+				
+				m.addAttribute("vp",vp);
+				m.addAttribute("page",page);
+				
+				return "admin/admin_movie_edit"; //view페이지로 이동
+		}else { //세션에 값이 없을 경우
+			out.println("<script>");
+			out.println("alert('로그인을 해주세요!');");
+			out.println("location='/moving.com/member/login';");
+			out.println("</script>");
+		}//if else
+		
+		return null;
+		
+	}
+	
+	/* 영화 수정 완료 */
+	@RequestMapping("/admin/movie/movie_edit_ok")
+	public String adminMovieEditOk(VideoPostVO vp,
+			int page,
+			int id,
+			String findField,
+			String findName,
+			RedirectAttributes rttr) throws Exception{
+		
+		this.adminVideoService.movieEdit(vp);
+		
+		rttr.addFlashAttribute("msg","EDIT"); // 개사물 수정 후 수정완료 알림
+		
+		return "redirect:/admin/movie/movie_cont?id="+id+"&page="+page+"&findField="+findField+"&findName="+findName; //해당 내용보기 페이지로 이동
+		
+	}
+	
+	/* 티저 수정 완료 */
+	@RequestMapping("/admin/movie/teaser_edit_ok")
+	public String adminTeaserEditOk(VideoPostVO vp,
+			int page,
+			int id,
+			String findField,
+			String findName,
+			RedirectAttributes rttr) throws Exception{
+		
+		this.adminVideoService.teaserEdit(vp);
+		
+		rttr.addFlashAttribute("msg","EDIT"); // 개사물 수정 후 수정완료 알림
+		
+		return "redirect:/admin/movie/movie_cont?id="+id+"&page="+page+"&findField="+findField+"&findName="+findName; //해당 내용보기 페이지로 이동
+		
+	}
+	
+	/* 영화 삭제 */
+	@RequestMapping("/admin/movie/movie_del")
+	public String adminNoticeDel(int id, //게시글 번호 id
+			int page,						//페이지
+			HttpServletRequest request,
+			HttpServletResponse response,
+			HttpSession session,
+			RedirectAttributes rttr) throws Exception{
+		
+		response.setContentType("text/html;charset=UTF-8");
+		PrintWriter out=response.getWriter();
+		session=request.getSession();
+
+		if(session.getAttribute("id") != null) { //세션에 값이 있을 경우
+
+			VideoPostVO vp=this.adminVideoService.movieCont(id); //글번호 id를 기준으로 검색
+
+			int m_userid=(int)session.getAttribute("id"); //세션으로 받아온 id를 m_userid에 저장
+
+				this.adminVideoService.movieDel(id);
+				
+				rttr.addFlashAttribute("msg","DEL"); // 게시물 삭제 후 삭제완료 알림
+				
+				return "redirect:/admin/movie?&page="+page; //view 페이지로 이동
+
+		}else { //세션에 값이 없을 경우
+			out.println("<script>");
+			out.println("alert('로그인을 해주세요!');");
+			out.println("location='/moving.com/member/login';");
+			out.println("</script>");
+		}//if else
+		
+		return null;
+		
 	}
 }
