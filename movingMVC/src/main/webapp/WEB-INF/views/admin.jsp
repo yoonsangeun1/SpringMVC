@@ -209,7 +209,7 @@
 								</div>
 							</div>
 							
-							<div id="MymenuUserActive_writeBoard" onclick="location.href='http://www.naver.com';">
+							<div id="MymenuUserActive_writeBoard" onclick="location.href='/moving.com/member_mypage?mid=${id}';">
 								<span class="wirte_Board">내가 쓴 글</span>
 								<br>
 								<i class="far fa-edit"></i>
@@ -219,7 +219,7 @@
 								<br>
 								<i class="fas fa-gift"></i>
 							</div>
-							<div id="MymenuUserActive_like" onclick="location.href='http://www.naver.com';">
+							<div id="MymenuUserActive_like" onclick="location.href='/moving.com/member_mypage?mid=${id}';">
 								<span class="like_project">좋아한</span>
 								<br>
 								<i class="far fa-heart"></i>

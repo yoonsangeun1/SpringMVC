@@ -102,7 +102,7 @@
 
 #aMember_table .aUserStatus {
 	text-align: center;
-	width: 52px;
+	width: 100px; 
 }
 
 #aMember_table .aPublishAvailability {

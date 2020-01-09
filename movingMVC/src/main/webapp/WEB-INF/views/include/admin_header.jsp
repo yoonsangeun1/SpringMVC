@@ -216,7 +216,7 @@
 								<i class="far fa-edit"></i>
 							</div>
 							<div id="MymenuUserActive_reward" onclick="location.href='http://www.naver.com';">
-								<span class="my_reward">나의 리워드</span>
+								<span class="my_reward">후원한</span>
 								<br>
 								<i class="fas fa-gift"></i>
 							</div>
