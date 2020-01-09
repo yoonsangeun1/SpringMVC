@@ -200,7 +200,7 @@ $(function(){ // document ready
 									<a class="MyMenuUserInfo_profileLink">
 										<span class="MyMenuUserInfo_name" id="myName">${name}</span> &nbsp;&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i>
 										<c:if test="${profile_image_url == 'default'}">
-											<img class="MyMenuUserInfo_avatar" src="${pageContext.request.contextPath}/images/member_profile.png"	style="width:60px; height:60px; border-radius: 50%;">
+											<img id="MyMenuUserInfo_avatar" class="MyMenuUserInfo_avatar" src="${pageContext.request.contextPath}/images/member_profile.png"	style="width:60px; height:60px; border-radius: 50%;">
 										</c:if>
 								
 										<c:if test="${profile_image_url != 'default'}">
@@ -211,17 +211,17 @@ $(function(){ // document ready
 								</div>
 							</div>
 							
-							<div id="MymenuUserActive_writeBoard" onclick="location.href='member_mypage?mid=${id}';">
+							<div id="MymenuUserActive_writeBoard" onclick="location.href='/moving.com/member_mypage?mid=${id}';">
 								<span class="wirte_Board">내가 쓴 글</span>
 								<br>
 								<i class="far fa-edit"></i>
 							</div>
-							<div id="MymenuUserActive_reward" onclick="location.href='http://www.naver.com';">
+							<div id="MymenuUserActive_reward" onclick="location.href='/moving.com/member_mypage?mid=${id}';">
 								<span class="my_reward">나의 리워드</span>
 								<br>
 								<i class="fas fa-gift"></i>
 							</div>
-							<div id="MymenuUserActive_like" onclick="location.href='member_mypage?mid=${id}';">
+							<div id="MymenuUserActive_like" onclick="location.href='/moving.com/member_mypage?mid=${id}';">
 								<span class="like_project">좋아한</span>
 								<br>
 								<i class="far fa-heart"></i>

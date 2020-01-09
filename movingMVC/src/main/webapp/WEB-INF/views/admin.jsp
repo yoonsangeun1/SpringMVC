@@ -150,11 +150,11 @@
 							<div class="header_profile_container">
 								<button type="button" id="header_profile_btn" onclick="getUserInfo();">
 									<c:if test="${profile_image_url == 'default'}">
-										<img class="Avatar_image" src="${pageContext.request.contextPath}/resources/images/member_profile.png"	style="width:30px; height:30px; border-radius: 50%; color:white;">
+										<img class="Avatar_image avatar_image_change" src="${pageContext.request.contextPath}/images/member_profile.png"	style="width:30px; height:30px; border-radius: 50%; color:white;">
 									</c:if>
 								
 									<c:if test="${profile_image_url != 'default'}">
-										<img class="Avatar_image" src="${profile_image_url}" style="width:30px; height:30px; border-radius: 50%;">
+										<img class="Avatar_image avatar_image_change" src="${profile_image_url}" style="width:30px; height:30px; border-radius: 50%;">
 									</c:if>
 								</button>
 							</div>
@@ -196,15 +196,15 @@
 <!-- 								</button> -->
 								<div class="MyMenuUserInfo_userInfo" onclick="location.href='/moving.com/member_mypage?mid=${id}';"> 
 									<a class="MyMenuUserInfo_profileLink">
-										<span class="MyMenuUserInfo_name">${name}</span> &nbsp;&nbsp;
+										<span class="MyMenuUserInfo_name" id="myName">${name}</span> &nbsp;&nbsp;
 										<c:if test="${profile_image_url == 'default'}">
-											<img class="MyMenuUserInfo_avatar" src="${pageContext.request.contextPath}/resources/images/member_profile.png"	style="width:60px; height:60px; border-radius: 50%;">
+											<img id="MyMenuUserInfo_avatar" class="MyMenuUserInfo_avatar" src="${pageContext.request.contextPath}/images/member_profile.png"	style="width:60px; height:60px; border-radius: 50%;">
 										</c:if>
 								
 										<c:if test="${profile_image_url != 'default'}">
-											<img class="MyMenuUserInfo_avatar" src="${profile_image_url}" style="width:60px; height:60px; border-radius: 50%;">
+											<img id="MyMenuUserInfo_avatar" class="MyMenuUserInfo_avatar" src="${profile_image_url}" style="width:60px; height:60px; border-radius: 50%;">
 										</c:if>
-										<span class="MyMenuUserInfo_userLevel">${user_lv}</span> 
+										<span class="MyMenuUserInfo_userLevel" id="myLevel">${user_lv}</span> 
 									</a>
 								</div>
 							</div>
@@ -214,7 +214,7 @@
 								<br>
 								<i class="far fa-edit"></i>
 							</div>
-							<div id="MymenuUserActive_reward" onclick="location.href='http://www.naver.com';">
+							<div id="MymenuUserActive_reward" onclick="location.href='/moving.com/member_mypage?mid=${id}';">
 								<span class="my_reward">나의 리워드</span>
 								<br>
 								<i class="fas fa-gift"></i>
@@ -229,11 +229,6 @@
 									<a href="#" class="MyMenu_subMenuBtn">
 										나의 포인트 ${user_point} 점
 										<i class="fas fa-chevron-right" aria-hidden="true" style="float:right"></i>
-									</a>
-								</li>
-								<li>
-									<a href="#" class="MyMenu_subMenuBtn">
-										나의 지지서명<i class="fas fa-chevron-right" aria-hidden="true" style="float:right"></i>
 									</a>
 								</li>
 								<li>
