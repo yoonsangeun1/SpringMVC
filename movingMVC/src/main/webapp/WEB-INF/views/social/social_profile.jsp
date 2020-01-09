@@ -97,7 +97,7 @@
 								<label for="File_First">사진 올리기</label> <input type="file"
 									id="File_First" class="SNS_Buttons_File"
 									accept=".jpg,.jpeg,.png,.gif,.bmp" onchange="loadImage(this)"
-									name="photoGet" multiple />
+									name="photoGet" />
 							</div>
 							<input type="reset" class="SNS_Buttons" value="전체 삭제"
 								onclick="removeAllLi()" />

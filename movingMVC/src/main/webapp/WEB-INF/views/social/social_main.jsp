@@ -156,8 +156,9 @@
 							<c:if test="${s.projectId==2}">
 								<div class="SNS_Cont_Move">0명이 이 영화를 후원하여 0원이 모였습니다!</div>
 							</c:if>
+							<div class="SNS_Cont_Move">${s.moveCount}명이좋아합니다!</div>
 								<div class="SNS_Cont_Option">
-									<div class="SNS_Cont_Option_Move">무브!</div>
+									<div class="SNS_Cont_Option_Move" onclick="location='/moving.com/social/add_move?social_id=${sessionSocial.id}&post_num=${s.id}&page_num=0';">무브!</div>
 									<div class="SNS_Cont_Option_Funding" onclick="if(confirm('공유할까요?') == true){
 											location='/moving.com/social/post_share_ok?id=${s.id}&socialId=${s_pro.id}&page_num=0';}else{return}">공유하기</div>
 								</div>
