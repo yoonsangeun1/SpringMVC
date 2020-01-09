@@ -15,12 +15,12 @@
 	<div id="SNS_Profile_Wrap">						<!-- 오브젝트 항목 래핑 -->
 		<div id="SNS_Profile_Top">
 			<div id="SNS_Profile_Ground">
-				<c:if test="${'default' == s_pro.backgroundImagePath}">
+<%-- 				<c:if test="${'default' == s_pro.backgroundImagePath}"> --%>
 					<div id="SNS_Profile_Background" style="background-image:url(${pageContext.request.contextPath}/resources/images/sns_back1.jpg)">
-				</c:if>
-				<c:if test="${'default' != s_pro.backgroundImagePath}">
-					<div id="SNS_Profile_Background" style="background-image:url('${s_pro.backgroundImagePath}')">
-				</c:if>
+<%-- 				</c:if> --%>
+<%-- 				<c:if test="${'default' != s_pro.backgroundImagePath}"> --%>
+<%-- 					<div id="SNS_Profile_Background" style="background-image:url('${s_pro.backgroundImagePath}')"> --%>
+<%-- 				</c:if> --%>
 					<c:if test="${'default' != s_pro.profileImagePath}">					<!-- 회원 이미지가 없을 경우 기본 이미지로 설정 -->
 						<img id="SNS_Profile_Photo" src="${s_pro.profileImagePath}">
 					</c:if>
@@ -497,7 +497,7 @@
 							<c:forEach  var="s_post" items="${s_pro.socialPostVO}">
 							<li>
 								<div class="SNS_Profile_Image">
-									<img class="SNS_Profile_Image_Photo" src="${s_pro.profileImagePath}">
+									<img class="SNS_Profile_Image_Photo" style="background:white">
 									<div class="SNS_Profile_Image_Info">
 										<c:if test="${fn:length(s_post.content)>100}">
 											<p>${fn:substring(s_post.content,0,99)}...</p>										
@@ -523,8 +523,8 @@
 							<div class="SNS_Profile_Friends_Li">
 								<img class="SNS_Profile_Friends_Picture" src="../images/sns_photo14.jpg">
 								<div class="SNS_Profile_Frineds_Info">
-									<div class="SNS_Profile_Friends_Name">김충칭</div>
-									<div class="SNS_Profile_Friends_Intro">장기밀매합니다</div>
+									<div class="SNS_Profile_Friends_Name">김석환</div>
+									<div class="SNS_Profile_Friends_Intro">매일 배우로써 노력합니다</div>
 									<input class="SNS_Profile_Friends_Out" type="button" 
 										   value="팔로우 취소">
 								</div>

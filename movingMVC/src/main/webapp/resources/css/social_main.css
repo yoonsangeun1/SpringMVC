@@ -257,8 +257,9 @@
 	border:2px solid #b3a9eb;
 }
 #right_profile_friends_ul p{
+	width:50px;
 	font-size: 12px;
-	margin-left: 8px;
+/* 	margin-left: 8px; */
 	margin-top: 7px;
 	float: left;
 	text-align: center;
