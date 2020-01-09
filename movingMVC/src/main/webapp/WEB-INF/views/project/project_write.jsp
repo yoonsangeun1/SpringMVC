@@ -17,7 +17,8 @@
 				<li class="option" id="e" data-tab="fWrite_preview">미리보기</li>
 				<li>
 				<c:if test="${projectPostVO.statusCode == 0 }">
-				<button type="button" class="btn" 
+				<button type="button" class="fWrite_cont_btn button
+       button_c9d8ce2 button_f12 button_p1024 button_r4 " 
 				onclick="if(confirm('제출 후에는 수정이 불가합니다. 정말로 제출하시겠습니까?')==true){ location='/moving.com/project/write_submit?id=${projectPostVO.id}'; }else {return false;}">
 				검토 요청하기</button></c:if>
 				<c:if test="${projectPostVO.statusCode == 1 }">
@@ -290,29 +291,29 @@
 		<div id="fWrite_reward" class="menu-option">
 			<%------첫번째 리워드------------------------------------------------ --%>
 			<c:if test="${empty projectPostVO.rewardVO}">
-			리워드를 추가해주세요~
+			리워드를 추가해주세요
 			</c:if>
 			<c:if test="${!empty projectPostVO.rewardVO}">
 				<c:forEach var="r" items="${projectPostVO.rewardVO }">
 					<form method="post" action="/moving.com/rewards/edit_ok?id=${r.id }&where=reward" onsubmit="">
 					<input type="hidden" name="projectPostId" value="${projectPostVO.id }">
 					<input type="hidden" name="id" value="${r.id }">
-					<table border="1">
+					<table border="1" id="fWrite_cont_reward_table2" cellspacing="0">
 						<tr>
 							<th rowspan="8">리워드 -</th>
 							<td>금액</td>
-							<td><input type="number" name="price" size="12" value="${r.price }" /> 원 
+							<td  style="padding-right:115px;"><input type="number" name="price" size="12" value="${r.price }" /> 원 
 							<%-- 정렬순서 <input
 								name="no" size="5" value="${r.no }"/> </td> --%>
 						</tr>
 						<tr>
 							<td>리워드 명</td>
-							<td><input name="title" size="50" value="${r.title }" /></td>
+							<td><input name="title" size="41" value="${r.title }" /></td>
 
 						</tr>
 						<tr>
-							<td>상세 설명</td>
-							<td><%-- <textarea rows="10" cols="38" name="content">${r.content }</textarea> --%></td>
+							<td style="vertical-align: middle;">상세 설명</td>
+							<td><textarea rows="10" cols="38" name="content">${r.content }</textarea></td>
 						</tr>
 						
 						<tr>
@@ -335,8 +336,8 @@
 						</tr>
 						<tr>
 							<td>발송 시작일</td>
-							<td><input type="date" name="deliveryExpectDate" 
-							value="${fn:substring(r.deliveryExpectDate,0,10)  }" />
+							<td style="padding-left: 148px; text-align:left;"><input type="date" name="deliveryExpectDate" 
+							value="${fn:substring(r.deliveryExpectDate,0,10)  }"/>
 							</td>
 						</tr>
 						<tr>
@@ -346,27 +347,28 @@
 					</table>
 				</form>
 				</c:forEach>
-			</c:if>
-			
+			</c:if>		
 				
 			<div id="fWrite_reward1">
 				<form method="post" action="/moving.com/rewards/write_ok?id=${projectPostVO.id }&where=reward" onsubmit="">
 					<input type="hidden" name="projectPostId" value="${projectPostVO.id }">
-					<table border="1">
+					<table border="1" id="fWrite_cont_reward_table2" cellspacing="0">
 						<tr>
 							<th rowspan="8">리워드 추가)</th>
 							<td>금액</td>
-							<td><input type="number" name="price" size="12" /> 원 
+							<td style="padding-right:115px;"><input type="number" name="price" size="12" /> 원 
 							<!-- 정렬순서 <input
 								name="no" size="5" /> --><!--  <input type="button" name="close" /> --></td>
 						</tr>
+						
 						<tr>
 							<td>리워드 명</td>
-							<td><input name="title" size="50" /></td>
-
+							<td><input name="title" size="41" />
+							</td>
 						</tr>
+						
 						<tr>
-							<td>상세 설명</td>
+							<td style="vertical-align: middle;">상세 설명</td>
 							<td><textarea rows="10" cols="38" name="content"></textarea></td>
 						</tr>
 					
@@ -384,27 +386,32 @@
 						</tr>
 						<tr>
 							<td>발송 시작일</td>
-							<td><input type="date" name="deliveryExpectDate" />
+							<td  style="padding-left: 134px; text-align:left;">
+							<input type="date" name="deliveryExpectDate" />
 							</td>
 						</tr>
+						
 						<tr>
 							<th colspan="3">
-							<input type="submit" name="save" value="저장하기" /></th>
+							<input type="submit" name="save" value="저장하기" 
+							class="fWrite_cont_reward_btn button
+       button_c9d8ce2 button_f12 button_p1024 button_r4" /></th>
 						</tr>
 						<%-- 저장하기 누르면 ->유효성 검증 실행 -> 끝나면 -> 새 리워드 추가하기로 멘트 바뀜 -> 분기 줘야 함.--%>
 					</table>
 				</form>
 			</div>
-			
-
 
 				<%---------------------------------------------------------------------------------------------- --%>
-			<table>
+			<table style="margin-left:400px; margin-top:10px;">
 				<tr height="50">
-					<th colspan="3"><input type="submit" value="저장하기" /> <input
+					<th colspan="3"> <input
 						type="button" value="다음 단계로>" onclick="$('html, body').stop().animate({scrollTop : 0}, 500);" id="nextButton2"
-						 data-tab="fWrite_director" /> <input type="reset"
-						value="초기화" /></th>
+						 data-tab="fWrite_director"
+						 class="fWrite_cont_reward_btn button
+       button_c9d8ce2 button_f12 button_p1024 button_r4" /> <input type="reset"
+						value="초기화" class="fWrite_cont_reward_btn button
+       button_c9d8ce2 button_f12 button_p1024 button_r4"/></th>
 				</tr>
 			</table>
 		</div>
@@ -414,26 +421,27 @@
 		<form method="post" action="/moving.com/project/write_business_ok?id=${projectPostVO.id }" 
 		onsubmit="" enctype="multipart/form-data">
 		<input type="hidden" name="id" value="${projectPostVO.id }"/>
-			<table border="1">
+			<table border="1" id="fWrite_cont_director_table" cellspacing="0">
 				<tr>
 					<th colspan="2">아래에 입력한 모든 정보는 프로젝트 페이지에 노출되는 정보이니, 서포터와의 소통과
 						응대가 가능한 정확한 정보를 입력해주세요.</th>
 				</tr>
+				
 				<tr>
-					<th>
-						<dl>
-							<dt>제작사 이름(법인명)</dt>
-						</dl>
-					</th>
-					<td><input name="director" id="director" size="20" value="${business_name }" readonly="readonly"/></td>
+				
+					<td id="fWrite_cont_director_name">제작사 이름(법인명)</td>
+					
+					<td>
+					<input name="director" id="director" size="20" value="${business_name }" readonly="readonly"/>
+					
+					</td>
 				</tr>
+				
 				<tr>
-					<th>
-						<dl>
-							<dt>프로필 이미지</dt>
-							<dd>메이커 프로필 영역에 노출되는 내용으로 로고나 메이커님의 사진을 넣어주세요.</dd>
-						</dl>
-					</th>
+					<td id="fWrite_cont_director_image">프로필 이미지<br/>
+					<p style="font-weight: initial;">메이커 프로필 영역에 노출되는 내용으로 로고나 메이커님의 사진을 넣어주세요.</p>
+					</td>
+
 					<td>
 					<div class="select_profile_img">
 					 <c:if test="${'default' !=  profile_image_url  }">
@@ -455,16 +463,16 @@
 							} 
 						 });
 						 </script>
+						 <br/><br/>
 						3MB 이하의 사진만 사용할 수 있습니다.</td>
 				</tr>
+				
 				<tr>
-					<td>
-						<dl>
-							<dt>소셜 네트워크</dt>
-							<dd>서포터가 확인할 수 있는 메이커님의 페이스북, 인스타그램 링크 등을 등록해주세요.(최소 1개 등록)
-							</dd>
-						</dl>
+					<td id="fWrite_cont_director_social">소셜 네트워크<br/>
+						<p style="font-weight: initial;">서포터가 확인할 수 있는 메이커님의 페이스북, 인스타그램 링크 등을 등록해주세요.<br/>
+						(최소 1개 등록)</p>
 					</td>
+					
 					<td>
 						<ul>
 							<li>
@@ -494,14 +502,11 @@
 					</td>
 				</tr> -->
 				<tr>
-					<th>
-						<dl>
-							<dt>함께하는 멤버 등록(선택)</dt>
-							<dd>프로젝트를 함께 준비하시는 팀원분이 있다면 와디즈에 가입하신 계정을 등록해 주세요. 프로젝트 상세
-								페이지 우측에 메이커분과 함께 노출됩니다.</dd>
-						</dl>
-					</th>
+					<td id="fWrite_cont_director_member">함께하는 멤버 등록(선택)<br/>
+					<p style="font-weight: initial;">프로젝트를 함께 준비하시는 팀원분이 있다면 와디즈에 가입하신 계정을 등록해 주세요.<br/>
+					 프로젝트 상세페이지 우측에 메이커분과 함께 노출됩니다.</p>
 					<td>
+					
 					<c:if test="${!empty projectPostVO.business}">
 					<input name="withMem" id="withMem" size="30" oninput="nick_check2();" value="${projectPostVO.business }"/>
 					</c:if>
@@ -564,24 +569,25 @@
                 -->
                </td>
 				</tr>
+				
 				<tr>
-					<th>
-						<dl>
-							<dt>문의 이메일</dt>
-							<dd>서포터 문의 시 소통이 가능하고, 프로젝트 페이지에 노출가능한 이메일을 입력해주세요.</dd>
-						</dl>
-					</th>
-					<td><input name="email" id="email" size="30" value="${email}"/></td>
+					<td id="fWrite_cont_director_email">문의 이메일<br/>
+					<p style="font-weight: initial;">서포터 문의 시 소통이 가능하고, 프로젝트 페이지에 노출가능한 이메일을 입력해주세요.</p>
+					</td>
+					
+					<td>
+					<input name="email" id="email" size="30" value="${email}"/>
+					</td>
 				</tr>
 
 				<tr>
-					<td>
-						<dl>
-							<dt>문의 전화번호</dt>
-							<dd>서포터 문의 시 실시간 연락이 가능하고, 프로젝트 페이지에 노출가능한 대표번호를 입력해주세요.</dd>
-						</dl>
+					<td id="fWrite_cont_director_phone">문의 전화번호<br/>
+							<p style="font-weight: initial;">서포터 문의 시 실시간 연락이 가능하고, 프로젝트 페이지에 노출가능한 대표번호를 입력해주세요.</p>
 					</td>
-					<td><input name="phone2" id="phone2" size="30" value="${phone}" /></td>
+					
+					<td>
+					<input name="phone2" id="phone2" size="30" value="${phone}" />
+					</td>
 				</tr>
 				<!-- <tr>
 					<th>
@@ -597,10 +603,13 @@
 					</td>
 				</tr> -->
 				<tr height="50">
-					<th colspan="2"><input type="submit" value="저장하기" /> <input
-						type="button" value="다음 단계로>" onclick="$('html, body').stop().animate({scrollTop : 0}, 500);" id="nextButton3"
-						 data-tab="fWrite_calculate"/> <input type="reset"
-						value="초기화" /></th>
+					<th colspan="2"><input type="submit" value="저장하기" class="fWrite_cont_director_btn button
+       button_c9d8ce2 button_f12 button_p1024 button_r4" />
+					<input type="button" value="다음 단계로>" onclick="$('html, body').stop().animate({scrollTop : 0}, 500);" id="nextButton3"
+						 data-tab="fWrite_calculate" class="fWrite_cont_director_btn button
+       button_c9d8ce2 button_f12 button_p1024 button_r4"/>
+					 <input type="reset" value="초기화" class="fWrite_cont_director_btn button
+       button_c9d8ce2 button_f12 button_p1024 button_r4" /></th>
 				</tr>
 			</table>
 		</form>
