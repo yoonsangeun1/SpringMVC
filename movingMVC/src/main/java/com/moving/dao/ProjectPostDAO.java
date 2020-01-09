@@ -83,5 +83,7 @@ public interface ProjectPostDAO {
 
 	List<ProjectPostVO> selectLikeList(int mid);
 
+	List<ProjectPostVO> selectMakeList(int mid);
+
 	
 }

@@ -511,10 +511,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 회원 아이디를 기준으로 좋아요한 목록 찾기 -->
 	<select id="selectLikeList" resultMap="minilist">
-	select P.id p_id, P.title, P.thumbnail_image, M.register_date AS like_date, U.nickname, U.id AS user_id 
-	FROM project_post P, move M, m_user U
+	select P.id p_id, P.title, P.thumbnail_image, M.register_date AS like_date
+	FROM project_post P, move M
 	WHERE P.id = M.project_post_id 
-	AND M.user_id_from = user_id
 	AND M.user_id_from = #{mid}
+	</select>
+	
+	<!-- 회원 아이디를 기준으로 제작한 목록 찾기 -->
+	<select id="selectMakeList" resultType="projectPostVO">
+	select id, title, thumbnail_image
+	FROM project_post
+	WHERE user_id = #{mid}
 	</select>
 </mapper>

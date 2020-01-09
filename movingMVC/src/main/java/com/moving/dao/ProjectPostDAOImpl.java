@@ -198,5 +198,10 @@ public class ProjectPostDAOImpl implements ProjectPostDAO {
 	public List<ProjectPostVO> selectLikeList(int mid) {
 		return sqlSession.selectList("selectLikeList", mid);
 	}
+
+	@Override
+	public List<ProjectPostVO> selectMakeList(int mid) {
+		return sqlSession.selectList("selectMakeList", mid);
+	}
 	
 }

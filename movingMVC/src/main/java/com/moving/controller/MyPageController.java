@@ -87,11 +87,13 @@ public class MyPageController {
 			
 			
 			//만든
+			List<ProjectPostVO> makeList = projectPostService.selectMakeList(mid);
 			
 			
 			
 			
 			
+			m.addObject("makeList",makeList);
 			m.addObject("likeList",likeList);
 			m.addObject("boardCount",boardCount);
 			m.addObject("mid",mid);

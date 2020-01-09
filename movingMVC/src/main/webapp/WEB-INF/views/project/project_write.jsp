@@ -254,7 +254,7 @@
             
             <tr>
              <td colspan="2">
-             <textarea cols="133" rows="30" name="content" id="content"></textarea>
+             <textarea cols="133" rows="30" name="content" id="content" value="${projectPostVO.content }"></textarea>
              
    <script type="text/javascript">
    var oEditors = []; //전역변수
@@ -312,7 +312,7 @@
 						</tr>
 						<tr>
 							<td>상세 설명</td>
-							<td><textarea rows="10" cols="38" name="content">${r.content }</textarea></td>
+							<td><%-- <textarea rows="10" cols="38" name="content">${r.content }</textarea> --%></td>
 						</tr>
 						
 						<tr>

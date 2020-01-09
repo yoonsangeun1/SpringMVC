@@ -352,6 +352,7 @@ public class ProjectPostController {
 					projectPostVO.setThumbnailImage(projectPostVO.getThumbnailImage()); //이전 파일 경로를 다시 저장
 					projectPostVO.setTitle(multi.getParameter("title"));
 					projectPostVO.setIntroduce(multi.getParameter("introduce"));
+					projectPostVO.setContent(multi.getParameter("content"));
 					projectPostVO.setTargetPrice(Integer.parseInt(multi.getParameter("targetPrice")));
 					projectPostVO.setTargetLimit(multi.getParameter("targetLimit"));
 					projectPostVO.setCodeNo(Integer.parseInt(multi.getParameter("codeNo")));

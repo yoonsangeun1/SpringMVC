@@ -188,4 +188,9 @@ public class ProjectPostServiceImpl implements ProjectPostService {
 	public List<ProjectPostVO> selectLikeList(int mid) {
 		return projectPostDAO.selectLikeList(mid);
 	}
+
+	@Override
+	public List<ProjectPostVO> selectMakeList(int mid) {
+		return projectPostDAO.selectMakeList(mid);
+	}
 }
