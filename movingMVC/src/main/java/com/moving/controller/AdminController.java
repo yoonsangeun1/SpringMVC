@@ -17,7 +17,7 @@ public class AdminController {
 	/* 관리자 홈 */
 	@RequestMapping(value="/admin")
 	public ModelAndView admin() {
-		return new ModelAndView("admin");
+		return new ModelAndView("admin/admin_member");
 	}//admin()
 	
 //	/* 게시판 관리 */

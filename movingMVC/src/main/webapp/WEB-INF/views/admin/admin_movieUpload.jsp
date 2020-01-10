@@ -104,74 +104,16 @@
 						</td>
 					</tr>
 					<tr>
-						<th>이미지</th>
-						<td>
-							<%-- 이미지파일 불러오기 --%>
-							<div id="aMUploadC_imageLoad">
-								<!-- <form method="post" enctype="multipart/form-data" action="#">
-								<input multiple="multiple" name="files[]" id="files" type="file"
-									style="width: 500px" />
-							</form> 
-							 -->
-								<input type="file" />
-								
-							</div> <%-- 이미지파일 --%>
-							<div id="aMUploadC_image">
-							
-							</div>
-						</td>
-					</tr>
-				</table>
-			</div>
-
-			<%-- 업로드 창 오른쪽 div --%>
-			<div id="aMUploadRight">
-				<table border="1" id="aMUR_table">
-					<tr>
-					
-						<%-- 동영상 div --%>
-						<td>
-							<div id="aMUploadR_video">
-								<iframe width="250" height="160" src="https://www.youtube.com/embed/b5bHx1nTQ24" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-							</div>
-						</td>
-					</tr>
-					<tr>
 					
 						<%-- 동영상 url or 파일명 --%>
-						<td height="100">
-							<div id="aMUploadR_videoUrl">
-								영상 파일 경로<input name="aMUploadR_url" id="aMUploadR_url" size="20" readonly />
-							</div>
-						</td>
+						<td style="text-align: center;">영상 파일 경로</td>
+						<td><input name="videoFilePath" id="aMUploadR_url" size="50"/></td>
 					</tr>
-					<tr>
-					
-						<%-- 제작사/배우 추가 --%>
-						<th height="30">제작사/배우 사진 추가</th>
-					</tr>
-					<tr>
-					
-						<%-- 제작사/배우 사진 --%>
-						<td height="100">
-							<div id="aMUploadR_Actor">
-							
-								<button type="button" name="aMU_imageBtn1" id="aMU_imageBtn1" >
-									<img src="../images/addfriendB.png" width="70" height="90" />
-								</button>
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<img src="../images/addfriendW.png" width="70" height="90" alt="이미지를 추가해 주세요." />
-								<img src="../images/addfriendW.png" width="70" height="90" alt="이미지를 추가해 주세요." />
-
-							</div>
-						</td>
-					</tr>
-
 				</table>
 			</div>
 			<%-- 취소 버튼 --%>
 			<div id="aMUploadR_cancelBtn">
-				<button type="reset" class="button">취소</button>
+				<button type="button" class="button upCancel">취소</button>
 			</div>
 			<%-- 업로드 버튼 --%>
 			<div id="aMUploadR_uploadBtn">
@@ -251,91 +193,15 @@
 						</td>
 					</tr>
 					<tr>
-						<th>이미지</th>
-						<td>
-							<%-- 이미지파일 불러오기 --%>
-							<div id="aMUploadC_imageLoad">
-								<!-- <form method="post" enctype="multipart/form-data" action="#">
-								<input multiple="multiple" name="files[]" id="files" type="file"
-									style="width: 500px" />
-							</form> 
-							 -->
-								<input type="file" />
-								
-							</div> <%-- 이미지파일 --%>
-							<div id="aMUploadC_image">
-							
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<th colspan="2">
-							<%-- 업로드 창 맨 밑 div --%>
-							<div id="aMUploadBottom">
-								댓글 허용<input type="checkbox" name="aMUploadU_Chk1" 
-								value="aMUComment" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;퍼가기 허용<input type="checkbox" 
-								name="aMUploadU_Chk2" value="aMUBring" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;공개 범위
-								
-								<%-- 공개범위 콤보박스 --%>
-								<select name="aMUComboBox" id="aMUComboBox">
-									<option value="전체">선택하세요.</option>
-									<option value="공개">공개</option>
-									<option value="비공개">비공개</option>
-								</select>
-							</div>
-						</th>
-					</tr>
-				</table>
-			</div>
-
-			<%-- 업로드 창 오른쪽 div --%>
-			<div id="aMUploadRight">
-				<table border="1" id="aMUR_table">
-					<tr>
-					
-						<%-- 동영상 div --%>
-						<td>
-							<div id="aMUploadR_video">
-								<iframe width="340" height="220" src="https://www.youtube.com/embed/b5bHx1nTQ24" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-							</div>
-						</td>
-					</tr>
-					<tr>
-					
 						<%-- 동영상 url or 파일명 --%>
-						<td height="100">
-							<div id="aMUploadR_videoUrl">
-								동영상 URL<input name="aMUploadR_url" id="aMUploadR_url" size="45" readonly />
-							</div>
-						</td>
+						<td style="text-align: center;">영상 파일 경로</td>
+						<td><input name="videoFilePath" id="aMUploadR_url" size="50"/></td>
 					</tr>
-					<tr>
-					
-						<%-- 제작사/배우 추가 --%>
-						<th height="30">제작사/배우 사진 추가</th>
-					</tr>
-					<tr>
-					
-						<%-- 제작사/배우 사진 --%>
-						<td height="100">
-							<div id="aMUploadR_Actor">
-							
-								<button type="button" name="aMU_imageBtn1" id="aMU_imageBtn1" >
-									<img src="../images/addfriendB.png" width="70" height="90" />
-								</button>
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<img src="../images/addfriendW.png" width="70" height="90" alt="이미지를 추가해 주세요." />
-								<img src="../images/addfriendW.png" width="70" height="90" alt="이미지를 추가해 주세요." />
-
-							</div>
-						</td>
-					</tr>
-
 				</table>
 			</div>
 			<%-- 취소 버튼 --%>
 			<div id="aMUploadR_cancelBtn">
-				<button type="reset" class="button">취소</button>
+				<button type="button" class="button upCancel">취소</button>
 			</div>
 			<%-- 업로드 버튼 --%>
 			<div id="aMUploadR_uploadBtn">
@@ -345,4 +211,13 @@
 	</div>
 	</div>
 </div>
+<script>
+	$(function(){
+		$('.upCancel').click(function(){
+			if(confirm('변경사항이 저장되지 않았습니다. 그래도 목록으로 나가시겠습니까?')){
+				location.href="/moving.com/admin/movie";
+			}
+		});
+	});
+</script>
 <%@ include file="../include/admin_footer.jsp"%>

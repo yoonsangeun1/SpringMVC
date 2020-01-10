@@ -12,6 +12,7 @@ import com.moving.dao.ProjectPostDAO;
 import com.moving.domain.MCommentVO;
 import com.moving.domain.MUserVO;
 import com.moving.domain.MoveVO;
+import com.moving.domain.NormalPostVO;
 import com.moving.domain.ProjectPostVO;
 import com.moving.domain.RewardVO;
 
@@ -192,5 +193,10 @@ public class ProjectPostServiceImpl implements ProjectPostService {
 	@Override
 	public List<ProjectPostVO> selectMakeList(int mid) {
 		return projectPostDAO.selectMakeList(mid);
+	}
+
+	@Override
+	public List<NormalPostVO> selectBoardList(int mid) {
+		return projectPostDAO.selectBoardList(mid);
 	}
 }

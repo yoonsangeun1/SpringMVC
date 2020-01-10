@@ -138,7 +138,7 @@
 
 #fCont_menubar {
 	width: 1200px;
-	height: 62px;
+	height: auto;
 	margin-top: 50px;
 	margin-bottom: 20px;
 	padding: auto 200px;
@@ -318,6 +318,14 @@
 	height:200px;
 }
 
+.fWrite_cont_btn{
+	cursor:pointer;	
+}
+
+.fWrite_cont_btn:hover{
+	background-color:#6a67ce;
+}
+
 
 /*reward css              */
 
@@ -345,11 +353,18 @@
 	width:700px;
 	border: 1px solid #a7a7a7;
     padding: 10px;
-    margin-left:auto;
-    margin-right:auto;
+    margin-left:150px;
     vertical-align: middle;
     background:#e4e4e4;
     line-height: 2.5;
+}
+
+.fWite_cont_reward_btn{
+	cursor:pointer;	
+}
+
+.fWrite_cont_reward_btn:hover{ /*버튼 호버시 */
+	background-color:#6a67ce;
 }
 
 /* 제작사 쪽 css*/
@@ -377,14 +392,39 @@
 	font-weight: bold;
 }
 
+#fWrite_cont_director_image{
+	text-align:left;
+	font-weight: bold;
+}
 
+#fWrite_cont_director_social{
+	text-align:left;
+	font-weight: bold;
+	
+}
 
+#fWrite_cont_director_member{
+	text-align:left;
+	font-weight: bold;
+}
 
+#fWrite_cont_director_email{
+	text-align:left;
+	font-weight: bold;
+}
 
+#fWrite_cont_director_phone{
+	text-align:left;
+	font-weight: bold;
+}
 
+.fWrite_cont_director_btn{
+	cursor:pointer;	
+}
 
-
-
+.fWrite_cont_director_btn:hover{ /*버튼 호버시 */
+	background-color:#6a67ce;
+}
 
 
 

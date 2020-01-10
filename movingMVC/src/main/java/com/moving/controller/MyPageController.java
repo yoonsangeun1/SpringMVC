@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.moving.domain.MUserVO;
+import com.moving.domain.NormalPostVO;
 import com.moving.domain.ProjectPostVO;
 import com.moving.service.MUserService;
 import com.moving.service.ProjectPostService;
@@ -89,10 +90,11 @@ public class MyPageController {
 			//만든
 			List<ProjectPostVO> makeList = projectPostService.selectMakeList(mid);
 			
+			//작성한
+			List<NormalPostVO> writeList=projectPostService.selectBoardList(mid);
 			
 			
-			
-			
+			m.addObject("writeList",writeList);
 			m.addObject("makeList",makeList);
 			m.addObject("likeList",likeList);
 			m.addObject("boardCount",boardCount);

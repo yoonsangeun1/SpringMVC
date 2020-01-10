@@ -395,8 +395,6 @@ public class BoardActorsController { /*배우모집 컨트롤러*/
 				
 			}else {//새로 등록한 썸네일이 없을 경우
 				
-				System.out.println(page+"+"+id);
-				
 				ba.setCategory(multi.getParameter("category"));
 				ba.setEmail(multi.getParameter("email"));
 				ba.setBirthDate(multi.getParameter("birthDate"));
@@ -423,13 +421,6 @@ public class BoardActorsController { /*배우모집 컨트롤러*/
 				ba.setWebsiteUrl(multi.getParameter("websiteUrl"));
 				ba.setContent(multi.getParameter("content"));
 				ba.setId(id);
-
-				System.out.println(ba.getContent());
-				System.out.println(ba.getSex());
-				System.out.println(ba.getWebsiteUrl());
-				System.out.println(ba.getEtctext());
-				System.out.println(ba.getCategory());
-				System.out.println(ba.getId());
 				
 				this.boardActorsService.editBoardActors2(ba);
 				

@@ -166,3 +166,5 @@ WHERE P.CODE_NO = 10005
  AND P.CODE_NO = 10005;
  
  alter table PROJECT_POST add(thumbnail_image varchar2(4000))
+
+ select * from project_post;

@@ -1,11 +1,51 @@
+insert into project_post (id) values(0)
+insert into profile_post (id) values(0)
+insert into normal_post (id) values(0)
+select user_id from SOCIAL_PROFILE where id=3
+update m_user set profile_image_url = 'default' where profile_image_url is null
+update m_user set business_license_image_path = null where id =20 
+delete from PROJECT_POST where thumbnail_image is null
+select * from m_comment where social_profile_id_from ='홈플러스'
+select * from(
+SELECT code_no, id, title, register_date, hit
+	FROM normal_post
+	WHERE user_id = 1
+	UNION ALL
+SELECT code_no, id, title, register_date, hit
+	FROM profile_post
+	WHERE user_id = 1
+	UNION ALL
+SELECT code_no, id, title, register_date, hit
+	FROM project_post
+	WHERE user_id = 1
+) order by register_date desc
 update m_user set name='관리자', genre_01 = 'history', phone='010-3429-9141'
 select * from PROJECT_POST where id=56
 where id=1
+select P.id AS p_id, M.user_id_from AS u_id, P.title, P.thumbnail_image, M.register_date AS r_date
+FROM project_post P, move M
+WHERE P.id = M.project_post_id
+AND M.user_id_from = 43
 select thumbnail_image from PROJECT_POST order by id desc
 alter table move add (project_post_id number(38));
-select * from reward
+select * from move
+select count(id) from move where user_id_from=45 and project_post_id=71
+select 
+P.id p_id, P.title title, P.register_date, P.user_id
+from m_user U, move M, project_post P
+where U.id = M.user_id_from
+AND M.project_post_id = P.id 
+select * from move
+delete from move
 update reward set PROJECT_POST_id=47
+selec
 alter table m_user add(report_count number(38))
+select P.id p_id, P.title, P.thumbnail_image, M.register_date AS like_date
+	FROM project_post P, move M
+	WHERE P.id = M.project_post_id 
+	AND M.user_id_from = 1
+select content from project_post
+delete from project_post where thumbnail_image is null
 
 select * from m_user where id=2 or id=1
 select * from m_user

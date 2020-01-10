@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" 
     uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ include file="../include/header.jsp"%>
+<%@ include file="../include/header.jsp"%>\
 
 <script type="text/javascript">
  $(document).ready(function(){
@@ -82,7 +82,7 @@
 					<li class="tab-link_write " data-tab="tab-4">작성한</li>
 				</ul>
 				
-				<div id="top-area" >
+				<div id="top-area">
 						<div class="select-box">
 							<select id="selectProjectType">
 								<option value="all" selected="selected">전체</option>
@@ -97,50 +97,93 @@
 		
 			<div id="tab-1" class="tab-content current">
 				<br />
+				<c:if test="${empty likeList }">
 				<p>좋아하는 프로젝트가 없습니다.</p>
+				</c:if>
+				<c:if test="${!empty likeList }">
+				<c:forEach var="l" items="${likeList}">
+				<div id="hover_container-category" style="float: left; width: 280px; height:250px;"
+					onclick="location.href='/moving.com/project/content?category=20001&id=${l.id}';">
+						<c:if test="${l.thumbnailImage == NULL}">
+							<img src="../images/funding05.PNG" width="270" height="150"  />
+						</c:if>
+						<c:if test="${l.thumbnailImage != NULL}">
+							<img src="${l.thumbnailImage}" width="270" height="150"  />
+						</c:if>
+						<div class="hover_container-category-padding">
+						<h3>${l.title }</h3> <br/>&nbsp;&nbsp;&nbsp;좋아요 일시: ${l.moveVO.registerDate } <%-- <a href="/moving.com/member_mypage?mid=${l.mUserVO.id }">
+						by. ${l.mUserVO.nickname }</a> --%>
+						
+						</div>
+				</div>
+				</c:forEach>
+				</c:if>
   			</div>
+  			
+  			
+  			
+  			
  			<div id="tab-2" class="tab-content">
  				<br />
 				<p>후원하는 프로젝트가 없습니다.</p>
  			</div>
+ 			
+ 			
+ 			
  			<div id="tab-3" class="tab-content">
  				<br />
-				<p>만든 프로젝트가 없습니다.</p>
+				<c:if test="${empty makeList }">
+				<p>좋아하는 프로젝트가 없습니다.</p>
+				</c:if>
+				<c:if test="${!empty makeList }">
+				<c:forEach var="l" items="${makeList}">
+				<c:if test="${statusCode == 0 }"> 아직 완료되지 않은 프로젝트입니다 </c:if>
+				<div id="hover_container-category" style="float: left; width: 280px; height:250px;"
+					onclick="location.href='/moving.com/project/content?category=20001&id=${l.id}';">
+						<c:if test="${empty l.thumbnailImage}">
+							<img src="/resources/images/funding05.PNG" width="270" height="150"  />
+						</c:if>
+						<c:if test="${l.thumbnailImage != NULL}">
+							<img src="${l.thumbnailImage}" width="270" height="150"  />
+						</c:if>
+						<div class="hover_container-category-padding">
+						<h3>${l.title }</h3> 
+						</div>
+				</div>
+				</c:forEach>
+				</c:if>
 			</div>
+			
+			
+			
  			<div id="tab-4" class="tab-content">
  				<br />
-				<table id="aBoard_table" border="1">
-					<tr>
-						<th scope="col" class="aBT_check"><input type="checkbox"
-							name="aBoard_check" id="ckAll" value="checkAll" /></th>
-						<th scope="col" class="aBT_no">번호</th>
-						<th scope="col" class="aBT_title">제목</th>
-						<th scope="col" class="aBT_writer">작성자</th>
-						<th scope="col" class="aBT_date">작성일</th>
-						<th scope="col" class="aBT_hit">조회수</th>
-					</tr>
-					<c:if test="${!empty nplist}">
-						<c:forEach var="n" items="${nplist }">
-							<input type="hidden" name="no_${n.id}" value="${n.id }" />
-							<tr data-value="${n.id }" class="tag">
-								<td class="bCheck" data-value="${n.id }"><input
-									type="checkbox" name="checkBoard" value="${n.id }"
-									data-value="${n.id }" class="chk" /></td>
-								<td class="bNo" data-value="${n.id }">${n.id }</td>
-								<td class="bTitle" data-value="${n.id }">${n.title }</td>
-								<td class="bUserId" data-value="${n.id }">${n.mUserVO.nickname }</td>
-								<td class="bRegisterDate" data-value="${n.id }">${n.registerDate }</td>
-								<td class="bHit" data-value="${n.id }">${n.hit }</td>
-							</tr>
-						</c:forEach>
-					</c:if>
-
-					<c:if test="${empty nplist }">
-						<tr>
-							<td colspan="6" align="center">등록된 게시글이 없습니다!</td>
-						</tr>
-					</c:if>
-				</table>
+				<table id="aBoard_table" style="width: 920px; background-color: white" border="1">
+		<tr>
+			<th scope="col" class="aBT_no" style="width: 100px">카테고리</th>
+			<th scope="col" class="aBT_title" style="width: 100px">번호</th>
+			<th scope="col" class="aBT_writer" style="width: 300px">제목</th>
+			<th scope="col" class="aBT_date" style="width: 150px">작성일</th>
+			<th scope="col" class="aBT_hit" style="width: 100px">조회수</th>
+		</tr>
+		<c:if test="${!empty writeList}">
+			<c:forEach var="n" items="${writeList }">
+			<tr data-value="${n.id }" class="tag" >
+				<td class="bNo" data-value="${n.id }" style="width: 100px">${n.codeNo }</td>
+				<td class="bNo" data-value="${n.id }" style="width: 100px">${n.id }</td>
+				<td class="bTitle" data-value="${n.id }" style="width: 300px">${n.title }</td>
+				<td class="bRegisterDate" data-value="${n.id }" style="width: 150px">${n.registerDate }</td>
+				<td class="bHit" data-value="${n.id }" style="width: 100px">${n.hit }</td>
+			</tr>
+			</c:forEach>
+		</c:if>
+		
+		<c:if test="${empty writeList }">
+			<tr>
+				<td colspan="6" align="center">등록한 게시글이 없습니다!</td>
+			</tr>
+		</c:if>
+		</table>
 			</div>
 			
 		</div>

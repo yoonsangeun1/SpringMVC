@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.moving.domain.AttachedFileVO;
 import com.moving.domain.MoveVO;
+import com.moving.domain.ProfilePostVO;
 import com.moving.domain.ReportVO;
 import com.moving.domain.SocialMessageVO;
 import com.moving.domain.SocialPostVO;
@@ -128,5 +129,10 @@ public class SocialDAOImpl implements SocialDAO {
 	@Override
 	public List<SocialProfileVO> selectRandomSocialProfile(int no) {
 		return this.sqlsession.selectList("selectRandomSocialProfile",no);
+	}
+
+	@Override
+	public List<ProfilePostVO> selectRandomProfilePost(int no) {
+		return this.sqlsession.selectList("selectRandomProfilePost",no);
 	}
 }

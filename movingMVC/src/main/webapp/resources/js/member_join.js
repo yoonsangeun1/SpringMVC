@@ -128,7 +128,7 @@ function userid_check(){
 				$("#joinBtn").prop("disabled",true);
 		        $("#joinBtn").css("background-color","#aaaaaa");
 			}else { //중복된 닉네임이 없다면
-				$("#emailCheck").text("사용 가능한 이메일입니다. 이메일인증을 해주세요 ! :)");
+				$("#emailCheck").text("사용 가능한 이메일입니다. :)");
 				$("#emailCheck").css("color","#9d8ce2");
 				$("#emailCheck").css("font-size","15px");
 				$("#emailCheck").css("font-weight","bold");//nickcheck영역에 문자열을 추가

@@ -454,7 +454,7 @@
 		<div id="SNS_main_right">
 			<!-- 우측 프로필, 뉴스, 기타 -->
 			<div id="right_profile">
-				<p>비슷한 장르 배우 추천</p>
+				<p>요즘 뜨는 회원</p>
 				<br />
 				<div id="right_profile_friends">
 					<ul id="right_profile_friends_ul">
@@ -476,15 +476,27 @@
 		</div>
 		<div id="right_etc">
 			<div id="SNS_right_title">
-				<p>영화 뉴스</p>
+				<p>추천하는 배우</p>
 			</div>
 			<ul id="SNS_ul2">
-				<li><a href="">'백두산'->'남산의 부장들' 이병헌, 연초 극장가 제대로 접수</a></li>
-				<li><a href="">외화 공습 시작 '닥터 두리틀','스타워즈' 새 정상 우뚝 ...'백두산' 3위로</a></li>
-				<li><a href="">이제훈 '사냥의 시간'으로 3년만에 스크린 복귀.. 폭발적 감정 연기 예고</a></li>
-				<li><a href="">'독립영화계 블루칩' 김한나, 신소율 김보라와 한솥밥(공식입장)</a></li>
-				<li><a href="">'시동' 마블리->뉴페이스 최성은..연기 맛집 거듭난 이유</a></li>
-				<li><a href="">"눈물 핑 돌아"..'백두산' 이병헌 김시아 부녀가 선사한 감동</a></li>
+				<c:if test="${!empty random_p}">
+					<c:forEach var="ran" items="${random_p}" begin="1" end="8">
+						<li><a href="/moving.com/board/actors_cont?id=${ran.id}&page=1">${ran.name}</a></li>
+					</c:forEach>
+				</c:if>
+			</ul>
+		</div>
+		<div id="right_etc">
+			<div id="SNS_right_title">
+				<p>영화 뉴스(타 사이트)</p>
+			</div>
+			<ul id="SNS_ul2">
+				<li><a href="https://www.msn.com/ko-kr/entertainment/movies/%eb%b0%b1%eb%91%90%ec%82%b0%e2%86%92%eb%82%a8%ec%82%b0%ec%9d%98-%eb%b6%80%ec%9e%a5%eb%93%a4-%ec%9d%b4%eb%b3%91%ed%97%8c-%ec%97%b0%ec%b4%88-%ea%b7%b9%ec%9e%a5%ea%b0%80-%ec%a0%9c%eb%8c%80%eb%a1%9c-%ec%a0%91%ec%88%98/ar-BBYL8tV">'백두산'->'남산의 부장들' 이병헌, 연초 극장가 제대로 접수</a></li>
+				<li><a href="https://www.msn.com/ko-kr/entertainment/movies/%ec%99%b8%ed%99%94-%ea%b3%b5%ec%8a%b5-%ec%8b%9c%ec%9e%91-%eb%8b%a5%ed%84%b0-%eb%91%90%eb%a6%ac%ed%8b%80%c2%b7%ec%8a%a4%ed%83%80%ec%9b%8c%ec%a6%88-%ec%83%88-%ec%a0%95%ec%83%81-%ec%9a%b0%eb%9a%9d%eb%b0%b1%eb%91%90%ec%82%b0-3%ec%9c%84%eb%a1%9c-%ec%a2%85%ed%95%a9/ar-BBYL8bo">외화 공습 시작 '닥터 두리틀','스타워즈' 새 정상 우뚝 ...'백두산' 3위로</a></li>
+				<li><a href="https://www.msn.com/ko-kr/entertainment/movies/%ec%9d%b4%ec%a0%9c%ed%9b%88-%ec%82%ac%eb%83%a5%ec%9d%98%ec%8b%9c%ea%b0%84%ec%9c%bc%eb%a1%9c-3%eb%85%84%eb%a7%8c-%ec%8a%a4%ed%81%ac%eb%a6%b0-%eb%b3%b5%ea%b7%80%ed%8f%ad%eb%b0%9c%ec%a0%81-%ea%b0%90%ec%a0%95%ec%97%b0%ea%b8%b0-%ec%98%88%ea%b3%a0/ar-BBYL8bt">이제훈 '사냥의 시간'으로 3년만에 스크린 복귀.. 폭발적 감정 연기 예고</a></li>
+				<li><a href="https://www.msn.com/ko-kr/entertainment/movies/%eb%8f%85%eb%a6%bd%ec%98%81%ed%99%94%ea%b3%84-%eb%b8%94%eb%a3%a8%ec%b9%a9-%ea%b9%80%ed%95%9c%eb%82%98-%ec%8b%a0%ec%86%8c%ec%9c%a8-%ea%b9%80%eb%b3%b4%eb%9d%bc%ec%99%80-%ed%95%9c%ec%86%a5%eb%b0%a5-%ea%b3%b5%ec%8b%9d%ec%9e%85%ec%9e%a5/ar-BBYJpLb">'독립영화계 블루칩' 김한나, 신소율 김보라와 한솥밥(공식입장)</a></li>
+				<li><a href="https://www.msn.com/ko-kr/entertainment/movies/%ec%8b%9c%eb%8f%99-%eb%a7%88%eb%b8%94%eb%a6%ac%e2%86%92%eb%89%b4%ed%8e%98%ec%9d%b4%ec%8a%a4-%ec%b5%9c%ec%84%b1%ec%9d%80%ec%97%b0%ea%b8%b0-%eb%a7%9b%ec%a7%91-%ea%b1%b0%eb%93%ad%eb%82%9c-%ec%9d%b4%ec%9c%a0/ar-BBYL8Zs">'시동' 마블리->뉴페이스 최성은..연기 맛집 거듭난 이유</a></li>
+				<li><a href="https://www.msn.com/ko-kr/entertainment/movies/%e2%80%9c%eb%88%88%eb%ac%bc-%ed%95%91-%eb%8f%8c%ec%95%84%e2%80%9d%eb%b0%b1%eb%91%90%ec%82%b0-%ec%9d%b4%eb%b3%91%ed%97%8c-%ea%b9%80%ec%8b%9c%ec%95%84-%eb%b6%80%eb%85%80%ea%b0%80-%ec%84%a0%ec%82%ac%ed%95%9c-%ea%b0%90%eb%8f%99/ar-BBYLkT2">"눈물 핑 돌아"..'백두산' 이병헌 김시아 부녀가 선사한 감동</a></li>
 			</ul>
 		</div>
 		<div id="right_etc2">

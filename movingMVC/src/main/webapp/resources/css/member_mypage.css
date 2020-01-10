@@ -150,7 +150,9 @@ ul.tabs li.current{
   display: none;
   background: #d9d3f5;
   padding: 15px;
-  min-height:400px;
+  min-height:700px !important;
+  height:auto !important;
+  overflow: visible;
 }
  
 .tab-content.current{
