@@ -4,6 +4,7 @@ package com.moving.controller;
 import java.io.File;
 import java.io.PrintWriter;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +18,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.moving.domain.MUserVO;
+import com.moving.domain.ProjectPostVO;
 import com.moving.service.MUserService;
+import com.moving.service.ProjectPostService;
 import com.oreilly.servlet.MultipartRequest;
 
 import pwdconv.PwdChange;
@@ -27,6 +30,10 @@ public class MyPageController {
 
 	@Autowired
 	private MUserService mUserService;
+	
+	@Autowired
+	private ProjectPostService projectPostService;
+	
 
 	/** 헤더 */
 	@RequestMapping(value="member_header")
@@ -72,6 +79,22 @@ public class MyPageController {
 			MUserVO userInfo = this.mUserService.selectUserInfo(mid);
 			int boardCount = this.mUserService.selectBoardCount(mid);
 			
+			
+			//좋아한
+			List<ProjectPostVO> likeList = projectPostService.selectLikeList(mid);
+			
+			//후원한
+			
+			
+			//만든
+			List<ProjectPostVO> makeList = projectPostService.selectMakeList(mid);
+			
+			
+			
+			
+			
+			m.addObject("makeList",makeList);
+			m.addObject("likeList",likeList);
 			m.addObject("boardCount",boardCount);
 			m.addObject("mid",mid);
 			m.addObject("userInfo",userInfo);

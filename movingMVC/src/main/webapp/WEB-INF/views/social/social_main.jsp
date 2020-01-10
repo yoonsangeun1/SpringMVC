@@ -29,13 +29,12 @@
 			<br />
 			<ul id="SNS_ul1">
 				<!-- 좌측 메뉴 생성 -->
-				<li><a href="#">즐겨찾기</a></li>
 				<li><a href="/moving.com/social/messenger?socialIdFrom=${sessionSocial.id}&socialIdTo=0">메신저</a></li>
-				<li><a href="#">영상</a></li>
-				<li><a href="#">페이지</a></li>
-				<li><a href="#">그룹</a></li>
-				<li><a href="#">이벤트</a></li>
-				<li><a href="#">저장한 게시글</a></li>
+				<li><a href="/moving.com/board/actors">배우</a></li>
+				<li><a href="/moving.com/video/videomain">영화</a></li>
+				<li><a href="/moving.com/project/list?category=20001">프로젝트</a></li>
+<!-- 				<li><a href="#">이벤트</a></li> -->
+<!-- 				<li><a href="#">저장한 게시글</a></li> -->
 			</ul>
 		</div>
 		<div id="SNS_main_mid">
@@ -156,8 +155,11 @@
 							<c:if test="${s.projectId==2}">
 								<div class="SNS_Cont_Move">0명이 이 영화를 후원하여 0원이 모였습니다!</div>
 							</c:if>
+							<c:if test="${s.moveCount>=1 }">
+								<div class="SNS_Cont_Move">${s.moveCount}명이좋아합니다!</div>
+							</c:if>
 								<div class="SNS_Cont_Option">
-									<div class="SNS_Cont_Option_Move">무브!</div>
+									<div class="SNS_Cont_Option_Move" onclick="location='/moving.com/social/add_move?social_id=${sessionSocial.id}&post_num=${s.id}&page_num=0';">무브!</div>
 									<div class="SNS_Cont_Option_Funding" onclick="if(confirm('공유할까요?') == true){
 											location='/moving.com/social/post_share_ok?id=${s.id}&socialId=${s_pro.id}&page_num=0';}else{return}">공유하기</div>
 								</div>
@@ -204,9 +206,8 @@
 											<input id="write"	name="write_${s.id}" class="write SNS_Comment_Write_Button"
 												type="button"	value="작성">
 										</div>
-
-
- 										<script>
+									</div>
+																			<script>
 										function t(bno) {
 											var sessionId=$('#sessionId').text();//로그인한 아이디
 											//var social_post_id = $('#social_post_id').val();//게시글 번호
@@ -281,7 +282,7 @@
 										   var content= $("input[name='content_"+rno+"']").val();//댓글 내용
 
 										   if(content=='') {
-										      alert('댓글 내용을 입력하세요!');
+// 										      alert('댓글 내용을 입력하세요!');
 										      $("input[name='content_"+rno+"']").val('').focus();
 										      return false;
 										   }
@@ -407,7 +408,7 @@
 													dataType:"text",
 													success: function(data) {
 														if(data=='SUCCESS') {
-															alert('댓글이 수정되었습니다!');
+// 															alert('댓글이 수정되었습니다!');
 															//getCommentList();//댓글 목록 함수 호출! 갱신된 내용 가져옴.
 															//getCommentCount();//댓글 개수 불러오기
 														}
@@ -433,7 +434,7 @@
 													dataType:'text',
 													success:function(data) {
 														if(data=='SUCCESS'){
-															alert('댓글이 삭제되었습니다!');
+// 															alert('댓글이 삭제되었습니다!');
 															//getCommentList();//댓글 목록 함수 호출! 갱신된 내용 가져옴.
 															//getCommentCount();//댓글 개수 불러오기
 														}
@@ -442,7 +443,7 @@
 											});
 										})
 										</script>
-									</div>
+									
 						</div>
 					</li>
 					</c:forEach>
@@ -457,35 +458,33 @@
 				<br />
 				<div id="right_profile_friends">
 					<ul id="right_profile_friends_ul">
-						<li ><img src="../images/sns_photo3.jpg">
-							<p>베잌동수</p></li>
-						<li ><img src="../images/sns_photo9.jpg">
-							<p>양드래곤</p></li>
-						<li ><img src="../images/sns_photo12.jpg">
-							<p>송타이거</p></li>
-						<li ><img src="../images/sns_photo6.jpg">
-							<p>윤상은행</p></li>
-						<li ><img src="../images/sns_photo7.jpg">
-							<p>홍채인식</p></li>
-						<li ><img src="../images/sns_photo7.jpg">
-							<p>홍채인식</p></li>
-						<li ><img src="../images/sns_photo7.jpg">
-							<p>홍채인식</p></li>
+					<c:if test="${!empty random_s}">
+						<c:forEach var="ran" items="${random_s}" begin="1" end="8">
+							<c:if test="${'default'==ran.profileImagePath }">
+								<li><img onclick="location.href='/moving.com/social/profile?id=${ran.id}'"
+								  src="../images/member_profile.png"><p>${ran.nickname}</p></li>
+							</c:if>
+							<c:if test="${'default'!=ran.profileImagePath }">
+								<li><img onclick="location.href='/moving.com/social/profile?id=${ran.id}'"
+								  src="${ran.profileImagePath}"><p>${ran.nickname}</p></li>
+							</c:if>
+						</c:forEach>
+					</c:if>
 					</ul>
 				</div>
 			</div>
 		</div>
 		<div id="right_etc">
 			<div id="SNS_right_title">
-				<p>뉴스</p>
+				<p>영화 뉴스</p>
 			</div>
 			<ul id="SNS_ul2">
-				<li><a href="">[속보]팀장 윤상은.. 박진우에게 팀장 양도..."감격"</a></li>
-				<li><a href="">홍진호.. 뉴스라인 2번째 당첨.. 홍진호.. 뉴스라인 2번째 당첨..</a></li>
-				<li><a href="">박진우 감독.. 영화 "자신있나" 매출 2조 달성</a></li>
-				<li><a href="">아스날 또 "4번째"</a></li>
-				<li><a href="">(대충 감동적인 뉴스)</a></li>
-				<li><a href="">빨리 프로젝트 끝내고 싶다</a></li>
+				<li><a href="">'백두산'->'남산의 부장들' 이병헌, 연초 극장가 제대로 접수</a></li>
+				<li><a href="">외화 공습 시작 '닥터 두리틀','스타워즈' 새 정상 우뚝 ...'백두산' 3위로</a></li>
+				<li><a href="">이제훈 '사냥의 시간'으로 3년만에 스크린 복귀.. 폭발적 감정 연기 예고</a></li>
+				<li><a href="">'독립영화계 블루칩' 김한나, 신소율 김보라와 한솥밥(공식입장)</a></li>
+				<li><a href="">'시동' 마블리->뉴페이스 최성은..연기 맛집 거듭난 이유</a></li>
+				<li><a href="">"눈물 핑 돌아"..'백두산' 이병헌 김시아 부녀가 선사한 감동</a></li>
 			</ul>
 		</div>
 		<div id="right_etc2">
@@ -493,12 +492,14 @@
 				<p>추천 광고</p>
 			</div>
 			<ul id="SNS_ul2">
-				<li><a href="">제주도 항공 특가 편도 140만원 {즉시보기}</a></li>
-				<li><a href="">홍진호.. 광고까지 2번째 당첨.. 홍진호.. 광고까지 2번째 당첨..</a></li>
-				<li><a href="">5천원만 투자하시면 100원으로 돌려드립니다!</a></li>
-				<li><a href="">♚♚히어로즈 오브 더 스☆톰♚♚가입시$$전원 카드팩☜☜</a></li>
-				<li><a href="">월 4만원에 맥북을 사는 흑우가 있다?!</a></li>
-				<li><a href="">2차 프로젝트에 쏟은 기간.."2시간" 보기만 해도 10만원!(이 부과됩니다.)</a></li>
+				<c:if test="${empty project}">
+					광고영역
+				</c:if>
+				<c:if test="${!empty project}">
+					<c:forEach var="p" items="${project}" begin="1" end="7">
+						<li><a href="/moving.com/project/list?category=20001&id=${p.id}">${p.title}</a></li>
+					</c:forEach>
+				</c:if>
 			</ul>
 		</div>
 	</div>

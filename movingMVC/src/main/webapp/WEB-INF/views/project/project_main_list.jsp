@@ -29,7 +29,7 @@
 		<div id="bFree_writing" style="text-align: center; align: center">
 	      <input type="button" class="bFree_writing_btn button
 	       button_c9d8ce2 button_f12 button_p1024 button_r4" 
-	      value="펀딩 오픈하기" onclick="location='/moving.com/project/write';" />
+	      value="펀딩 오픈하기" onclick="location='/moving.com/project/write';" style="margin-right: 550px" />
 	    </div> <%-- 글 쓰기 폼 div --%>
 		</section>
 	</div>
@@ -64,7 +64,7 @@
 		</div>
 
 		<%-- 우측 리스트 --%>
-		<div id="fList_right">
+		<div id="fList_right" style="overflow: hidden;">
 			<%-- 우측 리스트 제목 --%>
 			<h3>급상승 프로젝트</h3>
 			<div class="clear"></div>
@@ -131,7 +131,8 @@
 				</li> -->
 			</ul>
 			<%-- 우측 리스트 페이지 번호 --%>
-			<div id="page_num_container">
+			   <div id="page_num_container" style="padding: 0px 7px;
+   color:#999; font-size:17px; text-decoration:none;">
 	
 		   <%-- 페이징 추가 --%>
   <c:if test="${(empty findField) && (empty findName)}"> <%--검색 전 --%>
@@ -221,9 +222,10 @@
 		</p>
 		<div id="NewsletterSignUp_form">
 			<form>
-				<input id="newsletter-signup-input"
-					placeholder="이메일 주소 입력" type="email" value="" /><!-- Enter email address -->
-				<button type="submit" class="subscribeBtn button_wce8e8e8"id="newsletter-signup-button">구독</button>
+			   <input id="newsletter-signup-input"
+               placeholder="이메일 주소 입력" type="email" value="" style="height:24px;"  /><!-- Enter email address -->
+            <button type="submit" class="subscribeBtn button_wce8e8e8"
+            id="newsletter-signup-button">구독</button>
 			</form><!-- Subscribe -->
 		</div>
 	</div>
@@ -244,10 +246,10 @@
 				<div class="gallery">
 					<a href="/moving.com/project/content?id=${p.id }&category=${category}"> 
 					<c:if test="${!empty p.thumbnailImage }">
-					<img src="${p.thumbnailImage }" alt="funding01" width="246" height="auto">
+					<img src="${p.thumbnailImage }" width="246" height="135">
 					</c:if>
 					<c:if test="${empty p.thumbnailImage }">
-					<img src="../images/funding01.PNG" alt="funding01" width="246" height="auto">
+					<img src="../images/funding05.PNG" width="246" height="135">
 					</c:if>
 					</a>
 					<div class="desc">${p.title }<c:if test="${p.commentCount != 0}">[${p.commentCount }]</c:if></div>
@@ -260,7 +262,7 @@
 <div id="bFree_search"> <%--검색 구간 전체 div --%>
 <form action="/moving.com/project/list?category=${category}&findField=${findField}&findName=${findName}">
       <input type="hidden" name="category" value="${category }" />
-     <select name="findField" id="findField">
+     <select name="findField" id="findField" style="height: 28px">
       <option value="title" <c:if test="${findField == 'title'}">${'selected'}</c:if>>제목</option> 
       <option value="content" <c:if test="${findField == 'content'}">${'selected'}</c:if>>내용</option>
       <option value="nickname" <c:if test="${findField == 'nickname'}">${'selected'}</c:if>>닉네임</option>

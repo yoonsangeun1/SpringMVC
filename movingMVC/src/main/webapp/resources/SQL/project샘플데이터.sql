@@ -1,7 +1,8 @@
 update m_user set name='관리자', genre_01 = 'history', phone='010-3429-9141'
-
+select * from PROJECT_POST where id=56
 where id=1
 select thumbnail_image from PROJECT_POST order by id desc
+alter table move add (project_post_id number(38));
 select * from reward
 update reward set PROJECT_POST_id=47
 alter table m_user add(report_count number(38))

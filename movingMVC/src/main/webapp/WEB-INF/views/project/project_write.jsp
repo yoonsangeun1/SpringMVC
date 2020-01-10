@@ -1,12 +1,11 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="../include/header.jsp"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<script src="../resources/editor/js/HuskyEZCreator.js" charset="UTF-8"></script>
 <!-- 크라우드 펀딩 글 작성 페이지 -->
 <div id="fWrite_wrap" style="padding-top:90px">
 <!-- <form method="post" action="" onsubmit=""> -->
 
-	
-	
 		<!-- 상단 메뉴 -->
 		<div id="fWrite_title">
 
@@ -16,7 +15,16 @@
 				<li class="option" id="c" data-tab="fWrite_director">제작사</li>
 				<li class="option" id="d" data-tab="fWrite_calculate">정산</li>
 				<li class="option" id="e" data-tab="fWrite_preview">미리보기</li>
-				<li><button type="submit" class="btn">검토 요청하기</button></li>
+				<li>
+				<c:if test="${projectPostVO.statusCode == 0 }">
+				<button type="button" class="btn" 
+				onclick="if(confirm('제출 후에는 수정이 불가합니다. 정말로 제출하시겠습니까?')==true){ location='/moving.com/project/write_submit?id=${projectPostVO.id}'; }else {return false;}">
+				검토 요청하기</button></c:if>
+				<c:if test="${projectPostVO.statusCode == 1 }">
+				<button type="button" class="btn" 
+				onclick="if(confirm('수정이 완료되었습니다. 메인 리스트로 돌아가시겠습니까?')==true){ location='/moving.com/project/list?category=20001'; }else {return false;}">
+				수정 완료</button></c:if>
+				</li>
 			</ul>
 			<!-- 			<but1ton type="submit" class="btn" >검토 요청하기</button> -->
 			<!-- 알림  -->		
@@ -46,7 +54,7 @@
 					<input type="hidden" name="userId" value="${sessionUser.id }">
 					프로젝트 번호 : ${projectPostVO.id }
 					<br/>
-						http://localhost:8084/moving.com/project/content?id=${projectPostVO.id }로 프로젝트 개설 이후 접근 가능합니다. 
+						http://192.168.0.81:8084/moving.com/project/content?id=${projectPostVO.id }로 프로젝트 개설 이후 접근 가능합니다. 
 					</td>	
 				</tr>
 				
@@ -82,7 +90,7 @@
 					 <img src="${projectPostVO.thumbnailImage}" width="370" height="220"/>
 					 </c:if>
 					 <c:if test="${empty projectPostVO.thumbnailImage  }">
-					 <img src="../resources/images/noimage.gif" width="370" height="220"/>
+					 <img src=""/>
 					 </c:if>
 					 </div>
 					<input type="file" name="thumbnailImage" id="titleImg"  />
@@ -172,6 +180,7 @@
 					<td id="fWrite_cont_category">카테고리<br/>
 					<p style="font-weight: initial;">오픈 후, 노출될 카테고리를 선택해 주세요.</p>
 					</td>
+					
 					<td><select name="codeNo">
 							<c:if test="${!empty projectPostVO.codeNo}">
 							<option value="content"<c:if test="${projectPostVO.codeNo == 20001}">${'selected'}</c:if>>내용</option>
@@ -185,16 +194,14 @@
 							<option value="2000108"<c:if test="${projectPostVO.codeNo == 2000108}">${'selected'}</c:if>>애니메이션</option>
 							<option value="2000109"<c:if test="${projectPostVO.codeNo == 2000109}">${'selected'}</c:if>>기타</option>
 							</c:if>
-					</select></td>
+					</select>
+					</td>
 				</tr>
 				
 				<tr>
-					<th>
-						<dl>
-							<dt>프로젝트 종료일</dt>
-							<dd>프로젝트 진행 기간은 평균 30일입니다.</dd>
-						</dl>
-					</th>
+					<td id="fWite_cont_limit">프로젝트 종료일
+              		 <p style="font-weight: initial;">프로젝트 진행 기간은 평균 30일입니다.</p>
+              		 </td>
 					<c:if test="${empty projectPostVO.targetLimit }">
 					<td><input type="date" name="targetLimit" /></td>
 					</c:if>
@@ -219,23 +226,50 @@
 					</td>
 				</tr>
 				
-				<tr>
-					<td >리워드 필수 확인사항<br/>
-							답변이 미흡할 경우, 심사 시 재요청 드리며 심사 기간이 늘어날 수 있습니다.
-					</td>
-					
-					<td><b>Q1. 리워드가 타 크라우드펀딩사 및 온라인 커머스, 자사 홈페이지 등 다른 판매처에서
-							유통된 적이 있거나 현재 유통 중인가요?</b><br /> 선택하신 답변이 사실과 다를 경우 약정서에 근거하여 프로젝트
-						취소 및 위약벌이 부과될 수 있습니다. <br /> <input type="radio" name="warn"
-						value="no" checked />아니요. 다른 곳에서 유통한 적이 없으며 와디즈를 통해 처음 선보이는
-						제품입니다. <br /> <input type="radio" name="warn" value="yes" />예,
-						다른 곳에서 유통한 적이 있습니다. 또는 현재 유통 중입니다. <br /> <b>Q2. 현재 진행(제작)된
-							리워드의 상태 및 앞으로의 진행(제작)계획을 일정과 함께 구체적으로 설명해주세요.</b><br /> <textarea
-							cols="30" rows="2" name="question02"></textarea><br /> <b>Q3.
-							리워드의 전달(발송) 계획을 알려주세요.</b><br /> <textarea cols="30" rows="2"
-							name="question03"></textarea></td>
-
-				</tr>
+				   <tr>
+               <td id="fWrite_cont_Essential">리워드 필수 확인사항<br/>
+               <p style="font-weight: initial;">답변이 미흡할 경우, 심사 시 재요청 드리며 심사 기간이 늘어날 수 있습니다.</p>
+               </td>
+               
+   <td>
+               <b>Q1. 리워드가 타 크라우드펀딩사 및 온라인 커머스, 자사 홈페이지 등 다른 판매처에서
+                     유통된 적이 있거나 현재 유통 중인가요?</b><br /> 
+                     선택하신 답변이 사실과 다를 경우 약정서에 근거하여 프로젝트
+                  취소 및 위약벌이 부과될 수 있습니다. <br /><br/>
+                  <input type="radio" name="warn"
+                  value="no" checked />아니요. 다른 곳에서 유통한 적이 없으며 와디즈를 통해 처음 선보이는
+                  제품입니다. <br/><br/>
+                   <input type="radio" name="warn" value="yes" />예,
+                  다른 곳에서 유통한 적이 있습니다. 또는 현재 유통 중입니다. <br/><br/>
+   </td>
+                              <!--  <b>Q2. 현재 진행(제작)된
+                     리워드의 상태 및 앞으로의 진행(제작)계획을 일정과 함께 구체적으로 설명해주세요.</b><br/>
+                      <textarea
+                     cols="30" rows="2" name="question02" id="question02"></textarea><br/><br/>
+                      <b>Q3. 리워드의 전달(발송) 계획을 알려주세요.</b><br/>
+                       <textarea cols="30" rows="2"
+                     name="question03" id="question03"></textarea>
+               </td> -->
+            </tr>
+            
+            <tr>
+             <td colspan="2">
+             <textarea cols="133" rows="30" name="content" id="content" value="${projectPostVO.content }"></textarea>
+             
+   <script type="text/javascript">
+   var oEditors = []; //전역변수
+   
+   nhn.husky.EZCreator.createInIFrame({ //스마트 에디터 프레임 생성
+       oAppRef: oEditors,
+       elPlaceHolder:"content",
+       sSkinURI: "../resources/editor/SmartEditor2Skin.html",
+       bUseToolbar : true,      //툴 바 사용 여부
+       bUseVerticalResizer : true,  //입력창 크기 조절 사용 여부
+       bUseVerticalResizer : true, //모드 탭(Editor | HTML | TEXT ) 사용 여부
+   });
+   </script>
+             </td>
+            </tr>
 				
 				
 				<tr height="50">
@@ -260,12 +294,12 @@
 			</c:if>
 			<c:if test="${!empty projectPostVO.rewardVO}">
 				<c:forEach var="r" items="${projectPostVO.rewardVO }">
-					<form method="post" action="/moving.com/rewards/edit_ok?id=${r.id }" onsubmit="">
+					<form method="post" action="/moving.com/rewards/edit_ok?id=${r.id }&where=reward" onsubmit="">
 					<input type="hidden" name="projectPostId" value="${projectPostVO.id }">
 					<input type="hidden" name="id" value="${r.id }">
 					<table border="1">
 						<tr>
-							<th rowspan="8">리워드 ${r.id} -</th>
+							<th rowspan="8">리워드 -</th>
 							<td>금액</td>
 							<td><input type="number" name="price" size="12" value="${r.price }" /> 원 
 							<%-- 정렬순서 <input
@@ -278,7 +312,7 @@
 						</tr>
 						<tr>
 							<td>상세 설명</td>
-							<td><textarea rows="10" cols="38" name="content">${r.content }</textarea></td>
+							<td><%-- <textarea rows="10" cols="38" name="content">${r.content }</textarea> --%></td>
 						</tr>
 						
 						<tr>
@@ -316,7 +350,7 @@
 			
 				
 			<div id="fWrite_reward1">
-				<form method="post" action="/moving.com/rewards/write_ok?id=${projectPostVO.id }" onsubmit="">
+				<form method="post" action="/moving.com/rewards/write_ok?id=${projectPostVO.id }&where=reward" onsubmit="">
 					<input type="hidden" name="projectPostId" value="${projectPostVO.id }">
 					<table border="1">
 						<tr>
@@ -377,6 +411,9 @@
 		
 		<!-- 본문 내용 : 제작사-->
 		<div id="fWrite_director" class="menu-option">
+		<form method="post" action="/moving.com/project/write_business_ok?id=${projectPostVO.id }" 
+		onsubmit="" enctype="multipart/form-data">
+		<input type="hidden" name="id" value="${projectPostVO.id }"/>
 			<table border="1">
 				<tr>
 					<th colspan="2">아래에 입력한 모든 정보는 프로젝트 페이지에 노출되는 정보이니, 서포터와의 소통과
@@ -388,7 +425,7 @@
 							<dt>제작사 이름(법인명)</dt>
 						</dl>
 					</th>
-					<td><input name="director" id="director" size="20" value="${business_name }"/></td>
+					<td><input name="director" id="director" size="20" value="${business_name }" readonly="readonly"/></td>
 				</tr>
 				<tr>
 					<th>
@@ -400,7 +437,7 @@
 					<td>
 					<div class="select_profile_img">
 					 <c:if test="${'default' !=  profile_image_url  }">
-					 <img src="${projectPostVO.thumbnailImage}" width="100" height="100"/>
+					 <img src="${profile_image_url}" width="100" height="100" style="border-radius: 50px;"/>
 					 </c:if>
 					 <c:if test="${'default' == profile_image_url  }">
 					 <img src="${pageContext.request.contextPath}/images/member_profile.png" width="100" height="100" style="border-radius: 50px;"/>
@@ -464,8 +501,68 @@
 								페이지 우측에 메이커분과 함께 노출됩니다.</dd>
 						</dl>
 					</th>
-					<td><input name="withMem" id="withMem" size="30" /> <input
-						type="button" name="addMem" id="addMem" value="추가" /></td>
+					<td>
+					<c:if test="${!empty projectPostVO.business}">
+					<input name="withMem" id="withMem" size="30" oninput="nick_check2();" value="${projectPostVO.business }"/>
+					</c:if>
+					<c:if test="${empty projectPostVO.business}">
+					<input name="withMem" id="withMem" size="30" oninput="nick_check2();"/>
+					</c:if>
+					 
+                  <span id="addMem_nickcheck"></span>
+               
+               <!-- <script>
+               /** 중복닉네임 체크 */
+               function nick_check2() {
+                  $withMemNick=$.trim($("#withMem").val());
+
+                  //3. 닉네임 중복확인
+                  $.ajax({ //$는 jQuery , $.ajax는 jQuery내의 아작스 실행
+                     type:"POST", //데이터를 서버로 보내는 방법
+                     url:"/project/nickcheck", //아작스 서버 주소 파일명->컨트롤러에 등록한 매핑주소
+                     data : {"nickname":$withMemNick}, //좌측 nickname파라미터 이름에 우측 $withMemNick 변수값을 저장
+                     datatype : "int", //서버의 실행된 결과값을 사용자로 받아오는 방법
+                     success : function(data) { //success는 아작스로 받아오는 것이 성공했을 경우 서버 데이터를 data변수에 저장
+                        if(data==1) { //중복 닉네임이 있다면
+                           $("#addMem_nickcheck").text("무빙 회원 인증 완료!"); 
+                           $("#addMem_nickcheck").css("color","red");
+                           $("#addMem_nickcheck").css("font-size","15px");
+                           $("#addMem_nickcheck").css("font-weight","bold");
+                           $("#addMem_nickcheck").css("background-color","#FFCECE");
+                        }else if($nickname.length < 2 || $nickname.length > 8) {
+                           $("#addMem_nickcheck").text("닉네임은 2~8자 이어야 합니다 ! :P"); //nickcheck영역에 문자열을 추가
+                           $("#addMem_nickcheck").css("color","red");
+                           $("#addMem_nickcheck").css("font-size","15px");
+                           $("#addMem_nickcheck").css("font-weight","bold");
+                           $("#addMem_nickcheck").css("background-color","#FFCECE");
+                        }else if(!(check_usernickname($withMemNick))){
+                           $("#addMem_nickcheck").text("닉네임은 한글,영문,숫자 조합만 가능합니다 ! :P");//nickcheck영역에 문자열을 추가
+                           $("#addMem_nickcheck").css("color","red");
+                           $("#addMem_nickcheck").css("font-size","15px");
+                           $("#addMem_nickcheck").css("font-weight","bold");
+                           $("#addMem_nickcheck").css("background-color","#FFCECE");
+                        }else { //중복된 닉네임이 없다면
+                           $("#addMem_nickcheck").text("존재하지 않는 회원 닉네임입니다 ! :)"); //nickcheck영역에 문자열을 추가
+                           $("#addMem_nickcheck").css("color","#9d8ce2");
+                           $("#addMem_nickcheck").css("font-size","15px");
+                           $("#addMem_nickcheck").css("font-weight","bold");
+                           $("#addMem_nickcheck").css("background-color","#eae6fa");
+                        }
+                     },
+                     error : function() { //비동기식 아작스로 서버디비 데이터를 못가져와서 에러가 발생했을때 호출되는 함수
+                        alert("data error");
+                     }
+                  }); //$.ajax
+               }
+               
+               /** 닉네임 중복체크 정규표현식 */
+               function check_usernickname($withMemNick) {
+                  var pattern = new RegExp(/^[s가-힣a-zA-Z0-9]+$/); //닉네임을 한글,영문,숫자
+                  return pattern.test($withMemNick);
+               };
+               </script>
+                -->
+               </td>
 				</tr>
 				<tr>
 					<th>
@@ -474,7 +571,7 @@
 							<dd>서포터 문의 시 소통이 가능하고, 프로젝트 페이지에 노출가능한 이메일을 입력해주세요.</dd>
 						</dl>
 					</th>
-					<td><input name="email" id="email" size="30" value="${userid}"/></td>
+					<td><input name="email" id="email" size="30" value="${email}"/></td>
 				</tr>
 
 				<tr>
@@ -506,8 +603,8 @@
 						value="초기화" /></th>
 				</tr>
 			</table>
-		</div>
 		</form>
+		</div>
 		<!-- 본문 내용 : 정산 -->
 		<div id="fWrite_calculate" class="menu-option">
 			<table border="1">
@@ -529,34 +626,42 @@
 				</tr>
 				<tr>
 					<th><dl>
-							<dt>계약정보 - 1) 사업자 여부 및 정보</dt>
+							<dt>계약정보 - 1) 사업자 정보</dt>
 						</dl></th>
-					<td><input type="radio" name="company" value="personal">개인
+					<td><input type="radio" name="company" value="personal" checked>개인
 						사업자 <input type="radio" name="company" value="company">법인
 						사업자 <br />
 						<table>
 							<tr>
 								<td>사업자 번호</td>
-								<td><input name="companyNo" id="companyNo" size="20" /></td>
+								<td><input name="companyNo" id="companyNo" size="20" value="${business_register_no }"/></td>
 							</tr>
 							<tr>
-								<td>사업자등록증 업로드</td>
-								<td><input type="file" id="companyVarif" /></td>
+								<td>사업자등록증 </td>
+								<td>
+								<c:if test="${!empty business_license_image_path }">
+								<img src="${business_license_image_path}" width="100" height="150"/>
+								</c:if>
+								<!-- <input type="file" id="companyVarif" /> -->
+								
+								</td>
 							</tr>
-							<tr>
+							<!-- <tr>
 								<td>통장 사본 업로드</td>
 								<td><input type="file" id="checkVarif" /></td>
-							</tr>
+							</tr> -->
 						</table> <!-- 나중에 --></td>
 				</tr>
 				<tr>
 					<th><dl>
 							<dt>계약정보 - 2) 대표자 정보</dt>
-							<dd>전자 약정서는 대표자가 직접 확인하고, 서명을 진행해야함으로, 대표자의 이메일로 약정서가 발송됩니다.
-								공동 대표의 경우는 모든 대표자의 메일로 발송되며, 모든 대표자가 확인하고 서명하여야 약정이 체결됩니다.</dd>
+							<dd>전자 약정서는 대표자가 직접 확인하고, 서명을 진행해야함으로, <br/>
+							대표자의 이메일로 약정서가 발송됩니다.
+							공동 대표의 경우는 모든 대표자의 메일로 발송되며, <br/> 
+							모든 대표자가 확인하고 서명하여야 약정이 체결됩니다.</dd>
 						</dl></th>
-					<td><input name="ceo" id="ceo" size="10" /> <input
-						name="ceoEmail" id="ceoEmail" size="20" /></td>
+					<td><input name="ceo" id="ceo" size="10" value="${name }"/> <input
+						name="ceoEmail" id="ceoEmail" size="20" value="${email }"/></td>
 				</tr>
 
 				<%---------------------------------------------------------------------------------------------- --%>
@@ -570,27 +675,35 @@
 			</table>
 		</div>
 
-			<div id="fWrite_preview" class="menu-option">	<div id="fCont_title" style="padding-top: 45px;">
+			<div id="fWrite_preview" class="menu-option">	
+			<div id="fCont_title" style="padding-left: 0px; padding-right: 0px">
 				<h3>${projectPostVO.title }</h3>
 				<p>${projectPostVO.introduce }</p>
 			</div>
 		
 			<%-- 펀딩 메인 이미지, 모금 정보 --%>
-			<div id="fCont_subtitle">
-				<%-- 펀딩 메인 이미지 --%>
-				<div id="fCont_mainImage">
-					<img src="../images/funding05.PNG" width="700" height="400"
-						src="펀딩이미지05" />
-					<div class="fCont_tags">
-						<span class="sumCont_sub fCont_tag"><i
-							class="fas fa-tag fa-lg"></i> Project We Love</span> <span
-							class="sumCont_sub fCont_tag"><i class="fas fa-tag fa-lg"></i>
-							Documentary</span> <span class="sumCont_sub fCont_tag"><i
-							class="fas fa-map-marker-alt fa-lg"></i> 독도, 대한민국 </span> <span
-							class="sumCont_sub fCont_tag"><i
-							class="fas fa-hashtag fa-lg"></i> 감동적인</span>
-					</div>
-				</div>
+	<div id="fCont_subtitle">
+		<%-- 펀딩 메인 이미지 --%>
+		<div id="fCont_mainImage">
+			<c:if test="${projectPostVO.thumbnailImage == NULL}">
+				<img src="../images/funding05.PNG" width="700" height="400"
+					src="펀딩이미지05" />
+			</c:if>
+			<c:if test="${projectPostVO.thumbnailImage != NULL}">
+				<img src="${projectPostVO.thumbnailImage}" width="700" height="400"
+					src="펀딩이미지05" />
+			</c:if>
+
+			<div class="fCont_tags">
+				<span class="sumCont_sub fCont_tag"><i
+					class="fas fa-tag fa-lg"></i> Project We Love</span> <span
+					class="sumCont_sub fCont_tag"><i class="fas fa-tag fa-lg"></i>
+					Documentary</span> <span class="sumCont_sub fCont_tag"><i
+					class="fas fa-map-marker-alt fa-lg"></i> 독도, 대한민국 </span> <span
+					class="sumCont_sub fCont_tag"><i
+					class="fas fa-hashtag fa-lg"></i> 감동적인</span>
+			</div>
+		</div>
 		
 				<%-- 펀딩 메인 정보 요약 --%>
 				<div id="fCont_sumCont">

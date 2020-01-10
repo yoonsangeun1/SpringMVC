@@ -34,11 +34,19 @@ public class ProjectPostVO {		/* 프로젝트 게시글 */
 	/* resultMap JOIN 검색용 */
 	private List<MCommentVO> mCommentVO;			/* 댓글 VO */
 	private MUserVO mUserVO;						/* 회원 VO */
+	private MoveVO moveVO;							/* 무브 VO */
 	private List<AttachedFileVO> attachedFileVO; 	/* 첨부파일 VO */
 	private List<TagVO> tagVO;					 	/* 태그 VO */
 	private List<RewardVO> rewardVO;				/* 리워드 VO */
 	
 	
+	
+	public MoveVO getMoveVO() {
+		return moveVO;
+	}
+	public void setMoveVO(MoveVO moveVO) {
+		this.moveVO = moveVO;
+	}
 	public String getThumbnailImage() {
 		return thumbnailImage;
 	}

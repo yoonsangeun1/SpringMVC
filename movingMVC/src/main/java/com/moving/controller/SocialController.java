@@ -20,11 +20,14 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.moving.domain.AttachedFileVO;
 import com.moving.domain.MUserVO;
+import com.moving.domain.MoveVO;
+import com.moving.domain.ProjectPostVO;
 import com.moving.domain.ReportVO;
 import com.moving.domain.SocialMessageVO;
 import com.moving.domain.SocialPostVO;
 import com.moving.domain.SocialProfileVO;
 import com.moving.service.MUserService;
+import com.moving.service.ProjectPostService;
 import com.moving.service.SocialService;
 import com.oreilly.servlet.MultipartRequest;
 
@@ -32,7 +35,10 @@ import pwdconv.PwdChange;
 
 @Controller
 public class SocialController {
-
+	
+	@Autowired
+	private ProjectPostService projectPostService;
+	
 	@Autowired
 	private SocialService socialService;
 
@@ -227,6 +233,9 @@ public class SocialController {
 		PrintWriter out= response.getWriter();
 		session=request.getSession();
 		
+		List<SocialProfileVO> randomSocialProfileVO=this.socialService.selectRandomSocialProfile(8);
+		List<ProjectPostVO> projectPostVO=this.projectPostService.selectRandomProjectList(20);
+		
 		if(session.getAttribute("id")==null){
 			out.println("<script>");
 			out.println("alert('로그인이 필요합니다.');");
@@ -259,8 +268,12 @@ public class SocialController {
 //					SocialProfileVO sessionSocial=(SocialProfileVO) session.getAttribute("sessionSocial");
 					List<SocialPostVO> socialPostVO=socialService.selectSocialPost(); //id로 검색하여 게시글ㄹ
 					m.addObject("s_post", socialPostVO);
+					m.addObject("project", projectPostVO);
 					m.addObject("s_pro", s_pro);
+					m.addObject("random_s",randomSocialProfileVO);
+					
 					session.setAttribute("sessionSocial", s_pro);
+					
 					m.setViewName("social/social_main");
 					return m;
 				}
@@ -685,12 +698,32 @@ public class SocialController {
 		public String social_add_move(
 				int social_id,
 				int post_num,
-				int page_num
+				int page_num,Model m
 				) {
-				this.socialService.addMoveCount(post_num);//무브 카운트 +
+				MoveVO moveVO=new MoveVO();
+				MoveVO insertMoveVO=new MoveVO();
+				SocialPostVO s_post=this.socialService.selectSocialPostOne(post_num);
+				
+				moveVO.setSocialPostId(post_num);
+				moveVO.setSocialProfileIdFrom(social_id);	//게시글 번호와 소셜 아이디로 좋아요 여부 검색
+				insertMoveVO.setSocialPostId(post_num);
+				insertMoveVO.setSocialProfileIdFrom(social_id);	//게시글 번호와 소셜 아이디로 좋아요 여부 검색
+				
+				moveVO=this.socialService.checkMove(moveVO);	//정보를 VO에 넣은 뒤 검색
+				
+				int result=1;
+				if(moveVO==null) result=-1;
+				
+				if(result==-1) {
+					this.socialService.addMoveCount(post_num);//무브 카운트 +
+					this.socialService.insertMoveVO(insertMoveVO);
+				}else {
+					this.socialService.deMoveCount(post_num);//무브 카운트-
+					this.socialService.deleteMoveVO(moveVO);
+				}
 				
 				if(page_num==0)	return "redirect:/social/main";
-				else if(page_num==1) return "redirect:/social/profile?id="+social_id;
+				else if(page_num==1) return "redirect:/social/profile?id="+s_post.getSocialId();
 				else 	return null;
 		}
 }

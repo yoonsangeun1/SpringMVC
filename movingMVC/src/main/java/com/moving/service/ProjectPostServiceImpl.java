@@ -11,6 +11,7 @@ import com.moving.dao.MUserDAO;
 import com.moving.dao.ProjectPostDAO;
 import com.moving.domain.MCommentVO;
 import com.moving.domain.MUserVO;
+import com.moving.domain.MoveVO;
 import com.moving.domain.ProjectPostVO;
 import com.moving.domain.RewardVO;
 
@@ -137,5 +138,59 @@ public class ProjectPostServiceImpl implements ProjectPostService {
 	@Override
 	public void updateProjectReward(RewardVO rewardVO) {
 		projectPostDAO.updateProjectReward(rewardVO);
+	}
+
+	@Override
+	public void updateUserBusinessInfo(MUserVO mUserVO) {
+		projectPostDAO.updateUserBusinessInfo(mUserVO);
+	}
+
+	@Override
+	public void updateProjectBusiness(ProjectPostVO projectPostVO) {
+		projectPostDAO.updateProjectBusiness(projectPostVO);
+	}
+
+	@Transactional
+	@Override
+	public void updateProjectStatus(int id) {
+		projectPostDAO.updateProjectStatus(id);
+		ProjectPostVO p=selectprojectInfo(id);
+		MUserVO m=new MUserVO();
+		m.setId(p.getUserId());					//id 저장
+		m.setUserPoint(100000);					//포인트 저장
+		mUserDAO.pointCharge(m);				//포인트 높이기
+	}
+
+	@Transactional
+	@Override
+	public void insertMove(MoveVO moveVO) {
+		projectPostDAO.insertMove(moveVO);
+		projectPostDAO.updateMoveCount(moveVO);
+		MUserVO m=new MUserVO();
+		m.setId(moveVO.getUserIdFrom());					//id 저장
+		m.setUserPoint(5);					//포인트 저장
+		mUserDAO.pointCharge(m);				//포인트 높이기
+	}
+
+	@Override
+	public int findMoveOrNot(MoveVO m) {
+		return projectPostDAO.findMoveOrNot(m);
+	}
+
+	@Transactional
+	@Override
+	public void deleteMove(MoveVO moveVO) {
+		projectPostDAO.deleteMove(moveVO);
+		projectPostDAO.downMoveCount(moveVO);
+	}
+
+	@Override
+	public List<ProjectPostVO> selectLikeList(int mid) {
+		return projectPostDAO.selectLikeList(mid);
+	}
+
+	@Override
+	public List<ProjectPostVO> selectMakeList(int mid) {
+		return projectPostDAO.selectMakeList(mid);
 	}
 }

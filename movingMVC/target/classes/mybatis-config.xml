@@ -53,6 +53,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.moving.domain.SocialPostVO" alias="socialPostVO"/>				<!-- 소셜 포스트 VO -->
 		<typeAlias type="com.moving.domain.SocialProfileVO" alias="socialProfileVO"/>		<!-- 소셜 프로필 VO -->		
 		<typeAlias type="com.moving.domain.SocialMessageVO" alias="socialMessageVO"/>		<!-- 소셜 메시지 VO -->		
+		<typeAlias type="com.moving.domain.MoveVO" alias="moveVO"/>		<!-- 소셜 메시지 VO -->		
 		
 	</typeAliases>
 </configuration>

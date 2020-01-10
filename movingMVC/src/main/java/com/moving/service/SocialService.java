@@ -4,6 +4,7 @@ package com.moving.service;
 import java.util.List;
 
 import com.moving.domain.AttachedFileVO;
+import com.moving.domain.MoveVO;
 import com.moving.domain.ReportVO;
 import com.moving.domain.SocialMessageVO;
 import com.moving.domain.SocialPostVO;
@@ -44,4 +45,13 @@ public interface SocialService {
 
 	void addMoveCount(int post_num);
 
+	MoveVO checkMove(MoveVO moveVO);
+
+	void deMoveCount(int post_num);
+
+	void deleteMoveVO(MoveVO moveVO);
+
+	void insertMoveVO(MoveVO moveVO);
+
+	List<SocialProfileVO> selectRandomSocialProfile(int no);
 }

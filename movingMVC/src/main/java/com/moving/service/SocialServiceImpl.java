@@ -10,6 +10,7 @@ import com.moving.dao.MUserDAO;
 import com.moving.dao.SocialDAO;
 import com.moving.domain.AttachedFileVO;
 import com.moving.domain.MUserVO;
+import com.moving.domain.MoveVO;
 import com.moving.domain.ReportVO;
 import com.moving.domain.SocialMessageVO;
 import com.moving.domain.SocialPostVO;
@@ -122,5 +123,30 @@ public class SocialServiceImpl implements SocialService {
 	@Override
 	public void addMoveCount(int post_num) {
 		this.socialDAO.addMoveCount(post_num);
+	}
+
+	@Override
+	public MoveVO checkMove(MoveVO moveVO) {
+		return this.socialDAO.checkMove(moveVO);
+	}
+
+	@Override
+	public void deMoveCount(int post_num) {
+		this.socialDAO.deMoveCount(post_num);
+	}
+
+	@Override
+	public void deleteMoveVO(MoveVO moveVO) {
+		this.socialDAO.deleteMoveVO(moveVO);
+	}
+
+	@Override
+	public void insertMoveVO(MoveVO moveVO) {
+		this.socialDAO.insertMoveVO(moveVO);
+	}
+
+	@Override
+	public List<SocialProfileVO> selectRandomSocialProfile(int no) {
+		return this.socialDAO.selectRandomSocialProfile(no);
 	}
 }

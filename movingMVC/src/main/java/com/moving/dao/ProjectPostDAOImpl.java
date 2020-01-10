@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.moving.domain.MCommentVO;
+import com.moving.domain.MUserVO;
+import com.moving.domain.MoveVO;
 import com.moving.domain.ProjectPostVO;
 import com.moving.domain.RewardVO;
 
@@ -150,6 +152,56 @@ public class ProjectPostDAOImpl implements ProjectPostDAO {
 	@Override
 	public void updateProjectReward(RewardVO rewardVO) {
 		sqlSession.update("updateProjectReward", rewardVO);
+	}
+
+	@Override
+	public void updateUserBusinessInfo(MUserVO mUserVO) {
+		sqlSession.update("updateUserBusinessInfo", mUserVO);
+	}
+
+	@Override
+	public void updateProjectBusiness(ProjectPostVO projectPostVO) {
+		sqlSession.update("updateProjectBusiness", projectPostVO);
+	}
+
+	@Override
+	public void updateProjectStatus(int id) {
+		sqlSession.update("updateProjectStatus", id);
+	}
+
+	@Override
+	public void insertMove(MoveVO moveVO) {
+		sqlSession.insert("insertMove", moveVO);
+	}
+
+	@Override
+	public void updateMoveCount(MoveVO moveVO) {
+		sqlSession.update("updateMoveCount", moveVO);
+	}
+
+	@Override
+	public int findMoveOrNot(MoveVO m) {
+		return sqlSession.selectOne("findMoveOrNot", m);
+	}
+
+	@Override
+	public void deleteMove(MoveVO moveVO) {
+		sqlSession.delete("deleteMove", moveVO);
+	}
+
+	@Override
+	public void downMoveCount(MoveVO moveVO) {
+		sqlSession.update("downMoveCount", moveVO);
+	}
+
+	@Override
+	public List<ProjectPostVO> selectLikeList(int mid) {
+		return sqlSession.selectList("selectLikeList", mid);
+	}
+
+	@Override
+	public List<ProjectPostVO> selectMakeList(int mid) {
+		return sqlSession.selectList("selectMakeList", mid);
 	}
 	
 }

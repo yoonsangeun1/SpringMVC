@@ -15,12 +15,12 @@
 	<div id="SNS_Profile_Wrap">						<!-- 오브젝트 항목 래핑 -->
 		<div id="SNS_Profile_Top">
 			<div id="SNS_Profile_Ground">
-				<c:if test="${'default' == s_pro.backgroundImagePath}">
+<%-- 				<c:if test="${'default' == s_pro.backgroundImagePath}"> --%>
 					<div id="SNS_Profile_Background" style="background-image:url(${pageContext.request.contextPath}/resources/images/sns_back1.jpg)">
-				</c:if>
-				<c:if test="${'default' != s_pro.backgroundImagePath}">
-					<div id="SNS_Profile_Background" style="background-image:url('${s_pro.backgroundImagePath}')">
-				</c:if>
+<%-- 				</c:if> --%>
+<%-- 				<c:if test="${'default' != s_pro.backgroundImagePath}"> --%>
+<%-- 					<div id="SNS_Profile_Background" style="background-image:url('${s_pro.backgroundImagePath}')"> --%>
+<%-- 				</c:if> --%>
 					<c:if test="${'default' != s_pro.profileImagePath}">					<!-- 회원 이미지가 없을 경우 기본 이미지로 설정 -->
 						<img id="SNS_Profile_Photo" src="${s_pro.profileImagePath}">
 					</c:if>
@@ -97,7 +97,7 @@
 								<label for="File_First">사진 올리기</label> <input type="file"
 									id="File_First" class="SNS_Buttons_File"
 									accept=".jpg,.jpeg,.png,.gif,.bmp" onchange="loadImage(this)"
-									name="photoGet" multiple />
+									name="photoGet" />
 							</div>
 							<input type="reset" class="SNS_Buttons" value="전체 삭제"
 								onclick="removeAllLi()" />
@@ -108,15 +108,13 @@
 				<ul id="SNS_Content_ul">
 					<c:if test="${empty s_pro.socialPostVO}">
 						<div class="SNS_Profile_Post">
-							<p
-								style="width: 100%; height: 200px; text-align: center; line-height: 180px; font-size: 20px;">등록된
+							<p style="width: 100%; height: 200px; text-align: center; line-height: 180px; font-size: 20px;">등록된
 								게시글이 없습니다.</p>
 						</div>
 					</c:if>
 					<c:if test="${!empty s_pro.socialPostVO}">
 						<c:forEach var="s_post" items="${s_pro.socialPostVO}">
-<%-- 							${s_post.id}번 게시글 / <b>${s_pro.id}</b> 사용자  --%>
-							
+							${s_post.id}번 게시글 / <b>${s_pro.id}</b> 사용자 
 							<li>
 							<input type="hidden" id="postId_${s_post.id }" value="${s_post.id }">
 							<input type="hidden" id="id" value="${s_post.id }">
@@ -186,11 +184,12 @@
 									소셜 회원 아이디 : ${s_post.socialId}<br/>
 									등록일자 : ${s_post.registerDate}<br/>--%>
 										${s_post.content}<br />
-										<div class="SNS_Cont_Move">${s_post.moveCount}명이좋아합니다!</div>
+										<c:if test="${s_post.moveCount>=1 }">
+											<div class="SNS_Cont_Move">${s_post.moveCount}명이좋아합니다!</div>
+										</c:if> 
 										<div class="SNS_Cont_Option">
-											<div class="SNS_Cont_Option_Move" onclick="location='/moving.com/social/add_move?social_id=${sessionSocial.id}&post_num=${s_post.id}&page_num=1';">
-											<!-- <input type="file" value="asdf" onchange="getCommentList()"> -->
-											무브!</div>
+												<div class="SNS_Cont_Option_Move" onclick="location='/moving.com/social/add_move?social_id=${sessionSocial.id}&post_num=${s_post.id}&page_num=1';">
+												무브!</div>
 											<input class="SNS_Cont_Option_Funding" type="button"
 												value="공유하기"
 												onclick="if(confirm('공유할까요?') == true){
@@ -319,7 +318,7 @@
 										   var content= $("input[name='content_"+rno+"']").val();//댓글 내용
 
 										   if(content=='') {
-										      alert('댓글 내용을 입력하세요!');
+// 										      alert('댓글 내용을 입력하세요!');
 										      $("input[name='content_"+rno+"']").val('').focus();
 										      return false;
 										   }
@@ -445,7 +444,7 @@
 													dataType:"text",
 													success: function(data) {
 														if(data=='SUCCESS') {
-															alert('댓글이 수정되었습니다!');
+// 															alert('댓글이 수정되었습니다!');
 															//getCommentList();//댓글 목록 함수 호출! 갱신된 내용 가져옴.
 															//getCommentCount();//댓글 개수 불러오기
 														}
@@ -471,7 +470,7 @@
 													dataType:'text',
 													success:function(data) {
 														if(data=='SUCCESS'){
-															alert('댓글이 삭제되었습니다!');
+// 															alert('댓글이 삭제되었습니다!');
 															//getCommentList();//댓글 목록 함수 호출! 갱신된 내용 가져옴.
 															//getCommentCount();//댓글 개수 불러오기
 														}
@@ -479,50 +478,7 @@
 												});
 											});
 										})
-										   
-
-											/* 시간 차 계산 후 
-											출력 */
-											var writeTime = "${s_reply.registerDate}";
-											var nowTime = new Date();
-
-											var yyyy = writeTime.substr(0, 4);
-											var mm = writeTime.substr(5, 2);
-											var dd = writeTime.substr(8, 2);
-											var hh = writeTime.substr(11, 2);
-											var mi = writeTime.substr(14, 2);
-
-											var copyTime = new Date(yyyy,
-													mm - 1, dd, hh, mi);
-											var hours = Math.abs(nowTime
-													- copyTime) / 36e5;
-
-											hours = Math.floor(hours);
-
-											if (hours <= 1) {
-												hours = "조금 전";
-											} else if (hours <= 24) {
-												hours = hours + "시간 전";
-											} else if (24 < hours
-													&& hours <= 48) {
-												hours = "하루 전";
-											} else if (hours >= 48
-													&& hours < 8760) {
-												hours = (copyTime.getMonth() + 1)
-														+ "월"
-														+ copyTime.getDate()
-														+ "일 ";
-											} else if (hours >= 8760) {
-												hours = copyTime.getFullYear()
-														+ "년"
-														+ (copyTime.getMonth() + 1)
-														+ "월"
-														+ copyTime.getDate()
-														+ "일 ";
-											}
-											document.write(hours);
 										</script>
-
 									</div>
 								</div>
 							</li>
@@ -531,17 +487,17 @@
 				</ul>
 			</div>
 			<div id="SNS_Profile_Information">
-					<div>
-						프로필 정보입니다.
+					<div style="font-size: 19px;">
+						소셜 프로필을 작성해주세요.
 					</div>
 				</div>
 				<div id="SNS_Profile_Collect">
-						<div id="SNS_Profile_Intro">팔로워 수 : ${s_pro.followerCount}명</div>
+<%-- 						<div id="SNS_Profile_Intro">팔로워 수 : ${s_pro.followerCount}명</div> --%>
 						<ul id="SNS_Profile_Ul">
 							<c:forEach  var="s_post" items="${s_pro.socialPostVO}">
 							<li>
 								<div class="SNS_Profile_Image">
-									<img class="SNS_Profile_Image_Photo" src="${s_pro.profileImagePath}">
+									<img class="SNS_Profile_Image_Photo" style="background:white">
 									<div class="SNS_Profile_Image_Info">
 										<c:if test="${fn:length(s_post.content)>100}">
 											<p>${fn:substring(s_post.content,0,99)}...</p>										
@@ -550,12 +506,12 @@
 											<p>${fn:substring(s_post.content,0,99)}</p>		
 										</c:if>
 									</div>
-									<div class="SNS_Profile_Image_Center">
-										<p>더 보기</p>
-									</div>
-									<div class="SNS_Profile_Image_Like">
-										<p>❤</p>
-									</div>
+<!-- 									<div class="SNS_Profile_Image_Center"> -->
+<!-- 										<p>더 보기</p> -->
+<!-- 									</div> -->
+<!-- 									<div class="SNS_Profile_Image_Like"> -->
+<!-- 										<p>❤</p> -->
+<!-- 									</div> -->
 								</div>
 							</li>
 							</c:forEach>
@@ -567,8 +523,8 @@
 							<div class="SNS_Profile_Friends_Li">
 								<img class="SNS_Profile_Friends_Picture" src="../images/sns_photo14.jpg">
 								<div class="SNS_Profile_Frineds_Info">
-									<div class="SNS_Profile_Friends_Name">김충칭</div>
-									<div class="SNS_Profile_Friends_Intro">장기밀매합니다</div>
+									<div class="SNS_Profile_Friends_Name">김석환</div>
+									<div class="SNS_Profile_Friends_Intro">매일 배우로써 노력합니다</div>
 									<input class="SNS_Profile_Friends_Out" type="button" 
 										   value="팔로우 취소">
 								</div>

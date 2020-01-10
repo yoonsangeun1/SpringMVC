@@ -298,14 +298,84 @@
 	font-weight: bold;
 }
 
+#fWite_cont_limit{
+	font-weight: bold;
+}
+
+#fWrite_cont_Essential{
+	font-weight: bold;
+}
+
+#fWrite_cont_table #question02{
+	resize: none;
+	width:500px;
+	height:200px;
+}
+
+#fWrite_cont_table #question03{
+	resize: none;
+	width:500px;
+	height:200px;
+}
 
 
+/*reward css              */
 
+#fWrite_reward{ /*reward body */
+	width: 1200px;
+	margin-left: auto;
+	margin-right: auto;
+	min-height: 1024px; /*최소높이*/
+	height: auto;
+	align-items: center;
+	padding-left: 30px;
+	padding-right: 30px;
+	text-align: center;
+}
 
+#fWrite_cont_reward_table{
+	width:1000px;
+	border: 1px solid black;
+    padding: 10px;
+    vertical-align: middle;
+    text-align:center;
+}
 
+#fWrite_cont_reward_table2{
+	width:700px;
+	border: 1px solid #a7a7a7;
+    padding: 10px;
+    margin-left:auto;
+    margin-right:auto;
+    vertical-align: middle;
+    background:#e4e4e4;
+    line-height: 2.5;
+}
 
+/* 제작사 쪽 css*/
 
+#fWrite_cont_director_table{
+	width:1000px;
+	border: 1px solid black;
+    padding: 10px;
+    vertical-align: middle;
+    text-align:center;
+}
 
+#fWrite_cont_director_table tr{
+	min-height:50px;
+}
+
+#fWrite_cont_director_table th, #fWrite_cont_director_table td{
+	border-bottom:1px solid black;
+	padding:10px;
+	vertical-align: middle;
+}
+
+#fWrite_cont_director_name{
+	text-align:left;
+	font-weight: bold;
+}
 
 
 

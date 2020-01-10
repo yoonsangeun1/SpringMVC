@@ -94,23 +94,30 @@
 	<!-- 한 덩어리 -->
 
 	<div id="fList_left2" style="width: 1200px; height: auto">
-		<h3>
+		  <p style="font-size:17px; text-align:right;">
 			<!-- <b>다양한 프로젝트</b>를 탐색해보세요! -->
 			<c:if test="${findField != 'nickname' }">
 			<c:if test="${listCount != 0 }">
  			<b>${listCount}개의 프로젝트</b>를 탐색해보세요!
  			</c:if> 
  			</c:if>
-		</h3>
+		</p>
 		<c:if test="${category == 0 }">
 			<c:if test="${empty plist2 }">
-			<h3>개설된 프로젝트가 없습니다!</h3>
+			<p     style="font-size: 30px;text-align: center; margin-bottom: 100px;">
+         		개설된 프로젝트가 없습니다!
+         </p>
 			</c:if>
 			<c:if test="${!empty plist2 }">
 			<c:forEach var="p" items="${plist2 }" begin="1" end="9">
 			<div id="hover_container-category" style="float: left"
 					onclick="location.href='/moving.com/project/content?category=${category }&id=${p.id}&page=${page }&findField=${findField }&findName=${findName }';">
-					<img src="../images/funding01.PNG" width="370" height="222" alt="" />
+						<c:if test="${p.thumbnailImage == NULL}">
+							<img src="../images/funding05.PNG" width="370" height="222"  />
+						</c:if>
+						<c:if test="${p.thumbnailImage != NULL}">
+							<img src="${p.thumbnailImage}" width="370" height="222"  />
+						</c:if>
 					<div class="hover_container-category-padding">
 						<h3>${p.title }
 						<c:if test="${p.commentCount != 0}">[${p.commentCount }]</c:if>
@@ -119,14 +126,15 @@
 						<p>By ${p.mUserVO.nickname }</p>
 
 						<div class="progress-category">
-							<!-- 여기에 수정해야 할 것 : 퍼센트 표시 바. -->
-							<div class="progress-bar-category" role="progressbar"
-								aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"
-								style="width: 40%">
-								<%--<span class="sr-only">40% Complete</span>--%>
-							</div>
+								<!-- 여기에 수정해야 할 것 : 퍼센트 표시 바. -->
+								<div class="progress-bar length" role="progressbar"
+									aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"
+									style="width: ${ projectInfo.nowPrice div projectInfo.targetPrice * 100}%">
+									<span class="sr-only">${ projectInfo.nowPrice div projectInfo.targetPrice * 100}%
+										Complete</span>
+								</div>
 
-						<p>${p.nowPrice}원</p>
+								<p>${p.nowPrice}원</p>
 						<p>${p.nowPrice / p.targetPrice * 100} % 완료</p>
 						<p>${p.leftLimit }일남음</p>
 						</div>
@@ -138,27 +146,35 @@
 		
 		<c:if test="${category != 0 }">
 		<c:if test="${empty plist }">
-		<h3>개설된 프로젝트가 없습니다!</h3>
+		<p style="font-size: 30px;text-align: center; margin-bottom: 100px;">
+         	개설된 프로젝트가 없습니다!
+         </p>
 		</c:if>
 		<c:if test="${!empty plist }">
 			<c:forEach var="p" items="${plist }">
 				<div id="hover_container-category" style="float: left"
 					onclick="location.href='/moving.com/project/content?id=${p.id}&category=${category }&page=${page }&findField=${findField }&findName=${findName }';">
-					<img src="../images/funding01.PNG" width="370" height="222" alt="" />
+					<c:if test="${p.thumbnailImage == NULL}">
+							<img src="../images/funding05.PNG" width="370" height="222"  />
+						</c:if>
+						<c:if test="${p.thumbnailImage != NULL}">
+							<img src="${p.thumbnailImage}" width="370" height="222"  />
+						</c:if>
 					<div class="hover_container-category-padding">
 						<h3>${p.title }<c:if test="${p.commentCount != 0}">[${p.commentCount }]</c:if></h3>
 						<p>${p.introduce }</p>
 						<p>By ${p.mUserVO.nickname }</p>
 
 						<div class="progress-category">
-							<!-- 여기에 수정해야 할 것 : 퍼센트 표시 바. -->
-							<div class="progress-bar-category" role="progressbar"
-								aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"
-								style="width: ${p.nowPrice / p.targetPrice * 100}%">
-								<%--<span class="sr-only">40% Complete</span>--%>
-							</div>
+								<!-- 여기에 수정해야 할 것 : 퍼센트 표시 바. -->
+								<div class="progress-bar length" role="progressbar"
+									aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"
+									style="width: ${ projectInfo.nowPrice div projectInfo.targetPrice * 100}%">
+									<span class="sr-only">${ projectInfo.nowPrice div projectInfo.targetPrice * 100}%
+										Complete</span>
+								</div>
 
-						<p>${p.nowPrice}원</p>
+								<p>${p.nowPrice}원</p>
 						<p>${p.nowPrice / p.targetPrice * 100} % 완료</p>
 						<p>${p.leftLimit }일남음</p>
 						</div>
@@ -170,8 +186,10 @@
 	</div>
 
 
-<div id="bFree_pagination"> <%--페이지 div --%>
-	
+<div id="bFree_pagination" style="   padding: 0px 7px;
+   color:#999;
+   font-size:17px;
+   text-decoration:none;"> <%--페이지 div --%>	
 		   <%-- 페이징 추가 --%>
   <c:if test="${(empty findField) && (empty findName)}"> <%--검색 전 --%>
    <c:if test="${page <= 1}"> <!-- 첫번째 페이지 -->
@@ -248,7 +266,7 @@
 <div id="bFree_search"> <%--검색 구간 전체 div --%>
 <form action="/moving.com/project/list?category=${category}&findField=${findField}&findName=${findName}">
       <input type="hidden" name="category" value="${category }" />
-     <select name="findField" id="findField">
+     <select name="findField" id="findField" style="height: 30px">
       <option value="title" <c:if test="${findField == 'title'}">${'selected'}</c:if>>제목</option> 
       <option value="content" <c:if test="${findField == 'content'}">${'selected'}</c:if>>내용</option>
       <option value="nickname" <c:if test="${findField == 'nickname'}">${'selected'}</c:if>>닉네임</option>
@@ -262,71 +280,7 @@
    </form>
   </div> <%--검색 구간 전체 div --%>
 
-	<%-- <div class="ProjectCardList_item">
-				<div class="CommonProjectCard_container_squareSmall">
-					<div class="CommonProjectCard_rect">
-						<a href="/project/content" class="ProjectCardLink_link"> <span
-							class="CommonProjectCard_background"
-							style="background-image: url('')"></span>
-						</a>
-					</div>
-					<div class="CommonProjectCard_info">
-						<div class="RewardProjectCard_info">
-							<div class="RewardProjectCard_infoTop">
-								<a href="/web/campaign/detail/49208"
-									class="ProjectCardLink_link"> <span
-									class="CommonProjectCard_title"> <strong>${p.introduce }</strong>
-								</span></a>
-								<div>
-									<span class="RewardProjectCard_category">뷰티</span><span
-										class="RewardProjectCard_makerName">mundum</span>
-								</div>
-							</div>
-							<div class="RewardProjectCard_gauge__T-qNI">
-								<span style="width: 100%;"></span>
-							</div>
-							<span class="RewardProjectCard_percent__edRT9">384%</span><span
-								class="RewardProjectCard_amount__2GV5X">1,921,450원</span><span
-								class="RewardProjectCard_days__3Ic0W RewardProjectCard_isAchieve__argv3"><span
-								class="RewardProjectCard_remainingDay__2KYop">12일</span><span
-								class="RewardProjectCard_remainingDayText__1mXaP">남음</span><span
-								class="RewardProjectCard_isAchieve__argv3"></span></span>
-						</div>
-					</div>
-				</div>
-			</div> --%>
-			
-	<!-- <div class="ProjectCardList_item">
-	<div class="CommonProjectCard_container_squareSmall">
-		<div class="CommonProjectCard_rect">
-			<a href="/project/content" class="ProjectCardLink_link">
-				<span class="CommonProjectCard_background" style="background-image: url('')"></span>
-			</a></div>
-		<div class="CommonProjectCard_info">
-			<div class="RewardProjectCard_info">
-				<div class="RewardProjectCard_infoTop">
-					<a href="/web/campaign/detail/49208" class="ProjectCardLink_link">
-					<span class="CommonProjectCard_title">
-							<strong>자가진단으로 찾아보는 나를 위한 맞춤형 세안제 먼덤 솝 블록!</strong>
-						</span></a>
-					<div>
-						<span class="RewardProjectCard_category__1vo_V">뷰티</span><span
-							class="RewardProjectCard_makerName__2sITk">mundum</span>
-					</div>
-				</div>
-				<div class="RewardProjectCard_gauge__T-qNI">
-					<span style="width: 100%;"></span>
-				</div>
-				<span class="RewardProjectCard_percent__edRT9">384%</span><span
-					class="RewardProjectCard_amount__2GV5X">1,921,450원</span><span
-					class="RewardProjectCard_days__3Ic0W RewardProjectCard_isAchieve__argv3"><span
-					class="RewardProjectCard_remainingDay__2KYop">12일</span><span
-					class="RewardProjectCard_remainingDayText__1mXaP">남음</span><span
-					class="RewardProjectCard_isAchieve__argv3"></span></span>
-			</div>
-		</div>
-	</div>
-</div> -->
+
 </div>
 
 <%@ include file="../include/footer.jsp"%>

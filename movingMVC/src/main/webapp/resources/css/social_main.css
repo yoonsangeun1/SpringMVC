@@ -145,7 +145,7 @@
     /* border: 2px solid green; */
     box-sizing: border-box;
     float: left;
-    left: 21%;
+    left: 7%;
 }
 
 #SNS_main_mid {
@@ -215,7 +215,7 @@
     height: 900px;
     position: fixed;
     float: left;
-    left: 65%;
+    left: 71%;
 }
 #right_profile {
    width: 300px;
@@ -257,7 +257,9 @@
 	border:2px solid #b3a9eb;
 }
 #right_profile_friends_ul p{
+	width:50px;
 	font-size: 12px;
+/* 	margin-left: 8px; */
 	margin-top: 7px;
 	float: left;
 	text-align: center;
@@ -578,7 +580,7 @@
 	outline:none;
 	padding-left:4px;
 	margin-left: 10px;
-	width:430px;
+	width:420px;
 	height: 22px;
 	border: 1px solid #cacaca;
 	border-radius: 7px;
