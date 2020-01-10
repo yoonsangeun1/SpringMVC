@@ -28,15 +28,15 @@
  					<div id="mChange_file_text">
 						<span>● 사업자등록증 이미지 미리보기</span>
 						<div id="mChange_businessLicense_image">
-							<img id="business_img"  
-								<c:if test="${businessLicenseImagePath == null }">
-									src="${pageContext.request.contextPath}/images/noimage.gif"
+							 
+								<c:if test="${empty businessLicenseImagePath}">
+									<img id="business_img" src="${pageContext.request.contextPath}/resources/images/noimage.gif"/>
 								</c:if>
 								
-								<c:if test="${businessLicenseImagePath != null }">
-									src="${businessLicenseImagePath}"
+								<c:if test="${!empty businessLicenseImagePath }">
+									<img id="business_img" src="${businessLicenseImagePath}"/>
 								</c:if>
-							/>
+							
 						</div>
 						<input type="file" name="mChange_file" id="mChange_file">
 					</div>

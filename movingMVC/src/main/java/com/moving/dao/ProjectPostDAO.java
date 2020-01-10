@@ -6,6 +6,7 @@ import java.util.Map;
 import com.moving.domain.MCommentVO;
 import com.moving.domain.MUserVO;
 import com.moving.domain.MoveVO;
+import com.moving.domain.NormalPostVO;
 import com.moving.domain.ProjectPostVO;
 import com.moving.domain.RewardVO;
 
@@ -84,6 +85,8 @@ public interface ProjectPostDAO {
 	List<ProjectPostVO> selectLikeList(int mid);
 
 	List<ProjectPostVO> selectMakeList(int mid);
+
+	List<NormalPostVO> selectBoardList(int mid);
 
 	
 }

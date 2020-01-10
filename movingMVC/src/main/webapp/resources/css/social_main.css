@@ -145,7 +145,7 @@
     /* border: 2px solid green; */
     box-sizing: border-box;
     float: left;
-    left: 10%;
+    left: 13%;
 }
 
 #SNS_main_mid {
@@ -215,7 +215,7 @@
     height: 900px;
     position: fixed;
     float: left;
-    left: 71%;
+    left: 68.5%;
 }
 #right_profile {
    width: 300px;

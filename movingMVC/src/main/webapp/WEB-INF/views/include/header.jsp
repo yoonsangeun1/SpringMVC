@@ -70,6 +70,7 @@
 <script src="${pageContext.request.contextPath}/resources/js/move_banner.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/video_viewPg.js"></script>
 
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/admin_board.css" />
 <!--  <script>
 $(function(){ // document ready
       if (!!$('#header').offset()) { // make sure "#header" element exists

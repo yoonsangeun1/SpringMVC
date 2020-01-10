@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.moving.domain.MCommentVO;
 import com.moving.domain.MUserVO;
 import com.moving.domain.MoveVO;
+import com.moving.domain.NormalPostVO;
 import com.moving.domain.ProjectPostVO;
 import com.moving.domain.RewardVO;
 
@@ -202,6 +203,11 @@ public class ProjectPostDAOImpl implements ProjectPostDAO {
 	@Override
 	public List<ProjectPostVO> selectMakeList(int mid) {
 		return sqlSession.selectList("selectMakeList", mid);
+	}
+
+	@Override
+	public List<NormalPostVO> selectBoardList(int mid) {
+		return sqlSession.selectList("selectBoardList", mid);
 	}
 	
 }

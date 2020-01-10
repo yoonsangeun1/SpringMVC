@@ -15,7 +15,7 @@ var id = getParameterByName('id');
 
 //댓글 추가
 $(function(){ 
-//   getCommentList();
+   getCommentList();
    $('#write').on('click', function() {
    //var sessionId="<%=session.getAttribute('id')%>"
    //   var sessionTest=sessionId;

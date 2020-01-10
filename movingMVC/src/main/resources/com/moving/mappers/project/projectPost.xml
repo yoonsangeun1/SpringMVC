@@ -519,8 +519,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 회원 아이디를 기준으로 제작한 목록 찾기 -->
 	<select id="selectMakeList" resultType="projectPostVO">
-	select id, title, thumbnail_image
+	select id, title, thumbnail_image, status_code
 	FROM project_post
 	WHERE user_id = #{mid}
+	</select>
+	
+	
+	<!-- 회원 아이디를 기준으로 글 쓴 목록 찾기 -->
+	<select id="selectBoardList" resultType="normalPostVO">
+	select * from(
+	SELECT code_no, id, title, register_date, hit
+	FROM normal_post
+	WHERE user_id = #{mid}
+	UNION ALL
+	SELECT code_no, id, title, register_date, hit
+	FROM profile_post
+	WHERE user_id = #{mid}
+	UNION ALL
+	SELECT code_no, id, title, register_date, hit
+	FROM project_post
+	WHERE user_id = #{mid}
+	) order by register_date desc
 	</select>
 </mapper>

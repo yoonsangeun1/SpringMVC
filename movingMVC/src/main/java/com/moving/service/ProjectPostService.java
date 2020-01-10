@@ -6,6 +6,7 @@ import java.util.Map;
 import com.moving.domain.MCommentVO;
 import com.moving.domain.MUserVO;
 import com.moving.domain.MoveVO;
+import com.moving.domain.NormalPostVO;
 import com.moving.domain.ProjectPostVO;
 import com.moving.domain.RewardVO;
 
@@ -53,6 +54,8 @@ public interface ProjectPostService {
 	
 	List<ProjectPostVO> selectLikeList(int mid);//회원 아이디를 기준으로내가 좋아한 프로젝트 찾기
 	List<ProjectPostVO> selectMakeList(int mid);//회원 아이디 기준으로 만든 프로젝트 
+	List<NormalPostVO> selectBoardList(int mid);//회원 아이디 기준으로 작성글 찾기
+	
 
 
 }
